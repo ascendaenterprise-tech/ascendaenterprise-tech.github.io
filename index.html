@@ -811,13 +811,13 @@ footer{
       <div class="cd"><span>Availability</span><p>By appointment only</p></div>
       <div class="cd"><span>AUM status</span><p style="color:var(--up);font-weight:400">Currently accepting allocators</p></div>
     </div>
-    <div class="cf">
-      <div class="cff"><label>Full name</label><input type="text" placeholder="Your name"/></div>
-      <div class="cff"><label>Organization</label><input type="text" placeholder="Firm or company"/></div>
-      <div class="cff"><label>Email</label><input type="email" placeholder="you@example.com"/></div>
+    <form action="https://formspree.io/f/mvzywgwb" method="POST" class="cf">
+      <div class="cff"><label>Full name</label><input type="text" name="name" placeholder="Your name" required/></div>
+      <div class="cff"><label>Organization</label><input type="text" name="organization" placeholder="Firm or company"/></div>
+      <div class="cff"><label>Email</label><input type="email" name="email" placeholder="you@example.com" required/></div>
       <div class="cff">
         <label>Area of interest</label>
-        <select>
+        <select name="interest">
           <option value="">Select a focus area</option>
           <option>Trading / Public Markets</option>
           <option>Real Estate</option>
@@ -825,9 +825,9 @@ footer{
           <option>General inquiry</option>
         </select>
       </div>
-      <div class="cff"><label>Message</label><textarea placeholder="Tell us about your investment objectives..."></textarea></div>
-      <button class="btn-dark">Submit inquiry</button>
-    </div>
+      <div class="cff"><label>Message</label><textarea name="message" placeholder="Tell us about your investment objectives..."></textarea></div>
+      <button class="btn-dark" type="submit" style="align-self:flex-start;margin-top:.5rem">Submit inquiry</button>
+    </form>
   </div>
 </section>
 
