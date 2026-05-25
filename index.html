@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Ascenda Enterprise Capital</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,300;1,400;1,700&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --gold:#C9A84C;--gold2:#E8CC7A;--gold3:#9A7A30;--gold4:#F5DFA0;
+  --ink:#06050D;--ink2:#0D0B18;--ink3:#151220;
+  --light:#F7F3EB;--light2:#EDE6D5;--light3:#DDD4BE;
+  --white:#FFFFFF;
+  --cream:rgba(255,255,255,0.95);--cream2:rgba(255,255,255,0.78);--cream3:rgba(255,255,255,0.45);
+  --dark-text:#1A1624;--dark-text2:#3A3348;--dark-text3:#6B6080;
+  --rule:rgba(201,168,76,0.15);--rule2:rgba(201,168,76,0.38);
+  --rule-dark:rgba(26,22,36,0.12);
+  --up:#3DC47A;--dn:#E05555;
+}
+html{scroll-behavior:smooth}
+body{background:var(--ink);color:var(--white);font-family:'Jost',sans-serif;font-weight:300;overflow-x:hidden}
+
+/* ── NAV ── */
+nav{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:1.3rem 4rem;
+  background:rgba(6,5,13,0.96);
+  border-bottom:0.5px solid var(--rule);
+  backdrop-filter:blur(20px);
+  position:sticky;top:0;z-index:1000;
+}
+.nav-logo{font-family:'Playfair Display',serif;font-style:italic;font-size:1.1rem;color:var(--gold);letter-spacing:.02em}
+.nav-links{display:flex;gap:2.5rem}
+.nav-links a{
+  font-size:.65rem;letter-spacing:.25em;text-transform:uppercase;
+  color:var(--cream3);text-decoration:none;transition:color .2s;font-weight:400;
+}
+.nav-links a:hover{color:var(--white)}
+
+/* ── HERO ── */
+.hero{
+  min-height:100vh;display:flex;flex-direction:column;
+  justify-content:center;padding:8rem 4rem 6rem;
+  position:relative;overflow:hidden;background:var(--ink);
+}
+.hero-bg{
+  position:absolute;inset:0;
+  background:
+    radial-gradient(ellipse 100% 80% at 65% 35%,rgba(201,168,76,0.08) 0%,transparent 55%),
+    radial-gradient(ellipse 40% 60% at 5% 80%,rgba(201,168,76,0.04) 0%,transparent 50%);
+}
+.orb{position:absolute;border-radius:50%;animation:drift 14s ease-in-out infinite alternate}
+.orb1{width:560px;height:560px;background:rgba(201,168,76,0.035);top:-120px;right:-100px}
+.orb2{width:280px;height:280px;background:rgba(201,168,76,0.025);bottom:80px;left:-80px;animation-delay:-7s}
+@keyframes drift{from{transform:translate(0,0) scale(1)}to{transform:translate(22px,30px) scale(1.06)}}
+
+.eyebrow{
+  font-size:.65rem;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);
+  margin-bottom:2.5rem;display:flex;align-items:center;gap:1rem;font-weight:400;
+}
+.eyebrow::before{content:'';display:block;width:48px;height:.5px;background:var(--gold)}
+
+h1{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(4rem,6.5vw,6.8rem);
+  font-weight:400;line-height:.97;color:var(--white);
+  margin-bottom:2.75rem;letter-spacing:-.02em;
+}
+h1 em{font-style:italic;color:var(--gold2)}
+.h1b{display:block;padding-left:3.5rem}
+.h1c{display:block;padding-left:7rem}
+
+.hero-body{
+  font-size:1.15rem;font-weight:300;color:var(--cream2);
+  max-width:500px;line-height:2.05;margin-bottom:3.5rem;
+  border-left:2px solid var(--gold3);padding-left:1.6rem;
+}
+.cta-row{display:flex;gap:1.25rem;flex-wrap:wrap}
+
+.btn-gold{
+  font-size:.65rem;letter-spacing:.22em;text-transform:uppercase;
+  background:var(--gold);color:var(--ink);border:none;
+  padding:1.1rem 2.75rem;cursor:pointer;
+  font-family:'Jost',sans-serif;font-weight:500;
+  transition:background .2s,transform .15s;
+}
+.btn-gold:hover{background:var(--gold2);transform:translateY(-2px)}
+
+.btn-out{
+  font-size:.65rem;letter-spacing:.22em;text-transform:uppercase;
+  background:transparent;color:var(--cream2);
+  border:.5px solid var(--rule2);
+  padding:1.1rem 2.75rem;cursor:pointer;
+  font-family:'Jost',sans-serif;font-weight:300;
+  transition:border-color .2s,color .2s;
+}
+.btn-out:hover{border-color:var(--gold);color:var(--gold)}
+
+/* ── TRADINGVIEW TICKER ── */
+.tv-ticker-wrap{
+  width:100%;
+  border-top:.5px solid var(--rule);
+  border-bottom:.5px solid var(--rule);
+  background:rgba(201,168,76,0.04);
+}
+
+/* ── STATEMENT ── */
+.statement{
+  background:var(--gold);
+  padding:5.5rem 4rem;
+  display:flex;align-items:center;justify-content:center;text-align:center;
+}
+.statement-inner{max-width:900px}
+.statement-quote{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(2rem,4vw,3.6rem);
+  font-style:italic;font-weight:400;
+  color:var(--ink);line-height:1.15;
+  margin-bottom:1.25rem;letter-spacing:-.01em;
+}
+.statement-sub{
+  font-size:.7rem;letter-spacing:.28em;text-transform:uppercase;
+  color:rgba(6,5,13,.55);font-weight:500;
+}
+
+/* ── AUM BAND ── */
+.aum-band{
+  background:var(--ink2);
+  border-top:.5px solid var(--rule);border-bottom:.5px solid var(--rule);
+  padding:4rem 4rem;
+  display:flex;align-items:center;gap:4rem;
+  flex-wrap:wrap;
+}
+.aum-l{flex-shrink:0}
+.aum-tag{font-size:.6rem;letter-spacing:.28em;text-transform:uppercase;color:var(--gold3);margin-bottom:.6rem;font-weight:400}
+.aum-num{font-family:'Playfair Display',serif;font-size:3.4rem;font-style:italic;color:var(--gold2);line-height:1}
+.aum-cap{font-size:.7rem;color:rgba(255,255,255,.32);margin-top:.45rem;letter-spacing:.07em}
+.aum-sep{width:.5px;height:90px;background:var(--rule2);flex-shrink:0}
+.aum-r{
+  flex:1;min-width:280px;
+  font-size:1rem;color:var(--cream2);line-height:2;
+  border-left:1px solid var(--rule);padding-left:2rem;
+}
+.aum-r strong{color:var(--gold);font-weight:400}
+
+/* ── MARKETS ── */
+.mkt-section{padding:8rem 4rem;background:var(--ink3)}
+.sec-label{
+  font-size:.62rem;letter-spacing:.28em;text-transform:uppercase;
+  color:var(--gold);margin-bottom:1.25rem;
+  display:flex;align-items:center;gap:.9rem;font-weight:400;
+}
+.sec-label::before{content:'';display:block;width:32px;height:.5px;background:var(--gold)}
+.sec-label-light{
+  font-size:.62rem;letter-spacing:.28em;text-transform:uppercase;
+  color:var(--gold3);margin-bottom:1.25rem;
+  display:flex;align-items:center;gap:.9rem;font-weight:400;
+}
+.sec-label-light::before{content:'';display:block;width:32px;height:.5px;background:var(--gold3)}
+
+h2{font-family:'Playfair Display',serif;font-size:clamp(2rem,3.5vw,3rem);font-weight:400;line-height:1.12;margin-bottom:.8rem}
+h2 em{font-style:italic;color:var(--gold2)}
+h2.on-light{color:var(--dark-text)}
+h2.on-light em{color:var(--gold3)}
+h2.on-dark{color:var(--white)}
+
+.tv-charts-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+  gap:1.5rem;
+  margin-top:3rem;
+}
+.tv-chart-card{
+  background:rgba(255,255,255,0.03);
+  border:.5px solid var(--rule);
+  padding:0;overflow:hidden;
+}
+.tv-chart-label{
+  font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;
+  color:rgba(255,255,255,.4);padding:1rem 1.25rem .5rem;font-weight:400;
+}
+
+/* ── NEWS ── */
+.news-section{padding:8rem 4rem;background:var(--light)}
+.news-meta-bar{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:3rem;flex-wrap:wrap;gap:1rem}
+.src-note{font-size:.62rem;color:var(--dark-text3);letter-spacing:.1em;font-weight:300}
+.news-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--light3)}
+.nc{background:var(--light);padding:2.5rem 2.25rem;transition:background .3s;cursor:pointer}
+.nc:hover{background:var(--light2)}
+.nc-src{font-size:.58rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold3);margin-bottom:.5rem;font-weight:500}
+.nc-tag{
+  display:inline-block;font-size:.55rem;letter-spacing:.14em;text-transform:uppercase;
+  padding:.22rem .6rem;border:.5px solid var(--light3);
+  color:var(--dark-text3);margin-bottom:.9rem;margin-left:.5rem;
+}
+.nc-title{
+  font-family:'Playfair Display',serif;font-size:1.22rem;font-weight:400;
+  color:var(--dark-text);line-height:1.42;margin-bottom:.7rem;
+}
+.nc-body{font-size:.9rem;color:var(--dark-text2);line-height:1.95;font-weight:300}
+.nc-date{font-size:.6rem;letter-spacing:.1em;color:var(--dark-text3);margin-top:.9rem;font-weight:300}
+
+/* ── FOCUS ── */
+.focus-sec{padding:8rem 4rem;background:var(--ink)}
+.focus-grid{display:grid;grid-template-columns:repeat(3,1fr);border:.5px solid var(--rule);margin-top:3.5rem}
+.fc{padding:3.25rem 2.75rem;border-right:.5px solid var(--rule);position:relative;overflow:hidden;transition:background .4s}
+.fc:last-child{border-right:none}
+.fc:hover{background:rgba(201,168,76,0.05)}
+.fc-bar{position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--gold),transparent);opacity:0;transition:opacity .4s}
+.fc:hover .fc-bar{opacity:1}
+.fc-n{font-size:.58rem;letter-spacing:.2em;color:var(--gold3);margin-bottom:1.75rem;font-weight:400}
+.fc h3{font-family:'Playfair Display',serif;font-size:1.75rem;font-weight:400;color:var(--white);margin-bottom:1rem;line-height:1.2}
+.fc h3 em{font-style:italic;color:var(--gold2)}
+.fc p{font-size:.95rem;color:var(--cream2);line-height:1.95;font-weight:300}
+
+/* ── ABOUT ── */
+.about-sec{padding:8rem 4rem;background:var(--light2)}
+.about-wrap{display:grid;grid-template-columns:1fr 1fr;gap:8rem;align-items:start}
+.about-text p{font-size:1.05rem;line-height:2.1;color:var(--dark-text2);font-weight:300;margin-bottom:1.5rem}
+.stat-list{display:flex;flex-direction:column}
+.stat-row{padding:1.75rem 0;border-bottom:.5px solid var(--rule-dark);display:flex;justify-content:space-between;align-items:baseline}
+.stat-row:first-child{border-top:.5px solid var(--rule-dark)}
+.stat-v{font-family:'Playfair Display',serif;font-size:2.7rem;font-style:italic;color:var(--dark-text);letter-spacing:-.02em}
+.stat-l{font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;color:var(--dark-text3);font-weight:300}
+
+/* ── APPROACH ── */
+.ap-band{padding:8rem 4rem;background:var(--ink2);border-top:.5px solid var(--rule)}
+.ap-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:3rem;margin-top:3.5rem}
+.ap-n{font-size:.58rem;letter-spacing:.22em;color:var(--gold3);margin-bottom:.9rem;font-weight:400}
+.ap h4{font-family:'Playfair Display',serif;font-size:1.25rem;color:var(--white);margin-bottom:.7rem;font-weight:400}
+.ap p{font-size:.9rem;color:var(--cream2);line-height:1.95;font-weight:300}
+
+/* ── CONTACT ── */
+.contact-sec{padding:8rem 4rem;background:var(--light)}
+.contact-wrap{display:grid;grid-template-columns:1fr 1fr;gap:8rem;align-items:start}
+.ci p{font-size:1.05rem;line-height:2.05;color:var(--dark-text2);font-weight:300;margin-bottom:2rem}
+.cd{margin-bottom:1.75rem}
+.cd span{font-size:.58rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold3);display:block;margin-bottom:.35rem;font-weight:400}
+.cd a,.cd p{font-size:1rem;color:var(--dark-text);text-decoration:none;font-weight:300;margin:0;transition:color .2s}
+.cd a:hover{color:var(--gold3)}
+.cf{display:flex;flex-direction:column;gap:1.4rem}
+.cff{display:flex;flex-direction:column;gap:.45rem}
+.cff label{font-size:.58rem;letter-spacing:.2em;text-transform:uppercase;color:var(--dark-text3);font-weight:400}
+.cff input,.cff textarea,.cff select{
+  background:var(--white);border:.5px solid var(--light3);
+  color:var(--dark-text);font-family:'Jost',sans-serif;font-size:.95rem;font-weight:300;
+  padding:.95rem 1.1rem;outline:none;transition:border-color .2s;
+  width:100%;
+}
+.cff input:focus,.cff textarea:focus,.cff select:focus{border-color:var(--gold)}
+.cff textarea{resize:vertical;min-height:100px}
+.btn-dark{
+  font-size:.65rem;letter-spacing:.22em;text-transform:uppercase;
+  background:var(--dark-text);color:var(--light);border:none;
+  padding:1.1rem 2.75rem;cursor:pointer;
+  font-family:'Jost',sans-serif;font-weight:500;
+  transition:background .2s;align-self:flex-start;margin-top:.5rem;
+}
+.btn-dark:hover{background:var(--gold3);color:var(--ink)}
+
+/* ── FOOTER ── */
+footer{
+  padding:2.25rem 4rem;border-top:.5px solid var(--rule-dark);
+  background:var(--light2);
+  display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;
+}
+.flogo{font-family:'Playfair Display',serif;font-style:italic;font-size:1rem;color:var(--gold3)}
+.flinks{display:flex;gap:2rem}
+.flinks a{font-size:.58rem;letter-spacing:.15em;text-transform:uppercase;color:var(--dark-text3);text-decoration:none;transition:color .2s}
+.flinks a:hover{color:var(--gold3)}
+.fcopy{font-size:.6rem;letter-spacing:.08em;color:var(--dark-text3)}
+
+/* ── DIVIDER ── */
+.divider{width:100%;height:.5px;background:linear-gradient(90deg,transparent,var(--rule2),transparent)}
+
+/* ── RESPONSIVE ── */
+@media(max-width:900px){
+  nav{padding:1.2rem 2rem}
+  .hero{padding:7rem 2rem 5rem}
+  h1{font-size:clamp(2.8rem,8vw,4.5rem)}
+  .h1b{padding-left:2rem}.h1c{padding-left:4rem}
+  .aum-band{flex-direction:column;padding:3rem 2rem;gap:2rem}
+  .aum-sep{width:80px;height:.5px}
+  .aum-r{border-left:none;padding-left:0;border-top:.5px solid var(--rule);padding-top:1.5rem}
+  .focus-grid{grid-template-columns:1fr}
+  .fc{border-right:none;border-bottom:.5px solid var(--rule)}
+  .about-wrap,.contact-wrap{grid-template-columns:1fr;gap:3rem}
+  .ap-grid{grid-template-columns:repeat(2,1fr)}
+  .tv-charts-grid{grid-template-columns:1fr}
+  section,.news-section,.focus-sec,.about-sec,.ap-band,.contact-sec,.mkt-section{padding:5rem 2rem}
+  .statement{padding:4rem 2rem}
+  footer{padding:2rem}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Ascenda Enterprise Capital</div>
+  <div class="nav-links">
+    <a href="#markets">Markets</a>
+    <a href="#news">News</a>
+    <a href="#focus">Focus</a>
+    <a href="#about">About</a>
+    <a href="#contact">Contact</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="orb orb1"></div>
+  <div class="orb orb2"></div>
+  <div style="position:relative;z-index:2;max-width:920px">
+    <div class="eyebrow">Ascenda Enterprise Capital — Est. 2025</div>
+    <h1>
+      Capital<br/>
+      <span class="h1b">deployed</span>
+      <span class="h1c">with <em>precision.</em></span>
+    </h1>
+    <p class="hero-body">A multi-strategy investment firm operating across global markets, real estate, and private equity. We pursue exceptional risk-adjusted returns with discipline that compounds over decades.</p>
+    <div class="cta-row">
+      <button class="btn-gold" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Request a meeting</button>
+      <button class="btn-out" onclick="document.getElementById('focus').scrollIntoView({behavior:'smooth'})">Explore our focus</button>
+    </div>
+  </div>
+</section>
+
+<!-- TRADINGVIEW LIVE TICKER TAPE -->
+<div class="tv-ticker-wrap">
+  <div class="tradingview-widget-container">
+    <div class="tradingview-widget-container__widget"></div>
+    <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js" async>
+    {
+      "symbols": [
+        {"proName":"FOREXCOM:SPXUSD","title":"S&P 500"},
+        {"proName":"FOREXCOM:NSXUSD","title":"NASDAQ 100"},
+        {"proName":"INDEX:DJI","title":"Dow Jones"},
+        {"proName":"FOREXCOM:EURUSD","title":"EUR/USD"},
+        {"proName":"FOREXCOM:GBPUSD","title":"GBP/USD"},
+        {"proName":"FOREXCOM:USDJPY","title":"USD/JPY"},
+        {"proName":"FOREXCOM:AUDUSD","title":"AUD/USD"},
+        {"proName":"FOREXCOM:USDCAD","title":"USD/CAD"},
+        {"proName":"TVC:US10Y","title":"US 10Y"},
+        {"proName":"TVC:GOLD","title":"Gold"},
+        {"proName":"TVC:USOIL","title":"WTI Crude"},
+        {"proName":"BITSTAMP:BTCUSD","title":"Bitcoin"}
+      ],
+      "showSymbolLogo": false,
+      "isTransparent": true,
+      "displayMode": "adaptive",
+      "colorTheme": "dark",
+      "locale": "en"
+    }
+    </script>
+  </div>
+</div>
+
+<!-- STATEMENT — THE WOW MOMENT -->
+<div class="statement">
+  <div class="statement-inner">
+    <div class="statement-quote">"We close at $750,000,000.<br/>Not a dollar more."</div>
+    <div class="statement-sub">Ascenda Enterprise Capital — AUM Hard Cap</div>
+  </div>
+</div>
+
+<!-- AUM BAND -->
+<div class="aum-band">
+  <div class="aum-l">
+    <div class="aum-tag">Maximum AUM capacity</div>
+    <div class="aum-num">$750M</div>
+    <div class="aum-cap">Hard cap — by philosophy</div>
+  </div>
+  <div class="aum-sep"></div>
+  <div class="aum-r">
+    Ascenda enforces a <strong>strict $750,000,000 AUM ceiling</strong> at all times. Not a regulatory threshold — a philosophical covenant. Concentrated capital moves faster, thinks sharper, and compounds harder than bloated funds ever can. When we reach capacity, we close. <strong>No exceptions. No waivers.</strong>
+  </div>
+</div>
+
+<!-- MARKETS — LIVE TRADINGVIEW -->
+<section class="mkt-section" id="markets">
+  <div class="sec-label">Live market data</div>
+  <h2 class="on-dark">Real-time prices, <em>always accurate</em></h2>
+  <p style="font-size:.82rem;color:rgba(255,255,255,.32);margin-top:-.2rem;letter-spacing:.05em;font-weight:300;margin-bottom:2.5rem">
+    Powered by TradingView — live data, zero delay
+  </p>
+
+  <!-- TV MARKET OVERVIEW WIDGET -->
+  <div style="border:.5px solid var(--rule);overflow:hidden;margin-bottom:2.5rem">
+    <div class="tradingview-widget-container">
+      <div class="tradingview-widget-container__widget"></div>
+      <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-market-overview.js" async>
+      {
+        "colorTheme": "dark",
+        "dateRange": "1D",
+        "showChart": true,
+        "locale": "en",
+        "largeChartUrl": "",
+        "isTransparent": true,
+        "showSymbolLogo": false,
+        "showFloatingTooltip": true,
+        "width": "100%",
+        "height": "600",
+        "tabs": [
+          {
+            "title": "Indices",
+            "symbols": [
+              {"s":"FOREXCOM:SPXUSD","d":"S&P 500"},
+              {"s":"FOREXCOM:NSXUSD","d":"NASDAQ 100"},
+              {"s":"INDEX:DJI","d":"Dow Jones"},
+              {"s":"INDEX:RUT","d":"Russell 2000"},
+              {"s":"INDEX:VIX","d":"VIX"}
+            ],
+            "originalTitle": "Indices"
+          },
+          {
+            "title": "Forex",
+            "symbols": [
+              {"s":"FOREXCOM:EURUSD","d":"EUR/USD"},
+              {"s":"FOREXCOM:GBPUSD","d":"GBP/USD"},
+              {"s":"FOREXCOM:USDJPY","d":"USD/JPY"},
+              {"s":"FOREXCOM:AUDUSD","d":"AUD/USD"},
+              {"s":"FOREXCOM:USDCAD","d":"USD/CAD"},
+              {"s":"FOREXCOM:USDCHF","d":"USD/CHF"}
+            ],
+            "originalTitle": "Forex"
+          },
+          {
+            "title": "Commodities",
+            "symbols": [
+              {"s":"TVC:GOLD","d":"Gold"},
+              {"s":"TVC:USOIL","d":"WTI Crude"},
+              {"s":"TVC:UKOIL","d":"Brent Crude"},
+              {"s":"TVC:SILVER","d":"Silver"},
+              {"s":"TVC:NATURALGAS","d":"Natural Gas"}
+            ],
+            "originalTitle": "Commodities"
+          },
+          {
+            "title": "Crypto",
+            "symbols": [
+              {"s":"BITSTAMP:BTCUSD","d":"Bitcoin"},
+              {"s":"BITSTAMP:ETHUSD","d":"Ethereum"},
+              {"s":"COINBASE:SOLUSD","d":"Solana"}
+            ],
+            "originalTitle": "Crypto"
+          },
+          {
+            "title": "Bonds",
+            "symbols": [
+              {"s":"TVC:US10Y","d":"US 10Y Yield"},
+              {"s":"TVC:US02Y","d":"US 2Y Yield"},
+              {"s":"TVC:US30Y","d":"US 30Y Yield"}
+            ],
+            "originalTitle": "Bonds"
+          }
+        ]
+      }
+      </script>
+    </div>
+  </div>
+
+  <!-- TV MINI CHARTS ROW -->
+  <div class="tv-charts-grid">
+    <div class="tv-chart-card">
+      <div class="tv-chart-label">S&amp;P 500</div>
+      <div class="tradingview-widget-container">
+        <div class="tradingview-widget-container__widget"></div>
+        <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-mini-symbol-overview.js" async>
+        {"symbol":"FOREXCOM:SPXUSD","width":"100%","height":"220","locale":"en","dateRange":"3M","colorTheme":"dark","isTransparent":true,"autosize":true,"largeChartUrl":""}
+        </script>
+      </div>
+    </div>
+    <div class="tv-chart-card">
+      <div class="tv-chart-label">EUR / USD</div>
+      <div class="tradingview-widget-container">
+        <div class="tradingview-widget-container__widget"></div>
+        <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-mini-symbol-overview.js" async>
+        {"symbol":"FOREXCOM:EURUSD","width":"100%","height":"220","locale":"en","dateRange":"3M","colorTheme":"dark","isTransparent":true,"autosize":true,"largeChartUrl":""}
+        </script>
+      </div>
+    </div>
+    <div class="tv-chart-card">
+      <div class="tv-chart-label">Gold</div>
+      <div class="tradingview-widget-container">
+        <div class="tradingview-widget-container__widget"></div>
+        <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-mini-symbol-overview.js" async>
+        {"symbol":"TVC:GOLD","width":"100%","height":"220","locale":"en","dateRange":"3M","colorTheme":"dark","isTransparent":true,"autosize":true,"largeChartUrl":""}
+        </script>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- NEWS — LIGHT -->
+<section class="news-section" id="news">
+  <div class="news-meta-bar">
+    <div>
+      <div class="sec-label-light">Market intelligence</div>
+      <h2 class="on-light">What the <em>smart money</em><br/>is reading right now</h2>
+    </div>
+    <div class="src-note">Yahoo Finance · CNBC · MarketWatch · ForexFactory · WSJ</div>
+  </div>
+
+  <!-- TRADINGVIEW ECONOMIC CALENDAR -->
+  <div style="border:.5px solid var(--light3);overflow:hidden;margin-bottom:3rem">
+    <div class="tradingview-widget-container">
+      <div class="tradingview-widget-container__widget"></div>
+      <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-events.js" async>
+      {
+        "colorTheme": "light",
+        "isTransparent": true,
+        "width": "100%",
+        "height": "400",
+        "locale": "en",
+        "importanceFilter": "0,1",
+        "countryFilter": "us,eu,gb,jp,cn,ca,au"
+      }
+      </script>
+    </div>
+  </div>
+
+  <div class="news-grid">
+    <div class="nc">
+      <div><span class="nc-src">CNBC</span><span class="nc-tag">Equities</span></div>
+      <div class="nc-title">S&amp;P 500 posts eighth consecutive weekly gain as bond yields ease</div>
+      <p class="nc-body">U.S. equities surged as oil prices fell sharply on Iran deal optimism, relieving inflation pressure. The Dow crossed 50,000 for the first time on May 20, while Treasury yields retreated — a strong tailwind for risk assets heading into Memorial Day weekend.</p>
+      <div class="nc-date">May 22, 2026</div>
+    </div>
+    <div class="nc">
+      <div><span class="nc-src">ForexFactory</span><span class="nc-tag">Forex</span></div>
+      <div class="nc-title">EUR/USD holds 1.1600 as ECB prepares to raise inflation forecasts for June</div>
+      <p class="nc-body">The ECB is set to revise its 2026 inflation projections upward at its June meeting. President Lagarde signaled a potential rate hike amid rising energy costs tied to ongoing Middle East tensions. EUR/USD opened with a gap to 1.1649 before retracing.</p>
+      <div class="nc-date">May 25, 2026</div>
+    </div>
+    <div class="nc">
+      <div><span class="nc-src">MarketWatch</span><span class="nc-tag">Macro</span></div>
+      <div class="nc-title">"Trumpflation" rattles Wall Street — analysts warn it may not be transitory</div>
+      <p class="nc-body">Tariff-driven inflation could prove stickier than the administration suggests. The new Fed Chair faces a difficult path, with markets pricing no rate moves until year-end and growing speculation of White House-Fed conflict on the horizon.</p>
+      <div class="nc-date">May 24, 2026</div>
+    </div>
+    <div class="nc">
+      <div><span class="nc-src">WSJ / CBRE</span><span class="nc-tag">Real Estate</span></div>
+      <div class="nc-title">CRE lending hits a 5-year high — commercial investment eyes $562B in 2026</div>
+      <p class="nc-body">CBRE's Lending Momentum Index reached a five-year high in Q1 2026. Global direct transaction volumes rose 18% year-over-year to $216B. Multifamily debt is abundant, industrial supply-constrained, and prime office scarcity is intensifying across gateway markets.</p>
+      <div class="nc-date">May 18, 2026</div>
+    </div>
+    <div class="nc">
+      <div><span class="nc-src">Yahoo Finance</span><span class="nc-tag">Commodities</span></div>
+      <div class="nc-title">Crude oil plunges nearly 6% as Iran negotiations reach their "final stages"</div>
+      <p class="nc-body">WTI fell to $98.26 and Brent to $103 as Trump stated the U.S. is in the final stages of negotiations with Iran. Traders aggressively unwound the geopolitical risk premium built into energy markets over the past two months, boosting equities simultaneously.</p>
+      <div class="nc-date">May 20, 2026</div>
+    </div>
+    <div class="nc">
+      <div><span class="nc-src">ForexFactory</span><span class="nc-tag">Currencies</span></div>
+      <div class="nc-title">USD/JPY consolidates at 158.90 — BoJ June meeting now a critical watch point</div>
+      <p class="nc-body">The yen faces structural pressure with USD/JPY holding higher-lows on the daily. The Bank of Japan has maintained its 0.75% policy rate. The June 16 meeting is now a key inflection point for the pair's next directional move, watched closely by macro funds globally.</p>
+      <div class="nc-date">May 22, 2026</div>
+    </div>
+  </div>
+</section>
+
+<!-- FOCUS — DARK -->
+<section class="focus-sec" id="focus">
+  <div class="sec-label">Focus areas</div>
+  <h2 class="on-dark">Three pillars of<br/><em>institutional-grade</em> investing</h2>
+  <div class="focus-grid">
+    <div class="fc">
+      <div class="fc-bar"></div>
+      <div class="fc-n">01 — Trading</div>
+      <h3>Global <em>Markets</em></h3>
+      <p>Systematic and discretionary strategies across equities, derivatives, and macro. We deploy capital where volatility creates opportunity — with rigorous risk architecture at every layer of every position.</p>
+    </div>
+    <div class="fc">
+      <div class="fc-bar"></div>
+      <div class="fc-n">02 — Real Estate</div>
+      <h3>Property <em>Capital</em></h3>
+      <p>Value-add and opportunistic acquisitions across commercial and residential sectors. We identify mispriced assets in supply-constrained markets and create durable value through active, hands-on management.</p>
+    </div>
+    <div class="fc">
+      <div class="fc-bar"></div>
+      <div class="fc-n">03 — Private Equity</div>
+      <h3>Growth <em>Equity</em></h3>
+      <p>Strategic stakes in high-conviction operating companies. We partner with founders who share our long-horizon vision and bring capital, network, and genuine operational depth to every investment.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT — LIGHT -->
+<section class="about-sec" id="about">
+  <div class="about-wrap">
+    <div>
+      <div class="sec-label-light">About</div>
+      <h2 class="on-light">Built to compound<br/><em>exceptional</em> returns</h2>
+      <div class="about-text">
+        <p>Ascenda Enterprise Capital was founded on a single conviction: disciplined, concentrated capital allocation across uncorrelated asset classes creates superior risk-adjusted returns — compounded relentlessly over time.</p>
+        <p>We operate with the rigor of an institution and the agility of a startup. We move decisively when opportunities emerge, and remain patient — almost uncomfortably so — when they don't.</p>
+        <p>Our team brings deep expertise across quantitative trading, real estate development, and private markets. We are unified by an absolute commitment to our investors and a complete intolerance for mediocrity.</p>
+      </div>
+    </div>
+    <div class="stat-list">
+      <div class="stat-row"><span class="stat-l">Strategies</span><span class="stat-v">3</span></div>
+      <div class="stat-row"><span class="stat-l">AUM hard cap</span><span class="stat-v">$750M</span></div>
+      <div class="stat-row"><span class="stat-l">Mandate</span><span class="stat-v">Global</span></div>
+      <div class="stat-row"><span class="stat-l">Horizon</span><span class="stat-v">Long</span></div>
+      <div class="stat-row"><span class="stat-l">Status</span><span class="stat-v" style="color:var(--up);font-size:1.3rem;font-style:normal;font-family:'Jost';font-weight:400;letter-spacing:.05em">Open</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- APPROACH — DARK -->
+<div class="ap-band" id="approach">
+  <div class="sec-label">Our approach</div>
+  <h2 class="on-dark">How we think about<br/><em>risk and return</em></h2>
+  <div class="ap-grid">
+    <div class="ap">
+      <div class="ap-n">I</div>
+      <h4>Conviction-driven</h4>
+      <p>We concentrate capital in our highest-conviction ideas. Diversification for its own sake is a performance tax we refuse to pay.</p>
+    </div>
+    <div class="ap">
+      <div class="ap-n">II</div>
+      <h4>Risk-first always</h4>
+      <p>Downside protection is never an afterthought. Every position is sized with explicit risk parameters from the first dollar deployed.</p>
+    </div>
+    <div class="ap">
+      <div class="ap-n">III</div>
+      <h4>Operator mindset</h4>
+      <p>We don't just allocate — we engage. Operational depth flows through every vertical we touch. We build, not just buy.</p>
+    </div>
+    <div class="ap">
+      <div class="ap-n">IV</div>
+      <h4>Capped by design</h4>
+      <p>The $750M hard cap is a performance covenant. Scale is the enemy of alpha. We will never let asset growth dilute our edge.</p>
+    </div>
+  </div>
+</div>
+
+<!-- CONTACT — LIGHT -->
+<section class="contact-sec" id="contact">
+  <div class="contact-wrap">
+    <div class="ci">
+      <div class="sec-label-light">Contact</div>
+      <h2 class="on-light">Let's discuss<br/><em>your objectives</em></h2>
+      <p>Whether you represent an institutional allocator, a family office, or an operating company seeking a strategic partner — we welcome the conversation. Capacity is finite and fills permanently.</p>
+      <div class="cd"><span>Inquiries</span><a href="mailto:invest@ascendaenterprise.com">invest@ascendaenterprise.com</a></div>
+      <div class="cd"><span>Availability</span><p>By appointment only</p></div>
+      <div class="cd"><span>AUM status</span><p style="color:var(--up);font-weight:400">Currently accepting allocators</p></div>
+    </div>
+    <div class="cf">
+      <div class="cff"><label>Full name</label><input type="text" placeholder="Your name"/></div>
+      <div class="cff"><label>Organization</label><input type="text" placeholder="Firm or company"/></div>
+      <div class="cff"><label>Email</label><input type="email" placeholder="you@example.com"/></div>
+      <div class="cff">
+        <label>Area of interest</label>
+        <select>
+          <option value="">Select a focus area</option>
+          <option>Trading / Public Markets</option>
+          <option>Real Estate</option>
+          <option>Private Equity</option>
+          <option>General inquiry</option>
+        </select>
+      </div>
+      <div class="cff"><label>Message</label><textarea placeholder="Tell us about your investment objectives..."></textarea></div>
+      <button class="btn-dark">Submit inquiry</button>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="flogo">Ascenda Enterprise Capital</div>
+  <div class="flinks">
+    <a href="#">Privacy Policy</a>
+    <a href="#">Disclosures</a>
+    <a href="#">Terms of Use</a>
+  </div>
+  <div class="fcopy">© 2025 Ascenda Enterprise Capital. All rights reserved. Not an offer to invest.</div>
+</footer>
+
+</body>
+</html>
