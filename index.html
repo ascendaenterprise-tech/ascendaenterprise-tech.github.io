@@ -304,6 +304,7 @@ footer{
   <div class="nav-links">
     <a href="#markets">Markets</a>
     <a href="#news">News</a>
+    <a href="#network">Network</a>
     <a href="#focus">Focus</a>
     <a href="#about">About</a>
     <a href="#contact">Contact</a>
@@ -563,6 +564,165 @@ footer{
     </div>
   </div>
 </section>
+
+<!-- USA NETWORK MAP -->
+<section id="network" style="padding:8rem 4rem;background:#06050D;border-top:.5px solid rgba(201,168,76,0.15)">
+  <div style="font-size:.62rem;letter-spacing:.28em;text-transform:uppercase;color:#C9A84C;margin-bottom:1.25rem;display:flex;align-items:center;gap:.9rem;font-weight:400">
+    <span style="display:block;width:32px;height:.5px;background:#C9A84C"></span>
+    National reach
+  </div>
+  <h2 style="font-family:'Playfair Display',serif;font-size:clamp(2rem,3.5vw,3rem);font-weight:400;color:#FFFFFF;line-height:1.12;margin-bottom:.8rem">
+    48 states. One <em style="font-style:italic;color:#E8CC7A">command center.</em>
+  </h2>
+  <p style="font-size:.82rem;color:rgba(255,255,255,.32);margin-bottom:2.5rem;letter-spacing:.05em;font-weight:300">
+    Headquartered in New York — connected to every contiguous state in the union. Hover any state to explore.
+  </p>
+  <div id="map-container" style="width:100%;max-width:960px;margin:0 auto;position:relative">
+    <div id="map-loading" style="color:rgba(201,168,76,0.4);font-size:.8rem;font-family:Arial,sans-serif;padding:4rem;text-align:center">Loading map...</div>
+  </div>
+  <div id="map-state-label" style="text-align:center;font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;color:#E8CC7A;margin-top:1rem;min-height:1.2rem;font-family:'Jost',sans-serif">&nbsp;</div>
+</section>
+
+<script src="https://cdn.jsdelivr.net/npm/d3@7/dist/d3.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/topojson-client@3/dist/topojson-client.min.js"></script>
+<script>
+(function(){
+  const W=960,H=600;
+  const EXCLUDE=['02','15'];
+  const NY_ID='36';
+  const stateNames={
+    '01':'Alabama','04':'Arizona','05':'Arkansas','06':'California',
+    '08':'Colorado','09':'Connecticut','10':'Delaware','12':'Florida','13':'Georgia',
+    '16':'Idaho','17':'Illinois','18':'Indiana','19':'Iowa','20':'Kansas',
+    '21':'Kentucky','22':'Louisiana','23':'Maine','24':'Maryland','25':'Massachusetts',
+    '26':'Michigan','27':'Minnesota','28':'Mississippi','29':'Missouri','30':'Montana',
+    '31':'Nebraska','32':'Nevada','33':'New Hampshire','34':'New Jersey','35':'New Mexico',
+    '36':'New York','37':'North Carolina','38':'North Dakota','39':'Ohio','40':'Oklahoma',
+    '41':'Oregon','42':'Pennsylvania','44':'Rhode Island','45':'South Carolina',
+    '46':'South Dakota','47':'Tennessee','48':'Texas','49':'Utah','50':'Vermont',
+    '51':'Virginia','53':'Washington','54':'West Virginia','55':'Wisconsin','56':'Wyoming'
+  };
+  const sl=document.getElementById('map-state-label');
+
+  fetch('https://cdn.jsdelivr.net/npm/us-atlas@3/states-10m.json')
+  .then(r=>r.json())
+  .then(us=>{
+    const ml=document.getElementById('map-loading');
+    if(ml)ml.remove();
+    const container=document.getElementById('map-container');
+    const projection=d3.geoAlbersUsa().scale(1280).translate([W/2,H/2]);
+    const pathGen=d3.geoPath().projection(projection);
+    const svg=d3.select(container).append('svg')
+      .attr('viewBox',`0 0 ${W} ${H}`)
+      .style('width','100%').style('height','auto').style('display','block')
+      .style('background','#06050D');
+
+    const allStates=topojson.feature(us,us.objects.states).features
+      .filter(d=>!EXCLUDE.includes(d.id.toString().padStart(2,'0')));
+
+    const styleEl=document.createElement('style');
+    styleEl.textContent='.aec-st{fill:#0E0C1C;stroke:#2A2445;stroke-width:0.5;stroke-linejoin:round;cursor:pointer;transition:fill .2s,stroke .2s}';
+    document.head.appendChild(styleEl);
+
+    const sG=svg.append('g');
+    const lG=svg.append('g');
+    const dG=svg.append('g');
+    const nyG=svg.append('g');
+
+    sG.selectAll('path').data(allStates).enter().append('path')
+      .attr('class','aec-st').attr('id',d=>'aec-st'+d.id).attr('d',pathGen)
+      .on('mouseenter',function(e,d){highlight(d.id,true)})
+      .on('mouseleave',function(e,d){highlight(d.id,false)});
+
+    const nyFeat=allStates.find(d=>d.id.toString().padStart(2,'0')===NY_ID);
+    const [NYX,NYY]=pathGen.centroid(nyFeat);
+    const centerMap={};
+    allStates.forEach(d=>{centerMap[d.id.toString().padStart(2,'0')]=pathGen.centroid(d)});
+
+    const lineEls={},trailEls={},dotEls={};
+
+    allStates.forEach((d,i)=>{
+      const fid=d.id.toString().padStart(2,'0');
+      if(fid===NY_ID) return;
+      const [tx,ty]=centerMap[fid];
+      const dx=tx-NYX,dy=ty-NYY;
+      const dist=Math.sqrt(dx*dx+dy*dy);
+      const arcH=dist*0.55;
+      const mx=(tx+NYX)/2;
+      const my=Math.min(NYY,ty)-arcH;
+      const pathD=`M${NYX},${NYY} Q${mx},${my} ${tx},${ty}`;
+      const totalLen=dist*1.8;
+
+      const base=lG.append('path').attr('d',pathD).attr('fill','none')
+        .attr('stroke','#C9A84C').attr('stroke-width',0.7).attr('opacity',0.28);
+      lineEls[fid]=base;
+
+      const trail=lG.append('path').attr('d',pathD).attr('fill','none')
+        .attr('stroke','#F5DFA0').attr('stroke-width',2).attr('opacity',0)
+        .attr('stroke-dasharray',`${totalLen*0.12} ${totalLen}`)
+        .attr('stroke-dashoffset',totalLen);
+      trailEls[fid]={el:trail,len:totalLen,delay:i*75};
+
+      const dot=dG.append('circle').attr('cx',tx).attr('cy',ty).attr('r',3)
+        .attr('fill','#C9A84C').attr('opacity',0.75).style('cursor','pointer')
+        .on('mouseenter',()=>highlight(fid,true))
+        .on('mouseleave',()=>highlight(fid,false));
+      dotEls[fid]=dot;
+    });
+
+    function highlight(id,on){
+      const fid=id.toString().padStart(2,'0');
+      const base=lineEls[fid],dot=dotEls[fid];
+      const sp=d3.select('#aec-st'+id);
+      if(base){base.attr('stroke',on?'#F5DFA0':'#C9A84C').attr('stroke-width',on?2.5:0.7).attr('opacity',on?0.9:0.28)}
+      if(dot){dot.attr('r',on?7:3).attr('fill',on?'#F5DFA0':'#C9A84C').attr('opacity',1)}
+      if(!sp.empty()){sp.style('fill',on?'rgba(201,168,76,0.22)':'').style('stroke',on?'#E8CC7A':'').style('stroke-width',on?'1.2':'')}
+      if(sl) sl.textContent=on?(stateNames[fid]||fid):'\u00a0';
+    }
+
+    let startTime=null;
+    const CYCLE=4000;
+    function animateTrails(ts){
+      if(!startTime) startTime=ts;
+      const elapsed=ts-startTime;
+      Object.entries(trailEls).forEach(([fid,{el,len,delay}])=>{
+        const t=((elapsed-delay)%CYCLE)/CYCLE;
+        if(t<0){el.attr('opacity',0);return;}
+        const offset=len-(t*len*1.15);
+        el.attr('stroke-dashoffset',offset).attr('opacity',t<0.1?t*8:t>0.85?(1-t)*6.5:0.85);
+      });
+      requestAnimationFrame(animateTrails);
+    }
+    requestAnimationFrame(animateTrails);
+
+    nyG.append('circle').attr('cx',NYX).attr('cy',NYY).attr('r',28).attr('fill','rgba(201,168,76,0.08)');
+    nyG.append('circle').attr('cx',NYX).attr('cy',NYY).attr('r',7).attr('fill','#C9A84C');
+    nyG.append('circle').attr('cx',NYX).attr('cy',NYY).attr('r',4).attr('fill','#F5DFA0');
+    const p1=nyG.append('circle').attr('cx',NYX).attr('cy',NYY).attr('r',7).attr('fill','none').attr('stroke','#E8CC7A').attr('stroke-width',2).attr('opacity',0.8);
+    const p2=nyG.append('circle').attr('cx',NYX).attr('cy',NYY).attr('r',7).attr('fill','none').attr('stroke','#E8CC7A').attr('stroke-width',1).attr('opacity',0.5);
+    function pulse(){
+      let s=0;
+      const step=()=>{
+        s+=16;const t=Math.min(s/2500,1);
+        p1.attr('r',7+(24-7)*t).attr('opacity',0.8*(1-t));
+        if(s>600){const t2=Math.min((s-600)/1900,1);p2.attr('r',7+(38-7)*t2).attr('opacity',0.5*(1-t2));}
+        if(t<1)requestAnimationFrame(step);else setTimeout(pulse,400);
+      };
+      requestAnimationFrame(step);
+    }
+    pulse();
+    nyG.append('text').attr('x',NYX).attr('y',NYY-14).attr('text-anchor','middle')
+      .attr('fill','#F5DFA0').attr('font-size',9).attr('font-family','Georgia,serif').attr('font-style','italic').text('New York');
+    svg.append('text').attr('x',W/2).attr('y',H-6).attr('text-anchor','middle')
+      .attr('fill','rgba(201,168,76,0.18)').attr('font-size',8).attr('font-family','Arial,sans-serif')
+      .attr('letter-spacing',3).text('ASCENDA ENTERPRISE CAPITAL — 48 STATE NETWORK');
+  })
+  .catch(()=>{
+    const ml=document.getElementById('map-loading');
+    if(ml)ml.textContent='Map visible on live site.';
+  });
+})();
+</script>
 
 <!-- FOCUS — DARK -->
 <section class="focus-sec" id="focus">
