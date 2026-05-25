@@ -278,21 +278,101 @@ footer{
 
 /* ── RESPONSIVE ── */
 @media(max-width:900px){
-  nav{padding:1.2rem 2rem}
-  .hero{padding:7rem 2rem 5rem}
-  h1{font-size:clamp(2.8rem,8vw,4.5rem)}
-  .h1b{padding-left:2rem}.h1c{padding-left:4rem}
-  .aum-band{flex-direction:column;padding:3rem 2rem;gap:2rem}
-  .aum-sep{width:80px;height:.5px}
-  .aum-r{border-left:none;padding-left:0;border-top:.5px solid var(--rule);padding-top:1.5rem}
+
+  /* NAV — hamburger */
+  nav{padding:1rem 1.5rem;position:fixed;top:0;left:0;right:0;z-index:1000}
+  .nav-logo{font-size:.9rem}
+  .nav-links{display:none;position:fixed;top:56px;left:0;right:0;bottom:0;background:rgba(6,5,13,.98);flex-direction:column;align-items:center;justify-content:center;gap:2.5rem;z-index:999}
+  .nav-links.open{display:flex}
+  .nav-links a{font-size:1rem;letter-spacing:.2em}
+  .nav-hamburger{display:flex;flex-direction:column;gap:5px;cursor:pointer;padding:.5rem;z-index:1000}
+  .nav-hamburger span{display:block;width:24px;height:1.5px;background:var(--white);transition:all .3s}
+  .nav-hamburger.open span:nth-child(1){transform:rotate(45deg) translate(4px,4px)}
+  .nav-hamburger.open span:nth-child(2){opacity:0}
+  .nav-hamburger.open span:nth-child(3){transform:rotate(-45deg) translate(4px,-4px)}
+
+  /* HERO */
+  .hero{padding:6rem 1.5rem 3.5rem;margin-top:56px}
+  h1{font-size:clamp(2.4rem,9vw,3.5rem);line-height:1.05}
+  .h1b{padding-left:1.5rem}.h1c{padding-left:3rem}
+  .hero-body{font-size:1rem;max-width:100%}
+  .cta-row{flex-direction:column;gap:.75rem}
+  .btn-gold,.btn-out{text-align:center;padding:1rem 2rem;width:100%}
+
+  /* AUM BAND */
+  .aum-band{flex-direction:column;padding:3rem 1.5rem;gap:2rem}
+  .aum-sep{width:60px;height:.5px}
+  .aum-r{border-left:none;padding-left:0;border-top:.5px solid var(--rule);padding-top:1.5rem;font-size:.92rem}
+  .aum-num{font-size:2.6rem}
+
+  /* STATEMENT */
+  .statement{padding:3.5rem 1.5rem}
+  .statement-quote{font-size:clamp(1.5rem,6vw,2.2rem)}
+
+  /* SECTIONS — global padding */
+  section,
+  .news-section,
+  .focus-sec,
+  .about-sec,
+  .ap-band,
+  .contact-sec,
+  .mkt-section{padding:4.5rem 1.5rem}
+
+  /* MARKET SECTION */
+  .mkt-grid{grid-template-columns:repeat(2,1fr)}
+  .tv-charts-grid{grid-template-columns:1fr}
+
+  /* FOCUS */
   .focus-grid{grid-template-columns:1fr}
   .fc{border-right:none;border-bottom:.5px solid var(--rule)}
-  .about-wrap,.contact-wrap{grid-template-columns:1fr;gap:3rem}
-  .ap-grid{grid-template-columns:repeat(2,1fr)}
-  .tv-charts-grid{grid-template-columns:1fr}
-  section,.news-section,.focus-sec,.about-sec,.ap-band,.contact-sec,.mkt-section{padding:5rem 2rem}
-  .statement{padding:4rem 2rem}
-  footer{padding:2rem}
+  .fc h3{font-size:1.5rem}
+
+  /* NEWS */
+  .news-grid{grid-template-columns:1fr}
+  .news-meta-bar{flex-direction:column;align-items:flex-start;gap:1rem}
+
+  /* JOIN SECTION — 3 cards to 1 col */
+  #join > div[style*="grid-template-columns:repeat(3"]{grid-template-columns:1fr!important}
+
+  /* ABOUT */
+  .about-wrap{grid-template-columns:1fr;gap:3rem}
+  .stat-list{margin-top:1rem}
+
+  /* FOUNDER SECTION */
+  #about > div[style*="grid-template-columns:1fr 1fr"]{grid-template-columns:1fr!important}
+  #about > div[style*="grid-template-columns:1fr 1fr"] > div:first-child{padding:4rem 1.5rem!important}
+  #about > div[style*="grid-template-columns:1fr 1fr"] > div:last-child > div[style*="grid-template-columns:1fr 1fr"]{grid-template-columns:1fr 1fr!important}
+  .about-card-quote{font-size:1rem}
+
+  /* FIRM ABOUT */
+  #about > div:last-child > div[style*="grid-template-columns:1fr 1fr"]{grid-template-columns:1fr!important;gap:3rem!important}
+  #about > div:last-child{padding:4.5rem 1.5rem!important}
+
+  /* APPROACH */
+  .ap-grid{grid-template-columns:1fr 1fr;gap:2rem}
+  .ap-band{padding:4.5rem 1.5rem}
+
+  /* CONTACT */
+  .contact-wrap{grid-template-columns:1fr;gap:3rem}
+  .contact-sec{padding:4.5rem 1.5rem}
+
+  /* MAP */
+  #network{padding:4.5rem 1.5rem!important}
+
+  /* FOOTER */
+  footer{padding:2rem 1.5rem;flex-direction:column;text-align:center;gap:1.25rem}
+  .flinks{flex-wrap:wrap;justify-content:center;gap:1.25rem}
+}
+
+@media(max-width:480px){
+  h1{font-size:clamp(2rem,10vw,2.8rem)}
+  .h1b{padding-left:1rem}.h1c{padding-left:2rem}
+  .statement-quote{font-size:1.5rem}
+  .ap-grid{grid-template-columns:1fr}
+  .mkt-grid{grid-template-columns:1fr}
+  .aum-num{font-size:2.2rem}
+  #about > div[style*="grid-template-columns:1fr 1fr"] > div:last-child > div[style*="grid-template-columns:1fr 1fr"]{grid-template-columns:1fr 1fr!important}
+  .stat-v{font-size:2rem}
 }
 </style>
 </head>
@@ -301,14 +381,17 @@ footer{
 <!-- NAV -->
 <nav>
   <div class="nav-logo">Ascenda Enterprise Capital</div>
-  <div class="nav-links">
-    <a href="#markets">Markets</a>
-    <a href="#news">News</a>
-    <a href="#network">Network</a>
-    <a href="#focus">Focus</a>
-    <a href="#join">Join</a>
-    <a href="#about">About</a>
-    <a href="#contact">Contact</a>
+  <div class="nav-links" id="nav-links">
+    <a href="#markets" onclick="closeNav()">Markets</a>
+    <a href="#news" onclick="closeNav()">News</a>
+    <a href="#network" onclick="closeNav()">Network</a>
+    <a href="#focus" onclick="closeNav()">Focus</a>
+    <a href="#join" onclick="closeNav()">Join</a>
+    <a href="#about" onclick="closeNav()">About</a>
+    <a href="#contact" onclick="closeNav()">Contact</a>
+  </div>
+  <div class="nav-hamburger" id="hamburger" onclick="toggleNav()" style="display:none">
+    <span></span><span></span><span></span>
   </div>
 </nav>
 
@@ -1051,5 +1134,28 @@ footer{
   <div class="fcopy">© 2025 Ascenda Enterprise Capital. All rights reserved. Not an offer to invest.</div>
 </footer>
 
+<script>
+function toggleNav(){
+  const nav=document.getElementById('nav-links');
+  const hb=document.getElementById('hamburger');
+  nav.classList.toggle('open');
+  hb.classList.toggle('open');
+  document.body.style.overflow=nav.classList.contains('open')?'hidden':'';
+}
+function closeNav(){
+  const nav=document.getElementById('nav-links');
+  const hb=document.getElementById('hamburger');
+  nav.classList.remove('open');
+  hb.classList.remove('open');
+  document.body.style.overflow='';
+}
+function checkMobile(){
+  const hb=document.getElementById('hamburger');
+  if(window.innerWidth<=900){hb.style.display='flex'}
+  else{hb.style.display='none';closeNav()}
+}
+window.addEventListener('resize',checkMobile);
+checkMobile();
+</script>
 </body>
 </html>
