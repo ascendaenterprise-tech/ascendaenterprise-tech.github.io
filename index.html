@@ -528,6 +528,7 @@ footer{background:var(--ink);border-top:.5px solid var(--rule);padding:1.75rem 3
 
   /* NEWS */
   .news-grid{grid-template-columns:1fr !important}
+  #re-pe-news > div:last-child{grid-template-columns:1fr !important}
   .nc{padding:1.75rem 1.25rem;border-bottom:.5px solid rgba(26,22,36,.12)}
   .nc-title{font-size:1rem}
 
@@ -677,34 +678,101 @@ footer{background:var(--ink);border-top:.5px solid var(--rule);padding:1.75rem 3
 </nav>
 
 <!-- TICKER -->
-<div style="margin-top:56px;border-top:.5px solid rgba(196,146,42,0.15);border-bottom:.5px solid rgba(196,146,42,0.15);background:rgba(196,146,42,0.05)">
-  <div class="tradingview-widget-container">
-    <div class="tradingview-widget-container__widget"></div>
-    <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js" async>
-    {
-      "symbols": [
-        {"proName":"FOREXCOM:NSXUSD","title":"NQ / NASDAQ 100"},
-        {"proName":"FOREXCOM:SPXUSD","title":"ES / S&P 500"},
-        {"proName":"INDEX:DJI","title":"Dow Jones"},
-        {"proName":"TVC:GOLD","title":"Gold"},
-        {"proName":"TVC:USOIL","title":"WTI Crude"},
-        {"proName":"FOREXCOM:EURUSD","title":"EUR/USD"},
-        {"proName":"FOREXCOM:GBPUSD","title":"GBP/USD"},
-        {"proName":"FOREXCOM:USDJPY","title":"USD/JPY"},
-        {"proName":"BITSTAMP:BTCUSD","title":"Bitcoin"},
-        {"proName":"TVC:US10Y","title":"US 10Y Yield"},
-        {"proName":"NASDAQ:NVDA","title":"NVIDIA"},
-        {"proName":"NASDAQ:AAPL","title":"Apple"},
-        {"proName":"NASDAQ:MSFT","title":"Microsoft"},
-        {"proName":"TVC:SILVER","title":"Silver"}
-      ],
-      "showSymbolLogo": false,
-      "isTransparent": true,
-      "displayMode": "adaptive",
-      "colorTheme": "dark",
-      "locale": "en"
-    }
-    </script>
+<div style="margin-top:56px;border-top:.5px solid rgba(196,146,42,0.15);background:rgba(196,146,42,0.05)">
+  <!-- ROW 1: Indices, Forex, Crypto, Commodities -->
+  <div style="border-bottom:.5px solid rgba(196,146,42,0.1)">
+    <div class="tradingview-widget-container">
+      <div class="tradingview-widget-container__widget"></div>
+      <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js" async>
+      {
+        "symbols": [
+          {"proName":"FOREXCOM:NSXUSD","title":"NQ / NASDAQ 100"},
+          {"proName":"FOREXCOM:SPXUSD","title":"ES / S&P 500"},
+          {"proName":"INDEX:DJI","title":"Dow Jones"},
+          {"proName":"TVC:GOLD","title":"Gold"},
+          {"proName":"TVC:USOIL","title":"WTI Crude"},
+          {"proName":"TVC:SILVER","title":"Silver"},
+          {"proName":"FOREXCOM:EURUSD","title":"EUR/USD"},
+          {"proName":"FOREXCOM:GBPUSD","title":"GBP/USD"},
+          {"proName":"FOREXCOM:USDJPY","title":"USD/JPY"},
+          {"proName":"FOREXCOM:AUDUSD","title":"AUD/USD"},
+          {"proName":"BITSTAMP:BTCUSD","title":"Bitcoin"},
+          {"proName":"BITSTAMP:ETHUSD","title":"Ethereum"},
+          {"proName":"TVC:US10Y","title":"US 10Y Yield"},
+          {"proName":"CME_MINI:ES1!","title":"ES Futures"}
+        ],
+        "showSymbolLogo": false,
+        "isTransparent": true,
+        "displayMode": "adaptive",
+        "colorTheme": "dark",
+        "locale": "en"
+      }
+      </script>
+    </div>
+  </div>
+  <!-- ROW 2: Top Stocks -->
+  <div style="border-bottom:.5px solid rgba(196,146,42,0.15)">
+    <div class="tradingview-widget-container">
+      <div class="tradingview-widget-container__widget"></div>
+      <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js" async>
+      {
+        "symbols": [
+          {"proName":"NASDAQ:TSLA","title":"Tesla"},
+          {"proName":"NASDAQ:NVDA","title":"NVIDIA"},
+          {"proName":"NASDAQ:PLTR","title":"Palantir"},
+          {"proName":"NASDAQ:AMZN","title":"Amazon"},
+          {"proName":"NASDAQ:AAPL","title":"Apple"},
+          {"proName":"NASDAQ:MSFT","title":"Microsoft"},
+          {"proName":"NASDAQ:META","title":"Meta"},
+          {"proName":"NASDAQ:GOOGL","title":"Google"},
+          {"proName":"NYSE:JPM","title":"JPMorgan"},
+          {"proName":"NYSE:GS","title":"Goldman Sachs"},
+          {"proName":"NYSE:BRK.B","title":"Berkshire"},
+          {"proName":"NYSE:BAC","title":"Bank of America"},
+          {"proName":"NYSE:V","title":"Visa"},
+          {"proName":"NYSE:UNH","title":"UnitedHealth"},
+          {"proName":"NASDAQ:NFLX","title":"Netflix"}
+        ],
+        "showSymbolLogo": false,
+        "isTransparent": true,
+        "displayMode": "adaptive",
+        "colorTheme": "dark",
+        "locale": "en"
+      }
+      </script>
+    </div>
+  </div>
+  <!-- ROW 3: Real Estate, Energy, Commodities, International -->
+  <div style="border-bottom:.5px solid rgba(196,146,42,0.15)">
+    <div class="tradingview-widget-container">
+      <div class="tradingview-widget-container__widget"></div>
+      <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js" async>
+      {
+        "symbols": [
+          {"proName":"NYSE:SPG","title":"Simon Property"},
+          {"proName":"NYSE:PLD","title":"Prologis REIT"},
+          {"proName":"NYSE:AMT","title":"American Tower"},
+          {"proName":"NYSE:EQIX","title":"Equinix REIT"},
+          {"proName":"NYSE:O","title":"Realty Income"},
+          {"proName":"NYSE:BX","title":"Blackstone"},
+          {"proName":"NYSE:KKR","title":"KKR"},
+          {"proName":"NYSE:APO","title":"Apollo Global"},
+          {"proName":"NASDAQ:MSCI","title":"MSCI"},
+          {"proName":"TVC:UKOIL","title":"Brent Crude"},
+          {"proName":"TVC:NATURALGAS","title":"Natural Gas"},
+          {"proName":"TVC:COPPER","title":"Copper"},
+          {"proName":"FOREXCOM:USDCAD","title":"USD/CAD"},
+          {"proName":"FOREXCOM:USDCHF","title":"USD/CHF"},
+          {"proName":"INDEX:HSI","title":"Hang Seng"}
+        ],
+        "showSymbolLogo": false,
+        "isTransparent": true,
+        "displayMode": "adaptive",
+        "colorTheme": "dark",
+        "locale": "en"
+      }
+      </script>
+    </div>
   </div>
 </div>
 
@@ -899,6 +967,81 @@ footer{background:var(--ink);border-top:.5px solid var(--rule);padding:1.75rem 3
       <div class="tradingview-widget-container"><div class="tradingview-widget-container__widget"></div>
       <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-mini-symbol-overview.js" async>{"symbol":"TVC:GOLD","width":"100%","height":"200","locale":"en","dateRange":"3M","colorTheme":"dark","isTransparent":true,"autosize":true}</script></div>
     </div>
+  </div>
+</section>
+
+<!-- REAL ESTATE & PRIVATE EQUITY NEWS -->
+<section style="padding:6rem 3.5rem;background:var(--ink2);border-top:.5px solid var(--rule)" id="re-pe-news">
+  <div style="display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:3rem;flex-wrap:wrap;gap:1rem">
+    <div>
+      <div style="font-family:var(--font-mono);font-size:.58rem;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);margin-bottom:1.2rem;display:flex;align-items:center;gap:.9rem;font-weight:400">
+        <span style="display:block;width:32px;height:.5px;background:var(--gold)"></span>
+        Sector intelligence
+      </div>
+      <h2 style="font-family:var(--font-display);font-size:clamp(2rem,3.5vw,3rem);font-weight:300;color:var(--white);line-height:1.12;margin-bottom:.5rem">
+        Real Estate & <em style="font-style:italic;color:var(--gold2)">Private Equity</em>
+      </h2>
+      <p style="font-family:var(--font-mono);font-size:.75rem;color:rgba(255,255,255,.28);font-weight:300">Latest intelligence across AEC's real estate and private equity verticals</p>
+    </div>
+    <div style="font-family:var(--font-mono);font-size:.55rem;letter-spacing:.12em;color:var(--cream3)">CBRE · JLL · Bloomberg · WSJ · PitchBook</div>
+  </div>
+
+  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--rule)">
+
+    <!-- RE Card 1 -->
+    <div style="background:var(--ink2);padding:2.25rem 2rem;transition:background .3s;cursor:pointer" onmouseover="this.style.background='rgba(196,146,42,0.05)'" onmouseout="this.style.background='var(--ink2)'">
+      <div style="font-family:var(--font-mono);font-size:.52rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold3);margin-bottom:.5rem">CBRE</div>
+      <span style="font-family:var(--font-mono);font-size:.48rem;letter-spacing:.14em;text-transform:uppercase;padding:.2rem .55rem;border:.5px solid var(--rule);color:var(--cream3)">Real Estate</span>
+      <div style="font-family:var(--font-display);font-size:1.1rem;font-weight:400;color:var(--white);line-height:1.4;margin:1rem 0 .6rem">CRE lending hits 5-year high — global investment volume up 18% YoY in Q1 2026</div>
+      <p style="font-size:.82rem;color:var(--cream2);line-height:1.9;font-weight:300">CBRE's Lending Momentum Index reached a five-year high. Multifamily debt remains abundant, industrial is supply-constrained, and prime office scarcity intensifies across gateway markets. $562B projected for full-year 2026.</p>
+      <div style="font-family:var(--font-mono);font-size:.55rem;letter-spacing:.1em;color:var(--cream3);margin-top:.85rem">May 2026 · CBRE Research</div>
+    </div>
+
+    <!-- RE Card 2 -->
+    <div style="background:var(--ink2);padding:2.25rem 2rem;transition:background .3s;cursor:pointer;border-left:.5px solid var(--rule);border-right:.5px solid var(--rule)" onmouseover="this.style.background='rgba(196,146,42,0.05)'" onmouseout="this.style.background='var(--ink2)'">
+      <div style="font-family:var(--font-mono);font-size:.52rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold3);margin-bottom:.5rem">JLL</div>
+      <span style="font-family:var(--font-mono);font-size:.48rem;letter-spacing:.14em;text-transform:uppercase;padding:.2rem .55rem;border:.5px solid var(--rule);color:var(--cream3)">Real Estate</span>
+      <div style="font-family:var(--font-display);font-size:1.1rem;font-weight:400;color:var(--white);line-height:1.4;margin:1rem 0 .6rem">Industrial & logistics vacancy tightens to record lows across Sun Belt markets</div>
+      <p style="font-size:.82rem;color:var(--cream2);line-height:1.9;font-weight:300">Atlanta, Dallas, and Phoenix lead Sun Belt industrial absorption. E-commerce demand continues to drive net absorption above completions. Rent growth of 12–18% projected in prime industrial corridors through 2027.</p>
+      <div style="font-family:var(--font-mono);font-size:.55rem;letter-spacing:.1em;color:var(--cream3);margin-top:.85rem">May 2026 · JLL Research</div>
+    </div>
+
+    <!-- RE Card 3 -->
+    <div style="background:var(--ink2);padding:2.25rem 2rem;transition:background .3s;cursor:pointer" onmouseover="this.style.background='rgba(196,146,42,0.05)'" onmouseout="this.style.background='var(--ink2)'">
+      <div style="font-family:var(--font-mono);font-size:.52rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold3);margin-bottom:.5rem">WSJ</div>
+      <span style="font-family:var(--font-mono);font-size:.48rem;letter-spacing:.14em;text-transform:uppercase;padding:.2rem .55rem;border:.5px solid var(--rule);color:var(--cream3)">Real Estate</span>
+      <div style="font-family:var(--font-display);font-size:1.1rem;font-weight:400;color:var(--white);line-height:1.4;margin:1rem 0 .6rem">Multifamily demand surges as homeownership affordability hits 40-year low</div>
+      <p style="font-size:.82rem;color:var(--cream2);line-height:1.9;font-weight:300">With mortgage rates elevated and home prices near historic highs, rental demand continues to surge. Class A multifamily assets in growth markets are seeing sub-4% vacancy rates and strong rent escalations.</p>
+      <div style="font-family:var(--font-mono);font-size:.55rem;letter-spacing:.1em;color:var(--cream3);margin-top:.85rem">May 2026 · Wall Street Journal</div>
+    </div>
+
+    <!-- PE Card 1 -->
+    <div style="background:var(--ink3);padding:2.25rem 2rem;transition:background .3s;cursor:pointer" onmouseover="this.style.background='rgba(196,146,42,0.05)'" onmouseout="this.style.background='var(--ink3)'">
+      <div style="font-family:var(--font-mono);font-size:.52rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold3);margin-bottom:.5rem">PitchBook</div>
+      <span style="font-family:var(--font-mono);font-size:.48rem;letter-spacing:.14em;text-transform:uppercase;padding:.2rem .55rem;border:.5px solid var(--rule);color:var(--cream3)">Private Equity</span>
+      <div style="font-family:var(--font-display);font-size:1.1rem;font-weight:400;color:var(--white);line-height:1.4;margin:1rem 0 .6rem">Global PE dry powder reaches $4.1T — managers under pressure to deploy capital</div>
+      <p style="font-size:.82rem;color:var(--cream2);line-height:1.9;font-weight:300">Record levels of uncalled capital are forcing PE managers to compete harder for quality deals. Smaller, focused funds with sector expertise continue to outperform megafunds on a risk-adjusted basis.</p>
+      <div style="font-family:var(--font-mono);font-size:.55rem;letter-spacing:.1em;color:var(--cream3);margin-top:.85rem">May 2026 · PitchBook</div>
+    </div>
+
+    <!-- PE Card 2 -->
+    <div style="background:var(--ink3);padding:2.25rem 2rem;transition:background .3s;cursor:pointer;border-left:.5px solid var(--rule);border-right:.5px solid var(--rule)" onmouseover="this.style.background='rgba(196,146,42,0.05)'" onmouseout="this.style.background='var(--ink3)'">
+      <div style="font-family:var(--font-mono);font-size:.52rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold3);margin-bottom:.5rem">Bloomberg</div>
+      <span style="font-family:var(--font-mono);font-size:.48rem;letter-spacing:.14em;text-transform:uppercase;padding:.2rem .55rem;border:.5px solid var(--rule);color:var(--cream3)">Private Equity</span>
+      <div style="font-family:var(--font-display);font-size:1.1rem;font-weight:400;color:var(--white);line-height:1.4;margin:1rem 0 .6rem">AI infrastructure and energy transition emerge as top PE themes for 2026–2028</div>
+      <p style="font-size:.82rem;color:var(--cream2);line-height:1.9;font-weight:300">Private equity firms are pivoting aggressively toward data center infrastructure, power generation, and AI-adjacent businesses. Deal multiples in these sectors are commanding 15–22x EBITDA with strong conviction from institutional LPs.</p>
+      <div style="font-family:var(--font-mono);font-size:.55rem;letter-spacing:.1em;color:var(--cream3);margin-top:.85rem">May 2026 · Bloomberg</div>
+    </div>
+
+    <!-- PE Card 3 -->
+    <div style="background:var(--ink3);padding:2.25rem 2rem;transition:background .3s;cursor:pointer" onmouseover="this.style.background='rgba(196,146,42,0.05)'" onmouseout="this.style.background='var(--ink3)'">
+      <div style="font-family:var(--font-mono);font-size:.52rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold3);margin-bottom:.5rem">WSJ</div>
+      <span style="font-family:var(--font-mono);font-size:.48rem;letter-spacing:.14em;text-transform:uppercase;padding:.2rem .55rem;border:.5px solid var(--rule);color:var(--cream3)">Private Equity</span>
+      <div style="font-family:var(--font-display);font-size:1.1rem;font-weight:400;color:var(--white);line-height:1.4;margin:1rem 0 .6rem">Secondary market for PE stakes hits record $145B — liquidity solutions in high demand</div>
+      <p style="font-size:.82rem;color:var(--cream2);line-height:1.9;font-weight:300">The PE secondary market hit a record $145B in 2025 as LPs sought liquidity and GPs extended hold periods. GP-led continuation vehicles now account for over 40% of secondary volume, reshaping how private capital changes hands.</p>
+      <div style="font-family:var(--font-mono);font-size:.55rem;letter-spacing:.1em;color:var(--cream3);margin-top:.85rem">May 2026 · Wall Street Journal</div>
+    </div>
+
   </div>
 </section>
 
