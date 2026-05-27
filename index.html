@@ -99,6 +99,7 @@ nav{
 ═══════════════════════════════ */
 .hero{
   min-height:100vh;
+  width:100%;
   display:flex;flex-direction:column;justify-content:flex-end;
   padding:0 3.5rem 5rem;
   position:relative;overflow:hidden;
@@ -388,42 +389,203 @@ footer{background:var(--ink);border-top:.5px solid var(--rule);padding:1.75rem 3
    RESPONSIVE
 ═══════════════════════════════ */
 @media(max-width:900px){
-  nav{padding:1rem 1.5rem;position:fixed}
-  .nav-links{display:none;position:fixed;top:56px;left:0;right:0;bottom:0;background:rgba(4,3,10,.98);flex-direction:column;align-items:center;justify-content:center;gap:2.5rem;z-index:99}
+
+  /* NAV */
+  nav{
+    padding:1rem 1.5rem;
+    position:fixed;top:0;left:0;right:0;
+    z-index:1000;
+  }
+  .nav-links{
+    display:none;
+    position:fixed;top:56px;left:0;right:0;bottom:0;
+    background:rgba(4,3,10,.99);
+    flex-direction:column;align-items:center;justify-content:center;
+    gap:2.5rem;z-index:999;
+  }
   .nav-links.open{display:flex}
-  .nav-links a{font-size:.85rem;letter-spacing:.2em}
+  .nav-links a{
+    font-size:1rem;letter-spacing:.15em;
+    color:var(--cream2);text-align:center;
+  }
   .nav-hamburger{display:flex}
-  .hero{padding:5.5rem 1.5rem 3.5rem;margin-top:56px}
-  .hero-logo-center{top:42%;width:90%}
-  .hero-diamond-large{width:75px;height:75px}
-  .hero-brand-large{font-size:2rem;letter-spacing:.08em}
-  .hero-content{grid-template-columns:1fr;gap:2.5rem}
-  h1{font-size:clamp(2.2rem,8vw,3rem)}
+
+  /* GATE */
+  #gate{padding:1rem;overflow-y:auto}
+  .gate-inner{padding:1.75rem 1.25rem;max-width:100%}
+  .gate-title{font-size:1.2rem;line-height:1.3}
+  .gate-text{font-size:.73rem}
+  .gate-check label{font-size:.7rem}
+  .gate-btn{font-size:.58rem;padding:.9rem}
+  .gate-disclaimer{font-size:.55rem}
+
+  /* HERO */
+  .hero-logo-center{display:none!important;visibility:hidden!important;opacity:0!important;animation:none!important;position:fixed!important;left:-9999px!important}
+  .hero{
+    padding:5rem 1.5rem 3.5rem;
+    margin-top:56px;
+    min-height:auto;
+    width:100%;
+    box-sizing:border-box;
+  }
+  .hero-content{
+    display:block;
+    width:100%;
+    max-width:100%;
+    box-sizing:border-box;
+  }
+  h1{
+    font-size:clamp(2rem,8vw,2.8rem);
+    line-height:1.1;
+    width:100%;
+    max-width:100%;
+  }
+  .h1b,.h1c{padding-left:0}
+  .hero-body{
+    font-size:.92rem;
+    width:100%;
+    max-width:100%;
+    margin-bottom:2rem;
+    padding-left:1rem;
+    box-sizing:border-box;
+  }
+  .hero-ctas{
+    display:flex;
+    flex-direction:column;
+    gap:.75rem;
+    width:100%;
+  }
+  .btn-gold,.btn-ghost{
+    text-align:center;
+    padding:.95rem 1rem;
+    width:100%;
+    display:block;
+    box-sizing:border-box;
+  }
   .hero-right{display:none}
-  .aum-band{flex-direction:column;padding:3rem 1.5rem;gap:2rem}
-  .aum-sep{width:60px;height:.5px}
-  .aum-r{border-left:none;padding-left:0;border-top:.5px solid var(--rule);padding-top:1.5rem}
-  .sec,.tearsheet,#network{padding:5rem 1.5rem}
-  .statement{padding:3.5rem 1.5rem}
-  .kpi-grid{grid-template-columns:repeat(2,1fr)}
-  .perf-grid{grid-template-columns:1fr}
-  .strategy-grid,.focus-grid,.join-grid{grid-template-columns:1fr}
-  .sg,.fc{border-right:none;border-bottom:.5px solid var(--rule)}
-  .ap-grid{grid-template-columns:repeat(2,1fr);gap:2rem}
-  .founder-grid{grid-template-columns:1fr}
-  .contact-grid{grid-template-columns:1fr;gap:3rem}
-  .news-grid{grid-template-columns:1fr}
-  .tv-charts-grid{grid-template-columns:1fr}
-  .footer-top{grid-template-columns:1fr;gap:2rem}
-  footer{flex-direction:column;text-align:center;padding:1.5rem}
-  .gate-inner{padding:2.5rem 1.5rem}
+  .hero-content{grid-template-columns:1fr!important}
+
+  /* STATEMENT */
+  .statement{padding:3rem 1.5rem;width:100%}
+  .statement-q{font-size:clamp(1.15rem,4vw,1.6rem);line-height:1.35}
+  .statement-attr{font-size:.5rem}
+
+  /* AUM */
+  .aum-band{flex-direction:column;padding:2.5rem 1.5rem;gap:1.75rem;width:100%}
+  .aum-sep{width:50px;height:.5px}
+  .aum-r{
+    border-left:none;padding-left:0;
+    border-top:.5px solid var(--rule);
+    padding-top:1.25rem;font-size:.88rem;
+    min-width:unset;width:100%;
+  }
+  .aum-num{font-size:2.2rem}
+
+  /* ALL SECTIONS full width */
+  .sec,.tearsheet,.sec-alt,.sec-light,.sec-light2{
+    padding:4rem 1.5rem;
+    width:100%;
+    box-sizing:border-box;
+  }
+  .ap-band{padding:4rem 1.5rem;width:100%}
+  .about-intro{padding:3rem 1.5rem;width:100%}
+  #network{padding:4rem 1.5rem !important;width:100% !important}
+  #about{padding:0 !important}
+
+  /* PERFORMANCE */
+  .ts-header{display:block;margin-bottom:2rem}
+  .ts-header > div:last-child{text-align:left;margin-top:1rem}
+  .ts-disclaimer p{font-size:.56rem}
+  /* 2-col KPI - contained */
+  .kpi-grid{
+    grid-template-columns:1fr 1fr !important;
+    width:100%;
+    overflow:hidden;
+  }
+  .kpi{padding:1.25rem .85rem;overflow:hidden;word-break:break-word}
+  .kpi-val{font-size:1.3rem;white-space:nowrap}
+  .kpi-label{font-size:.46rem;letter-spacing:.1em}
+  .kpi-sub{font-size:.5rem;white-space:normal;line-height:1.4}
+  .perf-grid{grid-template-columns:1fr !important}
+  .perf-block{padding:1.75rem 1.25rem}
+  .monthly-table{
+    display:block;overflow-x:auto;
+    -webkit-overflow-scrolling:touch;
+    font-size:.68rem;white-space:nowrap;
+  }
+  .monthly-table th,.monthly-table td{padding:.45rem .6rem}
+  .dist-label{width:55px;font-size:.5rem}
+  .ml-label{font-size:.55rem}
+  .ml-val{font-size:.8rem}
+
+  /* STRATEGY */
+  .strategy-grid{grid-template-columns:1fr !important}
+  .sg{border-right:none;border-bottom:.5px solid var(--rule)}
+  .sg:last-child{border-bottom:none}
+
+  /* TV */
+  .tv-charts-grid{grid-template-columns:1fr !important}
+
+  /* NEWS */
+  .news-grid{grid-template-columns:1fr !important}
+  .nc{padding:1.75rem 1.25rem;border-bottom:.5px solid rgba(26,22,36,.12)}
+  .nc-title{font-size:1rem}
+
+  /* FOCUS */
+  .focus-grid{grid-template-columns:1fr !important;border:none}
+  .fc{border:none;border-bottom:.5px solid var(--rule);padding:2.25rem 1.5rem}
+  .fc:last-child{border-bottom:none}
+
+  /* JOIN */
+  .join-grid{grid-template-columns:1fr !important;gap:0}
+  .jc{border-right:none;border-bottom:.5px solid rgba(196,146,42,.2);padding:2.5rem 1.5rem}
+  .jc.featured{border-bottom:.5px solid rgba(196,146,42,.5)}
+  .jc-title{font-size:1.6rem}
+  .jc-body{font-size:.88rem}
+  .jc-btn{display:block;text-align:center}
+
+  /* FOUNDER */
+  .founder-grid{grid-template-columns:1fr !important;min-height:unset}
+  .founder-left{padding:3.5rem 1.5rem;border-right:none;border-bottom:.5px solid rgba(26,22,36,.15)}
+  .founder-right{padding:3rem 1.5rem}
+  .founder-name{font-size:2.2rem}
+  .founder-stats{grid-template-columns:1fr 1fr}
+  .founder-quote{font-size:1.1rem;line-height:1.6}
+  .tag{font-size:.5rem;padding:.28rem .6rem}
+
+  /* APPROACH */
+  .ap-grid{grid-template-columns:1fr 1fr !important;gap:2rem}
+
+  /* CONTACT */
+  .contact-grid{grid-template-columns:1fr !important;gap:2.5rem}
+
+  /* FOOTER */
+  .footer-top{grid-template-columns:1fr !important;gap:2rem;padding:2.5rem 1.5rem}
+  footer{flex-direction:column;text-align:center;padding:1.5rem;gap:1rem}
+  .f-logo-wrap{justify-content:center}
+  .f-legal{font-size:.48rem;text-align:center;max-width:100%}
+
+  h2{font-size:clamp(1.6rem,4.5vw,2.1rem)}
 }
+
 @media(max-width:480px){
-  h1{font-size:2rem}
-  .kpi-grid{grid-template-columns:1fr 1fr}
-  .ap-grid{grid-template-columns:1fr}
-  .hero-brand-large{font-size:1.5rem}
+  .gate-inner{padding:1.5rem 1rem}
+  .hero{padding:5rem 1.2rem 3.5rem;margin-top:52px}
+  h1{font-size:clamp(1.8rem,8vw,2.2rem) !important}
+  .hero-body{font-size:.85rem;padding-left:.75rem}
+  .statement-q{font-size:clamp(1.05rem,4.5vw,1.35rem)}
+  .aum-num{font-size:1.9rem}
+  .kpi-val{font-size:1.2rem}
+  .kpi{padding:1rem .65rem}
+  .kpi-label{font-size:.42rem}
+  .kpi-sub{font-size:.46rem}
+  .ap-grid{grid-template-columns:1fr !important}
+  .founder-name{font-size:1.9rem}
+  .fs-val{font-size:1.5rem}
+  .jc{padding:2rem 1.25rem}
+  h2{font-size:clamp(1.4rem,5.5vw,1.75rem)}
 }
+
 </style>
 </head>
 <body>
@@ -515,31 +677,43 @@ footer{background:var(--ink);border-top:.5px solid var(--rule);padding:1.75rem 3
 </nav>
 
 <!-- TICKER -->
-<div class="ticker" style="margin-top:56px"><div class="tw" id="tw"></div></div>
+<div style="margin-top:56px;border-top:.5px solid rgba(196,146,42,0.15);border-bottom:.5px solid rgba(196,146,42,0.15);background:rgba(196,146,42,0.05)">
+  <div class="tradingview-widget-container">
+    <div class="tradingview-widget-container__widget"></div>
+    <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js" async>
+    {
+      "symbols": [
+        {"proName":"FOREXCOM:NSXUSD","title":"NQ / NASDAQ 100"},
+        {"proName":"FOREXCOM:SPXUSD","title":"ES / S&P 500"},
+        {"proName":"INDEX:DJI","title":"Dow Jones"},
+        {"proName":"TVC:GOLD","title":"Gold"},
+        {"proName":"TVC:USOIL","title":"WTI Crude"},
+        {"proName":"FOREXCOM:EURUSD","title":"EUR/USD"},
+        {"proName":"FOREXCOM:GBPUSD","title":"GBP/USD"},
+        {"proName":"FOREXCOM:USDJPY","title":"USD/JPY"},
+        {"proName":"BITSTAMP:BTCUSD","title":"Bitcoin"},
+        {"proName":"TVC:US10Y","title":"US 10Y Yield"},
+        {"proName":"NASDAQ:NVDA","title":"NVIDIA"},
+        {"proName":"NASDAQ:AAPL","title":"Apple"},
+        {"proName":"NASDAQ:MSFT","title":"Microsoft"},
+        {"proName":"TVC:SILVER","title":"Silver"}
+      ],
+      "showSymbolLogo": false,
+      "isTransparent": true,
+      "displayMode": "adaptive",
+      "colorTheme": "dark",
+      "locale": "en"
+    }
+    </script>
+  </div>
+</div>
 
 <!-- HERO -->
 <section class="hero">
   <div class="hero-bg"></div>
   <div class="hero-grid-overlay"></div>
 
-  <div class="hero-logo-center">
-    <svg class="hero-diamond-large" viewBox="0 0 120 120" fill="none">
-      <polygon points="60,6 92,42 60,78 28,42" fill="none" stroke="rgba(196,146,42,0.2)" stroke-width="0.5"/>
-      <polygon points="60,6 82,36 60,60 38,36" fill="url(#hg1)"/>
-      <polygon points="60,6 92,42 82,36" fill="url(#hg2)"/>
-      <polygon points="60,60 82,36 92,42" fill="rgba(180,180,200,0.5)"/>
-      <polygon points="60,60 38,36 28,42" fill="rgba(160,160,180,0.4)"/>
-      <polygon points="60,60 92,42 60,90" fill="rgba(140,140,160,0.35)"/>
-      <polygon points="60,90 28,42 60,60" fill="rgba(120,120,140,0.3)"/>
-      <defs>
-        <linearGradient id="hg1" x1="60" y1="6" x2="60" y2="78"><stop offset="0%" stop-color="#E4B84A"/><stop offset="100%" stop-color="#8A6518"/></linearGradient>
-        <linearGradient id="hg2" x1="60" y1="6" x2="92" y2="42"><stop offset="0%" stop-color="#F2D680"/><stop offset="100%" stop-color="#C4922A"/></linearGradient>
-      </defs>
-    </svg>
-    <div class="hero-brand-large">ASCENDA</div>
-    <div class="hero-divider-h"></div>
-    <div class="hero-brand-sub-large">Enterprise Capital</div>
-  </div>
+
 
   <div class="hero-content">
     <div class="hero-left">
@@ -554,13 +728,7 @@ footer{background:var(--ink);border-top:.5px solid var(--rule);padding:1.75rem 3
         <a href="#performance" class="btn-ghost">View performance</a>
       </div>
     </div>
-    <div class="hero-right">
-      <div class="hero-stat"><span class="hs-label">Peak account balance</span><span class="hs-val">$82.4M</span></div>
-      <div class="hero-stat"><span class="hs-label">Years of experience</span><span class="hs-val">~10 Yrs</span></div>
-      <div class="hero-stat"><span class="hs-label">Win rate</span><span class="hs-val">78%</span></div>
-      <div class="hero-stat"><span class="hs-label">AUM ceiling</span><span class="hs-val">$750M</span></div>
-      <div class="hero-stat"><span class="hs-label">Registration</span><span class="hs-val" style="font-size:1.1rem">Georgia LLC</span></div>
-    </div>
+
   </div>
 </section>
 
@@ -608,6 +776,8 @@ footer{background:var(--ink);border-top:.5px solid var(--rule);padding:1.75rem 3
     <div class="kpi"><div class="kpi-val">$5,428</div><div class="kpi-label">Trade $ expectancy</div><div class="kpi-sub">$5,428.42 per trade · TraderSync Feb 2026</div></div>
     <div class="kpi"><div class="kpi-val">$3.2M</div><div class="kpi-label">Peak single-day return</div><div class="kpi-sub">$3,207,435.07 · Feb 24, 2026</div></div>
   </div>
+
+
 
   <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--rule);margin-top:1px;margin-bottom:1px">
     <div class="kpi" style="background:rgba(196,146,42,0.06)"><div class="kpi-val" style="font-size:1.8rem">$81.2M</div><div class="kpi-label">Acc. net return (TraderSync)</div></div>
@@ -786,7 +956,7 @@ footer{background:var(--ink);border-top:.5px solid var(--rule);padding:1.75rem 3
         <div class="jcp"><span class="jcp-dot">✦</span><span>Quarterly reporting & direct leadership access</span></div>
         <div class="jcp"><span class="jcp-dot">✦</span><span>Multi-strategy: trading, real estate, private equity</span></div>
       </div>
-      <a href="#contact" class="jc-btn">Apply as Investor →</a>
+      <a href="ascenda-investor.html" class="jc-btn">Apply as Investor →</a>
     </div>
     <div class="jc featured">
       <div class="jc-n">02 — Allocator</div>
@@ -798,7 +968,7 @@ footer{background:var(--ink);border-top:.5px solid var(--rule);padding:1.75rem 3
         <div class="jcp"><span class="jcp-dot">✦</span><span>Multi-strategy exposure across all 3 verticals</span></div>
         <div class="jcp"><span class="jcp-dot">✦</span><span>Capacity is finite — apply before we close</span></div>
       </div>
-      <a href="#contact" class="jc-btn">Apply as Allocator →</a>
+      <a href="ascenda-allocator.html" class="jc-btn">Apply as Allocator →</a>
     </div>
     <div class="jc">
       <div class="jc-n">03 — Mentee</div>
@@ -828,7 +998,7 @@ footer{background:var(--ink);border-top:.5px solid var(--rule);padding:1.75rem 3
 
 <!-- FOUNDER -->
 <section id="about" style="background:var(--ink)">
-  <div style="text-align:center;padding:5rem 3.5rem 3rem;border-top:.5px solid var(--rule)">
+  <div class="about-intro" style="text-align:center;padding:5rem 3.5rem 3rem;border-top:.5px solid var(--rule)">
     <div class="sec-label" style="justify-content:center">
       <span style="display:block;width:28px;height:.5px;background:var(--gold)"></span>Leadership<span style="display:block;width:28px;height:.5px;background:var(--gold)"></span>
     </div>
@@ -876,7 +1046,7 @@ footer{background:var(--ink);border-top:.5px solid var(--rule);padding:1.75rem 3
 </section>
 
 <!-- APPROACH -->
-<div style="padding:8rem 3.5rem;background:var(--ink2);border-top:.5px solid var(--rule)">
+<div class="ap-band" style="padding:8rem 3.5rem;background:var(--ink2);border-top:.5px solid var(--rule)">
   <div class="sec-label">Investment philosophy</div>
   <h2 class="on-dark">How we think about <em>risk and return</em></h2>
   <div class="ap-grid">
@@ -968,17 +1138,7 @@ footer{background:var(--ink);border-top:.5px solid var(--rule);padding:1.75rem 3
 <script src="https://cdn.jsdelivr.net/npm/d3@7/dist/d3.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/topojson-client@3/dist/topojson-client.min.js"></script>
 <script>
-// TICKER
-const T=[
-  {s:'NASDAQ 100',v:'26,270',c:'+1.54%',u:1},{s:'S&P 500',v:'7,432',c:'+1.08%',u:1},
-  {s:'Dow Jones',v:'50,009',c:'+1.31%',u:1},{s:'ES Futures',v:'5,892',c:'+0.82%',u:1},
-  {s:'WTI Crude',v:'$98.26',c:'-5.66%',u:0},{s:'EUR/USD',v:'1.1613',c:'+1.75%',u:1},
-  {s:'USD/JPY',v:'158.90',c:'-1.67%',u:0},{s:'GBP/USD',v:'1.2740',c:'+2.90%',u:1},
-  {s:'Gold',v:'$2,341',c:'+0.30%',u:1},{s:'US 10Y',v:'3.88%',c:'Cooling',u:0},
-];
-const tw=document.getElementById('tw');
-const h=T.map(t=>`<span class="ti"><b>${t.s}</b>${t.v}<span class="${t.u?'up':'dn'}">${t.c}</span></span>`).join('');
-tw.innerHTML=h+h;
+// Live ticker powered by TradingView
 
 // NAV
 function toggleNav(){
@@ -1002,6 +1162,52 @@ checkMobile();
 
 // GATE
 document.body.style.overflow='hidden';
+
+// MOBILE FIXES
+function applyMobileFixes(){
+  var isMobile = window.innerWidth <= 900;
+  
+  // Kill floating logo
+  var logo = document.getElementById('hero-logo-center');
+  if(logo){
+    if(isMobile){
+      logo.style.cssText = 'display:none!important;visibility:hidden!important;opacity:0!important;position:absolute!important;left:-99999px!important;animation:none!important;';
+    }
+  }
+  
+  // Fix hero content to single column full width on mobile
+  var heroContent = document.querySelector('.hero-content');
+  if(heroContent && isMobile){
+    heroContent.style.cssText = 'display:block!important;width:100%!important;max-width:100%!important;grid-template-columns:1fr!important;';
+  }
+  
+  // Fix h1 indents
+  var h1b = document.querySelector('.h1b');
+  var h1c = document.querySelector('.h1c');
+  if(h1b && isMobile) h1b.style.paddingLeft = '0';
+  if(h1c && isMobile) h1c.style.paddingLeft = '0';
+  
+  // Fix hero body width
+  var heroBody = document.querySelector('.hero-body');
+  if(heroBody && isMobile){
+    heroBody.style.maxWidth = '100%';
+    heroBody.style.width = '100%';
+  }
+  
+  // Fix buttons full width
+  document.querySelectorAll('.hero-ctas .btn-gold, .hero-ctas .btn-ghost').forEach(function(btn){
+    if(isMobile){
+      btn.style.width = '100%';
+      btn.style.display = 'block';
+      btn.style.textAlign = 'center';
+      btn.style.boxSizing = 'border-box';
+    }
+  });
+}
+
+// Run immediately and on resize
+applyMobileFixes();
+window.addEventListener('resize', applyMobileFixes);
 
 // MAP
 (function(){
