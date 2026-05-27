@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Allocator Application — Ascenda Enterprise Capital</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Mono:wght@300;400;500&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --gold:#C4922A;--gold2:#E4B84A;--gold3:#8A6518;--gold4:#F2D680;
+  --ink:#06050D;--ink2:#0D0B18;--ink3:#151220;
+  --white:#FFFFFF;--off:#F5F0E8;
+  --cream2:rgba(255,255,255,.72);--cream3:rgba(255,255,255,.38);
+  --rule:rgba(196,146,42,0.15);--rule2:rgba(196,146,42,0.38);
+  --font-display:'Cormorant Garamond',serif;
+  --font-mono:'DM Mono',monospace;
+  --font-body:'Jost',sans-serif;
+}
+html{scroll-behavior:smooth}
+body{background:var(--ink);color:var(--white);font-family:var(--font-body);font-weight:300;min-height:100vh}
+
+nav{display:flex;align-items:center;justify-content:space-between;padding:1.2rem 3.5rem;background:rgba(6,5,13,.96);border-bottom:.5px solid var(--rule);backdrop-filter:blur(20px);position:sticky;top:0;z-index:100}
+.nav-logo-main{font-family:var(--font-display);font-size:1rem;color:var(--white);font-weight:400;letter-spacing:.06em}
+.nav-logo-sub{font-family:var(--font-mono);font-size:.45rem;letter-spacing:.25em;text-transform:uppercase;color:var(--gold3)}
+.nav-back{font-family:var(--font-mono);font-size:.58rem;letter-spacing:.18em;text-transform:uppercase;color:var(--cream3);text-decoration:none;transition:color .2s}
+.nav-back:hover{color:var(--gold2)}
+
+.hero{padding:6rem 3.5rem 4rem;background:var(--gold);position:relative;overflow:hidden}
+.hero::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:rgba(4,3,10,.15)}
+.eyebrow{font-family:var(--font-mono);font-size:.58rem;letter-spacing:.28em;text-transform:uppercase;color:rgba(4,3,10,.5);margin-bottom:1.25rem;display:flex;align-items:center;gap:.8rem}
+.eyebrow::before{content:'';display:block;width:28px;height:.5px;background:rgba(4,3,10,.3)}
+h1{font-family:var(--font-display);font-size:clamp(2.5rem,5vw,4rem);font-weight:300;color:var(--ink);line-height:1.05;margin-bottom:1.25rem}
+h1 em{font-style:italic}
+.hero-sub{font-size:1rem;color:rgba(4,3,10,.7);line-height:1.9;font-weight:300;border-left:2px solid rgba(4,3,10,.2);padding-left:1.25rem;max-width:580px}
+
+.main{padding:5rem 3.5rem;max-width:1000px;margin:0 auto}
+
+.section-title{font-family:var(--font-mono);font-size:.62rem;letter-spacing:.25em;text-transform:uppercase;color:var(--gold);margin-bottom:2rem;display:flex;align-items:center;gap:.8rem}
+.section-title::before{content:'';display:block;width:24px;height:.5px;background:var(--gold)}
+
+.alloc-display{background:var(--ink2);border:.5px solid var(--rule2);padding:3rem;text-align:center;margin-bottom:2rem;position:relative;overflow:hidden}
+.alloc-display::before{content:'';position:absolute;top:0;left:0;right:0;height:1.5px;background:linear-gradient(90deg,transparent,var(--gold),transparent)}
+.alloc-amount{font-family:var(--font-display);font-size:clamp(2.5rem,5vw,4.5rem);font-style:italic;color:var(--gold2);line-height:1;margin-bottom:.5rem}
+.alloc-label{font-family:var(--font-mono);font-size:.58rem;letter-spacing:.2em;text-transform:uppercase;color:var(--cream3)}
+
+input[type=range]{width:100%;height:3px;-webkit-appearance:none;appearance:none;background:linear-gradient(90deg,var(--gold) 0%,var(--rule) 0%);outline:none;border-radius:0;cursor:pointer}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:20px;height:20px;background:var(--gold2);border:2px solid var(--ink);border-radius:50%;cursor:pointer}
+.slider-labels{display:flex;justify-content:space-between;margin-top:.6rem}
+.slider-labels span{font-family:var(--font-mono);font-size:.55rem;letter-spacing:.1em;color:var(--cream3)}
+
+.tier-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--rule);margin-bottom:3rem}
+.tier{background:var(--ink2);padding:1.5rem 1rem;cursor:pointer;transition:background .2s;text-align:center;border:1px solid transparent}
+.tier:hover{background:rgba(196,146,42,.08)}
+.tier.active{background:rgba(196,146,42,.1);border-color:var(--gold)}
+.tier-amount{font-family:var(--font-display);font-size:1.4rem;font-style:italic;color:var(--gold2);margin-bottom:.25rem}
+.tier-label{font-family:var(--font-mono);font-size:.48rem;letter-spacing:.12em;text-transform:uppercase;color:var(--cream3)}
+
+.benefits{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--rule);margin-bottom:3rem}
+.benefit{background:var(--ink2);padding:1.75rem 1.5rem}
+.benefit-icon{font-size:1.2rem;margin-bottom:.6rem}
+.benefit h4{font-family:var(--font-display);font-size:1rem;font-weight:400;color:var(--white);margin-bottom:.4rem}
+.benefit p{font-size:.78rem;color:var(--cream2);line-height:1.7;font-weight:300}
+
+/* LEGAL DISCLOSURES */
+.legal-section{background:rgba(255,255,255,.02);border:.5px solid var(--rule);padding:2.5rem;margin-bottom:3rem}
+.legal-title{font-family:var(--font-mono);font-size:.6rem;letter-spacing:.22em;text-transform:uppercase;color:var(--gold3);margin-bottom:1.5rem}
+.legal-item{margin-bottom:1.25rem;padding-bottom:1.25rem;border-bottom:.5px solid var(--rule)}
+.legal-item:last-child{border-bottom:none;margin-bottom:0;padding-bottom:0}
+.legal-item-title{font-size:.78rem;font-weight:500;color:var(--white);margin-bottom:.4rem;letter-spacing:.03em}
+.legal-item-text{font-size:.72rem;color:rgba(255,255,255,.4);line-height:1.75;font-weight:300}
+
+.form-block{background:var(--ink2);border:.5px solid var(--rule);padding:3rem}
+.form-title{font-family:var(--font-display);font-size:1.6rem;font-weight:300;color:var(--white);margin-bottom:.4rem}
+.form-sub{font-size:.78rem;color:var(--cream3);margin-bottom:2rem;font-family:var(--font-mono);letter-spacing:.05em}
+.cf{display:flex;flex-direction:column;gap:1.2rem}
+.cf-row{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem}
+.cff{display:flex;flex-direction:column;gap:.4rem}
+.cff label{font-family:var(--font-mono);font-size:.52rem;letter-spacing:.18em;text-transform:uppercase;color:var(--cream3)}
+.cff input,.cff select,.cff textarea{background:rgba(255,255,255,.025);border:.5px solid rgba(196,146,42,.2);color:var(--white);font-family:var(--font-body);font-size:.88rem;font-weight:300;padding:.85rem 1rem;outline:none;transition:border-color .2s;width:100%}
+.cff input:focus,.cff select:focus,.cff textarea:focus{border-color:var(--gold)}
+.cff select option{background:var(--ink2)}
+.cff textarea{resize:vertical;min-height:80px}
+.btn-submit{font-family:var(--font-mono);font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;background:var(--gold);color:var(--ink);border:none;padding:1.1rem 3rem;cursor:pointer;font-weight:500;transition:background .2s;margin-top:.5rem}
+.btn-submit:hover{background:var(--gold2)}
+
+.disclaimer-box{background:rgba(196,146,42,.04);border:.5px solid var(--rule);padding:1.5rem;margin-top:2rem}
+.disclaimer-box p{font-family:var(--font-mono);font-size:.5rem;letter-spacing:.04em;color:rgba(255,255,255,.22);line-height:1.85}
+.disclaimer-box strong{color:rgba(255,255,255,.38);font-weight:500}
+
+footer{padding:2rem 3.5rem;border-top:.5px solid var(--rule);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+.f-copy{font-family:var(--font-mono);font-size:.5rem;color:rgba(255,255,255,.2);letter-spacing:.06em}
+
+@media(max-width:768px){
+  nav{padding:1rem 1.5rem}
+  .hero{padding:5rem 1.5rem 3rem}
+  .main{padding:3.5rem 1.5rem}
+  .tier-grid{grid-template-columns:1fr 1fr}
+  .benefits{grid-template-columns:1fr}
+  .cf-row{grid-template-columns:1fr}
+  .form-block{padding:2rem 1.25rem}
+  .legal-section{padding:1.75rem 1.25rem}
+  footer{padding:1.5rem;flex-direction:column;text-align:center}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div>
+    <div class="nav-logo-main">Ascenda</div>
+    <div class="nav-logo-sub">Enterprise Capital</div>
+  </div>
+  <a href="index.html" class="nav-back">← Back to main site</a>
+</nav>
+
+<section class="hero">
+  <div class="eyebrow">Institutional Allocator Application</div>
+  <h1>Deploy capital<br/>at <em>scale.</em></h1>
+  <p class="hero-sub">Institutional allocators, family offices, and high-net-worth operators ready to deploy meaningful capital into Ascenda's multi-strategy approach. Minimum: $100,000. Maximum: $750,000,000 (subject to AUM cap).</p>
+</section>
+
+<div class="main">
+
+  <div style="margin-bottom:3rem">
+    <div class="section-title">Select allocation amount</div>
+    <div class="alloc-display">
+      <div class="alloc-amount" id="alloc-display">$100,000</div>
+      <div class="alloc-label">Your allocation amount</div>
+    </div>
+    <div style="margin-bottom:1.25rem">
+      <label style="font-family:var(--font-mono);font-size:.52rem;letter-spacing:.18em;text-transform:uppercase;color:var(--cream3);display:block;margin-bottom:.4rem">Or type exact amount</label>
+      <div style="display:flex;align-items:center;gap:.5rem">
+        <span style="font-family:var(--font-display);font-size:1.4rem;color:var(--gold2)">$</span>
+        <input type="number" id="alloc-input" min="100000" max="750000000" value="100000"
+          placeholder="Enter amount"
+          oninput="updateFromInput(this.value)"
+          style="background:rgba(255,255,255,.025);border:.5px solid rgba(196,146,42,.3);color:var(--white);font-family:var(--font-display);font-size:1.4rem;font-style:italic;padding:.6rem 1rem;outline:none;width:100%;transition:border-color .2s;"
+          onfocus="this.style.borderColor='var(--gold)'" onblur="this.style.borderColor='rgba(196,146,42,.3)'"/>
+      </div>
+      <div style="font-family:var(--font-mono);font-size:.5rem;color:rgba(255,255,255,.25);margin-top:.35rem;letter-spacing:.08em">Min $100,000 · Max $750,000,000</div>
+    </div>
+
+    <div style="margin-bottom:1.5rem">
+      <input type="range" id="alloc-slider" min="100000" max="750000000" step="100000" value="100000" oninput="updateAlloc(this.value)"/>
+      <div class="slider-labels"><span>Min $100,000</span><span>Max $750,000,000</span></div>
+    </div>
+    <div class="tier-grid">
+      <div class="tier active" onclick="setTier(100000,this)"><div class="tier-amount">$100K</div><div class="tier-label">Entry</div></div>
+      <div class="tier" onclick="setTier(1000000,this)"><div class="tier-amount">$1M</div><div class="tier-label">Standard</div></div>
+      <div class="tier" onclick="setTier(10000000,this)"><div class="tier-amount">$10M</div><div class="tier-label">Institutional</div></div>
+      <div class="tier" onclick="setTier(750000000,this)"><div class="tier-amount">$750M</div><div class="tier-label">Maximum</div></div>
+    </div>
+  </div>
+
+  <div class="section-title">Allocator benefits</div>
+  <div class="benefits">
+    <div class="benefit"><div class="benefit-icon">🏛️</div><h4>Institutional-Grade Reporting</h4><p>Full compliance documentation, detailed performance reporting, and strategy transparency delivered on your schedule.</p></div>
+    <div class="benefit"><div class="benefit-icon">🤝</div><h4>Direct CEO Relationship</h4><p>Every allocator has direct access to Izaiah Cottle. No intermediaries, no account managers — the principal directly.</p></div>
+    <div class="benefit"><div class="benefit-icon">📈</div><h4>Multi-Strategy Exposure</h4><p>Diversified across global markets trading, real estate acquisitions, and private equity — all under one disciplined framework.</p></div>
+    <div class="benefit"><div class="benefit-icon">🔐</div><h4>$750M Hard Cap</h4><p>Your allocation is protected by our absolute AUM ceiling. When capacity is reached, we close. Performance always comes first.</p></div>
+  </div>
+
+  <!-- LEGAL DISCLOSURES -->
+  <div class="section-title">Required disclosures & legal terms</div>
+  <div class="legal-section">
+    <div class="legal-title">Please read all disclosures carefully before applying</div>
+
+    <div class="legal-item">
+      <div class="legal-item-title">1. No Guarantee of Returns</div>
+      <div class="legal-item-text">Ascenda Enterprise Capital LLC makes no representations or warranties regarding the performance of any investment. All capital deployed through AEC is subject to market risk, including the total and permanent loss of principal. Past performance, including documented trading results, is not indicative of future returns under any circumstances.</div>
+    </div>
+    <div class="legal-item">
+      <div class="legal-item-title">2. Market Disruption — Limitation of Liability</div>
+      <div class="legal-item-text">Ascenda Enterprise Capital LLC, its principals, officers, members, employees, and agents — including but not limited to Izaiah Cottle — shall not be held liable for losses arising from market disruption, extreme volatility, black swan events, systemic market failures, regulatory changes, geopolitical events, or any other market conditions beyond AEC's reasonable control. By submitting this application and entering into any agreement with AEC, the allocator expressly waives any right to bring claims against AEC or Izaiah Cottle for losses attributable to market disruption.</div>
+    </div>
+    <div class="legal-item">
+      <div class="legal-item-title">3. Limitation of Liability & Indemnification</div>
+      <div class="legal-item-text">To the maximum extent permitted by applicable law, Ascenda Enterprise Capital LLC and Izaiah Cottle shall not be liable to any allocator for any indirect, incidental, special, consequential, or punitive damages, including but not limited to loss of profits, loss of capital, or loss of opportunity, arising out of or related to any investment, allocation, or trading activity. The allocator agrees to indemnify and hold harmless AEC and Izaiah Cottle from any claims, losses, or damages arising from the allocator's participation in AEC's programs.</div>
+    </div>
+    <div class="legal-item">
+      <div class="legal-item-title">4. Accredited Investor Requirement</div>
+      <div class="legal-item-text">Participation in Ascenda Enterprise Capital's allocator program is restricted exclusively to Accredited Investors as defined under SEC Regulation D, Rule 501, or Qualified Institutional Buyers as defined under SEC Rule 144A. By applying, the allocator represents and warrants that they meet the applicable definition and will provide verification upon request.</div>
+    </div>
+    <div class="legal-item">
+      <div class="legal-item-title">5. Discretionary Management</div>
+      <div class="legal-item-text">AEC exercises full discretionary authority over the management of allocated capital. The allocator grants AEC the authority to make all investment decisions without prior approval on a trade-by-trade basis. AEC reserves the right to modify strategy, adjust positions, and manage risk at its sole discretion in the best interests of overall fund performance.</div>
+    </div>
+    <div class="legal-item">
+      <div class="legal-item-title">6. Withdrawal & Redemption Terms</div>
+      <div class="legal-item-text">Withdrawal and redemption terms, lock-up periods, and liquidity provisions will be detailed in the formal allocation agreement. AEC reserves the right to impose restrictions on withdrawals in order to protect the integrity of the fund and the interests of all allocators.</div>
+    </div>
+    <div class="legal-item">
+      <div class="legal-item-title">7. Governing Law & Dispute Resolution</div>
+      <div class="legal-item-text">Any disputes arising from or related to an allocation agreement with Ascenda Enterprise Capital LLC shall be governed by the laws of the State of Georgia. The parties agree to resolve disputes through binding arbitration in the State of Georgia before resorting to litigation. The allocator expressly waives the right to participate in any class action lawsuit against AEC or Izaiah Cottle.</div>
+    </div>
+    <div class="legal-item">
+      <div class="legal-item-title">8. This Is Not Legal or Financial Advice</div>
+      <div class="legal-item-text">Nothing on this page or in any communication from AEC constitutes legal advice, financial advice, tax advice, or investment advice. Prospective allocators are strongly encouraged to consult with independent legal and financial advisors before making any investment decision.</div>
+    </div>
+  </div>
+
+  <!-- FORM -->
+  <div class="form-block">
+    <div class="form-title">Submit Allocator Application</div>
+    <div class="form-sub">Reviewed personally by Izaiah Cottle within 72 hours. All fields required.</div>
+    <form class="cf" action="https://formspree.io/f/mvzywgwb" method="POST">
+      <input type="hidden" name="application_type" value="Institutional Allocator"/>
+      <input type="hidden" name="allocation_amount" id="form-amount" value="$100,000"/>
+      <div class="cf-row">
+        <div class="cff"><label>First name</label><input type="text" name="first_name" required placeholder="John"/></div>
+        <div class="cff"><label>Last name</label><input type="text" name="last_name" required placeholder="Smith"/></div>
+      </div>
+      <div class="cf-row">
+        <div class="cff"><label>Email</label><input type="email" name="email" required placeholder="you@firm.com"/></div>
+        <div class="cff"><label>Phone</label><input type="tel" name="phone" required placeholder="(000) 000-0000"/></div>
+      </div>
+      <div class="cff"><label>Organization / Firm</label><input type="text" name="organization" required placeholder="Firm or family office name"/></div>
+      <div class="cff"><label>Allocation amount selected</label><input type="text" id="form-amount-display" readonly style="color:var(--gold2);font-family:var(--font-display);font-size:1.1rem;cursor:default" value="$100,000"/></div>
+      <div class="cff">
+        <label>Investor type</label>
+        <select name="investor_type" required>
+          <option value="">Select type</option>
+          <option>Family Office</option>
+          <option>Institutional Investor</option>
+          <option>High-Net-Worth Individual</option>
+          <option>Endowment / Foundation</option>
+          <option>Fund of Funds</option>
+          <option>Other Qualified Investor</option>
+        </select>
+      </div>
+      <div class="cff"><label>Investment objectives</label><textarea name="objectives" placeholder="Describe your investment objectives and why you want to allocate with AEC..." required></textarea></div>
+
+      <div style="display:flex;align-items:flex-start;gap:.75rem;padding:1.25rem;background:rgba(196,146,42,.04);border:.5px solid var(--rule)">
+        <input type="checkbox" id="legal-cb1" required style="margin-top:.15rem;accent-color:var(--gold);width:14px;height:14px;flex-shrink:0"/>
+        <label for="legal-cb1" style="font-size:.72rem;color:var(--cream2);line-height:1.7;cursor:pointer">I confirm I am an <strong>Accredited Investor or Qualified Institutional Buyer</strong>, I have read and agree to all disclosures above, and I understand that all investments carry significant risk including total loss of capital.</label>
+      </div>
+      <div style="display:flex;align-items:flex-start;gap:.75rem;padding:1.25rem;background:rgba(196,146,42,.04);border:.5px solid var(--rule)">
+        <input type="checkbox" id="legal-cb2" required style="margin-top:.15rem;accent-color:var(--gold);width:14px;height:14px;flex-shrink:0"/>
+        <label for="legal-cb2" style="font-size:.72rem;color:var(--cream2);line-height:1.7;cursor:pointer">I expressly <strong>waive any right to bring claims against Ascenda Enterprise Capital LLC or Izaiah Cottle</strong> for losses attributable to market disruption, volatility, or conditions beyond AEC's control, as outlined in the disclosures above.</label>
+      </div>
+
+      <button type="submit" class="btn-submit">Submit Allocator Application →</button>
+    </form>
+    <div class="disclaimer-box">
+      <p><strong>Final Disclosure:</strong> Submission of this application does not create any contractual obligation on the part of Ascenda Enterprise Capital LLC. AEC reserves the right to accept or decline any application at its sole discretion without providing explanation. All formal investment agreements will be executed via separate legal documentation reviewed by qualified legal counsel. Ascenda Enterprise Capital LLC is registered in the State of Georgia. AUM ceiling: $750,000,000. Neither AEC nor Izaiah Cottle shall be liable for market disruption losses. This document does not constitute a private placement memorandum or offering document.</p>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div style="font-family:var(--font-display);font-style:italic;font-size:.9rem;color:var(--gold3)">Ascenda Enterprise Capital LLC</div>
+  <div class="f-copy">© 2025 Ascenda Enterprise Capital LLC · Registered in Georgia · Institutional Allocator Program · All Rights Reserved</div>
+</footer>
+
+<script>
+var GOLD = '#C4922A';
+var GOLD_DIM = 'rgba(196,146,42,0.15)';
+var MIN = 100000;
+var MAX = 750000000;
+
+function fmt(v){
+  v = parseInt(v);
+  if(v >= 1000000000) return '$' + (v/1000000000).toFixed(2) + 'B';
+  if(v >= 1000000) return '$' + (v/1000000).toFixed(2) + 'M';
+  if(v >= 1000) return '$' + (v/1000).toFixed(0) + 'K';
+  return '$' + v.toLocaleString('en-US');
+}
+
+function fmtFull(v){
+  return '$' + parseInt(v).toLocaleString('en-US');
+}
+
+function updateAlloc(v){
+  v = parseInt(v);
+  if(isNaN(v)) return;
+  v = Math.max(MIN, Math.min(MAX, v));
+
+  document.getElementById('alloc-display').textContent = fmt(v);
+  document.getElementById('form-amount').value = fmtFull(v);
+  document.getElementById('form-amount-display').value = fmtFull(v);
+
+  var slider = document.getElementById('alloc-slider');
+  slider.value = v;
+  var pct = (v - MIN) / (MAX - MIN) * 100;
+  slider.style.background = 'linear-gradient(90deg, ' + GOLD + ' ' + pct + '%, ' + GOLD_DIM + ' ' + pct + '%)';
+
+  document.getElementById('alloc-input').value = v;
+
+  document.querySelectorAll('.tier').forEach(function(t){ t.classList.remove('active'); });
+  if(v <= 100000) document.querySelectorAll('.tier')[0].classList.add('active');
+  else if(v === 1000000) document.querySelectorAll('.tier')[1].classList.add('active');
+  else if(v === 10000000) document.querySelectorAll('.tier')[2].classList.add('active');
+  else if(v >= 750000000) document.querySelectorAll('.tier')[3].classList.add('active');
+}
+
+function updateFromInput(rawVal){
+  var v = parseInt(rawVal.toString().replace(/[^0-9]/g,''));
+  if(isNaN(v)) return;
+  if(v > MAX) v = MAX;
+  if(v < MIN) v = MIN;
+  updateAlloc(v);
+}
+
+function setTier(v, el){
+  updateAlloc(v);
+  document.querySelectorAll('.tier').forEach(function(t){ t.classList.remove('active'); });
+  el.classList.add('active');
+}
+
+window.onload = function(){ updateAlloc(MIN); };
+</script>
+</body>
+</html>
