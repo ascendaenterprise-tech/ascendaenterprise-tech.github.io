@@ -3,453 +3,572 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Ascenda Enterprise Capital</title>
+<title>Ascenda Enterprise Capital | Institutional Investment Management</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,300;1,400;1,700&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=DM+Mono:wght@300;400;500&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet"/>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
-  --gold:#C9A84C;--gold2:#E8CC7A;--gold3:#9A7A30;--gold4:#F5DFA0;
-  --ink:#06050D;--ink2:#0D0B18;--ink3:#151220;
-  --light:#F7F3EB;--light2:#EDE6D5;--light3:#DDD4BE;
-  --white:#FFFFFF;
-  --cream:rgba(255,255,255,0.95);--cream2:rgba(255,255,255,0.78);--cream3:rgba(255,255,255,0.45);
-  --dark-text:#1A1624;--dark-text2:#3A3348;--dark-text3:#6B6080;
-  --rule:rgba(201,168,76,0.15);--rule2:rgba(201,168,76,0.38);
-  --rule-dark:rgba(26,22,36,0.12);
-  --up:#3DC47A;--dn:#E05555;
+  --gold:#C4922A;--gold2:#E4B84A;--gold3:#8A6518;--gold4:#F2D680;
+  --ink:#04030A;--ink2:#080612;--ink3:#0E0B1A;--ink4:#141020;
+  --white:#FFFFFF;--off:#F5F0E8;--off2:#EAE3D3;
+  --cream:rgba(255,255,255,0.95);--cream2:rgba(255,255,255,0.72);--cream3:rgba(255,255,255,0.38);
+  --rule:rgba(196,146,42,0.14);--rule2:rgba(196,146,42,0.35);
+  --up:#2ECC71;--dn:#E74C3C;
+  --font-display:'Cormorant Garamond',Georgia,serif;
+  --font-mono:'DM Mono',monospace;
+  --font-body:'Jost',sans-serif;
 }
 html{scroll-behavior:smooth}
-body{background:var(--ink);color:var(--white);font-family:'Jost',sans-serif;font-weight:300;overflow-x:hidden}
+body{background:var(--ink);color:var(--white);font-family:var(--font-body);font-weight:300;overflow-x:hidden;cursor:default}
 
-/* ── NAV ── */
+/* ═══════════════════════════════
+   ACCREDITED INVESTOR GATE
+═══════════════════════════════ */
+#gate{
+  position:fixed;inset:0;z-index:9999;
+  background:var(--ink2);
+  display:flex;align-items:center;justify-content:center;
+  padding:2rem;
+}
+.gate-inner{
+  max-width:620px;width:100%;
+  border:.5px solid var(--rule2);
+  padding:4rem;
+  background:rgba(8,6,18,0.98);
+  text-align:center;
+  position:relative;
+}
+.gate-inner::before{
+  content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);
+  width:120px;height:1.5px;
+  background:linear-gradient(90deg,transparent,var(--gold),transparent);
+}
+.gate-logo-wrap{margin-bottom:2.5rem}
+.gate-diamond{width:60px;height:60px;margin:0 auto 1rem}
+.gate-brand{font-family:var(--font-display);font-size:1.4rem;color:var(--white);letter-spacing:.08em;font-weight:300}
+.gate-brand-sub{font-family:var(--font-mono);font-size:.6rem;letter-spacing:.3em;text-transform:uppercase;color:var(--gold3);margin-top:.3rem}
+.gate-rule{width:40px;height:.5px;background:var(--rule2);margin:2rem auto}
+.gate-title{font-family:var(--font-display);font-size:1.8rem;font-weight:300;color:var(--white);margin-bottom:1rem;line-height:1.2}
+.gate-text{font-size:.82rem;color:var(--cream3);line-height:1.9;margin-bottom:2rem;font-weight:300}
+.gate-check{display:flex;align-items:flex-start;gap:.75rem;text-align:left;margin-bottom:2rem;padding:1.25rem;background:rgba(196,146,42,0.05);border:.5px solid var(--rule)}
+.gate-check input{margin-top:.15rem;accent-color:var(--gold);flex-shrink:0;width:14px;height:14px;cursor:pointer}
+.gate-check label{font-size:.75rem;color:var(--cream2);line-height:1.7;cursor:pointer}
+.gate-btn{
+  width:100%;font-family:var(--font-mono);font-size:.62rem;letter-spacing:.22em;text-transform:uppercase;
+  background:var(--gold);color:var(--ink);border:none;padding:1.1rem 2rem;
+  cursor:pointer;font-weight:500;transition:background .2s;
+  opacity:.4;pointer-events:none;
+}
+.gate-btn.active{opacity:1;pointer-events:all}
+.gate-btn.active:hover{background:var(--gold2)}
+.gate-decline{display:block;margin-top:1rem;font-family:var(--font-mono);font-size:.58rem;letter-spacing:.15em;text-transform:uppercase;color:var(--cream3);text-decoration:none;cursor:pointer;transition:color .2s}
+.gate-decline:hover{color:var(--cream2)}
+.gate-disclaimer{margin-top:2rem;font-size:.62rem;color:rgba(255,255,255,.2);line-height:1.7}
+
+/* ═══════════════════════════════
+   NAV
+═══════════════════════════════ */
 nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
   display:flex;align-items:center;justify-content:space-between;
-  padding:1.3rem 4rem;
-  background:rgba(6,5,13,0.96);
-  border-bottom:0.5px solid var(--rule);
-  backdrop-filter:blur(20px);
-  position:sticky;top:0;z-index:1000;
+  padding:1.2rem 3.5rem;
+  background:rgba(4,3,10,0.94);
+  border-bottom:.5px solid var(--rule);
+  backdrop-filter:blur(24px);
 }
-.nav-logo{font-family:'Playfair Display',serif;font-style:italic;font-size:1.1rem;color:var(--gold);letter-spacing:.02em}
-.nav-links{display:flex;gap:2.5rem}
-.nav-links a{
-  font-size:.65rem;letter-spacing:.25em;text-transform:uppercase;
-  color:var(--cream3);text-decoration:none;transition:color .2s;font-weight:400;
-}
-.nav-links a:hover{color:var(--white)}
+.nav-logo{display:flex;align-items:center;gap:.75rem}
+.nav-logo-diamond{width:28px;height:28px}
+.nav-logo-text{display:flex;flex-direction:column;line-height:1.1}
+.nav-logo-main{font-family:var(--font-display);font-size:1rem;color:var(--white);font-weight:400;letter-spacing:.06em}
+.nav-logo-sub{font-family:var(--font-mono);font-size:.48rem;letter-spacing:.25em;text-transform:uppercase;color:var(--gold3)}
+.nav-links{display:flex;gap:2.5rem;align-items:center}
+.nav-links a{font-family:var(--font-mono);font-size:.58rem;letter-spacing:.2em;text-transform:uppercase;color:var(--cream3);text-decoration:none;transition:color .2s;font-weight:300}
+.nav-links a:hover{color:var(--gold2)}
+.nav-cta{border:.5px solid var(--rule2)!important;padding:.55rem 1.25rem;color:var(--gold)!important}
+.nav-cta:hover{background:rgba(196,146,42,0.08)!important;border-color:var(--gold)!important}
+.nav-hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:.4rem}
+.nav-hamburger span{display:block;width:22px;height:1px;background:var(--white);transition:all .3s}
+.nav-hamburger.open span:nth-child(1){transform:rotate(45deg) translate(4px,4px)}
+.nav-hamburger.open span:nth-child(2){opacity:0}
+.nav-hamburger.open span:nth-child(3){transform:rotate(-45deg) translate(4px,-4px)}
 
-/* ── HERO ── */
+/* ═══════════════════════════════
+   HERO
+═══════════════════════════════ */
 .hero{
-  min-height:100vh;display:flex;flex-direction:column;
-  justify-content:center;padding:8rem 4rem 6rem;
-  position:relative;overflow:hidden;background:var(--ink);
+  min-height:100vh;
+  display:flex;flex-direction:column;justify-content:flex-end;
+  padding:0 3.5rem 5rem;
+  position:relative;overflow:hidden;
+  background:var(--ink);
 }
 .hero-bg{
   position:absolute;inset:0;
   background:
-    radial-gradient(ellipse 100% 80% at 65% 35%,rgba(201,168,76,0.08) 0%,transparent 55%),
-    radial-gradient(ellipse 40% 60% at 5% 80%,rgba(201,168,76,0.04) 0%,transparent 50%);
+    radial-gradient(ellipse 70% 60% at 75% 30%,rgba(196,146,42,0.06) 0%,transparent 55%),
+    radial-gradient(ellipse 40% 50% at 10% 70%,rgba(196,146,42,0.03) 0%,transparent 50%);
 }
-.orb{position:absolute;border-radius:50%;animation:drift 14s ease-in-out infinite alternate}
-.orb1{width:560px;height:560px;background:rgba(201,168,76,0.035);top:-120px;right:-100px}
-.orb2{width:280px;height:280px;background:rgba(201,168,76,0.025);bottom:80px;left:-80px;animation-delay:-7s}
-@keyframes drift{from{transform:translate(0,0) scale(1)}to{transform:translate(22px,30px) scale(1.06)}}
-
-.eyebrow{
-  font-size:.65rem;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);
-  margin-bottom:2.5rem;display:flex;align-items:center;gap:1rem;font-weight:400;
+.hero-grid-overlay{
+  position:absolute;inset:0;opacity:.025;
+  background-image:linear-gradient(var(--gold) 1px,transparent 1px),linear-gradient(90deg,var(--gold) 1px,transparent 1px);
+  background-size:80px 80px;
 }
-.eyebrow::before{content:'';display:block;width:48px;height:.5px;background:var(--gold)}
-
-h1{
-  font-family:'Playfair Display',serif;
-  font-size:clamp(4rem,6.5vw,6.8rem);
-  font-weight:400;line-height:.97;color:var(--white);
-  margin-bottom:2.75rem;letter-spacing:-.02em;
+.hero-logo-center{
+  position:absolute;top:50%;left:50%;transform:translate(-50%,-60%);
+  display:flex;flex-direction:column;align-items:center;gap:1.5rem;
+  opacity:0;animation:fadeUp .8s ease .2s forwards;
 }
-h1 em{font-style:italic;color:var(--gold2)}
-.h1b{display:block;padding-left:3.5rem}
-.h1c{display:block;padding-left:7rem}
+.hero-diamond-large{width:110px;height:110px;filter:drop-shadow(0 0 40px rgba(196,146,42,0.25))}
+.hero-brand-large{font-family:var(--font-display);font-size:clamp(2.5rem,5vw,4rem);font-weight:300;color:var(--white);letter-spacing:.12em;text-align:center}
+.hero-brand-sub-large{font-family:var(--font-mono);font-size:.65rem;letter-spacing:.4em;text-transform:uppercase;color:var(--gold3);text-align:center}
+.hero-divider-h{width:200px;height:.5px;background:linear-gradient(90deg,transparent,var(--rule2),transparent);margin:0 auto}
 
-.hero-body{
-  font-size:1.15rem;font-weight:300;color:var(--cream2);
-  max-width:500px;line-height:2.05;margin-bottom:3.5rem;
-  border-left:2px solid var(--gold3);padding-left:1.6rem;
+.hero-content{
+  position:relative;z-index:2;
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:4rem;align-items:flex-end;
+  opacity:0;animation:fadeUp .8s ease .6s forwards;
 }
-.cta-row{display:flex;gap:1.25rem;flex-wrap:wrap}
-
-.btn-gold{
-  font-size:.65rem;letter-spacing:.22em;text-transform:uppercase;
-  background:var(--gold);color:var(--ink);border:none;
-  padding:1.1rem 2.75rem;cursor:pointer;
-  font-family:'Jost',sans-serif;font-weight:500;
-  transition:background .2s,transform .15s;
+.hero-left h1{
+  font-family:var(--font-display);
+  font-size:clamp(2.2rem,4.5vw,4.2rem);
+  font-weight:300;color:var(--white);
+  line-height:1.05;letter-spacing:.01em;
+  margin-bottom:1.5rem;
 }
-.btn-gold:hover{background:var(--gold2);transform:translateY(-2px)}
+h1 em,h2 em{font-style:italic;color:var(--gold2)}
+.hero-left p{font-size:.95rem;color:var(--cream2);line-height:1.95;font-weight:300;max-width:440px;margin-bottom:2.5rem;border-left:1.5px solid var(--rule2);padding-left:1.25rem}
+.hero-ctas{display:flex;gap:1rem;flex-wrap:wrap}
+.btn-gold{font-family:var(--font-mono);font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;background:var(--gold);color:var(--ink);border:none;padding:1rem 2.25rem;cursor:pointer;font-weight:500;transition:background .2s,transform .15s;text-decoration:none;display:inline-block}
+.btn-gold:hover{background:var(--gold2);transform:translateY(-1px)}
+.btn-ghost{font-family:var(--font-mono);font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;background:transparent;color:var(--cream2);border:.5px solid var(--rule2);padding:1rem 2.25rem;cursor:pointer;font-weight:300;transition:all .2s;text-decoration:none;display:inline-block}
+.btn-ghost:hover{border-color:var(--gold);color:var(--gold)}
 
-.btn-out{
-  font-size:.65rem;letter-spacing:.22em;text-transform:uppercase;
-  background:transparent;color:var(--cream2);
-  border:.5px solid var(--rule2);
-  padding:1.1rem 2.75rem;cursor:pointer;
-  font-family:'Jost',sans-serif;font-weight:300;
-  transition:border-color .2s,color .2s;
-}
-.btn-out:hover{border-color:var(--gold);color:var(--gold)}
+.hero-right{display:flex;flex-direction:column;gap:1px;background:var(--rule)}
+.hero-stat{background:var(--ink2);padding:1.25rem 1.5rem;display:flex;justify-content:space-between;align-items:baseline}
+.hs-label{font-family:var(--font-mono);font-size:.55rem;letter-spacing:.18em;text-transform:uppercase;color:var(--cream3)}
+.hs-val{font-family:var(--font-display);font-size:1.5rem;font-style:italic;color:var(--gold2)}
 
-/* ── TRADINGVIEW TICKER ── */
-.tv-ticker-wrap{
-  width:100%;
-  border-top:.5px solid var(--rule);
-  border-bottom:.5px solid var(--rule);
-  background:rgba(201,168,76,0.04);
-}
+@keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
 
-/* ── STATEMENT ── */
+/* ═══════════════════════════════
+   TICKER
+═══════════════════════════════ */
+.ticker{background:rgba(196,146,42,0.05);border-top:.5px solid var(--rule);border-bottom:.5px solid var(--rule);padding:.75rem 0;overflow:hidden;white-space:nowrap}
+.tw{display:inline-flex;gap:4rem;animation:tick 32s linear infinite}
+.ti{font-family:var(--font-mono);font-size:.6rem;letter-spacing:.1em;color:var(--cream3);display:inline-flex;align-items:center;gap:.6rem}
+.ti b{color:var(--white);font-weight:400}
+.up{color:var(--up)}.dn{color:var(--dn)}
+@keyframes tick{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* ═══════════════════════════════
+   STATEMENT
+═══════════════════════════════ */
 .statement{
-  background:var(--gold);
-  padding:5.5rem 4rem;
+  background:var(--gold);padding:5.5rem 3.5rem;
   display:flex;align-items:center;justify-content:center;text-align:center;
 }
-.statement-inner{max-width:900px}
-.statement-quote{
-  font-family:'Playfair Display',serif;
-  font-size:clamp(2rem,4vw,3.6rem);
-  font-style:italic;font-weight:400;
-  color:var(--ink);line-height:1.15;
-  margin-bottom:1.25rem;letter-spacing:-.01em;
-}
-.statement-sub{
-  font-size:.7rem;letter-spacing:.28em;text-transform:uppercase;
-  color:rgba(6,5,13,.55);font-weight:500;
-}
+.statement-q{font-family:var(--font-display);font-size:clamp(1.8rem,3.5vw,3.2rem);font-style:italic;font-weight:300;color:var(--ink);line-height:1.2;max-width:860px;margin:0 auto 1rem}
+.statement-attr{font-family:var(--font-mono);font-size:.58rem;letter-spacing:.28em;text-transform:uppercase;color:rgba(4,3,10,.5)}
 
-/* ── AUM BAND ── */
-.aum-band{
-  background:var(--ink2);
-  border-top:.5px solid var(--rule);border-bottom:.5px solid var(--rule);
-  padding:4rem 4rem;
-  display:flex;align-items:center;gap:4rem;
-  flex-wrap:wrap;
-}
+/* ═══════════════════════════════
+   AUM BAND
+═══════════════════════════════ */
+.aum-band{background:var(--ink2);border-top:.5px solid var(--rule);border-bottom:.5px solid var(--rule);padding:3.5rem 3.5rem;display:flex;align-items:center;gap:3.5rem;flex-wrap:wrap}
 .aum-l{flex-shrink:0}
-.aum-tag{font-size:.6rem;letter-spacing:.28em;text-transform:uppercase;color:var(--gold3);margin-bottom:.6rem;font-weight:400}
-.aum-num{font-family:'Playfair Display',serif;font-size:3.4rem;font-style:italic;color:var(--gold2);line-height:1}
-.aum-cap{font-size:.7rem;color:rgba(255,255,255,.32);margin-top:.45rem;letter-spacing:.07em}
-.aum-sep{width:.5px;height:90px;background:var(--rule2);flex-shrink:0}
-.aum-r{
-  flex:1;min-width:280px;
-  font-size:1rem;color:var(--cream2);line-height:2;
-  border-left:1px solid var(--rule);padding-left:2rem;
-}
+.aum-tag{font-family:var(--font-mono);font-size:.55rem;letter-spacing:.28em;text-transform:uppercase;color:var(--gold3);margin-bottom:.5rem}
+.aum-num{font-family:var(--font-display);font-size:3rem;font-style:italic;color:var(--gold2);line-height:1}
+.aum-cap{font-family:var(--font-mono);font-size:.62rem;color:var(--cream3);margin-top:.4rem;letter-spacing:.07em}
+.aum-sep{width:.5px;height:80px;background:var(--rule2);flex-shrink:0}
+.aum-r{flex:1;min-width:280px;font-size:.95rem;color:var(--cream2);line-height:2;border-left:1px solid var(--rule);padding-left:1.75rem}
 .aum-r strong{color:var(--gold);font-weight:400}
 
-/* ── MARKETS ── */
-.mkt-section{padding:8rem 4rem;background:var(--ink3)}
-.sec-label{
-  font-size:.62rem;letter-spacing:.28em;text-transform:uppercase;
-  color:var(--gold);margin-bottom:1.25rem;
-  display:flex;align-items:center;gap:.9rem;font-weight:400;
-}
-.sec-label::before{content:'';display:block;width:32px;height:.5px;background:var(--gold)}
-.sec-label-light{
-  font-size:.62rem;letter-spacing:.28em;text-transform:uppercase;
-  color:var(--gold3);margin-bottom:1.25rem;
-  display:flex;align-items:center;gap:.9rem;font-weight:400;
-}
-.sec-label-light::before{content:'';display:block;width:32px;height:.5px;background:var(--gold3)}
+/* ═══════════════════════════════
+   SECTIONS
+═══════════════════════════════ */
+.sec{padding:8rem 3.5rem}
+.sec-alt{background:var(--ink2);border-top:.5px solid var(--rule);border-bottom:.5px solid var(--rule)}
+.sec-light{background:var(--off);color:var(--ink)}
+.sec-light2{background:var(--off2);color:var(--ink)}
+.sec-label{font-family:var(--font-mono);font-size:.58rem;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);margin-bottom:1.2rem;display:flex;align-items:center;gap:.8rem}
+.sec-label::before{content:'';display:block;width:28px;height:.5px;background:var(--gold)}
+.sec-label-dark{font-family:var(--font-mono);font-size:.58rem;letter-spacing:.28em;text-transform:uppercase;color:var(--gold3);margin-bottom:1.2rem;display:flex;align-items:center;gap:.8rem}
+.sec-label-dark::before{content:'';display:block;width:28px;height:.5px;background:var(--gold3)}
+h2{font-family:var(--font-display);font-size:clamp(2rem,3.5vw,3rem);font-weight:300;line-height:1.1;margin-bottom:1rem}
+.on-dark{color:var(--white)}
+.on-light{color:#0D1A10}
+.on-light em{color:var(--gold3)}
 
-h2{font-family:'Playfair Display',serif;font-size:clamp(2rem,3.5vw,3rem);font-weight:400;line-height:1.12;margin-bottom:.8rem}
-h2 em{font-style:italic;color:var(--gold2)}
-h2.on-light{color:var(--dark-text)}
-h2.on-light em{color:var(--gold3)}
-h2.on-dark{color:var(--white)}
+/* ═══════════════════════════════
+   PERFORMANCE TEARSHEET
+═══════════════════════════════ */
+.tearsheet{background:var(--ink);padding:8rem 3.5rem}
+.ts-header{display:grid;grid-template-columns:1fr 1fr;gap:4rem;margin-bottom:4rem;align-items:end}
+.ts-disclaimer{background:rgba(196,146,42,0.06);border:.5px solid var(--rule);padding:1rem 1.5rem;margin-bottom:3rem}
+.ts-disclaimer p{font-family:var(--font-mono);font-size:.58rem;letter-spacing:.06em;color:rgba(255,255,255,.3);line-height:1.7}
+.ts-disclaimer strong{color:var(--gold3)}
 
-.tv-charts-grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
-  gap:1.5rem;
-  margin-top:3rem;
-}
-.tv-chart-card{
-  background:rgba(255,255,255,0.03);
-  border:.5px solid var(--rule);
-  padding:0;overflow:hidden;
-}
-.tv-chart-label{
-  font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;
-  color:rgba(255,255,255,.4);padding:1rem 1.25rem .5rem;font-weight:400;
-}
+.kpi-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--rule);margin-bottom:1px}
+.kpi{background:var(--ink2);padding:2rem 1.75rem}
+.kpi-val{font-family:var(--font-display);font-size:2.4rem;font-style:italic;color:var(--gold2);line-height:1;margin-bottom:.4rem}
+.kpi-label{font-family:var(--font-mono);font-size:.55rem;letter-spacing:.18em;text-transform:uppercase;color:var(--cream3)}
+.kpi-sub{font-size:.72rem;color:var(--cream3);margin-top:.3rem;font-weight:300}
 
-/* ── NEWS ── */
-.news-section{padding:8rem 4rem;background:var(--light)}
-.news-meta-bar{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:3rem;flex-wrap:wrap;gap:1rem}
-.src-note{font-size:.62rem;color:var(--dark-text3);letter-spacing:.1em;font-weight:300}
-.news-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--light3)}
-.nc{background:var(--light);padding:2.5rem 2.25rem;transition:background .3s;cursor:pointer}
-.nc:hover{background:var(--light2)}
-.nc-src{font-size:.58rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold3);margin-bottom:.5rem;font-weight:500}
-.nc-tag{
-  display:inline-block;font-size:.55rem;letter-spacing:.14em;text-transform:uppercase;
-  padding:.22rem .6rem;border:.5px solid var(--light3);
-  color:var(--dark-text3);margin-bottom:.9rem;margin-left:.5rem;
-}
-.nc-title{
-  font-family:'Playfair Display',serif;font-size:1.22rem;font-weight:400;
-  color:var(--dark-text);line-height:1.42;margin-bottom:.7rem;
-}
-.nc-body{font-size:.9rem;color:var(--dark-text2);line-height:1.95;font-weight:300}
-.nc-date{font-size:.6rem;letter-spacing:.1em;color:var(--dark-text3);margin-top:.9rem;font-weight:300}
+.perf-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--rule);margin-top:1px}
+.perf-block{background:var(--ink2);padding:2.5rem}
+.perf-block-title{font-family:var(--font-mono);font-size:.58rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold3);margin-bottom:1.75rem}
 
-/* ── FOCUS ── */
-.focus-sec{padding:8rem 4rem;background:var(--ink)}
+.monthly-table{width:100%;border-collapse:collapse}
+.monthly-table th{font-family:var(--font-mono);font-size:.52rem;letter-spacing:.15em;text-transform:uppercase;color:var(--cream3);padding:.6rem .75rem;text-align:right;border-bottom:.5px solid var(--rule)}
+.monthly-table th:first-child{text-align:left}
+.monthly-table td{font-size:.78rem;padding:.55rem .75rem;text-align:right;border-bottom:.5px solid rgba(196,146,42,0.05);color:var(--cream2);font-weight:300}
+.monthly-table td:first-child{text-align:left;font-family:var(--font-mono);font-size:.65rem;color:var(--cream3)}
+.td-up{color:var(--up)!important;font-weight:400}
+.td-dn{color:var(--dn)!important}
+.td-total{color:var(--gold2)!important;font-weight:500}
+
+.dist-bar{display:flex;flex-direction:column;gap:.85rem}
+.dist-row{display:flex;align-items:center;gap:1rem}
+.dist-label{font-family:var(--font-mono);font-size:.58rem;letter-spacing:.1em;color:var(--cream3);width:80px;flex-shrink:0}
+.dist-track{flex:1;height:4px;background:rgba(255,255,255,.06);position:relative}
+.dist-fill{height:100%;background:var(--gold);transition:width .6s ease}
+.dist-val{font-family:var(--font-mono);font-size:.62rem;color:var(--cream2);width:50px;text-align:right;flex-shrink:0}
+
+.metric-list{display:flex;flex-direction:column;gap:0}
+.ml-row{display:flex;justify-content:space-between;align-items:center;padding:.85rem 0;border-bottom:.5px solid var(--rule)}
+.ml-row:last-child{border-bottom:none}
+.ml-label{font-family:var(--font-mono);font-size:.6rem;letter-spacing:.12em;color:var(--cream3)}
+.ml-val{font-size:.88rem;color:var(--white);font-weight:400}
+.ml-val.good{color:var(--up)}
+.ml-val.gold{color:var(--gold2)}
+
+/* ═══════════════════════════════
+   STRATEGY
+═══════════════════════════════ */
+.strategy-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--rule);margin-top:3.5rem}
+.sg{background:var(--ink2);padding:3rem 2.5rem;position:relative;overflow:hidden;transition:background .4s}
+.sg:hover{background:rgba(196,146,42,0.05)}
+.sg-bar{position:absolute;top:0;left:0;right:0;height:1.5px;background:linear-gradient(90deg,transparent,var(--gold),transparent);opacity:0;transition:opacity .4s}
+.sg:hover .sg-bar{opacity:1}
+.sg-n{font-family:var(--font-mono);font-size:.52rem;letter-spacing:.2em;color:var(--gold3);margin-bottom:1.5rem}
+.sg h3{font-family:var(--font-display);font-size:1.6rem;font-weight:300;color:var(--white);margin-bottom:.85rem;line-height:1.2}
+.sg h3 em{font-style:italic;color:var(--gold2)}
+.sg p{font-size:.85rem;color:var(--cream2);line-height:1.95;font-weight:300}
+
+/* ═══════════════════════════════
+   MARKETS (TradingView)
+═══════════════════════════════ */
+.tv-charts-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:2.5rem}
+.tv-card{background:rgba(255,255,255,.02);border:.5px solid var(--rule);overflow:hidden}
+.tv-card-label{font-family:var(--font-mono);font-size:.55rem;letter-spacing:.2em;text-transform:uppercase;color:var(--cream3);padding:.85rem 1.2rem .4rem}
+
+/* ═══════════════════════════════
+   FOUNDER
+═══════════════════════════════ */
+.founder-grid{display:grid;grid-template-columns:1fr 1fr;gap:0;min-height:640px}
+.founder-left{padding:6rem 4rem;border-right:.5px solid var(--rule-dark,rgba(26,22,36,0.15));background:var(--off);display:flex;flex-direction:column;justify-content:center}
+.founder-right{background:var(--ink3);padding:5rem 4rem;display:flex;flex-direction:column;justify-content:center}
+.founder-name{font-family:var(--font-display);font-size:clamp(2.5rem,4vw,3.8rem);font-weight:300;color:#0D1A10;line-height:1.05;margin-bottom:.4rem}
+.founder-title{font-family:var(--font-mono);font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold3);margin-bottom:2.5rem}
+.founder-bio p{font-size:1rem;line-height:2.05;color:#3A3348;font-weight:300;margin-bottom:1.4rem}
+.founder-bio em{font-style:normal;color:var(--gold3);font-weight:400}
+.founder-stats{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:rgba(196,146,42,0.2);margin-top:3rem}
+.fs{padding:1.5rem;background:var(--off2)}
+.fs-val{font-family:var(--font-display);font-size:2.2rem;font-style:italic;color:#0D1A10;line-height:1;margin-bottom:.25rem}
+.fs-lbl{font-family:var(--font-mono);font-size:.52rem;letter-spacing:.15em;text-transform:uppercase;color:#6B6080}
+
+.founder-quote{font-family:var(--font-display);font-size:1.5rem;font-style:italic;font-weight:300;color:var(--white);line-height:1.5;margin-bottom:2rem;padding-left:1.25rem;border-left:1.5px solid var(--gold3)}
+.tag-grid{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:2rem}
+.tag{font-family:var(--font-mono);font-size:.55rem;letter-spacing:.12em;text-transform:uppercase;padding:.38rem .85rem;border:.5px solid var(--rule);color:var(--cream3)}
+
+/* ═══════════════════════════════
+   JOIN — 3 paths
+═══════════════════════════════ */
+.join-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--rule);margin-top:4rem}
+.jc{padding:3.5rem 2.75rem;position:relative;overflow:hidden;display:flex;flex-direction:column;transition:background .4s;background:var(--ink2)}
+.jc:hover{background:rgba(196,146,42,0.05)}
+.jc.featured{background:var(--gold)}
+.jc.featured:hover{background:var(--gold2)}
+.jc-n{font-family:var(--font-mono);font-size:.52rem;letter-spacing:.22em;text-transform:uppercase;margin-bottom:1.75rem}
+.jc:not(.featured) .jc-n{color:var(--gold3)}
+.jc.featured .jc-n{color:rgba(4,3,10,.5)}
+.jc-title{font-family:var(--font-display);font-size:1.8rem;font-weight:300;margin-bottom:.85rem;line-height:1.15}
+.jc:not(.featured) .jc-title{color:var(--white)}
+.jc:not(.featured) .jc-title em{font-style:italic;color:var(--gold2)}
+.jc.featured .jc-title{color:var(--ink)}
+.jc-body{font-size:.85rem;line-height:1.95;font-weight:300;margin-bottom:2rem;flex:1}
+.jc:not(.featured) .jc-body{color:var(--cream2)}
+.jc.featured .jc-body{color:rgba(4,3,10,.7)}
+.jc-points{display:flex;flex-direction:column;gap:.6rem;margin-bottom:2rem}
+.jcp{display:flex;align-items:flex-start;gap:.65rem;font-size:.78rem;font-weight:300;line-height:1.55}
+.jc:not(.featured) .jcp{color:var(--cream2)}
+.jc.featured .jcp{color:rgba(4,3,10,.72)}
+.jcp-dot{flex-shrink:0;margin-top:.18rem;font-size:.62rem}
+.jc:not(.featured) .jcp-dot{color:var(--gold)}
+.jc.featured .jcp-dot{color:var(--ink3)}
+.jc-btn{font-family:var(--font-mono);font-size:.58rem;letter-spacing:.18em;text-transform:uppercase;padding:.9rem 1.5rem;text-decoration:none;text-align:center;transition:all .2s;font-weight:400;cursor:pointer;display:block}
+.jc:not(.featured) .jc-btn{color:var(--gold);border:.5px solid var(--rule2);background:transparent}
+.jc:not(.featured) .jc-btn:hover{border-color:var(--gold);background:rgba(196,146,42,0.08)}
+.jc.featured .jc-btn{color:var(--ink);border:1.5px solid var(--ink);background:transparent}
+.jc.featured .jc-btn:hover{background:var(--ink);color:var(--gold2)}
+
+/* ═══════════════════════════════
+   FOCUS
+═══════════════════════════════ */
 .focus-grid{display:grid;grid-template-columns:repeat(3,1fr);border:.5px solid var(--rule);margin-top:3.5rem}
-.fc{padding:3.25rem 2.75rem;border-right:.5px solid var(--rule);position:relative;overflow:hidden;transition:background .4s}
+.fc{padding:3rem 2.5rem;border-right:.5px solid var(--rule);position:relative;overflow:hidden;transition:background .4s}
 .fc:last-child{border-right:none}
-.fc:hover{background:rgba(201,168,76,0.05)}
-.fc-bar{position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--gold),transparent);opacity:0;transition:opacity .4s}
+.fc:hover{background:rgba(196,146,42,0.05)}
+.fc-bar{position:absolute;top:0;left:0;right:0;height:1.5px;background:linear-gradient(90deg,transparent,var(--gold),transparent);opacity:0;transition:opacity .4s}
 .fc:hover .fc-bar{opacity:1}
-.fc-n{font-size:.58rem;letter-spacing:.2em;color:var(--gold3);margin-bottom:1.75rem;font-weight:400}
-.fc h3{font-family:'Playfair Display',serif;font-size:1.75rem;font-weight:400;color:var(--white);margin-bottom:1rem;line-height:1.2}
+.fc-n{font-family:var(--font-mono);font-size:.52rem;letter-spacing:.18em;color:var(--gold3);margin-bottom:1.5rem}
+.fc h3{font-family:var(--font-display);font-size:1.6rem;font-weight:300;color:var(--white);margin-bottom:.85rem;line-height:1.2}
 .fc h3 em{font-style:italic;color:var(--gold2)}
-.fc p{font-size:.95rem;color:var(--cream2);line-height:1.95;font-weight:300}
+.fc p{font-size:.85rem;color:var(--cream2);line-height:1.95;font-weight:300}
 
-/* ── ABOUT ── */
-.about-sec{padding:8rem 4rem;background:var(--light2)}
-.about-wrap{display:grid;grid-template-columns:1fr 1fr;gap:8rem;align-items:start}
-.about-text p{font-size:1.05rem;line-height:2.1;color:var(--dark-text2);font-weight:300;margin-bottom:1.5rem}
-.stat-list{display:flex;flex-direction:column}
-.stat-row{padding:1.75rem 0;border-bottom:.5px solid var(--rule-dark);display:flex;justify-content:space-between;align-items:baseline}
-.stat-row:first-child{border-top:.5px solid var(--rule-dark)}
-.stat-v{font-family:'Playfair Display',serif;font-size:2.7rem;font-style:italic;color:var(--dark-text);letter-spacing:-.02em}
-.stat-l{font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;color:var(--dark-text3);font-weight:300}
-
-/* ── APPROACH ── */
-.ap-band{padding:8rem 4rem;background:var(--ink2);border-top:.5px solid var(--rule)}
+/* ═══════════════════════════════
+   APPROACH
+═══════════════════════════════ */
 .ap-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:3rem;margin-top:3.5rem}
-.ap-n{font-size:.58rem;letter-spacing:.22em;color:var(--gold3);margin-bottom:.9rem;font-weight:400}
-.ap h4{font-family:'Playfair Display',serif;font-size:1.25rem;color:var(--white);margin-bottom:.7rem;font-weight:400}
-.ap p{font-size:.9rem;color:var(--cream2);line-height:1.95;font-weight:300}
+.ap-n{font-family:var(--font-mono);font-size:.52rem;letter-spacing:.2em;color:var(--gold3);margin-bottom:.85rem}
+.ap h4{font-family:var(--font-display);font-size:1.2rem;font-weight:300;color:var(--white);margin-bottom:.65rem}
+.ap p{font-size:.82rem;color:var(--cream2);line-height:1.9;font-weight:300}
 
-/* ── CONTACT ── */
-.contact-sec{padding:8rem 4rem;background:var(--light)}
-.contact-wrap{display:grid;grid-template-columns:1fr 1fr;gap:8rem;align-items:start}
-.ci p{font-size:1.05rem;line-height:2.05;color:var(--dark-text2);font-weight:300;margin-bottom:2rem}
-.cd{margin-bottom:1.75rem}
-.cd span{font-size:.58rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold3);display:block;margin-bottom:.35rem;font-weight:400}
-.cd a,.cd p{font-size:1rem;color:var(--dark-text);text-decoration:none;font-weight:300;margin:0;transition:color .2s}
-.cd a:hover{color:var(--gold3)}
-.cf{display:flex;flex-direction:column;gap:1.4rem}
-.cff{display:flex;flex-direction:column;gap:.45rem}
-.cff label{font-size:.58rem;letter-spacing:.2em;text-transform:uppercase;color:var(--dark-text3);font-weight:400}
-.cff input,.cff textarea,.cff select{
-  background:var(--white);border:.5px solid var(--light3);
-  color:var(--dark-text);font-family:'Jost',sans-serif;font-size:.95rem;font-weight:300;
-  padding:.95rem 1.1rem;outline:none;transition:border-color .2s;
-  width:100%;
-}
+/* ═══════════════════════════════
+   NEWS
+═══════════════════════════════ */
+.news-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:rgba(26,22,36,.15);margin-top:3rem}
+.nc{background:var(--off);padding:2.25rem 2rem;transition:background .3s;cursor:pointer}
+.nc:hover{background:var(--off2)}
+.nc-src{font-family:var(--font-mono);font-size:.52rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold3);margin-bottom:.5rem}
+.nc-tag{font-family:var(--font-mono);font-size:.48rem;letter-spacing:.14em;text-transform:uppercase;padding:.2rem .55rem;border:.5px solid rgba(26,22,36,.15);color:#6B6080;margin-left:.5rem}
+.nc-title{font-family:var(--font-display);font-size:1.15rem;font-weight:400;color:#0D1A10;line-height:1.4;margin-bottom:.6rem;margin-top:.85rem}
+.nc-body{font-size:.82rem;color:#3A3348;line-height:1.9;font-weight:300}
+.nc-date{font-family:var(--font-mono);font-size:.55rem;letter-spacing:.1em;color:#6B6080;margin-top:.85rem}
+
+/* ═══════════════════════════════
+   NETWORK MAP
+═══════════════════════════════ */
+#network{padding:8rem 3.5rem;background:var(--ink3);border-top:.5px solid var(--rule)}
+
+/* ═══════════════════════════════
+   CONTACT
+═══════════════════════════════ */
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:6rem;align-items:start}
+.ci p{font-size:.98rem;line-height:2;color:var(--cream2);font-weight:300;margin-bottom:1.75rem}
+.cd{margin-bottom:1.5rem}
+.cd span{font-family:var(--font-mono);font-size:.52rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold3);display:block;margin-bottom:.35rem}
+.cd a,.cd p{font-size:.95rem;color:var(--white);text-decoration:none;font-weight:300;margin:0;transition:color .2s}
+.cd a:hover{color:var(--gold2)}
+.cf{display:flex;flex-direction:column;gap:1.3rem}
+.cff{display:flex;flex-direction:column;gap:.4rem}
+.cff label{font-family:var(--font-mono);font-size:.52rem;letter-spacing:.2em;text-transform:uppercase;color:var(--cream3)}
+.cff input,.cff textarea,.cff select{background:rgba(255,255,255,.025);border:.5px solid rgba(196,146,42,.2);color:var(--white);font-family:var(--font-body);font-size:.88rem;font-weight:300;padding:.88rem 1rem;outline:none;transition:border-color .2s;width:100%}
 .cff input:focus,.cff textarea:focus,.cff select:focus{border-color:var(--gold)}
-.cff textarea{resize:vertical;min-height:100px}
-.btn-dark{
-  font-size:.65rem;letter-spacing:.22em;text-transform:uppercase;
-  background:var(--dark-text);color:var(--light);border:none;
-  padding:1.1rem 2.75rem;cursor:pointer;
-  font-family:'Jost',sans-serif;font-weight:500;
-  transition:background .2s;align-self:flex-start;margin-top:.5rem;
-}
-.btn-dark:hover{background:var(--gold3);color:var(--ink)}
+.cff textarea{resize:vertical;min-height:88px}
+.cff select option{background:var(--ink2)}
 
-/* ── FOOTER ── */
-footer{
-  padding:2.25rem 4rem;border-top:.5px solid var(--rule-dark);
-  background:var(--light2);
-  display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;
-}
-.flogo{font-family:'Playfair Display',serif;font-style:italic;font-size:1rem;color:var(--gold3)}
-.flinks{display:flex;gap:2rem}
-.flinks a{font-size:.58rem;letter-spacing:.15em;text-transform:uppercase;color:var(--dark-text3);text-decoration:none;transition:color .2s}
-.flinks a:hover{color:var(--gold3)}
-.fcopy{font-size:.6rem;letter-spacing:.08em;color:var(--dark-text3)}
+/* ═══════════════════════════════
+   FOOTER
+═══════════════════════════════ */
+.footer-top{background:var(--ink2);border-top:.5px solid var(--rule);padding:3rem 3.5rem;display:grid;grid-template-columns:1fr 1fr 1fr;gap:3rem}
+.ft-col-title{font-family:var(--font-mono);font-size:.52rem;letter-spacing:.22em;text-transform:uppercase;color:var(--gold3);margin-bottom:1.25rem}
+.ft-link{display:block;font-size:.78rem;color:var(--cream3);text-decoration:none;margin-bottom:.6rem;transition:color .2s;font-weight:300}
+.ft-link:hover{color:var(--gold2)}
+.ft-text{font-size:.75rem;color:var(--cream3);line-height:1.8;font-weight:300}
+footer{background:var(--ink);border-top:.5px solid var(--rule);padding:1.75rem 3.5rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+.f-logo-wrap{display:flex;align-items:center;gap:.6rem}
+.f-logo-diamond{width:20px;height:20px}
+.f-logo-text{font-family:var(--font-display);font-size:.85rem;color:var(--gold3);font-weight:300;letter-spacing:.06em}
+.f-legal{font-family:var(--font-mono);font-size:.5rem;letter-spacing:.06em;color:rgba(255,255,255,.15);max-width:550px;line-height:1.7}
 
-/* ── DIVIDER ── */
-.divider{width:100%;height:.5px;background:linear-gradient(90deg,transparent,var(--rule2),transparent)}
-
-/* ── RESPONSIVE ── */
+/* ═══════════════════════════════
+   RESPONSIVE
+═══════════════════════════════ */
 @media(max-width:900px){
-
-  /* NAV — hamburger */
-  nav{padding:1rem 1.5rem;position:fixed;top:0;left:0;right:0;z-index:1000}
-  .nav-logo{font-size:.9rem}
-  .nav-links{display:none;position:fixed;top:56px;left:0;right:0;bottom:0;background:rgba(6,5,13,.98);flex-direction:column;align-items:center;justify-content:center;gap:2.5rem;z-index:999}
+  nav{padding:1rem 1.5rem;position:fixed}
+  .nav-links{display:none;position:fixed;top:56px;left:0;right:0;bottom:0;background:rgba(4,3,10,.98);flex-direction:column;align-items:center;justify-content:center;gap:2.5rem;z-index:99}
   .nav-links.open{display:flex}
-  .nav-links a{font-size:1rem;letter-spacing:.2em}
-  .nav-hamburger{display:flex;flex-direction:column;gap:5px;cursor:pointer;padding:.5rem;z-index:1000}
-  .nav-hamburger span{display:block;width:24px;height:1.5px;background:var(--white);transition:all .3s}
-  .nav-hamburger.open span:nth-child(1){transform:rotate(45deg) translate(4px,4px)}
-  .nav-hamburger.open span:nth-child(2){opacity:0}
-  .nav-hamburger.open span:nth-child(3){transform:rotate(-45deg) translate(4px,-4px)}
-
-  /* HERO */
-  .hero{padding:6rem 1.5rem 3.5rem;margin-top:56px}
-  h1{font-size:clamp(2.4rem,9vw,3.5rem);line-height:1.05}
-  .h1b{padding-left:1.5rem}.h1c{padding-left:3rem}
-  .hero-body{font-size:1rem;max-width:100%}
-  .cta-row{flex-direction:column;gap:.75rem}
-  .btn-gold,.btn-out{text-align:center;padding:1rem 2rem;width:100%}
-
-  /* AUM BAND */
+  .nav-links a{font-size:.85rem;letter-spacing:.2em}
+  .nav-hamburger{display:flex}
+  .hero{padding:5.5rem 1.5rem 3.5rem;margin-top:56px}
+  .hero-logo-center{top:42%;width:90%}
+  .hero-diamond-large{width:75px;height:75px}
+  .hero-brand-large{font-size:2rem;letter-spacing:.08em}
+  .hero-content{grid-template-columns:1fr;gap:2.5rem}
+  h1{font-size:clamp(2.2rem,8vw,3rem)}
+  .hero-right{display:none}
   .aum-band{flex-direction:column;padding:3rem 1.5rem;gap:2rem}
   .aum-sep{width:60px;height:.5px}
-  .aum-r{border-left:none;padding-left:0;border-top:.5px solid var(--rule);padding-top:1.5rem;font-size:.92rem}
-  .aum-num{font-size:2.6rem}
-
-  /* STATEMENT */
+  .aum-r{border-left:none;padding-left:0;border-top:.5px solid var(--rule);padding-top:1.5rem}
+  .sec,.tearsheet,#network{padding:5rem 1.5rem}
   .statement{padding:3.5rem 1.5rem}
-  .statement-quote{font-size:clamp(1.5rem,6vw,2.2rem)}
-
-  /* SECTIONS — global padding */
-  section,
-  .news-section,
-  .focus-sec,
-  .about-sec,
-  .ap-band,
-  .contact-sec,
-  .mkt-section{padding:4.5rem 1.5rem}
-
-  /* MARKET SECTION */
-  .mkt-grid{grid-template-columns:repeat(2,1fr)}
-  .tv-charts-grid{grid-template-columns:1fr}
-
-  /* FOCUS */
-  .focus-grid{grid-template-columns:1fr}
-  .fc{border-right:none;border-bottom:.5px solid var(--rule)}
-  .fc h3{font-size:1.5rem}
-
-  /* NEWS */
+  .kpi-grid{grid-template-columns:repeat(2,1fr)}
+  .perf-grid{grid-template-columns:1fr}
+  .strategy-grid,.focus-grid,.join-grid{grid-template-columns:1fr}
+  .sg,.fc{border-right:none;border-bottom:.5px solid var(--rule)}
+  .ap-grid{grid-template-columns:repeat(2,1fr);gap:2rem}
+  .founder-grid{grid-template-columns:1fr}
+  .contact-grid{grid-template-columns:1fr;gap:3rem}
   .news-grid{grid-template-columns:1fr}
-  .news-meta-bar{flex-direction:column;align-items:flex-start;gap:1rem}
-
-  /* JOIN SECTION — 3 cards to 1 col */
-  #join > div[style*="grid-template-columns:repeat(3"]{grid-template-columns:1fr!important}
-
-  /* ABOUT */
-  .about-wrap{grid-template-columns:1fr;gap:3rem}
-  .stat-list{margin-top:1rem}
-
-  /* FOUNDER SECTION */
-  #about > div[style*="grid-template-columns:1fr 1fr"]{grid-template-columns:1fr!important}
-  #about > div[style*="grid-template-columns:1fr 1fr"] > div:first-child{padding:4rem 1.5rem!important}
-  #about > div[style*="grid-template-columns:1fr 1fr"] > div:last-child > div[style*="grid-template-columns:1fr 1fr"]{grid-template-columns:1fr 1fr!important}
-  .about-card-quote{font-size:1rem}
-
-  /* FIRM ABOUT */
-  #about > div:last-child > div[style*="grid-template-columns:1fr 1fr"]{grid-template-columns:1fr!important;gap:3rem!important}
-  #about > div:last-child{padding:4.5rem 1.5rem!important}
-
-  /* APPROACH */
-  .ap-grid{grid-template-columns:1fr 1fr;gap:2rem}
-  .ap-band{padding:4.5rem 1.5rem}
-
-  /* CONTACT */
-  .contact-wrap{grid-template-columns:1fr;gap:3rem}
-  .contact-sec{padding:4.5rem 1.5rem}
-
-  /* MAP */
-  #network{padding:4.5rem 1.5rem!important}
-
-  /* FOOTER */
-  footer{padding:2rem 1.5rem;flex-direction:column;text-align:center;gap:1.25rem}
-  .flinks{flex-wrap:wrap;justify-content:center;gap:1.25rem}
+  .tv-charts-grid{grid-template-columns:1fr}
+  .footer-top{grid-template-columns:1fr;gap:2rem}
+  footer{flex-direction:column;text-align:center;padding:1.5rem}
+  .gate-inner{padding:2.5rem 1.5rem}
 }
-
 @media(max-width:480px){
-  h1{font-size:clamp(2rem,10vw,2.8rem)}
-  .h1b{padding-left:1rem}.h1c{padding-left:2rem}
-  .statement-quote{font-size:1.5rem}
+  h1{font-size:2rem}
+  .kpi-grid{grid-template-columns:1fr 1fr}
   .ap-grid{grid-template-columns:1fr}
-  .mkt-grid{grid-template-columns:1fr}
-  .aum-num{font-size:2.2rem}
-  #about > div[style*="grid-template-columns:1fr 1fr"] > div:last-child > div[style*="grid-template-columns:1fr 1fr"]{grid-template-columns:1fr 1fr!important}
-  .stat-v{font-size:2rem}
+  .hero-brand-large{font-size:1.5rem}
 }
 </style>
 </head>
 <body>
 
+<!-- ═══════════════════════════════
+     ACCREDITED INVESTOR GATE
+═══════════════════════════════ -->
+<div id="gate">
+  <div class="gate-inner">
+    <div class="gate-logo-wrap">
+      <svg class="gate-diamond" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <polygon points="40,4 62,28 40,52 18,28" fill="none" stroke="rgba(196,146,42,0.3)" stroke-width="0.5"/>
+        <polygon points="40,4 54,24 40,40 26,24" fill="url(#dg1)"/>
+        <polygon points="40,4 62,28 54,24" fill="url(#dg2)"/>
+        <polygon points="40,40 54,24 62,28" fill="rgba(180,180,200,0.5)"/>
+        <polygon points="40,40 26,24 18,28" fill="rgba(160,160,180,0.4)"/>
+        <polygon points="40,40 62,28 40,58" fill="rgba(140,140,160,0.35)" opacity="0.7"/>
+        <polygon points="40,58 18,28 40,40" fill="rgba(120,120,140,0.3)" opacity="0.6"/>
+        <defs>
+          <linearGradient id="dg1" x1="40" y1="4" x2="40" y2="52" gradientUnits="userSpaceOnUse">
+            <stop offset="0%" stop-color="#E4B84A"/>
+            <stop offset="100%" stop-color="#8A6518"/>
+          </linearGradient>
+          <linearGradient id="dg2" x1="40" y1="4" x2="62" y2="28" gradientUnits="userSpaceOnUse">
+            <stop offset="0%" stop-color="#F2D680"/>
+            <stop offset="100%" stop-color="#C4922A"/>
+          </linearGradient>
+        </defs>
+      </svg>
+      <div class="gate-brand">ASCENDA</div>
+      <div class="gate-brand-sub">Enterprise Capital</div>
+    </div>
+    <div class="gate-rule"></div>
+    <div class="gate-title">Accredited Investor<br/>Verification Required</div>
+    <p class="gate-text">The information contained on this website is intended solely for accredited investors as defined under applicable securities laws. Access is restricted to qualified individuals and institutional investors.</p>
+    <div class="gate-check">
+      <input type="checkbox" id="gate-cb" onchange="document.getElementById('gate-btn').classList.toggle('active',this.checked)"/>
+      <label for="gate-cb">I confirm that I am an <strong>Accredited Investor</strong> as defined by the SEC (net worth exceeding $1,000,000 excluding primary residence, or annual income exceeding $200,000 individually / $300,000 jointly), or a Qualified Institutional Buyer, and I agree to the terms of access.</label>
+    </div>
+    <button class="gate-btn" id="gate-btn" onclick="document.getElementById('gate').style.display='none';document.body.style.overflow=''">Enter Ascenda Enterprise Capital</button>
+
+    <div style="margin-top:1.25rem;padding:1.25rem 1.5rem;background:rgba(196,146,42,0.06);border:.5px solid var(--rule);text-align:left">
+      <div style="font-family:var(--font-mono);font-size:.55rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold3);margin-bottom:.5rem">Don't meet the accredited investor requirements?</div>
+      <p style="font-size:.75rem;color:rgba(255,255,255,.5);line-height:1.75;font-weight:300">
+        If you do not qualify as an accredited investor, you are not eligible to participate in Ascenda Enterprise Capital's investment programs. However, if you're interested in our <strong style="color:var(--gold);font-weight:400">paid educational materials, mentorship programs, and trading courses</strong> — those are open to everyone. Visit our mentorship page to explore what's available.
+      </p>
+      <a href="ascenda-mentorship.html" style="display:inline-block;margin-top:.85rem;font-family:var(--font-mono);font-size:.58rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);text-decoration:none;border:.5px solid var(--rule2);padding:.55rem 1.25rem;transition:all .2s"
+        onmouseover="this.style.borderColor='var(--gold)';this.style.background='rgba(196,146,42,0.08)'"
+        onmouseout="this.style.borderColor='var(--rule2)';this.style.background='transparent'">
+        Explore Mentorship & Paid Materials →
+      </a>
+    </div>
+
+    <a class="gate-decline" href="https://www.google.com" style="margin-top:1rem">I do not qualify and I'm not interested — exit site</a>
+    <p class="gate-disclaimer">This website does not constitute an offer to sell or a solicitation of an offer to buy any securities. Past performance does not guarantee future results. All investments involve risk, including loss of principal. Ascenda Enterprise Capital LLC is registered in the State of Georgia.</p>
+  </div>
+</div>
+
 <!-- NAV -->
 <nav>
-  <div class="nav-logo">Ascenda Enterprise Capital</div>
+  <div class="nav-logo">
+    <svg class="nav-logo-diamond" viewBox="0 0 40 40" fill="none">
+      <polygon points="20,2 30,14 20,26 10,14" fill="url(#ng1)"/>
+      <polygon points="20,2 30,14 26,12" fill="url(#ng2)"/>
+      <polygon points="20,26 30,14 26,20" fill="rgba(180,180,200,0.4)"/>
+      <polygon points="20,26 10,14 14,20" fill="rgba(160,160,180,0.3)"/>
+      <defs>
+        <linearGradient id="ng1" x1="20" y1="2" x2="20" y2="26"><stop offset="0%" stop-color="#E4B84A"/><stop offset="100%" stop-color="#8A6518"/></linearGradient>
+        <linearGradient id="ng2" x1="20" y1="2" x2="30" y2="14"><stop offset="0%" stop-color="#F2D680"/><stop offset="100%" stop-color="#C4922A"/></linearGradient>
+      </defs>
+    </svg>
+    <div class="nav-logo-text">
+      <div class="nav-logo-main">Ascenda</div>
+      <div class="nav-logo-sub">Enterprise Capital</div>
+    </div>
+  </div>
   <div class="nav-links" id="nav-links">
+    <a href="#performance" onclick="closeNav()">Performance</a>
+    <a href="#strategy" onclick="closeNav()">Strategy</a>
     <a href="#markets" onclick="closeNav()">Markets</a>
-    <a href="#news" onclick="closeNav()">News</a>
     <a href="#network" onclick="closeNav()">Network</a>
-    <a href="#focus" onclick="closeNav()">Focus</a>
     <a href="#join" onclick="closeNav()">Join</a>
     <a href="#about" onclick="closeNav()">About</a>
-    <a href="#contact" onclick="closeNav()">Contact</a>
+    <a href="#contact" onclick="closeNav()" class="nav-cta">Inquire</a>
   </div>
-  <div class="nav-hamburger" id="hamburger" onclick="toggleNav()" style="display:none">
+  <div class="nav-hamburger" id="hamburger" onclick="toggleNav()">
     <span></span><span></span><span></span>
   </div>
 </nav>
 
+<!-- TICKER -->
+<div class="ticker" style="margin-top:56px"><div class="tw" id="tw"></div></div>
+
 <!-- HERO -->
 <section class="hero">
   <div class="hero-bg"></div>
-  <div class="orb orb1"></div>
-  <div class="orb orb2"></div>
-  <div style="position:relative;z-index:2;max-width:920px">
-    <div class="eyebrow">Ascenda Enterprise Capital — Est. 2025</div>
-    <h1>
-      Capital<br/>
-      <span class="h1b">deployed</span>
-      <span class="h1c">with <em>precision.</em></span>
-    </h1>
-    <p class="hero-body">A multi-strategy investment firm operating across global markets, real estate, and private equity. We pursue exceptional risk-adjusted returns with discipline that compounds over decades.</p>
-    <div class="cta-row">
-      <button class="btn-gold" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Request a meeting</button>
-      <button class="btn-out" onclick="document.getElementById('focus').scrollIntoView({behavior:'smooth'})">Explore our focus</button>
+  <div class="hero-grid-overlay"></div>
+
+  <div class="hero-logo-center">
+    <svg class="hero-diamond-large" viewBox="0 0 120 120" fill="none">
+      <polygon points="60,6 92,42 60,78 28,42" fill="none" stroke="rgba(196,146,42,0.2)" stroke-width="0.5"/>
+      <polygon points="60,6 82,36 60,60 38,36" fill="url(#hg1)"/>
+      <polygon points="60,6 92,42 82,36" fill="url(#hg2)"/>
+      <polygon points="60,60 82,36 92,42" fill="rgba(180,180,200,0.5)"/>
+      <polygon points="60,60 38,36 28,42" fill="rgba(160,160,180,0.4)"/>
+      <polygon points="60,60 92,42 60,90" fill="rgba(140,140,160,0.35)"/>
+      <polygon points="60,90 28,42 60,60" fill="rgba(120,120,140,0.3)"/>
+      <defs>
+        <linearGradient id="hg1" x1="60" y1="6" x2="60" y2="78"><stop offset="0%" stop-color="#E4B84A"/><stop offset="100%" stop-color="#8A6518"/></linearGradient>
+        <linearGradient id="hg2" x1="60" y1="6" x2="92" y2="42"><stop offset="0%" stop-color="#F2D680"/><stop offset="100%" stop-color="#C4922A"/></linearGradient>
+      </defs>
+    </svg>
+    <div class="hero-brand-large">ASCENDA</div>
+    <div class="hero-divider-h"></div>
+    <div class="hero-brand-sub-large">Enterprise Capital</div>
+  </div>
+
+  <div class="hero-content">
+    <div class="hero-left">
+      <h1>
+        Capital deployed<br/>
+        with <em>uncommon</em><br/>
+        precision.
+      </h1>
+      <p>A multi-strategy investment firm operating across global markets, real estate, and private equity — built to be the most dominant fund on the planet.</p>
+      <div class="hero-ctas">
+        <a href="#contact" class="btn-gold">Request a meeting</a>
+        <a href="#performance" class="btn-ghost">View performance</a>
+      </div>
+    </div>
+    <div class="hero-right">
+      <div class="hero-stat"><span class="hs-label">Peak account balance</span><span class="hs-val">$82.4M</span></div>
+      <div class="hero-stat"><span class="hs-label">Years of experience</span><span class="hs-val">~10 Yrs</span></div>
+      <div class="hero-stat"><span class="hs-label">Win rate</span><span class="hs-val">78%</span></div>
+      <div class="hero-stat"><span class="hs-label">AUM ceiling</span><span class="hs-val">$750M</span></div>
+      <div class="hero-stat"><span class="hs-label">Registration</span><span class="hs-val" style="font-size:1.1rem">Georgia LLC</span></div>
     </div>
   </div>
 </section>
 
-<!-- TRADINGVIEW LIVE TICKER TAPE -->
-<div class="tv-ticker-wrap">
-  <div class="tradingview-widget-container">
-    <div class="tradingview-widget-container__widget"></div>
-    <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js" async>
-    {
-      "symbols": [
-        {"proName":"FOREXCOM:SPXUSD","title":"S&P 500"},
-        {"proName":"FOREXCOM:NSXUSD","title":"NASDAQ 100"},
-        {"proName":"INDEX:DJI","title":"Dow Jones"},
-        {"proName":"FOREXCOM:EURUSD","title":"EUR/USD"},
-        {"proName":"FOREXCOM:GBPUSD","title":"GBP/USD"},
-        {"proName":"FOREXCOM:USDJPY","title":"USD/JPY"},
-        {"proName":"FOREXCOM:AUDUSD","title":"AUD/USD"},
-        {"proName":"FOREXCOM:USDCAD","title":"USD/CAD"},
-        {"proName":"TVC:US10Y","title":"US 10Y"},
-        {"proName":"TVC:GOLD","title":"Gold"},
-        {"proName":"TVC:USOIL","title":"WTI Crude"},
-        {"proName":"BITSTAMP:BTCUSD","title":"Bitcoin"}
-      ],
-      "showSymbolLogo": false,
-      "isTransparent": true,
-      "displayMode": "adaptive",
-      "colorTheme": "dark",
-      "locale": "en"
-    }
-    </script>
-  </div>
-</div>
-
-<!-- STATEMENT — THE WOW MOMENT -->
+<!-- STATEMENT -->
 <div class="statement">
-  <div class="statement-inner">
-    <div class="statement-quote">"We close at $750,000,000.<br/>Not a dollar more."</div>
-    <div class="statement-sub">Ascenda Enterprise Capital — AUM Hard Cap</div>
+  <div>
+    <div class="statement-q">"I didn't build Ascenda to be the biggest fund in the room.<br/>I built it to be the biggest fund in the world."</div>
+    <div class="statement-attr">— Izaiah Cottle, Founder & CEO · Ascenda Enterprise Capital LLC</div>
   </div>
 </div>
 
@@ -462,700 +581,493 @@ footer{
   </div>
   <div class="aum-sep"></div>
   <div class="aum-r">
-    Ascenda enforces a <strong>strict $750,000,000 AUM ceiling</strong> at all times. Not a regulatory threshold — a philosophical covenant. Concentrated capital moves faster, thinks sharper, and compounds harder than bloated funds ever can. When we reach capacity, we close. <strong>No exceptions. No waivers.</strong>
+    Ascenda enforces a <strong>strict $750,000,000 AUM ceiling</strong> at all times. Not a regulatory threshold — a philosophical covenant. Concentrated capital moves faster, thinks sharper, and compounds harder. When we reach capacity, we close. <strong>No exceptions. No waivers. Ever.</strong>
   </div>
 </div>
 
-<!-- MARKETS — LIVE TRADINGVIEW -->
-<section class="mkt-section" id="markets">
-  <div class="sec-label">Live market data</div>
-  <h2 class="on-dark">Real-time prices, <em>always accurate</em></h2>
-  <p style="font-size:.82rem;color:rgba(255,255,255,.32);margin-top:-.2rem;letter-spacing:.05em;font-weight:300;margin-bottom:2.5rem">
-    Powered by TradingView — live data, zero delay
-  </p>
+<!-- PERFORMANCE TEARSHEET -->
+<section class="tearsheet" id="performance">
+  <div class="ts-header">
+    <div>
+      <div class="sec-label">Performance record</div>
+      <h2 class="on-dark">Documented <em>track record</em></h2>
+    </div>
+    <div style="text-align:right">
+      <div style="font-family:var(--font-mono);font-size:.55rem;letter-spacing:.15em;text-transform:uppercase;color:var(--cream3)">Primary instrument</div>
+      <div style="font-family:var(--font-display);font-size:1.6rem;font-style:italic;color:var(--gold2);margin-top:.25rem">NAS100 · ES · Gold · Oil · Top Equities</div>
+    </div>
+  </div>
 
-  <!-- TV MARKET OVERVIEW WIDGET -->
-  <div style="border:.5px solid var(--rule);overflow:hidden;margin-bottom:2.5rem">
+  <div class="ts-disclaimer">
+    <p><strong>Important disclosure:</strong> The performance data presented below has been documented and verified through TraderSync and live platform records across multiple accounts. Past performance is not indicative of future results. All trading involves significant risk of loss, including total loss of capital. Nothing on this page constitutes an offer to invest or a guarantee of returns.</p>
+  </div>
+
+  <div class="kpi-grid">
+    <div class="kpi"><div class="kpi-val" style="font-size:2rem">$82,448,793</div><div class="kpi-label">Peak account balance</div><div class="kpi-sub">$82,448,793.72 · Feb 24, 2026 · TraderSync verified</div></div>
+    <div class="kpi"><div class="kpi-val">78%</div><div class="kpi-label">Win rate</div><div class="kpi-sub">Documented across all periods</div></div>
+    <div class="kpi"><div class="kpi-val">$5,428</div><div class="kpi-label">Trade $ expectancy</div><div class="kpi-sub">$5,428.42 per trade · TraderSync Feb 2026</div></div>
+    <div class="kpi"><div class="kpi-val">$3.2M</div><div class="kpi-label">Peak single-day return</div><div class="kpi-sub">$3,207,435.07 · Feb 24, 2026</div></div>
+  </div>
+
+  <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--rule);margin-top:1px;margin-bottom:1px">
+    <div class="kpi" style="background:rgba(196,146,42,0.06)"><div class="kpi-val" style="font-size:1.8rem">$81.2M</div><div class="kpi-label">Acc. net return (TraderSync)</div></div>
+    <div class="kpi" style="background:rgba(196,146,42,0.06)"><div class="kpi-val" style="font-size:1.8rem">$101.3M</div><div class="kpi-label">Gross return on winners</div></div>
+    <div class="kpi" style="background:rgba(196,146,42,0.06)"><div class="kpi-val" style="font-size:1.8rem">$318,929</div><div class="kpi-label">Biggest single trade profit</div></div>
+    <div class="kpi" style="background:rgba(196,146,42,0.06)"><div class="kpi-val" style="font-size:1.8rem">0.66:1</div><div class="kpi-label">Profit/Loss ratio</div></div>
+  </div>
+
+  <div class="perf-grid">
+    <div class="perf-block">
+      <div class="perf-block-title">Documented account & session performance</div>
+      <table class="monthly-table">
+        <thead>
+          <tr>
+            <th>Date / Session</th>
+            <th>Platform</th>
+            <th>P&L / Balance</th>
+            <th>Account Equity</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Nov 10, 2025</td><td>NAS100 Platform</td><td class="td-up">+$24,331</td><td class="td-total">$5,909,585</td></tr>
+          <tr><td>Nov 10, 2025</td><td>NAS100 Platform</td><td class="td-up">+$24,530</td><td class="td-total">$6,057,868</td></tr>
+          <tr><td>Dec 9, 2025</td><td>NAS100 Platform</td><td class="td-up">Deposit +$3,000</td><td class="td-total">$6,096,261</td></tr>
+          <tr><td>Jan 30, 2026</td><td>TraderSync · NAS100</td><td class="td-up">Multi-win session</td><td class="td-total">$2,086,688 net</td></tr>
+          <tr><td>Session — NAS100</td><td>NAS100.PRO</td><td class="td-up">+$607,000</td><td class="td-total">$1,542,338</td></tr>
+          <tr><td>Session — NAS100</td><td>NAS100.PRO</td><td class="td-up">+$41,280</td><td class="td-total">$2,127,343</td></tr>
+          <tr><td>Session — NAS100 · ES</td><td>Live Platform</td><td class="td-up">+$5,396</td><td class="td-total">$2,111,674</td></tr>
+          <tr><td>19:00 session block</td><td>TraderSync hourly</td><td class="td-up">+$225,654</td><td>—</td></tr>
+          <tr><td>Peak daily return</td><td>TraderSync verified</td><td class="td-up">+$630,790</td><td>—</td></tr>
+          <tr><td style="color:var(--gold2);font-weight:500;font-family:var(--font-mono);font-size:.65rem;letter-spacing:.1em" colspan="2">PEAK DOCUMENTED BALANCE · Feb 24, 2026</td><td colspan="2" class="td-total" style="text-align:right;font-size:1.1rem;color:var(--gold2)">$82,448,793.72</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="perf-block">
+      <div class="perf-block-title">TraderSync verified metrics</div>
+      <div class="metric-list">
+        <div class="ml-row"><span class="ml-label">Acc. return net (verified)</span><span class="ml-val gold">$81,229,509</span></div>
+        <div class="ml-row"><span class="ml-label">Peak account balance</span><span class="ml-val gold">$82,448,793</span></div>
+        <div class="ml-row"><span class="ml-label">Win rate</span><span class="ml-val good">78%</span></div>
+        <div class="ml-row"><span class="ml-label">Total trades logged</span><span class="ml-val gold">32,000+</span></div>
+        <div class="ml-row"><span class="ml-label">Trade $ expectancy</span><span class="ml-val gold">$5,428.42</span></div>
+        <div class="ml-row"><span class="ml-label">Profit/Loss ratio</span><span class="ml-val gold">0.66:1</span></div>
+        <div class="ml-row"><span class="ml-label">Gross return on winners</span><span class="ml-val good">$101,253,974</span></div>
+        <div class="ml-row"><span class="ml-label">Biggest single profit</span><span class="ml-val good">$318,929</span></div>
+        <div class="ml-row"><span class="ml-label">Best single-day return</span><span class="ml-val gold">$3,207,435</span></div>
+        <div class="ml-row"><span class="ml-label">Primary instruments</span><span class="ml-val" style="font-size:.68rem">NAS100 · ES · Gold · Oil · Equities</span></div>
+        <div class="ml-row"><span class="ml-label">Documentation source</span><span class="ml-val" style="font-size:.72rem">TraderSync · Platform screenshots</span></div>
+      </div>
+
+      <div style="margin-top:2rem">
+        <div class="perf-block-title">Return distribution by trade type</div>
+        <div class="dist-bar">
+          <div class="dist-row"><span class="dist-label">Take Profit</span><div class="dist-track"><div class="dist-fill" style="width:65%"></div></div><span class="dist-val">~65%</span></div>
+          <div class="dist-row"><span class="dist-label">Market Exit</span><div class="dist-track"><div class="dist-fill" style="width:20%;background:var(--gold3)"></div></div><span class="dist-val">~20%</span></div>
+          <div class="dist-row"><span class="dist-label">Stop Loss</span><div class="dist-track"><div class="dist-fill" style="width:15%;background:rgba(231,76,60,0.6)"></div></div><span class="dist-val">~15%</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STRATEGY -->
+<section class="sec sec-alt" id="strategy">
+  <div class="sec-label">Investment strategy</div>
+  <h2 class="on-dark">The <em>AEC Method</em></h2>
+  <p style="font-size:.98rem;color:var(--cream2);line-height:1.95;max-width:600px;font-weight:300;margin-top:.5rem">Three proprietary frameworks operating in concert — engineered to identify high-probability entries, eliminate noise, and execute with institutional precision.</p>
+  <div class="strategy-grid">
+    <div class="sg">
+      <div class="sg-bar"></div>
+      <div class="sg-n">Layer I — Momentum Engine</div>
+      <h3>Advanced <em>Momentum</em></h3>
+      <p>Multi-timeframe momentum analysis identifies the direction and strength of institutional order flow before entries are considered. We trade with the current, never against it. Trend confirmation across three timeframes is mandatory before any position is initiated.</p>
+    </div>
+    <div class="sg">
+      <div class="sg-bar"></div>
+      <div class="sg-n">Layer II — Statistical Edge</div>
+      <h3>Z-Score <em>Standard Deviation</em></h3>
+      <p>Proprietary Z-score analysis quantifies price deviation from statistical mean, identifying when assets are extended beyond sustainable levels. This framework eliminates emotional decision-making, replacing it with mathematical precision and a defined statistical edge on every trade.</p>
+    </div>
+    <div class="sg">
+      <div class="sg-bar"></div>
+      <div class="sg-n">Layer III — Institutional Flow</div>
+      <h3>DOM & <em>Order Flow</em></h3>
+      <p>Depth of Market and advanced order flow analysis reveals what institutions are actually doing — not what price suggests they're doing. By reading the tape at the microstructure level, AEC identifies the precise moments when institutional capital enters and exits the market.</p>
+    </div>
+  </div>
+</section>
+
+<!-- MARKETS — TradingView -->
+<section class="sec" id="markets" style="background:var(--ink3);border-top:.5px solid var(--rule)">
+  <div class="sec-label">Live market data</div>
+  <h2 class="on-dark">Markets, <em>real-time</em></h2>
+  <p style="font-size:.78rem;color:var(--cream3);margin-top:-.2rem;letter-spacing:.05em;margin-bottom:2.5rem;font-family:var(--font-mono)">Powered by TradingView — live data, zero delay</p>
+
+  <div style="border:.5px solid var(--rule);overflow:hidden;margin-bottom:2rem">
     <div class="tradingview-widget-container">
       <div class="tradingview-widget-container__widget"></div>
       <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-market-overview.js" async>
-      {
-        "colorTheme": "dark",
-        "dateRange": "1D",
-        "showChart": true,
-        "locale": "en",
-        "largeChartUrl": "",
-        "isTransparent": true,
-        "showSymbolLogo": false,
-        "showFloatingTooltip": true,
-        "width": "100%",
-        "height": "600",
-        "tabs": [
-          {
-            "title": "Indices",
-            "symbols": [
-              {"s":"FOREXCOM:SPXUSD","d":"S&P 500"},
-              {"s":"FOREXCOM:NSXUSD","d":"NASDAQ 100"},
-              {"s":"INDEX:DJI","d":"Dow Jones"},
-              {"s":"INDEX:RUT","d":"Russell 2000"},
-              {"s":"INDEX:VIX","d":"VIX"}
-            ],
-            "originalTitle": "Indices"
-          },
-          {
-            "title": "Forex",
-            "symbols": [
-              {"s":"FOREXCOM:EURUSD","d":"EUR/USD"},
-              {"s":"FOREXCOM:GBPUSD","d":"GBP/USD"},
-              {"s":"FOREXCOM:USDJPY","d":"USD/JPY"},
-              {"s":"FOREXCOM:AUDUSD","d":"AUD/USD"},
-              {"s":"FOREXCOM:USDCAD","d":"USD/CAD"},
-              {"s":"FOREXCOM:USDCHF","d":"USD/CHF"}
-            ],
-            "originalTitle": "Forex"
-          },
-          {
-            "title": "Commodities",
-            "symbols": [
-              {"s":"TVC:GOLD","d":"Gold"},
-              {"s":"TVC:USOIL","d":"WTI Crude"},
-              {"s":"TVC:UKOIL","d":"Brent Crude"},
-              {"s":"TVC:SILVER","d":"Silver"},
-              {"s":"TVC:NATURALGAS","d":"Natural Gas"}
-            ],
-            "originalTitle": "Commodities"
-          },
-          {
-            "title": "Crypto",
-            "symbols": [
-              {"s":"BITSTAMP:BTCUSD","d":"Bitcoin"},
-              {"s":"BITSTAMP:ETHUSD","d":"Ethereum"},
-              {"s":"COINBASE:SOLUSD","d":"Solana"}
-            ],
-            "originalTitle": "Crypto"
-          },
-          {
-            "title": "Bonds",
-            "symbols": [
-              {"s":"TVC:US10Y","d":"US 10Y Yield"},
-              {"s":"TVC:US02Y","d":"US 2Y Yield"},
-              {"s":"TVC:US30Y","d":"US 30Y Yield"}
-            ],
-            "originalTitle": "Bonds"
-          }
-        ]
-      }
+      {"colorTheme":"dark","dateRange":"1D","showChart":true,"locale":"en","isTransparent":true,"showSymbolLogo":false,"showFloatingTooltip":true,"width":"100%","height":"550","tabs":[{"title":"Indices","symbols":[{"s":"FOREXCOM:SPXUSD","d":"S&P 500"},{"s":"FOREXCOM:NSXUSD","d":"NASDAQ 100"},{"s":"INDEX:DJI","d":"Dow Jones"},{"s":"INDEX:VIX","d":"VIX"}],"originalTitle":"Indices"},{"title":"Forex","symbols":[{"s":"FOREXCOM:EURUSD","d":"EUR/USD"},{"s":"FOREXCOM:GBPUSD","d":"GBP/USD"},{"s":"FOREXCOM:USDJPY","d":"USD/JPY"},{"s":"FOREXCOM:AUDUSD","d":"AUD/USD"}],"originalTitle":"Forex"},{"title":"Top Equities","symbols":[{"s":"NASDAQ:NVDA","d":"NVIDIA"},{"s":"NASDAQ:AAPL","d":"Apple"},{"s":"NASDAQ:MSFT","d":"Microsoft"},{"s":"NASDAQ:AMZN","d":"Amazon"},{"s":"NASDAQ:META","d":"Meta"}],"originalTitle":"Top Equities"},{"title":"Commodities","symbols":[{"s":"TVC:GOLD","d":"Gold"},{"s":"TVC:USOIL","d":"WTI Crude"},{"s":"TVC:SILVER","d":"Silver"}],"originalTitle":"Commodities"}]}
       </script>
     </div>
   </div>
 
-  <!-- TV MINI CHARTS ROW -->
   <div class="tv-charts-grid">
-    <div class="tv-chart-card">
-      <div class="tv-chart-label">S&amp;P 500</div>
-      <div class="tradingview-widget-container">
-        <div class="tradingview-widget-container__widget"></div>
-        <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-mini-symbol-overview.js" async>
-        {"symbol":"FOREXCOM:SPXUSD","width":"100%","height":"220","locale":"en","dateRange":"3M","colorTheme":"dark","isTransparent":true,"autosize":true,"largeChartUrl":""}
-        </script>
-      </div>
+    <div class="tv-card">
+      <div class="tv-card-label">NASDAQ 100</div>
+      <div class="tradingview-widget-container"><div class="tradingview-widget-container__widget"></div>
+      <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-mini-symbol-overview.js" async>{"symbol":"FOREXCOM:NSXUSD","width":"100%","height":"200","locale":"en","dateRange":"3M","colorTheme":"dark","isTransparent":true,"autosize":true}</script></div>
     </div>
-    <div class="tv-chart-card">
-      <div class="tv-chart-label">EUR / USD</div>
-      <div class="tradingview-widget-container">
-        <div class="tradingview-widget-container__widget"></div>
-        <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-mini-symbol-overview.js" async>
-        {"symbol":"FOREXCOM:EURUSD","width":"100%","height":"220","locale":"en","dateRange":"3M","colorTheme":"dark","isTransparent":true,"autosize":true,"largeChartUrl":""}
-        </script>
-      </div>
+    <div class="tv-card">
+      <div class="tv-card-label">ES Futures (S&amp;P 500)</div>
+      <div class="tradingview-widget-container"><div class="tradingview-widget-container__widget"></div>
+      <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-mini-symbol-overview.js" async>{"symbol":"CME_MINI:ES1!","width":"100%","height":"200","locale":"en","dateRange":"3M","colorTheme":"dark","isTransparent":true,"autosize":true}</script></div>
     </div>
-    <div class="tv-chart-card">
-      <div class="tv-chart-label">Gold</div>
-      <div class="tradingview-widget-container">
-        <div class="tradingview-widget-container__widget"></div>
-        <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-mini-symbol-overview.js" async>
-        {"symbol":"TVC:GOLD","width":"100%","height":"220","locale":"en","dateRange":"3M","colorTheme":"dark","isTransparent":true,"autosize":true,"largeChartUrl":""}
-        </script>
-      </div>
+    <div class="tv-card">
+      <div class="tv-card-label">Gold</div>
+      <div class="tradingview-widget-container"><div class="tradingview-widget-container__widget"></div>
+      <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-mini-symbol-overview.js" async>{"symbol":"TVC:GOLD","width":"100%","height":"200","locale":"en","dateRange":"3M","colorTheme":"dark","isTransparent":true,"autosize":true}</script></div>
     </div>
   </div>
 </section>
 
-
-<!-- NEWS — LIGHT -->
-<section class="news-section" id="news">
-  <div class="news-meta-bar">
+<!-- NEWS -->
+<section class="sec sec-light" id="news">
+  <div style="display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:2rem;flex-wrap:wrap;gap:1rem">
     <div>
-      <div class="sec-label-light">Market intelligence</div>
-      <h2 class="on-light">What the <em>smart money</em><br/>is reading right now</h2>
+      <div class="sec-label-dark">Market intelligence</div>
+      <h2 class="on-light">What <em>smart money</em> is reading</h2>
     </div>
-    <div class="src-note">Yahoo Finance · CNBC · MarketWatch · ForexFactory · WSJ</div>
+    <div style="font-family:var(--font-mono);font-size:.55rem;letter-spacing:.12em;color:#6B6080">Yahoo Finance · CNBC · MarketWatch · ForexFactory · WSJ</div>
   </div>
-
-  <!-- TRADINGVIEW ECONOMIC CALENDAR -->
-  <div style="border:.5px solid var(--light3);overflow:hidden;margin-bottom:3rem">
-    <div class="tradingview-widget-container">
-      <div class="tradingview-widget-container__widget"></div>
-      <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-events.js" async>
-      {
-        "colorTheme": "light",
-        "isTransparent": true,
-        "width": "100%",
-        "height": "400",
-        "locale": "en",
-        "importanceFilter": "0,1",
-        "countryFilter": "us,eu,gb,jp,cn,ca,au"
-      }
-      </script>
-    </div>
-  </div>
-
   <div class="news-grid">
-    <div class="nc">
-      <div><span class="nc-src">CNBC</span><span class="nc-tag">Equities</span></div>
-      <div class="nc-title">S&amp;P 500 posts eighth consecutive weekly gain as bond yields ease</div>
-      <p class="nc-body">U.S. equities surged as oil prices fell sharply on Iran deal optimism, relieving inflation pressure. The Dow crossed 50,000 for the first time on May 20, while Treasury yields retreated — a strong tailwind for risk assets heading into Memorial Day weekend.</p>
-      <div class="nc-date">May 22, 2026</div>
+    <div class="nc"><div><span class="nc-src">CNBC</span><span class="nc-tag">Equities</span></div><div class="nc-title">S&P 500 posts eighth consecutive weekly gain as bond yields ease</div><p class="nc-body">U.S. equities surged as oil prices fell sharply on Iran deal optimism. The Dow crossed 50,000 for the first time while Treasury yields retreated — a strong tailwind for risk assets heading into Memorial Day weekend.</p><div class="nc-date">May 22, 2026</div></div>
+    <div class="nc"><div><span class="nc-src">ForexFactory</span><span class="nc-tag">Forex</span></div><div class="nc-title">EUR/USD holds 1.1600 as ECB prepares to raise inflation forecasts for June</div><p class="nc-body">The ECB is set to revise its 2026 inflation projections upward at its June meeting. President Lagarde signaled a potential rate hike amid rising energy costs tied to ongoing Middle East tensions.</p><div class="nc-date">May 25, 2026</div></div>
+    <div class="nc"><div><span class="nc-src">MarketWatch</span><span class="nc-tag">Macro</span></div><div class="nc-title">"Trumpflation" rattles Wall Street — analysts warn it may not be transitory</div><p class="nc-body">Tariff-driven inflation could prove stickier than the administration suggests. Markets are pricing no rate moves until year-end with growing speculation of White House-Fed conflict ahead.</p><div class="nc-date">May 24, 2026</div></div>
+    <div class="nc"><div><span class="nc-src">WSJ / CBRE</span><span class="nc-tag">Real Estate</span></div><div class="nc-title">CRE lending hits a 5-year high — commercial investment eyes $562B in 2026</div><p class="nc-body">CBRE's Lending Momentum Index reached a five-year high in Q1 2026. Global direct transaction volumes rose 18% year-over-year to $216B. Prime office scarcity is intensifying across gateway markets.</p><div class="nc-date">May 18, 2026</div></div>
+  </div>
+</section>
+
+<!-- NETWORK MAP -->
+<section id="network">
+  <div style="display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:3rem;flex-wrap:wrap;gap:1rem">
+    <div>
+      <div class="sec-label">National reach</div>
+      <h2 class="on-dark">48 states. One <em>command center.</em></h2>
     </div>
-    <div class="nc">
-      <div><span class="nc-src">ForexFactory</span><span class="nc-tag">Forex</span></div>
-      <div class="nc-title">EUR/USD holds 1.1600 as ECB prepares to raise inflation forecasts for June</div>
-      <p class="nc-body">The ECB is set to revise its 2026 inflation projections upward at its June meeting. President Lagarde signaled a potential rate hike amid rising energy costs tied to ongoing Middle East tensions. EUR/USD opened with a gap to 1.1649 before retracing.</p>
-      <div class="nc-date">May 25, 2026</div>
+    <div style="font-family:var(--font-mono);font-size:.55rem;letter-spacing:.12em;color:var(--cream3)">Headquartered in Georgia · Connected nationwide</div>
+  </div>
+  <div id="map-container" style="width:100%;max-width:960px;margin:0 auto">
+    <div id="map-loading" style="color:var(--cream3);font-family:var(--font-mono);font-size:.7rem;padding:4rem;text-align:center;letter-spacing:.1em">Initializing network map...</div>
+  </div>
+  <div id="map-state-label" style="text-align:center;font-family:var(--font-mono);font-size:.65rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-top:1rem;min-height:1.1rem">&nbsp;</div>
+</section>
+
+<!-- JOIN -->
+<section class="sec sec-alt" id="join">
+  <div style="text-align:center;max-width:680px;margin:0 auto 4rem">
+    <div class="sec-label" style="justify-content:center">
+      <span style="display:block;width:28px;height:.5px;background:var(--gold)"></span>
+      Work with Ascenda
+      <span style="display:block;width:28px;height:.5px;background:var(--gold)"></span>
     </div>
-    <div class="nc">
-      <div><span class="nc-src">MarketWatch</span><span class="nc-tag">Macro</span></div>
-      <div class="nc-title">"Trumpflation" rattles Wall Street — analysts warn it may not be transitory</div>
-      <p class="nc-body">Tariff-driven inflation could prove stickier than the administration suggests. The new Fed Chair faces a difficult path, with markets pricing no rate moves until year-end and growing speculation of White House-Fed conflict on the horizon.</p>
-      <div class="nc-date">May 24, 2026</div>
+    <h2 class="on-dark">Three ways to be part of <em>Ascenda</em></h2>
+    <p style="font-size:.95rem;color:var(--cream2);line-height:1.95;font-weight:300;margin-top:.75rem">We don't open our doors to everyone. But for the right people — there is a seat at this table.</p>
+  </div>
+  <div class="join-grid">
+    <div class="jc">
+      <div class="jc-n">01 — Private Investor</div>
+      <div class="jc-title">Invest <em>capital.</em><br/>Collect returns.</div>
+      <p class="jc-body">Qualified investors who share our long-horizon conviction can apply to allocate capital through Ascenda Enterprise Capital. Full transparency, no bloated fees, and direct access to our multi-strategy approach.</p>
+      <div class="jc-points">
+        <div class="jcp"><span class="jcp-dot">✦</span><span>Minimum allocation reviewed case by case</span></div>
+        <div class="jcp"><span class="jcp-dot">✦</span><span>$750M AUM hard cap — limited spots</span></div>
+        <div class="jcp"><span class="jcp-dot">✦</span><span>Quarterly reporting & direct leadership access</span></div>
+        <div class="jcp"><span class="jcp-dot">✦</span><span>Multi-strategy: trading, real estate, private equity</span></div>
+      </div>
+      <a href="#contact" class="jc-btn">Apply as Investor →</a>
     </div>
-    <div class="nc">
-      <div><span class="nc-src">WSJ / CBRE</span><span class="nc-tag">Real Estate</span></div>
-      <div class="nc-title">CRE lending hits a 5-year high — commercial investment eyes $562B in 2026</div>
-      <p class="nc-body">CBRE's Lending Momentum Index reached a five-year high in Q1 2026. Global direct transaction volumes rose 18% year-over-year to $216B. Multifamily debt is abundant, industrial supply-constrained, and prime office scarcity is intensifying across gateway markets.</p>
-      <div class="nc-date">May 18, 2026</div>
+    <div class="jc featured">
+      <div class="jc-n">02 — Allocator</div>
+      <div class="jc-title">Deploy capital<br/>at scale.</div>
+      <p class="jc-body">Institutional allocators, family offices, and high-net-worth operators who want meaningful exposure to Ascenda's strategy. We work with a select few who understand concentrated, disciplined capital.</p>
+      <div class="jc-points">
+        <div class="jcp"><span class="jcp-dot">✦</span><span>Institutional-grade reporting & compliance</span></div>
+        <div class="jcp"><span class="jcp-dot">✦</span><span>Direct relationship with Izaiah Cottle</span></div>
+        <div class="jcp"><span class="jcp-dot">✦</span><span>Multi-strategy exposure across all 3 verticals</span></div>
+        <div class="jcp"><span class="jcp-dot">✦</span><span>Capacity is finite — apply before we close</span></div>
+      </div>
+      <a href="#contact" class="jc-btn">Apply as Allocator →</a>
     </div>
-    <div class="nc">
-      <div><span class="nc-src">Yahoo Finance</span><span class="nc-tag">Commodities</span></div>
-      <div class="nc-title">Crude oil plunges nearly 6% as Iran negotiations reach their "final stages"</div>
-      <p class="nc-body">WTI fell to $98.26 and Brent to $103 as Trump stated the U.S. is in the final stages of negotiations with Iran. Traders aggressively unwound the geopolitical risk premium built into energy markets over the past two months, boosting equities simultaneously.</p>
-      <div class="nc-date">May 20, 2026</div>
-    </div>
-    <div class="nc">
-      <div><span class="nc-src">ForexFactory</span><span class="nc-tag">Currencies</span></div>
-      <div class="nc-title">USD/JPY consolidates at 158.90 — BoJ June meeting now a critical watch point</div>
-      <p class="nc-body">The yen faces structural pressure with USD/JPY holding higher-lows on the daily. The Bank of Japan has maintained its 0.75% policy rate. The June 16 meeting is now a key inflection point for the pair's next directional move, watched closely by macro funds globally.</p>
-      <div class="nc-date">May 22, 2026</div>
+    <div class="jc">
+      <div class="jc-n">03 — Mentee</div>
+      <div class="jc-title">Learn from<br/><em>the inside.</em></div>
+      <p class="jc-body">Direct mentorship under Izaiah Cottle. Real frameworks, real trade reviews, real access. Not a course — proximity to the actual thing. Reserved for those who prove they're built for it.</p>
+      <div class="jc-points">
+        <div class="jcp"><span class="jcp-dot">✦</span><span>Direct 1-on-1 with Izaiah Cottle</span></div>
+        <div class="jcp"><span class="jcp-dot">✦</span><span>Real-world trading & investment training</span></div>
+        <div class="jcp"><span class="jcp-dot">✦</span><span>Access to AEC's frameworks & playbooks</span></div>
+        <div class="jcp"><span class="jcp-dot">✦</span><span>Extremely limited — serious applicants only</span></div>
+      </div>
+      <a href="ascenda-mentorship.html" class="jc-btn">Apply as Mentee →</a>
     </div>
   </div>
 </section>
 
-<!-- USA NETWORK MAP -->
-<section id="network" style="padding:8rem 4rem;background:#06050D;border-top:.5px solid rgba(201,168,76,0.15)">
-  <div style="font-size:.62rem;letter-spacing:.28em;text-transform:uppercase;color:#C9A84C;margin-bottom:1.25rem;display:flex;align-items:center;gap:.9rem;font-weight:400">
-    <span style="display:block;width:32px;height:.5px;background:#C9A84C"></span>
-    National reach
+<!-- FOCUS -->
+<section class="sec" style="background:var(--ink);border-top:.5px solid var(--rule)" id="focus">
+  <div class="sec-label">Focus areas</div>
+  <h2 class="on-dark">Three pillars of <em>institutional</em> investing</h2>
+  <div class="focus-grid">
+    <div class="fc"><div class="fc-bar"></div><div class="fc-n">01 — Trading</div><h3>Global <em>Markets</em></h3><p>Systematic and discretionary strategies across equities, derivatives, and macro. NAS100, ES Futures, Gold, Crude Oil, and the top 15 performing equities of the decade are primary instruments — traded with momentum, Z-score precision, and institutional order flow analysis at every level.</p></div>
+    <div class="fc"><div class="fc-bar"></div><div class="fc-n">02 — Real Estate</div><h3>Property <em>Capital</em></h3><p>Value-add and opportunistic acquisitions across commercial and residential sectors. We identify mispriced assets in supply-constrained markets and create durable value through active, hands-on management.</p></div>
+    <div class="fc"><div class="fc-bar"></div><div class="fc-n">03 — Private Equity</div><h3>Growth <em>Equity</em></h3><p>Strategic stakes in high-conviction operating companies. We partner with founders who share our long-horizon vision and bring capital, network, and genuine operational depth to every investment.</p></div>
   </div>
-  <h2 style="font-family:'Playfair Display',serif;font-size:clamp(2rem,3.5vw,3rem);font-weight:400;color:#FFFFFF;line-height:1.12;margin-bottom:.8rem">
-    48 states. One <em style="font-style:italic;color:#E8CC7A">command center.</em>
-  </h2>
-  <p style="font-size:.82rem;color:rgba(255,255,255,.32);margin-bottom:2.5rem;letter-spacing:.05em;font-weight:300">
-    Headquartered in New York — connected to every contiguous state in the union. Hover any state to explore.
-  </p>
-  <div id="map-container" style="width:100%;max-width:960px;margin:0 auto;position:relative">
-    <div id="map-loading" style="color:rgba(201,168,76,0.4);font-size:.8rem;font-family:Arial,sans-serif;padding:4rem;text-align:center">Loading map...</div>
-  </div>
-  <div id="map-state-label" style="text-align:center;font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;color:#E8CC7A;margin-top:1rem;min-height:1.2rem;font-family:'Jost',sans-serif">&nbsp;</div>
 </section>
 
+<!-- FOUNDER -->
+<section id="about" style="background:var(--ink)">
+  <div style="text-align:center;padding:5rem 3.5rem 3rem;border-top:.5px solid var(--rule)">
+    <div class="sec-label" style="justify-content:center">
+      <span style="display:block;width:28px;height:.5px;background:var(--gold)"></span>Leadership<span style="display:block;width:28px;height:.5px;background:var(--gold)"></span>
+    </div>
+    <div style="font-family:var(--font-display);font-size:clamp(1.5rem,2.8vw,2.4rem);font-style:italic;font-weight:300;color:var(--white);max-width:760px;margin:0 auto;line-height:1.3">"I didn't build Ascenda to be the biggest fund in the room. I built it to be the biggest fund in the <span style='color:var(--gold2)'>world.</span>"</div>
+    <div style="font-family:var(--font-mono);font-size:.55rem;letter-spacing:.22em;text-transform:uppercase;color:var(--cream3);margin-top:1.25rem">— Izaiah Cottle, Founder & CEO</div>
+  </div>
+
+  <div class="founder-grid">
+    <div class="founder-left">
+      <div class="sec-label-dark">Founder & CEO</div>
+      <div class="founder-name">Izaiah<br/>Cottle</div>
+      <div class="founder-title">Founder, Owner & Chief Executive Officer<br/>Ascenda Enterprise Capital LLC</div>
+      <div class="founder-bio">
+        <p>Izaiah Cottle is the founder, owner, and CEO of Ascenda Enterprise Capital — a multi-strategy investment firm built to operate at the intersection of global markets, real estate, and private equity.</p>
+        <p>With nearly a decade of active market experience, Izaiah has built a documented track record with a peak account balance of <em>$82,448,793</em> and over $81,229,509 in verified net returns across 32,000+ documented trades — built not on leverage and luck, but on a proprietary three-layer system combining momentum analysis, Z-score standard deviation, and institutional DOM order flow.</p>
+        <p>He founded Ascenda with one vision: to build the most dominant investment firm on the planet. The $750M hard cap is not a limitation — <em>it is the weapon.</em></p>
+      </div>
+      <div class="founder-stats">
+        <div class="fs"><div class="fs-val">~10</div><div class="fs-lbl">Years experience</div></div>
+        <div class="fs"><div class="fs-val">$82M+</div><div class="fs-lbl">Peak account balance</div></div>
+        <div class="fs"><div class="fs-val">78%</div><div class="fs-lbl">Documented win rate</div></div>
+        <div class="fs"><div class="fs-val">$750M</div><div class="fs-lbl">AUM ceiling</div></div>
+      </div>
+    </div>
+    <div class="founder-right">
+      <div class="founder-quote">"Most funds grow to the point where size becomes their biggest enemy. I refuse to let that happen. The $750M cap is my promise to every investor that our edge will never be diluted."</div>
+      <div class="tag-grid">
+        <span class="tag">Global Equities</span>
+        <span class="tag">Derivatives</span>
+        <span class="tag">Macro Trading</span>
+        <span class="tag">NAS100 Specialist</span>
+        <span class="tag">Order Flow Analysis</span>
+        <span class="tag">Z-Score Strategy</span>
+        <span class="tag">Real Estate</span>
+        <span class="tag">Private Equity</span>
+        <span class="tag">Risk Management</span>
+        <span class="tag">Capital Allocation</span>
+      </div>
+      <div style="margin-top:2.5rem;padding:1.75rem;background:rgba(196,146,42,0.06);border:.5px solid var(--rule)">
+        <div style="font-family:var(--font-mono);font-size:.52rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold3);margin-bottom:.6rem">Legal entity</div>
+        <div style="font-size:.9rem;color:var(--cream2);font-weight:300;line-height:1.7">Ascenda Enterprise Capital LLC<br/><span style="color:var(--cream3)">Registered in the State of Georgia, United States</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- APPROACH -->
+<div style="padding:8rem 3.5rem;background:var(--ink2);border-top:.5px solid var(--rule)">
+  <div class="sec-label">Investment philosophy</div>
+  <h2 class="on-dark">How we think about <em>risk and return</em></h2>
+  <div class="ap-grid">
+    <div class="ap"><div class="ap-n">I</div><h4 style="font-family:var(--font-display);font-size:1.2rem;font-weight:300;color:var(--white);margin-bottom:.65rem">Conviction-driven</h4><p>We concentrate capital in our highest-conviction ideas. Diversification for its own sake is a performance tax we refuse to pay.</p></div>
+    <div class="ap"><div class="ap-n">II</div><h4 style="font-family:var(--font-display);font-size:1.2rem;font-weight:300;color:var(--white);margin-bottom:.65rem">Risk-first always</h4><p>Downside protection is never an afterthought. Every position is sized with explicit risk parameters from the first dollar deployed.</p></div>
+    <div class="ap"><div class="ap-n">III</div><h4 style="font-family:var(--font-display);font-size:1.2rem;font-weight:300;color:var(--white);margin-bottom:.65rem">Operator mindset</h4><p>We don't just allocate — we engage. Operational depth flows through every vertical we touch. We build, not just buy.</p></div>
+    <div class="ap"><div class="ap-n">IV</div><h4 style="font-family:var(--font-display);font-size:1.2rem;font-weight:300;color:var(--white);margin-bottom:.65rem">Capped by design</h4><p>The $750M hard cap is a performance covenant. Scale is the enemy of alpha. We will never let asset growth dilute our edge.</p></div>
+  </div>
+</div>
+
+<!-- CONTACT -->
+<section class="sec sec-light2" id="contact">
+  <div class="contact-grid">
+    <div>
+      <div class="sec-label-dark">Get in touch</div>
+      <h2 class="on-light">Let's discuss<br/><em>your objectives</em></h2>
+      <p style="font-size:1rem;line-height:2;color:#3A3348;font-weight:300;margin-bottom:2rem">Whether you're an institutional allocator, a family office, or an operating partner — we welcome the conversation. Capacity is finite and fills permanently.</p>
+      <div class="cd"><span style="color:var(--gold3)">Email</span><a href="mailto:ascendaenterprise@gmail.com" style="color:#0D1A10">ascendaenterprise@gmail.com</a></div>
+      <div class="cd"><span style="color:var(--gold3)">Availability</span><p style="color:#0D1A10">By appointment only</p></div>
+      <div class="cd"><span style="color:var(--gold3)">Registration</span><p style="color:#0D1A10">Ascenda Enterprise Capital LLC · Georgia</p></div>
+      <div class="cd"><span style="color:var(--gold3)">AUM status</span><p style="color:var(--up);font-weight:400">Currently accepting allocators</p></div>
+    </div>
+    <div>
+      <form class="cf" action="https://formspree.io/f/mvzywgwb" method="POST">
+        <div class="cff"><label style="color:#6B6080">Full name</label><input type="text" name="name" placeholder="Your name" required style="background:var(--white);border-color:rgba(26,22,36,.15);color:#0D1A10"/></div>
+        <div class="cff"><label style="color:#6B6080">Organization</label><input type="text" name="organization" placeholder="Firm or company" style="background:var(--white);border-color:rgba(26,22,36,.15);color:#0D1A10"/></div>
+        <div class="cff"><label style="color:#6B6080">Email</label><input type="email" name="email" placeholder="you@example.com" required style="background:var(--white);border-color:rgba(26,22,36,.15);color:#0D1A10"/></div>
+        <div class="cff"><label style="color:#6B6080">Area of interest</label>
+          <select name="interest" style="background:var(--white);border-color:rgba(26,22,36,.15);color:#0D1A10">
+            <option value="">Select an option</option>
+            <option>Private Investor</option>
+            <option>Allocator</option>
+            <option>Mentee</option>
+            <option>Trading / Public Markets</option>
+            <option>Real Estate</option>
+            <option>Private Equity</option>
+            <option>General inquiry</option>
+          </select>
+        </div>
+        <div class="cff"><label style="color:#6B6080">Message</label><textarea name="message" placeholder="Tell us about your investment objectives..." style="background:var(--white);border-color:rgba(26,22,36,.15);color:#0D1A10"></textarea></div>
+        <button type="submit" style="background:var(--ink);color:var(--gold2);font-family:var(--font-mono);font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;border:none;padding:1.1rem 2rem;cursor:pointer;font-weight:500;transition:background .2s;align-self:flex-start"
+          onmouseover="this.style.background='var(--gold)';this.style.color='var(--ink)'"
+          onmouseout="this.style.background='var(--ink)';this.style.color='var(--gold2)'">Submit inquiry →</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER TOP -->
+<div class="footer-top">
+  <div>
+    <div class="ft-col-title">Ascenda Enterprise Capital</div>
+    <p class="ft-text">A multi-strategy investment firm registered in the State of Georgia. Operating across global markets, real estate, and private equity.</p>
+    <div style="margin-top:1.25rem;font-family:var(--font-mono);font-size:.52rem;letter-spacing:.12em;color:var(--gold3)">ascendaenterprise@gmail.com</div>
+  </div>
+  <div>
+    <div class="ft-col-title">Navigation</div>
+    <a href="#performance" class="ft-link">Performance</a>
+    <a href="#strategy" class="ft-link">Strategy</a>
+    <a href="#markets" class="ft-link">Markets</a>
+    <a href="#join" class="ft-link">Join</a>
+    <a href="#about" class="ft-link">About</a>
+    <a href="#contact" class="ft-link">Contact</a>
+    <a href="ascenda-mentorship.html" class="ft-link">Mentorship</a>
+  </div>
+  <div>
+    <div class="ft-col-title">Legal</div>
+    <p class="ft-text">This website is for informational purposes only and does not constitute an offer to sell or a solicitation of an offer to buy any securities or investment products. Access is restricted to accredited investors.</p>
+    <p class="ft-text" style="margin-top:.75rem">Ascenda Enterprise Capital LLC · Registered in Georgia · All rights reserved.</p>
+  </div>
+</div>
+
+<footer>
+  <div class="f-logo-wrap">
+    <svg class="f-logo-diamond" viewBox="0 0 40 40" fill="none">
+      <polygon points="20,2 30,14 20,26 10,14" fill="url(#fg1)"/>
+      <polygon points="20,2 30,14 26,12" fill="url(#fg2)"/>
+      <defs>
+        <linearGradient id="fg1" x1="20" y1="2" x2="20" y2="26"><stop offset="0%" stop-color="#E4B84A"/><stop offset="100%" stop-color="#8A6518"/></linearGradient>
+        <linearGradient id="fg2" x1="20" y1="2" x2="30" y2="14"><stop offset="0%" stop-color="#F2D680"/><stop offset="100%" stop-color="#C4922A"/></linearGradient>
+      </defs>
+    </svg>
+    <div class="f-logo-text">Ascenda Enterprise Capital LLC</div>
+  </div>
+  <div class="f-legal">© 2025 Ascenda Enterprise Capital LLC. Registered in the State of Georgia. This material is provided for informational purposes only and does not constitute investment advice, an offer to sell, or a solicitation of an offer to buy any security. Past performance does not guarantee future results. All investments involve risk, including the possible loss of principal. Restricted to accredited investors only.</div>
+</footer>
+
+<!-- SCRIPTS -->
 <script src="https://cdn.jsdelivr.net/npm/d3@7/dist/d3.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/topojson-client@3/dist/topojson-client.min.js"></script>
 <script>
+// TICKER
+const T=[
+  {s:'NASDAQ 100',v:'26,270',c:'+1.54%',u:1},{s:'S&P 500',v:'7,432',c:'+1.08%',u:1},
+  {s:'Dow Jones',v:'50,009',c:'+1.31%',u:1},{s:'ES Futures',v:'5,892',c:'+0.82%',u:1},
+  {s:'WTI Crude',v:'$98.26',c:'-5.66%',u:0},{s:'EUR/USD',v:'1.1613',c:'+1.75%',u:1},
+  {s:'USD/JPY',v:'158.90',c:'-1.67%',u:0},{s:'GBP/USD',v:'1.2740',c:'+2.90%',u:1},
+  {s:'Gold',v:'$2,341',c:'+0.30%',u:1},{s:'US 10Y',v:'3.88%',c:'Cooling',u:0},
+];
+const tw=document.getElementById('tw');
+const h=T.map(t=>`<span class="ti"><b>${t.s}</b>${t.v}<span class="${t.u?'up':'dn'}">${t.c}</span></span>`).join('');
+tw.innerHTML=h+h;
+
+// NAV
+function toggleNav(){
+  const n=document.getElementById('nav-links');
+  const hb=document.getElementById('hamburger');
+  n.classList.toggle('open');hb.classList.toggle('open');
+  document.body.style.overflow=n.classList.contains('open')?'hidden':'';
+}
+function closeNav(){
+  document.getElementById('nav-links').classList.remove('open');
+  document.getElementById('hamburger').classList.remove('open');
+  document.body.style.overflow='';
+}
+function checkMobile(){
+  const hb=document.getElementById('hamburger');
+  hb.style.display=window.innerWidth<=900?'flex':'none';
+  if(window.innerWidth>900)closeNav();
+}
+window.addEventListener('resize',checkMobile);
+checkMobile();
+
+// GATE
+document.body.style.overflow='hidden';
+
+// MAP
 (function(){
-  const W=960,H=600;
-  const EXCLUDE=['02','15'];
-  const NY_ID='36';
-  const stateNames={
-    '01':'Alabama','04':'Arizona','05':'Arkansas','06':'California',
-    '08':'Colorado','09':'Connecticut','10':'Delaware','12':'Florida','13':'Georgia',
-    '16':'Idaho','17':'Illinois','18':'Indiana','19':'Iowa','20':'Kansas',
-    '21':'Kentucky','22':'Louisiana','23':'Maine','24':'Maryland','25':'Massachusetts',
-    '26':'Michigan','27':'Minnesota','28':'Mississippi','29':'Missouri','30':'Montana',
-    '31':'Nebraska','32':'Nevada','33':'New Hampshire','34':'New Jersey','35':'New Mexico',
-    '36':'New York','37':'North Carolina','38':'North Dakota','39':'Ohio','40':'Oklahoma',
-    '41':'Oregon','42':'Pennsylvania','44':'Rhode Island','45':'South Carolina',
-    '46':'South Dakota','47':'Tennessee','48':'Texas','49':'Utah','50':'Vermont',
-    '51':'Virginia','53':'Washington','54':'West Virginia','55':'Wisconsin','56':'Wyoming'
-  };
+  const W=960,H=600,EXCLUDE=['02','15'],NY_ID='36';
+  const stateNames={'01':'Alabama','04':'Arizona','05':'Arkansas','06':'California','08':'Colorado','09':'Connecticut','10':'Delaware','12':'Florida','13':'Georgia','16':'Idaho','17':'Illinois','18':'Indiana','19':'Iowa','20':'Kansas','21':'Kentucky','22':'Louisiana','23':'Maine','24':'Maryland','25':'Massachusetts','26':'Michigan','27':'Minnesota','28':'Mississippi','29':'Missouri','30':'Montana','31':'Nebraska','32':'Nevada','33':'New Hampshire','34':'New Jersey','35':'New Mexico','36':'New York','37':'North Carolina','38':'North Dakota','39':'Ohio','40':'Oklahoma','41':'Oregon','42':'Pennsylvania','44':'Rhode Island','45':'South Carolina','46':'South Dakota','47':'Tennessee','48':'Texas','49':'Utah','50':'Vermont','51':'Virginia','53':'Washington','54':'West Virginia','55':'Wisconsin','56':'Wyoming'};
   const sl=document.getElementById('map-state-label');
 
   fetch('https://cdn.jsdelivr.net/npm/us-atlas@3/states-10m.json')
   .then(r=>r.json())
   .then(us=>{
-    const ml=document.getElementById('map-loading');
-    if(ml)ml.remove();
+    const ml=document.getElementById('map-loading');if(ml)ml.remove();
     const container=document.getElementById('map-container');
     const projection=d3.geoAlbersUsa().scale(1280).translate([W/2,H/2]);
     const pathGen=d3.geoPath().projection(projection);
-    const svg=d3.select(container).append('svg')
-      .attr('viewBox',`0 0 ${W} ${H}`)
-      .style('width','100%').style('height','auto').style('display','block')
-      .style('background','#06050D');
-
-    const allStates=topojson.feature(us,us.objects.states).features
-      .filter(d=>!EXCLUDE.includes(d.id.toString().padStart(2,'0')));
-
-    const styleEl=document.createElement('style');
-    styleEl.textContent='.aec-st{fill:#0E0C1C;stroke:#2A2445;stroke-width:0.5;stroke-linejoin:round;cursor:pointer;transition:fill .2s,stroke .2s}';
-    document.head.appendChild(styleEl);
-
-    const sG=svg.append('g');
-    const lG=svg.append('g');
-    const dG=svg.append('g');
-    const nyG=svg.append('g');
-
-    sG.selectAll('path').data(allStates).enter().append('path')
-      .attr('class','aec-st').attr('id',d=>'aec-st'+d.id).attr('d',pathGen)
-      .on('mouseenter',function(e,d){highlight(d.id,true)})
-      .on('mouseleave',function(e,d){highlight(d.id,false)});
-
+    const svg=d3.select(container).append('svg').attr('viewBox',`0 0 ${W} ${H}`).style('width','100%').style('height','auto').style('display','block').style('background','var(--ink3)');
+    const allStates=topojson.feature(us,us.objects.states).features.filter(d=>!EXCLUDE.includes(d.id.toString().padStart(2,'0')));
+    const sEl=document.createElement('style');
+    sEl.textContent='.aec-st{fill:#0E0B1A;stroke:#2A2240;stroke-width:0.5;stroke-linejoin:round;cursor:pointer;transition:fill .2s}';
+    document.head.appendChild(sEl);
+    const sG=svg.append('g');const lG=svg.append('g');const dG=svg.append('g');const nyG=svg.append('g');
+    sG.selectAll('path').data(allStates).enter().append('path').attr('class','aec-st').attr('id',d=>'aec-st'+d.id).attr('d',pathGen).on('mouseenter',function(e,d){hlState(d.id,true)}).on('mouseleave',function(e,d){hlState(d.id,false)});
     const nyFeat=allStates.find(d=>d.id.toString().padStart(2,'0')===NY_ID);
     const [NYX,NYY]=pathGen.centroid(nyFeat);
-    const centerMap={};
-    allStates.forEach(d=>{centerMap[d.id.toString().padStart(2,'0')]=pathGen.centroid(d)});
-
+    const centerMap={};allStates.forEach(d=>{centerMap[d.id.toString().padStart(2,'0')]=pathGen.centroid(d)});
     const lineEls={},trailEls={},dotEls={};
-
     allStates.forEach((d,i)=>{
-      const fid=d.id.toString().padStart(2,'0');
-      if(fid===NY_ID) return;
-      const [tx,ty]=centerMap[fid];
-      const dx=tx-NYX,dy=ty-NYY;
-      const dist=Math.sqrt(dx*dx+dy*dy);
-      const arcH=dist*0.55;
-      const mx=(tx+NYX)/2;
-      const my=Math.min(NYY,ty)-arcH;
-      const pathD=`M${NYX},${NYY} Q${mx},${my} ${tx},${ty}`;
-      const totalLen=dist*1.8;
-
-      const base=lG.append('path').attr('d',pathD).attr('fill','none')
-        .attr('stroke','#C9A84C').attr('stroke-width',0.7).attr('opacity',0.28);
+      const fid=d.id.toString().padStart(2,'0');if(fid===NY_ID)return;
+      const [tx,ty]=centerMap[fid];const dx=tx-NYX,dy=ty-NYY;const dist=Math.sqrt(dx*dx+dy*dy);
+      const arcH=dist*0.55;const mx=(tx+NYX)/2;const my=Math.min(NYY,ty)-arcH;
+      const pathD=`M${NYX},${NYY} Q${mx},${my} ${tx},${ty}`;const totalLen=dist*1.8;
+      const base=lG.append('path').attr('d',pathD).attr('fill','none').attr('stroke','#C4922A').attr('stroke-width',0.7).attr('opacity',0.28);
       lineEls[fid]=base;
-
-      const trail=lG.append('path').attr('d',pathD).attr('fill','none')
-        .attr('stroke','#F5DFA0').attr('stroke-width',2).attr('opacity',0)
-        .attr('stroke-dasharray',`${totalLen*0.12} ${totalLen}`)
-        .attr('stroke-dashoffset',totalLen);
+      const trail=lG.append('path').attr('d',pathD).attr('fill','none').attr('stroke','#F2D680').attr('stroke-width',2).attr('opacity',0).attr('stroke-dasharray',`${totalLen*0.12} ${totalLen}`).attr('stroke-dashoffset',totalLen);
       trailEls[fid]={el:trail,len:totalLen,delay:i*75};
-
-      const dot=dG.append('circle').attr('cx',tx).attr('cy',ty).attr('r',3)
-        .attr('fill','#C9A84C').attr('opacity',0.75).style('cursor','pointer')
-        .on('mouseenter',()=>highlight(fid,true))
-        .on('mouseleave',()=>highlight(fid,false));
+      const dot=dG.append('circle').attr('cx',tx).attr('cy',ty).attr('r',3).attr('fill','#C4922A').attr('opacity',0.75).style('cursor','pointer').on('mouseenter',()=>hlState(fid,true)).on('mouseleave',()=>hlState(fid,false));
       dotEls[fid]=dot;
     });
-
-    function highlight(id,on){
+    function hlState(id,on){
       const fid=id.toString().padStart(2,'0');
-      const base=lineEls[fid],dot=dotEls[fid];
-      const sp=d3.select('#aec-st'+id);
-      if(base){base.attr('stroke',on?'#F5DFA0':'#C9A84C').attr('stroke-width',on?2.5:0.7).attr('opacity',on?0.9:0.28)}
-      if(dot){dot.attr('r',on?7:3).attr('fill',on?'#F5DFA0':'#C9A84C').attr('opacity',1)}
-      if(!sp.empty()){sp.style('fill',on?'rgba(201,168,76,0.22)':'').style('stroke',on?'#E8CC7A':'').style('stroke-width',on?'1.2':'')}
-      if(sl) sl.textContent=on?(stateNames[fid]||fid):'\u00a0';
+      const base=lineEls[fid],dot=dotEls[fid];const sp=d3.select('#aec-st'+id);
+      if(base){base.attr('stroke',on?'#F2D680':'#C4922A').attr('stroke-width',on?2.5:0.7).attr('opacity',on?0.9:0.28)}
+      if(dot){dot.attr('r',on?7:3).attr('fill',on?'#F2D680':'#C4922A').attr('opacity',1)}
+      if(!sp.empty()){sp.style('fill',on?'rgba(196,146,42,0.2)':'').style('stroke',on?'#E4B84A':'').style('stroke-width',on?'1.2':'')}
+      if(sl)sl.textContent=on?(stateNames[fid]||fid):'\u00a0';
     }
-
-    let startTime=null;
-    const CYCLE=4000;
+    let startTime=null;const CYCLE=4000;
     function animateTrails(ts){
-      if(!startTime) startTime=ts;
-      const elapsed=ts-startTime;
+      if(!startTime)startTime=ts;const elapsed=ts-startTime;
       Object.entries(trailEls).forEach(([fid,{el,len,delay}])=>{
-        const t=((elapsed-delay)%CYCLE)/CYCLE;
-        if(t<0){el.attr('opacity',0);return;}
-        const offset=len-(t*len*1.15);
-        el.attr('stroke-dashoffset',offset).attr('opacity',t<0.1?t*8:t>0.85?(1-t)*6.5:0.85);
+        const t=((elapsed-delay)%CYCLE)/CYCLE;if(t<0){el.attr('opacity',0);return;}
+        const offset=len-(t*len*1.15);el.attr('stroke-dashoffset',offset).attr('opacity',t<0.1?t*8:t>0.85?(1-t)*6.5:0.85);
       });
       requestAnimationFrame(animateTrails);
     }
     requestAnimationFrame(animateTrails);
-
-    nyG.append('circle').attr('cx',NYX).attr('cy',NYY).attr('r',28).attr('fill','rgba(201,168,76,0.08)');
-    nyG.append('circle').attr('cx',NYX).attr('cy',NYY).attr('r',7).attr('fill','#C9A84C');
-    nyG.append('circle').attr('cx',NYX).attr('cy',NYY).attr('r',4).attr('fill','#F5DFA0');
-    const p1=nyG.append('circle').attr('cx',NYX).attr('cy',NYY).attr('r',7).attr('fill','none').attr('stroke','#E8CC7A').attr('stroke-width',2).attr('opacity',0.8);
-    const p2=nyG.append('circle').attr('cx',NYX).attr('cy',NYY).attr('r',7).attr('fill','none').attr('stroke','#E8CC7A').attr('stroke-width',1).attr('opacity',0.5);
-    function pulse(){
-      let s=0;
-      const step=()=>{
-        s+=16;const t=Math.min(s/2500,1);
-        p1.attr('r',7+(24-7)*t).attr('opacity',0.8*(1-t));
-        if(s>600){const t2=Math.min((s-600)/1900,1);p2.attr('r',7+(38-7)*t2).attr('opacity',0.5*(1-t2));}
-        if(t<1)requestAnimationFrame(step);else setTimeout(pulse,400);
-      };
-      requestAnimationFrame(step);
-    }
+    nyG.append('circle').attr('cx',NYX).attr('cy',NYY).attr('r',28).attr('fill','rgba(196,146,42,0.08)');
+    nyG.append('circle').attr('cx',NYX).attr('cy',NYY).attr('r',7).attr('fill','#C4922A');
+    nyG.append('circle').attr('cx',NYX).attr('cy',NYY).attr('r',4).attr('fill','#F2D680');
+    const p1=nyG.append('circle').attr('cx',NYX).attr('cy',NYY).attr('r',7).attr('fill','none').attr('stroke','#E4B84A').attr('stroke-width',2).attr('opacity',0.8);
+    const p2=nyG.append('circle').attr('cx',NYX).attr('cy',NYY).attr('r',7).attr('fill','none').attr('stroke','#E4B84A').attr('stroke-width',1).attr('opacity',0.5);
+    function pulse(){let s=0;const step=()=>{s+=16;const t=Math.min(s/2500,1);p1.attr('r',7+(24-7)*t).attr('opacity',0.8*(1-t));if(s>600){const t2=Math.min((s-600)/1900,1);p2.attr('r',7+(38-7)*t2).attr('opacity',0.5*(1-t2));}if(t<1)requestAnimationFrame(step);else setTimeout(pulse,400);};requestAnimationFrame(step);}
     pulse();
-    nyG.append('text').attr('x',NYX).attr('y',NYY-14).attr('text-anchor','middle')
-      .attr('fill','#F5DFA0').attr('font-size',9).attr('font-family','Georgia,serif').attr('font-style','italic').text('New York');
-    svg.append('text').attr('x',W/2).attr('y',H-6).attr('text-anchor','middle')
-      .attr('fill','rgba(201,168,76,0.18)').attr('font-size',8).attr('font-family','Arial,sans-serif')
-      .attr('letter-spacing',3).text('ASCENDA ENTERPRISE CAPITAL — 48 STATE NETWORK');
-  })
-  .catch(()=>{
-    const ml=document.getElementById('map-loading');
-    if(ml)ml.textContent='Map visible on live site.';
-  });
+    nyG.append('text').attr('x',NYX).attr('y',NYY-14).attr('text-anchor','middle').attr('fill','#F2D680').attr('font-size',9).attr('font-family','DM Mono,monospace').attr('letter-spacing',2).text('NEW YORK');
+    svg.append('text').attr('x',W/2).attr('y',H-6).attr('text-anchor','middle').attr('fill','rgba(196,146,42,0.18)').attr('font-size',8).attr('font-family','DM Mono,monospace').attr('letter-spacing',3).text('ASCENDA ENTERPRISE CAPITAL LLC — 48 STATE NETWORK');
+  }).catch(()=>{const ml=document.getElementById('map-loading');if(ml)ml.textContent='Map renders on live site.';});
 })();
-</script>
-
-<!-- FOCUS — DARK -->
-<section class="focus-sec" id="focus">
-  <div class="sec-label">Focus areas</div>
-  <h2 class="on-dark">Three pillars of<br/><em>institutional-grade</em> investing</h2>
-  <div class="focus-grid">
-    <div class="fc">
-      <div class="fc-bar"></div>
-      <div class="fc-n">01 — Trading</div>
-      <h3>Global <em>Markets</em></h3>
-      <p>Systematic and discretionary strategies across equities, derivatives, and macro. We deploy capital where volatility creates opportunity — with rigorous risk architecture at every layer of every position.</p>
-    </div>
-    <div class="fc">
-      <div class="fc-bar"></div>
-      <div class="fc-n">02 — Real Estate</div>
-      <h3>Property <em>Capital</em></h3>
-      <p>Value-add and opportunistic acquisitions across commercial and residential sectors. We identify mispriced assets in supply-constrained markets and create durable value through active, hands-on management.</p>
-    </div>
-    <div class="fc">
-      <div class="fc-bar"></div>
-      <div class="fc-n">03 — Private Equity</div>
-      <h3>Growth <em>Equity</em></h3>
-      <p>Strategic stakes in high-conviction operating companies. We partner with founders who share our long-horizon vision and bring capital, network, and genuine operational depth to every investment.</p>
-    </div>
-  </div>
-</section>
-
-<!-- FOUNDER SECTION — DARK -->
-<section id="about" style="padding:0;background:var(--ink);border-top:.5px solid var(--rule)">
-
-  <!-- FULL BLEED FOUNDER STATEMENT -->
-  <div style="background:var(--ink2);padding:6rem 4rem;border-bottom:.5px solid var(--rule);text-align:center">
-    <div style="font-size:.62rem;letter-spacing:.3em;text-transform:uppercase;color:var(--gold3);margin-bottom:1.5rem;font-weight:400">Leadership</div>
-    <div style="font-family:'Playfair Display',serif;font-size:clamp(1.6rem,3vw,2.6rem);font-style:italic;color:var(--white);max-width:820px;margin:0 auto;line-height:1.35;font-weight:400">
-      "I didn't build Ascenda to be the biggest fund in the room. I built it to be the biggest fund in the <span style="color:var(--gold2)">world.</span>"
-    </div>
-    <div style="margin-top:1.5rem;font-size:.65rem;letter-spacing:.25em;text-transform:uppercase;color:rgba(255,255,255,.35)">— Izaiah Cottle, Founder & CEO</div>
-  </div>
-
-  <!-- FOUNDER PROFILE -->
-  <div style="display:grid;grid-template-columns:1fr 1fr;gap:0;min-height:600px">
-
-    <!-- LEFT — BIO -->
-    <div style="padding:6rem 4rem;border-right:.5px solid var(--rule);display:flex;flex-direction:column;justify-content:center">
-      <div style="font-size:.62rem;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);margin-bottom:1.25rem;display:flex;align-items:center;gap:.9rem;font-weight:400">
-        <span style="display:block;width:32px;height:.5px;background:var(--gold)"></span>
-        Founder & CEO
-      </div>
-      <h2 style="font-family:'Playfair Display',serif;font-size:clamp(2.2rem,3.5vw,3.2rem);font-weight:400;color:var(--white);line-height:1.1;margin-bottom:.5rem">Izaiah <em style="font-style:italic;color:var(--gold2)">Cottle</em></h2>
-      <div style="font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold3);margin-bottom:2.5rem;font-weight:400">Founder, Owner & Chief Executive Officer — Ascenda Enterprise Capital</div>
-
-      <div style="font-size:1.02rem;color:rgba(255,255,255,.75);line-height:2.05;font-weight:300;margin-bottom:1.5rem">
-        Izaiah Cottle is the founder, owner, and CEO of Ascenda Enterprise Capital — a multi-strategy investment firm operating at the intersection of global trading, real estate, and private equity.
-      </div>
-      <div style="font-size:1.02rem;color:rgba(255,255,255,.75);line-height:2.05;font-weight:300;margin-bottom:1.5rem">
-        With nearly a decade of active market experience, Izaiah has built a reputation as a precise, conviction-driven operator who lets performance speak louder than credentials. His trading career has generated over <span style="color:var(--gold2);font-weight:400">$50,000,000 in documented returns</span> — a number built not on leverage and luck, but on discipline, asymmetric thinking, and an obsessive understanding of risk.
-      </div>
-      <div style="font-size:1.02rem;color:rgba(255,255,255,.75);line-height:2.05;font-weight:300">
-        He founded Ascenda with one vision and one vision only: to build the most dominant investment firm on the planet. Not the loudest. Not the most marketed. The most <em style="font-style:italic;color:var(--gold2)">lethal</em> — in performance, in precision, and in the relentless compounding of capital. The $750M hard cap is not a limitation. It is the weapon.
-      </div>
-    </div>
-
-    <!-- RIGHT — STATS & CREDENTIALS -->
-    <div style="display:flex;flex-direction:column">
-      <!-- STAT CARDS -->
-      <div style="display:grid;grid-template-columns:1fr 1fr;flex:1">
-        <div style="padding:3rem 2.5rem;border-right:.5px solid var(--rule);border-bottom:.5px solid var(--rule);display:flex;flex-direction:column;justify-content:flex-end">
-          <div style="font-family:'Playfair Display',serif;font-size:3.5rem;font-style:italic;color:var(--gold2);line-height:1;margin-bottom:.5rem">~10</div>
-          <div style="font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.38);font-weight:400">Years trading experience</div>
-        </div>
-        <div style="padding:3rem 2.5rem;border-bottom:.5px solid var(--rule);display:flex;flex-direction:column;justify-content:flex-end">
-          <div style="font-family:'Playfair Display',serif;font-size:3.5rem;font-style:italic;color:var(--gold2);line-height:1;margin-bottom:.5rem">$50M+</div>
-          <div style="font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.38);font-weight:400">Generated in trading returns</div>
-        </div>
-        <div style="padding:3rem 2.5rem;border-right:.5px solid var(--rule);display:flex;flex-direction:column;justify-content:flex-end">
-          <div style="font-family:'Playfair Display',serif;font-size:3.5rem;font-style:italic;color:var(--gold2);line-height:1;margin-bottom:.5rem">3</div>
-          <div style="font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.38);font-weight:400">Asset classes mastered</div>
-        </div>
-        <div style="padding:3rem 2.5rem;display:flex;flex-direction:column;justify-content:flex-end">
-          <div style="font-family:'Playfair Display',serif;font-size:3.5rem;font-style:italic;color:var(--gold2);line-height:1;margin-bottom:.5rem">$750M</div>
-          <div style="font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.38);font-weight:400">Permanent AUM ceiling</div>
-        </div>
-      </div>
-
-      <!-- CREDENTIAL TAGS -->
-      <div style="padding:2.5rem;border-top:.5px solid var(--rule);background:rgba(201,168,76,0.04)">
-        <div style="font-size:.58rem;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:1rem;font-weight:400">Areas of mastery</div>
-        <div style="display:flex;flex-wrap:wrap;gap:.6rem">
-          <span style="font-size:.65rem;letter-spacing:.12em;padding:.45rem 1rem;border:.5px solid var(--rule2);color:rgba(255,255,255,.6);text-transform:uppercase">Global Equities</span>
-          <span style="font-size:.65rem;letter-spacing:.12em;padding:.45rem 1rem;border:.5px solid var(--rule2);color:rgba(255,255,255,.6);text-transform:uppercase">Derivatives</span>
-          <span style="font-size:.65rem;letter-spacing:.12em;padding:.45rem 1rem;border:.5px solid var(--rule2);color:rgba(255,255,255,.6);text-transform:uppercase">Macro Trading</span>
-          <span style="font-size:.65rem;letter-spacing:.12em;padding:.45rem 1rem;border:.5px solid var(--rule2);color:rgba(255,255,255,.6);text-transform:uppercase">Private Equity</span>
-          <span style="font-size:.65rem;letter-spacing:.12em;padding:.45rem 1rem;border:.5px solid var(--rule2);color:rgba(255,255,255,.6);text-transform:uppercase">Real Estate</span>
-          <span style="font-size:.65rem;letter-spacing:.12em;padding:.45rem 1rem;border:.5px solid var(--rule2);color:rgba(255,255,255,.6);text-transform:uppercase">Risk Management</span>
-          <span style="font-size:.65rem;letter-spacing:.12em;padding:.45rem 1rem;border:.5px solid var(--rule2);color:rgba(255,255,255,.6);text-transform:uppercase">Capital Allocation</span>
-          <span style="font-size:.65rem;letter-spacing:.12em;padding:.45rem 1rem;border:.5px solid var(--rule2);color:rgba(255,255,255,.6);text-transform:uppercase">Portfolio Construction</span>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- FIRM ABOUT -->
-  <div style="background:var(--light2);padding:7rem 4rem;border-top:.5px solid var(--rule)">
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8rem;align-items:start">
-      <div>
-        <div style="font-size:.62rem;letter-spacing:.28em;text-transform:uppercase;color:var(--gold3);margin-bottom:1.25rem;display:flex;align-items:center;gap:.9rem;font-weight:400">
-          <span style="display:block;width:32px;height:.5px;background:var(--gold3)"></span>
-          About the firm
-        </div>
-        <h2 style="font-family:'Playfair Display',serif;font-size:clamp(2rem,3.5vw,3rem);font-weight:400;color:var(--dark-text);line-height:1.15;margin-bottom:1.25rem">Built to compound<br/><em style="font-style:italic;color:var(--gold3)">exceptional</em> returns</h2>
-        <div>
-          <p style="font-size:1.05rem;line-height:2.1;color:var(--dark-text2);font-weight:300;margin-bottom:1.5rem">Ascenda Enterprise Capital was founded on a single conviction: disciplined, concentrated capital allocation across uncorrelated asset classes creates superior risk-adjusted returns — compounded relentlessly over time.</p>
-          <p style="font-size:1.05rem;line-height:2.1;color:var(--dark-text2);font-weight:300;margin-bottom:1.5rem">We operate with the rigor of an institution and the agility of a startup. We move decisively when opportunities emerge, and remain patient — almost uncomfortably so — when they don't.</p>
-          <p style="font-size:1.05rem;line-height:2.1;color:var(--dark-text2);font-weight:300">We are unified by an absolute commitment to our investors and a complete intolerance for mediocrity.</p>
-        </div>
-      </div>
-      <div class="stat-list">
-        <div class="stat-row"><span class="stat-l">Strategies</span><span class="stat-v">3</span></div>
-        <div class="stat-row"><span class="stat-l">AUM hard cap</span><span class="stat-v">$750M</span></div>
-        <div class="stat-row"><span class="stat-l">Mandate</span><span class="stat-v">Global</span></div>
-        <div class="stat-row"><span class="stat-l">Horizon</span><span class="stat-v">Long</span></div>
-        <div class="stat-row"><span class="stat-l">Status</span><span class="stat-v" style="color:var(--up);font-size:1.3rem;font-style:normal;font-family:'Jost';font-weight:400;letter-spacing:.05em">Open</span></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- JOIN SECTION -->
-<section id="join" style="padding:9rem 4rem;background:var(--ink);border-top:.5px solid var(--rule)">
-  <div style="text-align:center;max-width:700px;margin:0 auto 5rem">
-    <div style="font-size:.62rem;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);margin-bottom:1.25rem;display:flex;align-items:center;justify-content:center;gap:.9rem;font-weight:400">
-      <span style="display:block;width:32px;height:.5px;background:var(--gold)"></span>
-      Work with us
-      <span style="display:block;width:32px;height:.5px;background:var(--gold)"></span>
-    </div>
-    <h2 style="font-family:'Playfair Display',serif;font-size:clamp(2.2rem,3.8vw,3.4rem);font-weight:400;color:var(--white);line-height:1.1;margin-bottom:1.25rem">
-      Three ways to be part of <em style="font-style:italic;color:var(--gold2)">Ascenda</em>
-    </h2>
-    <p style="font-size:1.05rem;color:rgba(255,255,255,.55);line-height:1.95;font-weight:300">
-      We don't open our doors to everyone. But for the right people — investors who think long, allocators who move smart, and students who are hungry — there is a seat at the table.
-    </p>
-  </div>
-
-  <!-- THREE CARDS -->
-  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--rule);max-width:1100px;margin:0 auto">
-
-    <!-- PRIVATE INVESTOR -->
-    <div class="join-card" style="background:var(--ink2);padding:3.5rem 3rem;position:relative;overflow:hidden;transition:background .3s;cursor:default"
-      onmouseenter="this.style.background='rgba(201,168,76,0.06)'"
-      onmouseleave="this.style.background='var(--ink2)'">
-      <div style="position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--gold),transparent);opacity:0;transition:opacity .3s" class="card-top-bar"></div>
-      <div style="font-size:.6rem;letter-spacing:.25em;text-transform:uppercase;color:var(--gold3);margin-bottom:2rem;font-weight:400">01 — Private Investor</div>
-      <div style="font-family:'Playfair Display',serif;font-size:1.9rem;font-weight:400;color:var(--white);margin-bottom:1rem;line-height:1.15">
-        Invest <em style="font-style:italic;color:var(--gold2)">capital.</em><br/>Collect returns.
-      </div>
-      <p style="font-size:.92rem;color:rgba(255,255,255,.58);line-height:1.95;font-weight:300;margin-bottom:2rem">
-        Qualified investors who share our long-horizon conviction can apply to allocate capital through Ascenda Enterprise Capital. Access to our multi-strategy approach across trading, real estate, and private equity — with full transparency and no bloated fund fees.
-      </p>
-      <div style="display:flex;flex-direction:column;gap:.65rem;margin-bottom:2.5rem">
-        <div style="display:flex;align-items:center;gap:.75rem;font-size:.82rem;color:rgba(255,255,255,.65)">
-          <span style="color:var(--gold);font-size:.7rem">✦</span> Minimum allocation reviewed case by case
-        </div>
-        <div style="display:flex;align-items:center;gap:.75rem;font-size:.82rem;color:rgba(255,255,255,.65)">
-          <span style="color:var(--gold);font-size:.7rem">✦</span> Hard cap of $750M AUM — limited spots
-        </div>
-        <div style="display:flex;align-items:center;gap:.75rem;font-size:.82rem;color:rgba(255,255,255,.65)">
-          <span style="color:var(--gold);font-size:.7rem">✦</span> Full transparency on strategy & performance
-        </div>
-        <div style="display:flex;align-items:center;gap:.75rem;font-size:.82rem;color:rgba(255,255,255,.65)">
-          <span style="color:var(--gold);font-size:.7rem">✦</span> Quarterly reporting & direct access to leadership
-        </div>
-      </div>
-      <a href="#contact" style="display:inline-block;font-size:.63rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);border:.5px solid var(--rule2);padding:.85rem 1.75rem;text-decoration:none;font-family:'Jost',sans-serif;font-weight:400;transition:all .2s"
-        onmouseover="this.style.borderColor='var(--gold)';this.style.background='rgba(201,168,76,0.08)'"
-        onmouseout="this.style.borderColor='var(--rule2)';this.style.background='transparent'">
-        Apply as Investor →
-      </a>
-    </div>
-
-    <!-- ALLOCATOR -->
-    <div style="background:var(--gold);padding:3.5rem 3rem;position:relative;overflow:hidden;transition:background .3s"
-      onmouseenter="this.style.background='var(--gold2)'"
-      onmouseleave="this.style.background='var(--gold)'">
-      <div style="font-size:.6rem;letter-spacing:.25em;text-transform:uppercase;color:rgba(6,5,13,.55);margin-bottom:2rem;font-weight:500">02 — Allocator</div>
-      <div style="font-family:'Playfair Display',serif;font-size:1.9rem;font-weight:400;color:var(--ink);margin-bottom:1rem;line-height:1.15">
-        Deploy <em style="font-style:italic">capital</em><br/>at scale.
-      </div>
-      <p style="font-size:.92rem;color:rgba(6,5,13,.7);line-height:1.95;font-weight:300;margin-bottom:2rem">
-        Institutional allocators, family offices, and high-net-worth operators who want exposure to Ascenda's strategy at a meaningful scale. We work with a select number of allocators who understand the power of concentrated, disciplined capital.
-      </p>
-      <div style="display:flex;flex-direction:column;gap:.65rem;margin-bottom:2.5rem">
-        <div style="display:flex;align-items:center;gap:.75rem;font-size:.82rem;color:rgba(6,5,13,.75)">
-          <span style="font-size:.7rem">✦</span> Institutional-grade reporting & compliance
-        </div>
-        <div style="display:flex;align-items:center;gap:.75rem;font-size:.82rem;color:rgba(6,5,13,.75)">
-          <span style="font-size:.7rem">✦</span> Direct relationship with Izaiah Cottle
-        </div>
-        <div style="display:flex;align-items:center;gap:.75rem;font-size:.82rem;color:rgba(6,5,13,.75)">
-          <span style="font-size:.7rem">✦</span> Multi-strategy exposure across all 3 verticals
-        </div>
-        <div style="display:flex;align-items:center;gap:.75rem;font-size:.82rem;color:rgba(6,5,13,.75)">
-          <span style="font-size:.7rem">✦</span> Capacity is finite — apply before we close
-        </div>
-      </div>
-      <a href="#contact" style="display:inline-block;font-size:.63rem;letter-spacing:.2em;text-transform:uppercase;color:var(--ink);border:1.5px solid var(--ink);padding:.85rem 1.75rem;text-decoration:none;font-family:'Jost',sans-serif;font-weight:600;transition:all .2s;background:transparent"
-        onmouseover="this.style.background='var(--ink)';this.style.color='var(--gold2)'"
-        onmouseout="this.style.background='transparent';this.style.color='var(--ink)'">
-        Apply as Allocator →
-      </a>
-    </div>
-
-    <!-- MENTEE -->
-    <div style="background:var(--ink2);padding:3.5rem 3rem;position:relative;overflow:hidden;transition:background .3s"
-      onmouseenter="this.style.background='rgba(201,168,76,0.06)'"
-      onmouseleave="this.style.background='var(--ink2)'">
-      <div style="font-size:.6rem;letter-spacing:.25em;text-transform:uppercase;color:var(--gold3);margin-bottom:2rem;font-weight:400">03 — Mentee</div>
-      <div style="font-family:'Playfair Display',serif;font-size:1.9rem;font-weight:400;color:var(--white);margin-bottom:1rem;line-height:1.15">
-        Learn from<br/>the <em style="font-style:italic;color:var(--gold2)">inside.</em>
-      </div>
-      <p style="font-size:.92rem;color:rgba(255,255,255,.58);line-height:1.95;font-weight:300;margin-bottom:2rem">
-        For serious, hungry individuals who want to learn how to trade, invest, and think like an operator. Mentorship under Izaiah Cottle is rare, rigorous, and reserved for those who prove they're built for it. This is not a course. This is proximity to the real thing.
-      </p>
-      <div style="display:flex;flex-direction:column;gap:.65rem;margin-bottom:2.5rem">
-        <div style="display:flex;align-items:center;gap:.75rem;font-size:.82rem;color:rgba(255,255,255,.65)">
-          <span style="color:var(--gold);font-size:.7rem">✦</span> Direct mentorship from Izaiah Cottle
-        </div>
-        <div style="display:flex;align-items:center;gap:.75rem;font-size:.82rem;color:rgba(255,255,255,.65)">
-          <span style="color:var(--gold);font-size:.7rem">✦</span> Real-world trading & investment training
-        </div>
-        <div style="display:flex;align-items:center;gap:.75rem;font-size:.82rem;color:rgba(255,255,255,.65)">
-          <span style="color:var(--gold);font-size:.7rem">✦</span> Access to Ascenda's frameworks & playbooks
-        </div>
-        <div style="display:flex;align-items:center;gap:.75rem;font-size:.82rem;color:rgba(255,255,255,.65)">
-          <span style="color:var(--gold);font-size:.7rem">✦</span> Extremely limited — serious applicants only
-        </div>
-      </div>
-      <a href="#contact" style="display:inline-block;font-size:.63rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);border:.5px solid var(--rule2);padding:.85rem 1.75rem;text-decoration:none;font-family:'Jost',sans-serif;font-weight:400;transition:all .2s"
-        onmouseover="this.style.borderColor='var(--gold)';this.style.background='rgba(201,168,76,0.08)'"
-        onmouseout="this.style.borderColor='var(--rule2)';this.style.background='transparent'">
-        Apply as Mentee →
-      </a>
-    </div>
-
-  </div>
-
-  <!-- BOTTOM NOTE -->
-  <div style="text-align:center;margin-top:3.5rem;max-width:600px;margin-left:auto;margin-right:auto">
-    <p style="font-size:.82rem;color:rgba(255,255,255,.28);line-height:1.85;font-weight:300;font-family:'Jost',sans-serif">
-      All three paths lead to the same place — a relationship built on performance, trust, and results. We don't take applications lightly, and we don't make promises we can't keep. <span style="color:rgba(201,168,76,.5)">Apply through the contact form below.</span>
-    </p>
-  </div>
-</section>
-
-<!-- APPROACH — DARK -->
-<div class="ap-band" id="approach">
-  <div class="sec-label">Our approach</div>
-  <h2 class="on-dark">How we think about<br/><em>risk and return</em></h2>
-  <div class="ap-grid">
-    <div class="ap">
-      <div class="ap-n">I</div>
-      <h4>Conviction-driven</h4>
-      <p>We concentrate capital in our highest-conviction ideas. Diversification for its own sake is a performance tax we refuse to pay.</p>
-    </div>
-    <div class="ap">
-      <div class="ap-n">II</div>
-      <h4>Risk-first always</h4>
-      <p>Downside protection is never an afterthought. Every position is sized with explicit risk parameters from the first dollar deployed.</p>
-    </div>
-    <div class="ap">
-      <div class="ap-n">III</div>
-      <h4>Operator mindset</h4>
-      <p>We don't just allocate — we engage. Operational depth flows through every vertical we touch. We build, not just buy.</p>
-    </div>
-    <div class="ap">
-      <div class="ap-n">IV</div>
-      <h4>Capped by design</h4>
-      <p>The $750M hard cap is a performance covenant. Scale is the enemy of alpha. We will never let asset growth dilute our edge.</p>
-    </div>
-  </div>
-</div>
-
-<!-- CONTACT — LIGHT -->
-<section class="contact-sec" id="contact">
-  <div class="contact-wrap">
-    <div class="ci">
-      <div class="sec-label-light">Contact</div>
-      <h2 class="on-light">Let's discuss<br/><em>your objectives</em></h2>
-      <p>Whether you represent an institutional allocator, a family office, or an operating company seeking a strategic partner — we welcome the conversation. Capacity is finite and fills permanently.</p>
-      <div class="cd"><span>Inquiries</span><a href="mailto:invest@ascendaenterprise.com">invest@ascendaenterprise.com</a></div>
-      <div class="cd"><span>Availability</span><p>By appointment only</p></div>
-      <div class="cd"><span>AUM status</span><p style="color:var(--up);font-weight:400">Currently accepting allocators</p></div>
-    </div>
-    <form action="https://formspree.io/f/mvzywgwb" method="POST" class="cf">
-      <div class="cff"><label>Full name</label><input type="text" name="name" placeholder="Your name" required/></div>
-      <div class="cff"><label>Organization</label><input type="text" name="organization" placeholder="Firm or company"/></div>
-      <div class="cff"><label>Email</label><input type="email" name="email" placeholder="you@example.com" required/></div>
-      <div class="cff">
-        <label>Area of interest</label>
-        <select name="interest">
-          <option value="">Select an option</option>
-          <option>Private Investor</option>
-          <option>Allocator</option>
-          <option>Mentee</option>
-          <option>Trading / Public Markets</option>
-          <option>Real Estate</option>
-          <option>Private Equity</option>
-          <option>General inquiry</option>
-        </select>
-      </div>
-      <div class="cff"><label>Message</label><textarea name="message" placeholder="Tell us about your investment objectives..."></textarea></div>
-      <button class="btn-dark" type="submit" style="align-self:flex-start;margin-top:.5rem">Submit inquiry</button>
-    </form>
-  </div>
-</section>
-
-<!-- FOOTER -->
-<footer>
-  <div class="flogo">Ascenda Enterprise Capital</div>
-  <div class="flinks">
-    <a href="#">Privacy Policy</a>
-    <a href="#">Disclosures</a>
-    <a href="#">Terms of Use</a>
-  </div>
-  <div class="fcopy">© 2025 Ascenda Enterprise Capital. All rights reserved. Not an offer to invest.</div>
-</footer>
-
-<script>
-function toggleNav(){
-  const nav=document.getElementById('nav-links');
-  const hb=document.getElementById('hamburger');
-  nav.classList.toggle('open');
-  hb.classList.toggle('open');
-  document.body.style.overflow=nav.classList.contains('open')?'hidden':'';
-}
-function closeNav(){
-  const nav=document.getElementById('nav-links');
-  const hb=document.getElementById('hamburger');
-  nav.classList.remove('open');
-  hb.classList.remove('open');
-  document.body.style.overflow='';
-}
-function checkMobile(){
-  const hb=document.getElementById('hamburger');
-  if(window.innerWidth<=900){hb.style.display='flex'}
-  else{hb.style.display='none';closeNav()}
-}
-window.addEventListener('resize',checkMobile);
-checkMobile();
 </script>
 </body>
 </html>
