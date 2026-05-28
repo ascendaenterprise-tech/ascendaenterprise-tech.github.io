@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Private Investor Application — Ascenda Enterprise Capital</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Mono:wght@300;400;500&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --gold:#C4922A;--gold2:#E4B84A;--gold3:#8A6518;--gold4:#F2D680;
+  --ink:#06050D;--ink2:#0D0B18;--ink3:#151220;
+  --white:#FFFFFF;--off:#F5F0E8;--off2:#EAE3D3;
+  --cream2:rgba(255,255,255,.72);--cream3:rgba(255,255,255,.38);
+  --rule:rgba(196,146,42,0.15);--rule2:rgba(196,146,42,0.38);
+  --up:#2ECC71;
+  --font-display:'Cormorant Garamond',serif;
+  --font-mono:'DM Mono',monospace;
+  --font-body:'Jost',sans-serif;
+}
+html{scroll-behavior:smooth}
+body{background:var(--ink);color:var(--white);font-family:var(--font-body);font-weight:300;min-height:100vh}
+
+nav{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:1.2rem 3.5rem;
+  background:rgba(6,5,13,.96);
+  border-bottom:.5px solid var(--rule);
+  backdrop-filter:blur(20px);
+  position:sticky;top:0;z-index:100;
+}
+.nav-logo{display:flex;align-items:center;gap:.65rem}
+.nav-logo-main{font-family:var(--font-display);font-size:1rem;color:var(--white);font-weight:400;letter-spacing:.06em}
+.nav-logo-sub{font-family:var(--font-mono);font-size:.45rem;letter-spacing:.25em;text-transform:uppercase;color:var(--gold3)}
+.nav-back{font-family:var(--font-mono);font-size:.58rem;letter-spacing:.18em;text-transform:uppercase;color:var(--cream3);text-decoration:none;transition:color .2s}
+.nav-back:hover{color:var(--gold2)}
+
+.hero{
+  padding:6rem 3.5rem 4rem;
+  background:var(--ink);
+  border-bottom:.5px solid var(--rule);
+  position:relative;overflow:hidden;
+}
+.hero::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse 60% 80% at 80% 50%,rgba(196,146,42,0.06) 0%,transparent 60%);
+}
+.hero-inner{position:relative;z-index:2;max-width:700px}
+.eyebrow{font-family:var(--font-mono);font-size:.58rem;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);margin-bottom:1.25rem;display:flex;align-items:center;gap:.8rem}
+.eyebrow::before{content:'';display:block;width:28px;height:.5px;background:var(--gold)}
+h1{font-family:var(--font-display);font-size:clamp(2.5rem,5vw,4rem);font-weight:300;color:var(--white);line-height:1.05;margin-bottom:1.25rem}
+h1 em{font-style:italic;color:var(--gold2)}
+.hero-sub{font-size:1rem;color:var(--cream2);line-height:1.9;font-weight:300;border-left:1.5px solid var(--rule2);padding-left:1.25rem;max-width:560px}
+
+.main{padding:5rem 3.5rem;max-width:1000px;margin:0 auto}
+
+/* ALLOCATION SELECTOR */
+.alloc-section{margin-bottom:4rem}
+.section-title{font-family:var(--font-mono);font-size:.62rem;letter-spacing:.25em;text-transform:uppercase;color:var(--gold);margin-bottom:2rem;display:flex;align-items:center;gap:.8rem}
+.section-title::before{content:'';display:block;width:24px;height:.5px;background:var(--gold)}
+
+.alloc-display{
+  background:var(--ink2);border:.5px solid var(--rule2);
+  padding:3rem;text-align:center;margin-bottom:2rem;
+  position:relative;overflow:hidden;
+}
+.alloc-display::before{content:'';position:absolute;top:0;left:0;right:0;height:1.5px;background:linear-gradient(90deg,transparent,var(--gold),transparent)}
+.alloc-amount{font-family:var(--font-display);font-size:clamp(3rem,6vw,5rem);font-style:italic;color:var(--gold2);line-height:1;margin-bottom:.5rem}
+.alloc-label{font-family:var(--font-mono);font-size:.58rem;letter-spacing:.2em;text-transform:uppercase;color:var(--cream3)}
+
+.slider-wrap{margin-bottom:1.5rem}
+input[type=range]{
+  width:100%;height:3px;
+  -webkit-appearance:none;appearance:none;
+  background:linear-gradient(90deg,var(--gold) 0%,var(--rule) 0%);
+  outline:none;border-radius:0;cursor:pointer;
+}
+input[type=range]::-webkit-slider-thumb{
+  -webkit-appearance:none;appearance:none;
+  width:20px;height:20px;
+  background:var(--gold2);
+  border:2px solid var(--ink);
+  border-radius:50%;cursor:pointer;
+}
+input[type=range]::-moz-range-thumb{
+  width:20px;height:20px;
+  background:var(--gold2);border:2px solid var(--ink);
+  border-radius:50%;cursor:pointer;border:none;
+}
+.slider-labels{display:flex;justify-content:space-between;margin-top:.6rem}
+.slider-labels span{font-family:var(--font-mono);font-size:.55rem;letter-spacing:.1em;color:var(--cream3)}
+
+.tier-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--rule);margin-bottom:3rem}
+.tier{background:var(--ink2);padding:1.75rem 1.5rem;cursor:pointer;transition:background .2s;text-align:center;border:1px solid transparent}
+.tier:hover{background:rgba(196,146,42,0.08)}
+.tier.active{background:rgba(196,146,42,0.1);border-color:var(--gold)}
+.tier-amount{font-family:var(--font-display);font-size:1.6rem;font-style:italic;color:var(--gold2);margin-bottom:.3rem}
+.tier-label{font-family:var(--font-mono);font-size:.52rem;letter-spacing:.15em;text-transform:uppercase;color:var(--cream3)}
+.tier-sub{font-size:.72rem;color:var(--cream3);margin-top:.3rem;font-weight:300}
+
+/* WHAT YOU GET */
+.benefits{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--rule);margin-bottom:3rem}
+.benefit{background:var(--ink2);padding:1.75rem 1.5rem}
+.benefit-icon{font-size:1.2rem;margin-bottom:.6rem}
+.benefit h4{font-family:var(--font-display);font-size:1rem;font-weight:400;color:var(--white);margin-bottom:.4rem}
+.benefit p{font-size:.78rem;color:var(--cream2);line-height:1.7;font-weight:300}
+
+/* FORM */
+.form-block{background:var(--ink2);border:.5px solid var(--rule);padding:3rem}
+.form-title{font-family:var(--font-display);font-size:1.6rem;font-weight:300;color:var(--white);margin-bottom:.4rem}
+.form-sub{font-size:.78rem;color:var(--cream3);margin-bottom:2rem;font-family:var(--font-mono);letter-spacing:.05em}
+.cf{display:flex;flex-direction:column;gap:1.2rem}
+.cf-row{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem}
+.cff{display:flex;flex-direction:column;gap:.4rem}
+.cff label{font-family:var(--font-mono);font-size:.52rem;letter-spacing:.18em;text-transform:uppercase;color:var(--cream3)}
+.cff input,.cff select,.cff textarea{
+  background:rgba(255,255,255,.025);border:.5px solid rgba(196,146,42,.2);
+  color:var(--white);font-family:var(--font-body);font-size:.88rem;font-weight:300;
+  padding:.85rem 1rem;outline:none;transition:border-color .2s;width:100%;
+}
+.cff input:focus,.cff select:focus,.cff textarea:focus{border-color:var(--gold)}
+.cff select option{background:var(--ink2)}
+.cff textarea{resize:vertical;min-height:80px}
+
+.alloc-hidden{display:none}
+.btn-submit{
+  font-family:var(--font-mono);font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;
+  background:var(--gold);color:var(--ink);border:none;
+  padding:1.1rem 3rem;cursor:pointer;font-weight:500;
+  transition:background .2s;margin-top:.5rem;
+}
+.btn-submit:hover{background:var(--gold2)}
+
+.disclaimer-box{
+  background:rgba(196,146,42,.04);border:.5px solid var(--rule);
+  padding:1.5rem;margin-top:2rem;
+}
+.disclaimer-box p{font-family:var(--font-mono);font-size:.52rem;letter-spacing:.05em;color:rgba(255,255,255,.25);line-height:1.8}
+.disclaimer-box strong{color:rgba(255,255,255,.4);font-weight:500}
+
+footer{padding:2rem 3.5rem;border-top:.5px solid var(--rule);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+.f-copy{font-family:var(--font-mono);font-size:.52rem;color:rgba(255,255,255,.2);letter-spacing:.06em}
+
+@media(max-width:768px){
+  nav{padding:1rem 1.5rem}
+  .hero{padding:5rem 1.5rem 3rem}
+  .main{padding:3.5rem 1.5rem}
+  .tier-grid{grid-template-columns:1fr}
+  .benefits{grid-template-columns:1fr}
+  .cf-row{grid-template-columns:1fr}
+  .form-block{padding:2rem 1.25rem}
+  footer{padding:1.5rem;flex-direction:column;text-align:center}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">
+    <div style="display:flex;flex-direction:column;line-height:1.1">
+      <div class="nav-logo-main">Ascenda</div>
+      <div class="nav-logo-sub">Enterprise Capital</div>
+    </div>
+  </div>
+  <a href="index.html" class="nav-back">← Back to main site</a>
+</nav>
+
+<section class="hero">
+  <div class="hero-inner">
+    <div class="eyebrow">Private Investor Application</div>
+    <h1>Invest capital.<br/><em>Collect returns.</em></h1>
+    <p class="hero-sub">Select your allocation amount and submit your application. All investments are subject to review and approval by Ascenda Enterprise Capital LLC. Minimum investment: $50,000. Maximum per investor: $750,000.</p>
+  </div>
+</section>
+
+<div class="main">
+
+  <!-- ALLOCATION SELECTOR -->
+  <div class="alloc-section">
+    <div class="section-title">Select your allocation</div>
+
+    <div class="alloc-display">
+      <div class="alloc-amount" id="alloc-display">$50,000</div>
+      <div class="alloc-label">Your investment amount</div>
+    </div>
+
+    <div style="margin-bottom:1.25rem;display:flex;align-items:center;gap:1rem">
+      <div style="flex:1">
+        <label style="font-family:var(--font-mono);font-size:.52rem;letter-spacing:.18em;text-transform:uppercase;color:var(--cream3);display:block;margin-bottom:.4rem">Or type exact amount</label>
+        <div style="display:flex;align-items:center;gap:.5rem">
+          <span style="font-family:var(--font-display);font-size:1.4rem;color:var(--gold2)">$</span>
+          <input type="text" id="alloc-input" value="50,000"
+            placeholder="e.g. 150,000"
+            oninput="updateFromInput(this.value)"
+            onkeypress="return /[0-9,]/.test(event.key)"
+            style="background:rgba(255,255,255,.04);border:.5px solid var(--gold);color:var(--white);font-family:var(--font-display);font-size:1.4rem;font-style:italic;padding:.75rem 1rem;outline:none;width:100%;transition:border-color .2s;-webkit-appearance:none;"
+            onfocus="this.style.borderColor='#E4B84A'" onblur="this.style.borderColor='#C4922A'"/>
+        </div>
+        <div style="font-family:var(--font-mono);font-size:.5rem;color:rgba(255,255,255,.25);margin-top:.35rem;letter-spacing:.08em">Min $50,000 · Max $750,000</div>
+      </div>
+    </div>
+
+    <div class="slider-wrap">
+      <input type="range" id="alloc-slider" min="50000" max="750000" step="10000" value="50000"
+        oninput="updateAlloc(this.value)"/>
+      <div class="slider-labels">
+        <span>Min $50,000</span>
+        <span>Max $750,000</span>
+      </div>
+    </div>
+
+    <div class="tier-grid">
+      <div class="tier active" onclick="setTier(50000, this)">
+        <div class="tier-amount">$50K</div>
+        <div class="tier-label">Entry</div>
+        <div class="tier-sub">Minimum allocation</div>
+      </div>
+      <div class="tier" onclick="setTier(250000, this)">
+        <div class="tier-amount">$250K</div>
+        <div class="tier-label">Standard</div>
+        <div class="tier-sub">Most common allocation</div>
+      </div>
+      <div class="tier" onclick="setTier(750000, this)">
+        <div class="tier-amount">$750K</div>
+        <div class="tier-label">Maximum</div>
+        <div class="tier-sub">Per-investor cap</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- WHAT YOU GET -->
+  <div class="section-title">What investors receive</div>
+  <div class="benefits" style="margin-bottom:3rem">
+    <div class="benefit"><div class="benefit-icon">📊</div><h4>Multi-Strategy Exposure</h4><p>Access to AEC's three-pillar strategy across global trading, real estate, and private equity.</p></div>
+    <div class="benefit"><div class="benefit-icon">📋</div><h4>Quarterly Reporting</h4><p>Detailed performance reports delivered each quarter with full transparency on strategy and returns.</p></div>
+    <div class="benefit"><div class="benefit-icon">🔒</div><h4>$750M Hard Cap</h4><p>Your capital is protected by our absolute AUM ceiling. We will never dilute the fund's performance with excess capital.</p></div>
+    <div class="benefit"><div class="benefit-icon">📞</div><h4>Direct Access</h4><p>Direct communication with Izaiah Cottle and the AEC leadership team throughout your investment period.</p></div>
+  </div>
+
+  <!-- APPLICATION FORM -->
+  <div class="form-block">
+    <div class="form-title">Submit Your Application</div>
+    <div class="form-sub">All fields required. Applications reviewed personally within 72 hours.</div>
+    <form class="cf" action="https://formspree.io/f/mvzywgwb" method="POST">
+      <input type="hidden" name="application_type" value="Private Investor"/>
+      <input type="hidden" name="investment_amount" id="form-amount" value="$50,000"/>
+      <div class="cf-row">
+        <div class="cff"><label>First name</label><input type="text" name="first_name" required placeholder="John"/></div>
+        <div class="cff"><label>Last name</label><input type="text" name="last_name" required placeholder="Smith"/></div>
+      </div>
+      <div class="cf-row">
+        <div class="cff"><label>Email</label><input type="email" name="email" required placeholder="you@example.com"/></div>
+        <div class="cff"><label>Phone</label><input type="tel" name="phone" placeholder="(000) 000-0000"/></div>
+      </div>
+      <div class="cff"><label>Investment amount selected</label><input type="text" id="form-amount-display" readonly style="color:var(--gold2);font-family:var(--font-display);font-size:1.1rem;cursor:default" value="$50,000"/></div>
+      <div class="cff">
+        <label>Source of funds</label>
+        <select name="source_of_funds" required>
+          <option value="">Select source</option>
+          <option>Personal savings</option>
+          <option>Business income</option>
+          <option>Investment portfolio</option>
+          <option>Inherited wealth</option>
+          <option>Real estate proceeds</option>
+          <option>Other</option>
+        </select>
+      </div>
+      <div class="cff"><label>Investment experience</label>
+        <select name="investment_experience" required>
+          <option value="">Select level</option>
+          <option>Beginner (under 2 years)</option>
+          <option>Intermediate (2–5 years)</option>
+          <option>Experienced (5–10 years)</option>
+          <option>Expert (10+ years)</option>
+        </select>
+      </div>
+      <div class="cff"><label>Why do you want to invest with AEC?</label><textarea name="message" placeholder="Tell us about your investment goals and why AEC is the right fit..." required></textarea></div>
+      <div style="display:flex;align-items:flex-start;gap:.75rem;padding:1.25rem;background:rgba(196,146,42,.04);border:.5px solid var(--rule)">
+        <input type="checkbox" id="accredited-cb" required style="margin-top:.15rem;accent-color:var(--gold);width:14px;height:14px;flex-shrink:0"/>
+        <label for="accredited-cb" style="font-size:.72rem;color:var(--cream2);line-height:1.7;cursor:pointer">I confirm I am an <strong>Accredited Investor</strong> as defined by the SEC, I understand that all investments carry risk including loss of principal, and I have read and agree to all terms and disclosures below.</label>
+      </div>
+      <button type="submit" class="btn-submit">Submit Investor Application →</button>
+    </form>
+
+    <div class="disclaimer-box">
+      <p><strong>Important Disclosures:</strong> This application does not constitute an offer to sell or a solicitation of an offer to buy any securities. All investments in Ascenda Enterprise Capital LLC are subject to approval at the sole discretion of AEC management. Past performance is not indicative of future results. All trading involves significant risk of loss, including the total loss of principal. By submitting this application, you acknowledge that you are an Accredited Investor as defined under SEC Regulation D, Rule 501. Minimum investment: $50,000. Maximum per-investor allocation: $750,000. AEC reserves the right to reject any application without explanation. This is not financial advice.</p>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <div style="font-family:var(--font-display);font-style:italic;font-size:.9rem;color:var(--gold3)">Ascenda Enterprise Capital LLC</div>
+  <div class="f-copy">© 2025 Ascenda Enterprise Capital LLC · Registered in Georgia · Private Investor Program</div>
+</footer>
+
+<script>
+var GOLD = '#C4922A';
+var GOLD_DIM = 'rgba(196,146,42,0.15)';
+var MIN = 50000;
+var MAX = 750000;
+
+function fmt(v){
+  return '$' + Number(v).toLocaleString('en-US');
+}
+
+function updateAlloc(v){
+  v = parseInt(v);
+  if(isNaN(v)) return;
+  v = Math.max(MIN, Math.min(MAX, v));
+
+  document.getElementById('alloc-display').textContent = fmt(v);
+  document.getElementById('form-amount').value = fmt(v);
+  document.getElementById('form-amount-display').value = fmt(v);
+
+  var slider = document.getElementById('alloc-slider');
+  slider.value = v;
+  var pct = (v - MIN) / (MAX - MIN) * 100;
+  slider.style.background = 'linear-gradient(90deg, ' + GOLD + ' ' + pct + '%, ' + GOLD_DIM + ' ' + pct + '%)';
+
+  // Update text input with formatted number
+  var inp = document.getElementById('alloc-input');
+  inp.value = v.toLocaleString('en-US');
+
+  document.querySelectorAll('.tier').forEach(function(t){ t.classList.remove('active'); });
+  if(v <= 50000) document.querySelectorAll('.tier')[0].classList.add('active');
+  else if(v === 250000) document.querySelectorAll('.tier')[1].classList.add('active');
+  else if(v >= 750000) document.querySelectorAll('.tier')[2].classList.add('active');
+}
+
+function updateFromInput(rawVal){
+  // Strip everything except digits
+  var clean = rawVal.toString().replace(/[^0-9]/g, '');
+  var v = parseInt(clean);
+  if(isNaN(v) || clean.length === 0) return;
+  if(v > MAX) v = MAX;
+  // Don't enforce min while typing — only clamp on blur
+  var slider = document.getElementById('alloc-slider');
+  if(v >= MIN) slider.value = v;
+  var pct = (Math.max(MIN,v) - MIN) / (MAX - MIN) * 100;
+  slider.style.background = 'linear-gradient(90deg, ' + GOLD + ' ' + pct + '%, ' + GOLD_DIM + ' ' + pct + '%)';
+  document.getElementById('alloc-display').textContent = fmt(Math.max(MIN,v));
+  document.getElementById('form-amount').value = fmt(Math.max(MIN,v));
+  document.getElementById('form-amount-display').value = fmt(Math.max(MIN,v));
+}
+
+function setTier(v, el){
+  updateAlloc(v);
+  document.querySelectorAll('.tier').forEach(function(t){ t.classList.remove('active'); });
+  el.classList.add('active');
+}
+
+window.onload = function(){
+  updateAlloc(MIN);
+  // On blur, enforce min
+  document.getElementById('alloc-input').addEventListener('blur', function(){
+    var v = parseInt(this.value.replace(/[^0-9]/g,''));
+    if(isNaN(v) || v < MIN) v = MIN;
+    updateAlloc(v);
+  });
+};
+</script>
+</body>
+</html>
