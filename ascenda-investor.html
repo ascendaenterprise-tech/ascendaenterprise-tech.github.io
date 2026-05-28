@@ -189,11 +189,11 @@ footer{padding:2rem 3.5rem;border-top:.5px solid var(--rule);display:flex;justif
         <label style="font-family:var(--font-mono);font-size:.52rem;letter-spacing:.18em;text-transform:uppercase;color:var(--cream3);display:block;margin-bottom:.4rem">Or type exact amount</label>
         <div style="display:flex;align-items:center;gap:.5rem">
           <span style="font-family:var(--font-display);font-size:1.4rem;color:var(--gold2)">$</span>
-          <input type="number" id="alloc-input" min="50000" max="750000" value="50000"
-            placeholder="Enter amount"
+          <input type="text" id="alloc-input" inputmode="numeric" autocomplete="off" value="50,000"
+            placeholder="e.g. 150,000"
             oninput="updateFromInput(this.value)"
             style="background:rgba(255,255,255,.025);border:.5px solid rgba(196,146,42,.3);color:var(--white);font-family:var(--font-display);font-size:1.4rem;font-style:italic;padding:.6rem 1rem;outline:none;width:100%;transition:border-color .2s;"
-            onfocus="this.style.borderColor='var(--gold)'" onblur="this.style.borderColor='rgba(196,146,42,.3)'"/>
+            onfocus="this.style.borderColor='var(--gold)'" onblur="this.style.borderColor='rgba(196,146,42,.3)'; finalizeInput()"/>
         </div>
         <div style="font-family:var(--font-mono);font-size:.5rem;color:rgba(255,255,255,.25);margin-top:.35rem;letter-spacing:.08em">Min $50,000 · Max $750,000</div>
       </div>
@@ -303,6 +303,10 @@ function fmt(v){
   return '$' + Number(v).toLocaleString('en-US');
 }
 
+function fmtInput(v){
+  return Number(v).toLocaleString('en-US');
+}
+
 function updateAlloc(v){
   v = parseInt(v);
   if(isNaN(v)) return;
@@ -322,7 +326,7 @@ function updateAlloc(v){
   slider.style.background = 'linear-gradient(90deg, ' + GOLD + ' ' + pct + '%, ' + GOLD_DIM + ' ' + pct + '%)';
 
   // Sync text input
-  document.getElementById('alloc-input').value = v;
+  document.getElementById('alloc-input').value = fmtInput(v);
 
   // Update active tier
   document.querySelectorAll('.tier').forEach(function(t){ t.classList.remove('active'); });
@@ -332,10 +336,29 @@ function updateAlloc(v){
 }
 
 function updateFromInput(rawVal){
-  var v = parseInt(rawVal.toString().replace(/[^0-9]/g,''));
-  if(isNaN(v)) return;
+  var input = document.getElementById('alloc-input');
+  var cleaned = rawVal.toString().replace(/[^0-9]/g,'');
+  input.value = cleaned ? Number(cleaned).toLocaleString('en-US') : '';
+  var v = parseInt(cleaned, 10);
+  if(isNaN(v)){
+    document.getElementById('alloc-display').textContent = '$0';
+    return;
+  }
   if(v > MAX) v = MAX;
-  if(v < MIN) v = MIN;
+  document.getElementById('alloc-display').textContent = fmt(v);
+  document.getElementById('form-amount').value = fmt(v);
+  document.getElementById('form-amount-display').value = fmt(v);
+  var slider = document.getElementById('alloc-slider');
+  slider.value = Math.max(MIN, Math.min(MAX, v));
+  var pct = (slider.value - MIN) / (MAX - MIN) * 100;
+  slider.style.background = 'linear-gradient(90deg, ' + GOLD + ' ' + pct + '%, ' + GOLD_DIM + ' ' + pct + '%)';
+}
+
+function finalizeInput(){
+  var cleaned = document.getElementById('alloc-input').value.toString().replace(/[^0-9]/g,'');
+  var v = parseInt(cleaned, 10);
+  if(isNaN(v) || v < MIN) v = MIN;
+  if(v > MAX) v = MAX;
   updateAlloc(v);
 }
 
