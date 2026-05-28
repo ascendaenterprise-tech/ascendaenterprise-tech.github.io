@@ -1,0 +1,1472 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Ascenda Enterprise Capital | Institutional Investment Management</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=DM+Mono:wght@300;400;500&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --gold:#C4922A;--gold2:#E4B84A;--gold3:#8A6518;--gold4:#F2D680;
+  --ink:#04030A;--ink2:#080612;--ink3:#0E0B1A;--ink4:#141020;
+  --white:#FFFFFF;--off:#F5F0E8;--off2:#EAE3D3;
+  --cream:rgba(255,255,255,0.95);--cream2:rgba(255,255,255,0.72);--cream3:rgba(255,255,255,0.38);
+  --rule:rgba(196,146,42,0.14);--rule2:rgba(196,146,42,0.35);
+  --up:#2ECC71;--dn:#E74C3C;
+  --font-display:'Cormorant Garamond',Georgia,serif;
+  --font-mono:'DM Mono',monospace;
+  --font-body:'Jost',sans-serif;
+}
+html{scroll-behavior:smooth}
+body{background:var(--ink);color:var(--white);font-family:var(--font-body);font-weight:300;overflow-x:hidden;cursor:default}
+
+/* ═══════════════════════════════
+   ACCREDITED INVESTOR GATE
+═══════════════════════════════ */
+#gate{
+  position:fixed;inset:0;z-index:9999;
+  background:var(--ink2);
+  display:flex;align-items:center;justify-content:center;
+  padding:2rem;
+}
+.gate-inner{
+  max-width:620px;width:100%;
+  border:.5px solid var(--rule2);
+  padding:4rem;
+  background:rgba(8,6,18,0.98);
+  text-align:center;
+  position:relative;
+}
+.gate-inner::before{
+  content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);
+  width:120px;height:1.5px;
+  background:linear-gradient(90deg,transparent,var(--gold),transparent);
+}
+.gate-logo-wrap{margin-bottom:2.5rem}
+.gate-diamond{width:60px;height:60px;margin:0 auto 1rem}
+.gate-brand{font-family:var(--font-display);font-size:1.4rem;color:var(--white);letter-spacing:.08em;font-weight:300}
+.gate-brand-sub{font-family:var(--font-mono);font-size:.6rem;letter-spacing:.3em;text-transform:uppercase;color:var(--gold3);margin-top:.3rem}
+.gate-rule{width:40px;height:.5px;background:var(--rule2);margin:2rem auto}
+.gate-title{font-family:var(--font-display);font-size:1.8rem;font-weight:300;color:var(--white);margin-bottom:1rem;line-height:1.2}
+.gate-text{font-size:.82rem;color:var(--cream3);line-height:1.9;margin-bottom:2rem;font-weight:300}
+.gate-check{display:flex;align-items:flex-start;gap:.75rem;text-align:left;margin-bottom:2rem;padding:1.25rem;background:rgba(196,146,42,0.05);border:.5px solid var(--rule)}
+.gate-check input{margin-top:.15rem;accent-color:var(--gold);flex-shrink:0;width:14px;height:14px;cursor:pointer}
+.gate-check label{font-size:.75rem;color:var(--cream2);line-height:1.7;cursor:pointer}
+.gate-btn{
+  width:100%;font-family:var(--font-mono);font-size:.62rem;letter-spacing:.22em;text-transform:uppercase;
+  background:var(--gold);color:var(--ink);border:none;padding:1.1rem 2rem;
+  cursor:pointer;font-weight:500;transition:background .2s;
+  opacity:.4;pointer-events:none;
+}
+.gate-btn.active{opacity:1;pointer-events:all}
+.gate-btn.active:hover{background:var(--gold2)}
+.gate-decline{display:block;margin-top:1rem;font-family:var(--font-mono);font-size:.58rem;letter-spacing:.15em;text-transform:uppercase;color:var(--cream3);text-decoration:none;cursor:pointer;transition:color .2s}
+.gate-decline:hover{color:var(--cream2)}
+.gate-disclaimer{margin-top:2rem;font-size:.62rem;color:rgba(255,255,255,.2);line-height:1.7}
+
+/* ═══════════════════════════════
+   NAV
+═══════════════════════════════ */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:1.2rem 3.5rem;
+  background:rgba(4,3,10,0.94);
+  border-bottom:.5px solid var(--rule);
+  backdrop-filter:blur(24px);
+}
+.nav-logo{display:flex;align-items:center;gap:.75rem}
+.nav-logo-diamond{width:28px;height:28px}
+.nav-logo-text{display:flex;flex-direction:column;line-height:1.1}
+.nav-logo-main{font-family:var(--font-display);font-size:1rem;color:var(--white);font-weight:400;letter-spacing:.06em}
+.nav-logo-sub{font-family:var(--font-mono);font-size:.48rem;letter-spacing:.25em;text-transform:uppercase;color:var(--gold3)}
+.nav-links{display:flex;gap:2.5rem;align-items:center}
+.nav-links a{font-family:var(--font-mono);font-size:.58rem;letter-spacing:.2em;text-transform:uppercase;color:var(--cream3);text-decoration:none;transition:color .2s;font-weight:300}
+.nav-links a:hover{color:var(--gold2)}
+.nav-cta{border:.5px solid var(--rule2)!important;padding:.55rem 1.25rem;color:var(--gold)!important}
+.nav-cta:hover{background:rgba(196,146,42,0.08)!important;border-color:var(--gold)!important}
+.nav-hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:.4rem}
+.nav-hamburger span{display:block;width:22px;height:1px;background:var(--white);transition:all .3s}
+.nav-hamburger.open span:nth-child(1){transform:rotate(45deg) translate(4px,4px)}
+.nav-hamburger.open span:nth-child(2){opacity:0}
+.nav-hamburger.open span:nth-child(3){transform:rotate(-45deg) translate(4px,-4px)}
+
+/* ═══════════════════════════════
+   HERO
+═══════════════════════════════ */
+.hero{
+  min-height:100vh;
+  width:100%;
+  display:flex;flex-direction:column;justify-content:flex-end;
+  padding:0 3.5rem 5rem;
+  position:relative;overflow:hidden;
+  background:var(--ink);
+}
+.hero-bg{
+  position:absolute;inset:0;
+  background:
+    radial-gradient(ellipse 70% 60% at 75% 30%,rgba(196,146,42,0.06) 0%,transparent 55%),
+    radial-gradient(ellipse 40% 50% at 10% 70%,rgba(196,146,42,0.03) 0%,transparent 50%);
+}
+.hero-grid-overlay{
+  position:absolute;inset:0;opacity:.025;
+  background-image:linear-gradient(var(--gold) 1px,transparent 1px),linear-gradient(90deg,var(--gold) 1px,transparent 1px);
+  background-size:80px 80px;
+}
+.hero-logo-center{
+  position:absolute;top:50%;left:50%;transform:translate(-50%,-60%);
+  display:flex;flex-direction:column;align-items:center;gap:1.5rem;
+  opacity:0;animation:fadeUp .8s ease .2s forwards;
+}
+.hero-diamond-large{width:110px;height:110px;filter:drop-shadow(0 0 40px rgba(196,146,42,0.25))}
+.hero-brand-large{font-family:var(--font-display);font-size:clamp(2.5rem,5vw,4rem);font-weight:300;color:var(--white);letter-spacing:.12em;text-align:center}
+.hero-brand-sub-large{font-family:var(--font-mono);font-size:.65rem;letter-spacing:.4em;text-transform:uppercase;color:var(--gold3);text-align:center}
+.hero-divider-h{width:200px;height:.5px;background:linear-gradient(90deg,transparent,var(--rule2),transparent);margin:0 auto}
+
+.hero-content{
+  position:relative;z-index:2;
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:4rem;align-items:flex-end;
+  opacity:0;animation:fadeUp .8s ease .6s forwards;
+}
+.hero-left h1{
+  font-family:var(--font-display);
+  font-size:clamp(2.2rem,4.5vw,4.2rem);
+  font-weight:300;color:var(--white);
+  line-height:1.05;letter-spacing:.01em;
+  margin-bottom:1.5rem;
+}
+h1 em,h2 em{font-style:italic;color:var(--gold2)}
+.hero-left p{font-size:.95rem;color:var(--cream2);line-height:1.95;font-weight:300;max-width:440px;margin-bottom:2.5rem;border-left:1.5px solid var(--rule2);padding-left:1.25rem}
+.hero-ctas{display:flex;gap:1rem;flex-wrap:wrap}
+.btn-gold{font-family:var(--font-mono);font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;background:var(--gold);color:var(--ink);border:none;padding:1rem 2.25rem;cursor:pointer;font-weight:500;transition:background .2s,transform .15s;text-decoration:none;display:inline-block}
+.btn-gold:hover{background:var(--gold2);transform:translateY(-1px)}
+.btn-ghost{font-family:var(--font-mono);font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;background:transparent;color:var(--cream2);border:.5px solid var(--rule2);padding:1rem 2.25rem;cursor:pointer;font-weight:300;transition:all .2s;text-decoration:none;display:inline-block}
+.btn-ghost:hover{border-color:var(--gold);color:var(--gold)}
+
+.hero-right{display:flex;flex-direction:column;gap:1px;background:var(--rule)}
+.hero-stat{background:var(--ink2);padding:1.25rem 1.5rem;display:flex;justify-content:space-between;align-items:baseline}
+.hs-label{font-family:var(--font-mono);font-size:.55rem;letter-spacing:.18em;text-transform:uppercase;color:var(--cream3)}
+.hs-val{font-family:var(--font-display);font-size:1.5rem;font-style:italic;color:var(--gold2)}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+
+/* ═══════════════════════════════
+   TICKER
+═══════════════════════════════ */
+.ticker{background:rgba(196,146,42,0.05);border-top:.5px solid var(--rule);border-bottom:.5px solid var(--rule);padding:.75rem 0;overflow:hidden;white-space:nowrap}
+.tw{display:inline-flex;gap:4rem;animation:tick 32s linear infinite}
+.ti{font-family:var(--font-mono);font-size:.6rem;letter-spacing:.1em;color:var(--cream3);display:inline-flex;align-items:center;gap:.6rem}
+.ti b{color:var(--white);font-weight:400}
+.up{color:var(--up)}.dn{color:var(--dn)}
+@keyframes tick{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* ═══════════════════════════════
+   STATEMENT
+═══════════════════════════════ */
+.statement{
+  background:var(--gold);padding:5.5rem 3.5rem;
+  display:flex;align-items:center;justify-content:center;text-align:center;
+}
+.statement-q{font-family:var(--font-display);font-size:clamp(1.8rem,3.5vw,3.2rem);font-style:italic;font-weight:300;color:var(--ink);line-height:1.2;max-width:860px;margin:0 auto 1rem}
+.statement-attr{font-family:var(--font-mono);font-size:.58rem;letter-spacing:.28em;text-transform:uppercase;color:rgba(4,3,10,.5)}
+
+/* ═══════════════════════════════
+   AUM BAND
+═══════════════════════════════ */
+.aum-band{background:var(--ink2);border-top:.5px solid var(--rule);border-bottom:.5px solid var(--rule);padding:3.5rem 3.5rem;display:flex;align-items:center;gap:3.5rem;flex-wrap:wrap}
+.aum-l{flex-shrink:0}
+.aum-tag{font-family:var(--font-mono);font-size:.55rem;letter-spacing:.28em;text-transform:uppercase;color:var(--gold3);margin-bottom:.5rem}
+.aum-num{font-family:var(--font-display);font-size:3rem;font-style:italic;color:var(--gold2);line-height:1}
+.aum-cap{font-family:var(--font-mono);font-size:.62rem;color:var(--cream3);margin-top:.4rem;letter-spacing:.07em}
+.aum-sep{width:.5px;height:80px;background:var(--rule2);flex-shrink:0}
+.aum-r{flex:1;min-width:280px;font-size:.95rem;color:var(--cream2);line-height:2;border-left:1px solid var(--rule);padding-left:1.75rem}
+.aum-r strong{color:var(--gold);font-weight:400}
+
+/* ═══════════════════════════════
+   SECTIONS
+═══════════════════════════════ */
+.sec{padding:8rem 3.5rem}
+.sec-alt{background:var(--ink2);border-top:.5px solid var(--rule);border-bottom:.5px solid var(--rule)}
+.sec-light{background:var(--off);color:var(--ink)}
+.sec-light2{background:var(--off2);color:var(--ink)}
+.sec-label{font-family:var(--font-mono);font-size:.58rem;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);margin-bottom:1.2rem;display:flex;align-items:center;gap:.8rem}
+.sec-label::before{content:'';display:block;width:28px;height:.5px;background:var(--gold)}
+.sec-label-dark{font-family:var(--font-mono);font-size:.58rem;letter-spacing:.28em;text-transform:uppercase;color:var(--gold3);margin-bottom:1.2rem;display:flex;align-items:center;gap:.8rem}
+.sec-label-dark::before{content:'';display:block;width:28px;height:.5px;background:var(--gold3)}
+h2{font-family:var(--font-display);font-size:clamp(2rem,3.5vw,3rem);font-weight:300;line-height:1.1;margin-bottom:1rem}
+.on-dark{color:var(--white)}
+.on-light{color:#0D1A10}
+.on-light em{color:var(--gold3)}
+
+/* ═══════════════════════════════
+   PERFORMANCE TEARSHEET
+═══════════════════════════════ */
+.tearsheet{background:var(--ink);padding:8rem 3.5rem}
+.ts-header{display:grid;grid-template-columns:1fr 1fr;gap:4rem;margin-bottom:4rem;align-items:end}
+.ts-disclaimer{background:rgba(196,146,42,0.06);border:.5px solid var(--rule);padding:1rem 1.5rem;margin-bottom:3rem}
+.ts-disclaimer p{font-family:var(--font-mono);font-size:.58rem;letter-spacing:.06em;color:rgba(255,255,255,.3);line-height:1.7}
+.ts-disclaimer strong{color:var(--gold3)}
+
+.kpi-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--rule);margin-bottom:1px}
+.kpi{background:var(--ink2);padding:2rem 1.75rem}
+.kpi-val{font-family:var(--font-display);font-size:2.4rem;font-style:italic;color:var(--gold2);line-height:1;margin-bottom:.4rem}
+.kpi-label{font-family:var(--font-mono);font-size:.55rem;letter-spacing:.18em;text-transform:uppercase;color:var(--cream3)}
+.kpi-sub{font-size:.72rem;color:var(--cream3);margin-top:.3rem;font-weight:300}
+
+.perf-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--rule);margin-top:1px}
+.perf-block{background:var(--ink2);padding:2.5rem}
+.perf-block-title{font-family:var(--font-mono);font-size:.58rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold3);margin-bottom:1.75rem}
+
+.monthly-table{width:100%;border-collapse:collapse}
+.monthly-table th{font-family:var(--font-mono);font-size:.52rem;letter-spacing:.15em;text-transform:uppercase;color:var(--cream3);padding:.6rem .75rem;text-align:right;border-bottom:.5px solid var(--rule)}
+.monthly-table th:first-child{text-align:left}
+.monthly-table td{font-size:.78rem;padding:.55rem .75rem;text-align:right;border-bottom:.5px solid rgba(196,146,42,0.05);color:var(--cream2);font-weight:300}
+.monthly-table td:first-child{text-align:left;font-family:var(--font-mono);font-size:.65rem;color:var(--cream3)}
+.td-up{color:var(--up)!important;font-weight:400}
+.td-dn{color:var(--dn)!important}
+.td-total{color:var(--gold2)!important;font-weight:500}
+
+.dist-bar{display:flex;flex-direction:column;gap:.85rem}
+.dist-row{display:flex;align-items:center;gap:1rem}
+.dist-label{font-family:var(--font-mono);font-size:.58rem;letter-spacing:.1em;color:var(--cream3);width:80px;flex-shrink:0}
+.dist-track{flex:1;height:4px;background:rgba(255,255,255,.06);position:relative}
+.dist-fill{height:100%;background:var(--gold);transition:width .6s ease}
+.dist-val{font-family:var(--font-mono);font-size:.62rem;color:var(--cream2);width:50px;text-align:right;flex-shrink:0}
+
+.metric-list{display:flex;flex-direction:column;gap:0}
+.ml-row{display:flex;justify-content:space-between;align-items:center;padding:.85rem 0;border-bottom:.5px solid var(--rule)}
+.ml-row:last-child{border-bottom:none}
+.ml-label{font-family:var(--font-mono);font-size:.6rem;letter-spacing:.12em;color:var(--cream3)}
+.ml-val{font-size:.88rem;color:var(--white);font-weight:400}
+.ml-val.good{color:var(--up)}
+.ml-val.gold{color:var(--gold2)}
+
+/* ═══════════════════════════════
+   STRATEGY
+═══════════════════════════════ */
+.strategy-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--rule);margin-top:3.5rem}
+.sg{background:var(--ink2);padding:3rem 2.5rem;position:relative;overflow:hidden;transition:background .4s}
+.sg:hover{background:rgba(196,146,42,0.05)}
+.sg-bar{position:absolute;top:0;left:0;right:0;height:1.5px;background:linear-gradient(90deg,transparent,var(--gold),transparent);opacity:0;transition:opacity .4s}
+.sg:hover .sg-bar{opacity:1}
+.sg-n{font-family:var(--font-mono);font-size:.52rem;letter-spacing:.2em;color:var(--gold3);margin-bottom:1.5rem}
+.sg h3{font-family:var(--font-display);font-size:1.6rem;font-weight:300;color:var(--white);margin-bottom:.85rem;line-height:1.2}
+.sg h3 em{font-style:italic;color:var(--gold2)}
+.sg p{font-size:.85rem;color:var(--cream2);line-height:1.95;font-weight:300}
+
+/* ═══════════════════════════════
+   MARKETS (TradingView)
+═══════════════════════════════ */
+.tv-charts-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:2.5rem}
+.tv-card{background:rgba(255,255,255,.02);border:.5px solid var(--rule);overflow:hidden}
+.tv-card-label{font-family:var(--font-mono);font-size:.55rem;letter-spacing:.2em;text-transform:uppercase;color:var(--cream3);padding:.85rem 1.2rem .4rem}
+
+/* ═══════════════════════════════
+   FOUNDER
+═══════════════════════════════ */
+.founder-grid{display:grid;grid-template-columns:1fr 1fr;gap:0;min-height:640px}
+.founder-left{padding:6rem 4rem;border-right:.5px solid var(--rule-dark,rgba(26,22,36,0.15));background:var(--off);display:flex;flex-direction:column;justify-content:center}
+.founder-right{background:var(--ink3);padding:5rem 4rem;display:flex;flex-direction:column;justify-content:center}
+.founder-name{font-family:var(--font-display);font-size:clamp(2.5rem,4vw,3.8rem);font-weight:300;color:#0D1A10;line-height:1.05;margin-bottom:.4rem}
+.founder-title{font-family:var(--font-mono);font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold3);margin-bottom:2.5rem}
+.founder-bio p{font-size:1rem;line-height:2.05;color:#3A3348;font-weight:300;margin-bottom:1.4rem}
+.founder-bio em{font-style:normal;color:var(--gold3);font-weight:400}
+.founder-stats{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:rgba(196,146,42,0.2);margin-top:3rem}
+.fs{padding:1.5rem;background:var(--off2)}
+.fs-val{font-family:var(--font-display);font-size:2.2rem;font-style:italic;color:#0D1A10;line-height:1;margin-bottom:.25rem}
+.fs-lbl{font-family:var(--font-mono);font-size:.52rem;letter-spacing:.15em;text-transform:uppercase;color:#6B6080}
+
+.founder-quote{font-family:var(--font-display);font-size:1.5rem;font-style:italic;font-weight:300;color:var(--white);line-height:1.5;margin-bottom:2rem;padding-left:1.25rem;border-left:1.5px solid var(--gold3)}
+.tag-grid{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:2rem}
+.tag{font-family:var(--font-mono);font-size:.55rem;letter-spacing:.12em;text-transform:uppercase;padding:.38rem .85rem;border:.5px solid var(--rule);color:var(--cream3)}
+
+/* ═══════════════════════════════
+   JOIN — 3 paths
+═══════════════════════════════ */
+.join-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--rule);margin-top:4rem}
+.jc{padding:3.5rem 2.75rem;position:relative;overflow:hidden;display:flex;flex-direction:column;transition:background .4s;background:var(--ink2)}
+.jc:hover{background:rgba(196,146,42,0.05)}
+.jc.featured{background:var(--gold)}
+.jc.featured:hover{background:var(--gold2)}
+.jc-n{font-family:var(--font-mono);font-size:.52rem;letter-spacing:.22em;text-transform:uppercase;margin-bottom:1.75rem}
+.jc:not(.featured) .jc-n{color:var(--gold3)}
+.jc.featured .jc-n{color:rgba(4,3,10,.5)}
+.jc-title{font-family:var(--font-display);font-size:1.8rem;font-weight:300;margin-bottom:.85rem;line-height:1.15}
+.jc:not(.featured) .jc-title{color:var(--white)}
+.jc:not(.featured) .jc-title em{font-style:italic;color:var(--gold2)}
+.jc.featured .jc-title{color:var(--ink)}
+.jc-body{font-size:.85rem;line-height:1.95;font-weight:300;margin-bottom:2rem;flex:1}
+.jc:not(.featured) .jc-body{color:var(--cream2)}
+.jc.featured .jc-body{color:rgba(4,3,10,.7)}
+.jc-points{display:flex;flex-direction:column;gap:.6rem;margin-bottom:2rem}
+.jcp{display:flex;align-items:flex-start;gap:.65rem;font-size:.78rem;font-weight:300;line-height:1.55}
+.jc:not(.featured) .jcp{color:var(--cream2)}
+.jc.featured .jcp{color:rgba(4,3,10,.72)}
+.jcp-dot{flex-shrink:0;margin-top:.18rem;font-size:.62rem}
+.jc:not(.featured) .jcp-dot{color:var(--gold)}
+.jc.featured .jcp-dot{color:var(--ink3)}
+.jc-btn{font-family:var(--font-mono);font-size:.58rem;letter-spacing:.18em;text-transform:uppercase;padding:.9rem 1.5rem;text-decoration:none;text-align:center;transition:all .2s;font-weight:400;cursor:pointer;display:block}
+.jc:not(.featured) .jc-btn{color:var(--gold);border:.5px solid var(--rule2);background:transparent}
+.jc:not(.featured) .jc-btn:hover{border-color:var(--gold);background:rgba(196,146,42,0.08)}
+.jc.featured .jc-btn{color:var(--ink);border:1.5px solid var(--ink);background:transparent}
+.jc.featured .jc-btn:hover{background:var(--ink);color:var(--gold2)}
+
+/* ═══════════════════════════════
+   FOCUS
+═══════════════════════════════ */
+.focus-grid{display:grid;grid-template-columns:repeat(3,1fr);border:.5px solid var(--rule);margin-top:3.5rem}
+.fc{padding:3rem 2.5rem;border-right:.5px solid var(--rule);position:relative;overflow:hidden;transition:background .4s}
+.fc:last-child{border-right:none}
+.fc:hover{background:rgba(196,146,42,0.05)}
+.fc-bar{position:absolute;top:0;left:0;right:0;height:1.5px;background:linear-gradient(90deg,transparent,var(--gold),transparent);opacity:0;transition:opacity .4s}
+.fc:hover .fc-bar{opacity:1}
+.fc-n{font-family:var(--font-mono);font-size:.52rem;letter-spacing:.18em;color:var(--gold3);margin-bottom:1.5rem}
+.fc h3{font-family:var(--font-display);font-size:1.6rem;font-weight:300;color:var(--white);margin-bottom:.85rem;line-height:1.2}
+.fc h3 em{font-style:italic;color:var(--gold2)}
+.fc p{font-size:.85rem;color:var(--cream2);line-height:1.95;font-weight:300}
+
+/* ═══════════════════════════════
+   APPROACH
+═══════════════════════════════ */
+.ap-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:3rem;margin-top:3.5rem}
+.ap-n{font-family:var(--font-mono);font-size:.52rem;letter-spacing:.2em;color:var(--gold3);margin-bottom:.85rem}
+.ap h4{font-family:var(--font-display);font-size:1.2rem;font-weight:300;color:var(--white);margin-bottom:.65rem}
+.ap p{font-size:.82rem;color:var(--cream2);line-height:1.9;font-weight:300}
+
+/* ═══════════════════════════════
+   NEWS
+═══════════════════════════════ */
+.news-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:rgba(26,22,36,.15);margin-top:3rem}
+.nc{background:var(--off);padding:2.25rem 2rem;transition:background .3s;cursor:pointer}
+.nc:hover{background:var(--off2)}
+.nc-src{font-family:var(--font-mono);font-size:.52rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold3);margin-bottom:.5rem}
+.nc-tag{font-family:var(--font-mono);font-size:.48rem;letter-spacing:.14em;text-transform:uppercase;padding:.2rem .55rem;border:.5px solid rgba(26,22,36,.15);color:#6B6080;margin-left:.5rem}
+.nc-title{font-family:var(--font-display);font-size:1.15rem;font-weight:400;color:#0D1A10;line-height:1.4;margin-bottom:.6rem;margin-top:.85rem}
+.nc-body{font-size:.82rem;color:#3A3348;line-height:1.9;font-weight:300}
+.nc-date{font-family:var(--font-mono);font-size:.55rem;letter-spacing:.1em;color:#6B6080;margin-top:.85rem}
+
+/* ═══════════════════════════════
+   NETWORK MAP
+═══════════════════════════════ */
+#network{padding:8rem 3.5rem;background:var(--ink3);border-top:.5px solid var(--rule)}
+
+/* ═══════════════════════════════
+   CONTACT
+═══════════════════════════════ */
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:6rem;align-items:start}
+.ci p{font-size:.98rem;line-height:2;color:var(--cream2);font-weight:300;margin-bottom:1.75rem}
+.cd{margin-bottom:1.5rem}
+.cd span{font-family:var(--font-mono);font-size:.52rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold3);display:block;margin-bottom:.35rem}
+.cd a,.cd p{font-size:.95rem;color:var(--white);text-decoration:none;font-weight:300;margin:0;transition:color .2s}
+.cd a:hover{color:var(--gold2)}
+.cf{display:flex;flex-direction:column;gap:1.3rem}
+.cff{display:flex;flex-direction:column;gap:.4rem}
+.cff label{font-family:var(--font-mono);font-size:.52rem;letter-spacing:.2em;text-transform:uppercase;color:var(--cream3)}
+.cff input,.cff textarea,.cff select{background:rgba(255,255,255,.025);border:.5px solid rgba(196,146,42,.2);color:var(--white);font-family:var(--font-body);font-size:.88rem;font-weight:300;padding:.88rem 1rem;outline:none;transition:border-color .2s;width:100%}
+.cff input:focus,.cff textarea:focus,.cff select:focus{border-color:var(--gold)}
+.cff textarea{resize:vertical;min-height:88px}
+.cff select option{background:var(--ink2)}
+
+/* ═══════════════════════════════
+   FOOTER
+═══════════════════════════════ */
+.footer-top{background:var(--ink2);border-top:.5px solid var(--rule);padding:3rem 3.5rem;display:grid;grid-template-columns:1fr 1fr 1fr;gap:3rem}
+.ft-col-title{font-family:var(--font-mono);font-size:.52rem;letter-spacing:.22em;text-transform:uppercase;color:var(--gold3);margin-bottom:1.25rem}
+.ft-link{display:block;font-size:.78rem;color:var(--cream3);text-decoration:none;margin-bottom:.6rem;transition:color .2s;font-weight:300}
+.ft-link:hover{color:var(--gold2)}
+.ft-text{font-size:.75rem;color:var(--cream3);line-height:1.8;font-weight:300}
+footer{background:var(--ink);border-top:.5px solid var(--rule);padding:1.75rem 3.5rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+.f-logo-wrap{display:flex;align-items:center;gap:.6rem}
+.f-logo-diamond{width:20px;height:20px}
+.f-logo-text{font-family:var(--font-display);font-size:.85rem;color:var(--gold3);font-weight:300;letter-spacing:.06em}
+.f-legal{font-family:var(--font-mono);font-size:.5rem;letter-spacing:.06em;color:rgba(255,255,255,.15);max-width:550px;line-height:1.7}
+
+/* ═══════════════════════════════
+   RESPONSIVE
+═══════════════════════════════ */
+@media(max-width:900px){
+
+  /* NAV */
+  nav{
+    padding:1rem 1.5rem;
+    position:fixed;top:0;left:0;right:0;
+    z-index:1000;
+  }
+  .nav-links{
+    display:none;
+    position:fixed;top:56px;left:0;right:0;bottom:0;
+    background:rgba(4,3,10,.99);
+    flex-direction:column;align-items:center;justify-content:center;
+    gap:2.5rem;z-index:999;
+  }
+  .nav-links.open{display:flex}
+  .nav-links a{
+    font-size:1rem;letter-spacing:.15em;
+    color:var(--cream2);text-align:center;
+  }
+  .nav-hamburger{display:flex}
+
+  /* GATE */
+  #gate{padding:1rem;overflow-y:auto}
+  .gate-inner{padding:1.75rem 1.25rem;max-width:100%}
+  .gate-title{font-size:1.2rem;line-height:1.3}
+  .gate-text{font-size:.73rem}
+  .gate-check label{font-size:.7rem}
+  .gate-btn{font-size:.58rem;padding:.9rem}
+  .gate-disclaimer{font-size:.55rem}
+
+  /* HERO */
+  .hero-logo-center{display:none!important;visibility:hidden!important;opacity:0!important;animation:none!important;position:fixed!important;left:-9999px!important}
+  .hero{
+    padding:5rem 1.5rem 3.5rem;
+    margin-top:56px;
+    min-height:auto;
+    width:100%;
+    box-sizing:border-box;
+  }
+  .hero-content{
+    display:block;
+    width:100%;
+    max-width:100%;
+    box-sizing:border-box;
+  }
+  h1{
+    font-size:clamp(2rem,8vw,2.8rem);
+    line-height:1.1;
+    width:100%;
+    max-width:100%;
+  }
+  .h1b,.h1c{padding-left:0}
+  .hero-body{
+    font-size:.92rem;
+    width:100%;
+    max-width:100%;
+    margin-bottom:2rem;
+    padding-left:1rem;
+    box-sizing:border-box;
+  }
+  .hero-ctas{
+    display:flex;
+    flex-direction:column;
+    gap:.75rem;
+    width:100%;
+  }
+  .btn-gold,.btn-ghost{
+    text-align:center;
+    padding:.95rem 1rem;
+    width:100%;
+    display:block;
+    box-sizing:border-box;
+  }
+  .hero-right{display:none}
+  .hero-content{grid-template-columns:1fr!important}
+
+  /* STATEMENT */
+  .statement{padding:3rem 1.5rem;width:100%}
+  .statement-q{font-size:clamp(1.15rem,4vw,1.6rem);line-height:1.35}
+  .statement-attr{font-size:.5rem}
+
+  /* AUM */
+  .aum-band{flex-direction:column;padding:2.5rem 1.5rem;gap:1.75rem;width:100%}
+  .aum-sep{width:50px;height:.5px}
+  .aum-r{
+    border-left:none;padding-left:0;
+    border-top:.5px solid var(--rule);
+    padding-top:1.25rem;font-size:.88rem;
+    min-width:unset;width:100%;
+  }
+  .aum-num{font-size:2.2rem}
+
+  /* ALL SECTIONS full width */
+  .sec,.tearsheet,.sec-alt,.sec-light,.sec-light2{
+    padding:4rem 1.5rem;
+    width:100%;
+    box-sizing:border-box;
+  }
+  .ap-band{padding:4rem 1.5rem;width:100%}
+  .about-intro{padding:3rem 1.5rem;width:100%}
+  #network{padding:4rem 1.5rem !important;width:100% !important}
+  #about{padding:0 !important}
+
+  /* PERFORMANCE */
+  .ts-header{display:block;margin-bottom:2rem}
+  .ts-header > div:last-child{text-align:left;margin-top:1rem}
+  .ts-disclaimer p{font-size:.56rem}
+  /* 2-col KPI - contained */
+  .kpi-grid{
+    grid-template-columns:1fr 1fr !important;
+    width:100%;
+    overflow:hidden;
+  }
+  .kpi{padding:1.25rem .85rem;overflow:hidden;word-break:break-word}
+  .kpi-val{font-size:1.3rem;white-space:nowrap}
+  .kpi-label{font-size:.46rem;letter-spacing:.1em}
+  .kpi-sub{font-size:.5rem;white-space:normal;line-height:1.4}
+  .perf-grid{grid-template-columns:1fr !important}
+  .perf-block{padding:1.75rem 1.25rem}
+  .monthly-table{
+    display:block;overflow-x:auto;
+    -webkit-overflow-scrolling:touch;
+    font-size:.68rem;white-space:nowrap;
+  }
+  .monthly-table th,.monthly-table td{padding:.45rem .6rem}
+  .dist-label{width:55px;font-size:.5rem}
+  .ml-label{font-size:.55rem}
+  .ml-val{font-size:.8rem}
+
+  /* STRATEGY */
+  .strategy-grid{grid-template-columns:1fr !important}
+  .sg{border-right:none;border-bottom:.5px solid var(--rule)}
+  .sg:last-child{border-bottom:none}
+
+  /* TV */
+  .tv-charts-grid{grid-template-columns:1fr !important}
+
+  /* NEWS */
+  .news-grid{grid-template-columns:1fr !important}
+  #re-pe-news > div:last-child{grid-template-columns:1fr !important}
+  .nc{padding:1.75rem 1.25rem;border-bottom:.5px solid rgba(26,22,36,.12)}
+  .nc-title{font-size:1rem}
+
+  /* FOCUS */
+  .focus-grid{grid-template-columns:1fr !important;border:none}
+  .fc{border:none;border-bottom:.5px solid var(--rule);padding:2.25rem 1.5rem}
+  .fc:last-child{border-bottom:none}
+
+  /* JOIN */
+  .join-grid{grid-template-columns:1fr !important;gap:0}
+  .jc{border-right:none;border-bottom:.5px solid rgba(196,146,42,.2);padding:2.5rem 1.5rem}
+  .jc.featured{border-bottom:.5px solid rgba(196,146,42,.5)}
+  .jc-title{font-size:1.6rem}
+  .jc-body{font-size:.88rem}
+  .jc-btn{display:block;text-align:center}
+
+  /* FOUNDER */
+  .founder-grid{grid-template-columns:1fr !important;min-height:unset}
+  .founder-left{padding:3.5rem 1.5rem;border-right:none;border-bottom:.5px solid rgba(26,22,36,.15)}
+  .founder-right{padding:3rem 1.5rem}
+  .founder-name{font-size:2.2rem}
+  .founder-stats{grid-template-columns:1fr 1fr}
+  .founder-quote{font-size:1.1rem;line-height:1.6}
+  .tag{font-size:.5rem;padding:.28rem .6rem}
+
+  /* APPROACH */
+  .ap-grid{grid-template-columns:1fr 1fr !important;gap:2rem}
+
+  /* CONTACT */
+  .contact-grid{grid-template-columns:1fr !important;gap:2.5rem}
+
+  /* FOOTER */
+  .footer-top{grid-template-columns:1fr !important;gap:2rem;padding:2.5rem 1.5rem}
+  footer{flex-direction:column;text-align:center;padding:1.5rem;gap:1rem}
+  .f-logo-wrap{justify-content:center}
+  .f-legal{font-size:.48rem;text-align:center;max-width:100%}
+
+  h2{font-size:clamp(1.6rem,4.5vw,2.1rem)}
+}
+
+@media(max-width:480px){
+  .gate-inner{padding:1.5rem 1rem}
+  .hero{padding:5rem 1.2rem 3.5rem;margin-top:52px}
+  h1{font-size:clamp(1.8rem,8vw,2.2rem) !important}
+  .hero-body{font-size:.85rem;padding-left:.75rem}
+  .statement-q{font-size:clamp(1.05rem,4.5vw,1.35rem)}
+  .aum-num{font-size:1.9rem}
+  .kpi-val{font-size:1.2rem}
+  .kpi{padding:1rem .65rem}
+  .kpi-label{font-size:.42rem}
+  .kpi-sub{font-size:.46rem}
+  .ap-grid{grid-template-columns:1fr !important}
+  .founder-name{font-size:1.9rem}
+  .fs-val{font-size:1.5rem}
+  .jc{padding:2rem 1.25rem}
+  h2{font-size:clamp(1.4rem,5.5vw,1.75rem)}
+}
+
+</style>
+</head>
+<body>
+
+<!-- COOKIE CONSENT BANNER -->
+<div id="cookie-banner" style="
+  position:fixed;bottom:0;left:0;right:0;z-index:99999;
+  background:rgba(8,6,18,0.98);
+  border-top:.5px solid rgba(196,146,42,0.35);
+  padding:1.25rem 3.5rem;
+  display:flex;align-items:center;justify-content:space-between;
+  gap:2rem;flex-wrap:wrap;
+  backdrop-filter:blur(20px);
+">
+  <div style="flex:1;min-width:250px">
+    <div style="font-family:'DM Mono',monospace;font-size:.55rem;letter-spacing:.2em;text-transform:uppercase;color:#C4922A;margin-bottom:.35rem">Cookie Notice</div>
+    <p style="font-size:.75rem;color:rgba(255,255,255,.55);line-height:1.7;margin:0;font-family:'Jost',sans-serif;font-weight:300">
+      We use cookies to analyze site traffic and improve your experience. By continuing to use this site, you consent to our use of cookies.
+      <a href="privacy-policy.html" style="color:#E4B84A;text-decoration:none;margin-left:.35rem">Privacy Policy</a>
+    </p>
+  </div>
+  <div style="display:flex;gap:.75rem;flex-shrink:0">
+    <button onclick="declineCookies()" style="
+      font-family:'DM Mono',monospace;font-size:.55rem;letter-spacing:.15em;text-transform:uppercase;
+      background:transparent;color:rgba(255,255,255,.35);border:.5px solid rgba(255,255,255,.15);
+      padding:.6rem 1.25rem;cursor:pointer;transition:all .2s;
+    " onmouseover="this.style.color='rgba(255,255,255,.6)'" onmouseout="this.style.color='rgba(255,255,255,.35)'">Decline</button>
+    <button onclick="acceptCookies()" style="
+      font-family:'DM Mono',monospace;font-size:.55rem;letter-spacing:.15em;text-transform:uppercase;
+      background:#C4922A;color:#06050D;border:none;
+      padding:.6rem 1.5rem;cursor:pointer;font-weight:500;transition:background .2s;
+    " onmouseover="this.style.background='#E4B84A'" onmouseout="this.style.background='#C4922A'">Accept</button>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════
+     ACCREDITED INVESTOR GATE
+═══════════════════════════════ -->
+<div id="gate">
+  <div class="gate-inner">
+    <div class="gate-logo-wrap">
+      <svg class="gate-diamond" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <polygon points="40,4 62,28 40,52 18,28" fill="none" stroke="rgba(196,146,42,0.3)" stroke-width="0.5"/>
+        <polygon points="40,4 54,24 40,40 26,24" fill="url(#dg1)"/>
+        <polygon points="40,4 62,28 54,24" fill="url(#dg2)"/>
+        <polygon points="40,40 54,24 62,28" fill="rgba(180,180,200,0.5)"/>
+        <polygon points="40,40 26,24 18,28" fill="rgba(160,160,180,0.4)"/>
+        <polygon points="40,40 62,28 40,58" fill="rgba(140,140,160,0.35)" opacity="0.7"/>
+        <polygon points="40,58 18,28 40,40" fill="rgba(120,120,140,0.3)" opacity="0.6"/>
+        <defs>
+          <linearGradient id="dg1" x1="40" y1="4" x2="40" y2="52" gradientUnits="userSpaceOnUse">
+            <stop offset="0%" stop-color="#E4B84A"/>
+            <stop offset="100%" stop-color="#8A6518"/>
+          </linearGradient>
+          <linearGradient id="dg2" x1="40" y1="4" x2="62" y2="28" gradientUnits="userSpaceOnUse">
+            <stop offset="0%" stop-color="#F2D680"/>
+            <stop offset="100%" stop-color="#C4922A"/>
+          </linearGradient>
+        </defs>
+      </svg>
+      <div class="gate-brand">ASCENDA</div>
+      <div class="gate-brand-sub">Enterprise Capital</div>
+    </div>
+    <div class="gate-rule"></div>
+    <div class="gate-title">Accredited Investor<br/>Verification Required</div>
+    <p class="gate-text">The information contained on this website is intended solely for accredited investors as defined under applicable securities laws. Access is restricted to qualified individuals and institutional investors.</p>
+    <div class="gate-check">
+      <input type="checkbox" id="gate-cb" onchange="document.getElementById('gate-btn').classList.toggle('active',this.checked)"/>
+      <label for="gate-cb">I confirm that I am an <strong>Accredited Investor</strong> as defined by the SEC (net worth exceeding $1,000,000 excluding primary residence, or annual income exceeding $200,000 individually / $300,000 jointly), or a Qualified Institutional Buyer, and I agree to the terms of access.</label>
+    </div>
+    <button class="gate-btn" id="gate-btn" onclick="document.getElementById('gate').style.display='none';document.body.style.overflow=''">Enter Ascenda Enterprise Capital</button>
+
+    <div style="margin-top:1.25rem;padding:1.25rem 1.5rem;background:rgba(196,146,42,0.06);border:.5px solid var(--rule);text-align:left">
+      <div style="font-family:var(--font-mono);font-size:.55rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold3);margin-bottom:.5rem">Don't meet the accredited investor requirements?</div>
+      <p style="font-size:.75rem;color:rgba(255,255,255,.5);line-height:1.75;font-weight:300">
+        If you do not qualify as an accredited investor, you are not eligible to participate in Ascenda Enterprise Capital's investment programs. However, if you're interested in our <strong style="color:var(--gold);font-weight:400">paid educational materials, mentorship programs, and trading courses</strong> — those are open to everyone. Visit our mentorship page to explore what's available.
+      </p>
+      <a href="ascenda-mentorship.html" style="display:inline-block;margin-top:.85rem;font-family:var(--font-mono);font-size:.58rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);text-decoration:none;border:.5px solid var(--rule2);padding:.55rem 1.25rem;transition:all .2s"
+        onmouseover="this.style.borderColor='var(--gold)';this.style.background='rgba(196,146,42,0.08)'"
+        onmouseout="this.style.borderColor='var(--rule2)';this.style.background='transparent'">
+        Explore Mentorship & Paid Materials →
+      </a>
+    </div>
+
+    <a class="gate-decline" href="https://www.google.com" style="margin-top:1rem">I do not qualify and I'm not interested — exit site</a>
+    <p class="gate-disclaimer">This website does not constitute an offer to sell or a solicitation of an offer to buy any securities. Past performance does not guarantee future results. All investments involve risk, including loss of principal. Ascenda Enterprise Capital LLC is registered in the State of Georgia.</p>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">
+    <svg class="nav-logo-diamond" viewBox="0 0 40 40" fill="none">
+      <polygon points="20,2 30,14 20,26 10,14" fill="url(#ng1)"/>
+      <polygon points="20,2 30,14 26,12" fill="url(#ng2)"/>
+      <polygon points="20,26 30,14 26,20" fill="rgba(180,180,200,0.4)"/>
+      <polygon points="20,26 10,14 14,20" fill="rgba(160,160,180,0.3)"/>
+      <defs>
+        <linearGradient id="ng1" x1="20" y1="2" x2="20" y2="26"><stop offset="0%" stop-color="#E4B84A"/><stop offset="100%" stop-color="#8A6518"/></linearGradient>
+        <linearGradient id="ng2" x1="20" y1="2" x2="30" y2="14"><stop offset="0%" stop-color="#F2D680"/><stop offset="100%" stop-color="#C4922A"/></linearGradient>
+      </defs>
+    </svg>
+    <div class="nav-logo-text">
+      <div class="nav-logo-main">Ascenda</div>
+      <div class="nav-logo-sub">Enterprise Capital</div>
+    </div>
+  </div>
+  <div class="nav-links" id="nav-links">
+    <a href="#performance" onclick="closeNav()">Performance</a>
+    <a href="#strategy" onclick="closeNav()">Strategy</a>
+    <a href="#markets" onclick="closeNav()">Markets</a>
+    <a href="#network" onclick="closeNav()">Network</a>
+    <a href="#join" onclick="closeNav()">Join</a>
+    <a href="#about" onclick="closeNav()">About</a>
+    <a href="#contact" onclick="closeNav()" class="nav-cta">Inquire</a>
+  </div>
+  <div class="nav-hamburger" id="hamburger" onclick="toggleNav()">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- TICKER -->
+<div style="margin-top:56px;border-top:.5px solid rgba(196,146,42,0.15);background:rgba(196,146,42,0.05)">
+  <!-- ROW 1: Indices, Forex, Crypto, Commodities -->
+  <div style="border-bottom:.5px solid rgba(196,146,42,0.1)">
+    <div class="tradingview-widget-container">
+      <div class="tradingview-widget-container__widget"></div>
+      <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js" async>
+      {
+        "symbols": [
+          {"proName":"FOREXCOM:NSXUSD","title":"NQ / NASDAQ 100"},
+          {"proName":"FOREXCOM:SPXUSD","title":"ES / S&P 500"},
+          {"proName":"INDEX:DJI","title":"Dow Jones"},
+          {"proName":"TVC:GOLD","title":"Gold"},
+          {"proName":"TVC:USOIL","title":"WTI Crude"},
+          {"proName":"TVC:SILVER","title":"Silver"},
+          {"proName":"FOREXCOM:EURUSD","title":"EUR/USD"},
+          {"proName":"FOREXCOM:GBPUSD","title":"GBP/USD"},
+          {"proName":"FOREXCOM:USDJPY","title":"USD/JPY"},
+          {"proName":"FOREXCOM:AUDUSD","title":"AUD/USD"},
+          {"proName":"BITSTAMP:BTCUSD","title":"Bitcoin"},
+          {"proName":"BITSTAMP:ETHUSD","title":"Ethereum"},
+          {"proName":"TVC:US10Y","title":"US 10Y Yield"},
+          {"proName":"CME_MINI:ES1!","title":"ES Futures"}
+        ],
+        "showSymbolLogo": false,
+        "isTransparent": true,
+        "displayMode": "adaptive",
+        "colorTheme": "dark",
+        "locale": "en"
+      }
+      </script>
+    </div>
+  </div>
+  <!-- ROW 2: Top Stocks -->
+  <div style="border-bottom:.5px solid rgba(196,146,42,0.15)">
+    <div class="tradingview-widget-container">
+      <div class="tradingview-widget-container__widget"></div>
+      <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js" async>
+      {
+        "symbols": [
+          {"proName":"NASDAQ:TSLA","title":"Tesla"},
+          {"proName":"NASDAQ:NVDA","title":"NVIDIA"},
+          {"proName":"NASDAQ:PLTR","title":"Palantir"},
+          {"proName":"NASDAQ:AMZN","title":"Amazon"},
+          {"proName":"NASDAQ:AAPL","title":"Apple"},
+          {"proName":"NASDAQ:MSFT","title":"Microsoft"},
+          {"proName":"NASDAQ:META","title":"Meta"},
+          {"proName":"NASDAQ:GOOGL","title":"Google"},
+          {"proName":"NYSE:JPM","title":"JPMorgan"},
+          {"proName":"NYSE:GS","title":"Goldman Sachs"},
+          {"proName":"NYSE:BRK.B","title":"Berkshire"},
+          {"proName":"NYSE:BAC","title":"Bank of America"},
+          {"proName":"NYSE:V","title":"Visa"},
+          {"proName":"NYSE:UNH","title":"UnitedHealth"},
+          {"proName":"NASDAQ:NFLX","title":"Netflix"}
+        ],
+        "showSymbolLogo": false,
+        "isTransparent": true,
+        "displayMode": "adaptive",
+        "colorTheme": "dark",
+        "locale": "en"
+      }
+      </script>
+    </div>
+  </div>
+  <!-- ROW 3: Real Estate, Energy, Commodities, International -->
+  <div style="border-bottom:.5px solid rgba(196,146,42,0.15)">
+    <div class="tradingview-widget-container">
+      <div class="tradingview-widget-container__widget"></div>
+      <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js" async>
+      {
+        "symbols": [
+          {"proName":"NYSE:SPG","title":"Simon Property"},
+          {"proName":"NYSE:PLD","title":"Prologis REIT"},
+          {"proName":"NYSE:AMT","title":"American Tower"},
+          {"proName":"NYSE:EQIX","title":"Equinix REIT"},
+          {"proName":"NYSE:O","title":"Realty Income"},
+          {"proName":"NYSE:BX","title":"Blackstone"},
+          {"proName":"NYSE:KKR","title":"KKR"},
+          {"proName":"NYSE:APO","title":"Apollo Global"},
+          {"proName":"NASDAQ:MSCI","title":"MSCI"},
+          {"proName":"TVC:UKOIL","title":"Brent Crude"},
+          {"proName":"TVC:NATURALGAS","title":"Natural Gas"},
+          {"proName":"TVC:COPPER","title":"Copper"},
+          {"proName":"FOREXCOM:USDCAD","title":"USD/CAD"},
+          {"proName":"FOREXCOM:USDCHF","title":"USD/CHF"},
+          {"proName":"INDEX:HSI","title":"Hang Seng"}
+        ],
+        "showSymbolLogo": false,
+        "isTransparent": true,
+        "displayMode": "adaptive",
+        "colorTheme": "dark",
+        "locale": "en"
+      }
+      </script>
+    </div>
+  </div>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid-overlay"></div>
+
+
+
+  <div class="hero-content">
+    <div class="hero-left">
+      <h1>
+        Capital deployed<br/>
+        with <em>uncommon</em><br/>
+        precision.
+      </h1>
+      <p>A multi-strategy investment firm operating across global markets, real estate, and private equity — built to be the most dominant fund on the planet.</p>
+      <div class="hero-ctas">
+        <a href="#contact" class="btn-gold">Request a meeting</a>
+        <a href="#performance" class="btn-ghost">View performance</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- STATEMENT -->
+<div class="statement">
+  <div>
+    <div class="statement-q">"I didn't build Ascenda to be the biggest fund in the room.<br/>I built it to be the biggest fund in the world."</div>
+    <div class="statement-attr">— Izaiah Cottle, Founder & CEO · Ascenda Enterprise Capital LLC</div>
+  </div>
+</div>
+
+<!-- AUM BAND -->
+<div class="aum-band">
+  <div class="aum-l">
+    <div class="aum-tag">Maximum AUM capacity</div>
+    <div class="aum-num">$750M</div>
+    <div class="aum-cap">Hard cap — by philosophy</div>
+  </div>
+  <div class="aum-sep"></div>
+  <div class="aum-r">
+    Ascenda enforces a <strong>strict $750,000,000 AUM ceiling</strong> at all times. Not a regulatory threshold — a philosophical covenant. Concentrated capital moves faster, thinks sharper, and compounds harder. When we reach capacity, we close. <strong>No exceptions. No waivers. Ever.</strong>
+  </div>
+</div>
+
+<!-- PERFORMANCE TEARSHEET -->
+<section class="tearsheet" id="performance">
+  <div class="ts-header">
+    <div>
+      <div class="sec-label">Performance record</div>
+      <h2 class="on-dark">Documented <em>track record</em></h2>
+    </div>
+    <div style="text-align:right">
+      <div style="font-family:var(--font-mono);font-size:.55rem;letter-spacing:.15em;text-transform:uppercase;color:var(--cream3)">Primary instrument</div>
+      <div style="font-family:var(--font-display);font-size:1.6rem;font-style:italic;color:var(--gold2);margin-top:.25rem">NAS100 · ES · Gold · Oil · Top Equities</div>
+    </div>
+  </div>
+
+  <div class="ts-disclaimer">
+    <p><strong>Important disclosure:</strong> The performance data presented below has been documented and verified through TraderSync and live platform records across multiple accounts. Past performance is not indicative of future results. All trading involves significant risk of loss, including total loss of capital. Nothing on this page constitutes an offer to invest or a guarantee of returns.</p>
+  </div>
+
+  <div class="kpi-grid">
+    <div class="kpi"><div class="kpi-val" style="font-size:2rem">$82,448,793</div><div class="kpi-label">Peak account balance</div><div class="kpi-sub">$82,448,793.72 · Feb 24, 2026 · TraderSync verified</div></div>
+    <div class="kpi"><div class="kpi-val">78%</div><div class="kpi-label">Win rate</div><div class="kpi-sub">Documented across all periods</div></div>
+    <div class="kpi"><div class="kpi-val">$5,428</div><div class="kpi-label">Trade $ expectancy</div><div class="kpi-sub">$5,428.42 per trade · TraderSync Feb 2026</div></div>
+    <div class="kpi"><div class="kpi-val">$3.2M</div><div class="kpi-label">Peak single-day return</div><div class="kpi-sub">$3,207,435.07 · Feb 24, 2026</div></div>
+  </div>
+
+
+
+  <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--rule);margin-top:1px;margin-bottom:1px">
+    <div class="kpi" style="background:rgba(196,146,42,0.06)"><div class="kpi-val" style="font-size:1.8rem">$81.2M</div><div class="kpi-label">Acc. net return (TraderSync)</div></div>
+    <div class="kpi" style="background:rgba(196,146,42,0.06)"><div class="kpi-val" style="font-size:1.8rem">$101.3M</div><div class="kpi-label">Gross return on winners</div></div>
+    <div class="kpi" style="background:rgba(196,146,42,0.06)"><div class="kpi-val" style="font-size:1.8rem">$318,929</div><div class="kpi-label">Biggest single trade profit</div></div>
+    <div class="kpi" style="background:rgba(196,146,42,0.06)"><div class="kpi-val" style="font-size:1.8rem">0.66:1</div><div class="kpi-label">Profit/Loss ratio</div></div>
+  </div>
+
+  <div class="perf-grid">
+    <div class="perf-block">
+      <div class="perf-block-title">Documented account & session performance</div>
+      <table class="monthly-table">
+        <thead>
+          <tr>
+            <th>Date / Session</th>
+            <th>Platform</th>
+            <th>P&L / Balance</th>
+            <th>Account Equity</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Nov 10, 2025</td><td>NAS100 Platform</td><td class="td-up">+$24,331</td><td class="td-total">$5,909,585</td></tr>
+          <tr><td>Nov 10, 2025</td><td>NAS100 Platform</td><td class="td-up">+$24,530</td><td class="td-total">$6,057,868</td></tr>
+          <tr><td>Dec 9, 2025</td><td>NAS100 Platform</td><td class="td-up">Deposit +$3,000</td><td class="td-total">$6,096,261</td></tr>
+          <tr><td>Jan 30, 2026</td><td>TraderSync · NAS100</td><td class="td-up">Multi-win session</td><td class="td-total">$2,086,688 net</td></tr>
+          <tr><td>Session — NAS100</td><td>NAS100.PRO</td><td class="td-up">+$607,000</td><td class="td-total">$1,542,338</td></tr>
+          <tr><td>Session — NAS100</td><td>NAS100.PRO</td><td class="td-up">+$41,280</td><td class="td-total">$2,127,343</td></tr>
+          <tr><td>Session — NAS100 · ES</td><td>Live Platform</td><td class="td-up">+$5,396</td><td class="td-total">$2,111,674</td></tr>
+          <tr><td>19:00 session block</td><td>TraderSync hourly</td><td class="td-up">+$225,654</td><td>—</td></tr>
+          <tr><td>Peak daily return</td><td>TraderSync verified</td><td class="td-up">+$630,790</td><td>—</td></tr>
+          <tr><td style="color:var(--gold2);font-weight:500;font-family:var(--font-mono);font-size:.65rem;letter-spacing:.1em" colspan="2">PEAK DOCUMENTED BALANCE · Feb 24, 2026</td><td colspan="2" class="td-total" style="text-align:right;font-size:1.1rem;color:var(--gold2)">$82,448,793.72</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="perf-block">
+      <div class="perf-block-title">TraderSync verified metrics</div>
+      <div class="metric-list">
+        <div class="ml-row"><span class="ml-label">Acc. return net (verified)</span><span class="ml-val gold">$81,229,509</span></div>
+        <div class="ml-row"><span class="ml-label">Peak account balance</span><span class="ml-val gold">$82,448,793</span></div>
+        <div class="ml-row"><span class="ml-label">Win rate</span><span class="ml-val good">78%</span></div>
+        <div class="ml-row"><span class="ml-label">Total trades logged</span><span class="ml-val gold">32,000+</span></div>
+        <div class="ml-row"><span class="ml-label">Trade $ expectancy</span><span class="ml-val gold">$5,428.42</span></div>
+        <div class="ml-row"><span class="ml-label">Profit/Loss ratio</span><span class="ml-val gold">0.66:1</span></div>
+        <div class="ml-row"><span class="ml-label">Gross return on winners</span><span class="ml-val good">$101,253,974</span></div>
+        <div class="ml-row"><span class="ml-label">Biggest single profit</span><span class="ml-val good">$318,929</span></div>
+        <div class="ml-row"><span class="ml-label">Best single-day return</span><span class="ml-val gold">$3,207,435</span></div>
+        <div class="ml-row"><span class="ml-label">Primary instruments</span><span class="ml-val" style="font-size:.68rem">NAS100 · ES · Gold · Oil · Equities</span></div>
+        <div class="ml-row"><span class="ml-label">Documentation source</span><span class="ml-val" style="font-size:.72rem">TraderSync · Platform screenshots</span></div>
+      </div>
+
+      <div style="margin-top:2rem">
+        <div class="perf-block-title">Return distribution by trade type</div>
+        <div class="dist-bar">
+          <div class="dist-row"><span class="dist-label">Take Profit</span><div class="dist-track"><div class="dist-fill" style="width:65%"></div></div><span class="dist-val">~65%</span></div>
+          <div class="dist-row"><span class="dist-label">Market Exit</span><div class="dist-track"><div class="dist-fill" style="width:20%;background:var(--gold3)"></div></div><span class="dist-val">~20%</span></div>
+          <div class="dist-row"><span class="dist-label">Stop Loss</span><div class="dist-track"><div class="dist-fill" style="width:15%;background:rgba(231,76,60,0.6)"></div></div><span class="dist-val">~15%</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STRATEGY -->
+<section class="sec sec-alt" id="strategy">
+  <div class="sec-label">Investment strategy</div>
+  <h2 class="on-dark">The <em>AEC Method</em></h2>
+  <p style="font-size:.98rem;color:var(--cream2);line-height:1.95;max-width:600px;font-weight:300;margin-top:.5rem">Three proprietary frameworks operating in concert — engineered to identify high-probability entries, eliminate noise, and execute with institutional precision.</p>
+  <div class="strategy-grid">
+    <div class="sg">
+      <div class="sg-bar"></div>
+      <div class="sg-n">Layer I — Momentum Engine</div>
+      <h3>Advanced <em>Momentum</em></h3>
+      <p>Multi-timeframe momentum analysis identifies the direction and strength of institutional order flow before entries are considered. We trade with the current, never against it. Trend confirmation across three timeframes is mandatory before any position is initiated.</p>
+    </div>
+    <div class="sg">
+      <div class="sg-bar"></div>
+      <div class="sg-n">Layer II — Statistical Edge</div>
+      <h3>Z-Score <em>Standard Deviation</em></h3>
+      <p>Proprietary Z-score analysis quantifies price deviation from statistical mean, identifying when assets are extended beyond sustainable levels. This framework eliminates emotional decision-making, replacing it with mathematical precision and a defined statistical edge on every trade.</p>
+    </div>
+    <div class="sg">
+      <div class="sg-bar"></div>
+      <div class="sg-n">Layer III — Institutional Flow</div>
+      <h3>DOM & <em>Order Flow</em></h3>
+      <p>Depth of Market and advanced order flow analysis reveals what institutions are actually doing — not what price suggests they're doing. By reading the tape at the microstructure level, AEC identifies the precise moments when institutional capital enters and exits the market.</p>
+    </div>
+  </div>
+</section>
+
+<!-- MARKETS — TradingView -->
+<section class="sec" id="markets" style="background:var(--ink3);border-top:.5px solid var(--rule)">
+  <div class="sec-label">Live market data</div>
+  <h2 class="on-dark">Markets, <em>real-time</em></h2>
+  <p style="font-size:.78rem;color:var(--cream3);margin-top:-.2rem;letter-spacing:.05em;margin-bottom:2.5rem;font-family:var(--font-mono)">Powered by TradingView — live data, zero delay</p>
+
+  <div style="border:.5px solid var(--rule);overflow:hidden;margin-bottom:2rem">
+    <div class="tradingview-widget-container">
+      <div class="tradingview-widget-container__widget"></div>
+      <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-market-overview.js" async>
+      {"colorTheme":"dark","dateRange":"1D","showChart":true,"locale":"en","isTransparent":true,"showSymbolLogo":false,"showFloatingTooltip":true,"width":"100%","height":"550","tabs":[{"title":"Indices","symbols":[{"s":"FOREXCOM:SPXUSD","d":"S&P 500"},{"s":"FOREXCOM:NSXUSD","d":"NASDAQ 100"},{"s":"INDEX:DJI","d":"Dow Jones"},{"s":"INDEX:VIX","d":"VIX"}],"originalTitle":"Indices"},{"title":"Forex","symbols":[{"s":"FOREXCOM:EURUSD","d":"EUR/USD"},{"s":"FOREXCOM:GBPUSD","d":"GBP/USD"},{"s":"FOREXCOM:USDJPY","d":"USD/JPY"},{"s":"FOREXCOM:AUDUSD","d":"AUD/USD"}],"originalTitle":"Forex"},{"title":"Top Equities","symbols":[{"s":"NASDAQ:NVDA","d":"NVIDIA"},{"s":"NASDAQ:AAPL","d":"Apple"},{"s":"NASDAQ:MSFT","d":"Microsoft"},{"s":"NASDAQ:AMZN","d":"Amazon"},{"s":"NASDAQ:META","d":"Meta"}],"originalTitle":"Top Equities"},{"title":"Commodities","symbols":[{"s":"TVC:GOLD","d":"Gold"},{"s":"TVC:USOIL","d":"WTI Crude"},{"s":"TVC:SILVER","d":"Silver"}],"originalTitle":"Commodities"}]}
+      </script>
+    </div>
+  </div>
+
+  <div class="tv-charts-grid">
+    <div class="tv-card">
+      <div class="tv-card-label">NASDAQ 100</div>
+      <div class="tradingview-widget-container"><div class="tradingview-widget-container__widget"></div>
+      <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-mini-symbol-overview.js" async>{"symbol":"FOREXCOM:NSXUSD","width":"100%","height":"200","locale":"en","dateRange":"3M","colorTheme":"dark","isTransparent":true,"autosize":true}</script></div>
+    </div>
+    <div class="tv-card">
+      <div class="tv-card-label">ES Futures (S&amp;P 500)</div>
+      <div class="tradingview-widget-container"><div class="tradingview-widget-container__widget"></div>
+      <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-mini-symbol-overview.js" async>{"symbol":"CME_MINI:ES1!","width":"100%","height":"200","locale":"en","dateRange":"3M","colorTheme":"dark","isTransparent":true,"autosize":true}</script></div>
+    </div>
+    <div class="tv-card">
+      <div class="tv-card-label">Gold</div>
+      <div class="tradingview-widget-container"><div class="tradingview-widget-container__widget"></div>
+      <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-mini-symbol-overview.js" async>{"symbol":"TVC:GOLD","width":"100%","height":"200","locale":"en","dateRange":"3M","colorTheme":"dark","isTransparent":true,"autosize":true}</script></div>
+    </div>
+  </div>
+</section>
+
+<!-- REAL ESTATE & PRIVATE EQUITY NEWS -->
+<section style="padding:6rem 3.5rem;background:var(--ink2);border-top:.5px solid var(--rule)" id="re-pe-news">
+  <div style="display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:3rem;flex-wrap:wrap;gap:1rem">
+    <div>
+      <div style="font-family:var(--font-mono);font-size:.58rem;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);margin-bottom:1.2rem;display:flex;align-items:center;gap:.9rem;font-weight:400">
+        <span style="display:block;width:32px;height:.5px;background:var(--gold)"></span>
+        Sector intelligence
+      </div>
+      <h2 style="font-family:var(--font-display);font-size:clamp(2rem,3.5vw,3rem);font-weight:300;color:var(--white);line-height:1.12;margin-bottom:.5rem">
+        Real Estate & <em style="font-style:italic;color:var(--gold2)">Private Equity</em>
+      </h2>
+      <p style="font-family:var(--font-mono);font-size:.75rem;color:rgba(255,255,255,.28);font-weight:300">Latest intelligence across AEC's real estate and private equity verticals</p>
+    </div>
+    <div style="font-family:var(--font-mono);font-size:.55rem;letter-spacing:.12em;color:var(--cream3)">CBRE · JLL · Bloomberg · WSJ · PitchBook</div>
+  </div>
+
+  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--rule)">
+
+    <!-- RE Card 1 -->
+    <div style="background:var(--ink2);padding:2.25rem 2rem;transition:background .3s;cursor:pointer" onmouseover="this.style.background='rgba(196,146,42,0.05)'" onmouseout="this.style.background='var(--ink2)'">
+      <div style="font-family:var(--font-mono);font-size:.52rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold3);margin-bottom:.5rem">CBRE</div>
+      <span style="font-family:var(--font-mono);font-size:.48rem;letter-spacing:.14em;text-transform:uppercase;padding:.2rem .55rem;border:.5px solid var(--rule);color:var(--cream3)">Real Estate</span>
+      <div style="font-family:var(--font-display);font-size:1.1rem;font-weight:400;color:var(--white);line-height:1.4;margin:1rem 0 .6rem">CRE lending hits 5-year high — global investment volume up 18% YoY in Q1 2026</div>
+      <p style="font-size:.82rem;color:var(--cream2);line-height:1.9;font-weight:300">CBRE's Lending Momentum Index reached a five-year high. Multifamily debt remains abundant, industrial is supply-constrained, and prime office scarcity intensifies across gateway markets. $562B projected for full-year 2026.</p>
+      <div style="font-family:var(--font-mono);font-size:.55rem;letter-spacing:.1em;color:var(--cream3);margin-top:.85rem">May 2026 · CBRE Research</div>
+    </div>
+
+    <!-- RE Card 2 -->
+    <div style="background:var(--ink2);padding:2.25rem 2rem;transition:background .3s;cursor:pointer;border-left:.5px solid var(--rule);border-right:.5px solid var(--rule)" onmouseover="this.style.background='rgba(196,146,42,0.05)'" onmouseout="this.style.background='var(--ink2)'">
+      <div style="font-family:var(--font-mono);font-size:.52rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold3);margin-bottom:.5rem">JLL</div>
+      <span style="font-family:var(--font-mono);font-size:.48rem;letter-spacing:.14em;text-transform:uppercase;padding:.2rem .55rem;border:.5px solid var(--rule);color:var(--cream3)">Real Estate</span>
+      <div style="font-family:var(--font-display);font-size:1.1rem;font-weight:400;color:var(--white);line-height:1.4;margin:1rem 0 .6rem">Industrial & logistics vacancy tightens to record lows across Sun Belt markets</div>
+      <p style="font-size:.82rem;color:var(--cream2);line-height:1.9;font-weight:300">Atlanta, Dallas, and Phoenix lead Sun Belt industrial absorption. E-commerce demand continues to drive net absorption above completions. Rent growth of 12–18% projected in prime industrial corridors through 2027.</p>
+      <div style="font-family:var(--font-mono);font-size:.55rem;letter-spacing:.1em;color:var(--cream3);margin-top:.85rem">May 2026 · JLL Research</div>
+    </div>
+
+    <!-- RE Card 3 -->
+    <div style="background:var(--ink2);padding:2.25rem 2rem;transition:background .3s;cursor:pointer" onmouseover="this.style.background='rgba(196,146,42,0.05)'" onmouseout="this.style.background='var(--ink2)'">
+      <div style="font-family:var(--font-mono);font-size:.52rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold3);margin-bottom:.5rem">WSJ</div>
+      <span style="font-family:var(--font-mono);font-size:.48rem;letter-spacing:.14em;text-transform:uppercase;padding:.2rem .55rem;border:.5px solid var(--rule);color:var(--cream3)">Real Estate</span>
+      <div style="font-family:var(--font-display);font-size:1.1rem;font-weight:400;color:var(--white);line-height:1.4;margin:1rem 0 .6rem">Multifamily demand surges as homeownership affordability hits 40-year low</div>
+      <p style="font-size:.82rem;color:var(--cream2);line-height:1.9;font-weight:300">With mortgage rates elevated and home prices near historic highs, rental demand continues to surge. Class A multifamily assets in growth markets are seeing sub-4% vacancy rates and strong rent escalations.</p>
+      <div style="font-family:var(--font-mono);font-size:.55rem;letter-spacing:.1em;color:var(--cream3);margin-top:.85rem">May 2026 · Wall Street Journal</div>
+    </div>
+
+    <!-- PE Card 1 -->
+    <div style="background:var(--ink3);padding:2.25rem 2rem;transition:background .3s;cursor:pointer" onmouseover="this.style.background='rgba(196,146,42,0.05)'" onmouseout="this.style.background='var(--ink3)'">
+      <div style="font-family:var(--font-mono);font-size:.52rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold3);margin-bottom:.5rem">PitchBook</div>
+      <span style="font-family:var(--font-mono);font-size:.48rem;letter-spacing:.14em;text-transform:uppercase;padding:.2rem .55rem;border:.5px solid var(--rule);color:var(--cream3)">Private Equity</span>
+      <div style="font-family:var(--font-display);font-size:1.1rem;font-weight:400;color:var(--white);line-height:1.4;margin:1rem 0 .6rem">Global PE dry powder reaches $4.1T — managers under pressure to deploy capital</div>
+      <p style="font-size:.82rem;color:var(--cream2);line-height:1.9;font-weight:300">Record levels of uncalled capital are forcing PE managers to compete harder for quality deals. Smaller, focused funds with sector expertise continue to outperform megafunds on a risk-adjusted basis.</p>
+      <div style="font-family:var(--font-mono);font-size:.55rem;letter-spacing:.1em;color:var(--cream3);margin-top:.85rem">May 2026 · PitchBook</div>
+    </div>
+
+    <!-- PE Card 2 -->
+    <div style="background:var(--ink3);padding:2.25rem 2rem;transition:background .3s;cursor:pointer;border-left:.5px solid var(--rule);border-right:.5px solid var(--rule)" onmouseover="this.style.background='rgba(196,146,42,0.05)'" onmouseout="this.style.background='var(--ink3)'">
+      <div style="font-family:var(--font-mono);font-size:.52rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold3);margin-bottom:.5rem">Bloomberg</div>
+      <span style="font-family:var(--font-mono);font-size:.48rem;letter-spacing:.14em;text-transform:uppercase;padding:.2rem .55rem;border:.5px solid var(--rule);color:var(--cream3)">Private Equity</span>
+      <div style="font-family:var(--font-display);font-size:1.1rem;font-weight:400;color:var(--white);line-height:1.4;margin:1rem 0 .6rem">AI infrastructure and energy transition emerge as top PE themes for 2026–2028</div>
+      <p style="font-size:.82rem;color:var(--cream2);line-height:1.9;font-weight:300">Private equity firms are pivoting aggressively toward data center infrastructure, power generation, and AI-adjacent businesses. Deal multiples in these sectors are commanding 15–22x EBITDA with strong conviction from institutional LPs.</p>
+      <div style="font-family:var(--font-mono);font-size:.55rem;letter-spacing:.1em;color:var(--cream3);margin-top:.85rem">May 2026 · Bloomberg</div>
+    </div>
+
+    <!-- PE Card 3 -->
+    <div style="background:var(--ink3);padding:2.25rem 2rem;transition:background .3s;cursor:pointer" onmouseover="this.style.background='rgba(196,146,42,0.05)'" onmouseout="this.style.background='var(--ink3)'">
+      <div style="font-family:var(--font-mono);font-size:.52rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold3);margin-bottom:.5rem">WSJ</div>
+      <span style="font-family:var(--font-mono);font-size:.48rem;letter-spacing:.14em;text-transform:uppercase;padding:.2rem .55rem;border:.5px solid var(--rule);color:var(--cream3)">Private Equity</span>
+      <div style="font-family:var(--font-display);font-size:1.1rem;font-weight:400;color:var(--white);line-height:1.4;margin:1rem 0 .6rem">Secondary market for PE stakes hits record $145B — liquidity solutions in high demand</div>
+      <p style="font-size:.82rem;color:var(--cream2);line-height:1.9;font-weight:300">The PE secondary market hit a record $145B in 2025 as LPs sought liquidity and GPs extended hold periods. GP-led continuation vehicles now account for over 40% of secondary volume, reshaping how private capital changes hands.</p>
+      <div style="font-family:var(--font-mono);font-size:.55rem;letter-spacing:.1em;color:var(--cream3);margin-top:.85rem">May 2026 · Wall Street Journal</div>
+    </div>
+
+  </div>
+</section>
+
+<!-- NEWS -->
+<section class="sec sec-light" id="news">
+  <div style="display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:2rem;flex-wrap:wrap;gap:1rem">
+    <div>
+      <div class="sec-label-dark">Market intelligence</div>
+      <h2 class="on-light">What <em>smart money</em> is reading</h2>
+    </div>
+    <div style="font-family:var(--font-mono);font-size:.55rem;letter-spacing:.12em;color:#6B6080">Yahoo Finance · CNBC · MarketWatch · ForexFactory · WSJ</div>
+  </div>
+  <div class="news-grid">
+    <div class="nc"><div><span class="nc-src">CNBC</span><span class="nc-tag">Equities</span></div><div class="nc-title">S&P 500 posts eighth consecutive weekly gain as bond yields ease</div><p class="nc-body">U.S. equities surged as oil prices fell sharply on Iran deal optimism. The Dow crossed 50,000 for the first time while Treasury yields retreated — a strong tailwind for risk assets heading into Memorial Day weekend.</p><div class="nc-date">May 22, 2026</div></div>
+    <div class="nc"><div><span class="nc-src">ForexFactory</span><span class="nc-tag">Forex</span></div><div class="nc-title">EUR/USD holds 1.1600 as ECB prepares to raise inflation forecasts for June</div><p class="nc-body">The ECB is set to revise its 2026 inflation projections upward at its June meeting. President Lagarde signaled a potential rate hike amid rising energy costs tied to ongoing Middle East tensions.</p><div class="nc-date">May 25, 2026</div></div>
+    <div class="nc"><div><span class="nc-src">MarketWatch</span><span class="nc-tag">Macro</span></div><div class="nc-title">"Trumpflation" rattles Wall Street — analysts warn it may not be transitory</div><p class="nc-body">Tariff-driven inflation could prove stickier than the administration suggests. Markets are pricing no rate moves until year-end with growing speculation of White House-Fed conflict ahead.</p><div class="nc-date">May 24, 2026</div></div>
+    <div class="nc"><div><span class="nc-src">WSJ / CBRE</span><span class="nc-tag">Real Estate</span></div><div class="nc-title">CRE lending hits a 5-year high — commercial investment eyes $562B in 2026</div><p class="nc-body">CBRE's Lending Momentum Index reached a five-year high in Q1 2026. Global direct transaction volumes rose 18% year-over-year to $216B. Prime office scarcity is intensifying across gateway markets.</p><div class="nc-date">May 18, 2026</div></div>
+  </div>
+</section>
+
+<!-- NETWORK MAP -->
+<section id="network">
+  <div style="display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:3rem;flex-wrap:wrap;gap:1rem">
+    <div>
+      <div class="sec-label">National reach</div>
+      <h2 class="on-dark">48 states. One <em>command center.</em></h2>
+    </div>
+    <div style="font-family:var(--font-mono);font-size:.55rem;letter-spacing:.12em;color:var(--cream3)">Headquartered in Georgia · Connected nationwide</div>
+  </div>
+  <div id="map-container" style="width:100%;max-width:960px;margin:0 auto">
+    <div id="map-loading" style="color:var(--cream3);font-family:var(--font-mono);font-size:.7rem;padding:4rem;text-align:center;letter-spacing:.1em">Initializing network map...</div>
+  </div>
+  <div id="map-state-label" style="text-align:center;font-family:var(--font-mono);font-size:.65rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-top:1rem;min-height:1.1rem">&nbsp;</div>
+</section>
+
+<!-- JOIN -->
+<section class="sec sec-alt" id="join">
+  <div style="text-align:center;max-width:680px;margin:0 auto 4rem">
+    <div class="sec-label" style="justify-content:center">
+      <span style="display:block;width:28px;height:.5px;background:var(--gold)"></span>
+      Work with Ascenda
+      <span style="display:block;width:28px;height:.5px;background:var(--gold)"></span>
+    </div>
+    <h2 class="on-dark">Three ways to be part of <em>Ascenda</em></h2>
+    <p style="font-size:.95rem;color:var(--cream2);line-height:1.95;font-weight:300;margin-top:.75rem">We don't open our doors to everyone. But for the right people — there is a seat at this table.</p>
+  </div>
+  <div class="join-grid">
+    <div class="jc">
+      <div class="jc-n">01 — Private Investor</div>
+      <div class="jc-title">Invest <em>capital.</em><br/>Collect returns.</div>
+      <p class="jc-body">Qualified investors who share our long-horizon conviction can apply to allocate capital through Ascenda Enterprise Capital. Full transparency, no bloated fees, and direct access to our multi-strategy approach.</p>
+      <div class="jc-points">
+        <div class="jcp"><span class="jcp-dot">✦</span><span>Minimum allocation reviewed case by case</span></div>
+        <div class="jcp"><span class="jcp-dot">✦</span><span>$750M AUM hard cap — limited spots</span></div>
+        <div class="jcp"><span class="jcp-dot">✦</span><span>Quarterly reporting & direct leadership access</span></div>
+        <div class="jcp"><span class="jcp-dot">✦</span><span>Multi-strategy: trading, real estate, private equity</span></div>
+      </div>
+      <a href="ascenda-investor.html" class="jc-btn">Apply as Investor →</a>
+    </div>
+    <div class="jc featured">
+      <div class="jc-n">02 — Allocator</div>
+      <div class="jc-title">Deploy capital<br/>at scale.</div>
+      <p class="jc-body">Institutional allocators, family offices, and high-net-worth operators who want meaningful exposure to Ascenda's strategy. We work with a select few who understand concentrated, disciplined capital.</p>
+      <div class="jc-points">
+        <div class="jcp"><span class="jcp-dot">✦</span><span>Institutional-grade reporting & compliance</span></div>
+        <div class="jcp"><span class="jcp-dot">✦</span><span>Direct relationship with Izaiah Cottle</span></div>
+        <div class="jcp"><span class="jcp-dot">✦</span><span>Multi-strategy exposure across all 3 verticals</span></div>
+        <div class="jcp"><span class="jcp-dot">✦</span><span>Capacity is finite — apply before we close</span></div>
+      </div>
+      <a href="ascenda-allocator.html" class="jc-btn">Apply as Allocator →</a>
+    </div>
+    <div class="jc">
+      <div class="jc-n">03 — Mentee</div>
+      <div class="jc-title">Learn from<br/><em>the inside.</em></div>
+      <p class="jc-body">Direct mentorship under Izaiah Cottle. Real frameworks, real trade reviews, real access. Not a course — proximity to the actual thing. Reserved for those who prove they're built for it.</p>
+      <div class="jc-points">
+        <div class="jcp"><span class="jcp-dot">✦</span><span>Direct 1-on-1 with Izaiah Cottle</span></div>
+        <div class="jcp"><span class="jcp-dot">✦</span><span>Real-world trading & investment training</span></div>
+        <div class="jcp"><span class="jcp-dot">✦</span><span>Access to AEC's frameworks & playbooks</span></div>
+        <div class="jcp"><span class="jcp-dot">✦</span><span>Extremely limited — serious applicants only</span></div>
+      </div>
+      <a href="ascenda-mentorship.html" class="jc-btn">Apply as Mentee →</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOCUS -->
+<section class="sec" style="background:var(--ink);border-top:.5px solid var(--rule)" id="focus">
+  <div class="sec-label">Focus areas</div>
+  <h2 class="on-dark">Three pillars of <em>institutional</em> investing</h2>
+  <div class="focus-grid">
+    <div class="fc"><div class="fc-bar"></div><div class="fc-n">01 — Trading</div><h3>Global <em>Markets</em></h3><p>Systematic and discretionary strategies across equities, derivatives, and macro. NAS100, ES Futures, Gold, Crude Oil, and the top 15 performing equities of the decade are primary instruments — traded with momentum, Z-score precision, and institutional order flow analysis at every level.</p></div>
+    <div class="fc"><div class="fc-bar"></div><div class="fc-n">02 — Real Estate</div><h3>Property <em>Capital</em></h3><p>Value-add and opportunistic acquisitions across commercial and residential sectors. We identify mispriced assets in supply-constrained markets and create durable value through active, hands-on management.</p></div>
+    <div class="fc"><div class="fc-bar"></div><div class="fc-n">03 — Private Equity</div><h3>Growth <em>Equity</em></h3><p>Strategic stakes in high-conviction operating companies. We partner with founders who share our long-horizon vision and bring capital, network, and genuine operational depth to every investment.</p></div>
+  </div>
+</section>
+
+<!-- FOUNDER -->
+<section id="about" style="background:var(--ink)">
+  <div class="about-intro" style="text-align:center;padding:5rem 3.5rem 3rem;border-top:.5px solid var(--rule)">
+    <div class="sec-label" style="justify-content:center">
+      <span style="display:block;width:28px;height:.5px;background:var(--gold)"></span>Leadership<span style="display:block;width:28px;height:.5px;background:var(--gold)"></span>
+    </div>
+    <div style="font-family:var(--font-display);font-size:clamp(1.5rem,2.8vw,2.4rem);font-style:italic;font-weight:300;color:var(--white);max-width:760px;margin:0 auto;line-height:1.3">"I didn't build Ascenda to be the biggest fund in the room. I built it to be the biggest fund in the <span style='color:var(--gold2)'>world.</span>"</div>
+    <div style="font-family:var(--font-mono);font-size:.55rem;letter-spacing:.22em;text-transform:uppercase;color:var(--cream3);margin-top:1.25rem">— Izaiah Cottle, Founder & CEO</div>
+  </div>
+
+  <div class="founder-grid">
+    <div class="founder-left">
+      <div class="sec-label-dark">Founder & CEO</div>
+      <div class="founder-name">Izaiah<br/>Cottle</div>
+      <div class="founder-title">Founder, Owner & Chief Executive Officer<br/>Ascenda Enterprise Capital LLC</div>
+      <div class="founder-bio">
+        <p>Izaiah Cottle is the founder, owner, and CEO of Ascenda Enterprise Capital — a multi-strategy investment firm built to operate at the intersection of global markets, real estate, and private equity.</p>
+        <p>With nearly a decade of active market experience, Izaiah has built a documented track record with a peak account balance of <em>$82,448,793</em> and over $81,229,509 in verified net returns across 32,000+ documented trades — built not on leverage and luck, but on a proprietary three-layer system combining momentum analysis, Z-score standard deviation, and institutional DOM order flow.</p>
+        <p>He founded Ascenda with one vision: to build the most dominant investment firm on the planet. The $750M hard cap is not a limitation — <em>it is the weapon.</em></p>
+      </div>
+      <div class="founder-stats">
+        <div class="fs"><div class="fs-val">~10</div><div class="fs-lbl">Years experience</div></div>
+        <div class="fs"><div class="fs-val">$82M+</div><div class="fs-lbl">Peak account balance</div></div>
+        <div class="fs"><div class="fs-val">78%</div><div class="fs-lbl">Documented win rate</div></div>
+        <div class="fs"><div class="fs-val">$750M</div><div class="fs-lbl">AUM ceiling</div></div>
+      </div>
+    </div>
+    <div class="founder-right">
+      <div class="founder-quote">"Most funds grow to the point where size becomes their biggest enemy. I refuse to let that happen. The $750M cap is my promise to every investor that our edge will never be diluted."</div>
+      <div class="tag-grid">
+        <span class="tag">Global Equities</span>
+        <span class="tag">Derivatives</span>
+        <span class="tag">Macro Trading</span>
+        <span class="tag">NAS100 Specialist</span>
+        <span class="tag">Order Flow Analysis</span>
+        <span class="tag">Z-Score Strategy</span>
+        <span class="tag">Real Estate</span>
+        <span class="tag">Private Equity</span>
+        <span class="tag">Risk Management</span>
+        <span class="tag">Capital Allocation</span>
+      </div>
+      <div style="margin-top:2.5rem;padding:1.75rem;background:rgba(196,146,42,0.06);border:.5px solid var(--rule)">
+        <div style="font-family:var(--font-mono);font-size:.52rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold3);margin-bottom:.6rem">Legal entity</div>
+        <div style="font-size:.9rem;color:var(--cream2);font-weight:300;line-height:1.7">Ascenda Enterprise Capital LLC<br/><span style="color:var(--cream3)">Registered in the State of Georgia, United States</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- APPROACH -->
+<div class="ap-band" style="padding:8rem 3.5rem;background:var(--ink2);border-top:.5px solid var(--rule)">
+  <div class="sec-label">Investment philosophy</div>
+  <h2 class="on-dark">How we think about <em>risk and return</em></h2>
+  <div class="ap-grid">
+    <div class="ap"><div class="ap-n">I</div><h4 style="font-family:var(--font-display);font-size:1.2rem;font-weight:300;color:var(--white);margin-bottom:.65rem">Conviction-driven</h4><p>We concentrate capital in our highest-conviction ideas. Diversification for its own sake is a performance tax we refuse to pay.</p></div>
+    <div class="ap"><div class="ap-n">II</div><h4 style="font-family:var(--font-display);font-size:1.2rem;font-weight:300;color:var(--white);margin-bottom:.65rem">Risk-first always</h4><p>Downside protection is never an afterthought. Every position is sized with explicit risk parameters from the first dollar deployed.</p></div>
+    <div class="ap"><div class="ap-n">III</div><h4 style="font-family:var(--font-display);font-size:1.2rem;font-weight:300;color:var(--white);margin-bottom:.65rem">Operator mindset</h4><p>We don't just allocate — we engage. Operational depth flows through every vertical we touch. We build, not just buy.</p></div>
+    <div class="ap"><div class="ap-n">IV</div><h4 style="font-family:var(--font-display);font-size:1.2rem;font-weight:300;color:var(--white);margin-bottom:.65rem">Capped by design</h4><p>The $750M hard cap is a performance covenant. Scale is the enemy of alpha. We will never let asset growth dilute our edge.</p></div>
+  </div>
+</div>
+
+<!-- CONTACT -->
+<section class="sec sec-light2" id="contact">
+  <div class="contact-grid">
+    <div>
+      <div class="sec-label-dark">Get in touch</div>
+      <h2 class="on-light">Let's discuss<br/><em>your objectives</em></h2>
+      <p style="font-size:1rem;line-height:2;color:#3A3348;font-weight:300;margin-bottom:2rem">Whether you're an institutional allocator, a family office, or an operating partner — we welcome the conversation. Capacity is finite and fills permanently.</p>
+      <div class="cd"><span style="color:var(--gold3)">Email</span><a href="mailto:ascendaenterprise@gmail.com" style="color:#0D1A10">ascendaenterprise@gmail.com</a></div>
+      <div class="cd"><span style="color:var(--gold3)">Availability</span><p style="color:#0D1A10">By appointment only</p></div>
+      <div class="cd"><span style="color:var(--gold3)">Registration</span><p style="color:#0D1A10">Ascenda Enterprise Capital LLC · Georgia</p></div>
+      <div class="cd"><span style="color:var(--gold3)">AUM status</span><p style="color:var(--up);font-weight:400">Currently accepting allocators</p></div>
+    </div>
+    <div>
+      <form class="cf" action="https://formspree.io/f/mvzywgwb" method="POST">
+        <div class="cff"><label style="color:#6B6080">Full name</label><input type="text" name="name" placeholder="Your name" required style="background:var(--white);border-color:rgba(26,22,36,.15);color:#0D1A10"/></div>
+        <div class="cff"><label style="color:#6B6080">Organization</label><input type="text" name="organization" placeholder="Firm or company" style="background:var(--white);border-color:rgba(26,22,36,.15);color:#0D1A10"/></div>
+        <div class="cff"><label style="color:#6B6080">Email</label><input type="email" name="email" placeholder="you@example.com" required style="background:var(--white);border-color:rgba(26,22,36,.15);color:#0D1A10"/></div>
+        <div class="cff"><label style="color:#6B6080">Area of interest</label>
+          <select name="interest" style="background:var(--white);border-color:rgba(26,22,36,.15);color:#0D1A10">
+            <option value="">Select an option</option>
+            <option>Private Investor</option>
+            <option>Allocator</option>
+            <option>Mentee</option>
+            <option>Trading / Public Markets</option>
+            <option>Real Estate</option>
+            <option>Private Equity</option>
+            <option>General inquiry</option>
+          </select>
+        </div>
+        <div class="cff"><label style="color:#6B6080">Message</label><textarea name="message" placeholder="Tell us about your investment objectives..." style="background:var(--white);border-color:rgba(26,22,36,.15);color:#0D1A10"></textarea></div>
+        <button type="submit" style="background:var(--ink);color:var(--gold2);font-family:var(--font-mono);font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;border:none;padding:1.1rem 2rem;cursor:pointer;font-weight:500;transition:background .2s;align-self:flex-start"
+          onmouseover="this.style.background='var(--gold)';this.style.color='var(--ink)'"
+          onmouseout="this.style.background='var(--ink)';this.style.color='var(--gold2)'">Submit inquiry →</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER TOP -->
+<div class="footer-top">
+  <div>
+    <div class="ft-col-title">Ascenda Enterprise Capital</div>
+    <p class="ft-text">A multi-strategy investment firm registered in the State of Georgia. Operating across global markets, real estate, and private equity.</p>
+    <div style="margin-top:1.25rem;font-family:var(--font-mono);font-size:.52rem;letter-spacing:.12em;color:var(--gold3)">ascendaenterprise@gmail.com</div>
+  </div>
+  <div>
+    <div class="ft-col-title">Navigation</div>
+    <a href="#performance" class="ft-link">Performance</a>
+    <a href="#strategy" class="ft-link">Strategy</a>
+    <a href="#markets" class="ft-link">Markets</a>
+    <a href="#join" class="ft-link">Join</a>
+    <a href="#about" class="ft-link">About</a>
+    <a href="#contact" class="ft-link">Contact</a>
+    <a href="ascenda-mentorship.html" class="ft-link">Mentorship</a>
+  </div>
+  <div>
+    <div class="ft-col-title">Legal</div>
+    <a href="privacy-policy.html" class="ft-link">Privacy Policy</a>
+    <a href="terms-of-service.html" class="ft-link">Terms of Service</a>
+    <a href="regulatory-disclosures.html" class="ft-link">Regulatory Disclosures</a>
+    <p class="ft-text" style="margin-top:1rem">This website is for informational purposes only and does not constitute an offer to sell or a solicitation of an offer to buy any securities. Access restricted to accredited investors.</p>
+    <p class="ft-text" style="margin-top:.75rem">Ascenda Enterprise Capital LLC · Registered in Georgia · All rights reserved.</p>
+  </div>
+</div>
+
+<footer>
+  <div class="f-logo-wrap">
+    <svg class="f-logo-diamond" viewBox="0 0 40 40" fill="none">
+      <polygon points="20,2 30,14 20,26 10,14" fill="url(#fg1)"/>
+      <polygon points="20,2 30,14 26,12" fill="url(#fg2)"/>
+      <defs>
+        <linearGradient id="fg1" x1="20" y1="2" x2="20" y2="26"><stop offset="0%" stop-color="#E4B84A"/><stop offset="100%" stop-color="#8A6518"/></linearGradient>
+        <linearGradient id="fg2" x1="20" y1="2" x2="30" y2="14"><stop offset="0%" stop-color="#F2D680"/><stop offset="100%" stop-color="#C4922A"/></linearGradient>
+      </defs>
+    </svg>
+    <div class="f-logo-text">Ascenda Enterprise Capital LLC</div>
+  </div>
+  <div class="f-legal">© 2025 Ascenda Enterprise Capital LLC. Registered in the State of Georgia. This material is provided for informational purposes only and does not constitute investment advice, an offer to sell, or a solicitation of an offer to buy any security. Past performance does not guarantee future results. All investments involve risk, including the possible loss of principal. Restricted to accredited investors only.</div>
+</footer>
+
+<!-- SCRIPTS -->
+<script src="https://cdn.jsdelivr.net/npm/d3@7/dist/d3.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/topojson-client@3/dist/topojson-client.min.js"></script>
+<script>
+// Live ticker powered by TradingView
+
+// COOKIE CONSENT
+function acceptCookies(){
+  localStorage.setItem('aec_cookie_consent','accepted');
+  document.getElementById('cookie-banner').style.display='none';
+}
+function declineCookies(){
+  localStorage.setItem('aec_cookie_consent','declined');
+  document.getElementById('cookie-banner').style.display='none';
+}
+// Check if already consented
+(function(){
+  if(localStorage.getItem('aec_cookie_consent')){
+    document.getElementById('cookie-banner').style.display='none';
+  }
+})();
+
+// NAV
+function toggleNav(){
+  const n=document.getElementById('nav-links');
+  const hb=document.getElementById('hamburger');
+  n.classList.toggle('open');hb.classList.toggle('open');
+  document.body.style.overflow=n.classList.contains('open')?'hidden':'';
+}
+function closeNav(){
+  document.getElementById('nav-links').classList.remove('open');
+  document.getElementById('hamburger').classList.remove('open');
+  document.body.style.overflow='';
+}
+function checkMobile(){
+  const hb=document.getElementById('hamburger');
+  hb.style.display=window.innerWidth<=900?'flex':'none';
+  if(window.innerWidth>900)closeNav();
+}
+window.addEventListener('resize',checkMobile);
+checkMobile();
+
+// GATE
+document.body.style.overflow='hidden';
+
+// MOBILE FIXES
+function applyMobileFixes(){
+  var isMobile = window.innerWidth <= 900;
+  
+  // Kill floating logo
+  var logo = document.getElementById('hero-logo-center');
+  if(logo){
+    if(isMobile){
+      logo.style.cssText = 'display:none!important;visibility:hidden!important;opacity:0!important;position:absolute!important;left:-99999px!important;animation:none!important;';
+    }
+  }
+  
+  // Fix hero content to single column full width on mobile
+  var heroContent = document.querySelector('.hero-content');
+  if(heroContent && isMobile){
+    heroContent.style.cssText = 'display:block!important;width:100%!important;max-width:100%!important;grid-template-columns:1fr!important;';
+  }
+  
+  // Fix h1 indents
+  var h1b = document.querySelector('.h1b');
+  var h1c = document.querySelector('.h1c');
+  if(h1b && isMobile) h1b.style.paddingLeft = '0';
+  if(h1c && isMobile) h1c.style.paddingLeft = '0';
+  
+  // Fix hero body width
+  var heroBody = document.querySelector('.hero-body');
+  if(heroBody && isMobile){
+    heroBody.style.maxWidth = '100%';
+    heroBody.style.width = '100%';
+  }
+  
+  // Fix buttons full width
+  document.querySelectorAll('.hero-ctas .btn-gold, .hero-ctas .btn-ghost').forEach(function(btn){
+    if(isMobile){
+      btn.style.width = '100%';
+      btn.style.display = 'block';
+      btn.style.textAlign = 'center';
+      btn.style.boxSizing = 'border-box';
+    }
+  });
+}
+
+// Run immediately and on resize
+applyMobileFixes();
+window.addEventListener('resize', applyMobileFixes);
+
+// MAP
+(function(){
+  const W=960,H=600,EXCLUDE=['02','15'],NY_ID='36';
+  const stateNames={'01':'Alabama','04':'Arizona','05':'Arkansas','06':'California','08':'Colorado','09':'Connecticut','10':'Delaware','12':'Florida','13':'Georgia','16':'Idaho','17':'Illinois','18':'Indiana','19':'Iowa','20':'Kansas','21':'Kentucky','22':'Louisiana','23':'Maine','24':'Maryland','25':'Massachusetts','26':'Michigan','27':'Minnesota','28':'Mississippi','29':'Missouri','30':'Montana','31':'Nebraska','32':'Nevada','33':'New Hampshire','34':'New Jersey','35':'New Mexico','36':'New York','37':'North Carolina','38':'North Dakota','39':'Ohio','40':'Oklahoma','41':'Oregon','42':'Pennsylvania','44':'Rhode Island','45':'South Carolina','46':'South Dakota','47':'Tennessee','48':'Texas','49':'Utah','50':'Vermont','51':'Virginia','53':'Washington','54':'West Virginia','55':'Wisconsin','56':'Wyoming'};
+  const sl=document.getElementById('map-state-label');
+
+  fetch('https://cdn.jsdelivr.net/npm/us-atlas@3/states-10m.json')
+  .then(r=>r.json())
+  .then(us=>{
+    const ml=document.getElementById('map-loading');if(ml)ml.remove();
+    const container=document.getElementById('map-container');
+    const projection=d3.geoAlbersUsa().scale(1280).translate([W/2,H/2]);
+    const pathGen=d3.geoPath().projection(projection);
+    const svg=d3.select(container).append('svg').attr('viewBox',`0 0 ${W} ${H}`).style('width','100%').style('height','auto').style('display','block').style('background','var(--ink3)');
+    const allStates=topojson.feature(us,us.objects.states).features.filter(d=>!EXCLUDE.includes(d.id.toString().padStart(2,'0')));
+    const sEl=document.createElement('style');
+    sEl.textContent='.aec-st{fill:#0E0B1A;stroke:#2A2240;stroke-width:0.5;stroke-linejoin:round;cursor:pointer;transition:fill .2s}';
+    document.head.appendChild(sEl);
+    const sG=svg.append('g');const lG=svg.append('g');const dG=svg.append('g');const nyG=svg.append('g');
+    sG.selectAll('path').data(allStates).enter().append('path').attr('class','aec-st').attr('id',d=>'aec-st'+d.id).attr('d',pathGen).on('mouseenter',function(e,d){hlState(d.id,true)}).on('mouseleave',function(e,d){hlState(d.id,false)});
+    const nyFeat=allStates.find(d=>d.id.toString().padStart(2,'0')===NY_ID);
+    const [NYX,NYY]=pathGen.centroid(nyFeat);
+    const centerMap={};allStates.forEach(d=>{centerMap[d.id.toString().padStart(2,'0')]=pathGen.centroid(d)});
+    const lineEls={},trailEls={},dotEls={};
+    allStates.forEach((d,i)=>{
+      const fid=d.id.toString().padStart(2,'0');if(fid===NY_ID)return;
+      const [tx,ty]=centerMap[fid];const dx=tx-NYX,dy=ty-NYY;const dist=Math.sqrt(dx*dx+dy*dy);
+      const arcH=dist*0.55;const mx=(tx+NYX)/2;const my=Math.min(NYY,ty)-arcH;
+      const pathD=`M${NYX},${NYY} Q${mx},${my} ${tx},${ty}`;const totalLen=dist*1.8;
+      const base=lG.append('path').attr('d',pathD).attr('fill','none').attr('stroke','#C4922A').attr('stroke-width',0.7).attr('opacity',0.28);
+      lineEls[fid]=base;
+      const trail=lG.append('path').attr('d',pathD).attr('fill','none').attr('stroke','#F2D680').attr('stroke-width',2).attr('opacity',0).attr('stroke-dasharray',`${totalLen*0.12} ${totalLen}`).attr('stroke-dashoffset',totalLen);
+      trailEls[fid]={el:trail,len:totalLen,delay:i*75};
+      const dot=dG.append('circle').attr('cx',tx).attr('cy',ty).attr('r',3).attr('fill','#C4922A').attr('opacity',0.75).style('cursor','pointer').on('mouseenter',()=>hlState(fid,true)).on('mouseleave',()=>hlState(fid,false));
+      dotEls[fid]=dot;
+    });
+    function hlState(id,on){
+      const fid=id.toString().padStart(2,'0');
+      const base=lineEls[fid],dot=dotEls[fid];const sp=d3.select('#aec-st'+id);
+      if(base){base.attr('stroke',on?'#F2D680':'#C4922A').attr('stroke-width',on?2.5:0.7).attr('opacity',on?0.9:0.28)}
+      if(dot){dot.attr('r',on?7:3).attr('fill',on?'#F2D680':'#C4922A').attr('opacity',1)}
+      if(!sp.empty()){sp.style('fill',on?'rgba(196,146,42,0.2)':'').style('stroke',on?'#E4B84A':'').style('stroke-width',on?'1.2':'')}
+      if(sl)sl.textContent=on?(stateNames[fid]||fid):'\u00a0';
+    }
+    let startTime=null;const CYCLE=4000;
+    function animateTrails(ts){
+      if(!startTime)startTime=ts;const elapsed=ts-startTime;
+      Object.entries(trailEls).forEach(([fid,{el,len,delay}])=>{
+        const t=((elapsed-delay)%CYCLE)/CYCLE;if(t<0){el.attr('opacity',0);return;}
+        const offset=len-(t*len*1.15);el.attr('stroke-dashoffset',offset).attr('opacity',t<0.1?t*8:t>0.85?(1-t)*6.5:0.85);
+      });
+      requestAnimationFrame(animateTrails);
+    }
+    requestAnimationFrame(animateTrails);
+    nyG.append('circle').attr('cx',NYX).attr('cy',NYY).attr('r',28).attr('fill','rgba(196,146,42,0.08)');
+    nyG.append('circle').attr('cx',NYX).attr('cy',NYY).attr('r',7).attr('fill','#C4922A');
+    nyG.append('circle').attr('cx',NYX).attr('cy',NYY).attr('r',4).attr('fill','#F2D680');
+    const p1=nyG.append('circle').attr('cx',NYX).attr('cy',NYY).attr('r',7).attr('fill','none').attr('stroke','#E4B84A').attr('stroke-width',2).attr('opacity',0.8);
+    const p2=nyG.append('circle').attr('cx',NYX).attr('cy',NYY).attr('r',7).attr('fill','none').attr('stroke','#E4B84A').attr('stroke-width',1).attr('opacity',0.5);
+    function pulse(){let s=0;const step=()=>{s+=16;const t=Math.min(s/2500,1);p1.attr('r',7+(24-7)*t).attr('opacity',0.8*(1-t));if(s>600){const t2=Math.min((s-600)/1900,1);p2.attr('r',7+(38-7)*t2).attr('opacity',0.5*(1-t2));}if(t<1)requestAnimationFrame(step);else setTimeout(pulse,400);};requestAnimationFrame(step);}
+    pulse();
+    nyG.append('text').attr('x',NYX).attr('y',NYY-14).attr('text-anchor','middle').attr('fill','#F2D680').attr('font-size',9).attr('font-family','DM Mono,monospace').attr('letter-spacing',2).text('NEW YORK');
+    svg.append('text').attr('x',W/2).attr('y',H-6).attr('text-anchor','middle').attr('fill','rgba(196,146,42,0.18)').attr('font-size',8).attr('font-family','DM Mono,monospace').attr('letter-spacing',3).text('ASCENDA ENTERPRISE CAPITAL LLC — 48 STATE NETWORK');
+  }).catch(()=>{const ml=document.getElementById('map-loading');if(ml)ml.textContent='Map renders on live site.';});
+})();
+</script>
+</body>
+</html>
