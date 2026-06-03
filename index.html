@@ -733,7 +733,11 @@ footer{background:var(--ink);border-top:.5px solid var(--rule);padding:1.75rem 3
     <a href="#video" onclick="closeNav()">About</a>
     <a href="#faq" onclick="closeNav()">FAQ</a>
     <a href="#about" onclick="closeNav()">About</a>
-    <a href="#contact" onclick="closeNav()" class="nav-cta">Inquire</a>
+    <div id="market-status" style="display:flex;align-items:center;gap:.4rem;font-family:var(--font-mono);font-size:.52rem;letter-spacing:.1em;color:rgba(255,255,255,.4)">
+        <span id="market-dot" style="width:7px;height:7px;border-radius:50%;background:#666;flex-shrink:0"></span>
+        <span id="market-text">Checking...</span>
+      </div>
+      <a href="#contact" onclick="closeNav()" class="nav-cta">Inquire</a>
   </div>
   <div class="nav-hamburger" id="hamburger" onclick="toggleNav()">
     <span></span><span></span><span></span>
@@ -864,6 +868,22 @@ footer{background:var(--ink);border-top:.5px solid var(--rule);padding:1.75rem 3
 </section>
 
 <!-- STATEMENT -->
+<!-- AS SEEN IN / TRUST -->
+<div style="background:var(--ink2);border-top:.5px solid var(--rule);border-bottom:.5px solid var(--rule);padding:1.5rem 3.5rem;display:flex;align-items:center;gap:2rem;flex-wrap:wrap">
+  <div style="font-family:var(--font-mono);font-size:.55rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.2);flex-shrink:0">Data sourced from</div>
+  <div style="display:flex;gap:2rem;align-items:center;flex-wrap:wrap">
+    <div style="font-family:var(--font-mono);font-size:.7rem;font-weight:700;letter-spacing:.1em;color:rgba(255,255,255,.3);text-transform:uppercase">TraderSync</div>
+    <div style="width:1px;height:16px;background:var(--rule)"></div>
+    <div style="font-family:var(--font-mono);font-size:.7rem;font-weight:700;letter-spacing:.1em;color:rgba(255,255,255,.3);text-transform:uppercase">NAS100.PRO</div>
+    <div style="width:1px;height:16px;background:var(--rule)"></div>
+    <div style="font-family:var(--font-mono);font-size:.7rem;font-weight:700;letter-spacing:.1em;color:rgba(255,255,255,.3);text-transform:uppercase">TradingView</div>
+    <div style="width:1px;height:16px;background:var(--rule)"></div>
+    <div style="font-family:var(--font-mono);font-size:.7rem;font-weight:700;letter-spacing:.1em;color:rgba(255,255,255,.3);text-transform:uppercase">Georgia SOS</div>
+    <div style="width:1px;height:16px;background:var(--rule)"></div>
+    <div style="font-family:var(--font-mono);font-size:.7rem;font-weight:700;letter-spacing:.1em;color:rgba(255,255,255,.3);text-transform:uppercase">SEC.GOV</div>
+  </div>
+</div>
+
 <div class="statement">
   <div>
     <div class="statement-q">"I didn't build Ascenda to be the biggest fund in the room.<br/>I built it to be the biggest fund in the world."</div>
@@ -899,6 +919,51 @@ footer{background:var(--ink);border-top:.5px solid var(--rule);padding:1.75rem 3
 
   <div class="ts-disclaimer">
     <p><strong>Important disclosure:</strong> The performance data presented below has been documented and verified through TraderSync and live platform records across multiple accounts. Past performance is not indicative of future results. All trading involves significant risk of loss, including total loss of capital. Nothing on this page constitutes an offer to invest or a guarantee of returns.</p>
+  </div>
+
+  <!-- VERIFIED BADGES ROW -->
+  <div style="display:flex;align-items:center;gap:1rem;flex-wrap:wrap;margin-bottom:1.5rem">
+    
+    <div style="display:flex;align-items:center;gap:.6rem;background:rgba(46,204,113,0.08);border:.5px solid rgba(46,204,113,0.3);padding:.55rem 1.1rem">
+      <div style="width:18px;height:18px;background:#2ECC71;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.65rem;color:#06050D;font-weight:900;flex-shrink:0">✓</div>
+      <div>
+        <div style="font-family:var(--font-mono);font-size:.52rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#2ECC71">Verified by TraderSync</div>
+        <div style="font-family:var(--font-mono);font-size:.46rem;color:rgba(255,255,255,.3);margin-top:.1rem">app.tradersync.com · Feb 24, 2026</div>
+      </div>
+    </div>
+
+    <div style="display:flex;align-items:center;gap:.6rem;background:rgba(196,146,42,0.08);border:.5px solid rgba(196,146,42,0.3);padding:.55rem 1.1rem">
+      <div style="width:18px;height:18px;background:var(--gold);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.65rem;color:#06050D;font-weight:900;flex-shrink:0">✓</div>
+      <div>
+        <div style="font-family:var(--font-mono);font-size:.52rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--gold2)">Georgia LLC · Registered</div>
+        <div style="font-family:var(--font-mono);font-size:.46rem;color:rgba(255,255,255,.3);margin-top:.1rem">State of Georgia · Est. 2025</div>
+      </div>
+    </div>
+
+    <div style="display:flex;align-items:center;gap:.6rem;background:rgba(255,255,255,0.03);border:.5px solid rgba(255,255,255,0.1);padding:.55rem 1.1rem">
+      <div style="width:18px;height:18px;background:rgba(255,255,255,.15);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.65rem;color:#fff;flex-shrink:0">🔒</div>
+      <div>
+        <div style="font-family:var(--font-mono);font-size:.52rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.6)">SSL Encrypted</div>
+        <div style="font-family:var(--font-mono);font-size:.46rem;color:rgba(255,255,255,.3);margin-top:.1rem">HTTPS · 256-bit secure</div>
+      </div>
+    </div>
+
+    <div style="display:flex;align-items:center;gap:.6rem;background:rgba(255,255,255,0.03);border:.5px solid rgba(255,255,255,0.1);padding:.55rem 1.1rem">
+      <div style="width:18px;height:18px;background:rgba(255,255,255,.15);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.65rem;color:#fff;flex-shrink:0">👤</div>
+      <div>
+        <div style="font-family:var(--font-mono);font-size:.52rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.6)">Accredited Investors Only</div>
+        <div style="font-family:var(--font-mono);font-size:.46rem;color:rgba(255,255,255,.3);margin-top:.1rem">SEC Reg D · Rule 501</div>
+      </div>
+    </div>
+
+    <div style="display:flex;align-items:center;gap:.6rem;background:rgba(255,255,255,0.03);border:.5px solid rgba(255,255,255,0.1);padding:.55rem 1.1rem">
+      <div style="width:18px;height:18px;background:rgba(255,255,255,.15);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.65rem;color:#fff;flex-shrink:0">📋</div>
+      <div>
+        <div style="font-family:var(--font-mono);font-size:.52rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.6)">Form D Filing Compliant</div>
+        <div style="font-family:var(--font-mono);font-size:.46rem;color:rgba(255,255,255,.3);margin-top:.1rem">SEC · Regulation D</div>
+      </div>
+    </div>
+
   </div>
 
   <div class="kpi-grid">
@@ -1170,6 +1235,16 @@ footer{background:var(--ink);border-top:.5px solid var(--rule);padding:1.75rem 3
   <div id="map-state-label" style="text-align:center;font-family:var(--font-mono);font-size:.65rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-top:1rem;min-height:1.1rem">&nbsp;</div>
 </section>
 
+<!-- PITCH DECK DOWNLOAD -->
+<div style="background:var(--gold);padding:3.5rem 3.5rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:2rem;border-top:.5px solid rgba(6,5,13,0.15)">
+  <div>
+    <div style="font-family:var(--font-mono);font-size:.58rem;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:rgba(6,5,13,0.5);margin-bottom:.4rem">For accredited investors</div>
+    <div style="font-family:var(--font-display);font-size:1.8rem;font-weight:400;color:var(--ink);line-height:1.15">Download our Executive Summary</div>
+    <div style="font-size:.88rem;color:rgba(6,5,13,0.6);margin-top:.35rem;font-weight:300">6-page confidential overview · Performance data · Strategy · Investment terms</div>
+  </div>
+  <a href="AEC-Executive-Summary.pdf" download style="font-family:var(--font-mono);font-size:.68rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;background:var(--ink);color:var(--gold2);padding:1.1rem 2.5rem;text-decoration:none;transition:all .2s;white-space:nowrap;flex-shrink:0" onmouseover="this.style.background='var(--ink2)'" onmouseout="this.style.background='var(--ink)'">⬇ Download Executive Summary</a>
+</div>
+
 <!-- JOIN -->
 <section class="sec sec-alt" id="join">
   <div style="text-align:center;max-width:680px;margin:0 auto 4rem">
@@ -1296,6 +1371,11 @@ footer{background:var(--ink);border-top:.5px solid var(--rule);padding:1.75rem 3
         <span class="tag">Private Equity</span>
         <span class="tag">Risk Management</span>
         <span class="tag">Capital Allocation</span>
+        <span class="tag">~10 Years Experience</span>
+        <span class="tag">32,000+ Trades</span>
+        <span class="tag">78% Win Rate</span>
+        <span class="tag">Georgia LLC · Est. 2025</span>
+        <span class="tag">TraderSync Verified</span>
       </div>
       <div style="margin-top:2.5rem;padding:1.75rem;background:rgba(196,146,42,0.06);border:.5px solid var(--rule)">
         <div style="font-family:var(--font-mono);font-size:.52rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold3);margin-bottom:.6rem">Legal entity</div>
