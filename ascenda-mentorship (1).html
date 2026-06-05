@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Mentorship — Ascenda Enterprise Capital</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,300;1,400;1,700&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --gold:#C9A84C;--gold2:#E8CC7A;--gold3:#9A7A30;--gold4:#F5DFA0;
+  --ink:#06050D;--ink2:#0D0B18;--ink3:#151220;
+  --light:#F7F3EB;--light2:#EDE6D5;--light3:#DDD4BE;
+  --white:#FFFFFF;
+  --cream:rgba(255,255,255,0.95);--cream2:rgba(255,255,255,0.75);--cream3:rgba(255,255,255,0.45);
+  --dark-text:#1A1624;--dark-text2:#3A3348;--dark-text3:#6B6080;
+  --rule:rgba(201,168,76,0.15);--rule2:rgba(201,168,76,0.38);
+  --rule-dark:rgba(26,22,36,0.12);
+  --up:#3DC47A;
+}
+html{scroll-behavior:smooth}
+body{background:var(--ink);color:var(--white);font-family:'Jost',sans-serif;font-weight:300;overflow-x:hidden}
+
+/* NAV */
+nav{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:1.3rem 4rem;
+  background:rgba(6,5,13,0.96);
+  border-bottom:.5px solid var(--rule);
+  backdrop-filter:blur(20px);
+  position:sticky;top:0;z-index:100;
+}
+.nav-logo{font-family:'Playfair Display',serif;font-style:italic;font-size:1.05rem;color:var(--gold);letter-spacing:.02em}
+.nav-back{font-size:.65rem;letter-spacing:.2em;text-transform:uppercase;color:var(--cream3);text-decoration:none;font-weight:400;transition:color .2s;display:flex;align-items:center;gap:.5rem}
+.nav-back:hover{color:var(--white)}
+
+/* HERO */
+.hero{
+  padding:10rem 4rem 7rem;
+  background:var(--ink);
+  position:relative;overflow:hidden;
+  text-align:center;
+}
+.hero-bg{
+  position:absolute;inset:0;
+  background:radial-gradient(ellipse 80% 60% at 50% 40%,rgba(201,168,76,0.07) 0%,transparent 60%);
+}
+.orb{position:absolute;border-radius:50%;animation:drift 14s ease-in-out infinite alternate}
+.orb1{width:500px;height:500px;background:rgba(201,168,76,0.03);top:-150px;right:-100px}
+.orb2{width:300px;height:300px;background:rgba(201,168,76,0.025);bottom:0;left:-80px;animation-delay:-7s}
+@keyframes drift{from{transform:translate(0,0) scale(1)}to{transform:translate(20px,28px) scale(1.05)}}
+
+.hero-content{position:relative;z-index:2;max-width:800px;margin:0 auto}
+.eyebrow{font-size:.62rem;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);margin-bottom:2rem;display:flex;align-items:center;justify-content:center;gap:1rem;font-weight:400}
+.eyebrow::before,.eyebrow::after{content:'';display:block;width:40px;height:.5px;background:var(--gold)}
+
+h1{font-family:'Playfair Display',serif;font-size:clamp(3rem,6vw,5.5rem);font-weight:400;line-height:1;color:var(--white);margin-bottom:1.5rem;letter-spacing:-.02em}
+h1 em{font-style:italic;color:var(--gold2)}
+.hero-sub{font-size:1.1rem;color:var(--cream2);line-height:1.95;max-width:560px;margin:0 auto 3rem;font-weight:300}
+
+/* WARNING BAND */
+.warning-band{
+  background:rgba(201,168,76,0.06);
+  border-top:.5px solid var(--rule);border-bottom:.5px solid var(--rule);
+  padding:2rem 4rem;text-align:center;
+}
+.wb-text{font-size:.82rem;color:var(--cream2);line-height:1.85;font-weight:300;max-width:700px;margin:0 auto}
+.wb-text strong{color:var(--gold);font-weight:400}
+
+/* WHAT YOU GET */
+.wyg-sec{padding:8rem 4rem;background:var(--ink2)}
+.sec-label{font-size:.62rem;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);margin-bottom:1.2rem;display:flex;align-items:center;gap:.9rem;font-weight:400}
+.sec-label::before{content:'';display:block;width:32px;height:.5px;background:var(--gold)}
+.sec-label-center{justify-content:center}
+.sec-label-center::before,.sec-label-center::after{content:'';display:block;width:32px;height:.5px;background:var(--gold)}
+h2{font-family:'Playfair Display',serif;font-size:clamp(2rem,3.5vw,3rem);font-weight:400;color:var(--white);line-height:1.12;margin-bottom:1rem}
+h2 em{font-style:italic;color:var(--gold2)}
+
+.wyg-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--rule);margin-top:3.5rem}
+.wc{background:var(--ink2);padding:2.75rem 2.5rem;transition:background .3s}
+.wc:hover{background:rgba(201,168,76,0.05)}
+.wc-num{font-family:'Playfair Display',serif;font-size:2.5rem;font-style:italic;color:rgba(201,168,76,0.2);margin-bottom:1rem;line-height:1}
+.wc h3{font-size:1.1rem;font-weight:400;color:var(--white);margin-bottom:.65rem;font-family:'Playfair Display',serif}
+.wc p{font-size:.88rem;color:var(--cream2);line-height:1.9;font-weight:300}
+
+/* PRICING */
+.pricing-sec{padding:8rem 4rem;background:var(--ink);text-align:center}
+.pricing-intro{font-size:1rem;color:var(--cream2);line-height:1.9;max-width:580px;margin:0 auto 4rem;font-weight:300}
+
+.pricing-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--rule);max-width:1050px;margin:0 auto;text-align:left}
+
+.pc{background:var(--ink2);padding:3rem 2.5rem;position:relative;overflow:hidden;transition:background .3s;display:flex;flex-direction:column}
+.pc:hover{background:rgba(201,168,76,0.04)}
+.pc.featured{background:var(--gold);border:none}
+.pc.featured:hover{background:var(--gold2)}
+.pc-tag{font-size:.55rem;letter-spacing:.22em;text-transform:uppercase;font-weight:500;margin-bottom:1.75rem}
+.pc:not(.featured) .pc-tag{color:var(--gold3)}
+.pc.featured .pc-tag{color:rgba(6,5,13,.55)}
+.pc-name{font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:400;margin-bottom:.5rem}
+.pc:not(.featured) .pc-name{color:var(--white)}
+.pc.featured .pc-name{color:var(--ink)}
+.pc-duration{font-size:.68rem;letter-spacing:.15em;text-transform:uppercase;font-weight:300;margin-bottom:2rem}
+.pc:not(.featured) .pc-duration{color:var(--cream3)}
+.pc.featured .pc-duration{color:rgba(6,5,13,.5)}
+.pc-price{font-family:'Playfair Display',serif;font-size:3rem;font-style:italic;line-height:1;margin-bottom:.35rem}
+.pc:not(.featured) .pc-price{color:var(--gold2)}
+.pc.featured .pc-price{color:var(--ink)}
+.pc-period{font-size:.65rem;letter-spacing:.12em;text-transform:uppercase;font-weight:300;margin-bottom:2rem}
+.pc:not(.featured) .pc-period{color:var(--cream3)}
+.pc.featured .pc-period{color:rgba(6,5,13,.5)}
+.pc-divider{height:.5px;margin-bottom:2rem}
+.pc:not(.featured) .pc-divider{background:var(--rule)}
+.pc.featured .pc-divider{background:rgba(6,5,13,.15)}
+.pc-features{display:flex;flex-direction:column;gap:.75rem;flex:1;margin-bottom:2rem}
+.pf{display:flex;align-items:flex-start;gap:.75rem;font-size:.82rem;font-weight:300;line-height:1.6}
+.pc:not(.featured) .pf{color:var(--cream2)}
+.pc.featured .pf{color:rgba(6,5,13,.75)}
+.pf-icon{flex-shrink:0;margin-top:.1rem;font-size:.7rem}
+.pc:not(.featured) .pf-icon{color:var(--gold)}
+.pc.featured .pf-icon{color:var(--ink)}
+
+.pc-btn{display:block;text-align:center;font-size:.63rem;letter-spacing:.2em;text-transform:uppercase;font-weight:500;padding:1rem 1.5rem;text-decoration:none;font-family:'Jost',sans-serif;transition:all .2s;margin-top:auto;cursor:pointer;border:none}
+.pc:not(.featured) .pc-btn{background:transparent;color:var(--gold);border:.5px solid var(--rule2)}
+.pc:not(.featured) .pc-btn:hover{border-color:var(--gold);background:rgba(201,168,76,0.08)}
+.pc.featured .pc-btn{background:var(--ink);color:var(--gold2)}
+.pc.featured .pc-btn:hover{background:var(--ink2)}
+
+.pc-badge{position:absolute;top:0;right:2rem;background:var(--ink);color:var(--gold);font-size:.55rem;letter-spacing:.18em;text-transform:uppercase;padding:.4rem .9rem;font-weight:500;font-family:'Jost',sans-serif}
+
+/* STATEMENT */
+.statement-sec{
+  background:var(--gold);padding:6rem 4rem;text-align:center;
+}
+.statement-quote{font-family:'Playfair Display',serif;font-size:clamp(1.8rem,3.5vw,3rem);font-style:italic;font-weight:400;color:var(--ink);line-height:1.2;margin-bottom:1rem;max-width:800px;margin-left:auto;margin-right:auto}
+.statement-attr{font-size:.65rem;letter-spacing:.25em;text-transform:uppercase;color:rgba(6,5,13,.5);font-weight:500}
+
+/* WHO IS THIS FOR */
+.who-sec{padding:8rem 4rem;background:var(--light2)}
+.who-grid{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center}
+.who-list{display:flex;flex-direction:column;gap:1.25rem;margin-top:2.5rem}
+.who-item{display:flex;align-items:flex-start;gap:1rem;padding:1.25rem 1.5rem;background:var(--white);border:.5px solid var(--rule-dark)}
+.who-icon{font-size:1.2rem;flex-shrink:0}
+.who-text h4{font-size:.92rem;font-weight:600;color:var(--dark-text);margin-bottom:.3rem}
+.who-text p{font-size:.8rem;color:var(--dark-text3);line-height:1.7;font-weight:300}
+
+.not-list{display:flex;flex-direction:column;gap:.85rem;margin-top:2rem}
+.not-item{display:flex;align-items:center;gap:.75rem;font-size:.88rem;color:var(--dark-text2);font-weight:300}
+.not-icon{color:#E05555;flex-shrink:0}
+
+/* FAQ */
+.faq-sec{padding:8rem 4rem;background:var(--ink2)}
+.faq-list{margin-top:3rem;display:flex;flex-direction:column;gap:0;border:.5px solid var(--rule);max-width:800px}
+.faq-item{border-bottom:.5px solid var(--rule)}
+.faq-item:last-child{border-bottom:none}
+.faq-q{padding:1.5rem 2rem;display:flex;justify-content:space-between;align-items:center;cursor:pointer;transition:background .2s}
+.faq-q:hover{background:rgba(201,168,76,0.05)}
+.faq-q-text{font-size:.95rem;font-weight:400;color:var(--white)}
+.faq-icon{width:22px;height:22px;background:var(--gold3);color:var(--white);display:flex;align-items:center;justify-content:center;font-size:.75rem;flex-shrink:0;transition:transform .3s}
+.faq-a{max-height:0;overflow:hidden;transition:max-height .35s ease,padding .35s ease;font-size:.88rem;color:var(--cream2);line-height:1.9;font-weight:300;padding:0 2rem}
+.faq-item.open .faq-a{max-height:300px;padding:0 2rem 1.5rem}
+.faq-item.open .faq-icon{transform:rotate(45deg)}
+
+/* APPLY */
+.apply-sec{padding:8rem 4rem;background:var(--ink3)}
+.apply-inner{display:grid;grid-template-columns:1fr 1fr;gap:6rem;align-items:start;max-width:1000px;margin:0 auto}
+.apply-left p{font-size:1rem;color:var(--cream2);line-height:2;font-weight:300;margin-bottom:1.5rem}
+.apply-form{background:rgba(255,255,255,0.03);border:.5px solid var(--rule);padding:2.5rem}
+.cf{display:flex;flex-direction:column;gap:1.2rem}
+.cff{display:flex;flex-direction:column;gap:.4rem}
+.cff label{font-size:.58rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.3);font-weight:400}
+.cff input,.cff textarea,.cff select{background:rgba(255,255,255,.03);border:.5px solid rgba(201,168,76,.22);color:var(--white);font-family:'Jost',sans-serif;font-size:.9rem;font-weight:300;padding:.85rem 1rem;outline:none;transition:border-color .2s;width:100%}
+.cff input:focus,.cff textarea:focus,.cff select:focus{border-color:var(--gold)}
+.cff textarea{resize:vertical;min-height:90px}
+.cff select option{background:#151220}
+.btn-gold{font-size:.65rem;letter-spacing:.22em;text-transform:uppercase;background:var(--gold);color:var(--ink);border:none;padding:1.1rem 2rem;cursor:pointer;font-family:'Jost',sans-serif;font-weight:500;transition:background .2s;width:100%;margin-top:.5rem}
+.btn-gold:hover{background:var(--gold2)}
+
+footer{
+  padding:2rem 4rem;border-top:.5px solid var(--rule);
+  background:var(--ink);
+  display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;
+}
+.flogo{font-family:'Playfair Display',serif;font-style:italic;font-size:.9rem;color:var(--gold3)}
+.fcopy{font-size:.6rem;letter-spacing:.08em;color:rgba(255,255,255,.15)}
+
+/* RESPONSIVE */
+@media(max-width:900px){
+  nav{padding:1rem 1.5rem}
+  .hero{padding:7rem 1.5rem 4rem}
+  .warning-band,.wyg-sec,.pricing-sec,.who-sec,.faq-sec,.apply-sec,.statement-sec{padding:5rem 1.5rem}
+  .wyg-grid,.pricing-grid{grid-template-columns:1fr}
+  .pc.featured .pc-badge{display:none}
+  .who-grid,.apply-inner{grid-template-columns:1fr;gap:3rem}
+  footer{padding:2rem 1.5rem;flex-direction:column;text-align:center}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">Ascenda Enterprise Capital</div>
+  <a href="index.html" class="nav-back">← Back to main site</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="orb orb1"></div>
+  <div class="orb orb2"></div>
+  <div class="hero-content">
+    <div class="eyebrow">Ascenda Mentorship Program</div>
+    <h1>Learn from the<br/><em>inside.</em></h1>
+    <p class="hero-sub">This is not a course. This is not a YouTube channel. This is direct, unfiltered access to how Izaiah Cottle thinks, trades, and builds — reserved for those who are serious about changing their financial trajectory.</p>
+    <a href="#apply" style="display:inline-block;font-size:.65rem;letter-spacing:.22em;text-transform:uppercase;background:var(--gold);color:var(--ink);padding:1.1rem 2.75rem;text-decoration:none;font-family:'Jost',sans-serif;font-weight:500;transition:background .2s"
+      onmouseover="this.style.background='var(--gold2)'"
+      onmouseout="this.style.background='var(--gold)'">Apply for Mentorship</a>
+  </div>
+</section>
+
+<!-- WARNING BAND -->
+<div class="warning-band">
+  <p class="wb-text">
+    <strong>Spots are extremely limited.</strong> Mentorship under Izaiah Cottle is a rare opportunity that opens infrequently. Applications are reviewed personally and most are declined. If you are not serious, do not apply. If you are — this could be the most important decision you make.
+  </p>
+</div>
+
+<!-- WHAT YOU GET -->
+<section class="wyg-sec">
+  <div class="sec-label">What's included</div>
+  <h2>What you actually <em>get</em></h2>
+  <p style="font-size:1rem;color:var(--cream2);line-height:1.9;font-weight:300;max-width:560px;margin-top:.5rem">Every tier includes real, hands-on education. Not theory. Not generic advice. The actual frameworks, strategies, and thinking Izaiah uses to generate results.</p>
+  <div class="wyg-grid">
+    <div class="wc">
+      <div class="wc-num">01</div>
+      <h3>Trading Education</h3>
+      <p>Learn how to read markets, manage risk, size positions, and develop the mental framework of a professional trader. Equities, forex, derivatives, and macro — all covered at depth.</p>
+    </div>
+    <div class="wc">
+      <div class="wc-num">02</div>
+      <h3>Live Trade Reviews</h3>
+      <p>Watch real trades broken down in real time. Understand the entry, the reasoning, the risk management, and the exit. Learn by seeing, not just reading.</p>
+    </div>
+    <div class="wc">
+      <div class="wc-num">03</div>
+      <h3>1-on-1 Sessions</h3>
+      <p>Direct access to Izaiah. Ask questions, get feedback on your trades, review your portfolio, and get personalized guidance based on your specific goals and situation.</p>
+    </div>
+    <div class="wc">
+      <div class="wc-num">04</div>
+      <h3>Investment Frameworks</h3>
+      <p>Access to Ascenda's internal playbooks on capital allocation, real estate deal analysis, and private equity evaluation. The same frameworks used to generate $50M+ in returns.</p>
+    </div>
+    <div class="wc">
+      <div class="wc-num">05</div>
+      <h3>Mindset & Psychology</h3>
+      <p>The market is 80% mental. Learn how to manage emotion, handle losing streaks, stay disciplined in volatile conditions, and think like an operator — not a gambler.</p>
+    </div>
+    <div class="wc">
+      <div class="wc-num">06</div>
+      <h3>Network Access</h3>
+      <p>Proximity to Ascenda's network of investors, operators, and deal flow. The people you meet in this program could change the trajectory of your career.</p>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="pricing-sec" id="pricing">
+  <div style="display:flex;justify-content:center">
+    <div class="sec-label sec-label-center">Mentorship tiers</div>
+  </div>
+  <h2 style="margin-bottom:.75rem">Choose your <em>level</em></h2>
+  <p class="pricing-intro">Three tiers. Each one is a real commitment — from both sides. Pick the level that matches where you are and where you want to go.</p>
+
+  <div class="pricing-grid">
+
+    <!-- FOUNDATION -->
+    <div class="pc">
+      <div class="pc-tag">Foundation</div>
+      <div class="pc-name">The Foundation</div>
+      <div class="pc-duration">3 Month Program</div>
+      <div class="pc-price">$750</div>
+      <div class="pc-period">One-time program investment</div>
+      <div class="pc-divider"></div>
+      <div class="pc-features">
+        <div class="pf"><span class="pf-icon">✦</span><span>Weekly group sessions with Izaiah</span></div>
+        <div class="pf"><span class="pf-icon">✦</span><span>Core trading & investment curriculum</span></div>
+        <div class="pf"><span class="pf-icon">✦</span><span>Access to recorded trade reviews</span></div>
+        <div class="pf"><span class="pf-icon">✦</span><span>Private community access</span></div>
+        <div class="pf"><span class="pf-icon">✦</span><span>Monthly 1-on-1 check-in (30 min)</span></div>
+        <div class="pf"><span class="pf-icon">✦</span><span>Ascenda framework documents</span></div>
+      </div>
+      <a href="#apply" class="pc-btn">Apply for Foundation →</a>
+    </div>
+
+    <!-- ACCELERATOR — FEATURED -->
+    <div class="pc featured">
+      <div class="pc-badge">Most Popular</div>
+      <div class="pc-tag">Accelerator</div>
+      <div class="pc-name">The Accelerator</div>
+      <div class="pc-duration">6 Month Program</div>
+      <div class="pc-price">$4,500</div>
+      <div class="pc-period">One-time program investment</div>
+      <div class="pc-divider"></div>
+      <div class="pc-features">
+        <div class="pf"><span class="pf-icon">✦</span><span>Everything in Foundation</span></div>
+        <div class="pf"><span class="pf-icon">✦</span><span>Bi-weekly 1-on-1 sessions with Izaiah</span></div>
+        <div class="pf"><span class="pf-icon">✦</span><span>Live trade alerts & analysis</span></div>
+        <div class="pf"><span class="pf-icon">✦</span><span>Personal portfolio review & feedback</span></div>
+        <div class="pf"><span class="pf-icon">✦</span><span>Real estate & private equity modules</span></div>
+        <div class="pf"><span class="pf-icon">✦</span><span>Direct messaging access (business hours)</span></div>
+        <div class="pf"><span class="pf-icon">✦</span><span>Priority network introductions</span></div>
+      </div>
+      <a href="#apply" class="pc-btn">Apply for Accelerator →</a>
+    </div>
+
+    <!-- ELITE -->
+    <div class="pc">
+      <div class="pc-tag">Elite</div>
+      <div class="pc-name">The Elite</div>
+      <div class="pc-duration">12 Month Program</div>
+      <div class="pc-price">$35,000</div>
+      <div class="pc-period">One-time program investment</div>
+      <div class="pc-divider"></div>
+      <div class="pc-features">
+        <div class="pf"><span class="pf-icon">✦</span><span>Everything in Accelerator</span></div>
+        <div class="pf"><span class="pf-icon">✦</span><span>Weekly 1-on-1 sessions with Izaiah</span></div>
+        <div class="pf"><span class="pf-icon">✦</span><span>Full Ascenda internal playbooks</span></div>
+        <div class="pf"><span class="pf-icon">✦</span><span>Co-investment opportunities (case by case)</span></div>
+        <div class="pf"><span class="pf-icon">✦</span><span>Unlimited direct messaging access</span></div>
+        <div class="pf"><span class="pf-icon">✦</span><span>Ascenda deal flow visibility</span></div>
+        <div class="pf"><span class="pf-icon">✦</span><span>End-of-program performance review</span></div>
+        <div class="pf"><span class="pf-icon">✦</span><span>Potential for ongoing relationship</span></div>
+      </div>
+      <a href="#apply" class="pc-btn">Apply for Elite →</a>
+    </div>
+
+  </div>
+
+  <p style="margin-top:2rem;font-size:.72rem;color:rgba(255,255,255,.25);letter-spacing:.08em;font-family:'Jost',sans-serif">
+    All pricing discussed privately upon application. No public pricing to protect program integrity.
+  </p>
+</section>
+
+<!-- STATEMENT -->
+<div class="statement-sec">
+  <div class="statement-quote">"I'm not looking for students. I'm looking for the ones who are already moving — and just need the right person in their corner."</div>
+  <div class="statement-attr">— Izaiah Cottle, Founder & CEO · Ascenda Enterprise Capital</div>
+</div>
+
+<!-- WHO IS THIS FOR -->
+<section class="who-sec">
+  <div class="who-grid">
+    <div>
+      <div style="font-size:.62rem;letter-spacing:.28em;text-transform:uppercase;color:var(--gold3);margin-bottom:1.2rem;display:flex;align-items:center;gap:.9rem;font-weight:400">
+        <span style="display:block;width:32px;height:.5px;background:var(--gold3)"></span>
+        This is for you if...
+      </div>
+      <h2 style="font-family:'Playfair Display',serif;font-size:clamp(2rem,3vw,2.6rem);font-weight:400;color:var(--dark-text);line-height:1.15;margin-bottom:.5rem">
+        Who this <em style="color:var(--gold3)">is</em> for
+      </h2>
+      <div class="who-list">
+        <div class="who-item">
+          <div class="who-icon">📈</div>
+          <div class="who-text"><h4>Aspiring traders</h4><p>You want to learn markets properly — from someone who actually trades, not someone who sells courses about trading.</p></div>
+        </div>
+        <div class="who-item">
+          <div class="who-icon">🏗️</div>
+          <div class="who-text"><h4>Hungry builders</h4><p>You're building something — a portfolio, a business, a future — and you need a framework, not just motivation.</p></div>
+        </div>
+        <div class="who-item">
+          <div class="who-icon">💡</div>
+          <div class="who-text"><h4>Smart, coachable people</h4><p>You can take feedback. You can implement. You don't need hand-holding — you need direction and the right tools.</p></div>
+        </div>
+        <div class="who-item">
+          <div class="who-icon">🎯</div>
+          <div class="who-text"><h4>Long-term thinkers</h4><p>You're not looking for a get-rich-quick scheme. You want to build real, durable wealth over time.</p></div>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div style="font-size:.62rem;letter-spacing:.28em;text-transform:uppercase;color:#E05555;margin-bottom:1.2rem;display:flex;align-items:center;gap:.9rem;font-weight:400">
+        <span style="display:block;width:32px;height:.5px;background:#E05555"></span>
+        This is NOT for you if...
+      </div>
+      <h2 style="font-family:'Playfair Display',serif;font-size:clamp(2rem,3vw,2.6rem);font-weight:400;color:var(--dark-text);line-height:1.15;margin-bottom:1.5rem">
+        Who this <em style="color:#E05555;font-style:italic">isn't</em> for
+      </h2>
+      <div class="not-list">
+        <div class="not-item"><span class="not-icon">✗</span> You're looking for guaranteed returns or overnight success</div>
+        <div class="not-item"><span class="not-icon">✗</span> You want someone to just tell you what to buy and sell</div>
+        <div class="not-item"><span class="not-icon">✗</span> You're not willing to put in the work between sessions</div>
+        <div class="not-item"><span class="not-icon">✗</span> You can't take direct, honest feedback</div>
+        <div class="not-item"><span class="not-icon">✗</span> You're not serious about a long-term financial commitment</div>
+        <div class="not-item"><span class="not-icon">✗</span> You want entertainment, not education</div>
+        <div class="not-item"><span class="not-icon">✗</span> You're only here because it sounds cool</div>
+      </div>
+      <div style="margin-top:2.5rem;padding:1.75rem;background:var(--light);border-left:3px solid var(--gold3)">
+        <p style="font-size:.88rem;color:var(--dark-text2);line-height:1.85;font-weight:300;font-style:italic">"Most people who apply won't get in. That's not arrogance — that's the standard. The ones who do get in understand that this is a privilege, not a product."</p>
+        <p style="font-size:.65rem;color:var(--dark-text3);margin-top:.75rem;letter-spacing:.1em;text-transform:uppercase;font-weight:500">— Izaiah Cottle</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq-sec">
+  <div class="sec-label">Questions</div>
+  <h2>Common <em>questions</em></h2>
+  <div class="faq-list">
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">
+        <span class="faq-q-text">Do I need prior trading experience?</span>
+        <div class="faq-icon">+</div>
+      </div>
+      <div class="faq-a">No — but you need the right mindset. Beginners with serious intent are welcome. What matters is your commitment, your coachability, and your willingness to do the work. Experience helps, but hunger matters more.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">
+        <span class="faq-q-text">Why is pricing not listed publicly?</span>
+        <div class="faq-icon">+</div>
+      </div>
+      <div class="faq-a">Because pricing is not the filter — fit is. We don't want people applying based on a number. We want to understand who you are first, then discuss investment. Every applicant is treated individually.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">
+        <span class="faq-q-text">How many spots are available?</span>
+        <div class="faq-icon">+</div>
+      </div>
+      <div class="faq-a">Extremely few. This is intentional. Izaiah only takes on mentees he can give real time and attention to. When spots are full, the program closes — sometimes for months. Apply now if you're serious.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">
+        <span class="faq-q-text">What happens after I apply?</span>
+        <div class="faq-icon">+</div>
+      </div>
+      <div class="faq-a">Your application is reviewed personally by Izaiah. If you're a potential fit, you'll be contacted for a direct conversation to discuss your goals, your situation, and which tier makes sense. Most applications are declined — but every one is read.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">
+        <span class="faq-q-text">Is there a refund policy?</span>
+        <div class="faq-icon">+</div>
+      </div>
+      <div class="faq-a">All sales are final. This is a commitment — from you and from Izaiah. We take this seriously and expect you to as well. We only accept mentees we genuinely believe we can help, which is why the application process exists.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">
+        <span class="faq-q-text">Can I upgrade tiers mid-program?</span>
+        <div class="faq-icon">+</div>
+      </div>
+      <div class="faq-a">Yes, on a case-by-case basis. If you're in the Foundation or Accelerator tier and want to move up, we can discuss upgrading at the appropriate time. This is always at Izaiah's discretion.</div>
+    </div>
+  </div>
+</section>
+
+<!-- APPLY -->
+<section class="apply-sec" id="apply">
+  <div class="apply-inner">
+    <div class="apply-left">
+      <div class="sec-label">Apply now</div>
+      <h2>Ready to <em>apply?</em></h2>
+      <p>Fill out the application below. Be honest, be specific, and be serious. Generic applications get generic responses — which is none.</p>
+      <p>If you're a fit, Izaiah will reach out personally within 72 hours to schedule a conversation.</p>
+      <div style="margin-top:2rem;padding:1.5rem 1.75rem;background:rgba(201,168,76,0.06);border:.5px solid var(--rule)">
+        <div style="font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold3);margin-bottom:.5rem;font-weight:400">Direct contact</div>
+        <a href="mailto:ascendaenterprise@gmail.com" style="font-size:.95rem;color:var(--white);text-decoration:none;font-weight:300">ascendaenterprise@gmail.com</a>
+      </div>
+    </div>
+    <div class="apply-form">
+      <form class="cf" action="https://formspree.io/f/mvzywgwb" method="POST">
+        <input type="hidden" name="application_type" value="Mentorship Application"/>
+        <div class="cff"><label>Full name</label><input type="text" name="name" placeholder="Your full name" required/></div>
+        <div class="cff"><label>Email</label><input type="email" name="email" placeholder="you@example.com" required/></div>
+        <div class="cff"><label>Phone</label><input type="tel" name="phone" placeholder="Your phone number"/></div>
+        <div class="cff">
+          <label>Tier of interest</label>
+          <select name="tier">
+            <option value="">Select a tier</option>
+            <option>Foundation — 3 Month</option>
+            <option>Accelerator — 6 Month</option>
+            <option>Elite — 12 Month</option>
+            <option>Not sure yet</option>
+          </select>
+        </div>
+        <div class="cff">
+          <label>Current trading / investing experience</label>
+          <select name="experience">
+            <option value="">Select your level</option>
+            <option>Complete beginner</option>
+            <option>Some experience (under 1 year)</option>
+            <option>1–3 years experience</option>
+            <option>3+ years experience</option>
+          </select>
+        </div>
+        <div class="cff"><label>What is your #1 financial goal right now?</label><textarea name="goal" placeholder="Be specific. What do you actually want to achieve?" required></textarea></div>
+        <div class="cff"><label>Why Ascenda? Why now?</label><textarea name="why" placeholder="What made you apply? What are you looking for that you haven't found elsewhere?" required></textarea></div>
+        <button type="submit" class="btn-gold">Submit Application →</button>
+        <p style="font-size:.65rem;color:rgba(255,255,255,.22);margin-top:.75rem;text-align:center;font-family:'Jost',sans-serif">Applications reviewed personally. Most are declined. Serious applicants only.</p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div>
+    <div class="flogo">Ascenda Enterprise Capital</div>
+    <div style="font-size:.58rem;color:rgba(255,255,255,.2);letter-spacing:.1em;text-transform:uppercase;margin-top:.3rem;font-family:'Jost',sans-serif">Mentorship Program</div>
+  </div>
+  <a href="index.html" style="font-size:.62rem;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,.3);text-decoration:none;font-family:'Jost',sans-serif;transition:color .2s"
+    onmouseover="this.style.color='var(--gold)'"
+    onmouseout="this.style.color='rgba(255,255,255,.3)'">← Back to main site</a>
+  <div class="fcopy">© 2025 Ascenda Enterprise Capital. All rights reserved.</div>
+</footer>
+
+<script>
+function toggleFaq(el){
+  const item=el.parentElement;
+  const isOpen=item.classList.contains('open');
+  document.querySelectorAll('.faq-item').forEach(i=>i.classList.remove('open'));
+  if(!isOpen) item.classList.add('open');
+}
+</script>
+</body>
+</html>
