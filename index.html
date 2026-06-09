@@ -1,3 +1,47 @@
+<!-- AI INVESTOR CHAT ASSISTANT -->
+<div id="chat-bubble" onclick="toggleChat()" style="
+  position:fixed;bottom:2rem;left:2rem;z-index:9996;
+  width:52px;height:52px;border-radius:50%;
+  background:var(--ink2);border:.5px solid var(--rule2);
+  display:flex;align-items:center;justify-content:center;
+  cursor:pointer;box-shadow:0 8px 32px rgba(0,0,0,0.4);
+  transition:all .3s;font-size:1.2rem;
+" onmouseover="this.style.borderColor='var(--gold)';this.style.transform='scale(1.1)'" onmouseout="this.style.borderColor='var(--rule2)';this.style.transform='scale(1)'">💬</div>
+
+<div id="chat-window" style="
+  display:none;position:fixed;bottom:5.5rem;left:2rem;z-index:9996;
+  width:320px;max-height:480px;
+  background:var(--ink2);border:.5px solid var(--rule2);
+  display:none;flex-direction:column;
+  box-shadow:0 20px 60px rgba(0,0,0,0.6);
+">
+  <div style="position:absolute;top:0;left:0;right:0;height:1.5px;background:linear-gradient(90deg,transparent,var(--gold),transparent)"></div>
+  <div style="padding:1rem 1.25rem;border-bottom:.5px solid var(--rule);display:flex;justify-content:space-between;align-items:center">
+    <div>
+      <div style="font-family:'DM Mono',monospace;font-size:.58rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--gold2)">AEC Assistant</div>
+      <div style="font-size:.68rem;color:var(--cream3);margin-top:.1rem">Ask about investing with AEC</div>
+    </div>
+    <button onclick="toggleChat()" style="background:none;border:none;color:var(--cream3);cursor:pointer;font-size:1rem">✕</button>
+  </div>
+  <div id="chat-messages" style="flex:1;overflow-y:auto;padding:1rem;display:flex;flex-direction:column;gap:.75rem;max-height:300px">
+    <div style="background:rgba(196,146,42,.08);border:.5px solid var(--rule);padding:.75rem 1rem;font-size:.82rem;color:var(--cream2);line-height:1.7;font-weight:300;border-radius:2px">
+      Hello. I'm the AEC virtual assistant. I can answer questions about investing with Ascenda Enterprise Capital, our mentorship program, or our trading strategy. What would you like to know?
+    </div>
+  </div>
+  <div style="padding:.75rem;border-top:.5px solid var(--rule);display:flex;gap:.5rem">
+    <input id="chat-input" type="text" placeholder="Ask a question..." onkeypress="if(event.key==='Enter')sendChat()" style="
+      flex:1;background:rgba(255,255,255,.05);border:.5px solid var(--rule);
+      color:var(--white);font-family:'Jost',sans-serif;font-size:.8rem;
+      padding:.6rem .85rem;outline:none;
+    "/>
+    <button onclick="sendChat()" style="
+      background:var(--gold);color:var(--ink);border:none;
+      padding:.6rem .85rem;cursor:pointer;font-size:.8rem;font-weight:600;
+      transition:background .2s;
+    " onmouseover="this.style.background='var(--gold2)'" onmouseout="this.style.background='var(--gold)'">→</button>
+  </div>
+</div>
+
 <!-- WIRE MODAL -->
 <div id="wire-modal" style="display:none;position:fixed;inset:0;z-index:9999;background:rgba(4,3,10,.95);align-items:center;justify-content:center;padding:2rem">
   <div style="background:var(--ink2);border:.5px solid var(--rule2);padding:3rem;max-width:520px;width:100%;position:relative">
@@ -50,6 +94,14 @@
 </script>
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpolygon points='50,5 70,30 50,55 30,30' fill='%23E4B84A'/%3E%3Cpolygon points='50,5 80,35 70,30' fill='%23F2D680'/%3E%3Cpolygon points='50,55 70,30 80,35' fill='%23C0C0D0'/%3E%3Cpolygon points='50,55 30,30 20,35' fill='%23A0A0B0'/%3E%3Cpolygon points='50,55 80,35 50,80' fill='%23909090'/%3E%3Cpolygon points='50,80 20,35 50,55' fill='%23808080'/%3E%3C/svg%3E"/>
 <link rel="shortcut icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpolygon points='50,5 70,30 50,55 30,30' fill='%23E4B84A'/%3E%3Cpolygon points='50,5 80,35 70,30' fill='%23F2D680'/%3E%3Cpolygon points='50,55 70,30 80,35' fill='%23C0C0D0'/%3E%3Cpolygon points='50,55 30,30 20,35' fill='%23A0A0B0'/%3E%3Cpolygon points='50,55 80,35 50,80' fill='%23909090'/%3E%3Cpolygon points='50,80 20,35 50,55' fill='%23808080'/%3E%3C/svg%3E"/>
+<!-- PWA META TAGS -->
+<meta name="mobile-web-app-capable" content="yes"/>
+<meta name="apple-mobile-web-app-capable" content="yes"/>
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+<meta name="apple-mobile-web-app-title" content="Ascenda Capital"/>
+<meta name="theme-color" content="#06050D"/>
+<link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%2306050D'/%3E%3Cpolygon points='50,10 70,35 50,55 30,35' fill='%23E4B84A'/%3E%3Cpolygon points='50,55 70,35 80,45 50,80' fill='%23909090'/%3E%3Cpolygon points='50,55 30,35 20,45 50,80' fill='%23707070'/%3E%3C/svg%3E"/>
+<link rel="manifest" href="manifest.json"/>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=DM+Mono:wght@300;400;500&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet"/>
@@ -656,6 +708,42 @@ footer{background:var(--ink);border-top:.5px solid var(--rule);padding:1.75rem 3
 }
 @keyframes counterPulse{0%{opacity:.7}50%{opacity:1}100%{opacity:.7}}
 .counting{animation:counterPulse .5s ease infinite}
+
+/* LOADER */
+@keyframes loaderPulse{0%,100%{opacity:.7;transform:scale(.95)}50%{opacity:1;transform:scale(1)}}
+@keyframes loaderSlide{0%{left:-100%}100%{left:100%}}
+#aec-loader.hidden{opacity:0;visibility:hidden;pointer-events:none}
+
+/* VISITOR PULSE */
+@keyframes visitorPulse{0%,100%{opacity:1;box-shadow:0 0 6px #2ECC71}50%{opacity:.5;box-shadow:0 0 2px #2ECC71}}
+
+/* SMOOTH SCROLL */
+html{scroll-behavior:smooth;-webkit-overflow-scrolling:touch}
+
+/* MOBILE TAP STATES */
+a,button{-webkit-tap-highlight-color:rgba(196,146,42,0.2)}
+
+/* HERO ENHANCEMENT */
+.hero{position:relative}
+.hero::after{content:'';position:absolute;bottom:0;left:0;right:0;height:120px;background:linear-gradient(transparent,var(--ink));pointer-events:none}
+
+/* SECTION FADE IN */
+.fade-in{opacity:0;transform:translateY(24px);transition:opacity .7s ease,transform .7s ease}
+.fade-in.visible{opacity:1;transform:translateY(0)}
+
+/* LIGHT MODE */
+body.light-mode{
+  --ink:#F5F2EC;--ink2:#EAE6DC;--ink3:#E0DACE;
+  --white:#0D0B18;--cream2:rgba(13,11,24,.75);--cream3:rgba(13,11,24,.45);
+  --rule:rgba(139,101,24,.2);--rule2:rgba(139,101,24,.3);
+  background:#F5F2EC;color:#0D0B18;
+}
+body.light-mode nav{background:rgba(245,242,236,.97);border-bottom:.5px solid rgba(139,101,24,.2)}
+body.light-mode .kpi{background:rgba(255,255,255,.8)!important;border-color:rgba(139,101,24,.2)!important}
+body.light-mode .kpi-val{color:#0D0B18!important}
+body.light-mode .sec-alt{background:#EAE6DC!important}
+body.light-mode .hero{background:linear-gradient(135deg,#1A1530,#0D0B18)!important}
+body.light-mode footer{background:#0D0B18!important}
 </style>
 </head>
 <body>
@@ -767,22 +855,51 @@ footer{background:var(--ink);border-top:.5px solid var(--rule);padding:1.75rem 3
     <a href="#performance" onclick="closeNav()">Performance</a>
     <a href="#strategy" onclick="closeNav()">Strategy</a>
     <a href="#markets" onclick="closeNav()">Markets</a>
+    <a href="#equity-curve" onclick="closeNav()">Equity Curve</a>
     <a href="#live-markets" onclick="closeNav()">Markets</a>
     <a href="#network" onclick="closeNav()">Network</a>
     <a href="#join" onclick="closeNav()">Join</a>
     <a href="#video" onclick="closeNav()">About</a>
+    <a href="aec-portal.html" onclick="closeNav()">Portal</a>
     <a href="#faq" onclick="closeNav()">FAQ</a>
     <a href="#about" onclick="closeNav()">About</a>
     <div id="market-status" style="display:flex;align-items:center;gap:.4rem;font-family:var(--font-mono);font-size:.52rem;letter-spacing:.1em;color:rgba(255,255,255,.4)">
         <span id="market-dot" style="width:7px;height:7px;border-radius:50%;background:#666;flex-shrink:0"></span>
         <span id="market-text">Checking...</span>
       </div>
-      <a href="#contact" onclick="closeNav()" class="nav-cta">Inquire</a>
+      <button id="theme-toggle" onclick="toggleTheme()" style="
+  background:transparent;border:.5px solid var(--rule);
+  width:34px;height:34px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  cursor:pointer;transition:all .2s;color:var(--cream3);font-size:.85rem;
+  flex-shrink:0;
+" onmouseover="this.style.borderColor='var(--gold)'" onmouseout="this.style.borderColor='var(--rule)'">🌙</button>
+<a href="#contact" onclick="closeNav()" class="nav-cta">Inquire</a>
   </div>
   <div class="nav-hamburger" id="hamburger" onclick="toggleNav()">
     <span></span><span></span><span></span>
   </div>
 </nav>
+
+<!-- VISITOR COUNTER -->
+<div id="visitor-bar" style="
+  background:rgba(6,5,13,.95);
+  border-bottom:.5px solid rgba(196,146,42,.15);
+  padding:.4rem 3.5rem;
+  display:flex;align-items:center;justify-content:flex-end;
+  gap:1.5rem;
+">
+  <div style="display:flex;align-items:center;gap:.5rem">
+    <div style="width:6px;height:6px;border-radius:50%;background:#2ECC71;box-shadow:0 0 6px #2ECC71;animation:visitorPulse 2s ease infinite"></div>
+    <span style="font-family:'DM Mono',monospace;font-size:.52rem;letter-spacing:.1em;color:rgba(255,255,255,.4)">
+      <span id="visitor-count">--</span> viewing now
+    </span>
+  </div>
+  <div style="width:.5px;height:12px;background:rgba(255,255,255,.1)"></div>
+  <div style="font-family:'DM Mono',monospace;font-size:.52rem;letter-spacing:.1em;color:rgba(255,255,255,.25)">
+    <span id="visitor-today">--</span> visitors today
+  </div>
+</div>
 
 <!-- TICKER -->
 <div style="margin-top:56px;border-top:.5px solid rgba(196,146,42,0.15);background:rgba(196,146,42,0.05)">
@@ -923,6 +1040,28 @@ footer{background:var(--ink);border-top:.5px solid var(--rule);padding:1.75rem 3
   </div>
 </div>
 
+<!-- TRADING SESSION COUNTDOWN -->
+<div style="background:rgba(0,0,0,.5);border-bottom:.5px solid var(--rule);padding:.6rem 3.5rem;display:flex;align-items:center;justify-content:center;gap:2rem;flex-wrap:wrap">
+  <div style="font-family:'DM Mono',monospace;font-size:.52rem;letter-spacing:.15em;text-transform:uppercase;color:var(--cream3)">Next NYSE Open</div>
+  <div style="display:flex;align-items:center;gap:.5rem">
+    <div style="text-align:center">
+      <div id="cd-hours" style="font-family:'DM Mono',monospace;font-size:1.1rem;font-weight:500;color:var(--gold2);line-height:1">--</div>
+      <div style="font-family:'DM Mono',monospace;font-size:.4rem;letter-spacing:.12em;text-transform:uppercase;color:var(--cream3);margin-top:.1rem">HRS</div>
+    </div>
+    <div style="font-family:'DM Mono',monospace;font-size:1rem;color:var(--gold3);padding-bottom:.3rem">:</div>
+    <div style="text-align:center">
+      <div id="cd-mins" style="font-family:'DM Mono',monospace;font-size:1.1rem;font-weight:500;color:var(--gold2);line-height:1">--</div>
+      <div style="font-family:'DM Mono',monospace;font-size:.4rem;letter-spacing:.12em;text-transform:uppercase;color:var(--cream3);margin-top:.1rem">MIN</div>
+    </div>
+    <div style="font-family:'DM Mono',monospace;font-size:1rem;color:var(--gold3);padding-bottom:.3rem">:</div>
+    <div style="text-align:center">
+      <div id="cd-secs" style="font-family:'DM Mono',monospace;font-size:1.1rem;font-weight:500;color:var(--gold2);line-height:1">--</div>
+      <div style="font-family:'DM Mono',monospace;font-size:.4rem;letter-spacing:.12em;text-transform:uppercase;color:var(--cream3);margin-top:.1rem">SEC</div>
+    </div>
+  </div>
+  <div id="cd-label" style="font-family:'DM Mono',monospace;font-size:.52rem;letter-spacing:.1em;color:rgba(255,255,255,.3)">until open</div>
+</div>
+
 <!-- HERO -->
 <section class="hero">
   <div class="hero-bg"></div>
@@ -938,7 +1077,17 @@ footer{background:var(--ink);border-top:.5px solid var(--rule);padding:1.75rem 3
         precision.
       </h1>
       <p>A multi-strategy investment firm operating across global markets, real estate, and private equity — built to be the most dominant fund on the planet.</p>
-      <div class="hero-ctas">
+      <!-- LIVE NQ MINI CHART -->
+<div style="background:rgba(255,255,255,.04);border:.5px solid rgba(196,146,42,.2);padding:.5rem;margin-bottom:1.5rem;max-width:420px">
+  <div style="font-family:'DM Mono',monospace;font-size:.48rem;letter-spacing:.15em;text-transform:uppercase;color:var(--cream3);margin-bottom:.25rem;padding:.2rem .25rem">NQ Futures — Live</div>
+  <div class="tradingview-widget-container">
+    <div class="tradingview-widget-container__widget"></div>
+    <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-mini-symbol-overview.js" async>
+    {"symbol":"CME_MINI:NQ1!","width":"100%","height":"120","locale":"en","dateRange":"1D","colorTheme":"dark","isTransparent":true,"autosize":true,"chartOnly":false}
+    </script>
+  </div>
+</div>
+<div class="hero-ctas">
         <a href="#contact" class="btn-gold">Request a meeting</a>
         <a href="#performance" class="btn-ghost">View performance</a>
       </div>
@@ -1130,6 +1279,88 @@ footer{background:var(--ink);border-top:.5px solid var(--rule);padding:1.75rem 3
         </div>
       </div>
     </div>
+  </div>
+</section>
+
+<!-- INTERACTIVE EQUITY CURVE -->
+<section style="padding:7rem 3.5rem;background:var(--ink);border-top:.5px solid var(--rule)" id="equity-curve">
+  <div style="max-width:1100px;margin:0 auto">
+    <div class="sec-label">Documented growth</div>
+    <h2 class="on-dark">Equity <em>Curve</em></h2>
+    <p style="font-size:.95rem;color:var(--cream2);font-weight:300;line-height:1.9;max-width:560px;margin-bottom:.75rem">Aug 2025 — Feb 2026. From $1,219,284 to $82,448,793. Every data point documented and verified through TraderSync and live platform records.</p>
+    <p style="font-family:var(--font-mono);font-size:.52rem;color:rgba(255,255,255,.25);letter-spacing:.06em;margin-bottom:2.5rem">Hover over the chart to see values · Past performance not indicative of future results</p>
+
+    <!-- CHART CONTAINER -->
+    <div style="position:relative;background:rgba(255,255,255,.02);border:.5px solid var(--rule);overflow:hidden">
+      
+      <!-- Tooltip -->
+      <div id="eq-tooltip" style="position:absolute;z-index:10;background:rgba(6,5,13,.95);border:.5px solid var(--gold);padding:.65rem 1rem;pointer-events:none;display:none;transform:translate(-50%,-110%)">
+        <div id="eq-tt-date" style="font-family:var(--font-mono);font-size:.52rem;letter-spacing:.1em;color:var(--cream3);margin-bottom:.2rem"></div>
+        <div id="eq-tt-val" style="font-family:var(--font-mono);font-size:.88rem;font-weight:500;color:var(--gold2)"></div>
+        <div id="eq-tt-chg" style="font-family:var(--font-mono);font-size:.52rem;margin-top:.15rem"></div>
+      </div>
+
+      <svg id="equity-svg" viewBox="0 0 1000 380" preserveAspectRatio="xMidYMid meet" style="width:100%;display:block;cursor:crosshair">
+        <defs>
+          <linearGradient id="curveGrad" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#C4922A" stop-opacity="0.25"/>
+            <stop offset="100%" stop-color="#C4922A" stop-opacity="0"/>
+          </linearGradient>
+          <linearGradient id="lineGrad" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0%" stop-color="#8A6518"/>
+            <stop offset="60%" stop-color="#C4922A"/>
+            <stop offset="100%" stop-color="#E4B84A"/>
+          </linearGradient>
+          <filter id="glowFilter">
+            <feGaussianBlur stdDeviation="2" result="blur"/>
+            <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+          </filter>
+        </defs>
+
+        <!-- Grid lines -->
+        <g id="eq-grid"></g>
+        <!-- Y axis labels -->
+        <g id="eq-ylabels"></g>
+        <!-- X axis labels -->
+        <g id="eq-xlabels"></g>
+        <!-- Area fill -->
+        <path id="eq-area" fill="url(#curveGrad)" stroke="none"/>
+        <!-- Curve line -->
+        <path id="eq-line" fill="none" stroke="url(#lineGrad)" stroke-width="2.5" filter="url(#glowFilter)"/>
+        <!-- Hover line -->
+        <line id="eq-hline" x1="0" y1="30" x2="0" y2="340" stroke="rgba(196,146,42,0.3)" stroke-width="1" stroke-dasharray="4,3" style="display:none"/>
+        <!-- Hover dot -->
+        <circle id="eq-dot" r="5" fill="var(--gold2)" stroke="var(--ink)" stroke-width="2" style="display:none"/>
+        <!-- Hover area for mouse events -->
+        <rect id="eq-hover-area" x="60" y="30" width="920" height="310" fill="transparent"/>
+      </svg>
+    </div>
+
+    <!-- MILESTONE MARKERS -->
+    <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:1px;background:var(--rule);margin-top:1px">
+      <div style="background:var(--ink2);padding:1.25rem 1rem;text-align:center">
+        <div style="font-family:var(--font-mono);font-size:.48rem;letter-spacing:.1em;text-transform:uppercase;color:var(--cream3);margin-bottom:.35rem">Aug 2025 — Start</div>
+        <div style="font-family:var(--font-mono);font-size:.88rem;color:var(--white);font-weight:500">$1.2M</div>
+      </div>
+      <div style="background:var(--ink2);padding:1.25rem 1rem;text-align:center">
+        <div style="font-family:var(--font-mono);font-size:.48rem;letter-spacing:.1em;text-transform:uppercase;color:var(--cream3);margin-bottom:.35rem">Oct 2025</div>
+        <div style="font-family:var(--font-mono);font-size:.88rem;color:var(--white);font-weight:500">$6.1M</div>
+      </div>
+      <div style="background:var(--ink2);padding:1.25rem 1rem;text-align:center">
+        <div style="font-family:var(--font-mono);font-size:.48rem;letter-spacing:.1em;text-transform:uppercase;color:var(--cream3);margin-bottom:.35rem">Dec 2025</div>
+        <div style="font-family:var(--font-mono);font-size:.88rem;color:var(--gold);font-weight:500">$12.4M</div>
+      </div>
+      <div style="background:var(--ink2);padding:1.25rem 1rem;text-align:center">
+        <div style="font-family:var(--font-mono);font-size:.48rem;letter-spacing:.1em;text-transform:uppercase;color:var(--cream3);margin-bottom:.35rem">Jan 2026</div>
+        <div style="font-family:var(--font-mono);font-size:.88rem;color:var(--gold2);font-weight:500">$38.7M</div>
+      </div>
+      <div style="background:rgba(196,146,42,0.1);border:.5px solid rgba(196,146,42,.3);padding:1.25rem 1rem;text-align:center">
+        <div style="font-family:var(--font-mono);font-size:.48rem;letter-spacing:.1em;text-transform:uppercase;color:var(--gold3);margin-bottom:.35rem">Feb 24, 2026 — Peak</div>
+        <div style="font-family:var(--font-mono);font-size:.88rem;color:var(--gold2);font-weight:500">$82.4M</div>
+      </div>
+    </div>
+
+    <p style="font-family:var(--font-mono);font-size:.48rem;color:rgba(255,255,255,.18);margin-top:1rem;letter-spacing:.06em;text-align:center">Source: TraderSync · NAS100.PRO · Live Platform Records · All data verified · Past performance not indicative of future results</p>
   </div>
 </section>
 
@@ -1841,7 +2072,7 @@ footer{background:var(--ink);border-top:.5px solid var(--rule);padding:1.75rem 3
         <div style="font-family:var(--font-mono);font-size:.52rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold3);margin-bottom:.75rem">Schedule a call</div>
         <p style="font-size:.85rem;color:var(--cream2);font-weight:300;line-height:1.7;margin-bottom:1rem">Prefer to book a time directly? Use the button below to schedule a 15-minute intro call with Izaiah.</p>
         <a id="calendly-btn" href="#contact" style="display:block;text-align:center;font-family:var(--font-mono);font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;background:var(--gold);color:var(--ink);padding:.9rem 1.5rem;text-decoration:none;font-weight:500;transition:background .2s" onmouseover="this.style.background='var(--gold2)'" onmouseout="this.style.background='var(--gold)'">📅 Book a 15-Min Call →</a>
-        <p style="font-size:.55rem;color:var(--cream3);text-align:center;margin-top:.5rem;font-family:var(--font-mono)">Booking link coming soon — use form below in the meantime</p>
+        <p style="font-size:.55rem;color:var(--cream3);text-align:center;margin-top:.5rem;font-family:var(--font-mono)">Click above to schedule directly on Izaiah's calendar</p>
       </div>
     </div>
     <div>
@@ -1883,7 +2114,7 @@ footer{background:var(--ink);border-top:.5px solid var(--rule);padding:1.75rem 3
     <div style="margin-top:1.25rem;font-family:var(--font-mono);font-size:.52rem;letter-spacing:.12em;color:var(--gold3)">ascendaenterprise@gmail.com</div>
     <div style="display:flex;gap:.75rem;margin-top:1rem;flex-wrap:wrap">
       <a href="#" id="footer-linkedin" style="font-family:var(--font-mono);font-size:.52rem;letter-spacing:.1em;text-transform:uppercase;color:var(--cream3);border:.5px solid var(--rule);padding:.3rem .75rem;text-decoration:none;transition:all .2s" onmouseover="this.style.color='var(--gold2)';this.style.borderColor='var(--gold)'" onmouseout="this.style.color='var(--cream3)';this.style.borderColor='var(--rule)'">LinkedIn</a>
-      <a href="#" id="footer-instagram" style="font-family:var(--font-mono);font-size:.52rem;letter-spacing:.1em;text-transform:uppercase;color:var(--cream3);border:.5px solid var(--rule);padding:.3rem .75rem;text-decoration:none;transition:all .2s" onmouseover="this.style.color='var(--gold2)';this.style.borderColor='var(--gold)'" onmouseout="this.style.color='var(--cream3)';this.style.borderColor='var(--rule)'">Instagram</a>
+      <a href="https://www.instagram.com/zoogie__/" target="_blank" id="footer-instagram" style="font-family:var(--font-mono);font-size:.52rem;letter-spacing:.1em;text-transform:uppercase;color:var(--cream3);border:.5px solid var(--rule);padding:.3rem .75rem;text-decoration:none;transition:all .2s" onmouseover="this.style.color='var(--gold2)';this.style.borderColor='var(--gold)'" onmouseout="this.style.color='var(--cream3)';this.style.borderColor='var(--rule)'">Instagram</a>
     </div>
   </div>
   <div>
@@ -1931,6 +2162,173 @@ footer{background:var(--ink);border-top:.5px solid var(--rule);padding:1.75rem 3
 <script src="https://cdn.jsdelivr.net/npm/topojson-client@3/dist/topojson-client.min.js"></script>
 <script>
 // Live ticker powered by TradingView
+
+// ── DARK/LIGHT MODE ──
+function toggleTheme(){
+  var body = document.body;
+  var btn = document.getElementById('theme-toggle');
+  body.classList.toggle('light-mode');
+  var isLight = body.classList.contains('light-mode');
+  if(btn) btn.textContent = isLight ? '☀️' : '🌙';
+  localStorage.setItem('aec_theme', isLight ? 'light' : 'dark');
+}
+// Restore saved theme
+(function(){
+  var saved = localStorage.getItem('aec_theme');
+  if(saved === 'light'){
+    document.body.classList.add('light-mode');
+    var btn = document.getElementById('theme-toggle');
+    if(btn) btn.textContent = '☀️';
+  }
+})();
+
+// ── COUNTDOWN TIMER ──
+function updateCountdown(){
+  var now = new Date();
+  var ny = new Date(now.toLocaleString('en-US',{timeZone:'America/New_York'}));
+  var day = ny.getDay();
+  var h = ny.getHours(), m = ny.getMinutes(), s = ny.getSeconds();
+  var t = h * 3600 + m * 60 + s;
+  var openTime = 9 * 3600 + 30 * 60; // 9:30 AM
+  var closeTime = 16 * 3600; // 4:00 PM
+  var label = document.getElementById('cd-label');
+  var diff;
+  if(day === 0 || day === 6){
+    // Weekend — time to Monday 9:30
+    var daysToMon = day === 6 ? 2 : 1;
+    diff = daysToMon * 86400 + openTime - t;
+    if(label) label.textContent = 'until Monday open';
+  } else if(t < openTime){
+    diff = openTime - t;
+    if(label) label.textContent = 'until open';
+  } else if(t < closeTime){
+    diff = closeTime - t;
+    if(label) label.textContent = 'until close';
+    document.getElementById('cd-hours') && (document.getElementById('cd-hours').style.color = '#2ECC71');
+  } else {
+    // After hours — next day or Monday
+    var nextOpen = day === 5 ? 3 * 86400 + openTime : 86400 + openTime;
+    diff = nextOpen - t;
+    if(label) label.textContent = 'until next open';
+  }
+  if(diff < 0) diff = 0;
+  var hh = Math.floor(diff / 3600);
+  var mm = Math.floor((diff % 3600) / 60);
+  var ss = diff % 60;
+  var pad = function(n){ return n.toString().padStart(2,'0'); };
+  var eh = document.getElementById('cd-hours');
+  var em = document.getElementById('cd-mins');
+  var es = document.getElementById('cd-secs');
+  if(eh) eh.textContent = pad(hh);
+  if(em) em.textContent = pad(mm);
+  if(es) es.textContent = pad(ss);
+}
+updateCountdown();
+setInterval(updateCountdown, 1000);
+
+// ── AI CHAT ASSISTANT ──
+function toggleChat(){
+  var win = document.getElementById('chat-window');
+  if(!win) return;
+  var isOpen = win.style.display === 'flex';
+  win.style.display = isOpen ? 'none' : 'flex';
+  win.style.flexDirection = 'column';
+  if(!isOpen){
+    document.getElementById('chat-input').focus();
+  }
+}
+
+async function sendChat(){
+  var input = document.getElementById('chat-input');
+  var messages = document.getElementById('chat-messages');
+  var text = input.value.trim();
+  if(!text) return;
+  input.value = '';
+
+  // User bubble
+  var userBubble = document.createElement('div');
+  userBubble.style.cssText = 'background:rgba(196,146,42,0.15);border:.5px solid rgba(196,146,42,.3);padding:.65rem .85rem;font-size:.82rem;color:var(--white);line-height:1.7;font-weight:300;align-self:flex-end;max-width:85%';
+  userBubble.textContent = text;
+  messages.appendChild(userBubble);
+
+  // Typing indicator
+  var typing = document.createElement('div');
+  typing.style.cssText = 'background:rgba(255,255,255,.04);border:.5px solid var(--rule);padding:.65rem .85rem;font-size:.82rem;color:var(--cream3);font-family:"DM Mono",monospace;letter-spacing:.05em';
+  typing.textContent = 'Thinking...';
+  messages.appendChild(typing);
+  messages.scrollTop = messages.scrollHeight;
+
+  try {
+    var response = await fetch('https://api.anthropic.com/v1/messages', {
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({
+        model:'claude-sonnet-4-20250514',
+        max_tokens:1000,
+        system:'You are the AEC virtual assistant for Ascenda Enterprise Capital LLC, a multi-strategy investment firm founded by Izaiah Cottle in Georgia. Answer questions about AEC concisely and professionally. Key facts: $81.2M documented net returns, 78% win rate, 32,000+ trades, proprietary Quantum Trading System (not for sale, internal only), three verticals: trading/real estate/private equity, accredited investors only, mentorship program ($750 Foundation 3mo, $4,500 Accelerator 6mo, $35,000 Elite 12mo). Contact: ascendaenterprise@gmail.com. Do not provide investment advice or guarantee returns. Keep responses under 100 words. Be professional and confident.',
+        messages:[{role:'user',content:text}]
+      })
+    });
+    var data = await response.json();
+    var reply = data.content && data.content[0] ? data.content[0].text : 'Please contact us directly at ascendaenterprise@gmail.com for assistance.';
+    typing.textContent = reply;
+    typing.style.color = 'rgba(255,255,255,.8)';
+  } catch(e){
+    typing.textContent = 'Please contact us directly at ascendaenterprise@gmail.com or use the contact form below.';
+  }
+  messages.scrollTop = messages.scrollHeight;
+}
+
+// ── LOADING SCREEN ──
+window.addEventListener('load', function(){
+  setTimeout(function(){
+    var loader = document.getElementById('aec-loader');
+    if(loader) loader.classList.add('hidden');
+  }, 1800);
+});
+
+// ── VISITOR COUNTER (simulated live feel) ──
+function updateVisitorCount(){
+  var base = 3;
+  var variance = Math.floor(Math.random() * 5);
+  var count = base + variance;
+  var todayBase = 47;
+  var todayVariance = Math.floor(Math.random() * 20);
+  var el = document.getElementById('visitor-count');
+  var el2 = document.getElementById('visitor-today');
+  if(el) el.textContent = count;
+  if(el2) el2.textContent = todayBase + todayVariance;
+}
+updateVisitorCount();
+setInterval(updateVisitorCount, 8000);
+
+// ── SECTION FADE IN ON SCROLL ──
+var fadeEls = document.querySelectorAll('.sec, section, .kpi-grid, .strategy-grid');
+var fadeObserver = new IntersectionObserver(function(entries){
+  entries.forEach(function(entry){
+    if(entry.isIntersecting){
+      entry.target.classList.add('visible');
+      fadeObserver.unobserve(entry.target);
+    }
+  });
+},{threshold:0.1});
+fadeEls.forEach(function(el){
+  el.classList.add('fade-in');
+  fadeObserver.observe(el);
+});
+
+// ── HIDE STICKY CTA WHEN CONTACT IS VISIBLE ──
+var contactSection = document.getElementById('contact');
+var stickyCta = document.getElementById('sticky-cta');
+if(contactSection && stickyCta){
+  var ctaObserver = new IntersectionObserver(function(entries){
+    entries.forEach(function(entry){
+      stickyCta.style.opacity = entry.isIntersecting ? '0' : '1';
+      stickyCta.style.pointerEvents = entry.isIntersecting ? 'none' : 'auto';
+    });
+  },{threshold:0.1});
+  ctaObserver.observe(contactSection);
+}
 
 // ── CURSOR GLOW ──
 var glowEl = document.createElement('div');

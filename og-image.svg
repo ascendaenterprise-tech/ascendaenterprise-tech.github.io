@@ -1,0 +1,52 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1200" y2="630" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#06050D"/>
+      <stop offset="100%" stop-color="#0D0B18"/>
+    </linearGradient>
+    <linearGradient id="dg1" x1="600" y1="80" x2="600" y2="220" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#E4B84A"/>
+      <stop offset="100%" stop-color="#8A6518"/>
+    </linearGradient>
+    <linearGradient id="dg2" x1="600" y1="80" x2="690" y2="180" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#F2D680"/>
+      <stop offset="100%" stop-color="#C4922A"/>
+    </linearGradient>
+    <linearGradient id="gline" x1="0" y1="0" x2="1200" y2="0" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="transparent"/>
+      <stop offset="15%" stop-color="#C4922A"/>
+      <stop offset="85%" stop-color="#C4922A"/>
+      <stop offset="100%" stop-color="transparent"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <line x1="0" y1="210" x2="1200" y2="210" stroke="rgba(196,146,42,0.05)" stroke-width="1"/>
+  <line x1="0" y1="420" x2="1200" y2="420" stroke="rgba(196,146,42,0.05)" stroke-width="1"/>
+  <line x1="400" y1="0" x2="400" y2="630" stroke="rgba(196,146,42,0.05)" stroke-width="1"/>
+  <line x1="800" y1="0" x2="800" y2="630" stroke="rgba(196,146,42,0.05)" stroke-width="1"/>
+  <rect x="0" y="0" width="1200" height="2" fill="url(#gline)"/>
+  <rect x="0" y="628" width="1200" height="2" fill="url(#gline)"/>
+  <polygon points="600,75 655,150 600,200 545,150" fill="url(#dg1)"/>
+  <polygon points="600,75 680,165 655,150" fill="url(#dg2)"/>
+  <polygon points="600,200 655,150 680,165" fill="rgba(180,180,200,0.5)"/>
+  <polygon points="600,200 545,150 520,165" fill="rgba(160,160,180,0.4)"/>
+  <rect x="480" y="220" width="240" height="0.5" fill="rgba(196,146,42,0.4)"/>
+  <text x="600" y="278" text-anchor="middle" font-family="Georgia,serif" font-size="68" font-weight="300" fill="#FFFFFF" letter-spacing="18">ASCENDA</text>
+  <text x="600" y="318" text-anchor="middle" font-family="Georgia,serif" font-size="16" fill="#C4922A" letter-spacing="12">ENTERPRISE CAPITAL</text>
+  <rect x="80" y="352" width="1040" height="0.5" fill="rgba(196,146,42,0.18)"/>
+  <text x="220" y="408" text-anchor="middle" font-family="Georgia,serif" font-size="38" font-style="italic" fill="#E4B84A">$82.4M</text>
+  <text x="220" y="432" text-anchor="middle" font-family="Arial,sans-serif" font-size="10" fill="rgba(255,255,255,0.38)" letter-spacing="3">PEAK BALANCE</text>
+  <rect x="368" y="378" width="0.5" height="60" fill="rgba(196,146,42,0.22)"/>
+  <text x="490" y="408" text-anchor="middle" font-family="Georgia,serif" font-size="38" font-style="italic" fill="#E4B84A">78%</text>
+  <text x="490" y="432" text-anchor="middle" font-family="Arial,sans-serif" font-size="10" fill="rgba(255,255,255,0.38)" letter-spacing="3">WIN RATE</text>
+  <rect x="608" y="378" width="0.5" height="60" fill="rgba(196,146,42,0.22)"/>
+  <text x="740" y="408" text-anchor="middle" font-family="Georgia,serif" font-size="38" font-style="italic" fill="#E4B84A">$5,428</text>
+  <text x="740" y="432" text-anchor="middle" font-family="Arial,sans-serif" font-size="10" fill="rgba(255,255,255,0.38)" letter-spacing="3">EXPECTANCY</text>
+  <rect x="868" y="378" width="0.5" height="60" fill="rgba(196,146,42,0.22)"/>
+  <text x="990" y="408" text-anchor="middle" font-family="Georgia,serif" font-size="38" font-style="italic" fill="#E4B84A">$750M</text>
+  <text x="990" y="432" text-anchor="middle" font-family="Arial,sans-serif" font-size="10" fill="rgba(255,255,255,0.38)" letter-spacing="3">AUM CEILING</text>
+  <rect x="80" y="460" width="1040" height="0.5" fill="rgba(196,146,42,0.18)"/>
+  <text x="600" y="510" text-anchor="middle" font-family="Georgia,serif" font-size="22" font-style="italic" fill="rgba(255,255,255,0.45)">Capital deployed with uncommon precision.</text>
+  <text x="600" y="555" text-anchor="middle" font-family="Arial,sans-serif" font-size="11" fill="rgba(196,146,42,0.38)" letter-spacing="4">ASCENDAENTERPRISE-TECH.GITHUB.IO</text>
+  <text x="600" y="590" text-anchor="middle" font-family="Arial,sans-serif" font-size="10" fill="rgba(255,255,255,0.2)" letter-spacing="3">REGISTERED IN GEORGIA · UNITED STATES</text>
+</svg>
