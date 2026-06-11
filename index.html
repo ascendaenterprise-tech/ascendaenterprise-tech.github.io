@@ -340,7 +340,7 @@ h2{font-family:var(--font-display);font-size:clamp(2rem,3.5vw,3rem);font-weight:
 /* ═══════════════════════════════
    PERFORMANCE TEARSHEET
 ═══════════════════════════════ */
-.tearsheet{background:var(--ink);padding:8rem 3.5rem}
+.tearsheet{background:var(--ink);padding:8rem 3.5rem;overflow:hidden;width:100%}
 .ts-header{display:grid;grid-template-columns:1fr 1fr;gap:4rem;margin-bottom:4rem;align-items:end}
 .ts-disclaimer{background:rgba(196,146,42,0.06);border:.5px solid var(--rule);padding:1rem 1.5rem;margin-bottom:3rem}
 .ts-disclaimer p{font-family:var(--font-mono);font-size:.58rem;letter-spacing:.06em;color:rgba(255,255,255,.3);line-height:1.7}
@@ -352,10 +352,11 @@ h2{font-family:var(--font-display);font-size:clamp(2rem,3.5vw,3rem);font-weight:
 .kpi-label{font-family:var(--font-mono);font-size:.55rem;letter-spacing:.18em;text-transform:uppercase;color:var(--cream3)}
 .kpi-sub{font-size:.72rem;color:var(--cream3);margin-top:.3rem;font-weight:300}
 
-.perf-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--rule);margin-top:1px}
-.perf-block{background:var(--ink2);padding:2.5rem}
+.perf-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--rule);margin-top:1px;width:100%;overflow:hidden}
+.perf-block{background:var(--ink2);padding:2.5rem;width:100%;overflow:hidden;min-width:0}
 .perf-block-title{font-family:var(--font-mono);font-size:.58rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold3);margin-bottom:1.75rem}
 
+.perf-block-title{word-break:break-word;white-space:normal;overflow-wrap:break-word}
 .monthly-table{width:100%;border-collapse:collapse}
 .monthly-table th{font-family:var(--font-mono);font-size:.52rem;letter-spacing:.15em;text-transform:uppercase;color:var(--cream3);padding:.6rem .75rem;text-align:right;border-bottom:.5px solid var(--rule)}
 .monthly-table th:first-child{text-align:left}
@@ -372,11 +373,11 @@ h2{font-family:var(--font-display);font-size:clamp(2rem,3.5vw,3rem);font-weight:
 .dist-fill{height:100%;background:var(--gold);transition:width .6s ease}
 .dist-val{font-family:var(--font-mono);font-size:.62rem;color:var(--cream2);width:50px;text-align:right;flex-shrink:0}
 
-.metric-list{display:flex;flex-direction:column;gap:0}
-.ml-row{display:flex;justify-content:space-between;align-items:center;padding:.85rem 0;border-bottom:.5px solid var(--rule)}
+.metric-list{display:flex;flex-direction:column;gap:0;width:100%}
+.ml-row{display:flex;justify-content:space-between;align-items:center;padding:.85rem 0;border-bottom:.5px solid var(--rule);width:100%;min-width:0}
 .ml-row:last-child{border-bottom:none}
-.ml-label{font-family:var(--font-mono);font-size:.6rem;letter-spacing:.12em;color:var(--cream3)}
-.ml-val{font-size:.88rem;color:var(--white);font-weight:400}
+.ml-label{font-family:var(--font-mono);font-size:.6rem;letter-spacing:.12em;color:var(--cream3);flex:1;min-width:0;padding-right:.5rem}
+.ml-val{font-size:.88rem;color:var(--white);font-weight:400;flex-shrink:0;text-align:right}
 .ml-val.good{color:var(--up)}
 .ml-val.gold{color:var(--gold2)}
 
@@ -781,6 +782,50 @@ body.light-mode .kpi-val{color:#0D0B18!important}
 body.light-mode .sec-alt{background:#EAE6DC!important}
 body.light-mode .hero{background:linear-gradient(135deg,#1A1530,#0D0B18)!important}
 body.light-mode footer{background:#0D0B18!important}
+
+/* ── MOBILE METRIC + TABLE FIXES ── */
+@media(max-width:900px){
+  .tearsheet { overflow:hidden !important; width:100% !important; }
+  .perf-grid { width:100% !important; overflow:hidden !important; }
+  .perf-block { width:100% !important; overflow:hidden !important; min-width:0 !important; box-sizing:border-box !important; }
+  .metric-list { width:100% !important; }
+  .ml-row { width:100% !important; display:flex !important; justify-content:space-between !important; align-items:center !important; gap:.5rem !important; flex-wrap:nowrap !important; min-width:0 !important; }
+  .ml-label { flex:1 !important; min-width:0 !important; font-size:.52rem !important; letter-spacing:.06em !important; overflow:hidden !important; text-overflow:ellipsis !important; white-space:nowrap !important; }
+  .ml-val { flex-shrink:0 !important; font-size:.82rem !important; text-align:right !important; white-space:nowrap !important; }
+  .ts-header { width:100% !important; overflow:hidden !important; }
+  .ts-header h2 { word-break:break-word !important; }
+}
+@media(max-width:480px){
+  .ml-label { font-size:.46rem !important; letter-spacing:.04em !important; }
+  .ml-val { font-size:.75rem !important; }
+  .tearsheet { padding:3.5rem 1rem !important; }
+}
+@media(max-width:600px){
+  .perf-block-title { font-size:.48rem !important; letter-spacing:.1em !important; white-space:normal !important; word-break:break-word !important; line-height:1.5 !important; }
+  .monthly-table th { font-size:.55rem !important; padding:.35rem .4rem !important; white-space:normal !important; word-break:break-word !important; }
+  .monthly-table td { font-size:.62rem !important; padding:.35rem .4rem !important; }
+}
+
+
+/* ── TARGETED SECTION FIXES ── */
+@media(max-width:600px){
+  #equity-curve { padding:4rem 1rem !important; }
+  #equity-curve > div { max-width:100% !important; }
+  .equity-milestones > div { padding:.75rem .25rem !important; }
+  .tearsheet { padding:4rem 1rem !important; }
+  .perf-block { padding:1.25rem .85rem !important; }
+  .perf-block-title { font-size:.5rem !important; letter-spacing:.12em !important; white-space:normal !important; }
+  .ml-row { flex-wrap:wrap !important; gap:.25rem !important; }
+  .ml-label { font-size:.5rem !important; flex:1 !important; min-width:0 !important; }
+  .ml-val { font-size:.78rem !important; text-align:right !important; }
+  .dist-row { gap:.5rem !important; }
+  .dist-label { width:52px !important; font-size:.46rem !important; white-space:normal !important; line-height:1.3 !important; }
+  .dist-val { font-size:.55rem !important; }
+}
+@media(max-width:900px){
+  #equity-curve { padding:4rem 1.5rem !important; }
+  .equity-milestones > div { padding:1rem .4rem !important; }
+}
 
 /* ── COMPREHENSIVE MOBILE FIXES ── */
 /* Prevent all horizontal overflow */
@@ -1430,7 +1475,8 @@ html,body{max-width:100vw;overflow-x:hidden}
   <div class="perf-grid">
     <div class="perf-block">
       <div class="perf-block-title">Documented account & session performance</div>
-      <table class="monthly-table">
+      <div style="overflow-x:auto;-webkit-overflow-scrolling:touch;width:100%">
+      <table class="monthly-table" style="min-width:480px">
         <thead>
           <tr>
             <th>Date / Session</th>
@@ -1452,6 +1498,7 @@ html,body{max-width:100vw;overflow-x:hidden}
           <tr><td style="color:var(--gold2);font-weight:500;font-family:var(--font-mono);font-size:.65rem;letter-spacing:.1em" colspan="2">PEAK DOCUMENTED BALANCE · Feb 24, 2026</td><td colspan="2" class="td-total" style="text-align:right;font-size:1.1rem;color:var(--gold2)">$82,448,793.72</td></tr>
         </tbody>
       </table>
+      </div>
     </div>
 
     <div class="perf-block">
@@ -1537,26 +1584,26 @@ html,body{max-width:100vw;overflow-x:hidden}
     </div>
 
     <!-- MILESTONE MARKERS -->
-    <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:1px;background:var(--rule);margin-top:1px">
-      <div style="background:var(--ink2);padding:1.25rem 1rem;text-align:center">
-        <div style="font-family:var(--font-mono);font-size:.48rem;letter-spacing:.1em;text-transform:uppercase;color:var(--cream3);margin-bottom:.35rem">Aug 2025 — Start</div>
-        <div style="font-family:var(--font-mono);font-size:.88rem;color:var(--white);font-weight:500">$1.2M</div>
+    <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:1px;background:var(--rule);margin-top:1px" class="equity-milestones">
+      <div style="background:var(--ink2);padding:1.25rem .5rem;text-align:center">
+        <div style="font-family:var(--font-mono);font-size:.44rem;letter-spacing:.08em;text-transform:uppercase;color:var(--cream3);margin-bottom:.35rem">Aug 2025</div>
+        <div style="font-family:var(--font-mono);font-size:.82rem;color:var(--white);font-weight:500">$1.2M</div>
       </div>
-      <div style="background:var(--ink2);padding:1.25rem 1rem;text-align:center">
-        <div style="font-family:var(--font-mono);font-size:.48rem;letter-spacing:.1em;text-transform:uppercase;color:var(--cream3);margin-bottom:.35rem">Oct 2025</div>
-        <div style="font-family:var(--font-mono);font-size:.88rem;color:var(--white);font-weight:500">$6.1M</div>
+      <div style="background:var(--ink2);padding:1.25rem .5rem;text-align:center">
+        <div style="font-family:var(--font-mono);font-size:.44rem;letter-spacing:.08em;text-transform:uppercase;color:var(--cream3);margin-bottom:.35rem">Oct 2025</div>
+        <div style="font-family:var(--font-mono);font-size:.82rem;color:var(--white);font-weight:500">$6.1M</div>
       </div>
-      <div style="background:var(--ink2);padding:1.25rem 1rem;text-align:center">
-        <div style="font-family:var(--font-mono);font-size:.48rem;letter-spacing:.1em;text-transform:uppercase;color:var(--cream3);margin-bottom:.35rem">Dec 2025</div>
-        <div style="font-family:var(--font-mono);font-size:.88rem;color:var(--gold);font-weight:500">$12.4M</div>
+      <div style="background:var(--ink2);padding:1.25rem .5rem;text-align:center">
+        <div style="font-family:var(--font-mono);font-size:.44rem;letter-spacing:.08em;text-transform:uppercase;color:var(--cream3);margin-bottom:.35rem">Dec 2025</div>
+        <div style="font-family:var(--font-mono);font-size:.82rem;color:var(--gold);font-weight:500">$12.4M</div>
       </div>
-      <div style="background:var(--ink2);padding:1.25rem 1rem;text-align:center">
-        <div style="font-family:var(--font-mono);font-size:.48rem;letter-spacing:.1em;text-transform:uppercase;color:var(--cream3);margin-bottom:.35rem">Jan 2026</div>
-        <div style="font-family:var(--font-mono);font-size:.88rem;color:var(--gold2);font-weight:500">$38.7M</div>
+      <div style="background:var(--ink2);padding:1.25rem .5rem;text-align:center">
+        <div style="font-family:var(--font-mono);font-size:.44rem;letter-spacing:.08em;text-transform:uppercase;color:var(--cream3);margin-bottom:.35rem">Jan 2026</div>
+        <div style="font-family:var(--font-mono);font-size:.82rem;color:var(--gold2);font-weight:500">$38.7M</div>
       </div>
-      <div style="background:rgba(196,146,42,0.1);border:.5px solid rgba(196,146,42,.3);padding:1.25rem 1rem;text-align:center">
-        <div style="font-family:var(--font-mono);font-size:.48rem;letter-spacing:.1em;text-transform:uppercase;color:var(--gold3);margin-bottom:.35rem">Feb 24, 2026 — Peak</div>
-        <div style="font-family:var(--font-mono);font-size:.88rem;color:var(--gold2);font-weight:500">$82.4M</div>
+      <div style="background:rgba(196,146,42,0.1);border:.5px solid rgba(196,146,42,.3);padding:1.25rem .5rem;text-align:center">
+        <div style="font-family:var(--font-mono);font-size:.44rem;letter-spacing:.08em;text-transform:uppercase;color:var(--gold3);margin-bottom:.35rem">Feb 2026</div>
+        <div style="font-family:var(--font-mono);font-size:.82rem;color:var(--gold2);font-weight:500">$82.4M</div>
       </div>
     </div>
 
