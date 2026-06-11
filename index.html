@@ -10,35 +10,72 @@
 
 <div id="chat-window" style="
   display:none;position:fixed;bottom:5.5rem;left:2rem;z-index:9996;
-  width:320px;max-height:480px;
+  width:min(330px, calc(100vw - 2rem));max-height:min(540px, 80vh);
   background:var(--ink2);border:.5px solid var(--rule2);
-  display:none;flex-direction:column;
+  flex-direction:column;
   box-shadow:0 20px 60px rgba(0,0,0,0.6);
 ">
   <div style="position:absolute;top:0;left:0;right:0;height:1.5px;background:linear-gradient(90deg,transparent,var(--gold),transparent)"></div>
   <div style="padding:1rem 1.25rem;border-bottom:.5px solid var(--rule);display:flex;justify-content:space-between;align-items:center">
     <div>
       <div style="font-family:'DM Mono',monospace;font-size:.58rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--gold2)">AEC Assistant</div>
-      <div style="font-size:.68rem;color:var(--cream3);margin-top:.1rem">Ask about investing with AEC</div>
+      <div style="font-size:.68rem;color:var(--cream3);margin-top:.1rem">How can we help you today?</div>
     </div>
     <button onclick="toggleChat()" style="background:none;border:none;color:var(--cream3);cursor:pointer;font-size:1rem">✕</button>
   </div>
-  <div id="chat-messages" style="flex:1;overflow-y:auto;padding:1rem;display:flex;flex-direction:column;gap:.75rem;max-height:300px">
-    <div style="background:rgba(196,146,42,.08);border:.5px solid var(--rule);padding:.75rem 1rem;font-size:.82rem;color:var(--cream2);line-height:1.7;font-weight:300;border-radius:2px">
-      Hello. I'm the AEC virtual assistant. I can answer questions about investing with Ascenda Enterprise Capital, our mentorship program, or our trading strategy. What would you like to know?
+
+  <!-- Topic Selection View -->
+  <div id="chat-topics" style="padding:1rem;display:flex;flex-direction:column;gap:.6rem">
+    <div style="font-size:.78rem;color:var(--cream2);line-height:1.7;font-weight:300;margin-bottom:.25rem">
+      Select a topic to get started:
+    </div>
+    <button onclick="selectTopic('private_equity')" style="background:rgba(196,146,42,.07);border:.5px solid rgba(196,146,42,.25);color:var(--cream2);padding:.75rem 1rem;text-align:left;cursor:pointer;font-size:.8rem;font-family:'Jost',sans-serif;transition:all .2s" onmouseover="this.style.borderColor='var(--gold)';this.style.color='var(--white)'" onmouseout="this.style.borderColor='rgba(196,146,42,.25)';this.style.color='var(--cream2)'">
+      <span style="color:var(--gold);margin-right:.5rem">01</span> Private Equity & Fund Investment
+    </button>
+    <button onclick="selectTopic('real_estate')" style="background:rgba(196,146,42,.07);border:.5px solid rgba(196,146,42,.25);color:var(--cream2);padding:.75rem 1rem;text-align:left;cursor:pointer;font-size:.8rem;font-family:'Jost',sans-serif;transition:all .2s" onmouseover="this.style.borderColor='var(--gold)';this.style.color='var(--white)'" onmouseout="this.style.borderColor='rgba(196,146,42,.25)';this.style.color='var(--cream2)'">
+      <span style="color:var(--gold);margin-right:.5rem">02</span> Real Estate Investing
+    </button>
+    <button onclick="selectTopic('mentorship')" style="background:rgba(196,146,42,.07);border:.5px solid rgba(196,146,42,.25);color:var(--cream2);padding:.75rem 1rem;text-align:left;cursor:pointer;font-size:.8rem;font-family:'Jost',sans-serif;transition:all .2s" onmouseover="this.style.borderColor='var(--gold)';this.style.color='var(--white)'" onmouseout="this.style.borderColor='rgba(196,146,42,.25)';this.style.color='var(--cream2)'">
+      <span style="color:var(--gold);margin-right:.5rem">03</span> Mentorship Program
+    </button>
+    <button onclick="selectTopic('trading')" style="background:rgba(196,146,42,.07);border:.5px solid rgba(196,146,42,.25);color:var(--cream2);padding:.75rem 1rem;text-align:left;cursor:pointer;font-size:.8rem;font-family:'Jost',sans-serif;transition:all .2s" onmouseover="this.style.borderColor='var(--gold)';this.style.color='var(--white)'" onmouseout="this.style.borderColor='rgba(196,146,42,.25)';this.style.color='var(--cream2)'">
+      <span style="color:var(--gold);margin-right:.5rem">04</span> Trading Strategy & Markets
+    </button>
+    <button onclick="showPersonalHelp()" style="background:transparent;border:.5px solid var(--rule);color:var(--cream3);padding:.65rem 1rem;text-align:left;cursor:pointer;font-size:.78rem;font-family:'Jost',sans-serif;transition:all .2s;margin-top:.15rem" onmouseover="this.style.color='var(--white)'" onmouseout="this.style.color='var(--cream3)'">
+      None of these — I need personal assistance →
+    </button>
+  </div>
+
+  <!-- Chat View (shown after topic selected) -->
+  <div id="chat-main" style="display:none;flex-direction:column;flex:1">
+    <div id="chat-messages" style="flex:1;overflow-y:auto;padding:1rem;display:flex;flex-direction:column;gap:.75rem;max-height:300px"></div>
+    <div style="padding:.75rem;border-top:.5px solid var(--rule);display:flex;gap:.5rem">
+      <input id="chat-input" type="text" placeholder="Ask a question..." onkeypress="if(event.key==='Enter')sendChat()" style="
+        flex:1;background:rgba(255,255,255,.05);border:.5px solid var(--rule);
+        color:var(--white);font-family:'Jost',sans-serif;font-size:.8rem;
+        padding:.6rem .85rem;outline:none;
+      "/>
+      <button onclick="sendChat()" style="
+        background:var(--gold);color:var(--ink);border:none;
+        padding:.6rem .85rem;cursor:pointer;font-size:.8rem;font-weight:600;
+        transition:background .2s;
+      " onmouseover="this.style.background='var(--gold2)'" onmouseout="this.style.background='var(--gold)'">→</button>
+    </div>
+    <div style="padding:.5rem .75rem;border-top:.5px solid var(--rule)">
+      <button onclick="resetChat()" style="background:none;border:none;color:var(--cream3);font-size:.72rem;cursor:pointer;font-family:'DM Mono',monospace;letter-spacing:.05em">← Back to topics</button>
     </div>
   </div>
-  <div style="padding:.75rem;border-top:.5px solid var(--rule);display:flex;gap:.5rem">
-    <input id="chat-input" type="text" placeholder="Ask a question..." onkeypress="if(event.key==='Enter')sendChat()" style="
-      flex:1;background:rgba(255,255,255,.05);border:.5px solid var(--rule);
-      color:var(--white);font-family:'Jost',sans-serif;font-size:.8rem;
-      padding:.6rem .85rem;outline:none;
-    "/>
-    <button onclick="sendChat()" style="
-      background:var(--gold);color:var(--ink);border:none;
-      padding:.6rem .85rem;cursor:pointer;font-size:.8rem;font-weight:600;
-      transition:background .2s;
-    " onmouseover="this.style.background='var(--gold2)'" onmouseout="this.style.background='var(--gold)'">→</button>
+
+  <!-- Personal Help View -->
+  <div id="chat-personal" style="display:none;flex-direction:column;padding:1rem;gap:.75rem">
+    <div style="font-size:.82rem;color:var(--cream2);line-height:1.7;font-weight:300">
+      No problem. Leave your name and email and Izaiah will reach out to you directly within 24 hours.
+    </div>
+    <input id="help-name" type="text" placeholder="Your name" style="background:rgba(255,255,255,.05);border:.5px solid var(--rule);color:var(--white);font-family:'Jost',sans-serif;font-size:.8rem;padding:.65rem .85rem;outline:none;width:100%;box-sizing:border-box"/>
+    <input id="help-email" type="email" placeholder="Your email" style="background:rgba(255,255,255,.05);border:.5px solid var(--rule);color:var(--white);font-family:'Jost',sans-serif;font-size:.8rem;padding:.65rem .85rem;outline:none;width:100%;box-sizing:border-box"/>
+    <button onclick="submitPersonalHelp()" style="background:var(--gold);color:var(--ink);border:none;padding:.75rem;cursor:pointer;font-size:.8rem;font-weight:600;font-family:'Jost',sans-serif;transition:background .2s" onmouseover="this.style.background='var(--gold2)'" onmouseout="this.style.background='var(--gold)'">Send Request →</button>
+    <div id="help-confirm" style="display:none;font-size:.78rem;color:var(--gold);text-align:center;font-family:'DM Mono',monospace">✓ Request sent. Izaiah will be in touch.</div>
+    <button onclick="resetChat()" style="background:none;border:none;color:var(--cream3);font-size:.72rem;cursor:pointer;font-family:'DM Mono',monospace;letter-spacing:.05em;text-align:left">← Back to topics</button>
   </div>
 </div>
 
@@ -744,6 +781,169 @@ body.light-mode .kpi-val{color:#0D0B18!important}
 body.light-mode .sec-alt{background:#EAE6DC!important}
 body.light-mode .hero{background:linear-gradient(135deg,#1A1530,#0D0B18)!important}
 body.light-mode footer{background:#0D0B18!important}
+
+/* ── COMPREHENSIVE MOBILE FIXES ── */
+/* Prevent all horizontal overflow */
+*{box-sizing:border-box}
+html,body{max-width:100vw;overflow-x:hidden}
+
+/* Chat widget — full width on mobile */
+@media(max-width:600px){
+  #chat-window{
+    width:calc(100vw - 2rem) !important;
+    left:1rem !important;
+    right:1rem !important;
+    bottom:5rem !important;
+    max-height:80vh !important;
+  }
+  #chat-bubble{
+    bottom:1.25rem !important;
+    left:1.25rem !important;
+  }
+}
+
+/* Cookie banner mobile */
+@media(max-width:600px){
+  #cookie-banner{
+    padding:1rem !important;
+    flex-direction:column !important;
+    gap:1rem !important;
+    text-align:center !important;
+  }
+  #cookie-banner > div:first-child{min-width:unset !important}
+}
+
+/* Ticker strip — ensure scrolls don't break layout */
+.ticker{overflow:hidden !important;max-width:100vw !important}
+
+/* Market clock — hide on very small screens */
+@media(max-width:480px){
+  .clock-grid,.market-clock-section{
+    display:none !important;
+  }
+}
+
+/* Equity curve section */
+@media(max-width:900px){
+  #equity-curve,#equity-curve > div{
+    width:100% !important;
+    max-width:100vw !important;
+    overflow-x:hidden !important;
+  }
+  svg{max-width:100% !important}
+}
+
+/* TradingView widget containers */
+@media(max-width:900px){
+  .tv-widget-container,.tradingview-widget-container{
+    width:100% !important;
+    max-width:100% !important;
+  }
+  iframe{max-width:100% !important}
+}
+
+/* Tables — horizontal scroll on mobile */
+@media(max-width:900px){
+  table{display:block;overflow-x:auto;-webkit-overflow-scrolling:touch;max-width:100%}
+  .monthly-table{font-size:.62rem}
+}
+
+/* Wire instructions modal */
+@media(max-width:600px){
+  #wire-modal > div,
+  [id*="modal"] > div,
+  [class*="modal"] > div{
+    width:calc(100vw - 2rem) !important;
+    max-width:100% !important;
+    margin:1rem !important;
+    padding:1.5rem !important;
+    max-height:90vh !important;
+    overflow-y:auto !important;
+  }
+}
+
+/* Mentorship tiers */
+@media(max-width:900px){
+  .mentorship-grid,[class*="tier-grid"]{
+    grid-template-columns:1fr !important;
+    gap:1rem !important;
+  }
+}
+
+/* Network/team section */
+@media(max-width:900px){
+  #network .founder-stats{
+    grid-template-columns:1fr 1fr !important;
+  }
+  .tag-list{flex-wrap:wrap !important;gap:.4rem !important}
+}
+
+/* Application forms */
+@media(max-width:600px){
+  .cff input,.cff textarea,.cff select{
+    font-size:.82rem !important;
+    padding:.75rem .85rem !important;
+  }
+  .cff{gap:.6rem !important}
+}
+
+/* FAQ accordion */
+@media(max-width:900px){
+  .faq-item,[class*="faq"]{
+    width:100% !important;
+    max-width:100% !important;
+  }
+}
+
+/* Visitor counter / live badges */
+@media(max-width:480px){
+  [id*="visitor"],[class*="visitor"]{
+    font-size:.55rem !important;
+  }
+}
+
+/* Prevent text from overflowing containers */
+@media(max-width:600px){
+  p,li,td,th,div{
+    word-break:break-word;
+    overflow-wrap:break-word;
+  }
+  .kpi-val{white-space:normal !important;word-break:break-all}
+  .kpi-sub{font-size:.44rem !important;line-height:1.4 !important}
+}
+
+/* Portal / investor section grids - only target known problem grids */
+@media(max-width:900px){
+  .perf-grid,.strategy-grid,.news-grid,.focus-grid,.join-grid,
+  .founder-grid,.contact-grid,.footer-top,.tv-charts-grid{
+    grid-template-columns:1fr !important;
+  }
+}
+
+/* Bottom fixed elements spacing */
+@media(max-width:600px){
+  body{padding-bottom:0}
+}
+
+/* Fix any absolute/fixed elements that might overflow */
+@media(max-width:600px){
+  .cursor-glow{display:none !important}
+}
+
+/* Nav improvements */
+@media(max-width:900px){
+  .nav-links a{
+    font-size:.9rem !important;
+    letter-spacing:.12em !important;
+  }
+  .nav-cta{
+    padding:.75rem 1.5rem !important;
+    font-size:.72rem !important;
+  }
+}
+
+/* Smooth touch scrolling everywhere */
+*{-webkit-overflow-scrolling:touch}
 </style>
 </head>
 <body>
@@ -2227,31 +2427,82 @@ updateCountdown();
 setInterval(updateCountdown, 1000);
 
 // ── AI CHAT ASSISTANT ──
+var chatTopic = null;
+var chatSystemPrompts = {
+  private_equity: 'You are the AEC virtual assistant for Ascenda Enterprise Capital LLC. The user is asking about private equity and fund investment. Key facts: accredited investors only (net worth $1M+ or income $200k+), minimum allocation $50k for individuals / $100k+ for institutional, multi-strategy fund across trading/real estate/PE, $81.2M documented net returns, 78% win rate, quarterly reporting, direct access to Izaiah Cottle. To apply: ascendaenterprise-tech.github.io/ascenda-investor.html. Contact: ascendaenterprise@gmail.com. Keep responses under 100 words. Do not guarantee returns. Be professional and confident.',
+  real_estate: 'You are the AEC virtual assistant for Ascenda Enterprise Capital LLC. The user is asking about real estate investing. Key facts: AEC pursues value-add and opportunistic acquisitions in commercial and residential sectors, focus on supply-constrained markets, Sun Belt industrial and multifamily, active management approach. AEC also co-founded One House One Story (OHOS), a cash home buying company in Atlanta. For real estate inquiries contact: ascendaenterprise@gmail.com. Keep responses under 100 words. Do not guarantee returns. Be professional.',
+  mentorship: 'You are the AEC virtual assistant for Ascenda Enterprise Capital LLC. The user is asking about the mentorship program. Tiers: Foundation $750 (3 months), Accelerator $4,500 (6 months), Elite $35,000 (12 months). All tiers include direct 1-on-1 with Izaiah Cottle, real trade reviews, AEC frameworks and playbooks. Not a course — real proximity to the actual operation. Apply at: ascendaenterprise-tech.github.io/ascenda-mentorship.html. Extremely limited spots. Keep responses under 100 words. Be professional and confident.',
+  trading: 'You are the AEC virtual assistant for Ascenda Enterprise Capital LLC. The user is asking about trading strategy. Key facts: proprietary Quantum Trading System (internal only, not for sale), three layers: momentum analysis, Z-score standard deviation, institutional DOM order flow. Primary instruments: NAS100, ES Futures, Gold, Crude Oil, top equities (NVDA, TSLA, AMZN, AAPL, MSFT, META). $81.2M net returns, 78% win rate, 32,000+ trades verified via TraderSync. Keep responses under 100 words. Do not provide investment advice. Be professional and confident.'
+};
+
 function toggleChat(){
   var win = document.getElementById('chat-window');
   if(!win) return;
   var isOpen = win.style.display === 'flex';
   win.style.display = isOpen ? 'none' : 'flex';
   win.style.flexDirection = 'column';
-  if(!isOpen){
-    document.getElementById('chat-input').focus();
-  }
+}
+
+function selectTopic(topic){
+  chatTopic = topic;
+  var topicLabels = {
+    private_equity: 'Private Equity & Fund Investment',
+    real_estate: 'Real Estate Investing',
+    mentorship: 'Mentorship Program',
+    trading: 'Trading Strategy & Markets'
+  };
+  document.getElementById('chat-topics').style.display = 'none';
+  var main = document.getElementById('chat-main');
+  main.style.display = 'flex';
+  main.style.flexDirection = 'column';
+  var messages = document.getElementById('chat-messages');
+  messages.innerHTML = '';
+  var intro = document.createElement('div');
+  intro.style.cssText = 'background:rgba(196,146,42,.08);border:.5px solid var(--rule);padding:.75rem 1rem;font-size:.82rem;color:var(--cream2);line-height:1.7;font-weight:300';
+  intro.textContent = "You selected: " + topicLabels[topic] + ". What would you like to know?";
+  messages.appendChild(intro);
+  document.getElementById('chat-input').focus();
+}
+
+function showPersonalHelp(){
+  document.getElementById('chat-topics').style.display = 'none';
+  var p = document.getElementById('chat-personal');
+  p.style.display = 'flex';
+  p.style.flexDirection = 'column';
+}
+
+function resetChat(){
+  chatTopic = null;
+  document.getElementById('chat-topics').style.display = 'flex';
+  document.getElementById('chat-topics').style.flexDirection = 'column';
+  document.getElementById('chat-main').style.display = 'none';
+  document.getElementById('chat-personal').style.display = 'none';
+  document.getElementById('help-confirm').style.display = 'none';
+  document.getElementById('help-name').value = '';
+  document.getElementById('help-email').value = '';
+}
+
+async function submitPersonalHelp(){
+  var name = document.getElementById('help-name').value.trim();
+  var email = document.getElementById('help-email').value.trim();
+  if(!name || !email){ alert('Please enter your name and email.'); return; }
+  window.location.href = 'mailto:ascendaenterprise@gmail.com?subject=Personal Assistance Request — AEC&body=Name: ' + encodeURIComponent(name) + '%0AEmail: ' + encodeURIComponent(email) + '%0A%0AThis visitor requested personal assistance from the AEC website chat.';
+  document.getElementById('help-confirm').style.display = 'block';
 }
 
 async function sendChat(){
+  if(!chatTopic) return;
   var input = document.getElementById('chat-input');
   var messages = document.getElementById('chat-messages');
   var text = input.value.trim();
   if(!text) return;
   input.value = '';
 
-  // User bubble
   var userBubble = document.createElement('div');
   userBubble.style.cssText = 'background:rgba(196,146,42,0.15);border:.5px solid rgba(196,146,42,.3);padding:.65rem .85rem;font-size:.82rem;color:var(--white);line-height:1.7;font-weight:300;align-self:flex-end;max-width:85%';
   userBubble.textContent = text;
   messages.appendChild(userBubble);
 
-  // Typing indicator
   var typing = document.createElement('div');
   typing.style.cssText = 'background:rgba(255,255,255,.04);border:.5px solid var(--rule);padding:.65rem .85rem;font-size:.82rem;color:var(--cream3);font-family:"DM Mono",monospace;letter-spacing:.05em';
   typing.textContent = 'Thinking...';
@@ -2263,18 +2514,21 @@ async function sendChat(){
       method:'POST',
       headers:{'Content-Type':'application/json'},
       body:JSON.stringify({
-        model:'claude-sonnet-4-20250514',
-        max_tokens:1000,
-        system:'You are the AEC virtual assistant for Ascenda Enterprise Capital LLC, a multi-strategy investment firm founded by Izaiah Cottle in Georgia. Answer questions about AEC concisely and professionally. Key facts: $81.2M documented net returns, 78% win rate, 32,000+ trades, proprietary Quantum Trading System (not for sale, internal only), three verticals: trading/real estate/private equity, accredited investors only, mentorship program ($750 Foundation 3mo, $4,500 Accelerator 6mo, $35,000 Elite 12mo). Contact: ascendaenterprise@gmail.com. Do not provide investment advice or guarantee returns. Keep responses under 100 words. Be professional and confident.',
+        model:'claude-haiku-4-5-20251001',
+        max_tokens:300,
+        system: chatSystemPrompts[chatTopic],
         messages:[{role:'user',content:text}]
       })
     });
-    var rawText = await response.text(); var data = JSON.parse(rawText);
+    var rawText = await response.text();
+    var data = JSON.parse(rawText);
     var reply = data.content && data.content[0] && data.content[0].text ? data.content[0].text : 'For assistance contact us at ascendaenterprise@gmail.com.';
     typing.textContent = reply;
     typing.style.color = 'rgba(255,255,255,.8)';
+    typing.style.fontFamily = "'Jost',sans-serif";
+    typing.style.letterSpacing = 'normal';
   } catch(e){
-    typing.textContent = 'Please contact us directly at ascendaenterprise@gmail.com or use the contact form below.';
+    typing.textContent = 'Please contact us directly at ascendaenterprise@gmail.com.';
   }
   messages.scrollTop = messages.scrollHeight;
 }
