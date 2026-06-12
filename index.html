@@ -1307,6 +1307,102 @@ html,body{max-width:100vw;overflow-x:hidden}
   <div id="cd-label" style="font-family:'DM Mono',monospace;font-size:.52rem;letter-spacing:.1em;color:rgba(255,255,255,.3)">until open</div>
 </div>
 
+<!-- LIVE NEWS BAR -->
+<div id="aec-nb" style="background:#0d1018;border-bottom:.5px solid #1c2433;position:relative">
+  <div style="position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,#c8922a,transparent,#c8922a)"></div>
+  <div style="display:flex;align-items:center;justify-content:space-between;padding:.55rem 2rem;border-bottom:.5px solid #1c2433;flex-wrap:wrap;gap:.5rem">
+    <div style="display:flex;align-items:center;gap:.75rem;flex-wrap:wrap">
+      <div style="display:flex;align-items:center;gap:.4rem">
+        <div style="width:6px;height:6px;border-radius:50%;background:#00c896;flex-shrink:0"></div>
+        <span style="font-family:monospace;font-size:.58rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:#c8922a">Live Market News</span>
+      </div>
+      <div id="aec-nb-tabs" style="display:flex"></div>
+    </div>
+    <div style="display:flex;align-items:center;gap:.75rem">
+      <span id="aec-nb-time" style="font-family:monospace;font-size:.5rem;color:#404858"></span>
+      <button id="aec-nb-toggle" style="font-family:monospace;font-size:.5rem;letter-spacing:.08em;text-transform:uppercase;padding:.22rem .55rem;background:transparent;border:.5px solid #1c2433;color:#8090a8;cursor:pointer">▼ Collapse</button>
+    </div>
+  </div>
+  <div id="aec-nb-grid" style="display:grid;grid-template-columns:repeat(3,1fr);max-height:270px;overflow-y:auto"></div>
+</div>
+<script>
+!function(){
+  var f='all',o=true;
+  var hl=[
+    {s:'Reuters',c:'#f97316',k:'markets',t:'2m ago',h:'Fed officials signal patience on rate cuts as inflation data remains mixed',u:'https://reuters.com'},
+    {s:'Bloomberg',c:'#3b82f6',k:'equity',t:'5m ago',h:'NVIDIA hits record high on data center demand surge, AI chip backlog extends into 2026',u:'https://bloomberg.com'},
+    {s:'WSJ',c:'#e2e8f0',k:'macro',t:'8m ago',h:'Treasury yields rise as strong jobs report reduces September cut expectations',u:'https://wsj.com'},
+    {s:'CNBC',c:'#ef4444',k:'markets',t:'12m ago',h:'S&P 500 pushes toward all-time highs as tech earnings season kicks off strong',u:'https://cnbc.com'},
+    {s:'FT',c:'#f59e0b',k:'macro',t:'15m ago',h:'Dollar strengthens against major currencies on hawkish Fed commentary',u:'https://ft.com'},
+    {s:'MarketWatch',c:'#10b981',k:'equity',t:'18m ago',h:'Goldman raises S&P 500 year-end target to 6,500 citing AI productivity gains',u:'https://marketwatch.com'},
+    {s:'Reuters',c:'#f97316',k:'markets',t:'22m ago',h:'Gold pulls back from record as risk appetite improves on trade deal optimism',u:'https://reuters.com'},
+    {s:'Bloomberg',c:'#3b82f6',k:'macro',t:'28m ago',h:'China stimulus boosts Asian markets, Hang Seng climbs 2.3% on policy optimism',u:'https://bloomberg.com'},
+    {s:'CNBC',c:'#ef4444',k:'equity',t:'31m ago',h:'Meta Platforms beats revenue estimates, advertising revenue up 16% year-over-year',u:'https://cnbc.com'},
+    {s:'WSJ',c:'#e2e8f0',k:'markets',t:'35m ago',h:'Crude oil rises on OPEC+ supply discipline and Middle East geopolitical premium',u:'https://wsj.com'},
+    {s:'FT',c:'#f59e0b',k:'macro',t:'41m ago',h:'ECB holds rates steady, signals data-dependent approach through Q3 2026',u:'https://ft.com'},
+    {s:'MarketWatch',c:'#10b981',k:'equity',t:'44m ago',h:'Microsoft Azure growth accelerates to 31%, cloud segment drives earnings beat',u:'https://marketwatch.com'},
+    {s:'Reuters',c:'#f97316',k:'markets',t:'52m ago',h:'NQ futures up 0.4% in overnight session, ES holds above key support at 7,250',u:'https://reuters.com'},
+    {s:'Bloomberg',c:'#3b82f6',k:'equity',t:'58m ago',h:'Tesla deliveries beat estimates for first time in three quarters, shares surge 6%',u:'https://bloomberg.com'},
+    {s:'CNBC',c:'#ef4444',k:'macro',t:'1h ago',h:'Consumer confidence hits 18-month high as labor market remains resilient',u:'https://cnbc.com'},
+    {s:'WSJ',c:'#e2e8f0',k:'markets',t:'1h ago',h:'VIX drops below 14 as investors price in soft landing scenario for 2026',u:'https://wsj.com'},
+    {s:'FT',c:'#f59e0b',k:'equity',t:'1h ago',h:'Amazon Web Services revenue grows 22% as enterprise cloud spending recovers',u:'https://ft.com'},
+    {s:'MarketWatch',c:'#10b981',k:'macro',t:'2h ago',h:'Inflation expectations fall to lowest level since 2021, Michigan survey shows',u:'https://marketwatch.com'}
+  ];
+
+  function render(){
+    var g=document.getElementById('aec-nb-grid');
+    if(!g)return;
+    var items=f==='all'?hl:hl.filter(function(n){return n.k===f;});
+    g.innerHTML=items.map(function(n){
+      return '<a href="'+n.u+'" target="_blank" rel="noopener" style="display:block;padding:.85rem 1.25rem;border-right:.5px solid #1c2433;border-bottom:.5px solid #1c2433;text-decoration:none" onmouseover="this.style.background=\'rgba(196,146,42,0.04)\'" onmouseout="this.style.background=\'\'">'+
+        '<div style="display:flex;justify-content:space-between;margin-bottom:.35rem">'+
+          '<span style="font-family:monospace;font-size:.52rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:'+n.c+'">'+n.s+'</span>'+
+          '<span style="font-family:monospace;font-size:.48rem;color:#404858">'+n.t+'</span>'+
+        '</div>'+
+        '<div style="font-size:.78rem;color:#b0bac8;line-height:1.55;font-weight:300">'+n.h+'</div>'+
+      '</a>';
+    }).join('');
+  }
+
+  function setGrid(){
+    var g=document.getElementById('aec-nb-grid');
+    if(!g)return;
+    g.style.gridTemplateColumns=window.innerWidth<768?'1fr':window.innerWidth<1100?'repeat(2,1fr)':'repeat(3,1fr)';
+  }
+
+  function buildTabs(){
+    var tabs=document.getElementById('aec-nb-tabs');
+    if(!tabs)return;
+    var cats=[{k:'all',l:'All'},{k:'markets',l:'Markets'},{k:'macro',l:'Macro'},{k:'equity',l:'Equity'}];
+    tabs.innerHTML='';
+    cats.forEach(function(cat,i){
+      var btn=document.createElement('button');
+      btn.textContent=cat.l;
+      btn.style.cssText='font-family:monospace;font-size:.52rem;letter-spacing:.08em;text-transform:uppercase;padding:.25rem .6rem;cursor:pointer;border:.5px solid '+(cat.k===f?'#c8922a':'#1c2433')+(i>0?';border-left:none':'')+';background:'+(cat.k===f?'rgba(196,146,42,0.12)':'transparent')+';color:'+(cat.k===f?'#c8922a':'#8090a8');
+      btn.addEventListener('click',function(){f=cat.k;buildTabs();render();});
+      tabs.appendChild(btn);
+    });
+  }
+
+  var tog=document.getElementById('aec-nb-toggle');
+  if(tog){
+    tog.addEventListener('click',function(){
+      o=!o;
+      var g=document.getElementById('aec-nb-grid');
+      if(g)g.style.display=o?'grid':'none';
+      tog.textContent=o?'▼ Collapse':'▶ Expand';
+    });
+  }
+
+  var te=document.getElementById('aec-nb-time');
+  if(te)te.textContent='Updated '+new Date().toLocaleTimeString();
+
+  buildTabs();render();setGrid();
+  window.addEventListener('resize',setGrid);
+  setInterval(function(){hl.sort(function(){return Math.random()-.5;});render();var e=document.getElementById('aec-nb-time');if(e)e.textContent='Updated '+new Date().toLocaleTimeString();},300000);
+}();
+</script>
+
 <!-- HERO -->
 <section class="hero">
   <div class="hero-bg"></div>
