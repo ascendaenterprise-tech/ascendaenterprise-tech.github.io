@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Private Investor Application — Ascenda Enterprise Capital</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Mono:wght@300;400;500&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --gold:#C4922A;--gold2:#E4B84A;--gold3:#8A6518;--gold4:#F2D680;
+  --ink:#06050D;--ink2:#0D0B18;--ink3:#151220;
+  --white:#FFFFFF;--off:#F5F0E8;--off2:#EAE3D3;
+  --cream2:rgba(255,255,255,.72);--cream3:rgba(255,255,255,.38);
+  --rule:rgba(196,146,42,0.15);--rule2:rgba(196,146,42,0.38);
+  --up:#2ECC71;
+  --font-display:'Cormorant Garamond',serif;
+  --font-mono:'DM Mono',monospace;
+  --font-body:'Jost',sans-serif;
+}
+html{scroll-behavior:smooth}
+body{background:var(--ink);color:var(--white);font-family:var(--font-body);font-weight:300;min-height:100vh}
+
+nav{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:1.2rem 3.5rem;
+  background:rgba(6,5,13,.96);
+  border-bottom:.5px solid var(--rule);
+  backdrop-filter:blur(20px);
+  position:sticky;top:0;z-index:100;
+}
+.nav-logo{display:flex;align-items:center;gap:.65rem}
+.nav-logo-main{font-family:var(--font-display);font-size:1rem;color:var(--white);font-weight:400;letter-spacing:.06em}
+.nav-logo-sub{font-family:var(--font-mono);font-size:.45rem;letter-spacing:.25em;text-transform:uppercase;color:var(--gold3)}
+.nav-back{font-family:var(--font-mono);font-size:.58rem;letter-spacing:.18em;text-transform:uppercase;color:var(--cream3);text-decoration:none;transition:color .2s}
+.nav-back:hover{color:var(--gold2)}
+
+.hero{
+  padding:6rem 3.5rem 4rem;
+  background:var(--ink);
+  border-bottom:.5px solid var(--rule);
+  position:relative;overflow:hidden;
+}
+.hero::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse 60% 80% at 80% 50%,rgba(196,146,42,0.06) 0%,transparent 60%);
+}
+.hero-inner{position:relative;z-index:2;max-width:700px}
+.eyebrow{font-family:var(--font-mono);font-size:.58rem;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);margin-bottom:1.25rem;display:flex;align-items:center;gap:.8rem}
+.eyebrow::before{content:'';display:block;width:28px;height:.5px;background:var(--gold)}
+h1{font-family:var(--font-display);font-size:clamp(2.5rem,5vw,4rem);font-weight:300;color:var(--white);line-height:1.05;margin-bottom:1.25rem}
+h1 em{font-style:italic;color:var(--gold2)}
+.hero-sub{font-size:1rem;color:var(--cream2);line-height:1.9;font-weight:300;border-left:1.5px solid var(--rule2);padding-left:1.25rem;max-width:560px}
+
+.main{padding:5rem 3.5rem;max-width:1000px;margin:0 auto}
+
+/* ALLOCATION SELECTOR */
+.alloc-section{margin-bottom:4rem}
+.section-title{font-family:var(--font-mono);font-size:.62rem;letter-spacing:.25em;text-transform:uppercase;color:var(--gold);margin-bottom:2rem;display:flex;align-items:center;gap:.8rem}
+.section-title::before{content:'';display:block;width:24px;height:.5px;background:var(--gold)}
+
+.alloc-display{
+  background:var(--ink2);border:.5px solid var(--rule2);
+  padding:3rem;text-align:center;margin-bottom:2rem;
+  position:relative;overflow:hidden;
+}
+.alloc-display::before{content:'';position:absolute;top:0;left:0;right:0;height:1.5px;background:linear-gradient(90deg,transparent,var(--gold),transparent)}
+.alloc-amount{font-family:var(--font-display);font-size:clamp(3rem,6vw,5rem);font-style:italic;color:var(--gold2);line-height:1;margin-bottom:.5rem}
+.alloc-label{font-family:var(--font-mono);font-size:.58rem;letter-spacing:.2em;text-transform:uppercase;color:var(--cream3)}
+
+.slider-wrap{margin-bottom:1.5rem}
+input[type=range]{
+  width:100%;height:3px;
+  -webkit-appearance:none;appearance:none;
+  background:linear-gradient(90deg,var(--gold) 0%,var(--rule) 0%);
+  outline:none;border-radius:0;cursor:pointer;
+}
+input[type=range]::-webkit-slider-thumb{
+  -webkit-appearance:none;appearance:none;
+  width:20px;height:20px;
+  background:var(--gold2);
+  border:2px solid var(--ink);
+  border-radius:50%;cursor:pointer;
+}
+input[type=range]::-moz-range-thumb{
+  width:20px;height:20px;
+  background:var(--gold2);border:2px solid var(--ink);
+  border-radius:50%;cursor:pointer;border:none;
+}
+.slider-labels{display:flex;justify-content:space-between;margin-top:.6rem}
+.slider-labels span{font-family:var(--font-mono);font-size:.55rem;letter-spacing:.1em;color:var(--cream3)}
+
+.tier-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--rule);margin-bottom:3rem}
+.tier{background:var(--ink2);padding:1.75rem 1.5rem;cursor:pointer;transition:background .2s;text-align:center;border:1px solid transparent}
+.tier:hover{background:rgba(196,146,42,0.08)}
+.tier.active{background:rgba(196,146,42,0.1);border-color:var(--gold)}
+.tier-amount{font-family:var(--font-display);font-size:1.6rem;font-style:italic;color:var(--gold2);margin-bottom:.3rem}
+.tier-label{font-family:var(--font-mono);font-size:.52rem;letter-spacing:.15em;text-transform:uppercase;color:var(--cream3)}
+.tier-sub{font-size:.72rem;color:var(--cream3);margin-top:.3rem;font-weight:300}
+
+/* WHAT YOU GET */
+.benefits{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--rule);margin-bottom:3rem}
+.benefit{background:var(--ink2);padding:1.75rem 1.5rem}
+.benefit-icon{font-size:1.2rem;margin-bottom:.6rem}
+.benefit h4{font-family:var(--font-display);font-size:1rem;font-weight:400;color:var(--white);margin-bottom:.4rem}
+.benefit p{font-size:.78rem;color:var(--cream2);line-height:1.7;font-weight:300}
+
+/* FORM */
+.form-block{background:var(--ink2);border:.5px solid var(--rule);padding:3rem}
+.form-title{font-family:var(--font-display);font-size:1.6rem;font-weight:300;color:var(--white);margin-bottom:.4rem}
+.form-sub{font-size:.78rem;color:var(--cream3);margin-bottom:2rem;font-family:var(--font-mono);letter-spacing:.05em}
+.cf{display:flex;flex-direction:column;gap:1.2rem}
+.cf-row{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem}
+.cff{display:flex;flex-direction:column;gap:.4rem}
+.cff label{font-family:var(--font-mono);font-size:.52rem;letter-spacing:.18em;text-transform:uppercase;color:var(--cream3)}
+.cff input,.cff select,.cff textarea{
+  background:rgba(255,255,255,.025);border:.5px solid rgba(196,146,42,.2);
+  color:var(--white);font-family:var(--font-body);font-size:.88rem;font-weight:300;
+  padding:.85rem 1rem;outline:none;transition:border-color .2s;width:100%;
+}
+.cff input:focus,.cff select:focus,.cff textarea:focus{border-color:var(--gold)}
+.cff select option{background:var(--ink2)}
+.cff textarea{resize:vertical;min-height:80px}
+
+.alloc-hidden{display:none}
+.btn-submit{
+  font-family:var(--font-mono);font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;
+  background:var(--gold);color:var(--ink);border:none;
+  padding:1.1rem 3rem;cursor:pointer;font-weight:500;
+  transition:background .2s;margin-top:.5rem;
+}
+.btn-submit:hover{background:var(--gold2)}
+
+.disclaimer-box{
+  background:rgba(196,146,42,.04);border:.5px solid var(--rule);
+  padding:1.5rem;margin-top:2rem;
+}
+.disclaimer-box p{font-family:var(--font-mono);font-size:.52rem;letter-spacing:.05em;color:rgba(255,255,255,.25);line-height:1.8}
+.disclaimer-box strong{color:rgba(255,255,255,.4);font-weight:500}
+
+footer{padding:2rem 3.5rem;border-top:.5px solid var(--rule);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+.f-copy{font-family:var(--font-mono);font-size:.52rem;color:rgba(255,255,255,.2);letter-spacing:.06em}
+
+@media(max-width:768px){
+  nav{padding:1rem 1.5rem}
+  .hero{padding:5rem 1.5rem 3rem}
+  .main{padding:3.5rem 1.5rem}
+  .tier-grid{grid-template-columns:1fr}
+  .benefits{grid-template-columns:1fr}
+  .cf-row{grid-template-columns:1fr}
+  .form-block{padding:2rem 1.25rem}
+  footer{padding:1.5rem;flex-direction:column;text-align:center}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">
+    <div style="display:flex;flex-direction:column;line-height:1.1">
+      <div class="nav-logo-main">Ascenda</div>
+      <div class="nav-logo-sub">Enterprise Capital</div>
+    </div>
+  </div>
+  <a href="index.html" class="nav-back">← Back to main site</a>
+</nav>
+
+<section class="hero">
+  <div class="hero-inner">
+    <div class="eyebrow">Private Investor Application</div>
+    <h1>Invest capital.<br/><em>Collect returns.</em></h1>
+    <p class="hero-sub">Select your allocation amount and submit your application. All investments are subject to review and approval by Ascenda Enterprise Capital LLC. Minimum investment: $50,000. Maximum per investor: $750,000.</p>
+  </div>
+</section>
+
+<div class="main">
+
+  <!-- ALLOCATION SELECTOR -->
+  <div class="alloc-section">
+    <div class="section-title">Select your allocation</div>
+
+    <div class="alloc-display">
+      <div class="alloc-amount" id="alloc-display">$50,000</div>
+      <div class="alloc-label">Your investment amount</div>
+    </div>
+
+    <div style="margin-bottom:1.25rem;display:flex;align-items:center;gap:1rem">
+      <div style="flex:1">
+        <label style="font-family:var(--font-mono);font-size:.52rem;letter-spacing:.18em;text-transform:uppercase;color:var(--cream3);display:block;margin-bottom:.4rem">Or type exact amount</label>
+        <div style="display:flex;align-items:center;gap:.5rem">
+          <span style="font-family:var(--font-display);font-size:1.4rem;color:var(--gold2)">$</span>
+          <input type="text" id="alloc-input" value="50,000"
+            placeholder="e.g. 150,000"
+            oninput="updateFromInput(this.value)"
+            onkeypress="return /[0-9,]/.test(event.key)"
+            style="background:rgba(255,255,255,.04);border:.5px solid var(--gold);color:var(--white);font-family:var(--font-display);font-size:1.4rem;font-style:italic;padding:.75rem 1rem;outline:none;width:100%;transition:border-color .2s;-webkit-appearance:none;"
+            onfocus="this.style.borderColor='#E4B84A'" onblur="this.style.borderColor='#C4922A'"/>
+        </div>
+        <div style="font-family:var(--font-mono);font-size:.5rem;color:rgba(255,255,255,.25);margin-top:.35rem;letter-spacing:.08em">Min $50,000 · Max $750,000</div>
+      </div>
+    </div>
+
+    <div class="slider-wrap">
+      <input type="range" id="alloc-slider" min="50000" max="750000" step="10000" value="50000"
+        oninput="updateAlloc(this.value)"/>
+      <div class="slider-labels">
+        <span>Min $50,000</span>
+        <span>Max $750,000</span>
+      </div>
+    </div>
+
+    <div class="tier-grid">
+      <div class="tier active" onclick="setTier(50000, this)">
+        <div class="tier-amount">$50K</div>
+        <div class="tier-label">Entry</div>
+        <div class="tier-sub">Minimum allocation</div>
+      </div>
+      <div class="tier" onclick="setTier(250000, this)">
+        <div class="tier-amount">$250K</div>
+        <div class="tier-label">Standard</div>
+        <div class="tier-sub">Most common allocation</div>
+      </div>
+      <div class="tier" onclick="setTier(750000, this)">
+        <div class="tier-amount">$750K</div>
+        <div class="tier-label">Maximum</div>
+        <div class="tier-sub">Per-investor cap</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- WHAT YOU GET -->
+  <div class="section-title">What investors receive</div>
+  <div class="benefits" style="margin-bottom:3rem">
+    <div class="benefit"><div class="benefit-icon">📊</div><h4>Multi-Strategy Exposure</h4><p>Access to AEC's three-pillar strategy across global trading, real estate, and private equity.</p></div>
+    <div class="benefit"><div class="benefit-icon">📋</div><h4>Quarterly Reporting</h4><p>Detailed performance reports delivered each quarter with full transparency on strategy and returns.</p></div>
+    <div class="benefit"><div class="benefit-icon">🔒</div><h4>$750M Hard Cap</h4><p>Your capital is protected by our absolute AUM ceiling. We will never dilute the fund's performance with excess capital.</p></div>
+    <div class="benefit"><div class="benefit-icon">📞</div><h4>Direct Access</h4><p>Direct communication with Izaiah Cottle and the AEC leadership team throughout your investment period.</p></div>
+  </div>
+
+  <!-- APPLICATION FORM -->
+  <div class="form-block">
+    <div class="form-title">Submit Your Application</div>
+    <div class="form-sub">All fields required. Applications reviewed personally within 72 hours.</div>
+    <form class="cf" action="https://formspree.io/f/mvzywgwb" method="POST">
+      <input type="hidden" name="application_type" value="Private Investor"/>
+      <input type="hidden" name="investment_amount" id="form-amount" value="$50,000"/>
+      <div class="cf-row">
+        <div class="cff"><label>First name</label><input type="text" name="first_name" required placeholder="John"/></div>
+        <div class="cff"><label>Last name</label><input type="text" name="last_name" required placeholder="Smith"/></div>
+      </div>
+      <div class="cf-row">
+        <div class="cff"><label>Email</label><input type="email" name="email" required placeholder="you@example.com"/></div>
+        <div class="cff"><label>Phone</label><input type="tel" name="phone" placeholder="(000) 000-0000"/></div>
+      </div>
+      <div class="cff"><label>Investment amount selected</label><input type="text" id="form-amount-display" readonly style="color:var(--gold2);font-family:var(--font-display);font-size:1.1rem;cursor:default" value="$50,000"/></div>
+      <div class="cff">
+        <label>Source of funds</label>
+        <select name="source_of_funds" required>
+          <option value="">Select source</option>
+          <option>Personal savings</option>
+          <option>Business income</option>
+          <option>Investment portfolio</option>
+          <option>Inherited wealth</option>
+          <option>Real estate proceeds</option>
+          <option>Other</option>
+        </select>
+      </div>
+      <div class="cff"><label>Investment experience</label>
+        <select name="investment_experience" required>
+          <option value="">Select level</option>
+          <option>Beginner (under 2 years)</option>
+          <option>Intermediate (2–5 years)</option>
+          <option>Experienced (5–10 years)</option>
+          <option>Expert (10+ years)</option>
+        </select>
+      </div>
+      <div class="cff"><label>Why do you want to invest with AEC?</label><textarea name="message" placeholder="Tell us about your investment goals and why AEC is the right fit..." required></textarea></div>
+      <div style="display:flex;align-items:flex-start;gap:.75rem;padding:1.25rem;background:rgba(196,146,42,.04);border:.5px solid var(--rule)">
+
+    <!-- LEGAL DISCLOSURES -->
+    <div style="margin-top:3rem;border:.5px solid rgba(196,146,42,0.25);background:rgba(196,146,42,0.03)">
+      <div style="background:rgba(196,146,42,0.08);border-bottom:.5px solid rgba(196,146,42,0.25);padding:1.25rem 1.75rem;display:flex;align-items:center;gap:.75rem">
+        <div style="width:8px;height:8px;background:var(--gold);flex-shrink:0"></div>
+        <div style="font-family:var(--font-mono);font-size:.6rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--gold2)">Required Legal Disclosures — Read Carefully Before Submitting</div>
+      </div>
+      <div style="padding:1.75rem;display:flex;flex-direction:column;gap:1.25rem;max-height:400px;overflow-y:auto">
+
+        <div>
+          <div style="font-family:var(--font-mono);font-size:.58rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--gold);margin-bottom:.5rem">1. No Guarantee of Returns</div>
+          <p style="font-family:var(--font-mono);font-size:.6rem;color:rgba(255,255,255,.55);line-height:1.85">Ascenda Enterprise Capital LLC ("AEC") makes no representations, warranties, or guarantees of any kind regarding investment returns, performance, or the preservation of capital. All documented historical trading results are provided for informational purposes only and are not a projection, promise, or guarantee of future performance. Past performance is not indicative of future results under any circumstances. All capital invested through AEC is subject to market risk, including the complete and permanent loss of principal.</p>
+        </div>
+
+        <div>
+          <div style="font-family:var(--font-mono);font-size:.58rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--gold);margin-bottom:.5rem">2. Accredited Investor Requirement & Verification</div>
+          <p style="font-family:var(--font-mono);font-size:.6rem;color:rgba(255,255,255,.55);line-height:1.85">Participation in AEC's private investment program is restricted exclusively to Accredited Investors as defined under the Securities Act of 1933, as amended, and SEC Regulation D, Rule 501(a). An Accredited Investor is an individual with a net worth exceeding $1,000,000 (excluding primary residence), or annual income exceeding $200,000 ($300,000 jointly with a spouse) in each of the two most recent years with reasonable expectation of the same income in the current year. By submitting this application, you represent and warrant that you meet this definition. AEC reserves the right to request documentation verifying accredited investor status at any time, and to reject any application where such status cannot be confirmed.</p>
+        </div>
+
+        <div>
+          <div style="font-family:var(--font-mono);font-size:.58rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--gold);margin-bottom:.5rem">3. Limitation of Liability</div>
+          <p style="font-family:var(--font-mono);font-size:.6rem;color:rgba(255,255,255,.55);line-height:1.85">To the fullest extent permitted by applicable law, AEC, its members, managers, officers, employees, and agents shall not be liable for any direct, indirect, incidental, consequential, special, or exemplary damages arising out of or in connection with your investment, including but not limited to: losses resulting from market movements, platform failures, force majeure events, acts of God, geopolitical events, regulatory changes, cyberattacks, or any other cause beyond AEC's reasonable control. In no event shall AEC's aggregate liability to any investor exceed the amount of capital actually received from that investor in the six (6) months preceding the claim.</p>
+        </div>
+
+        <div>
+          <div style="font-family:var(--font-mono);font-size:.58rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--gold);margin-bottom:.5rem">4. Indemnification</div>
+          <p style="font-family:var(--font-mono);font-size:.6rem;color:rgba(255,255,255,.55);line-height:1.85">By submitting this application and investing with AEC, you agree to indemnify, defend, and hold harmless Ascenda Enterprise Capital LLC, its members, managers, officers, employees, affiliates, and agents from and against any and all claims, damages, losses, liabilities, costs, and expenses (including reasonable attorneys' fees) arising from: (a) your breach of any representation or warranty made herein; (b) your violation of any applicable law or regulation; (c) any false or misleading information provided by you in connection with this application; or (d) any third-party claims arising from your use of AEC's services.</p>
+        </div>
+
+        <div>
+          <div style="font-family:var(--font-mono);font-size:.58rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--gold);margin-bottom:.5rem">5. Discretionary Investment Management</div>
+          <p style="font-family:var(--font-mono);font-size:.6rem;color:rgba(255,255,255,.55);line-height:1.85">AEC operates with full discretionary authority over all investment decisions. Investors have no right to direct, control, or interfere with AEC's trading strategies, asset allocation, position sizing, or risk management decisions. AEC's investment strategies — including but not limited to futures trading, options strategies, real estate acquisitions, and private equity placements — may change at any time without prior notice to investors.</p>
+        </div>
+
+        <div>
+          <div style="font-family:var(--font-mono);font-size:.58rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--gold);margin-bottom:.5rem">6. Withdrawal & Redemption Terms</div>
+          <p style="font-family:var(--font-mono);font-size:.6rem;color:rgba(255,255,255,.55);line-height:1.85">All withdrawal and redemption terms are subject to AEC's operating agreement and applicable law. AEC does not guarantee liquidity at any specific time. Requests for redemption must be submitted in writing with a minimum of ninety (90) days advance notice. AEC reserves the right to suspend or delay redemptions during periods of market dislocation, regulatory review, or other extraordinary circumstances. AEC is not liable for any losses incurred as a result of a delayed or suspended redemption.</p>
+        </div>
+
+        <div>
+          <div style="font-family:var(--font-mono);font-size:.58rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--gold);margin-bottom:.5rem">7. No Registration — Exempt Offering</div>
+          <p style="font-family:var(--font-mono);font-size:.6rem;color:rgba(255,255,255,.55);line-height:1.85">This offering has not been registered with the U.S. Securities and Exchange Commission or any state securities authority. AEC is relying on the exemption from registration provided by Section 4(a)(2) of the Securities Act of 1933 and Rule 506(b) of Regulation D. This offering is not subject to the same legal requirements as a registered offering. Investments in unregistered securities involve significant additional risk.</p>
+        </div>
+
+        <div>
+          <div style="font-family:var(--font-mono);font-size:.58rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--gold);margin-bottom:.5rem">8. Anti-Fraud Acknowledgment</div>
+          <p style="font-family:var(--font-mono);font-size:.6rem;color:rgba(255,255,255,.55);line-height:1.85">By submitting this application, you represent that all information provided is true, accurate, and complete. You acknowledge that providing false or misleading information in connection with a securities offering is a federal crime under 18 U.S.C. § 1001 and may expose you to civil and criminal liability. AEC reserves the right to rescind any investment made on the basis of materially false representations.</p>
+        </div>
+
+        <div>
+          <div style="font-family:var(--font-mono);font-size:.58rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--gold);margin-bottom:.5rem">9. Governing Law & Binding Arbitration</div>
+          <p style="font-family:var(--font-mono);font-size:.6rem;color:rgba(255,255,255,.55);line-height:1.85">This agreement and all disputes arising therefrom shall be governed by the laws of the State of Georgia, without regard to its conflict of laws provisions. Any dispute, claim, or controversy arising out of or relating to your investment with AEC shall be resolved exclusively through binding arbitration administered by the American Arbitration Association under its Commercial Arbitration Rules. The arbitration shall take place in Atlanta, Georgia. The arbitrator's decision shall be final and binding, and judgment thereon may be entered in any court of competent jurisdiction. YOU HEREBY WAIVE YOUR RIGHT TO A JURY TRIAL AND TO PARTICIPATE IN ANY CLASS ACTION OR REPRESENTATIVE PROCEEDING.</p>
+        </div>
+
+        <div>
+          <div style="font-family:var(--font-mono);font-size:.58rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--gold);margin-bottom:.5rem">10. Electronic Signature & Consent</div>
+          <p style="font-family:var(--font-mono);font-size:.6rem;color:rgba(255,255,255,.55);line-height:1.85">By clicking "Submit Investor Application," you agree that your electronic submission constitutes a legally binding electronic signature under the Electronic Signatures in Global and National Commerce Act (E-SIGN Act), 15 U.S.C. § 7001 et seq., and is the legal equivalent of a handwritten signature. You consent to conduct this transaction electronically and agree to be bound by all terms and disclosures set forth herein. Your IP address, device information, and timestamp will be recorded at the time of submission as evidence of your agreement.</p>
+        </div>
+
+        <div>
+          <div style="font-family:var(--font-mono);font-size:.58rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--gold);margin-bottom:.5rem">11. Not Legal or Financial Advice</div>
+          <p style="font-family:var(--font-mono);font-size:.6rem;color:rgba(255,255,255,.55);line-height:1.85">Nothing on this page or in any communication from AEC constitutes legal advice, financial advice, tax advice, or investment advice. You are strongly encouraged to consult with independent legal counsel, a registered investment advisor, and a certified public accountant before making any investment decision.</p>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- SIGNATURE CHECKBOXES -->
+    <div style="margin-top:1.5rem;display:flex;flex-direction:column;gap:.85rem;padding:1.5rem;border:.5px solid rgba(196,146,42,0.25);background:rgba(196,146,42,0.03)">
+      <div style="font-family:var(--font-mono);font-size:.58rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--gold2);margin-bottom:.25rem">Investor Acknowledgments — All Required</div>
+      <label style="display:flex;align-items:flex-start;gap:.75rem;cursor:pointer">
+        <input type="checkbox" id="cb-accredited" required style="margin-top:.2rem;accent-color:var(--gold);width:14px;height:14px;flex-shrink:0"/>
+        <span style="font-size:.72rem;color:var(--cream2);line-height:1.7">I confirm that I am an <strong>Accredited Investor</strong> as defined by SEC Regulation D, Rule 501(a), and I understand that AEC may request documentation to verify my status.</span>
+      </label>
+      <label style="display:flex;align-items:flex-start;gap:.75rem;cursor:pointer">
+        <input type="checkbox" id="cb-risk" required style="margin-top:.2rem;accent-color:var(--gold);width:14px;height:14px;flex-shrink:0"/>
+        <span style="font-size:.72rem;color:var(--cream2);line-height:1.7">I understand that investing with AEC involves significant risk, including the <strong>complete and permanent loss of all capital invested</strong>, and that past performance is not indicative of future results.</span>
+      </label>
+      <label style="display:flex;align-items:flex-start;gap:.75rem;cursor:pointer">
+        <input type="checkbox" id="cb-disclosures" required style="margin-top:.2rem;accent-color:var(--gold);width:14px;height:14px;flex-shrink:0"/>
+        <span style="font-size:.72rem;color:var(--cream2);line-height:1.7">I have read, understood, and agree to all <strong>11 legal disclosures</strong> above, including the limitation of liability, indemnification clause, binding arbitration requirement, and class action waiver.</span>
+      </label>
+      <label style="display:flex;align-items:flex-start;gap:.75rem;cursor:pointer">
+        <input type="checkbox" id="cb-esign" required style="margin-top:.2rem;accent-color:var(--gold);width:14px;height:14px;flex-shrink:0"/>
+        <span style="font-size:.72rem;color:var(--cream2);line-height:1.7">I understand that submitting this form constitutes a <strong>legally binding electronic signature</strong> under the E-SIGN Act, and that my IP address and timestamp will be recorded.</span>
+      </label>
+      <label style="display:flex;align-items:flex-start;gap:.75rem;cursor:pointer">
+        <input type="checkbox" id="cb-noadvice" required style="margin-top:.2rem;accent-color:var(--gold);width:14px;height:14px;flex-shrink:0"/>
+        <span style="font-size:.72rem;color:var(--cream2);line-height:1.7">I confirm that I have consulted or had the opportunity to consult with independent legal and financial advisors, and that I am making this investment decision of my own free will without reliance on any representations by AEC beyond what is documented herein.</span>
+      </label>
+    </div>
+
+      <button type="submit" class="btn-submit" style="margin-top:1.5rem" onclick="logSubmission()">Submit Investor Application →</button>
+    </form>
+  </div>
+
+</div>
+
+<footer>
+  <div style="font-family:var(--font-display);font-style:italic;font-size:.9rem;color:var(--gold3)">Ascenda Enterprise Capital LLC</div>
+  <div class="f-copy">© 2025 Ascenda Enterprise Capital LLC · Registered in Georgia · Private Investor Program</div>
+</footer>
+
+<script>
+var GOLD = '#C4922A';
+var GOLD_DIM = 'rgba(196,146,42,0.15)';
+var MIN = 50000;
+var MAX = 750000;
+
+function fmt(v){
+  return '$' + Number(v).toLocaleString('en-US');
+}
+
+function updateAlloc(v){
+  v = parseInt(v);
+  if(isNaN(v)) return;
+  v = Math.max(MIN, Math.min(MAX, v));
+
+  document.getElementById('alloc-display').textContent = fmt(v);
+  document.getElementById('form-amount').value = fmt(v);
+  document.getElementById('form-amount-display').value = fmt(v);
+
+  var slider = document.getElementById('alloc-slider');
+  slider.value = v;
+  var pct = (v - MIN) / (MAX - MIN) * 100;
+  slider.style.background = 'linear-gradient(90deg, ' + GOLD + ' ' + pct + '%, ' + GOLD_DIM + ' ' + pct + '%)';
+
+  // Update text input with formatted number
+  var inp = document.getElementById('alloc-input');
+  inp.value = v.toLocaleString('en-US');
+
+  document.querySelectorAll('.tier').forEach(function(t){ t.classList.remove('active'); });
+  if(v <= 50000) document.querySelectorAll('.tier')[0].classList.add('active');
+  else if(v === 250000) document.querySelectorAll('.tier')[1].classList.add('active');
+  else if(v >= 750000) document.querySelectorAll('.tier')[2].classList.add('active');
+}
+
+function updateFromInput(rawVal){
+  // Strip everything except digits
+  var clean = rawVal.toString().replace(/[^0-9]/g, '');
+  var v = parseInt(clean);
+  if(isNaN(v) || clean.length === 0) return;
+  if(v > MAX) v = MAX;
+  // Don't enforce min while typing — only clamp on blur
+  var slider = document.getElementById('alloc-slider');
+  if(v >= MIN) slider.value = v;
+  var pct = (Math.max(MIN,v) - MIN) / (MAX - MIN) * 100;
+  slider.style.background = 'linear-gradient(90deg, ' + GOLD + ' ' + pct + '%, ' + GOLD_DIM + ' ' + pct + '%)';
+  document.getElementById('alloc-display').textContent = fmt(Math.max(MIN,v));
+  document.getElementById('form-amount').value = fmt(Math.max(MIN,v));
+  document.getElementById('form-amount-display').value = fmt(Math.max(MIN,v));
+}
+
+function setTier(v, el){
+  updateAlloc(v);
+  document.querySelectorAll('.tier').forEach(function(t){ t.classList.remove('active'); });
+  el.classList.add('active');
+}
+
+window.onload = function(){
+  updateAlloc(MIN);
+  // On blur, enforce min
+  document.getElementById('alloc-input').addEventListener('blur', function(){
+    var v = parseInt(this.value.replace(/[^0-9]/g,''));
+    if(isNaN(v) || v < MIN) v = MIN;
+    updateAlloc(v);
+  });
+};
+
+// ── LEGAL LOGGING & FORM SUBMISSION ──
+function logSubmission() {
+  var ts = new Date().toISOString();
+  document.getElementById('sub-timestamp').value = ts;
+  // Log to console for record
+  console.log('[AEC] Application submitted', ts, window.location.href);
+}
+
+// Wire form to Resend
+document.addEventListener('DOMContentLoaded', function() {
+  var form = document.querySelector('form');
+  if(!form) return;
+
+  // Add hidden fields for metadata
+  ['sub-timestamp','sub-useragent'].forEach(function(id) {
+    if(!document.getElementById(id)) {
+      var inp = document.createElement('input');
+      inp.type = 'hidden'; inp.id = id; inp.name = id;
+      form.appendChild(inp);
+    }
+  });
+  document.getElementById('sub-useragent').value = navigator.userAgent;
+
+  form.addEventListener('submit', async function(e) {
+    e.preventDefault();
+    var btn = form.querySelector('.btn-submit');
+    btn.textContent = 'Submitting...';
+    btn.disabled = true;
+
+    var data = {};
+    new FormData(form).forEach(function(v, k) { data[k] = v; });
+    data.timestamp = new Date().toISOString();
+    data.userAgent = navigator.userAgent;
+    data.formType = 'Investor Application';
+
+    try {
+      await fetch('https://aec-email.ascendaenterprise.workers.dev/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          type: 'subscribe',
+          name: data.name || data['full-name'] || 'Applicant',
+          email: data.email,
+          interests: ['Fund Investment — $' + (data.amount || data['alloc-amount'] || '')]
+        })
+      });
+    } catch(err) { console.error('Email error', err); }
+
+    // Show success
+    form.innerHTML = '<div style="text-align:center;padding:3rem 0"><div style="font-size:2.5rem;margin-bottom:1rem">✓</div><div style="font-family:var(--font-mono);font-size:.65rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--gold2);margin-bottom:1rem">Application Received</div><p style="font-size:.88rem;color:rgba(255,255,255,.6);line-height:1.8;max-width:480px;margin:0 auto">Your investor application has been received and logged. Izaiah will contact you within 24–48 hours to discuss next steps. Reference time: ' + new Date().toLocaleString() + '</p></div>';
+  });
+});
+
+</script>
+</body>
+</html>
