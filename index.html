@@ -2127,7 +2127,8 @@ html,body{max-width:100vw;overflow-x:hidden}
         <div class="jcp"><span class="jcp-dot">✦</span><span>Access to AEC's frameworks & playbooks</span></div>
         <div class="jcp"><span class="jcp-dot">✦</span><span>Extremely limited — serious applicants only</span></div>
       </div>
-      <a href="ascenda-mentorship.html" class="jc-btn">Apply as Mentee →</a>
+      <a href="ascenda-mentorship.html" class="jc-btn" style="margin-bottom:.5rem">Explore Mentorship →</a>
+      <button onclick="document.getElementById('mentorship-payment-modal').style.display='flex'" style="background:var(--gold);color:var(--ink);border:none;font-family:var(--font-mono);font-size:.58rem;letter-spacing:.18em;text-transform:uppercase;padding:.9rem 1.5rem;cursor:pointer;width:100%;font-weight:600;margin-top:.25rem">Enroll Now →</button>
     </div>
   </div>
 </section>
@@ -2914,5 +2915,49 @@ window.addEventListener('resize', applyMobileFixes);
   }).catch(()=>{const ml=document.getElementById('map-loading');if(ml)ml.textContent='Map renders on live site.';});
 })();
 </script>
+
+<!-- MENTORSHIP PAYMENT MODAL -->
+<div id="mentorship-payment-modal" style="display:none;position:fixed;inset:0;z-index:9999;background:rgba(4,3,10,.95);align-items:center;justify-content:center;padding:2rem">
+  <div style="background:var(--ink2);border:.5px solid var(--rule2);padding:3rem;max-width:580px;width:100%;position:relative;max-height:90vh;overflow-y:auto">
+    <div style="position:absolute;top:0;left:0;right:0;height:1.5px;background:linear-gradient(90deg,transparent,var(--gold),transparent)"></div>
+    <button onclick="document.getElementById('mentorship-payment-modal').style.display='none'" style="position:absolute;top:1rem;right:1rem;background:none;border:none;color:var(--cream3);font-size:1.2rem;cursor:pointer">✕</button>
+    <div style="font-family:var(--font-mono);font-size:.55rem;letter-spacing:.22em;text-transform:uppercase;color:var(--gold3);margin-bottom:.75rem">Mentorship Enrollment</div>
+    <h3 style="font-family:var(--font-display);font-size:1.5rem;font-weight:300;color:var(--white);margin-bottom:.5rem">Select Your Tier</h3>
+    <p style="font-size:.82rem;color:var(--cream3);line-height:1.7;font-weight:300;margin-bottom:2rem">Direct mentorship under Izaiah Cottle. Real frameworks, real trade reviews, real access. Limited spots available.</p>
+
+    <div style="display:flex;flex-direction:column;gap:1px;background:var(--rule);margin-bottom:2rem">
+      <!-- FOUNDATION -->
+      <div style="background:var(--ink2);padding:1.5rem 1.75rem;display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap">
+        <div>
+          <div style="font-family:var(--font-mono);font-size:.6rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--gold2);margin-bottom:.35rem">Foundation</div>
+          <div style="font-size:.82rem;color:var(--cream2);margin-bottom:.2rem">3-month program · Core frameworks</div>
+          <div style="font-family:var(--font-display);font-size:1.5rem;color:var(--white);font-weight:300">$750</div>
+        </div>
+        <a href="https://app.mercury.com/pay/m72tnzyqgp5d05p3" target="_blank" style="font-family:var(--font-mono);font-size:.58rem;letter-spacing:.15em;text-transform:uppercase;background:transparent;color:var(--gold);border:.5px solid var(--gold);padding:.75rem 1.5rem;text-decoration:none;white-space:nowrap;transition:all .2s" onmouseover="this.style.background='rgba(196,146,42,0.1)'" onmouseout="this.style.background='transparent'">Enroll →</a>
+      </div>
+      <!-- ACCELERATOR -->
+      <div style="background:var(--ink2);padding:1.5rem 1.75rem;display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap">
+        <div>
+          <div style="font-family:var(--font-mono);font-size:.6rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--gold2);margin-bottom:.35rem">Accelerator</div>
+          <div style="font-size:.82rem;color:var(--cream2);margin-bottom:.2rem">6-month program · Advanced execution</div>
+          <div style="font-family:var(--font-display);font-size:1.5rem;color:var(--white);font-weight:300">$4,500</div>
+        </div>
+        <a href="https://app.mercury.com/pay/xl602z7lvqx7g1rn" target="_blank" style="font-family:var(--font-mono);font-size:.58rem;letter-spacing:.15em;text-transform:uppercase;background:transparent;color:var(--gold);border:.5px solid var(--gold);padding:.75rem 1.5rem;text-decoration:none;white-space:nowrap;transition:all .2s" onmouseover="this.style.background='rgba(196,146,42,0.1)'" onmouseout="this.style.background='transparent'">Enroll →</a>
+      </div>
+      <!-- ELITE -->
+      <div style="background:rgba(196,146,42,0.06);border:.5px solid rgba(196,146,42,.25);padding:1.5rem 1.75rem;display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap">
+        <div>
+          <div style="font-family:var(--font-mono);font-size:.6rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--gold2);margin-bottom:.35rem">Elite <span style="color:var(--gold3)">— Most Exclusive</span></div>
+          <div style="font-size:.82rem;color:var(--cream2);margin-bottom:.2rem">12-month program · Full proximity access</div>
+          <div style="font-family:var(--font-display);font-size:1.5rem;color:var(--gold2);font-weight:300">$35,000</div>
+        </div>
+        <a href="https://app.mercury.com/pay/vbqf00lyyh8z5885" target="_blank" style="font-family:var(--font-mono);font-size:.58rem;letter-spacing:.15em;text-transform:uppercase;background:var(--gold);color:var(--ink);border:.5px solid var(--gold);padding:.75rem 1.5rem;text-decoration:none;white-space:nowrap;transition:all .2s;font-weight:600" onmouseover="this.style.background='var(--gold2)'" onmouseout="this.style.background='var(--gold)'">Enroll →</a>
+      </div>
+    </div>
+
+    <p style="font-family:var(--font-mono);font-size:.52rem;color:var(--cream3);line-height:1.7;text-align:center">Payment goes directly to Ascenda Enterprise Capital LLC via Mercury. After payment, email <strong style="color:var(--gold)">ascendaenterprise@gmail.com</strong> with your receipt to schedule your first session.</p>
+  </div>
+</div>
+
 </body>
 </html>
