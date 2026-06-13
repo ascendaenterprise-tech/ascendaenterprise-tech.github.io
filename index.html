@@ -1475,7 +1475,11 @@ html,body{max-width:100vw;overflow-x:hidden}
   var te=document.getElementById('aec-nb-time');
   if(te)te.textContent='Updated '+new Date().toLocaleTimeString();
 
-  buildTabs();setGrid();
+  buildTabs();
+  setGrid();
+  // Show loading state
+  var g=document.getElementById('aec-nb-grid');
+  if(g) g.innerHTML='<div style="padding:1.5rem;color:#404858;font-family:monospace;font-size:.72rem;grid-column:1/-1">Loading headlines...</div>';
   fetchNews();
   window.addEventListener('resize',setGrid);
   setInterval(fetchNews, 300000);
