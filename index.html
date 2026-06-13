@@ -1328,26 +1328,89 @@ html,body{max-width:100vw;overflow-x:hidden}
 <script>
 !function(){
   var f='all',o=true;
-  var hl=[
-    {s:'Reuters',c:'#f97316',k:'markets',t:'2m ago',h:'Fed officials signal patience on rate cuts as inflation data remains mixed',u:'https://reuters.com'},
-    {s:'Bloomberg',c:'#3b82f6',k:'equity',t:'5m ago',h:'NVIDIA hits record high on data center demand surge, AI chip backlog extends into 2026',u:'https://bloomberg.com'},
-    {s:'WSJ',c:'#e2e8f0',k:'macro',t:'8m ago',h:'Treasury yields rise as strong jobs report reduces September cut expectations',u:'https://wsj.com'},
-    {s:'CNBC',c:'#ef4444',k:'markets',t:'12m ago',h:'S&P 500 pushes toward all-time highs as tech earnings season kicks off strong',u:'https://cnbc.com'},
-    {s:'FT',c:'#f59e0b',k:'macro',t:'15m ago',h:'Dollar strengthens against major currencies on hawkish Fed commentary',u:'https://ft.com'},
-    {s:'MarketWatch',c:'#10b981',k:'equity',t:'18m ago',h:'Goldman raises S&P 500 year-end target to 6,500 citing AI productivity gains',u:'https://marketwatch.com'},
-    {s:'Reuters',c:'#f97316',k:'markets',t:'22m ago',h:'Gold pulls back from record as risk appetite improves on trade deal optimism',u:'https://reuters.com'},
-    {s:'Bloomberg',c:'#3b82f6',k:'macro',t:'28m ago',h:'China stimulus boosts Asian markets, Hang Seng climbs 2.3% on policy optimism',u:'https://bloomberg.com'},
-    {s:'CNBC',c:'#ef4444',k:'equity',t:'31m ago',h:'Meta Platforms beats revenue estimates, advertising revenue up 16% year-over-year',u:'https://cnbc.com'},
-    {s:'WSJ',c:'#e2e8f0',k:'markets',t:'35m ago',h:'Crude oil rises on OPEC+ supply discipline and Middle East geopolitical premium',u:'https://wsj.com'},
-    {s:'FT',c:'#f59e0b',k:'macro',t:'41m ago',h:'ECB holds rates steady, signals data-dependent approach through Q3 2026',u:'https://ft.com'},
-    {s:'MarketWatch',c:'#10b981',k:'equity',t:'44m ago',h:'Microsoft Azure growth accelerates to 31%, cloud segment drives earnings beat',u:'https://marketwatch.com'},
-    {s:'Reuters',c:'#f97316',k:'markets',t:'52m ago',h:'NQ futures up 0.4% in overnight session, ES holds above key support at 7,250',u:'https://reuters.com'},
-    {s:'Bloomberg',c:'#3b82f6',k:'equity',t:'58m ago',h:'Tesla deliveries beat estimates for first time in three quarters, shares surge 6%',u:'https://bloomberg.com'},
-    {s:'CNBC',c:'#ef4444',k:'macro',t:'1h ago',h:'Consumer confidence hits 18-month high as labor market remains resilient',u:'https://cnbc.com'},
-    {s:'WSJ',c:'#e2e8f0',k:'markets',t:'1h ago',h:'VIX drops below 14 as investors price in soft landing scenario for 2026',u:'https://wsj.com'},
-    {s:'FT',c:'#f59e0b',k:'equity',t:'1h ago',h:'Amazon Web Services revenue grows 22% as enterprise cloud spending recovers',u:'https://ft.com'},
-    {s:'MarketWatch',c:'#10b981',k:'macro',t:'2h ago',h:'Inflation expectations fall to lowest level since 2021, Michigan survey shows',u:'https://marketwatch.com'}
-  ];
+  var hl=[];
+  var NEWS_KEY='59d74aa2328448c8916d7914b3ab0097';
+
+  var sourceColors={
+    'reuters.com':'#f97316','bloomberg.com':'#3b82f6','wsj.com':'#e2e8f0',
+    'cnbc.com':'#ef4444','ft.com':'#f59e0b','marketwatch.com':'#10b981',
+    'forbes.com':'#8b5cf6','businessinsider.com':'#06b6d4','yahoo.com':'#6366f1',
+    'default':'#c8922a'
+  };
+
+  function getColor(url){
+    if(!url) return sourceColors.default;
+    for(var d in sourceColors){ if(url.includes(d)) return sourceColors[d]; }
+    return sourceColors.default;
+  }
+
+  function getSource(name,url){
+    if(name) return name;
+    if(!url) return 'News';
+    var m=url.match(/(?:https?:\/\/)?(?:www\.)?([^\/]+)/);
+    return m?m[1].split('.')[0].charAt(0).toUpperCase()+m[1].split('.')[0].slice(1):'News';
+  }
+
+  function timeAgo(dt){
+    var diff=Math.floor((Date.now()-new Date(dt))/60000);
+    if(diff<1) return 'just now';
+    if(diff<60) return diff+'m ago';
+    if(diff<1440) return Math.floor(diff/60)+'h ago';
+    return Math.floor(diff/1440)+'d ago';
+  }
+
+  function catFromTitle(title){
+    var t=(title||'').toLowerCase();
+    if(/stock|nasdaq|s&p|dow|equity|share|ipo|earnings|dividend/.test(t)) return 'equity';
+    if(/fed|rate|inflation|gdp|macro|treasury|yield|economy|fomc|dollar/.test(t)) return 'macro';
+    return 'markets';
+  }
+
+  async function fetchNews(){
+    try {
+      // Use rss2json to parse RSS feeds — no CORS issues
+      var feeds = [
+        {url:'https://www.cnbc.com/id/100003114/device/rss/rss.html', source:'CNBC', color:'#ef4444'},
+        {url:'https://feeds.finance.yahoo.com/rss/2.0/headline?s=^GSPC&region=US&lang=en-US', source:'Yahoo Finance', color:'#6366f1'},
+        {url:'https://www.marketwatch.com/rss/topstories', source:'MarketWatch', color:'#10b981'},
+        {url:'https://feeds.bloomberg.com/markets/news.rss', source:'Bloomberg', color:'#3b82f6'},
+        {url:'https://www.investing.com/rss/news.rss', source:'Investing.com', color:'#c8922a'}
+      ];
+      var allItems = [];
+      for(var i=0;i<feeds.length;i++){
+        try {
+          var feed = feeds[i];
+          var apiUrl = 'https://api.rss2json.com/v1/api.json?rss_url='+encodeURIComponent(feed.url)+'&count=6';
+          var r = await fetch(apiUrl);
+          var j = await r.json();
+          if(j.items){
+            j.items.forEach(function(item){
+              allItems.push({
+                s: feed.source,
+                c: feed.color,
+                k: catFromTitle(item.title),
+                t: timeAgo(item.pubDate),
+                h: item.title,
+                u: item.link||'#'
+              });
+            });
+          }
+        } catch(e2){ /* skip failed feed */ }
+      }
+      // Sort by recency and deduplicate
+      var seen={};
+      hl = allItems.filter(function(a){
+        if(!a.h||seen[a.h]) return false;
+        seen[a.h]=true;
+        return true;
+      });
+      if(hl.length > 0) render();
+      var el=document.getElementById('aec-nb-time');
+      if(el) el.textContent='Updated '+new Date().toLocaleTimeString();
+    } catch(e){
+      console.error('News fetch error',e);
+    }
+  }
 
   function render(){
     var g=document.getElementById('aec-nb-grid');
@@ -1397,9 +1460,10 @@ html,body{max-width:100vw;overflow-x:hidden}
   var te=document.getElementById('aec-nb-time');
   if(te)te.textContent='Updated '+new Date().toLocaleTimeString();
 
-  buildTabs();render();setGrid();
+  buildTabs();setGrid();
+  fetchNews();
   window.addEventListener('resize',setGrid);
-  setInterval(function(){hl.sort(function(){return Math.random()-.5;});render();var e=document.getElementById('aec-nb-time');if(e)e.textContent='Updated '+new Date().toLocaleTimeString();},300000);
+  setInterval(fetchNews, 300000);
 }();
 </script>
 
@@ -1431,6 +1495,7 @@ html,body{max-width:100vw;overflow-x:hidden}
 <div class="hero-ctas">
         <a href="#contact" class="btn-gold">Request a meeting</a>
         <a href="#performance" class="btn-ghost">View performance</a>
+        <button onclick="document.getElementById('mentorship-payment-modal').style.display='flex'" style="background:transparent;border:.5px solid var(--gold);color:var(--gold);font-family:var(--font-mono);font-size:.58rem;letter-spacing:.18em;text-transform:uppercase;padding:.75rem 1.75rem;cursor:pointer;transition:all .2s;font-weight:600" onmouseover="this.style.background='rgba(196,146,42,0.1)'" onmouseout="this.style.background='transparent'">Enroll in Mentorship →</button>
       </div>
     </div>
 
