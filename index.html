@@ -326,7 +326,7 @@ h1 em,h2 em{font-style:italic;color:var(--gold2)}
 /* ═══════════════════════════════
    SECTIONS
 ═══════════════════════════════ */
-.sec{padding:8rem 3.5rem}
+.sec{padding:8rem clamp(1rem,5vw,3.5rem)}
 .sec-alt{background:var(--ink2);border-top:.5px solid var(--rule);border-bottom:.5px solid var(--rule)}
 .sec-light{background:var(--off);color:var(--ink)}
 .sec-light2{background:var(--off2);color:var(--ink)}
@@ -342,7 +342,7 @@ h2{font-family:var(--font-display);font-size:clamp(2rem,3.5vw,3rem);font-weight:
 /* ═══════════════════════════════
    PERFORMANCE TEARSHEET
 ═══════════════════════════════ */
-.tearsheet{background:var(--ink);padding:8rem 3.5rem;overflow:hidden;width:100%}
+.tearsheet{background:var(--ink);padding:8rem clamp(1rem,5vw,3.5rem);overflow:hidden;width:100%}
 .ts-header{display:grid;grid-template-columns:1fr 1fr;gap:4rem;margin-bottom:4rem;align-items:end}
 .ts-disclaimer{background:rgba(196,146,42,0.06);border:.5px solid var(--rule);padding:1rem 1.5rem;margin-bottom:3rem}
 .ts-disclaimer p{font-family:var(--font-mono);font-size:.58rem;letter-spacing:.06em;color:rgba(255,255,255,.3);line-height:1.7}
@@ -490,7 +490,7 @@ h2{font-family:var(--font-display);font-size:clamp(2rem,3.5vw,3rem);font-weight:
 /* ═══════════════════════════════
    NETWORK MAP
 ═══════════════════════════════ */
-#network{padding:8rem 3.5rem;background:var(--ink3);border-top:.5px solid var(--rule)}
+#network{padding:8rem clamp(1rem,5vw,3.5rem);background:var(--ink3);border-top:.5px solid var(--rule)}
 
 /* ═══════════════════════════════
    CONTACT
@@ -512,7 +512,7 @@ h2{font-family:var(--font-display);font-size:clamp(2rem,3.5vw,3rem);font-weight:
 /* ═══════════════════════════════
    FOOTER
 ═══════════════════════════════ */
-.footer-top{background:var(--ink2);border-top:.5px solid var(--rule);padding:3rem 3.5rem;display:grid;grid-template-columns:1fr 1fr 1fr;gap:3rem}
+.footer-top{background:var(--ink2);border-top:.5px solid var(--rule);padding:3rem clamp(1rem,5vw,3.5rem);display:grid;grid-template-columns:1fr 1fr 1fr;gap:3rem}
 .ft-col-title{font-family:var(--font-mono);font-size:.52rem;letter-spacing:.22em;text-transform:uppercase;color:var(--gold3);margin-bottom:1.25rem}
 .ft-link{display:block;font-size:.78rem;color:var(--cream3);text-decoration:none;margin-bottom:.6rem;transition:color .2s;font-weight:300}
 .ft-link:hover{color:var(--gold2)}
@@ -1729,7 +1729,7 @@ html,body{max-width:100vw;overflow-x:hidden}
 </section>
 
 <!-- INTERACTIVE EQUITY CURVE -->
-<section style="padding:7rem 3.5rem;background:var(--ink);border-top:.5px solid var(--rule)" id="equity-curve">
+<section style="padding:7rem clamp(1rem,5vw,3.5rem);background:var(--ink);border-top:.5px solid var(--rule)" id="equity-curve">
   <div style="max-width:1100px;margin:0 auto">
     <div class="sec-label">Documented growth</div>
     <h2 class="on-dark">Equity <em>Curve</em></h2>
@@ -1872,7 +1872,7 @@ html,body{max-width:100vw;overflow-x:hidden}
 </section>
 
 <!-- LIVE MARKETS -->
-<section style="padding:7rem 3.5rem;background:var(--ink);border-top:.5px solid var(--rule)" id="live-markets">
+<section style="padding:7rem clamp(1rem,5vw,3.5rem);background:var(--ink);border-top:.5px solid var(--rule)" id="live-markets">
   <div style="max-width:1200px;margin:0 auto">
     <div class="sec-label">Live market data</div>
     <h2 class="on-dark">Markets, <em>Real-Time</em></h2>
@@ -2086,7 +2086,7 @@ html,body{max-width:100vw;overflow-x:hidden}
 </section>
 
 <!-- REAL ESTATE & PRIVATE EQUITY NEWS -->
-<section style="padding:6rem 3.5rem;background:var(--ink2);border-top:.5px solid var(--rule)" id="re-pe-news">
+<section style="padding:6rem clamp(1rem,5vw,3.5rem);background:var(--ink2);border-top:.5px solid var(--rule)" id="re-pe-news">
   <div style="display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:3rem;flex-wrap:wrap;gap:1rem">
     <div>
       <div style="font-family:var(--font-mono);font-size:.58rem;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);margin-bottom:1.2rem;display:flex;align-items:center;gap:.9rem;font-weight:400">
@@ -2178,7 +2178,7 @@ html,body{max-width:100vw;overflow-x:hidden}
 </section>
 
 <!-- PRESS & MEDIA -->
-<section style="padding:6rem 3.5rem;background:var(--off2)" id="press">
+<section style="padding:6rem clamp(1rem,5vw,3.5rem);background:var(--off2)" id="press">
   <div style="max-width:1100px;margin:0 auto">
     <div class="sec-label-dark">Press & media</div>
     <h2 style="font-family:var(--font-display);font-size:clamp(2rem,3.5vw,3rem);font-weight:300;color:#0D1A10;line-height:1.12;margin-bottom:1rem">In the <em style="font-style:italic;color:var(--gold3)">conversation</em></h2>
@@ -2222,7 +2222,7 @@ html,body{max-width:100vw;overflow-x:hidden}
 </section>
 
 <!-- INVESTOR PORTAL -->
-<section style="padding:6rem 3.5rem;background:var(--ink3);border-top:.5px solid var(--rule)" id="portal">
+<section style="padding:6rem clamp(1rem,5vw,3.5rem);background:var(--ink3);border-top:.5px solid var(--rule)" id="portal">
   <div style="max-width:900px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center">
     <div>
       <div class="sec-label">Restricted access</div>
@@ -2344,7 +2344,7 @@ html,body{max-width:100vw;overflow-x:hidden}
 </section>
 
 <!-- VIDEO INTRO -->
-<section style="padding:7rem 3.5rem;background:var(--ink);border-top:.5px solid var(--rule)" id="video">
+<section style="padding:7rem clamp(1rem,5vw,3.5rem);background:var(--ink);border-top:.5px solid var(--rule)" id="video">
   <div style="max-width:900px;margin:0 auto;text-align:center">
     <div class="sec-label" style="justify-content:center;display:flex">
       <span style="display:block;width:28px;height:.5px;background:var(--gold);margin-right:.8rem;margin-top:.5rem"></span>
@@ -2368,7 +2368,7 @@ html,body{max-width:100vw;overflow-x:hidden}
 
 <!-- FOUNDER -->
 <section id="about" style="background:var(--ink)">
-  <div class="about-intro" style="text-align:center;padding:5rem 3.5rem 3rem;border-top:.5px solid var(--rule)">
+  <div class="about-intro" style="text-align:center;padding:5rem clamp(1rem,5vw,3.5rem) 3rem;border-top:.5px solid var(--rule)">
     <div class="sec-label" style="justify-content:center">
       <span style="display:block;width:28px;height:.5px;background:var(--gold)"></span>Leadership<span style="display:block;width:28px;height:.5px;background:var(--gold)"></span>
     </div>
@@ -2422,7 +2422,7 @@ html,body{max-width:100vw;overflow-x:hidden}
 </section>
 
 <!-- APPROACH -->
-<div class="ap-band" style="padding:8rem 3.5rem;background:var(--ink2);border-top:.5px solid var(--rule)">
+<div class="ap-band" style="padding:8rem clamp(1rem,5vw,3.5rem);background:var(--ink2);border-top:.5px solid var(--rule)">
   <div class="sec-label">Investment philosophy</div>
   <h2 class="on-dark">How we think about <em>risk and return</em></h2>
   <div class="ap-grid">
@@ -2434,66 +2434,66 @@ html,body{max-width:100vw;overflow-x:hidden}
 </div>
 
 <!-- FAQ -->
-<section style="padding:8rem 3.5rem;background:var(--ink2);border-top:.5px solid var(--rule)" id="faq">
+<section style="padding:8rem clamp(1rem,5vw,3.5rem);background:var(--ink2);border-top:.5px solid var(--rule)" id="faq">
   <div style="max-width:800px;margin:0 auto">
     <div class="sec-label">Common questions</div>
     <h2 class="on-dark">Frequently Asked <em>Questions</em></h2>
     <div style="margin-top:3rem;display:flex;flex-direction:column;gap:0;border:.5px solid var(--rule)">
 
       <div class="faq-item" style="border-bottom:.5px solid var(--rule)">
-        <div class="faq-q" onclick="toggleFaq(this)" style="padding:1.5rem 2rem;display:flex;justify-content:space-between;align-items:center;cursor:pointer;transition:background .2s" onmouseover="this.style.background='rgba(196,146,42,0.05)'" onmouseout="this.style.background='transparent'">
+        <div class="faq-q" onclick="toggleFaq(this)" style="padding:1.25rem clamp(.75rem,3vw,2rem);display:flex;justify-content:space-between;align-items:center;cursor:pointer;transition:background .2s;gap:.75rem" onmouseover="this.style.background='rgba(196,146,42,0.05)'" onmouseout="this.style.background='transparent'">
           <span style="font-size:.95rem;font-weight:400;color:var(--white);font-family:var(--font-body)">Who can invest with Ascenda Enterprise Capital?</span>
           <div class="faq-icon" style="width:22px;height:22px;background:var(--gold3);color:var(--white);display:flex;align-items:center;justify-content:center;font-size:.75rem;flex-shrink:0;transition:transform .3s">+</div>
         </div>
-        <div class="faq-a" style="max-height:0;overflow:hidden;transition:max-height .35s ease;font-size:.88rem;color:var(--cream2);line-height:1.9;font-weight:300;padding:0 2rem">AEC is open exclusively to Accredited Investors as defined by the SEC — individuals with a net worth exceeding $1,000,000 (excluding primary residence) or annual income exceeding $200,000 individually ($300,000 jointly). Institutional allocators and qualified family offices are also welcome to inquire.</div>
+        <div class="faq-a" style="max-height:0;overflow:hidden;transition:max-height .35s ease;font-size:.88rem;color:var(--cream2);line-height:1.9;font-weight:300;padding:0 clamp(.75rem,3vw,2rem);word-break:normal;overflow-wrap:break-word;width:100%;box-sizing:border-box">AEC is open exclusively to Accredited Investors as defined by the SEC — individuals with a net worth exceeding $1,000,000 (excluding primary residence) or annual income exceeding $200,000 individually ($300,000 jointly). Institutional allocators and qualified family offices are also welcome to inquire.</div>
       </div>
 
       <div class="faq-item" style="border-bottom:.5px solid var(--rule)">
-        <div class="faq-q" onclick="toggleFaq(this)" style="padding:1.5rem 2rem;display:flex;justify-content:space-between;align-items:center;cursor:pointer;transition:background .2s" onmouseover="this.style.background='rgba(196,146,42,0.05)'" onmouseout="this.style.background='transparent'">
+        <div class="faq-q" onclick="toggleFaq(this)" style="padding:1.25rem clamp(.75rem,3vw,2rem);display:flex;justify-content:space-between;align-items:center;cursor:pointer;transition:background .2s;gap:.75rem" onmouseover="this.style.background='rgba(196,146,42,0.05)'" onmouseout="this.style.background='transparent'">
           <span style="font-size:.95rem;font-weight:400;color:var(--white);font-family:var(--font-body)">What is the minimum investment?</span>
           <div class="faq-icon" style="width:22px;height:22px;background:var(--gold3);color:var(--white);display:flex;align-items:center;justify-content:center;font-size:.75rem;flex-shrink:0;transition:transform .3s">+</div>
         </div>
-        <div class="faq-a" style="max-height:0;overflow:hidden;transition:max-height .35s ease;font-size:.88rem;color:var(--cream2);line-height:1.9;font-weight:300;padding:0 2rem">Minimum investment starts at $50,000 for private investors. Institutional allocators and family offices typically deploy $100,000 and above. All investment amounts are subject to review and approval by AEC leadership.</div>
+        <div class="faq-a" style="max-height:0;overflow:hidden;transition:max-height .35s ease;font-size:.88rem;color:var(--cream2);line-height:1.9;font-weight:300;padding:0 clamp(.75rem,3vw,2rem);word-break:normal;overflow-wrap:break-word;width:100%;box-sizing:border-box">Minimum investment starts at $50,000 for private investors. Institutional allocators and family offices typically deploy $100,000 and above. All investment amounts are subject to review and approval by AEC leadership.</div>
       </div>
 
       <div class="faq-item" style="border-bottom:.5px solid var(--rule)">
-        <div class="faq-q" onclick="toggleFaq(this)" style="padding:1.5rem 2rem;display:flex;justify-content:space-between;align-items:center;cursor:pointer;transition:background .2s" onmouseover="this.style.background='rgba(196,146,42,0.05)'" onmouseout="this.style.background='transparent'">
+        <div class="faq-q" onclick="toggleFaq(this)" style="padding:1.25rem clamp(.75rem,3vw,2rem);display:flex;justify-content:space-between;align-items:center;cursor:pointer;transition:background .2s;gap:.75rem" onmouseover="this.style.background='rgba(196,146,42,0.05)'" onmouseout="this.style.background='transparent'">
           <span style="font-size:.95rem;font-weight:400;color:var(--white);font-family:var(--font-body)">What is the Quantum Trading System?</span>
           <div class="faq-icon" style="width:22px;height:22px;background:var(--gold3);color:var(--white);display:flex;align-items:center;justify-content:center;font-size:.75rem;flex-shrink:0;transition:transform .3s">+</div>
         </div>
-        <div class="faq-a" style="max-height:0;overflow:hidden;transition:max-height .35s ease;font-size:.88rem;color:var(--cream2);line-height:1.9;font-weight:300;padding:0 2rem">AEC's Quantum Trading System is a proprietary, internally-developed trading framework that combines advanced momentum analysis, Z-score standard deviation modeling, and institutional DOM order flow reading. It is not licensed, not sold, and not available outside of AEC. It exists exclusively to generate returns for our clients and our firm.</div>
+        <div class="faq-a" style="max-height:0;overflow:hidden;transition:max-height .35s ease;font-size:.88rem;color:var(--cream2);line-height:1.9;font-weight:300;padding:0 clamp(.75rem,3vw,2rem);word-break:normal;overflow-wrap:break-word;width:100%;box-sizing:border-box">AEC's Quantum Trading System is a proprietary, internally-developed trading framework that combines advanced momentum analysis, Z-score standard deviation modeling, and institutional DOM order flow reading. It is not licensed, not sold, and not available outside of AEC. It exists exclusively to generate returns for our clients and our firm.</div>
       </div>
 
       <div class="faq-item" style="border-bottom:.5px solid var(--rule)">
-        <div class="faq-q" onclick="toggleFaq(this)" style="padding:1.5rem 2rem;display:flex;justify-content:space-between;align-items:center;cursor:pointer;transition:background .2s" onmouseover="this.style.background='rgba(196,146,42,0.05)'" onmouseout="this.style.background='transparent'">
+        <div class="faq-q" onclick="toggleFaq(this)" style="padding:1.25rem clamp(.75rem,3vw,2rem);display:flex;justify-content:space-between;align-items:center;cursor:pointer;transition:background .2s;gap:.75rem" onmouseover="this.style.background='rgba(196,146,42,0.05)'" onmouseout="this.style.background='transparent'">
           <span style="font-size:.95rem;font-weight:400;color:var(--white);font-family:var(--font-body)">What markets does AEC trade?</span>
           <div class="faq-icon" style="width:22px;height:22px;background:var(--gold3);color:var(--white);display:flex;align-items:center;justify-content:center;font-size:.75rem;flex-shrink:0;transition:transform .3s">+</div>
         </div>
-        <div class="faq-a" style="max-height:0;overflow:hidden;transition:max-height .35s ease;font-size:.88rem;color:var(--cream2);line-height:1.9;font-weight:300;padding:0 2rem">AEC's primary trading instruments include NAS100, ES Futures, Gold, Crude Oil, and the top-performing equities of the decade including NVDA, TSLA, AMZN, AAPL, MSFT, and META. We operate across both long and short positions using systematic momentum and order flow strategies.</div>
+        <div class="faq-a" style="max-height:0;overflow:hidden;transition:max-height .35s ease;font-size:.88rem;color:var(--cream2);line-height:1.9;font-weight:300;padding:0 clamp(.75rem,3vw,2rem);word-break:normal;overflow-wrap:break-word;width:100%;box-sizing:border-box">AEC's primary trading instruments include NAS100, ES Futures, Gold, Crude Oil, and the top-performing equities of the decade including NVDA, TSLA, AMZN, AAPL, MSFT, and META. We operate across both long and short positions using systematic momentum and order flow strategies.</div>
       </div>
 
       <div class="faq-item" style="border-bottom:.5px solid var(--rule)">
-        <div class="faq-q" onclick="toggleFaq(this)" style="padding:1.5rem 2rem;display:flex;justify-content:space-between;align-items:center;cursor:pointer;transition:background .2s" onmouseover="this.style.background='rgba(196,146,42,0.05)'" onmouseout="this.style.background='transparent'">
+        <div class="faq-q" onclick="toggleFaq(this)" style="padding:1.25rem clamp(.75rem,3vw,2rem);display:flex;justify-content:space-between;align-items:center;cursor:pointer;transition:background .2s;gap:.75rem" onmouseover="this.style.background='rgba(196,146,42,0.05)'" onmouseout="this.style.background='transparent'">
           <span style="font-size:.95rem;font-weight:400;color:var(--white);font-family:var(--font-body)">How do I know if I qualify as an Accredited Investor?</span>
           <div class="faq-icon" style="width:22px;height:22px;background:var(--gold3);color:var(--white);display:flex;align-items:center;justify-content:center;font-size:.75rem;flex-shrink:0;transition:transform .3s">+</div>
         </div>
-        <div class="faq-a" style="max-height:0;overflow:hidden;transition:max-height .35s ease;font-size:.88rem;color:var(--cream2);line-height:1.9;font-weight:300;padding:0 2rem">Under SEC Regulation D Rule 501, you qualify as an Accredited Investor if you have a net worth exceeding $1,000,000 excluding your primary residence, OR annual income exceeding $200,000 individually (or $300,000 jointly with a spouse) in each of the last two years with expectation of the same this year. Holders of Series 7, 65, or 82 licenses also qualify automatically.</div>
+        <div class="faq-a" style="max-height:0;overflow:hidden;transition:max-height .35s ease;font-size:.88rem;color:var(--cream2);line-height:1.9;font-weight:300;padding:0 clamp(.75rem,3vw,2rem);word-break:normal;overflow-wrap:break-word;width:100%;box-sizing:border-box">Under SEC Regulation D Rule 501, you qualify as an Accredited Investor if you have a net worth exceeding $1,000,000 excluding your primary residence, OR annual income exceeding $200,000 individually (or $300,000 jointly with a spouse) in each of the last two years with expectation of the same this year. Holders of Series 7, 65, or 82 licenses also qualify automatically.</div>
       </div>
 
       <div class="faq-item" style="border-bottom:.5px solid var(--rule)">
-        <div class="faq-q" onclick="toggleFaq(this)" style="padding:1.5rem 2rem;display:flex;justify-content:space-between;align-items:center;cursor:pointer;transition:background .2s" onmouseover="this.style.background='rgba(196,146,42,0.05)'" onmouseout="this.style.background='transparent'">
+        <div class="faq-q" onclick="toggleFaq(this)" style="padding:1.25rem clamp(.75rem,3vw,2rem);display:flex;justify-content:space-between;align-items:center;cursor:pointer;transition:background .2s;gap:.75rem" onmouseover="this.style.background='rgba(196,146,42,0.05)'" onmouseout="this.style.background='transparent'">
           <span style="font-size:.95rem;font-weight:400;color:var(--white);font-family:var(--font-body)">What happens after I submit an inquiry?</span>
           <div class="faq-icon" style="width:22px;height:22px;background:var(--gold3);color:var(--white);display:flex;align-items:center;justify-content:center;font-size:.75rem;flex-shrink:0;transition:transform .3s">+</div>
         </div>
-        <div class="faq-a" style="max-height:0;overflow:hidden;transition:max-height .35s ease;font-size:.88rem;color:var(--cream2);line-height:1.9;font-weight:300;padding:0 2rem">Every inquiry is reviewed personally by Izaiah Cottle within 24–48 hours. If there is a potential fit, you will receive a direct response to schedule an introductory call. AEC is selective about who we work with — quality over quantity, always.</div>
+        <div class="faq-a" style="max-height:0;overflow:hidden;transition:max-height .35s ease;font-size:.88rem;color:var(--cream2);line-height:1.9;font-weight:300;padding:0 clamp(.75rem,3vw,2rem);word-break:normal;overflow-wrap:break-word;width:100%;box-sizing:border-box">Every inquiry is reviewed personally by Izaiah Cottle within 24–48 hours. If there is a potential fit, you will receive a direct response to schedule an introductory call. AEC is selective about who we work with — quality over quantity, always.</div>
       </div>
 
       <div class="faq-item">
-        <div class="faq-q" onclick="toggleFaq(this)" style="padding:1.5rem 2rem;display:flex;justify-content:space-between;align-items:center;cursor:pointer;transition:background .2s" onmouseover="this.style.background='rgba(196,146,42,0.05)'" onmouseout="this.style.background='transparent'">
+        <div class="faq-q" onclick="toggleFaq(this)" style="padding:1.25rem clamp(.75rem,3vw,2rem);display:flex;justify-content:space-between;align-items:center;cursor:pointer;transition:background .2s;gap:.75rem" onmouseover="this.style.background='rgba(196,146,42,0.05)'" onmouseout="this.style.background='transparent'">
           <span style="font-size:.95rem;font-weight:400;color:var(--white);font-family:var(--font-body)">Is AEC registered with the SEC?</span>
           <div class="faq-icon" style="width:22px;height:22px;background:var(--gold3);color:var(--white);display:flex;align-items:center;justify-content:center;font-size:.75rem;flex-shrink:0;transition:transform .3s">+</div>
         </div>
-        <div class="faq-a" style="max-height:0;overflow:hidden;transition:max-height .35s ease;font-size:.88rem;color:var(--cream2);line-height:1.9;font-weight:300;padding:0 2rem">Ascenda Enterprise Capital LLC is a registered Limited Liability Company in the State of Georgia. AEC is not currently registered as an Investment Adviser with the SEC or any state authority. All investment activities are conducted in compliance with applicable federal and state securities laws. Prospective investors are encouraged to consult with independent legal and financial advisors before making any investment decisions.</div>
+        <div class="faq-a" style="max-height:0;overflow:hidden;transition:max-height .35s ease;font-size:.88rem;color:var(--cream2);line-height:1.9;font-weight:300;padding:0 clamp(.75rem,3vw,2rem);word-break:normal;overflow-wrap:break-word;width:100%;box-sizing:border-box">Ascenda Enterprise Capital LLC is a registered Limited Liability Company in the State of Georgia. AEC is not currently registered as an Investment Adviser with the SEC or any state authority. All investment activities are conducted in compliance with applicable federal and state securities laws. Prospective investors are encouraged to consult with independent legal and financial advisors before making any investment decisions.</div>
       </div>
 
     </div>
