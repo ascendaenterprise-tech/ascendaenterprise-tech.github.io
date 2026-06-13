@@ -939,6 +939,9 @@ html,body{max-width:100vw;overflow-x:hidden}
   .faq-item,[class*="faq"]{
     width:100% !important;
     max-width:100% !important;
+    min-width:0 !important;
+    word-break:normal !important;
+    overflow-wrap:break-word !important;
   }
 }
 
@@ -955,7 +958,7 @@ html,body{max-width:100vw;overflow-x:hidden}
     word-break:break-word;
     overflow-wrap:break-word;
   }
-  .kpi-val{white-space:normal !important;word-break:break-all}
+  .kpi-val{white-space:normal !important;word-break:break-word}
   .kpi-sub{font-size:.44rem !important;line-height:1.4 !important}
 }
 
@@ -991,6 +994,22 @@ html,body{max-width:100vw;overflow-x:hidden}
 
 /* Smooth touch scrolling everywhere */
 *{-webkit-overflow-scrolling:touch}
+
+@media(max-width:600px){
+  /* Fix vertical letter-by-letter text */
+  p,li,td,th,h1,h2,h3,h4,h5,span,div,a,label,button{
+    word-break:normal !important;
+    overflow-wrap:break-word !important;
+    white-space:normal !important;
+  }
+  /* Fix accordion/FAQ narrow containers */
+  .faq-answer, .accordion-content, details, summary{
+    width:100% !important;
+    min-width:0 !important;
+    box-sizing:border-box !important;
+  }
+}
+
 </style>
 </head>
 <body>
@@ -1641,7 +1660,7 @@ html,body{max-width:100vw;overflow-x:hidden}
 @media(max-width:900px){
   .gold-kpi-override{grid-template-columns:repeat(2,1fr)!important;width:100%!important;max-width:100vw!important;overflow:hidden!important}
   .gold-kpi-override .kpi{min-width:0!important;overflow:hidden!important}
-  .gold-kpi-override .kpi-val{font-size:1.3rem!important;word-break:break-all!important}
+  .gold-kpi-override .kpi-val{font-size:1.3rem!important;word-break:break-word!important}
   .gold-kpi-override .kpi-label{font-size:.44rem!important}
 }
 </style>
