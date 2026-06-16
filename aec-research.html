@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Research Notes — Ascenda Enterprise Capital</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,300;0,400;0,500;1,300;1,400&family=EB+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet"/>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#050508;--panel:#0a0a10;--border:#1a1a28;
+  --gold:#C4922A;--gold2:#E4B84A;--white:#F0EDE8;
+  --cream:#B8B0A0;--text3:#404050;
+  --mono:'JetBrains Mono',monospace;
+  --display:'Playfair Display',Georgia,serif;
+  --body:'EB Garamond',Georgia,serif;
+}
+html,body{min-height:100vh;background:var(--bg);color:var(--white);font-family:var(--body);font-size:16px}
+a{color:inherit;text-decoration:none}
+
+nav{position:sticky;top:0;z-index:100;background:var(--panel);border-bottom:.5px solid var(--border);padding:0 clamp(1rem,5vw,3rem);height:52px;display:flex;align-items:center;justify-content:space-between}
+.nav-logo{font-family:var(--mono);font-size:.7rem;font-weight:600;letter-spacing:.12em;color:var(--white)}
+.nav-logo span{color:var(--gold)}
+.nav-links{display:flex;gap:2rem;align-items:center}
+.nav-links a{font-family:var(--mono);font-size:.55rem;letter-spacing:.15em;text-transform:uppercase;color:var(--text3);transition:color .2s}
+.nav-links a:hover{color:var(--white)}
+
+.hero{padding:5rem clamp(1rem,5vw,3rem) 4rem;border-bottom:.5px solid var(--border);max-width:900px;margin:0 auto}
+.hero-label{font-family:var(--mono);font-size:.58rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:1rem}
+.hero-title{font-family:var(--display);font-size:clamp(2rem,6vw,3.5rem);font-weight:300;line-height:1.15;margin-bottom:1.25rem}
+.hero-sub{font-family:var(--body);font-size:1.05rem;color:var(--cream);line-height:1.8;font-weight:300;max-width:580px}
+
+.main{max-width:900px;margin:0 auto;padding:3rem clamp(1rem,5vw,3rem)}
+
+.note-card{padding:2.5rem 0;border-bottom:.5px solid var(--border)}
+.note-card:last-child{border:none}
+.note-meta{display:flex;align-items:center;gap:1.25rem;margin-bottom:1rem;flex-wrap:wrap}
+.note-date{font-family:var(--mono);font-size:.6rem;color:var(--text3);letter-spacing:.1em}
+.note-tag{font-family:var(--mono);font-size:.55rem;letter-spacing:.1em;text-transform:uppercase;padding:.15rem .55rem;border:.5px solid}
+.tag-macro{color:#3b82f6;border-color:rgba(59,130,246,.4)}
+.tag-equity{color:#00c896;border-color:rgba(0,200,150,.4)}
+.tag-futures{color:var(--gold);border-color:rgba(196,146,42,.4)}
+.tag-re{color:#a78bfa;border-color:rgba(167,139,250,.4)}
+.note-title{font-family:var(--display);font-size:1.6rem;font-weight:400;margin-bottom:.75rem;line-height:1.3}
+.note-title a:hover{color:var(--gold2)}
+.note-excerpt{font-family:var(--body);font-size:.95rem;color:var(--cream);line-height:1.85;margin-bottom:1rem}
+.note-read-more{font-family:var(--mono);font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);transition:color .2s}
+.note-read-more:hover{color:var(--gold2)}
+
+.note-full{display:none;margin-top:1.25rem;padding-top:1.25rem;border-top:.5px solid var(--border)}
+.note-full p{font-family:var(--body);font-size:1rem;color:var(--cream);line-height:1.9;margin-bottom:1.25rem}
+.note-full h3{font-family:var(--display);font-size:1.2rem;color:var(--white);margin:1.5rem 0 .75rem}
+.note-full .key-point{background:rgba(196,146,42,.06);border-left:2px solid var(--gold);padding:.85rem 1.25rem;font-family:var(--mono);font-size:.72rem;color:var(--cream);line-height:1.7;margin-bottom:1rem}
+
+.sidebar{position:sticky;top:72px;align-self:flex-start}
+.sidebar-section{background:var(--panel);border:.5px solid var(--border);padding:1.5rem;margin-bottom:1rem}
+.sidebar-title{font-family:var(--mono);font-size:.58rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--text3);margin-bottom:1rem;padding-bottom:.75rem;border-bottom:.5px solid var(--border)}
+.sidebar-item{font-family:var(--mono);font-size:.68rem;color:var(--cream);padding:.4rem 0;border-bottom:.5px solid rgba(26,26,40,.5);cursor:pointer;transition:color .2s}
+.sidebar-item:hover{color:var(--white)}
+.sidebar-item:last-child{border:none}
+
+.layout{display:grid;grid-template-columns:1fr 280px;gap:3rem;align-items:start}
+
+.subscribe-bar{background:var(--panel);border:.5px solid var(--border);padding:1.5rem;margin-bottom:2rem;display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap}
+.subscribe-text{font-family:var(--mono);font-size:.65rem;color:var(--cream)}
+.subscribe-form{display:flex;gap:.5rem}
+.sub-inp{background:rgba(255,255,255,.04);border:.5px solid var(--border);color:var(--white);font-family:var(--mono);font-size:.72rem;padding:.55rem .85rem;outline:none;width:220px;transition:border-color .2s}
+.sub-inp:focus{border-color:var(--gold)}
+.sub-btn{background:var(--gold);color:#000;border:none;font-family:var(--mono);font-size:.58rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:.55rem 1rem;cursor:pointer;transition:background .2s;white-space:nowrap}
+.sub-btn:hover{background:var(--gold2)}
+
+footer{background:var(--panel);border-top:.5px solid var(--border);padding:2rem clamp(1rem,5vw,3rem);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem}
+footer .f-logo{font-family:var(--mono);font-size:.65rem;color:var(--white)}
+footer .f-logo span{color:var(--gold)}
+footer .f-copy{font-family:var(--mono);font-size:.55rem;color:var(--text3)}
+
+@media(max-width:768px){
+  .layout{grid-template-columns:1fr}
+  .sidebar{display:none}
+  .subscribe-form{flex-direction:column;width:100%}
+  .sub-inp{width:100%}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">AEC<span>.</span>RESEARCH</a>
+  <div class="nav-links">
+    <a href="index.html">Main Site</a>
+    <a href="ascenda-investor.html">Invest</a>
+    <a href="ascenda-mentorship.html">Mentorship</a>
+  </div>
+</nav>
+
+<div class="hero">
+  <div class="hero-label">Research & Commentary</div>
+  <h1 class="hero-title">Market Notes from<br><em>Ascenda Enterprise Capital</em></h1>
+  <p class="hero-sub">Weekly market analysis, macro commentary, and trade insights from Izaiah Cottle and the AEC trading desk.</p>
+</div>
+
+<div class="main">
+
+  <!-- Subscribe bar -->
+  <div class="subscribe-bar">
+    <div class="subscribe-text">Get weekly research notes delivered to your inbox.</div>
+    <div class="subscribe-form">
+      <input class="sub-inp" type="email" id="research-email" placeholder="your@email.com"/>
+      <button class="sub-btn" onclick="subscribeResearch()">Subscribe</button>
+    </div>
+  </div>
+
+  <div class="layout">
+    <!-- Notes -->
+    <div>
+
+      <!-- Note 1 -->
+      <div class="note-card">
+        <div class="note-meta">
+          <span class="note-date">June 14, 2026</span>
+          <span class="note-tag tag-futures">Futures</span>
+          <span class="note-tag tag-macro">Macro</span>
+        </div>
+        <h2 class="note-title"><a href="#" onclick="toggleNote('note1');return false">NQ at Critical Confluence — What the June 14 Open Tells Us</a></h2>
+        <p class="note-excerpt">The NASDAQ 100 futures opened Friday's session with an overnight gap that placed price directly into a weekly Fair Value Gap identified on the Sunday open. With the Fed's next meeting three weeks out and CPI data printing hotter than expected mid-week, the market is pricing in a "higher for longer" narrative that creates asymmetric opportunity in both directions.</p>
+        <a href="#" class="note-read-more" onclick="toggleNote('note1');return false">Read full note →</a>
+        <div class="note-full" id="note1">
+          <h3>The Setup</h3>
+          <p>NQ opened Friday at 20,847 — precisely into a Fair Value Gap formed on the June 8-9 weekly candle. This level has acted as a magnet for institutional order flow three times over the past 30 days. The question is not whether this level is significant, but whether it acts as support or resistance from here.</p>
+          <div class="key-point">Key Level: 20,800 — Major support. Below this, 20,650 becomes the next target. Above 20,950 confirms continuation toward 21,200.</div>
+          <h3>The Macro Context</h3>
+          <p>Thursday's CPI came in at 3.4% YoY — 0.1% above consensus. Markets initially sold off but recovered within two hours as traders interpreted the data as "not bad enough to derail the September cut thesis." This behavioral pattern — sell the news, buy the recovery — has been characteristic of this bull market cycle since Q4 2025.</p>
+          <p>The Fed Fund Futures currently price a 62% probability of a September cut. If that number drops below 50%, expect a more significant NQ selloff. Monitor closely.</p>
+          <div class="key-point">AEC Trading Desk Bias: Cautiously long on pullbacks to 20,800-20,820. Stops below 20,750. Target: 21,100-21,200. Risk/reward: approximately 1:3.</div>
+          <h3>What to Watch Next Week</h3>
+          <p>Monday pre-market will be critical. Any gap up above 21,000 should be treated with skepticism — those tend to be faded in the current regime. Look for orderly price action with consolidation before making new highs. Aggressive gaps without consolidation are distribution patterns in disguise.</p>
+        </div>
+      </div>
+
+      <!-- Note 2 -->
+      <div class="note-card">
+        <div class="note-meta">
+          <span class="note-date">June 7, 2026</span>
+          <span class="note-tag tag-macro">Macro</span>
+          <span class="note-tag tag-equity">Equity</span>
+        </div>
+        <h2 class="note-title"><a href="#" onclick="toggleNote('note2');return false">The Dollar, Gold, and Why Institutions Are Quietly Rotating</a></h2>
+        <p class="note-excerpt">Something important is happening beneath the surface of a market that looks calm on the surface. The US Dollar Index has been quietly weakening for three consecutive weeks while Gold has held above $2,300 — a level that previously acted as resistance for over two years. This is not coincidence.</p>
+        <a href="#" class="note-read-more" onclick="toggleNote('note2');return false">Read full note →</a>
+        <div class="note-full" id="note2">
+          <p>When the dollar weakens and gold holds, the typical interpretation is that institutional money is hedging against currency debasement. This happens during late-cycle dynamics — when the Fed is either cutting or signaling cuts, and inflation remains elevated enough to erode real purchasing power.</p>
+          <div class="key-point">AEC is long Gold (GC1!) with a position opened at $2,318. Target: $2,420. Stop: $2,275. This is a macro hedge, not a short-term trade.</div>
+          <p>On the equity side, the rotation out of mega-cap tech and into financials, healthcare, and industrials that began in late May appears to be continuing. This is consistent with a late-cycle expansion where earnings breadth matters more than multiple expansion on a handful of AI names.</p>
+        </div>
+      </div>
+
+      <!-- Note 3 -->
+      <div class="note-card">
+        <div class="note-meta">
+          <span class="note-date">May 31, 2026</span>
+          <span class="note-tag tag-re">Real Estate</span>
+          <span class="note-tag tag-macro">Macro</span>
+        </div>
+        <h2 class="note-title"><a href="#" onclick="toggleNote('note3');return false">Atlanta Real Estate: Why We Are Still Buyers in a High Rate Environment</a></h2>
+        <p class="note-excerpt">The conventional wisdom says you don't buy real estate when the 30-year mortgage rate is above 7%. At AEC's real estate division, we respectfully disagree — at least in specific submarkets of Atlanta where population growth, job creation, and inventory constraints create a fundamental demand floor that rate sensitivity cannot override.</p>
+        <a href="#" class="note-read-more" onclick="toggleNote('note3');return false">Read full note →</a>
+        <div class="note-full" id="note3">
+          <p>Atlanta added 78,000 net new residents in 2025 — ranking third nationally behind Dallas and Phoenix. The south suburban corridor, particularly Stockbridge, McDonough, and Locust Grove, continues to absorb inventory faster than it is being built. Cash buyers represent 34% of transactions in these submarkets, removing rate sensitivity from a significant portion of demand.</p>
+          <div class="key-point">OHOS (One House One Story Investments) is actively acquiring in Clayton, Henry, and Rockdale counties. Target properties: 3BR/2BA, 1,200-1,800 sqft, ARV $200,000-$320,000.</div>
+          <p>The thesis is simple: buy at a discount to distressed sellers who need liquidity now, renovate to market standard, sell or hold for rental income. In a rate environment that has frozen conventional buyers, cash buyers with speed and certainty win on price. That spread is where the returns are generated.</p>
+        </div>
+      </div>
+
+      <!-- Note 4 -->
+      <div class="note-card">
+        <div class="note-meta">
+          <span class="note-date">May 24, 2026</span>
+          <span class="note-tag tag-futures">Futures</span>
+        </div>
+        <h2 class="note-title"><a href="#" onclick="toggleNote('note4');return false">Why I Trade the NYSE Open — And What Most Traders Get Wrong About It</a></h2>
+        <p class="note-excerpt">The first 90 minutes after the NYSE opens at 9:30 AM ET generates more volume than any other period in the trading day. For NQ and ES futures traders, the open is simultaneously the highest-opportunity and highest-risk window in the session. Here is how I approach it.</p>
+        <a href="#" class="note-read-more" onclick="toggleNote('note4');return false">Read full note →</a>
+        <div class="note-full" id="note4">
+          <p>Most retail traders try to trade the first 5 minutes of the open. This is almost always a mistake. The opening range — roughly the first 15-30 minutes — is price discovery. Institutions are filling orders, rebalancing overnight positions, and reacting to pre-market news. Trying to trade in that chaos without significant capital and institutional-grade order flow data is guessing, not trading.</p>
+          <div class="key-point">AEC Framework: Wait for the 9:45-10:00 AM consolidation. Identify the opening range high and low. Trade breakouts of that range with momentum and order flow confirmation. This alone eliminates 80% of losing setups.</div>
+          <p>The second critical window is 10:30-11:00 AM ET — after the initial volatility settles and trend direction becomes clearer. This is where the highest-probability continuation trades emerge. Price has typically swept liquidity on both sides of the opening range and is now committed to a direction. That direction, confirmed by order flow, is your trade.</p>
+          <p>The third window — which most traders miss entirely — is 3:30-4:00 PM ET. The closing auction creates significant institutional activity as funds rebalance end-of-day. These moves tend to be sharp, directional, and well-defined.</p>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <div class="sidebar-section">
+        <div class="sidebar-title">Recent Notes</div>
+        <div class="sidebar-item" onclick="scrollToNote('note1')">NQ at Critical Confluence — Jun 14</div>
+        <div class="sidebar-item" onclick="scrollToNote('note2')">Dollar, Gold & Institutional Rotation — Jun 7</div>
+        <div class="sidebar-item" onclick="scrollToNote('note3')">Atlanta Real Estate: Still Buying — May 31</div>
+        <div class="sidebar-item" onclick="scrollToNote('note4')">Why I Trade the NYSE Open — May 24</div>
+      </div>
+
+      <div class="sidebar-section">
+        <div class="sidebar-title">Topics</div>
+        <div class="sidebar-item">Macro & Fed Policy</div>
+        <div class="sidebar-item">NQ / ES Futures</div>
+        <div class="sidebar-item">Equity Markets</div>
+        <div class="sidebar-item">Real Estate</div>
+        <div class="sidebar-item">Risk Management</div>
+        <div class="sidebar-item">Trading Psychology</div>
+      </div>
+
+      <div class="sidebar-section">
+        <div class="sidebar-title">About the Author</div>
+        <p style="font-family:var(--body);font-size:.85rem;color:var(--cream);line-height:1.7">Izaiah Cottle is the Founder & CEO of Ascenda Enterprise Capital LLC, a multi-strategy investment firm based in Atlanta, Georgia.</p>
+        <div style="margin-top:1rem;font-family:var(--mono);font-size:.6rem;color:var(--gold)">$81.2M documented returns · 78% win rate · 32,000+ trades</div>
+        <a href="ascenda-mentorship.html" style="display:block;margin-top:1rem;font-family:var(--mono);font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);border:.5px solid rgba(196,146,42,.4);padding:.5rem .75rem;text-align:center;transition:all .2s">Work with Izaiah →</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="f-logo">ASCENDA <span>ENTERPRISE CAPITAL</span></div>
+  <div class="f-copy">© 2026 Ascenda Enterprise Capital LLC · ascendaenterprisecapital.com</div>
+</footer>
+
+<script>
+function toggleNote(id) {
+  var el = document.getElementById(id);
+  if(!el) return;
+  var isOpen = el.style.display === 'block';
+  el.style.display = isOpen ? 'none' : 'block';
+  var links = document.querySelectorAll('[onclick*="' + id + '"]');
+  links.forEach(function(l) {
+    if(l.classList.contains('note-read-more')) l.textContent = isOpen ? 'Read full note ->' : 'Collapse ->';
+  });
+}
+
+function scrollToNote(id) {
+  var el = document.getElementById(id);
+  if(el) {
+    el.style.display = 'block';
+    el.scrollIntoView({behavior:'smooth', block:'start'});
+  }
+}
+
+function subscribeResearch() {
+  var email = document.getElementById('research-email').value.trim();
+  if(!email) return;
+  fetch('https://aec-email.ascendaenterprise.workers.dev/', {
+    method:'POST',
+    headers:{'Content-Type':'application/json'},
+    body: JSON.stringify({type:'subscribe', name:'Research Subscriber', email:email, interests:['Weekly Research Notes']})
+  }).catch(function(){});
+  document.getElementById('research-email').value = '';
+  alert('Subscribed! You will receive weekly research notes from AEC.');
+}
+</script>
+</body>
+</html>

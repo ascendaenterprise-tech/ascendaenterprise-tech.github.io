@@ -4,273 +4,241 @@
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Investor Portal — Ascenda Enterprise Capital</title>
-<meta name="robots" content="noindex, nofollow"/>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=DM+Mono:wght@300;400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@300;400;500&family=EB+Garamond:wght@300;400&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet"/>
 <style>
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-:root{--gold:#C4922A;--gold2:#E4B84A;--gold3:#8A6518;--ink:#06050D;--ink2:#0D0B18;--white:#FFFFFF;--cream2:rgba(255,255,255,.72);--cream3:rgba(255,255,255,.38);--rule:rgba(196,146,42,0.15);--font-display:'Cormorant Garamond',serif;--font-mono:'DM Mono',monospace;--font-body:'Jost',sans-serif}
-body{background:var(--ink);color:var(--white);font-family:var(--font-body);font-weight:300;min-height:100vh;display:flex;flex-direction:column}
-/* GRID OVERLAY */
-body::before{content:'';position:fixed;inset:0;background-image:repeating-linear-gradient(0deg,rgba(196,146,42,0.03) 0px,rgba(196,146,42,0.03) 1px,transparent 1px,transparent 60px),repeating-linear-gradient(90deg,rgba(196,146,42,0.03) 0px,rgba(196,146,42,0.03) 1px,transparent 1px,transparent 60px);pointer-events:none;z-index:0}
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#050508;--panel:#0a0a10;--panel2:#0f0f18;
+  --border:#1a1a28;--gold:#C4922A;--gold2:#E4B84A;
+  --green:#00C896;--red:#E8334A;
+  --white:#F0EDE8;--cream:#B8B0A0;--text3:#404050;
+  --mono:'JetBrains Mono',monospace;
+  --display:'Playfair Display',Georgia,serif;
+  --body:'EB Garamond',Georgia,serif;
+}
+html,body{min-height:100vh;background:var(--bg);color:var(--white);font-family:var(--body)}
+.login-wrap{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:2rem}
+.login-box{background:var(--panel);border:.5px solid var(--border);padding:3rem;width:420px;max-width:100%;position:relative}
+.login-box::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent)}
+.logo{font-family:var(--mono);font-size:.58rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:2rem;text-align:center}
+.login-title{font-family:var(--display);font-size:1.8rem;font-weight:300;text-align:center;margin-bottom:.4rem}
+.login-sub{font-family:var(--mono);font-size:.55rem;color:var(--text3);text-align:center;letter-spacing:.1em;margin-bottom:2rem}
+.inp{width:100%;background:rgba(255,255,255,.04);border:.5px solid var(--border);color:var(--white);font-family:var(--mono);font-size:.82rem;padding:.85rem 1rem;outline:none;margin-bottom:.75rem;transition:border-color .2s}
+.inp:focus{border-color:var(--gold)}
+.btn{width:100%;background:var(--white);color:#000;border:none;font-family:var(--mono);font-size:.6rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;padding:.9rem;cursor:pointer;transition:background .2s;margin-top:.25rem}
+.btn:hover{background:#ddd}
+.err{display:none;background:rgba(232,51,74,.1);border:.5px solid rgba(232,51,74,.3);color:var(--red);font-family:var(--mono);font-size:.6rem;padding:.6rem;margin-top:.75rem;text-align:center}
 
-/* LOGIN SCREEN */
-#login-screen{position:fixed;inset:0;z-index:100;background:var(--ink);display:flex;align-items:center;justify-content:center;padding:2rem}
-.login-box{background:rgba(255,255,255,.03);border:.5px solid var(--rule);padding:3.5rem;max-width:420px;width:100%;position:relative;text-align:center}
-.login-box::before{content:'';position:absolute;top:0;left:0;right:0;height:1.5px;background:linear-gradient(90deg,transparent,var(--gold),transparent)}
-.login-diamond{margin:0 auto 1.5rem}
-.login-title{font-family:var(--font-display);font-size:1.75rem;font-weight:300;color:var(--white);margin-bottom:.35rem}
-.login-sub{font-family:var(--font-mono);font-size:.55rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold3);margin-bottom:2.5rem}
-.login-label{font-family:var(--font-mono);font-size:.55rem;letter-spacing:.15em;text-transform:uppercase;color:var(--cream3);display:block;text-align:left;margin-bottom:.5rem}
-.login-input{width:100%;background:rgba(255,255,255,.05);border:.5px solid var(--rule);color:var(--white);font-family:var(--font-mono);font-size:.9rem;padding:.85rem 1rem;outline:none;margin-bottom:1.25rem;transition:border-color .2s;letter-spacing:.1em}
-.login-input:focus{border-color:var(--gold)}
-.login-btn{width:100%;font-family:var(--font-mono);font-size:.62rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;background:var(--gold);color:var(--ink);border:none;padding:1rem;cursor:pointer;transition:background .2s}
-.login-btn:hover{background:var(--gold2)}
-.login-error{font-family:var(--font-mono);font-size:.58rem;color:#E74C3C;margin-top:.75rem;display:none;letter-spacing:.08em}
-.login-back{display:block;margin-top:1.5rem;font-family:var(--font-mono);font-size:.52rem;letter-spacing:.12em;text-transform:uppercase;color:var(--cream3);text-decoration:none;transition:color .2s}
-.login-back:hover{color:var(--gold2)}
+/* PORTAL */
+#portal{display:none}
+nav{position:sticky;top:0;z-index:100;background:var(--panel);border-bottom:.5px solid var(--border);padding:0 2rem;height:52px;display:flex;align-items:center;justify-content:space-between}
+.nav-logo{font-family:var(--mono);font-size:.7rem;font-weight:600;letter-spacing:.12em;color:var(--white)}
+.nav-logo span{color:var(--gold)}
+.nav-right{display:flex;align-items:center;gap:1rem}
+.investor-name{font-family:var(--mono);font-size:.6rem;color:var(--cream)}
+.logout-btn{background:none;border:.5px solid var(--border);color:var(--text3);font-family:var(--mono);font-size:.52rem;letter-spacing:.1em;text-transform:uppercase;padding:.3rem .65rem;cursor:pointer;transition:all .2s}
+.logout-btn:hover{border-color:var(--red);color:var(--red)}
 
-/* PORTAL CONTENT */
-#portal-content{display:none;flex:1;flex-direction:column}
-nav{display:flex;align-items:center;justify-content:space-between;padding:1.2rem 3.5rem;background:rgba(6,5,13,.96);border-bottom:.5px solid var(--rule);position:sticky;top:0;z-index:50;backdrop-filter:blur(20px)}
-.nav-logo{display:flex;align-items:center;gap:.75rem}
-.nav-logo-main{font-family:var(--font-display);font-size:1rem;color:var(--white);letter-spacing:.06em}
-.nav-logo-sub{font-family:var(--font-mono);font-size:.48rem;letter-spacing:.25em;text-transform:uppercase;color:var(--gold3)}
-.nav-right{display:flex;align-items:center;gap:1.5rem}
-.portal-badge{font-family:var(--font-mono);font-size:.52rem;letter-spacing:.12em;text-transform:uppercase;background:rgba(196,146,42,.12);border:.5px solid var(--rule);color:var(--gold2);padding:.3rem .85rem}
-.logout-btn{font-family:var(--font-mono);font-size:.52rem;letter-spacing:.12em;text-transform:uppercase;background:transparent;color:var(--cream3);border:none;cursor:pointer;transition:color .2s}
-.logout-btn:hover{color:var(--gold2)}
+.main{max-width:1100px;margin:0 auto;padding:2.5rem 2rem}
+.section-title{font-family:var(--mono);font-size:.55rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--text3);margin-bottom:1rem}
 
-/* PORTAL BODY */
-.portal-body{max-width:1100px;margin:0 auto;padding:3.5rem;width:100%;position:relative;z-index:1}
-.portal-header{margin-bottom:3rem}
-.portal-welcome{font-family:var(--font-mono);font-size:.58rem;letter-spacing:.22em;text-transform:uppercase;color:var(--gold3);margin-bottom:.75rem}
-.portal-title{font-family:var(--font-display);font-size:2.5rem;font-weight:300;color:var(--white);line-height:1.1}
-.portal-title em{font-style:italic;color:var(--gold2)}
+.kpi-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:1px;background:var(--border);margin-bottom:2rem}
+.kpi{background:var(--panel);padding:1.5rem}
+.kpi-label{font-family:var(--mono);font-size:.52rem;letter-spacing:.12em;text-transform:uppercase;color:var(--text3);margin-bottom:.6rem}
+.kpi-val{font-family:var(--display);font-size:1.8rem;font-weight:300;color:var(--white);line-height:1}
+.kpi-sub{font-family:var(--mono);font-size:.6rem;color:var(--cream);margin-top:.4rem}
+.kpi-badge{display:inline-block;font-family:var(--mono);font-size:.55rem;padding:.15rem .45rem;margin-top:.5rem}
+.up{background:rgba(0,200,150,.1);color:var(--green)}
+.dn{background:rgba(232,51,74,.1);color:var(--red)}
 
-/* STAT CARDS */
-.portal-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--rule);margin-bottom:2.5rem}
-.ps{background:var(--ink2);padding:1.5rem}
-.ps-label{font-family:var(--font-mono);font-size:.5rem;letter-spacing:.15em;text-transform:uppercase;color:var(--cream3);margin-bottom:.5rem}
-.ps-val{font-family:var(--font-display);font-size:1.75rem;font-style:italic;color:var(--gold2);line-height:1}
-.ps-sub{font-family:var(--font-mono);font-size:.48rem;color:rgba(255,255,255,.25);margin-top:.3rem;letter-spacing:.06em}
+.panel{background:var(--panel);border:.5px solid var(--border);padding:1.5rem;margin-bottom:1.5rem}
+.panel-head{font-family:var(--mono);font-size:.6rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--text3);padding-bottom:.75rem;border-bottom:.5px solid var(--border);margin-bottom:1.25rem}
 
-/* DOCUMENT GRID */
-.doc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-bottom:2.5rem}
-.doc-card{background:rgba(255,255,255,.03);border:.5px solid var(--rule);padding:1.75rem;transition:all .3s;cursor:pointer;position:relative;overflow:hidden}
-.doc-card:hover{border-color:var(--gold);background:rgba(196,146,42,.05)}
-.doc-card::before{content:'';position:absolute;top:0;left:0;right:0;height:1.5px;background:var(--gold);transform:scaleX(0);transition:transform .3s;transform-origin:left}
-.doc-card:hover::before{transform:scaleX(1)}
-.doc-icon{font-size:1.5rem;margin-bottom:.85rem}
-.doc-title{font-family:var(--font-mono);font-size:.65rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--white);margin-bottom:.35rem}
-.doc-desc{font-size:.8rem;color:var(--cream3);line-height:1.7;font-weight:300}
-.doc-badge{position:absolute;top:.85rem;right:.85rem;font-family:var(--font-mono);font-size:.48rem;letter-spacing:.1em;text-transform:uppercase;padding:.2rem .6rem}
-.doc-badge.new{background:rgba(46,204,113,.15);border:.5px solid rgba(46,204,113,.3);color:#2ECC71}
-.doc-badge.locked{background:rgba(196,146,42,.1);border:.5px solid var(--rule);color:var(--gold3)}
+table{width:100%;border-collapse:collapse}
+thead th{font-family:var(--mono);font-size:.55rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--text3);padding:.5rem .75rem;text-align:left;border-bottom:.5px solid var(--border)}
+tbody td{font-family:var(--mono);font-size:.75rem;padding:.6rem .75rem;border-bottom:.5px solid rgba(26,26,40,.5);color:var(--cream)}
+tbody tr:hover td{background:var(--panel2)}
 
-/* UPDATES FEED */
-.updates-feed{display:flex;flex-direction:column;gap:0;border:.5px solid var(--rule)}
-.update-item{padding:1.5rem;border-bottom:.5px solid var(--rule);display:flex;gap:1.5rem;align-items:flex-start}
-.update-item:last-child{border-bottom:none}
-.update-date{font-family:var(--font-mono);font-size:.52rem;letter-spacing:.1em;text-transform:uppercase;color:var(--gold3);flex-shrink:0;padding-top:.15rem;min-width:80px}
-.update-content{}
-.update-title{font-size:.92rem;color:var(--white);margin-bottom:.35rem;font-weight:400}
-.update-body{font-size:.82rem;color:var(--cream3);line-height:1.75;font-weight:300}
+.doc-item{display:flex;align-items:center;justify-content:space-between;padding:.85rem 0;border-bottom:.5px solid rgba(26,26,40,.5)}
+.doc-item:last-child{border:none}
+.doc-name{font-family:var(--mono);font-size:.75rem;color:var(--white)}
+.doc-date{font-family:var(--mono);font-size:.62rem;color:var(--text3)}
+.doc-btn{background:transparent;border:.5px solid var(--border);color:var(--cream);font-family:var(--mono);font-size:.55rem;letter-spacing:.1em;text-transform:uppercase;padding:.3rem .75rem;cursor:pointer;text-decoration:none;transition:all .2s}
+.doc-btn:hover{border-color:var(--white);color:var(--white)}
 
-/* SECTION TITLES */
-.section-title{font-family:var(--font-mono);font-size:.58rem;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);margin-bottom:1.25rem;display:flex;align-items:center;gap:.75rem}
-.section-title::before{content:'';display:block;width:20px;height:.5px;background:var(--gold)}
+.msg-input{width:100%;background:var(--panel2);border:.5px solid var(--border);color:var(--white);font-family:var(--body);font-size:.88rem;padding:.85rem 1rem;outline:none;resize:vertical;min-height:100px;transition:border-color .2s;margin-bottom:.75rem}
+.msg-input:focus{border-color:var(--gold)}
+.msg-btn{background:var(--gold);color:#000;border:none;font-family:var(--mono);font-size:.58rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;padding:.75rem 1.5rem;cursor:pointer}
 
-@media(max-width:768px){
-  nav{padding:1rem 1.25rem}
-  .portal-body{padding:2rem 1.25rem}
-  .portal-stats{grid-template-columns:repeat(2,1fr)}
-  .doc-grid{grid-template-columns:1fr}
-  .portal-title{font-size:1.75rem}
+.notice{background:rgba(196,146,42,.06);border:.5px solid rgba(196,146,42,.2);padding:1rem 1.25rem;font-family:var(--mono);font-size:.62rem;color:var(--cream);line-height:1.7;margin-bottom:1.5rem}
+
+@media(max-width:600px){
+  .main{padding:1.5rem 1rem}
+  nav{padding:0 1rem}
+  .login-box{padding:2rem 1.25rem}
 }
 </style>
 </head>
 <body>
 
-<!-- LOGIN SCREEN -->
-<div id="login-screen">
+<!-- LOGIN -->
+<div class="login-wrap" id="login-wrap">
   <div class="login-box">
-    <svg viewBox="0 0 100 100" class="login-diamond" style="width:50px;height:50px">
-      <polygon points="50,5 70,30 50,55 30,30" fill="#E4B84A"/>
-      <polygon points="50,5 80,35 70,30" fill="#F2D680"/>
-      <polygon points="50,55 70,30 80,35" fill="#C0C0D0"/>
-      <polygon points="50,55 30,30 20,35" fill="#A0A0B0"/>
-      <polygon points="50,55 80,35 50,80" fill="#909090"/>
-      <polygon points="50,80 20,35 50,55" fill="#808080"/>
-    </svg>
+    <div class="logo">Ascenda Enterprise Capital</div>
     <div class="login-title">Investor Portal</div>
-    <div class="login-sub">Ascenda Enterprise Capital LLC</div>
-    <label class="login-label">Access Code</label>
-    <input type="password" class="login-input" id="portal-password" placeholder="Enter your access code" onkeypress="if(event.key==='Enter')checkPassword()"/>
-    <button class="login-btn" onclick="checkPassword()">Access Portal →</button>
-    <div class="login-error" id="login-error">Invalid access code. Contact ascendaenterprise@gmail.com for access.</div>
-    <a href="index.html" class="login-back">← Back to main site</a>
+    <div class="login-sub">Authorized investors only · Private access</div>
+    <input class="inp" type="email" id="portal-email" placeholder="Your email address" autocomplete="off"/>
+    <input class="inp" type="password" id="portal-pass" placeholder="Access code" autocomplete="off" onkeypress="if(event.key==='Enter')portalLogin()"/>
+    <button class="btn" onclick="portalLogin()">Access Portal →</button>
+    <div class="err" id="portal-err">Invalid credentials. Contact izaiah@ascendaenterprisecapital.com for access.</div>
+    <div style="margin-top:1.5rem;font-family:var(--mono);font-size:.55rem;color:var(--text3);text-align:center;line-height:1.8">
+      Don't have access? Apply at<br>
+      <a href="ascenda-investor.html" style="color:var(--gold);text-decoration:none">ascendaenterprisecapital.com/ascenda-investor.html</a>
+    </div>
   </div>
 </div>
 
-<!-- PORTAL CONTENT -->
-<div id="portal-content">
+<!-- PORTAL -->
+<div id="portal">
   <nav>
-    <div class="nav-logo">
-      <div>
-        <div class="nav-logo-main">Ascenda Enterprise Capital</div>
-        <div class="nav-logo-sub">Investor Portal</div>
-      </div>
-    </div>
+    <div class="nav-logo">AEC<span>.</span>PORTAL</div>
     <div class="nav-right">
-      <div class="portal-badge">🔐 Verified Investor</div>
-      <button class="logout-btn" onclick="logout()">Sign Out</button>
+      <div class="investor-name" id="investor-name-display"></div>
+      <button class="logout-btn" onclick="portalLogout()">Sign Out</button>
     </div>
   </nav>
 
-  <div class="portal-body">
-    <div class="portal-header">
-      <div class="portal-welcome">Welcome back</div>
-      <h1 class="portal-title">Investor <em>Dashboard</em></h1>
+  <div class="main">
+
+    <div class="notice">
+      Welcome to your private investor portal. All information contained herein is confidential and intended solely for the authorized account holder. Do not share your access credentials.
     </div>
 
-    <!-- STATS -->
-    <div class="portal-stats">
-      <div class="ps">
-        <div class="ps-label">Peak Account Balance</div>
-        <div class="ps-val">$82.4M</div>
-        <div class="ps-sub">Feb 24, 2026 · TraderSync</div>
+    <!-- KPIs -->
+    <div class="section-title">Your Allocation Overview</div>
+    <div class="kpi-row">
+      <div class="kpi">
+        <div class="kpi-label">Allocation</div>
+        <div class="kpi-val" id="p-allocation">$50,000</div>
+        <div class="kpi-sub">Initial deployment</div>
       </div>
-      <div class="ps">
-        <div class="ps-label">Net Return</div>
-        <div class="ps-val">$81.2M</div>
-        <div class="ps-sub">Verified · Documented</div>
+      <div class="kpi">
+        <div class="kpi-label">Current Value</div>
+        <div class="kpi-val" id="p-value">$54,210</div>
+        <div class="kpi-sub">As of today</div>
+        <div class="kpi-badge up">+8.42%</div>
       </div>
-      <div class="ps">
-        <div class="ps-label">Win Rate</div>
-        <div class="ps-val">78%</div>
-        <div class="ps-sub">32,000+ trades</div>
+      <div class="kpi">
+        <div class="kpi-label">Net P&L</div>
+        <div class="kpi-val" id="p-pnl" style="color:var(--green)">+$4,210</div>
+        <div class="kpi-sub">All-time</div>
       </div>
-      <div class="ps">
-        <div class="ps-label">Status</div>
-        <div class="ps-val" style="font-size:1.1rem;color:#2ECC71;padding-top:.35rem">Active</div>
-        <div class="ps-sub">Accepting allocations</div>
+      <div class="kpi">
+        <div class="kpi-label">Next Report</div>
+        <div class="kpi-val" style="font-size:1.2rem">Jul 1</div>
+        <div class="kpi-sub">Quarterly statement</div>
       </div>
-    </div>
-
-    <!-- DOCUMENTS -->
-    <div class="section-title">Documents & Reports</div>
-    <div class="doc-grid">
-      <div class="doc-card" onclick="alert('Document available upon full onboarding. Contact ascendaenterprise@gmail.com')">
-        <div class="doc-badge new">New</div>
-        <div class="doc-icon">📊</div>
-        <div class="doc-title">Q2 2026 Performance Report</div>
-        <div class="doc-desc">Detailed breakdown of AEC's trading performance, strategy updates, and capital deployment for Q2 2026.</div>
-      </div>
-      <div class="doc-card" onclick="window.open('AEC-Executive-Summary.pdf')">
-        <div class="doc-icon">📋</div>
-        <div class="doc-title">Executive Summary</div>
-        <div class="doc-desc">AEC's full 6-page executive summary including performance data, strategy overview, and investment terms.</div>
-      </div>
-      <div class="doc-card" onclick="alert('Available upon executed subscription agreement. Contact ascendaenterprise@gmail.com')">
-        <div class="doc-badge locked">Restricted</div>
-        <div class="doc-icon">🔐</div>
-        <div class="doc-title">Capital Statement</div>
-        <div class="doc-desc">Detailed capital allocation statement and account breakdown. Available to verified investors only.</div>
-      </div>
-      <div class="doc-card" onclick="alert('Available upon executed subscription agreement. Contact ascendaenterprise@gmail.com')">
-        <div class="doc-badge locked">Restricted</div>
-        <div class="doc-icon">⚖️</div>
-        <div class="doc-title">Private Placement Memorandum</div>
-        <div class="doc-desc">Full PPM outlining investment terms, risks, and legal disclosures. Sent directly upon approval.</div>
-      </div>
-      <div class="doc-card" onclick="window.open('AEC-Investor-Allocation-Form.pdf')">
-        <div class="doc-icon">✍️</div>
-        <div class="doc-title">Allocation Commitment Form</div>
-        <div class="doc-desc">Complete this form to confirm your allocation commitment to Ascenda Enterprise Capital LLC.</div>
-      </div>
-      <div class="doc-card" onclick="window.open('AEC-Board-Resolution.pdf')">
-        <div class="doc-icon">🏛️</div>
-        <div class="doc-title">Board Resolution</div>
-        <div class="doc-desc">Official managing member resolution establishing AEC's capital management policy and $750M AUM ceiling.</div>
+      <div class="kpi">
+        <div class="kpi-label">Account Status</div>
+        <div class="kpi-val" style="font-size:1.2rem;color:var(--green)">Active</div>
+        <div class="kpi-sub">In good standing</div>
       </div>
     </div>
 
-    <!-- UPDATES -->
-    <div class="section-title">Latest Updates</div>
-    <div class="updates-feed">
-      <div class="update-item">
-        <div class="update-date">Jun 2026</div>
-        <div class="update-content">
-          <div class="update-title">Portal Launch — Welcome to the AEC Investor Portal</div>
-          <div class="update-body">The AEC investor portal is now live. All verified investors and allocators will have access to performance reports, documents, and direct communication with leadership through this platform.</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-bottom:1.5rem">
+
+      <!-- Monthly Returns -->
+      <div class="panel">
+        <div class="panel-head">Monthly Performance</div>
+        <table>
+          <thead><tr><th>Month</th><th>Return</th><th>Status</th></tr></thead>
+          <tbody>
+            <tr><td>Jun 2026</td><td style="color:var(--green)">+3.2%</td><td style="color:var(--green)">Live</td></tr>
+            <tr><td>May 2026</td><td style="color:var(--green)">+5.8%</td><td style="color:var(--cream)">Final</td></tr>
+            <tr><td>Apr 2026</td><td style="color:var(--green)">+4.1%</td><td style="color:var(--cream)">Final</td></tr>
+            <tr><td>Mar 2026</td><td style="color:var(--red)">-1.2%</td><td style="color:var(--cream)">Final</td></tr>
+            <tr><td>Feb 2026</td><td style="color:var(--green)">+6.4%</td><td style="color:var(--cream)">Final</td></tr>
+            <tr><td>Jan 2026</td><td style="color:var(--green)">+3.9%</td><td style="color:var(--cream)">Final</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Fund Documents -->
+      <div class="panel">
+        <div class="panel-head">Fund Documents</div>
+        <div class="doc-item">
+          <div><div class="doc-name">Q2 2026 Investor Report</div><div class="doc-date">Jul 1, 2026 · PDF</div></div>
+          <a href="mailto:izaiah@ascendaenterprisecapital.com?subject=Document Request: Q2 2026 Report" class="doc-btn">Request</a>
         </div>
-      </div>
-      <div class="update-item">
-        <div class="update-date">May 2026</div>
-        <div class="update-content">
-          <div class="update-title">Allocation Spots Open — Limited Availability</div>
-          <div class="update-body">AEC is currently accepting a limited number of new investor and allocator relationships across all three tiers. Contact Izaiah directly to discuss your allocation.</div>
+        <div class="doc-item">
+          <div><div class="doc-name">AEC Executive Summary</div><div class="doc-date">Jun 1, 2026 · PDF</div></div>
+          <a href="mailto:izaiah@ascendaenterprisecapital.com?subject=Document Request: Executive Summary" class="doc-btn">Request</a>
         </div>
-      </div>
-      <div class="update-item">
-        <div class="update-date">Feb 2026</div>
-        <div class="update-content">
-          <div class="update-title">Peak Balance Reached — $82,448,793</div>
-          <div class="update-body">AEC's documented peak account balance reached $82,448,793 on February 24, 2026 — verified through TraderSync. Full performance report available upon request.</div>
+        <div class="doc-item">
+          <div><div class="doc-name">Fund Operating Agreement</div><div class="doc-date">On file · PDF</div></div>
+          <a href="mailto:izaiah@ascendaenterprisecapital.com?subject=Document Request: Operating Agreement" class="doc-btn">Request</a>
+        </div>
+        <div class="doc-item">
+          <div><div class="doc-name">Wire Instructions</div><div class="doc-date">Current · PDF</div></div>
+          <a href="mailto:izaiah@ascendaenterprisecapital.com?subject=Wire Instructions Request" class="doc-btn">Request</a>
+        </div>
+        <div class="doc-item">
+          <div><div class="doc-name">Allocation Form</div><div class="doc-date">Form · PDF</div></div>
+          <a href="ascenda-investor.html" class="doc-btn">View</a>
         </div>
       </div>
     </div>
 
-    <!-- CONTACT -->
-    <div style="margin-top:2.5rem;background:rgba(196,146,42,.06);border:.5px solid var(--rule);padding:2rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1.5rem">
-      <div>
-        <div style="font-family:var(--font-mono);font-size:.58rem;letter-spacing:.15em;text-transform:uppercase;color:var(--gold3);margin-bottom:.4rem">Direct Contact</div>
-        <div style="font-size:.95rem;color:var(--white)">Izaiah Cottle — Founder & CEO</div>
-        <div style="font-size:.82rem;color:var(--cream3);margin-top:.2rem">ascendaenterprise@gmail.com</div>
-      </div>
-      <a href="mailto:ascendaenterprise@gmail.com" style="font-family:var(--font-mono);font-size:.62rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;background:var(--gold);color:var(--ink);padding:.9rem 2rem;text-decoration:none;transition:background .2s" onmouseover="this.style.background='#E4B84A'" onmouseout="this.style.background='#C4922A'">Send Message →</a>
+    <!-- Message Izaiah -->
+    <div class="panel">
+      <div class="panel-head">Direct Message — Izaiah Cottle</div>
+      <textarea class="msg-input" id="investor-msg" placeholder="Send a private message to Izaiah regarding your account, additional allocations, withdrawals, or any questions..."></textarea>
+      <button class="msg-btn" onclick="sendInvestorMsg()">Send Message →</button>
+      <div id="msg-confirm" style="display:none;margin-top:.75rem;font-family:var(--mono);font-size:.62rem;color:var(--green)">Message sent. Izaiah will respond within 24 hours.</div>
     </div>
 
-    <div style="margin-top:1.5rem;font-family:var(--font-mono);font-size:.5rem;color:rgba(255,255,255,.2);letter-spacing:.06em;text-align:center">
-      Ascenda Enterprise Capital LLC · Registered in Georgia · Confidential — Authorized Investors Only
+    <!-- Disclosures -->
+    <div style="padding:1.5rem;border:.5px solid var(--border);margin-top:1rem">
+      <p style="font-family:var(--mono);font-size:.55rem;color:var(--text3);line-height:1.8">All performance data is unaudited and for informational purposes only. Past performance is not indicative of future results. This portal is provided for convenience and does not constitute a formal account statement. For official statements contact izaiah@ascendaenterprisecapital.com. Ascenda Enterprise Capital LLC is registered in the State of Georgia.</p>
     </div>
+
   </div>
 </div>
 
 <script>
-// Password — you can change this to whatever you want
-var PORTAL_PASSWORD = 'AEC2025';
+var INVESTOR_CREDENTIALS = [
+  {email:'izaiah@ascendaenterprisecapital.com', pass:'AEC2026!', name:'Izaiah Cottle'},
+  {email:'izaiahcottle0@gmail.com', pass:'AEC2026!', name:'Izaiah Cottle'},
+];
 
-function checkPassword(){
-  var input = document.getElementById('portal-password').value;
-  if(input === PORTAL_PASSWORD){
-    document.getElementById('login-screen').style.display = 'none';
-    var portal = document.getElementById('portal-content');
-    portal.style.display = 'flex';
-    portal.style.flexDirection = 'column';
-    sessionStorage.setItem('aec_portal', 'granted');
+function portalLogin() {
+  var email = document.getElementById('portal-email').value.trim().toLowerCase();
+  var pass = document.getElementById('portal-pass').value.trim();
+  var found = INVESTOR_CREDENTIALS.find(function(c) { return c.email === email && c.pass === pass; });
+  if(found) {
+    document.getElementById('login-wrap').style.display = 'none';
+    document.getElementById('portal').style.display = 'block';
+    document.getElementById('investor-name-display').textContent = found.name;
   } else {
-    document.getElementById('login-error').style.display = 'block';
-    document.getElementById('portal-password').style.borderColor = '#E74C3C';
-    setTimeout(function(){
-      document.getElementById('portal-password').style.borderColor = 'var(--rule)';
-    }, 2000);
+    document.getElementById('portal-err').style.display = 'block';
   }
 }
 
-function logout(){
-  sessionStorage.removeItem('aec_portal');
-  document.getElementById('login-screen').style.display = 'flex';
-  document.getElementById('portal-content').style.display = 'none';
-  document.getElementById('portal-password').value = '';
+function portalLogout() {
+  document.getElementById('login-wrap').style.display = 'flex';
+  document.getElementById('portal').style.display = 'none';
+  document.getElementById('portal-email').value = '';
+  document.getElementById('portal-pass').value = '';
 }
 
-// Auto-login if already authenticated this session
-if(sessionStorage.getItem('aec_portal') === 'granted'){
-  document.getElementById('login-screen').style.display = 'none';
-  var p = document.getElementById('portal-content');
-  p.style.display = 'flex';
-  p.style.flexDirection = 'column';
+function sendInvestorMsg() {
+  var msg = document.getElementById('investor-msg').value.trim();
+  if(!msg) return;
+  var name = document.getElementById('investor-name-display').textContent;
+  window.open('mailto:izaiah@ascendaenterprisecapital.com?subject=Investor Portal Message from ' + encodeURIComponent(name) + '&body=' + encodeURIComponent(msg));
+  document.getElementById('investor-msg').value = '';
+  document.getElementById('msg-confirm').style.display = 'block';
+  setTimeout(function() { document.getElementById('msg-confirm').style.display = 'none'; }, 5000);
 }
 </script>
 </body>
