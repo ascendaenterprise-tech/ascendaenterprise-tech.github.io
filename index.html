@@ -131,8 +131,8 @@
   gtag('js', new Date());
   gtag('config', 'G-0YMYZFJG77');
 </script>
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpolygon points='50,5 70,30 50,55 30,30' fill='%23E4B84A'/%3E%3Cpolygon points='50,5 80,35 70,30' fill='%23F2D680'/%3E%3Cpolygon points='50,55 70,30 80,35' fill='%23C0C0D0'/%3E%3Cpolygon points='50,55 30,30 20,35' fill='%23A0A0B0'/%3E%3Cpolygon points='50,55 80,35 50,80' fill='%23909090'/%3E%3Cpolygon points='50,80 20,35 50,55' fill='%23808080'/%3E%3C/svg%3E"/>
-<link rel="shortcut icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpolygon points='50,5 70,30 50,55 30,30' fill='%23E4B84A'/%3E%3Cpolygon points='50,5 80,35 70,30' fill='%23F2D680'/%3E%3Cpolygon points='50,55 70,30 80,35' fill='%23C0C0D0'/%3E%3Cpolygon points='50,55 30,30 20,35' fill='%23A0A0B0'/%3E%3Cpolygon points='50,55 80,35 50,80' fill='%23909090'/%3E%3Cpolygon points='50,80 20,35 50,55' fill='%23808080'/%3E%3C/svg%3E"/>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpolygon points='50,5 70,30 50,55 30,30' fill='%23E4B84A'/%3E%3Cpolygon points='50,5 80,35 70,30' fill='%23F2D680'/%3E%3Cpolygon points='50,55 70,30 80,35' fill='%23C4922A'/%3E%3Cpolygon points='50,55 30,30 20,35' fill='%238A6518'/%3E%3Cpolygon points='50,55 80,35 50,80' fill='%23141020'/%3E%3Cpolygon points='50,80 20,35 50,55' fill='%230E0B1A'/%3E%3C/svg%3E"/>
+<link rel="shortcut icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpolygon points='50,5 70,30 50,55 30,30' fill='%23E4B84A'/%3E%3Cpolygon points='50,5 80,35 70,30' fill='%23F2D680'/%3E%3Cpolygon points='50,55 70,30 80,35' fill='%23C4922A'/%3E%3Cpolygon points='50,55 30,30 20,35' fill='%238A6518'/%3E%3Cpolygon points='50,55 80,35 50,80' fill='%23141020'/%3E%3Cpolygon points='50,80 20,35 50,55' fill='%230E0B1A'/%3E%3C/svg%3E"/>
 <!-- PWA META TAGS -->
 <meta name="mobile-web-app-capable" content="yes"/>
 <meta name="apple-mobile-web-app-capable" content="yes"/>
@@ -157,40 +157,6 @@
   --font-mono:'DM Mono',monospace;
   --font-body:'Jost',sans-serif;
 }
-
-/* ═══════════════════════════════
-   LIGHT MODE OVERRIDES
-   Same variable names, light values.
-   Everything in the page already reads
-   through var(--token), so this swap
-   re-themes the whole site with no
-   need to touch individual elements.
-═══════════════════════════════ */
-[data-theme="light"]{
-  --gold:#A87418;--gold2:#C4922A;--gold3:#8A6518;--gold4:#7A5410;
-  --ink:#FAF8F4;--ink2:#FFFFFF;--ink3:#F2EEE6;--ink4:#EAE3D3;
-  --white:#0E0B1A;--off:#04030A;--off2:#141020;
-  --cream:rgba(14,11,26,0.92);--cream2:rgba(14,11,26,0.68);--cream3:rgba(14,11,26,0.42);
-  --rule:rgba(168,116,24,0.18);--rule2:rgba(168,116,24,0.4);
-  --up:#1E9E56;--dn:#C0392B;
-}
-[data-theme="light"] body{background:var(--ink)}
-[data-theme="light"] .gate-disclaimer{color:rgba(14,11,26,.45)}
-[data-theme="light"] nav{background:rgba(250,248,244,0.94)}
-[data-theme="light"] #gate{background:var(--ink2)}
-[data-theme="light"] .gate-inner{background:rgba(255,255,255,0.98)}
-
-html,body,nav,#gate,.gate-inner{transition:background-color .35s ease,color .35s ease,border-color .35s ease}
-
-/* THEME TOGGLE BUTTON */
-#theme-toggle{
-  display:flex;align-items:center;justify-content:center;
-  width:34px;height:34px;border:.5px solid var(--rule2);
-  background:transparent;cursor:pointer;transition:all .2s;
-  color:var(--gold);font-size:.85rem;flex-shrink:0;
-}
-#theme-toggle:hover{border-color:var(--gold);background:rgba(196,146,42,0.08)}
-
 html{scroll-behavior:smooth}
 body{background:var(--ink);color:var(--white);font-family:var(--font-body);font-weight:300;overflow-x:hidden;cursor:default}
 
@@ -571,14 +537,14 @@ footer{background:var(--ink);border-top:.5px solid var(--rule);padding:1.75rem 3
   .nav-links{
     display:none;
     position:fixed;top:56px;left:0;right:0;bottom:0;
-    background:rgba(4,3,10,.99);
+    background:#04030A;
     flex-direction:column;align-items:center;justify-content:center;
     gap:2.5rem;z-index:999;
   }
   .nav-links.open{display:flex}
   .nav-links a{
     font-size:1rem;letter-spacing:.15em;
-    color:var(--cream2);text-align:center;
+    color:#FFFFFF;text-align:center;
   }
   .nav-hamburger{display:flex}
 
@@ -1018,6 +984,16 @@ html,body{max-width:100vw;overflow-x:hidden}
 /* Smooth touch scrolling everywhere */
 *{-webkit-overflow-scrolling:touch}
 
+/* Landing page mobile */
+@media(max-width:700px){
+  #aec-landing > div > div:nth-child(3){
+    grid-template-columns:1fr !important;
+  }
+  #aec-re-modal > div{
+    padding:2rem 1.25rem !important;
+  }
+}
+
 @media(max-width:600px){
   /* Fix vertical letter-by-letter text */
   p,li,td,th,h1,h2,h3,h4,h5,span,div,a,label,button{
@@ -1103,7 +1079,7 @@ html,body{max-width:100vw;overflow-x:hidden}
       <input type="checkbox" id="gate-cb" onchange="document.getElementById('gate-btn').classList.toggle('active',this.checked)"/>
       <label for="gate-cb">I confirm that I am an <strong>Accredited Investor</strong> as defined by the SEC (net worth exceeding $1,000,000 excluding primary residence, or annual income exceeding $200,000 individually / $300,000 jointly), or a Qualified Institutional Buyer, and I agree to the terms of access.</label>
     </div>
-    <button class="gate-btn" id="gate-btn" onclick="document.getElementById('gate').style.display='none';document.body.style.overflow=''">Enter Ascenda Enterprise Capital</button>
+    <button class="gate-btn" id="gate-btn" onclick="document.getElementById('gate').style.display='none';document.getElementById('aec-landing').style.display='flex';document.body.style.overflow=''">Enter Ascenda Enterprise Capital</button>
 
     <div style="margin-top:1.25rem;padding:1.25rem 1.5rem;background:rgba(196,146,42,0.06);border:.5px solid var(--rule);text-align:left">
       <div style="font-family:var(--font-mono);font-size:.55rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold3);margin-bottom:.5rem">Don't meet the accredited investor requirements?</div>
@@ -1119,6 +1095,138 @@ html,body{max-width:100vw;overflow-x:hidden}
 
     <a class="gate-decline" href="https://www.google.com" style="margin-top:1rem">I do not qualify and I'm not interested — exit site</a>
     <p class="gate-disclaimer">This website does not constitute an offer to sell or a solicitation of an offer to buy any securities or investment products. Access restricted to Accredited Investors as defined under SEC Regulation D Rule 501. Past performance — including all figures shown — does not guarantee future results. All investments involve significant risk including total loss of principal. Ascenda Enterprise Capital LLC is registered in the State of Georgia and is not registered as an investment adviser with the SEC or any state authority.</p>
+  </div>
+</div>
+
+<!-- LANDING PAGE — shown after gate is accepted -->
+<div id="aec-landing" style="display:none;position:fixed;inset:0;z-index:9998;background:#04030A;align-items:center;justify-content:center;padding:2rem;overflow-y:auto">
+
+  <!-- Top bar -->
+  <div style="position:absolute;top:0;left:0;right:0;height:1.5px;background:linear-gradient(90deg,transparent,#C4922A,transparent)"></div>
+
+  <div style="max-width:960px;width:100%;margin:auto;text-align:center">
+
+    <!-- Logo -->
+    <div style="margin-bottom:2.5rem">
+      <svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:54px;height:54px;margin:0 auto 1rem">
+        <polygon points="40,4 62,28 40,52 18,28" fill="none" stroke="rgba(196,146,42,0.3)" stroke-width="0.5"/>
+        <polygon points="40,4 54,24 40,40 26,24" fill="url(#ld1)"/>
+        <polygon points="40,4 62,28 54,24" fill="url(#ld2)"/>
+        <polygon points="40,40 54,24 62,28" fill="rgba(180,180,200,0.5)"/>
+        <polygon points="40,40 26,24 18,28" fill="rgba(160,160,180,0.4)"/>
+        <defs>
+          <linearGradient id="ld1" x1="40" y1="4" x2="40" y2="52" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#E4B84A"/><stop offset="100%" stop-color="#8A6518"/></linearGradient>
+          <linearGradient id="ld2" x1="40" y1="4" x2="62" y2="28" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#F2D680"/><stop offset="100%" stop-color="#C4922A"/></linearGradient>
+        </defs>
+      </svg>
+      <div style="font-family:'Cormorant Garamond',Georgia,serif;font-size:1.3rem;font-weight:300;color:#FFFFFF;letter-spacing:.08em">ASCENDA</div>
+      <div style="font-family:'DM Mono',monospace;font-size:.55rem;letter-spacing:.3em;text-transform:uppercase;color:#8A6518;margin-top:.2rem">Enterprise Capital</div>
+    </div>
+
+    <!-- Headline -->
+    <h1 style="font-family:'Cormorant Garamond',Georgia,serif;font-size:clamp(1.8rem,4vw,2.8rem);font-weight:300;color:#FFFFFF;margin-bottom:.75rem;line-height:1.15">What brings you to <em style="font-style:italic;color:#E4B84A">Ascenda?</em></h1>
+    <p style="font-family:'Jost',sans-serif;font-size:.92rem;color:rgba(255,255,255,0.55);font-weight:300;margin-bottom:3.5rem;max-width:520px;margin-left:auto;margin-right:auto;line-height:1.8">Choose the path that fits you. We'll take you exactly where you need to go.</p>
+
+    <!-- Three option cards -->
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(196,146,42,0.2);margin-bottom:2.5rem">
+
+      <!-- Card 1: Mentorship -->
+      <a href="ascenda-mentorship.html" style="background:#080612;padding:2.75rem 2rem;display:flex;flex-direction:column;align-items:center;text-align:center;text-decoration:none;transition:background .3s;position:relative;overflow:hidden"
+        onmouseover="this.style.background='rgba(196,146,42,0.08)'" onmouseout="this.style.background='#080612'">
+        <div style="position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,#C4922A,transparent)"></div>
+        <div style="font-size:2.2rem;margin-bottom:1.25rem">🎓</div>
+        <div style="font-family:'DM Mono',monospace;font-size:.52rem;letter-spacing:.22em;text-transform:uppercase;color:#8A6518;margin-bottom:.75rem">01</div>
+        <div style="font-family:'Cormorant Garamond',Georgia,serif;font-size:1.5rem;font-weight:300;color:#FFFFFF;margin-bottom:.75rem;line-height:1.2">Explore<br/><em style="font-style:italic;color:#E4B84A">Mentorship</em></div>
+        <p style="font-family:'Jost',sans-serif;font-size:.82rem;color:rgba(255,255,255,0.6);font-weight:300;line-height:1.8;margin-bottom:1.5rem">Direct 1-on-1 training under Izaiah Cottle. Real frameworks, real trade reviews, real access. Foundation, Accelerator, or Elite tiers available.</p>
+        <div style="font-family:'DM Mono',monospace;font-size:.58rem;letter-spacing:.15em;text-transform:uppercase;color:#C4922A;border:.5px solid rgba(196,146,42,0.4);padding:.6rem 1.5rem">Explore Mentorship →</div>
+      </a>
+
+      <!-- Card 2: Real Estate -->
+      <div style="background:#080612;padding:2.75rem 2rem;display:flex;flex-direction:column;align-items:center;text-align:center;transition:background .3s;position:relative;overflow:hidden;cursor:pointer"
+        onmouseover="this.style.background='rgba(196,146,42,0.08)'" onmouseout="this.style.background='#080612'"
+        onclick="document.getElementById('aec-landing').style.display='none';document.getElementById('aec-re-modal').style.display='flex'">
+        <div style="position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,#C4922A,transparent)"></div>
+        <div style="font-size:2.2rem;margin-bottom:1.25rem">🏗️</div>
+        <div style="font-family:'DM Mono',monospace;font-size:.52rem;letter-spacing:.22em;text-transform:uppercase;color:#8A6518;margin-bottom:.75rem">02</div>
+        <div style="font-family:'Cormorant Garamond',Georgia,serif;font-size:1.5rem;font-weight:300;color:#FFFFFF;margin-bottom:.75rem;line-height:1.2">Apply as an<br/><em style="font-style:italic;color:#E4B84A">RE Investor</em></div>
+        <p style="font-family:'Jost',sans-serif;font-size:.82rem;color:rgba(255,255,255,0.6);font-weight:300;line-height:1.8;margin-bottom:1.5rem">Accredited investors interested in real estate opportunities — buying, selling, building properties, buying or selling land. Select your area of interest.</p>
+        <div style="font-family:'DM Mono',monospace;font-size:.58rem;letter-spacing:.15em;text-transform:uppercase;color:#C4922A;border:.5px solid rgba(196,146,42,0.4);padding:.6rem 1.5rem">Apply as RE Investor →</div>
+      </div>
+
+      <!-- Card 3: Main Site -->
+      <div style="background:rgba(196,146,42,0.06);padding:2.75rem 2rem;display:flex;flex-direction:column;align-items:center;text-align:center;transition:background .3s;position:relative;overflow:hidden;cursor:pointer;border:.5px solid rgba(196,146,42,0.25)"
+        onmouseover="this.style.background='rgba(196,146,42,0.12)'" onmouseout="this.style.background='rgba(196,146,42,0.06)'"
+        onclick="document.getElementById('aec-landing').style.display='none'">
+        <div style="position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,#E4B84A,transparent)"></div>
+        <div style="font-size:2.2rem;margin-bottom:1.25rem">📊</div>
+        <div style="font-family:'DM Mono',monospace;font-size:.52rem;letter-spacing:.22em;text-transform:uppercase;color:#8A6518;margin-bottom:.75rem">03</div>
+        <div style="font-family:'Cormorant Garamond',Georgia,serif;font-size:1.5rem;font-weight:300;color:#FFFFFF;margin-bottom:.75rem;line-height:1.2">Explore the<br/><em style="font-style:italic;color:#E4B84A">Main Site</em></div>
+        <p style="font-family:'Jost',sans-serif;font-size:.82rem;color:rgba(255,255,255,0.6);font-weight:300;line-height:1.8;margin-bottom:1.5rem">Performance record, strategy, live markets, investor portal, the AEC story, and everything else. The full picture of Ascenda Enterprise Capital.</p>
+        <div style="font-family:'DM Mono',monospace;font-size:.58rem;letter-spacing:.15em;text-transform:uppercase;color:#E4B84A;background:rgba(196,146,42,0.15);border:.5px solid rgba(196,146,42,0.5);padding:.6rem 1.5rem">Enter Main Site →</div>
+      </div>
+
+    </div>
+
+    <!-- Mobile stacked note -->
+    <p style="font-family:'DM Mono',monospace;font-size:.5rem;letter-spacing:.1em;color:rgba(255,255,255,0.18);text-transform:uppercase">Ascenda Enterprise Capital LLC · Georgia · All investments involve risk</p>
+
+  </div>
+</div>
+
+<!-- RE INVESTOR MODAL — shown when card 2 is clicked -->
+<div id="aec-re-modal" style="display:none;position:fixed;inset:0;z-index:9999;background:rgba(4,3,10,.97);align-items:center;justify-content:center;padding:2rem;overflow-y:auto">
+  <div style="max-width:680px;width:100%;background:#080612;border:.5px solid rgba(196,146,42,0.35);padding:3.5rem;position:relative">
+    <div style="position:absolute;top:0;left:0;right:0;height:1.5px;background:linear-gradient(90deg,transparent,#C4922A,transparent)"></div>
+    <button onclick="document.getElementById('aec-re-modal').style.display='none';document.getElementById('aec-landing').style.display='flex'" style="position:absolute;top:1rem;right:1rem;background:none;border:none;color:rgba(255,255,255,0.4);font-size:1.2rem;cursor:pointer">✕</button>
+    <div style="font-family:'DM Mono',monospace;font-size:.55rem;letter-spacing:.22em;text-transform:uppercase;color:#8A6518;margin-bottom:.75rem">Real Estate Investment</div>
+    <h2 style="font-family:'Cormorant Garamond',Georgia,serif;font-size:1.8rem;font-weight:300;color:#FFFFFF;margin-bottom:.5rem">Select your area of <em style="font-style:italic;color:#E4B84A">interest</em></h2>
+    <p style="font-size:.82rem;color:rgba(255,255,255,0.55);font-weight:300;line-height:1.8;margin-bottom:2.5rem">Tell us what you're here for. Izaiah and the AEC team will follow up directly within 24 hours.</p>
+
+    <div style="display:flex;flex-direction:column;gap:1px;background:rgba(196,146,42,0.15);margin-bottom:2rem">
+
+      <a href="mailto:izaiah@ascendaenterprisecapital.com?subject=RE Investor Interest — Buying Properties&body=I am an accredited investor interested in buying properties through AEC / OHOS." style="background:#0E0B1A;padding:1.25rem 1.5rem;display:flex;align-items:center;justify-content:space-between;text-decoration:none;transition:background .2s" onmouseover="this.style.background='rgba(196,146,42,0.08)'" onmouseout="this.style.background='#0E0B1A'">
+        <div>
+          <div style="font-family:'DM Mono',monospace;font-size:.62rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#E4B84A;margin-bottom:.2rem">Buying Properties</div>
+          <div style="font-size:.78rem;color:rgba(255,255,255,0.5);font-weight:300">Residential, commercial, multifamily acquisitions</div>
+        </div>
+        <span style="font-family:'DM Mono',monospace;font-size:.7rem;color:#C4922A">→</span>
+      </a>
+
+      <a href="mailto:izaiah@ascendaenterprisecapital.com?subject=RE Investor Interest — Selling Properties&body=I am an accredited investor interested in selling properties through AEC / OHOS." style="background:#0E0B1A;padding:1.25rem 1.5rem;display:flex;align-items:center;justify-content:space-between;text-decoration:none;transition:background .2s" onmouseover="this.style.background='rgba(196,146,42,0.08)'" onmouseout="this.style.background='#0E0B1A'">
+        <div>
+          <div style="font-family:'DM Mono',monospace;font-size:.62rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#E4B84A;margin-bottom:.2rem">Selling Properties</div>
+          <div style="font-size:.78rem;color:rgba(255,255,255,0.5);font-weight:300">Cash offers, fast close, no agent fees</div>
+        </div>
+        <span style="font-family:'DM Mono',monospace;font-size:.7rem;color:#C4922A">→</span>
+      </a>
+
+      <a href="mailto:izaiah@ascendaenterprisecapital.com?subject=RE Investor Interest — Building Properties&body=I am an accredited investor interested in building / development projects through AEC." style="background:#0E0B1A;padding:1.25rem 1.5rem;display:flex;align-items:center;justify-content:space-between;text-decoration:none;transition:background .2s" onmouseover="this.style.background='rgba(196,146,42,0.08)'" onmouseout="this.style.background='#0E0B1A'">
+        <div>
+          <div style="font-family:'DM Mono',monospace;font-size:.62rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#E4B84A;margin-bottom:.2rem">Building Properties</div>
+          <div style="font-size:.78rem;color:rgba(255,255,255,0.5);font-weight:300">Ground-up development and construction projects</div>
+        </div>
+        <span style="font-family:'DM Mono',monospace;font-size:.7rem;color:#C4922A">→</span>
+      </a>
+
+      <a href="mailto:izaiah@ascendaenterprisecapital.com?subject=RE Investor Interest — Buying Land&body=I am an accredited investor interested in acquiring land through AEC." style="background:#0E0B1A;padding:1.25rem 1.5rem;display:flex;align-items:center;justify-content:space-between;text-decoration:none;transition:background .2s" onmouseover="this.style.background='rgba(196,146,42,0.08)'" onmouseout="this.style.background='#0E0B1A'">
+        <div>
+          <div style="font-family:'DM Mono',monospace;font-size:.62rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#E4B84A;margin-bottom:.2rem">Buying Land</div>
+          <div style="font-size:.78rem;color:rgba(255,255,255,0.5);font-weight:300">Raw land, lots, and acreage acquisitions</div>
+        </div>
+        <span style="font-family:'DM Mono',monospace;font-size:.7rem;color:#C4922A">→</span>
+      </a>
+
+      <a href="mailto:izaiah@ascendaenterprisecapital.com?subject=RE Investor Interest — Selling Land&body=I am an accredited investor interested in selling land through AEC / OHOS." style="background:#0E0B1A;padding:1.25rem 1.5rem;display:flex;align-items:center;justify-content:space-between;text-decoration:none;transition:background .2s" onmouseover="this.style.background='rgba(196,146,42,0.08)'" onmouseout="this.style.background='#0E0B1A'">
+        <div>
+          <div style="font-family:'DM Mono',monospace;font-size:.62rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#E4B84A;margin-bottom:.2rem">Selling Land</div>
+          <div style="font-size:.78rem;color:rgba(255,255,255,0.5);font-weight:300">Liquidate land holdings quickly and efficiently</div>
+        </div>
+        <span style="font-family:'DM Mono',monospace;font-size:.7rem;color:#C4922A">→</span>
+      </a>
+
+    </div>
+
+    <p style="font-family:'DM Mono',monospace;font-size:.52rem;color:rgba(255,255,255,0.25);line-height:1.7;text-align:center">Each option opens an email to izaiah@ascendaenterprisecapital.com · Response within 24 hours</p>
   </div>
 </div>
 
@@ -1430,23 +1538,44 @@ html,body{max-width:100vw;overflow-x:hidden}
       ];
       render();
     }
-    // Then try to fetch live headlines via Cloudflare Worker proxy
+    // Then try to fetch live headlines
     try {
-      var r = await fetch('https://aec-news-proxy.ascendaenterprise.workers.dev');
-      if(!r.ok) throw new Error('Worker responded '+r.status);
-      var j = await r.json();
-      if(j.items && j.items.length){
+      var feeds = [
+        {url:'https://www.cnbc.com/id/100003114/device/rss/rss.html', source:'CNBC', color:'#ef4444'},
+        {url:'https://feeds.finance.yahoo.com/rss/2.0/headline?s=^GSPC&region=US&lang=en-US', source:'Yahoo Finance', color:'#6366f1'},
+        {url:'https://www.marketwatch.com/rss/topstories', source:'MarketWatch', color:'#10b981'},
+        {url:'https://feeds.bloomberg.com/markets/news.rss', source:'Bloomberg', color:'#3b82f6'},
+        {url:'https://www.investing.com/rss/news.rss', source:'Investing.com', color:'#c8922a'}
+      ];
+      var allItems = [];
+      for(var i=0;i<feeds.length;i++){
+        try {
+          var feed = feeds[i];
+          var apiUrl = 'https://api.rss2json.com/v1/api.json?rss_url='+encodeURIComponent(feed.url)+'&count=6';
+          var r = await fetch(apiUrl);
+          var j = await r.json();
+          if(j.items && j.items.length){
+            j.items.forEach(function(item){
+              if(item.title && item.title !== '[Removed]'){
+                allItems.push({
+                  s: feed.source, c: feed.color,
+                  k: catFromTitle(item.title),
+                  t: timeAgo(item.pubDate),
+                  h: item.title, u: item.link||'#'
+                });
+              }
+            });
+          }
+        } catch(e2){}
+      }
+      if(allItems.length > 0){
         var seen={};
-        hl = j.items.filter(function(a){ if(seen[a.h]) return false; seen[a.h]=true; return true; });
+        hl = allItems.filter(function(a){ if(seen[a.h]) return false; seen[a.h]=true; return true; });
         render();
         var el=document.getElementById('aec-nb-time');
         if(el) el.textContent='Updated '+new Date().toLocaleTimeString();
       }
-    } catch(e){
-      console.error('News fetch error',e);
-      var el2=document.getElementById('aec-nb-time');
-      if(el2) el2.textContent='Showing recent headlines';
-    }
+    } catch(e){ console.error('News fetch error',e); }
   }
 
   function render(){
@@ -2769,25 +2898,17 @@ html,body{max-width:100vw;overflow-x:hidden}
 // Live ticker powered by TradingView
 
 // ── DARK/LIGHT MODE ──
-function applyTheme(mode){
-  if(mode === 'light'){
-    document.documentElement.setAttribute('data-theme','light');
-  } else {
-    document.documentElement.removeAttribute('data-theme');
-  }
-  var btn = document.getElementById('theme-toggle');
-  if(btn) btn.textContent = mode === 'light' ? '☀️' : '🌙';
-}
 function toggleTheme(){
-  var current = document.documentElement.getAttribute('data-theme') === 'light' ? 'light' : 'dark';
-  var next = current === 'light' ? 'dark' : 'light';
-  try{ localStorage.setItem('aec_theme', next); }catch(e){}
-  applyTheme(next);
+  // AEC is dark only — light mode removed
+  localStorage.removeItem('aec_theme');
+  document.body.classList.remove('light-mode');
 }
+// Force dark mode always
 (function(){
-  var saved = 'dark';
-  try{ saved = localStorage.getItem('aec_theme') || 'dark'; }catch(e){}
-  applyTheme(saved);
+  document.body.classList.remove('light-mode');
+  localStorage.removeItem('aec_theme');
+  var btn = document.getElementById('theme-toggle');
+  if(btn) btn.style.display = 'none'; // hide toggle button
 })();
 
 // ── COUNTDOWN TIMER ──
