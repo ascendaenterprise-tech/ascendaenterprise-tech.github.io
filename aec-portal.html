@@ -11,28 +11,28 @@
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
-  --gold:#FFFFFF;--gold2:#E0E0E0;--gold3:#999999;--gold4:#CCCCCC;
-  --ink:#000000;--ink2:#0A0A0A;--ink3:#111111;--ink4:#1A1A1A;
+  --gold:#C4922A;--gold2:#E4B84A;--gold3:#8A6518;--gold4:#F2D680;
+  --ink:#04030A;--ink2:#080612;--ink3:#0E0B1A;--ink4:#141020;
   --white:#FFFFFF;--cream:rgba(255,255,255,0.95);--cream2:rgba(255,255,255,0.72);--cream3:rgba(255,255,255,0.38);
-  --rule:rgba(255,255,255,0.12);--rule2:rgba(255,255,255,0.3);
-  --up:#FFFFFF;--dn:#999999;
+  --rule:rgba(196,146,42,0.14);--rule2:rgba(196,146,42,0.35);
+  --up:#2ECC71;--dn:#E74C3C;
   --font-display:'Cormorant Garamond',Georgia,serif;
   --font-mono:'DM Mono',monospace;
   --font-body:'Jost',sans-serif;
 }
 [data-theme="light"]{
-  --gold:#000000;--gold2:#222222;--gold3:#555555;--gold4:#333333;
-  --ink:#FFFFFF;--ink2:#F5F5F5;--ink3:#EFEFEF;--ink4:#E5E5E5;
-  --white:#000000;--cream:rgba(0,0,0,0.92);--cream2:rgba(0,0,0,0.68);--cream3:rgba(0,0,0,0.42);
-  --rule:rgba(0,0,0,0.12);--rule2:rgba(0,0,0,0.3);
-  --up:#000000;--dn:#777777;
+  --gold:#A87418;--gold2:#C4922A;--gold3:#8A6518;--gold4:#7A5410;
+  --ink:#FAF8F4;--ink2:#FFFFFF;--ink3:#F2EEE6;--ink4:#EAE3D3;
+  --white:#0E0B1A;--cream:rgba(14,11,26,0.92);--cream2:rgba(14,11,26,0.68);--cream3:rgba(14,11,26,0.42);
+  --rule:rgba(168,116,24,0.18);--rule2:rgba(168,116,24,0.4);
+  --up:#1E9E56;--dn:#C0392B;
 }
 html{scroll-behavior:smooth}
 body{background:var(--ink);color:var(--white);font-family:var(--font-body);font-weight:300;overflow-x:hidden;transition:background-color .35s,color .35s;min-height:100vh}
 
 /* ── NAV ── */
-nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:1.2rem 3.5rem;background:rgba(0,0,0,0.94);border-bottom:.5px solid var(--rule);backdrop-filter:blur(24px);transition:background-color .35s,border-color .35s}
-[data-theme="light"] nav{background:rgba(255,255,255,0.94)}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:1.2rem 3.5rem;background:rgba(4,3,10,0.94);border-bottom:.5px solid var(--rule);backdrop-filter:blur(24px);transition:background-color .35s,border-color .35s}
+[data-theme="light"] nav{background:rgba(250,248,244,0.94)}
 .nav-logo{display:flex;align-items:center;gap:.75rem;text-decoration:none}
 .nav-logo-text{display:flex;flex-direction:column;line-height:1.1}
 .nav-logo-main{font-family:var(--font-display);font-size:1rem;color:var(--white);font-weight:400;letter-spacing:.06em}
@@ -46,17 +46,14 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 
 /* ── LOGIN GATE ── */
 #login{position:fixed;inset:0;z-index:9999;background:var(--ink2);display:flex;align-items:center;justify-content:center;padding:2rem;transition:background-color .35s}
-.login-inner{max-width:440px;width:100%;border:.5px solid var(--rule2);padding:3.5rem;background:rgba(0,0,0,0.98);text-align:center;position:relative}
+.login-inner{max-width:440px;width:100%;border:.5px solid var(--rule2);padding:3.5rem;background:rgba(8,6,18,0.98);text-align:center;position:relative}
 [data-theme="light"] .login-inner{background:rgba(255,255,255,0.98)}
-[data-theme="light"] .login-field{background:rgba(0,0,0,0.04)}
-[data-theme="light"] .doc-dl:hover{background:rgba(0,0,0,0.06)}
-[data-theme="light"] table.statements tr:hover td{background:rgba(0,0,0,0.02)}
 .login-inner::before{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);width:120px;height:1.5px;background:linear-gradient(90deg,transparent,var(--gold),transparent)}
 .gate-diamond{width:54px;height:54px;margin:0 auto 1.25rem}
 .login-brand{font-family:var(--font-display);font-size:1.3rem;letter-spacing:.06em;font-weight:300}
 .login-sub{font-family:var(--font-mono);font-size:.58rem;letter-spacing:.28em;text-transform:uppercase;color:var(--gold3);margin-top:.3rem;margin-bottom:2rem}
 .login-title{font-family:var(--font-display);font-size:1.5rem;font-weight:300;margin-bottom:1.5rem}
-.login-field{width:100%;background:rgba(255,255,255,0.05);border:.5px solid var(--rule);color:var(--white);font-family:var(--font-body);font-size:.85rem;padding:.85rem 1rem;outline:none;margin-bottom:.85rem;transition:border-color .2s}
+.login-field{width:100%;background:rgba(196,146,42,0.05);border:.5px solid var(--rule);color:var(--white);font-family:var(--font-body);font-size:.85rem;padding:.85rem 1rem;outline:none;margin-bottom:.85rem;transition:border-color .2s}
 .login-field:focus{border-color:var(--gold)}
 .login-btn{width:100%;font-family:var(--font-mono);font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;background:var(--gold);color:var(--ink);border:none;padding:1rem;cursor:pointer;font-weight:500;transition:background .2s;margin-top:.5rem}
 .login-btn:hover{background:var(--gold2)}
@@ -87,12 +84,12 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 .doc-name{font-size:.85rem;color:var(--cream2);margin-bottom:.25rem}
 .doc-meta{font-family:var(--font-mono);font-size:.6rem;color:var(--cream3);letter-spacing:.05em}
 .doc-dl{font-family:var(--font-mono);font-size:.58rem;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);text-decoration:none;border:.5px solid var(--gold);padding:.5rem .9rem;white-space:nowrap;transition:all .2s}
-.doc-dl:hover{background:rgba(255,255,255,0.1)}
+.doc-dl:hover{background:rgba(196,146,42,0.1)}
 
 table.statements{width:100%;border-collapse:collapse;margin-bottom:3rem}
 table.statements th{font-family:var(--font-mono);font-size:.55rem;letter-spacing:.12em;text-transform:uppercase;color:var(--cream3);text-align:left;padding:.85rem 1rem;border-bottom:.5px solid var(--rule2)}
 table.statements td{padding:.9rem 1rem;font-size:.82rem;border-bottom:.5px solid var(--rule);color:var(--cream2)}
-table.statements tr:hover td{background:rgba(255,255,255,0.03)}
+table.statements tr:hover td{background:rgba(196,146,42,0.03)}
 
 .logout-link{font-family:var(--font-mono);font-size:.6rem;letter-spacing:.15em;text-transform:uppercase;color:var(--cream3);text-decoration:none;cursor:pointer}
 .logout-link:hover{color:var(--gold2)}
@@ -104,14 +101,14 @@ table.statements tr:hover td{background:rgba(255,255,255,0.03)}
 <div id="login">
   <div class="login-inner">
     <svg class="gate-diamond" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <polygon points="40,4 62,28 40,52 18,28" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="0.5"/>
+      <polygon points="40,4 62,28 40,52 18,28" fill="none" stroke="rgba(196,146,42,0.3)" stroke-width="0.5"/>
       <polygon points="40,4 54,24 40,40 26,24" fill="url(#dg1)"/>
       <polygon points="40,4 62,28 54,24" fill="url(#dg2)"/>
       <polygon points="40,40 54,24 62,28" fill="rgba(180,180,200,0.5)"/>
       <polygon points="40,40 26,24 18,28" fill="rgba(160,160,180,0.4)"/>
       <defs>
-        <linearGradient id="dg1" x1="40" y1="4" x2="40" y2="52" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#FFFFFF"/><stop offset="100%" stop-color="#777777"/></linearGradient>
-        <linearGradient id="dg2" x1="40" y1="4" x2="62" y2="28" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#EEEEEE"/><stop offset="100%" stop-color="#AAAAAA"/></linearGradient>
+        <linearGradient id="dg1" x1="40" y1="4" x2="40" y2="52" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#E4B84A"/><stop offset="100%" stop-color="#8A6518"/></linearGradient>
+        <linearGradient id="dg2" x1="40" y1="4" x2="62" y2="28" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#F2D680"/><stop offset="100%" stop-color="#C4922A"/></linearGradient>
       </defs>
     </svg>
     <div class="login-brand">ASCENDA</div>
