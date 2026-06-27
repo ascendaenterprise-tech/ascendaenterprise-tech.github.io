@@ -233,25 +233,74 @@ footer{padding:2rem 3.5rem;border-top:.5px solid var(--rule);display:flex;justif
       <div class="cff"><label>Investment objectives</label><textarea name="objectives" placeholder="Describe your investment objectives and why you want to allocate with AEC..." required></textarea></div>
 
       <div style="display:flex;align-items:flex-start;gap:.75rem;padding:1.25rem;background:rgba(196,146,42,.04);border:.5px solid var(--rule)">
-        <input type="checkbox" id="legal-cb1" required style="margin-top:.15rem;accent-color:var(--gold);width:14px;height:14px;flex-shrink:0"/>
-        <label for="legal-cb1" style="font-size:.72rem;color:var(--cream2);line-height:1.7;cursor:pointer">I confirm I am an <strong>Accredited Investor or Qualified Institutional Buyer</strong>, I have read and agree to all disclosures above, and I understand that all investments carry significant risk including total loss of capital.</label>
-      </div>
-      <div style="display:flex;align-items:flex-start;gap:.75rem;padding:1.25rem;background:rgba(196,146,42,.04);border:.5px solid var(--rule)">
-        <input type="checkbox" id="legal-cb2" required style="margin-top:.15rem;accent-color:var(--gold);width:14px;height:14px;flex-shrink:0"/>
-        <label for="legal-cb2" style="font-size:.72rem;color:var(--cream2);line-height:1.7;cursor:pointer">I expressly <strong>waive any right to bring claims against Ascenda Enterprise Capital LLC or Izaiah Cottle</strong> for losses attributable to market disruption, volatility, or conditions beyond AEC's control, as outlined in the disclosures above.</label>
+
+      <!-- ADDITIONAL INSTITUTIONAL DISCLOSURES -->
+      <div style="margin-top:1.5rem;border:.5px solid rgba(196,146,42,0.25);background:rgba(196,146,42,0.03)">
+        <div style="background:rgba(196,146,42,0.08);border-bottom:.5px solid rgba(196,146,42,0.25);padding:1.25rem 1.75rem;display:flex;align-items:center;gap:.75rem">
+          <div style="width:8px;height:8px;background:var(--gold);flex-shrink:0"></div>
+          <div style="font-family:var(--font-mono);font-size:.6rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--gold2)">Supplemental Institutional Disclosures</div>
+        </div>
+        <div style="padding:1.75rem;display:flex;flex-direction:column;gap:1.25rem;max-height:350px;overflow-y:auto">
+          <div>
+            <div style="font-family:var(--font-mono);font-size:.58rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--gold);margin-bottom:.5rem">A. Indemnification — Institutional Allocators</div>
+            <p style="font-family:var(--font-mono);font-size:.6rem;color:rgba(255,255,255,.55);line-height:1.85">As an institutional allocator, you agree to indemnify, defend, and hold harmless Ascenda Enterprise Capital LLC, its members, managers, officers, employees, and affiliates from and against any and all claims, damages, losses, liabilities, costs, and expenses — including reasonable attorneys' fees — arising from: (a) any breach of the representations and warranties made herein; (b) your failure to conduct appropriate due diligence prior to allocating capital; (c) any misrepresentation of your entity's authority to invest; or (d) any regulatory action arising from your jurisdiction's securities laws as they apply to your investment in AEC.</p>
+          </div>
+          <div>
+            <div style="font-family:var(--font-mono);font-size:.58rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--gold);margin-bottom:.5rem">B. Qualified Institutional Buyer (QIB) Standards</div>
+            <p style="font-family:var(--font-mono);font-size:.6rem;color:rgba(255,255,255,.55);line-height:1.85">Institutional allocators representing entities (family offices, endowments, funds of funds) must either qualify as a Qualified Institutional Buyer under Rule 144A of the Securities Act of 1933, or qualify as an Accredited Investor under Regulation D, Rule 501(a). By submitting this application, the undersigned authorized representative warrants that they have full legal authority to bind their entity to the terms herein, and that the entity meets the applicable qualification threshold.</p>
+          </div>
+          <div>
+            <div style="font-family:var(--font-mono);font-size:.58rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--gold);margin-bottom:.5rem">C. Binding Arbitration & Class Action Waiver</div>
+            <p style="font-family:var(--font-mono);font-size:.6rem;color:rgba(255,255,255,.55);line-height:1.85">Any dispute arising from this allocation agreement shall be resolved through binding arbitration in Atlanta, Georgia, under AAA Commercial Arbitration Rules. Both parties expressly waive any right to trial by jury and any right to participate in class action or representative litigation. The arbitrator's award shall be final and enforceable in any court of competent jurisdiction.</p>
+          </div>
+          <div>
+            <div style="font-family:var(--font-mono);font-size:.58rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--gold);margin-bottom:.5rem">D. Electronic Signature — E-SIGN Act Compliance</div>
+            <p style="font-family:var(--font-mono);font-size:.6rem;color:rgba(255,255,255,.55);line-height:1.85">Submission of this form constitutes a legally binding electronic signature under the Electronic Signatures in Global and National Commerce Act (15 U.S.C. § 7001). Your IP address, browser fingerprint, and submission timestamp will be recorded and stored as evidence of consent. This electronic record carries the same legal weight as a wet-ink signature under applicable federal and Georgia state law.</p>
+          </div>
+          <div>
+            <div style="font-family:var(--font-mono);font-size:.58rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--gold);margin-bottom:.5rem">E. No Partnership, Agency, or Fiduciary Relationship</div>
+            <p style="font-family:var(--font-mono);font-size:.6rem;color:rgba(255,255,255,.55);line-height:1.85">Nothing in this application or any subsequent agreement shall be construed as creating a partnership, joint venture, agency relationship, or fiduciary duty between AEC and the allocator beyond what is explicitly set forth in a separate signed operating or subscription agreement. AEC's duties are limited to those expressly stated therein.</p>
+          </div>
+        </div>
       </div>
 
-      <button type="submit" class="btn-submit">Submit Allocator Application →</button>
+      <!-- ACKNOWLEDGMENT CHECKBOXES -->
+      <div style="margin-top:1.5rem;display:flex;flex-direction:column;gap:.85rem;padding:1.5rem;border:.5px solid rgba(196,146,42,0.25);background:rgba(196,146,42,0.03)">
+        <div style="font-family:var(--font-mono);font-size:.58rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--gold2);margin-bottom:.25rem">Allocator Acknowledgments — All Required</div>
+        <label style="display:flex;align-items:flex-start;gap:.75rem;cursor:pointer">
+          <input type="checkbox" id="cb-qib" required style="margin-top:.2rem;accent-color:var(--gold);width:14px;height:14px;flex-shrink:0"/>
+          <span style="font-size:.72rem;color:var(--cream2);line-height:1.7">I confirm that I am, or am authorized to represent, an <strong>Accredited Investor or Qualified Institutional Buyer</strong> as defined under applicable U.S. securities laws, and that I have the legal authority to bind my entity to this agreement.</span>
+        </label>
+        <label style="display:flex;align-items:flex-start;gap:.75rem;cursor:pointer">
+          <input type="checkbox" id="cb-risk2" required style="margin-top:.2rem;accent-color:var(--gold);width:14px;height:14px;flex-shrink:0"/>
+          <span style="font-size:.72rem;color:var(--cream2);line-height:1.7">I understand that this allocation involves significant risk, including the <strong>complete and permanent loss of all capital deployed</strong>, and that AEC makes no guarantees of returns or capital preservation.</span>
+        </label>
+        <label style="display:flex;align-items:flex-start;gap:.75rem;cursor:pointer">
+          <input type="checkbox" id="cb-alldisclosures" required style="margin-top:.2rem;accent-color:var(--gold);width:14px;height:14px;flex-shrink:0"/>
+          <span style="font-size:.72rem;color:var(--cream2);line-height:1.7">I have read, understood, and agree to all legal disclosures set forth on this page, including the <strong>limitation of liability, indemnification, binding arbitration requirement, and class action waiver</strong>.</span>
+        </label>
+        <label style="display:flex;align-items:flex-start;gap:.75rem;cursor:pointer">
+          <input type="checkbox" id="cb-waiver" required style="margin-top:.2rem;accent-color:var(--gold);width:14px;height:14px;flex-shrink:0"/>
+          <span style="font-size:.72rem;color:var(--cream2);line-height:1.7">I expressly <strong>waive any right to bring claims against AEC or Izaiah Cottle</strong> for losses attributable to market conditions, volatility, force majeure, or any other factor beyond AEC's direct control.</span>
+        </label>
+        <label style="display:flex;align-items:flex-start;gap:.75rem;cursor:pointer">
+          <input type="checkbox" id="cb-esign2" required style="margin-top:.2rem;accent-color:var(--gold);width:14px;height:14px;flex-shrink:0"/>
+          <span style="font-size:.72rem;color:var(--cream2);line-height:1.7">I understand this submission constitutes a <strong>legally binding electronic signature</strong> under the E-SIGN Act, and that my IP address, device information, and timestamp will be recorded as evidence of my agreement.</span>
+        </label>
+        <label style="display:flex;align-items:flex-start;gap:.75rem;cursor:pointer">
+          <input type="checkbox" id="cb-counsel" required style="margin-top:.2rem;accent-color:var(--gold);width:14px;height:14px;flex-shrink:0"/>
+          <span style="font-size:.72rem;color:var(--cream2);line-height:1.7">I confirm that I have had the opportunity to consult with independent legal counsel and financial advisors, and that I am making this allocation decision of my own free will and informed judgment.</span>
+        </label>
+      </div>
+
+      <button type="submit" class="btn-submit" style="margin-top:1.5rem" onclick="logSubmission()">Submit Allocator Application →</button>
     </form>
-    <div class="disclaimer-box">
-      <p><strong>Final Disclosure:</strong> Submission of this application does not create any contractual obligation on the part of Ascenda Enterprise Capital LLC. AEC reserves the right to accept or decline any application at its sole discretion without providing explanation. All formal investment agreements will be executed via separate legal documentation reviewed by qualified legal counsel. Ascenda Enterprise Capital LLC is registered in the State of Georgia. AUM ceiling: $750,000,000. Neither AEC nor Izaiah Cottle shall be liable for market disruption losses. This document does not constitute a private placement memorandum or offering document.</p>
-    </div>
   </div>
 </div>
 
 <footer>
   <div style="font-family:var(--font-display);font-style:italic;font-size:.9rem;color:var(--gold3)">Ascenda Enterprise Capital LLC</div>
-  <div class="f-copy">© 2025 Ascenda Enterprise Capital LLC · Registered in Georgia · Institutional Allocator Program · All Rights Reserved</div>
+  <div class="f-copy">© 2026 Ascenda Enterprise Capital LLC · Registered in Georgia · Institutional Allocator Program · All Rights Reserved</div>
 </footer>
 
 <script>
@@ -324,6 +373,39 @@ window.onload = function(){
     updateAlloc(v);
   });
 };
+
+// ── LEGAL LOGGING & FORM SUBMISSION ──
+function logSubmission() {
+  var ts = new Date().toISOString();
+  console.log('[AEC] Allocator application submitted', ts);
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+  var form = document.querySelector('form');
+  if(!form) return;
+  form.addEventListener('submit', async function(e) {
+    e.preventDefault();
+    var btn = form.querySelector('.btn-submit');
+    btn.textContent = 'Submitting...';
+    btn.disabled = true;
+    var data = {};
+    new FormData(form).forEach(function(v, k) { data[k] = v; });
+    try {
+      await fetch('https://aec-email.ascendaenterprise.workers.dev/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          type: 'subscribe',
+          name: data.name || data['full-name'] || 'Allocator',
+          email: data.email,
+          interests: ['Institutional Allocation — ' + (data.amount || data['alloc-amount'] || '') + ' | Org: ' + (data.org || data['organization'] || '')]
+        })
+      });
+    } catch(err) { console.error('Email error', err); }
+    form.innerHTML = '<div style="text-align:center;padding:3rem 0"><div style="font-size:2.5rem;margin-bottom:1rem">✓</div><div style="font-family:var(--font-mono);font-size:.65rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--gold2);margin-bottom:1rem">Application Received</div><p style="font-size:.88rem;color:rgba(255,255,255,.6);line-height:1.8;max-width:480px;margin:0 auto">Your allocator application has been received and logged. Izaiah will contact you within 24–48 hours. Reference time: ' + new Date().toLocaleString() + '</p></div>';
+  });
+});
+
 </script>
 </body>
 </html>
