@@ -3869,5 +3869,20 @@ window.addEventListener('resize', applyMobileFixes);
 })();
 </script>
 
+
+<script>
+function toggleIFAQ(btn) {
+  var body = btn.nextElementSibling;
+  var icon = btn.querySelector('.ifaq-icon');
+  var isOpen = body.style.display !== 'none';
+  document.querySelectorAll('.ifaq-body').forEach(function(b){ b.style.display='none'; });
+  document.querySelectorAll('.ifaq-icon').forEach(function(i){ i.textContent='+'; });
+  if (!isOpen) {
+    body.style.display = 'block';
+    icon.textContent = '−';
+  }
+}
+</script>
+
 </body>
 </html>
