@@ -168,8 +168,8 @@ nav{
 
 .hero-content{
   position:relative;z-index:2;
-  display:grid;grid-template-columns:1fr 1fr;
-  gap:4rem;align-items:flex-end;
+  display:grid;grid-template-columns:1fr;
+  gap:4rem;align-items:flex-start;max-width:680px;
   opacity:0;animation:fadeUp .8s ease .6s forwards;
 }
 .hero-left h1{
@@ -931,7 +931,276 @@ html,body{max-width:100vw;overflow-x:hidden}
 .path-card-featured:hover{background:rgba(255,255,255,0.08)!important}
 .path-cta-featured{color:#FFFFFF;background:rgba(255,255,255,0.08);border:.5px solid rgba(255,255,255,0.35)}
 @media(max-width:700px){.path-grid{grid-template-columns:1fr!important}}
+
+/* ═══════════════════════════════
+   MOBILE — COMPREHENSIVE FIX
+   max-width: 768px
+═══════════════════════════════ */
+@media(max-width:768px){
+
+  /* NAV */
+  nav{padding:.9rem 1.25rem}
+  .nav-link{display:none}
+  #hamburger{display:flex}
+
+  /* HERO */
+  .hero{padding:7rem 1.25rem 3rem}
+  .hero-content{grid-template-columns:1fr!important;gap:2rem}
+  .hero-right{display:none}
+  .hero-left h1{font-size:clamp(2.2rem,8vw,3rem)}
+  .hero-ctas{flex-direction:column;gap:.75rem}
+  .hero-ctas a{text-align:center}
+
+  /* MINIMUM COMMITMENT STRIP */
+  #sticky-cta{padding:.85rem 1.25rem}
+  #sticky-cta > div:first-child{display:none}
+
+  /* STATEMENT */
+  .statement{padding:3.5rem 1.25rem}
+  .statement-q{font-size:clamp(1.4rem,5vw,2rem)}
+
+  /* PERFORMANCE TEARSHEET */
+  .ts-header{grid-template-columns:1fr!important;gap:1.5rem}
+  .kpi-grid{grid-template-columns:1fr 1fr!important}
+  .perf-grid{grid-template-columns:1fr!important}
+  section.sec{padding:4rem 1.25rem}
+
+  /* STRATEGY */
+  .strategy-grid{grid-template-columns:1fr!important}
+  .tv-charts-grid{grid-template-columns:1fr!important}
+
+  /* MARKETS */
+  #markets{padding:4rem 1.25rem}
+
+  /* JOIN */
+  .join-grid{grid-template-columns:1fr!important}
+
+  /* FOCUS */
+  .focus-grid{grid-template-columns:1fr!important}
+
+  /* APPROACH / ADVISORY */
+  .ap-grid{grid-template-columns:1fr!important;gap:1.5rem}
+
+  /* FOUNDER */
+  .founder-grid{grid-template-columns:1fr!important;min-height:auto}
+  .founder-stats{grid-template-columns:1fr 1fr!important}
+
+  /* CONTACT */
+  .contact-grid{grid-template-columns:1fr!important;gap:2.5rem}
+
+  /* FOOTER */
+  .footer-top{grid-template-columns:1fr!important;gap:2rem}
+
+  /* NEW SECTIONS — INLINE GRIDS */
+
+  /* Process timeline — 5 col -> 1 col */
+  #process > div > div[style*="repeat(5"]{
+    grid-template-columns:1fr!important;
+    gap:2rem!important
+  }
+  #process > div > div[style*="repeat(5"] > div:not(:last-child)::after{
+    content:'';display:block;width:1px;height:30px;background:rgba(255,255,255,0.1);margin:1rem auto 0
+  }
+  /* Hide the absolute connector line on mobile */
+  #process > div > div[style*="repeat(5"] > div[style*="position:absolute"]{
+    display:none!important
+  }
+
+  /* Advisory founder card — 1fr 2fr -> 1 col */
+  #advisory > div > div[style*="1fr 2fr"]{
+    grid-template-columns:1fr!important
+  }
+  #advisory > div > div[style*="repeat(3"]{
+    grid-template-columns:1fr!important
+  }
+
+  /* Press section — 3 cards -> 1 col */
+  #press > div > div[style*="repeat(3"]{
+    grid-template-columns:1fr!important
+  }
+  #press > div > div[style*="flex"]{
+    flex-direction:column!important;align-items:flex-start!important
+  }
+
+  /* Document library — 2x2 -> 1 col */
+  #documents > div > div[style*="repeat(2"]{
+    grid-template-columns:1fr!important
+  }
+
+  /* Schedule section — 2 col -> 1 col */
+  #schedule > div{
+    grid-template-columns:1fr!important;gap:2.5rem!important
+  }
+
+  /* Minimum commitment strip — stack vertically */
+  div[style*="$50,000 minimum"]{
+    flex-direction:column!important;gap:.5rem!important
+  }
+
+  /* Equity milestones — 5 col -> 2 col */
+  .equity-milestones{
+    grid-template-columns:1fr 1fr!important
+  }
+
+  /* Market clocks / stat grids — 4 col -> 2 col */
+  div[style*="repeat(4,1fr)"][style*="gap:1rem"]{
+    grid-template-columns:1fr 1fr!important
+  }
+  div[style*="repeat(3,1fr)"][style*="gap:1rem"]{
+    grid-template-columns:1fr 1fr!important
+  }
+
+  /* FAQ sections */
+  #faq-investors > div{padding:0 1.25rem 4rem}
+  .ifaq summary{padding:1.25rem 0}
+
+  /* New footer — 4 col -> 1 col */
+  footer > div > div[style*="2fr 1fr 1fr 1fr"]{
+    grid-template-columns:1fr!important;gap:2rem!important
+  }
+  footer{padding:3rem 1.25rem 2rem}
+
+  /* Sticky CTA — simplify on mobile */
+  #sticky-cta{flex-direction:column!important;gap:.5rem!important;padding:.75rem 1.25rem}
+  #sticky-cta a[style*="Investor FAQ"]{display:none}
+
+  /* General padding fix for all new sections */
+  #process,#faq-investors,#press,#advisory,#documents{
+    padding:4rem 1.25rem!important
+  }
+  #schedule{padding:4rem 1.25rem!important}
+
+  /* Min commitment strip */
+  div[id="sticky-cta"] + div,
+  div[style*="Currently Accepting"]{
+    display:none
+  }
+}
+
+/* ── EXTRA SMALL ── */
+@media(max-width:400px){
+  .kpi-grid{grid-template-columns:1fr!important}
+  .founder-stats{grid-template-columns:1fr!important}
+  .equity-milestones{grid-template-columns:1fr!important}
+  .path-grid{grid-template-columns:1fr!important}
+  .hero-left h1{font-size:2rem}
+}
+
+
+/* ── 3D GLOBE ── */
+#aec-globe{width:500px;height:500px}
+@media(max-width:900px){.hero-right{display:none!important}}
 </style>
+
+<style>
+@media(max-width:768px){
+
+  /* ── HERO ── */
+  .hero{padding:6rem 1.25rem 3rem!important}
+  .hero-content{grid-template-columns:1fr!important;max-width:100%!important}
+  .hero-left h1{font-size:clamp(2rem,8vw,3rem)!important}
+  .hero-ctas{flex-direction:column!important;gap:.75rem!important}
+  .hero-ctas a,.hero-ctas button{width:100%!important;text-align:center!important;box-sizing:border-box!important}
+
+  /* ── NAV ── */
+  .nav-link{display:none!important}
+  nav{padding:.9rem 1.25rem!important}
+
+  /* ── ALL SECTIONS PADDING ── */
+  section,.sec,#performance,#strategy,#markets,#network,
+  #join,#focus,#about,#press,#advisory,#process,
+  #faq-investors,#documents,#schedule,#contact{
+    padding-left:1.25rem!important;padding-right:1.25rem!important;
+  }
+
+  /* ── CLASS-BASED GRIDS ── */
+  .kpi-grid{grid-template-columns:1fr 1fr!important}
+  .ts-header{grid-template-columns:1fr!important;gap:1.5rem!important}
+  .perf-grid{grid-template-columns:1fr!important}
+  .strategy-grid{grid-template-columns:1fr!important}
+  .tv-charts-grid{grid-template-columns:1fr!important}
+  .join-grid{grid-template-columns:1fr!important}
+  .focus-grid{grid-template-columns:1fr!important}
+  .ap-grid{grid-template-columns:1fr!important;gap:1.5rem!important}
+  .founder-grid{grid-template-columns:1fr!important;min-height:auto!important}
+  .founder-stats{grid-template-columns:1fr 1fr!important}
+  .contact-grid{grid-template-columns:1fr!important;gap:2rem!important}
+  .footer-top{grid-template-columns:1fr!important;gap:2rem!important}
+  .path-grid{grid-template-columns:1fr!important}
+  .equity-milestones{grid-template-columns:1fr 1fr!important}
+  .ifaq summary{padding:1.25rem 0!important}
+
+  /* ── STATEMENT ── */
+  .statement{padding:3.5rem 1.25rem!important}
+  .statement-q{font-size:clamp(1.3rem,5vw,2rem)!important}
+
+  /* ── AUM BAND ── */
+  .aum-band{flex-direction:column!important;padding:2.5rem 1.25rem!important;gap:1.5rem!important}
+  .aum-sep{width:50px!important;height:.5px!important}
+
+  /* ── STICKY CTA ── */
+  #sticky-cta{flex-direction:column!important;gap:.5rem!important;padding:.75rem 1.25rem!important}
+  #sticky-cta a[href="#faq-investors"]{display:none!important}
+
+  /* ── SCHEDULE (2-col -> 1) ── */
+  #schedule > div > div{grid-template-columns:1fr!important;gap:2rem!important}
+
+  /* ── FOOTER ── */
+  footer{padding:3rem 1.25rem 2rem!important}
+  footer > div > div[style*="2fr 1fr 1fr 1fr"]{grid-template-columns:1fr!important;gap:2rem!important}
+
+  /* ── MIN COMMITMENT STRIP ── */
+  div[style*="$50,000 minimum"]{flex-direction:column!important;align-items:flex-start!important;gap:.75rem!important;padding:1.5rem 1.25rem!important}
+
+}
+
+/* ── JS-FREE INLINE GRID OVERRIDES via CSS attr targeting ── */
+@media(max-width:768px){
+  /* Process 5-col */
+  #process [style*="repeat(5"]{grid-template-columns:1fr!important}
+  #process [style*="position:absolute"]{display:none!important}
+  /* Advisory */
+  #advisory [style*="1fr 2fr"]{grid-template-columns:1fr!important}
+  #advisory [style*="repeat(3"]{grid-template-columns:1fr!important}
+  /* Press */
+  #press [style*="repeat(3"]{grid-template-columns:1fr!important}
+  /* Documents */
+  #documents [style*="repeat(2"]{grid-template-columns:1fr!important}
+  /* Schedule */
+  #schedule > div{grid-template-columns:1fr!important;gap:2.5rem!important}
+  /* Markets inline grids */
+  [style*="repeat(4,1fr)"][style*="gap:1rem"]{grid-template-columns:1fr 1fr!important}
+  [style*="repeat(3,1fr)"][style*="gap:1rem"]{grid-template-columns:1fr 1fr!important}
+  [style*="repeat(3,1fr)"][style*="gap:1px"]{grid-template-columns:1fr!important}
+  /* News bar */
+  [style*="repeat(3,1fr)"][style*="max-height"]{grid-template-columns:1fr!important}
+  /* Equity milestones horizontal scroll */
+  [style*="repeat(5,1fr)"][style*="min-width"]{min-width:100%!important;grid-template-columns:1fr 1fr!important}
+  /* Founder card 1fr 2fr */
+  [style*="1fr 2fr"]{grid-template-columns:1fr!important}
+  /* Advisory TBA cards */
+  [style*="repeat(3,1fr)"][style*="rgba(255,255,255,0.06)"]{grid-template-columns:1fr!important}
+  /* Press 3 cards */
+  [style*="repeat(3,1fr)"][style*="rgba(255,255,255,0.07)"]{grid-template-columns:1fr!important}
+  /* Document library */
+  [style*="repeat(2,1fr)"][style*="rgba(255,255,255,0.08)"]{grid-template-columns:1fr!important}
+  /* Footer 4-col */
+  [style*="2fr 1fr 1fr 1fr"]{grid-template-columns:1fr!important;gap:2rem!important}
+  /* Reg grid */
+  .reg-grid{grid-template-columns:1fr!important}
+  /* Network map */
+  #map-container{height:280px!important}
+}
+
+@media(max-width:480px){
+  .kpi-grid{grid-template-columns:1fr!important}
+  .founder-stats{grid-template-columns:1fr!important}
+  .path-grid{grid-template-columns:1fr!important}
+  .hero-left h1{font-size:1.9rem!important}
+  [style*="repeat(4,1fr)"][style*="gap:1rem"]{grid-template-columns:1fr!important}
+}
+</style>
+
 </head>
 <body>
 
@@ -1704,7 +1973,7 @@ html,body{max-width:100vw;overflow-x:hidden}
         <a href="#performance" class="btn-ghost">View performance</a>
         <button onclick="document.getElementById('mentorship-payment-modal').style.display='flex'" style="background:transparent;border:.5px solid var(--gold);color:var(--gold);font-family:var(--font-mono);font-size:.58rem;letter-spacing:.18em;text-transform:uppercase;padding:.75rem 1.75rem;cursor:pointer;transition:all .2s;font-weight:600" onmouseover="this.style.background='rgba(200,200,200,0.1)'" onmouseout="this.style.background='transparent'">Enroll in Mentorship →</button>
       </div>
-    </div>
+    </div><!-- end hero-left -->
 
   </div>
 </section>
@@ -1996,7 +2265,7 @@ html,body{max-width:100vw;overflow-x:hidden}
     </div>
 
     <!-- MILESTONE MARKERS -->
-    <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:1px;background:var(--rule);margin-top:1px" class="equity-milestones">
+    <div style="overflow-x:auto;-webkit-overflow-scrolling:touch"><div style="display:grid;grid-template-columns:repeat(5,1fr);gap:1px;background:var(--rule);margin-top:1px;min-width:600px" class="equity-milestones">
       <div style="background:var(--ink2);padding:1.25rem .5rem;text-align:center">
         <div style="font-family:var(--font-mono);font-size:.44rem;letter-spacing:.08em;text-transform:uppercase;color:var(--cream3);margin-bottom:.35rem">Aug 2025</div>
         <div style="font-family:var(--font-mono);font-size:.82rem;color:var(--white);font-weight:500">$1.2M</div>
@@ -2162,7 +2431,7 @@ html,body{max-width:100vw;overflow-x:hidden}
     </div>
 
     <!-- Mini stock charts -->
-    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-bottom:3rem">
+    <div style="overflow-x:auto"><div style="display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-bottom:3rem;min-width:500px">
       <div style="border:.5px solid var(--rule);overflow:hidden">
         <div style="font-family:var(--font-mono);font-size:.5rem;letter-spacing:.15em;text-transform:uppercase;color:var(--cream3);padding:.65rem 1rem .2rem">NVIDIA</div>
         <div class="tradingview-widget-container"><div class="tradingview-widget-container__widget"></div>
@@ -2395,6 +2664,10 @@ html,body{max-width:100vw;overflow-x:hidden}
       <div style="font-family:var(--font-mono);font-size:.55rem;letter-spacing:.1em;color:var(--cream3);margin-top:.85rem">May 2026 · Wall Street Journal</div>
     </div>
 
+    <div class="hero-right" style="display:flex;align-items:center;justify-content:center;position:relative;min-height:460px;background:transparent">
+      <canvas id="aec-globe" style="border-radius:50%;display:block;border:.5px solid rgba(255,255,255,0.08);box-shadow:0 0 60px rgba(255,255,255,0.04)"></canvas>
+    </div>
+
   </div>
 </section>
 
@@ -2465,6 +2738,10 @@ html,body{max-width:100vw;overflow-x:hidden}
         <p style="font-size:.85rem;color:rgba(255,255,255,.45);font-family:'Jost',sans-serif;font-weight:300;line-height:1.8;margin-bottom:1.5rem">Available for keynote and panel speaking on active trading, capital management, private equity, and building generational wealth infrastructure.</p>
         <a href="mailto:izaiah@ascendaenterprisecapital.com?subject=Speaking%20Inquiry" style="font-family:'DM Mono',monospace;font-size:.52rem;letter-spacing:.12em;text-transform:uppercase;color:#C8C8C8;text-decoration:none;border-bottom:.5px solid rgba(200,200,200,0.3);padding-bottom:.2rem">Speaking Inquiry →</a>
       </div>
+    </div>
+
+    <div class="hero-right" style="display:flex;align-items:center;justify-content:center;position:relative;min-height:460px;background:transparent">
+      <canvas id="aec-globe" style="border-radius:50%;display:block;border:.5px solid rgba(255,255,255,0.08);box-shadow:0 0 60px rgba(255,255,255,0.04)"></canvas>
     </div>
 
   </div>
@@ -3102,6 +3379,10 @@ html,body{max-width:100vw;overflow-x:hidden}
         <div style="font-family:'DM Mono',monospace;font-size:.46rem;letter-spacing:.12em;text-transform:uppercase;color:#888;margin-bottom:.35rem">Prefer Email First?</div>
         <a href="mailto:izaiah@ascendaenterprisecapital.com" style="font-size:.85rem;color:#06050D;font-family:'Jost',sans-serif;font-weight:300;text-decoration:none;border-bottom:.5px solid rgba(0,0,0,0.2)">izaiah@ascendaenterprisecapital.com</a>
       </div>
+    </div>
+
+    <div class="hero-right" style="display:flex;align-items:center;justify-content:center;position:relative;min-height:460px;background:transparent">
+      <canvas id="aec-globe" style="border-radius:50%;display:block;border:.5px solid rgba(255,255,255,0.08);box-shadow:0 0 60px rgba(255,255,255,0.04)"></canvas>
     </div>
 
   </div>
@@ -3877,6 +4158,22 @@ function toggleFaq(el) {
   }
 }
 </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 </body>
 </html>
