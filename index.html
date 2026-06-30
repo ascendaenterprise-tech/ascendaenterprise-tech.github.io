@@ -1201,6 +1201,77 @@ html,body{max-width:100vw;overflow-x:hidden}
 }
 </style>
 
+
+<style>
+/* ── KIT NEWSLETTER FORM — OVERRIDE TO MATCH B&W THEME ── */
+.formkit-form[data-uid="bb4d404832"]{
+  background-color: transparent !important;
+  border: .5px solid rgba(255,255,255,0.12) !important;
+  border-radius: 0 !important;
+  max-width: 480px !important;
+}
+.formkit-form[data-uid="bb4d404832"] .formkit-background{
+  display: none !important;
+}
+.formkit-form[data-uid="bb4d404832"] [data-style="minimal"]{
+  padding: 2.5rem 2rem !important;
+}
+.formkit-form[data-uid="bb4d404832"] .formkit-header h2{
+  font-family: 'Cormorant Garamond', serif !important;
+  font-weight: 300 !important;
+  font-size: 1.6rem !important;
+  color: #FFFFFF !important;
+  letter-spacing: 0 !important;
+}
+.formkit-form[data-uid="bb4d404832"] .formkit-subheader{
+  font-family: 'Jost', sans-serif !important;
+  font-weight: 300 !important;
+  font-size: .85rem !important;
+  color: rgba(255,255,255,.45) !important;
+}
+.formkit-form[data-uid="bb4d404832"] .formkit-input{
+  background: rgba(255,255,255,0.05) !important;
+  border: .5px solid rgba(255,255,255,0.15) !important;
+  border-radius: 0 !important;
+  color: #fff !important;
+  font-family: 'DM Mono', monospace !important;
+  font-size: .65rem !important;
+  letter-spacing: .04em !important;
+}
+.formkit-form[data-uid="bb4d404832"] .formkit-input::placeholder{
+  color: rgba(255,255,255,.35) !important;
+}
+.formkit-form[data-uid="bb4d404832"] .formkit-input:focus{
+  border-color: rgba(255,255,255,.4) !important;
+}
+.formkit-form[data-uid="bb4d404832"] .formkit-submit{
+  background-color: rgba(255,255,255,0.9) !important;
+  border-radius: 0 !important;
+}
+.formkit-form[data-uid="bb4d404832"] .formkit-submit > span{
+  color: #06050D !important;
+  font-family: 'DM Mono', monospace !important;
+  font-size: .55rem !important;
+  letter-spacing: .12em !important;
+  text-transform: uppercase !important;
+  font-weight: 700 !important;
+  padding: .9rem 1.5rem !important;
+}
+.formkit-form[data-uid="bb4d404832"] .formkit-submit:hover{
+  background-color: #ffffff !important;
+}
+.formkit-form[data-uid="bb4d404832"] .formkit-guarantee{
+  font-family: 'DM Mono', monospace !important;
+  font-size: .42rem !important;
+  letter-spacing: .06em !important;
+  text-transform: uppercase !important;
+  color: rgba(255,255,255,.2) !important;
+}
+.formkit-form[data-uid="bb4d404832"] .formkit-powered-by-convertkit{
+  opacity: .25 !important;
+}
+</style>
+
 </head>
 <body>
 
@@ -3386,24 +3457,27 @@ html,body{max-width:100vw;overflow-x:hidden}
     <p style="font-size:.98rem;color:var(--cream2);line-height:1.95;font-weight:300;margin-bottom:2.5rem;max-width:580px">Weekly market analysis, macro commentary, and trade insights from Izaiah Cottle and the AEC trading desk. Free to read — no subscription required.</p>
     
     <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1px;background:var(--rule);margin-bottom:2rem">
-      <div style="background:var(--ink2);padding:1.75rem">
+      <div style="background:var(--ink2);padding:1.75rem;cursor:pointer;transition:background .2s" onclick="document.getElementById('research-modal').style.display='block';document.getElementById('research-article-0').scrollIntoView()" onmouseover="this.style.background='rgba(255,255,255,0.06)'" onmouseout="this.style.background='var(--ink2)'">
         <div style="font-family:var(--font-mono);font-size:.52rem;letter-spacing:.1em;text-transform:uppercase;color:var(--gold3);margin-bottom:.6rem">Jun 14, 2026 · Futures</div>
         <div style="font-family:var(--font-display);font-size:1.05rem;color:var(--white);margin-bottom:.6rem;line-height:1.4">NQ at Critical Confluence — What the June 14 Open Tells Us</div>
         <div style="font-size:.82rem;color:var(--cream2);line-height:1.7;font-weight:300">The NASDAQ 100 futures opened directly into a weekly Fair Value Gap. With CPI printing hotter than expected, the market is pricing in higher-for-longer...</div>
+        <div style="font-family:var(--font-mono);font-size:.46rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.25);margin-top:.75rem">Read Full Note →</div>
       </div>
-      <div style="background:var(--ink2);padding:1.75rem">
+      <div style="background:var(--ink2);padding:1.75rem;cursor:pointer;transition:background .2s" onclick="document.getElementById('research-modal').style.display='block';document.getElementById('research-article-1').scrollIntoView()" onmouseover="this.style.background='rgba(255,255,255,0.06)'" onmouseout="this.style.background='var(--ink2)'">
         <div style="font-family:var(--font-mono);font-size:.52rem;letter-spacing:.1em;text-transform:uppercase;color:var(--gold3);margin-bottom:.6rem">Jun 7, 2026 · Macro</div>
         <div style="font-family:var(--font-display);font-size:1.05rem;color:var(--white);margin-bottom:.6rem;line-height:1.4">The Dollar, Gold, and Why Institutions Are Quietly Rotating</div>
         <div style="font-size:.82rem;color:var(--cream2);line-height:1.7;font-weight:300">The USD Index has weakened three consecutive weeks while Gold holds above $2,300. This is not coincidence — here is what it means...</div>
+        <div style="font-family:var(--font-mono);font-size:.46rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.25);margin-top:.75rem">Read Full Note →</div>
       </div>
-      <div style="background:var(--ink2);padding:1.75rem">
+      <div style="background:var(--ink2);padding:1.75rem;cursor:pointer;transition:background .2s" onclick="document.getElementById('research-modal').style.display='block';document.getElementById('research-article-2').scrollIntoView()" onmouseover="this.style.background='rgba(255,255,255,0.06)'" onmouseout="this.style.background='var(--ink2)'">
         <div style="font-family:var(--font-mono);font-size:.52rem;letter-spacing:.1em;text-transform:uppercase;color:var(--gold3);margin-bottom:.6rem">May 31, 2026 · Real Estate</div>
         <div style="font-family:var(--font-display);font-size:1.05rem;color:var(--white);margin-bottom:.6rem;line-height:1.4">Atlanta Real Estate: Why We Are Still Buyers in a High Rate Environment</div>
         <div style="font-size:.82rem;color:var(--cream2);line-height:1.7;font-weight:300">Conventional wisdom says avoid real estate above 7% rates. AEC respectfully disagrees — here is the Atlanta submarket thesis...</div>
+        <div style="font-family:var(--font-mono);font-size:.46rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.25);margin-top:.75rem">Read Full Note →</div>
       </div>
     </div>
 
-    <a href="#research" style="display:inline-block;font-family:var(--font-mono);font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;background:transparent;color:var(--gold);border:.5px solid var(--gold);padding:.85rem 2rem;text-decoration:none;font-weight:500;transition:all .2s" onmouseover="this.style.background='rgba(200,200,200,0.1)'" onmouseout="this.style.background='transparent'">Read All Research Notes →</a>
+    <button onclick="document.getElementById('research-modal').style.display='block'" style="display:inline-block;font-family:var(--font-mono);font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;background:transparent;color:var(--gold);border:.5px solid var(--gold);padding:.85rem 2rem;cursor:pointer;font-weight:500;transition:all .2s" onmouseover="this.style.background='rgba(200,200,200,0.1)'" onmouseout="this.style.background='transparent'">Read All Research Notes →</button>
   </div>
 </section>
 
@@ -3556,13 +3630,9 @@ html,body{max-width:100vw;overflow-x:hidden}
     <h2 style="font-family:'Cormorant Garamond',serif;font-size:clamp(1.6rem,3vw,2.4rem);font-weight:300;color:#FFFFFF;line-height:1.15;margin-bottom:.75rem">AEC <em>Investor Updates</em></h2>
     <p style="font-size:.9rem;color:rgba(255,255,255,.4);font-family:'Jost',sans-serif;font-weight:300;line-height:1.9;margin-bottom:2.5rem;max-width:500px;margin-left:auto;margin-right:auto">Market commentary, performance updates, fund news, and exclusive AEC insights — delivered directly to your inbox. No spam. Unsubscribe anytime.</p>
     <!-- ConvertKit Form — replace YOUR_FORM_ID with your actual ConvertKit form ID -->
-    <form action="https://app.convertkit.com/forms/YOUR_FORM_ID/subscriptions" method="post" style="display:flex;gap:0;max-width:480px;margin:0 auto 1rem">
-      <input type="email" name="email_address" placeholder="Your email address" required
-        style="flex:1;background:rgba(255,255,255,0.05);border:.5px solid rgba(255,255,255,0.15);border-right:none;color:#fff;padding:.9rem 1.25rem;font-family:'DM Mono',monospace;font-size:.6rem;letter-spacing:.08em;outline:none;min-width:0"/>
-      <button type="submit"
-        style="background:rgba(255,255,255,0.9);color:#06050D;font-family:'DM Mono',monospace;font-size:.52rem;letter-spacing:.15em;text-transform:uppercase;padding:.9rem 1.5rem;border:none;cursor:pointer;white-space:nowrap;font-weight:700;transition:all .2s"
-        onmouseover="this.style.background='#fff'" onmouseout="this.style.background='rgba(255,255,255,0.9)'">Subscribe →</button>
-    </form>
+    <div style="max-width:480px;margin:0 auto">
+      <script async data-uid="bb4d404832" src="https://ascenda-enterprise-capital.kit.com/bb4d404832/index.js"></script>
+    </div>
     <p style="font-family:'DM Mono',monospace;font-size:.44rem;letter-spacing:.08em;color:rgba(255,255,255,.18);text-transform:uppercase">For accredited investors and qualified allocators · Unsubscribe anytime</p>
   </div>
 </section>
@@ -4384,6 +4454,66 @@ function toggleFaq(el) {
     </div>
     <p style="font-size:.8rem;color:rgba(255,255,255,.3);font-family:'DM Mono',monospace;letter-spacing:.06em;margin-bottom:1.5rem">Already an investor? Contact us directly for access.</p>
     <a href="mailto:izaiah@ascendaenterprisecapital.com" style="display:block;text-align:center;font-family:'DM Mono',monospace;font-size:.55rem;letter-spacing:.18em;text-transform:uppercase;background:rgba(255,255,255,0.08);color:#fff;border:.5px solid rgba(255,255,255,0.2);padding:1rem;text-decoration:none">Contact for Portal Access →</a>
+  </div>
+</div>
+
+
+<!-- RESEARCH NOTES MODAL -->
+<div id="research-modal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.95);z-index:9999;overflow-y:auto;padding:2rem" onclick="if(event.target===this)this.style.display='none'">
+  <div style="max-width:800px;margin:0 auto;position:relative">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:2rem;position:sticky;top:0;background:rgba(0,0,0,0.95);padding:1rem 0;border-bottom:.5px solid rgba(255,255,255,0.1)">
+      <div>
+        <div style="font-family:'DM Mono',monospace;font-size:.48rem;letter-spacing:.22em;text-transform:uppercase;color:#888;margin-bottom:.3rem">AEC Market Intelligence</div>
+        <div style="font-family:'Cormorant Garamond',serif;font-size:1.4rem;color:#fff;font-weight:300">Research Notes</div>
+      </div>
+      <button onclick="document.getElementById('research-modal').style.display='none'" style="background:none;border:.5px solid rgba(255,255,255,0.2);color:rgba(255,255,255,.5);font-size:.9rem;cursor:pointer;padding:.5rem 1rem;font-family:'DM Mono',monospace;font-size:.5rem;letter-spacing:.1em">✕ CLOSE</button>
+    </div>
+
+    <!-- Article 1 -->
+    <div id="research-article-0" style="margin-bottom:3rem;padding-bottom:3rem;border-bottom:.5px solid rgba(255,255,255,0.08)">
+      <div style="font-family:'DM Mono',monospace;font-size:.5rem;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,.35);margin-bottom:.75rem">Jun 14, 2026 · Futures · By Izaiah Cottle</div>
+      <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.8rem;font-weight:300;color:#fff;line-height:1.2;margin-bottom:1.25rem">NQ at Critical Confluence — What the June 14 Open Tells Us</h3>
+      <p style="font-size:.95rem;color:rgba(255,255,255,.55);line-height:1.9;margin-bottom:1rem">The NASDAQ 100 futures opened directly into a weekly Fair Value Gap on June 14. With CPI printing hotter than expected, the market is pricing in higher-for-longer — and the institutional reaction was immediate.</p>
+      <p style="font-size:.95rem;color:rgba(255,255,255,.55);line-height:1.9;margin-bottom:1rem">What caught AEC's attention was not the CPI print itself — it was the order flow response. In the first 15 minutes of the New York open, NQ absorbed significant sell-side liquidity at the 18,840 level without breaking. That absorption pattern, confirmed by our DOM layer, signaled institutional accumulation rather than distribution.</p>
+      <p style="font-size:.95rem;color:rgba(255,255,255,.55);line-height:1.9;margin-bottom:1rem">Our Z-Score framework showed price at 2.1 standard deviations below the 20-period mean on the 15-minute chart — historically a high-probability mean reversion zone. Combined with the FVG confluence and order flow confirmation, the setup aligned across all three layers of AEC's system.</p>
+      <p style="font-size:.95rem;color:rgba(255,255,255,.55);line-height:1.9;margin-bottom:1rem"><strong style="color:rgba(255,255,255,.7)">Key levels to watch:</strong> 18,840 remains critical support. A sustained close above 19,200 opens the door to the next liquidity pool at 19,580. Failure to hold 18,840 targets the daily FVG at 18,420.</p>
+      <p style="font-size:.95rem;color:rgba(255,255,255,.55);line-height:1.9"><strong style="color:rgba(255,255,255,.7)">AEC positioning:</strong> We remain tactically long on confirmed momentum above 18,900, with defined risk below 18,780. Position sizing per Kelly Criterion — no overexposure regardless of conviction level.</p>
+      <div style="margin-top:1.5rem;padding:1rem 1.25rem;background:rgba(255,255,255,0.04);border-left:2px solid rgba(255,255,255,0.2)">
+        <p style="font-family:'DM Mono',monospace;font-size:.5rem;letter-spacing:.08em;color:rgba(255,255,255,.25);margin:0">This note is for informational purposes only and does not constitute investment advice. Past performance is not indicative of future results.</p>
+      </div>
+    </div>
+
+    <!-- Article 2 -->
+    <div id="research-article-1" style="margin-bottom:3rem;padding-bottom:3rem;border-bottom:.5px solid rgba(255,255,255,0.08)">
+      <div style="font-family:'DM Mono',monospace;font-size:.5rem;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,.35);margin-bottom:.75rem">Jun 7, 2026 · Macro · By Izaiah Cottle</div>
+      <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.8rem;font-weight:300;color:#fff;line-height:1.2;margin-bottom:1.25rem">The Dollar, Gold, and Why Institutions Are Quietly Rotating</h3>
+      <p style="font-size:.95rem;color:rgba(255,255,255,.55);line-height:1.9;margin-bottom:1rem">The USD Index has weakened three consecutive weeks while Gold holds above $2,300. This is not coincidence — this is a deliberate institutional rotation that most retail participants are missing entirely.</p>
+      <p style="font-size:.95rem;color:rgba(255,255,255,.55);line-height:1.9;margin-bottom:1rem">The inverse relationship between the dollar and gold is well understood. What is less understood is the timing of these rotations at the institutional level. When large capital moves from dollar-denominated assets into hard assets like gold, it does so gradually — over weeks, not days. The weekly chart tells this story clearly.</p>
+      <p style="font-size:.95rem;color:rgba(255,255,255,.55);line-height:1.9;margin-bottom:1rem">AEC's order flow analysis on Gold futures shows consistent absorption at the $2,280-$2,300 range over the past three weeks. Every dip into that zone has been met with institutional buying — the kind of patient, systematic accumulation that precedes significant directional moves.</p>
+      <p style="font-size:.95rem;color:rgba(255,255,255,.55);line-height:1.9;margin-bottom:1rem"><strong style="color:rgba(255,255,255,.7)">The macro thesis:</strong> If the Fed delays rate cuts further into 2026, dollar strength becomes a ceiling rather than a floor. Simultaneously, geopolitical uncertainty and sovereign debt concerns globally continue to support the gold bid. AEC sees this as a multi-month structural tailwind for precious metals.</p>
+      <p style="font-size:.95rem;color:rgba(255,255,255,.55);line-height:1.9"><strong style="color:rgba(255,255,255,.7)">AEC positioning:</strong> Long Gold on pullbacks to the $2,280 zone with targets at $2,420 and $2,500. Stop below $2,240 on a weekly close basis.</p>
+      <div style="margin-top:1.5rem;padding:1rem 1.25rem;background:rgba(255,255,255,0.04);border-left:2px solid rgba(255,255,255,0.2)">
+        <p style="font-family:'DM Mono',monospace;font-size:.5rem;letter-spacing:.08em;color:rgba(255,255,255,.25);margin:0">This note is for informational purposes only and does not constitute investment advice. Past performance is not indicative of future results.</p>
+      </div>
+    </div>
+
+    <!-- Article 3 -->
+    <div id="research-article-2" style="margin-bottom:3rem">
+      <div style="font-family:'DM Mono',monospace;font-size:.5rem;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,.35);margin-bottom:.75rem">May 31, 2026 · Real Estate · By Izaiah Cottle</div>
+      <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.8rem;font-weight:300;color:#fff;line-height:1.2;margin-bottom:1.25rem">Atlanta Real Estate: Why We Are Still Buyers in a High Rate Environment</h3>
+      <p style="font-size:.95rem;color:rgba(255,255,255,.55);line-height:1.9;margin-bottom:1rem">Conventional wisdom says avoid real estate above 7% rates. AEC respectfully disagrees — and here is the Atlanta submarket thesis that justifies our continued acquisition posture.</p>
+      <p style="font-size:.95rem;color:rgba(255,255,255,.55);line-height:1.9;margin-bottom:1rem">Atlanta is not a typical market. The city's population has grown faster than any major U.S. metro over the past five years. Job creation in the technology, film, logistics, and financial services sectors continues to outpace housing supply by a significant margin. The fundamentals that drive real estate appreciation — population growth, job creation, housing undersupply — remain firmly intact regardless of the rate environment.</p>
+      <p style="font-size:.95rem;color:rgba(255,255,255,.55);line-height:1.9;margin-bottom:1rem">AEC's real estate strategy is not rate-dependent. We focus on value-add acquisitions where the forced appreciation through renovation and repositioning creates equity that rate environment alone cannot erode. A property acquired at the right basis with the right execution thesis generates returns independent of the financing rate.</p>
+      <p style="font-size:.95rem;color:rgba(255,255,255,.55);line-height:1.9;margin-bottom:1rem"><strong style="color:rgba(255,255,255,.7)">Target submarkets:</strong> Southwest Atlanta, College Park, East Point, and select DeKalb County corridors showing above-average rent growth and below-average days on market. These pockets remain underpriced relative to their trajectory.</p>
+      <p style="font-size:.95rem;color:rgba(255,255,255,.55);line-height:1.9"><strong style="color:rgba(255,255,255,.7)">AEC thesis:</strong> Rate normalization — whenever it comes — will be a significant catalyst for appreciation in already supply-constrained markets like Atlanta. We are positioning now to benefit from that inflection point. Those who wait for rates to drop will be competing for the same assets at higher prices.</p>
+      <div style="margin-top:1.5rem;padding:1rem 1.25rem;background:rgba(255,255,255,0.04);border-left:2px solid rgba(255,255,255,0.2)">
+        <p style="font-family:'DM Mono',monospace;font-size:.5rem;letter-spacing:.08em;color:rgba(255,255,255,.25);margin:0">This note is for informational purposes only and does not constitute investment advice. Past performance is not indicative of future results.</p>
+      </div>
+    </div>
+
+    <div style="text-align:center;padding:1.5rem 0;border-top:.5px solid rgba(255,255,255,0.08)">
+      <p style="font-family:'DM Mono',monospace;font-size:.5rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.2)">New research notes published weekly · Subscribe to the AEC newsletter to receive them directly</p>
+    </div>
   </div>
 </div>
 
