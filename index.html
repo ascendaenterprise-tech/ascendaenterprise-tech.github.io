@@ -381,7 +381,7 @@ h2{font-family:var(--font-display);font-size:clamp(2rem,3.5vw,3rem);font-weight:
 /* ═══════════════════════════════
    NEWS
 ═══════════════════════════════ */
-.news-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:rgba(26,22,36,.15);margin-top:3rem}
+.news-grid{display:grid;grid-template-columns:1fr;gap:1px;background:rgba(26,22,36,.15);margin-top:3rem}
 .nc{background:var(--off);padding:2.25rem 2rem;transition:background .3s;cursor:pointer}
 .nc:hover{background:var(--off2)}
 .nc-src{font-family:var(--font-mono);font-size:.52rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold3);margin-bottom:.5rem}
@@ -1509,8 +1509,8 @@ html,body{max-width:100vw;overflow-x:hidden}
     <a href="#network" onclick="closeNav()">Network</a>
     <a href="#join" onclick="closeNav()">Join</a>
     <a href="#video" onclick="closeNav()">About</a>
-    <a href="aec-portal.html" onclick="closeNav()">Portal</a>
-    <a href="aec-research.html" onclick="closeNav()">Research</a>
+    <a href="#" onclick="document.getElementById('portal-modal').style.display='flex';return false;" onclick="closeNav()">Portal</a>
+    <a href="#research" onclick="closeNav()">Research</a>
     <a href="#faq" onclick="closeNav()">FAQ</a>
     <a href="#about" onclick="closeNav()">About</a>
     <div id="market-status" style="display:flex;align-items:center;gap:.4rem;font-family:var(--font-mono);font-size:.52rem;letter-spacing:.1em;color:rgba(255,255,255,.4)">
@@ -2138,7 +2138,7 @@ html,body{max-width:100vw;overflow-x:hidden}
 
   <style>
 @media(max-width:900px){
-  .gold-kpi-override{grid-template-columns:repeat(2,1fr)!important;width:100%!important;max-width:100vw!important;overflow:hidden!important}
+  .gold-kpi-override{grid-template-columns:1fr!important;width:100%!important;max-width:100vw!important;overflow:hidden!important}
   .gold-kpi-override .kpi{min-width:0!important;overflow:hidden!important}
   .gold-kpi-override .kpi-val{font-size:1.3rem!important;word-break:break-word!important}
   .gold-kpi-override .kpi-label{font-size:.44rem!important}
@@ -2345,6 +2345,71 @@ html,body{max-width:100vw;overflow-x:hidden}
       <h3>DOM & <em>Order Flow</em></h3>
       <p>Depth of Market and advanced order flow analysis reveals what institutions are actually doing — not what price suggests they're doing. By reading the tape at the microstructure level, AEC identifies the precise moments when institutional capital enters and exits the market.</p><p style="font-family:var(--font-mono);font-size:.48rem;color:rgba(255,255,255,.2);line-height:1.6;margin-top:.75rem;letter-spacing:.04em">Results may vary. Past strategy performance is not indicative of future results.</p>
     </div>
+  </div>
+</section>
+
+
+<!-- QUANTUM TRADING SYSTEM -->
+<section style="padding:6rem clamp(1rem,5vw,3.5rem);background:#060606;border-top:.5px solid rgba(255,255,255,0.06)" id="quantum-system">
+  <div style="max-width:1100px;margin:0 auto">
+
+    <div style="display:flex;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;gap:2rem;margin-bottom:3.5rem">
+      <div>
+        <div style="font-family:'DM Mono',monospace;font-size:.55rem;letter-spacing:.28em;text-transform:uppercase;color:#888;margin-bottom:.75rem;display:flex;align-items:center;gap:.8rem">
+          <span style="display:block;width:28px;height:.5px;background:#888"></span>Proprietary Technology
+        </div>
+        <h2 style="font-family:'Cormorant Garamond',serif;font-size:clamp(1.8rem,3.5vw,2.8rem);font-weight:300;color:#FFFFFF;line-height:1.1">Quantum Trading <em style="font-style:italic;color:#C8C8C8">System</em></h2>
+        <p style="font-size:.92rem;color:rgba(255,255,255,.45);margin-top:.75rem;font-family:'Jost',sans-serif;font-weight:300;max-width:520px;line-height:1.9">AEC's proprietary automated trading system — built entirely in-house. Not licensed. Not sold. Not available outside AEC. Engineered to execute the three-layer framework with machine precision across global markets.</p>
+      </div>
+      <div style="display:inline-flex;align-items:center;gap:.6rem;background:rgba(255,255,255,0.04);border:.5px solid rgba(255,255,255,0.15);padding:.6rem 1.25rem;align-self:flex-start">
+        <span style="width:7px;height:7px;border-radius:50%;background:#F5A623;display:inline-block;animation:pulse 2s infinite"></span>
+        <span style="font-family:'DM Mono',monospace;font-size:.5rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.5)">Coming Soon — In Development</span>
+      </div>
+    </div>
+
+    <!-- System specs grid -->
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(255,255,255,0.08);margin-bottom:1px">
+      <div style="background:#06050D;padding:2rem 1.75rem">
+        <div style="font-family:'DM Mono',monospace;font-size:.48rem;letter-spacing:.2em;text-transform:uppercase;color:#888;margin-bottom:.75rem">Core Engine</div>
+        <div style="font-family:'Cormorant Garamond',serif;font-size:1.2rem;color:#FFFFFF;margin-bottom:.75rem;font-weight:300">Momentum + Z-Score + DOM</div>
+        <p style="font-size:.82rem;color:rgba(255,255,255,.4);font-family:'Jost',sans-serif;font-weight:300;line-height:1.8">All three layers of the AEC method running simultaneously in automated form — no human emotion, no hesitation, pure execution.</p>
+      </div>
+      <div style="background:#06050D;padding:2rem 1.75rem">
+        <div style="font-family:'DM Mono',monospace;font-size:.48rem;letter-spacing:.2em;text-transform:uppercase;color:#888;margin-bottom:.75rem">Target Instruments</div>
+        <div style="font-family:'Cormorant Garamond',serif;font-size:1.2rem;color:#FFFFFF;margin-bottom:.75rem;font-weight:300">NAS100 · ES Futures · Gold</div>
+        <p style="font-size:.82rem;color:rgba(255,255,255,.4);font-family:'Jost',sans-serif;font-weight:300;line-height:1.8">Built specifically for the instruments AEC trades — the same markets where 32,000+ documented trades have been executed.</p>
+      </div>
+      <div style="background:#06050D;padding:2rem 1.75rem">
+        <div style="font-family:'DM Mono',monospace;font-size:.48rem;letter-spacing:.2em;text-transform:uppercase;color:#888;margin-bottom:.75rem">Architecture</div>
+        <div style="font-family:'Cormorant Garamond',serif;font-size:1.2rem;color:#FFFFFF;margin-bottom:.75rem;font-weight:300">Fully Automated Execution</div>
+        <p style="font-size:.82rem;color:rgba(255,255,255,.4);font-family:'Jost',sans-serif;font-weight:300;line-height:1.8">Entry, management, and exit logic fully systematized. Built on top of IBKR infrastructure with real-time market data integration.</p>
+      </div>
+    </div>
+
+    <!-- Status bar -->
+    <div style="background:#06050D;border:.5px solid rgba(255,255,255,0.08);padding:1.75rem 2rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1.5rem">
+      <div style="display:flex;align-items:center;gap:3rem;flex-wrap:wrap">
+        <div>
+          <div style="font-family:'DM Mono',monospace;font-size:.44rem;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,.25);margin-bottom:.3rem">Status</div>
+          <div style="font-family:'DM Mono',monospace;font-size:.58rem;letter-spacing:.08em;text-transform:uppercase;color:#F5A623">In Active Development</div>
+        </div>
+        <div>
+          <div style="font-family:'DM Mono',monospace;font-size:.44rem;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,.25);margin-bottom:.3rem">Deployment</div>
+          <div style="font-family:'DM Mono',monospace;font-size:.58rem;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.5)">AEC Internal Use Only</div>
+        </div>
+        <div>
+          <div style="font-family:'DM Mono',monospace;font-size:.44rem;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,.25);margin-bottom:.3rem">Access</div>
+          <div style="font-family:'DM Mono',monospace;font-size:.58rem;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.5)">Not Licensed · Not Sold</div>
+        </div>
+        <div>
+          <div style="font-family:'DM Mono',monospace;font-size:.44rem;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,.25);margin-bottom:.3rem">Infrastructure</div>
+          <div style="font-family:'DM Mono',monospace;font-size:.58rem;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.5)">IBKR · Python · Live Data</div>
+        </div>
+      </div>
+      <a href="#contact" style="font-family:'DM Mono',monospace;font-size:.52rem;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,.4);border:.5px solid rgba(255,255,255,0.15);padding:.65rem 1.35rem;text-decoration:none;white-space:nowrap;transition:all .2s" onmouseover="this.style.color='#fff';this.style.borderColor='rgba(255,255,255,.4)'" onmouseout="this.style.color='rgba(255,255,255,.4)';this.style.borderColor='rgba(255,255,255,0.15)'">Inquire About Access →</a>
+    </div>
+
+    <div style="font-family:'DM Mono',monospace;font-size:.44rem;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.12);text-align:center;margin-top:1rem">Proprietary system · Internal use only · Performance not guaranteed · Past results not indicative of future returns</div>
   </div>
 </section>
 
@@ -2749,6 +2814,31 @@ html,body{max-width:100vw;overflow-x:hidden}
     </div>
 
   </div>
+
+<!-- MOBILE APP BANNER -->
+<div style="background:#06050D;border-top:.5px solid rgba(255,255,255,0.06);border-bottom:.5px solid rgba(255,255,255,0.06);padding:1.25rem clamp(1rem,5vw,3.5rem)">
+  <div style="max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem">
+    <div style="display:flex;align-items:center;gap:1.25rem">
+      <div style="width:38px;height:38px;background:rgba(255,255,255,0.06);border:.5px solid rgba(255,255,255,0.12);display:flex;align-items:center;justify-content:center;font-size:1.1rem">📱</div>
+      <div>
+        <div style="font-family:'DM Mono',monospace;font-size:.5rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.5);margin-bottom:.2rem">Coming Soon</div>
+        <div style="font-family:'Cormorant Garamond',serif;font-size:1rem;color:#fff;font-weight:300">AEC Mobile — Investor updates on the go</div>
+      </div>
+    </div>
+    <div style="display:flex;align-items:center;gap:.75rem;flex-wrap:wrap">
+      <div style="display:flex;align-items:center;gap:.5rem;background:rgba(255,255,255,0.04);border:.5px solid rgba(255,255,255,0.1);padding:.45rem .9rem">
+        <span style="font-family:'DM Mono',monospace;font-size:.46rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.35)">iOS</span>
+        <span style="font-family:'DM Mono',monospace;font-size:.44rem;color:rgba(255,255,255,.2)">In Development</span>
+      </div>
+      <div style="display:flex;align-items:center;gap:.5rem;background:rgba(255,255,255,0.04);border:.5px solid rgba(255,255,255,0.1);padding:.45rem .9rem">
+        <span style="font-family:'DM Mono',monospace;font-size:.46rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.35)">Android</span>
+        <span style="font-family:'DM Mono',monospace;font-size:.44rem;color:rgba(255,255,255,.2)">In Development</span>
+      </div>
+      <a href="#contact" style="font-family:'DM Mono',monospace;font-size:.46rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.35);border:.5px solid rgba(255,255,255,0.1);padding:.45rem .9rem;text-decoration:none">Notify Me →</a>
+    </div>
+  </div>
+</div>
+
 </section>
 
 <!-- NETWORK MAP -->
@@ -2787,8 +2877,8 @@ html,body{max-width:100vw;overflow-x:hidden}
           <span style="color:var(--gold);font-size:.7rem">✦</span> Deal flow & co-investment notifications
         </div>
       </div>
-      <a href="aec-portal.html" style="display:inline-block;font-family:var(--font-mono);font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;background:var(--gold);color:var(--ink);padding:1rem 2.25rem;text-decoration:none;font-weight:500;transition:background .2s" onmouseover="this.style.background='var(--gold2)'" onmouseout="this.style.background='var(--gold)'">Access Investor Portal →</a>
-      <a href="aec-portal.html" style="display:inline-block;margin-left:.75rem;font-family:var(--font-mono);font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;background:transparent;color:var(--gold);border:.5px solid var(--gold);padding:1rem 2.25rem;text-decoration:none;font-weight:500;transition:all .2s" onmouseover="this.style.background='rgba(200,200,200,0.1)'" onmouseout="this.style.background='transparent'">Learn More →</a>
+      <a href="#" onclick="document.getElementById('portal-modal').style.display='flex';return false;" style="display:inline-block;font-family:var(--font-mono);font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;background:var(--gold);color:var(--ink);padding:1rem 2.25rem;text-decoration:none;font-weight:500;transition:background .2s" onmouseover="this.style.background='var(--gold2)'" onmouseout="this.style.background='var(--gold)'">Access Investor Portal →</a>
+      <a href="#" onclick="document.getElementById('portal-modal').style.display='flex';return false;" style="display:inline-block;margin-left:.75rem;font-family:var(--font-mono);font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;background:transparent;color:var(--gold);border:.5px solid var(--gold);padding:1rem 2.25rem;text-decoration:none;font-weight:500;transition:all .2s" onmouseover="this.style.background='rgba(200,200,200,0.1)'" onmouseout="this.style.background='transparent'">Learn More →</a>
     </div>
     <div style="background:var(--ink2);border:.5px solid var(--rule2);padding:2.5rem;position:relative;overflow:hidden">
       <div style="position:absolute;top:0;left:0;right:0;height:1.5px;background:linear-gradient(90deg,transparent,var(--gold),transparent)"></div>
@@ -2829,7 +2919,7 @@ html,body{max-width:100vw;overflow-x:hidden}
       <div style="font-family:'DM Mono',monospace;font-size:.48rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.2)">Confidential · Accredited Investors Only</div>
     </div>
 
-    <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:rgba(255,255,255,0.08)">
+    <div style="display:grid;grid-template-columns:1fr;gap:1px;background:rgba(255,255,255,0.08)">
 
       <div style="background:#06050D;padding:2rem 2.25rem;display:flex;align-items:center;justify-content:space-between;gap:1.5rem;flex-wrap:wrap;transition:background .2s" onmouseover="this.style.background='#0d0b18'" onmouseout="this.style.background='#06050D'">
         <div>
@@ -2865,9 +2955,74 @@ html,body{max-width:100vw;overflow-x:hidden}
           <div style="font-family:'DM Mono',monospace;font-size:.44rem;color:rgba(255,255,255,.25)">2 pages · Seed · Growth · Anchor tiers · PDF</div>
         </div>
         <a href="AEC-Startup-Capital-Form.pdf" download style="font-family:'DM Mono',monospace;font-size:.52rem;letter-spacing:.12em;text-transform:uppercase;background:#FFFFFF;color:#06050D;padding:.7rem 1.4rem;text-decoration:none;white-space:nowrap;font-weight:600;flex-shrink:0;transition:background .2s" onmouseover="this.style.background='#C8C8C8'" onmouseout="this.style.background='#FFFFFF'">↓ Download</a>
+
+        <!-- Fund Fact Sheet -->
+        <div style="background:rgba(255,255,255,0.04);border:.5px solid rgba(255,255,255,0.1);padding:1.5rem 1.75rem;display:flex;align-items:center;justify-content:space-between;gap:1.5rem;flex-wrap:wrap">
+          <div>
+            <div style="font-family:'DM Mono',monospace;font-size:.48rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.35);margin-bottom:.4rem">Fund Fact Sheet</div>
+            <div style="font-family:'Cormorant Garamond',serif;font-size:1.05rem;color:#FFFFFF;font-weight:300;margin-bottom:.3rem">AEC Fund Fact Sheet</div>
+            <div style="font-family:'DM Mono',monospace;font-size:.44rem;letter-spacing:.08em;color:rgba(255,255,255,.25)">1 page · Key stats · Terms · Contact · PDF</div>
+          </div>
+          <a href="AEC-Fund-Fact-Sheet.pdf" download style="font-family:'DM Mono',monospace;font-size:.52rem;letter-spacing:.12em;text-transform:uppercase;background:#FFFFFF;color:#06050D;padding:.7rem 1.4rem;text-decoration:none;white-space:nowrap;font-weight:600;flex-shrink:0;transition:background .2s" onmouseover="this.style.background='#C8C8C8'" onmouseout="this.style.background='#FFFFFF'">&#8595; Download</a>
+        </div>
+        <!-- Investor Questionnaire -->
+        <div style="background:rgba(255,255,255,0.04);border:.5px solid rgba(255,255,255,0.1);padding:1.5rem 1.75rem;display:flex;align-items:center;justify-content:space-between;gap:1.5rem;flex-wrap:wrap">
+          <div>
+            <div style="font-family:'DM Mono',monospace;font-size:.48rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.35);margin-bottom:.4rem">Investor Questionnaire</div>
+            <div style="font-family:'Cormorant Garamond',serif;font-size:1.05rem;color:#FFFFFF;font-weight:300;margin-bottom:.3rem">Accreditation Verification Form</div>
+            <div style="font-family:'DM Mono',monospace;font-size:.44rem;letter-spacing:.08em;color:rgba(255,255,255,.25)">2 pages · Accreditation · Suitability · Source of funds · PDF</div>
+          </div>
+          <a href="AEC-Investor-Questionnaire.pdf" download style="font-family:'DM Mono',monospace;font-size:.52rem;letter-spacing:.12em;text-transform:uppercase;background:#FFFFFF;color:#06050D;padding:.7rem 1.4rem;text-decoration:none;white-space:nowrap;font-weight:600;flex-shrink:0;transition:background .2s" onmouseover="this.style.background='#C8C8C8'" onmouseout="this.style.background='#FFFFFF'">&#8595; Download</a>
+        </div>
+        <!-- Quarterly Report -->
+        <div style="background:rgba(255,255,255,0.04);border:.5px solid rgba(255,255,255,0.1);padding:1.5rem 1.75rem;display:flex;align-items:center;justify-content:space-between;gap:1.5rem;flex-wrap:wrap">
+          <div>
+            <div style="font-family:'DM Mono',monospace;font-size:.48rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.35);margin-bottom:.4rem">Quarterly Report</div>
+            <div style="font-family:'Cormorant Garamond',serif;font-size:1.05rem;color:#FFFFFF;font-weight:300;margin-bottom:.3rem">Q1 2026 Investor Report</div>
+            <div style="font-family:'DM Mono',monospace;font-size:.44rem;letter-spacing:.08em;color:rgba(255,255,255,.25)">3 pages · Jan&#8211;Mar 2026 · Performance · Outlook · PDF</div>
+          </div>
+          <a href="AEC-Quarterly-Report-Q1-2026.pdf" download style="font-family:'DM Mono',monospace;font-size:.52rem;letter-spacing:.12em;text-transform:uppercase;background:#FFFFFF;color:#06050D;padding:.7rem 1.4rem;text-decoration:none;white-space:nowrap;font-weight:600;flex-shrink:0;transition:background .2s" onmouseover="this.style.background='#C8C8C8'" onmouseout="this.style.background='#FFFFFF'">&#8595; Download</a>
+        </div>
       </div>
 
     </div>
+
+        <!-- Risk Disclosure -->
+        <div style="background:rgba(255,255,255,0.04);border:.5px solid rgba(255,255,255,0.1);padding:1.5rem 1.75rem;display:flex;align-items:center;justify-content:space-between;gap:1.5rem;flex-wrap:wrap">
+          <div>
+            <div style="font-family:'DM Mono',monospace;font-size:.48rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.35);margin-bottom:.4rem">Risk Disclosure</div>
+            <div style="font-family:'Cormorant Garamond',serif;font-size:1.05rem;color:#FFFFFF;font-weight:300;margin-bottom:.3rem">Risk Disclosure Statement</div>
+            <div style="font-family:'DM Mono',monospace;font-size:.44rem;letter-spacing:.08em;color:rgba(255,255,255,.25)">1 page · 10 risk factors · Investor acknowledgment · PDF</div>
+          </div>
+          <a href="AEC-Risk-Disclosure.pdf" download style="font-family:'DM Mono',monospace;font-size:.52rem;letter-spacing:.12em;text-transform:uppercase;background:#FFFFFF;color:#06050D;padding:.7rem 1.4rem;text-decoration:none;white-space:nowrap;font-weight:600;flex-shrink:0;transition:background .2s" onmouseover="this.style.background='#C8C8C8'" onmouseout="this.style.background='#FFFFFF'">&#8595; Download</a>
+        </div>
+        <!-- AML Policy -->
+        <div style="background:rgba(255,255,255,0.04);border:.5px solid rgba(255,255,255,0.1);padding:1.5rem 1.75rem;display:flex;align-items:center;justify-content:space-between;gap:1.5rem;flex-wrap:wrap">
+          <div>
+            <div style="font-family:'DM Mono',monospace;font-size:.48rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.35);margin-bottom:.4rem">Compliance</div>
+            <div style="font-family:'Cormorant Garamond',serif;font-size:1.05rem;color:#FFFFFF;font-weight:300;margin-bottom:.3rem">Anti-Money Laundering Policy</div>
+            <div style="font-family:'DM Mono',monospace;font-size:.44rem;letter-spacing:.08em;color:rgba(255,255,255,.25)">2 pages · BSA compliant · KYC · CIP · Effective June 2026 · PDF</div>
+          </div>
+          <a href="AEC-AML-Policy.pdf" download style="font-family:'DM Mono',monospace;font-size:.52rem;letter-spacing:.12em;text-transform:uppercase;background:#FFFFFF;color:#06050D;padding:.7rem 1.4rem;text-decoration:none;white-space:nowrap;font-weight:600;flex-shrink:0;transition:background .2s" onmouseover="this.style.background='#C8C8C8'" onmouseout="this.style.background='#FFFFFF'">&#8595; Download</a>
+        </div>
+        <!-- Subscription Agreement -->
+        <div style="background:rgba(255,255,255,0.04);border:.5px solid rgba(255,255,255,0.1);padding:1.5rem 1.75rem;display:flex;align-items:center;justify-content:space-between;gap:1.5rem;flex-wrap:wrap">
+          <div>
+            <div style="font-family:'DM Mono',monospace;font-size:.48rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.35);margin-bottom:.4rem">Legal</div>
+            <div style="font-family:'Cormorant Garamond',serif;font-size:1.05rem;color:#FFFFFF;font-weight:300;margin-bottom:.3rem">Subscription Agreement Template</div>
+            <div style="font-family:'DM Mono',monospace;font-size:.44rem;letter-spacing:.08em;color:rgba(255,255,255,.25)">2 pages · Draft template · Representations · Execution · PDF</div>
+          </div>
+          <a href="AEC-Subscription-Agreement.pdf" download style="font-family:'DM Mono',monospace;font-size:.52rem;letter-spacing:.12em;text-transform:uppercase;background:#FFFFFF;color:#06050D;padding:.7rem 1.4rem;text-decoration:none;white-space:nowrap;font-weight:600;flex-shrink:0;transition:background .2s" onmouseover="this.style.background='#C8C8C8'" onmouseout="this.style.background='#FFFFFF'">&#8595; Download</a>
+        </div>
+        <!-- Wire Transfer Instructions -->
+        <div style="background:rgba(255,255,255,0.04);border:.5px solid rgba(255,255,255,0.1);padding:1.5rem 1.75rem;display:flex;align-items:center;justify-content:space-between;gap:1.5rem;flex-wrap:wrap">
+          <div>
+            <div style="font-family:'DM Mono',monospace;font-size:.48rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.35);margin-bottom:.4rem">Banking</div>
+            <div style="font-family:'Cormorant Garamond',serif;font-size:1.05rem;color:#FFFFFF;font-weight:300;margin-bottom:.3rem">Wire Transfer Instructions</div>
+            <div style="font-family:'DM Mono',monospace;font-size:.44rem;letter-spacing:.08em;color:rgba(255,255,255,.25)">1 page · Confirmed investors only · Mercury · Fraud prevention · PDF</div>
+          </div>
+          <a href="AEC-Wire-Transfer-Instructions.pdf" download style="font-family:'DM Mono',monospace;font-size:.52rem;letter-spacing:.12em;text-transform:uppercase;background:#FFFFFF;color:#06050D;padding:.7rem 1.4rem;text-decoration:none;white-space:nowrap;font-weight:600;flex-shrink:0;transition:background .2s" onmouseover="this.style.background='#C8C8C8'" onmouseout="this.style.background='#FFFFFF'">&#8595; Download</a>
+        </div>
     <div style="font-family:'DM Mono',monospace;font-size:.44rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.12);text-align:center;margin-top:1rem">All Documents Are Confidential · Do not forward or distribute without authorization from AEC</div>
   </div>
 </section>
@@ -3248,7 +3403,7 @@ html,body{max-width:100vw;overflow-x:hidden}
       </div>
     </div>
 
-    <a href="aec-research.html" style="display:inline-block;font-family:var(--font-mono);font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;background:transparent;color:var(--gold);border:.5px solid var(--gold);padding:.85rem 2rem;text-decoration:none;font-weight:500;transition:all .2s" onmouseover="this.style.background='rgba(200,200,200,0.1)'" onmouseout="this.style.background='transparent'">Read All Research Notes →</a>
+    <a href="#research" style="display:inline-block;font-family:var(--font-mono);font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;background:transparent;color:var(--gold);border:.5px solid var(--gold);padding:.85rem 2rem;text-decoration:none;font-weight:500;transition:all .2s" onmouseover="this.style.background='rgba(200,200,200,0.1)'" onmouseout="this.style.background='transparent'">Read All Research Notes →</a>
   </div>
 </section>
 
@@ -3391,7 +3546,26 @@ html,body{max-width:100vw;overflow-x:hidden}
 
   </div>
 </section>
-@media(max-width:768px){#schedule .schedule-grid{grid-template-columns:1fr!important}}
+<style>@media(max-width:768px){#schedule .schedule-grid{grid-template-columns:1fr!important}}</style>
+
+
+<!-- NEWSLETTER -->
+<section style="padding:5rem clamp(1rem,5vw,3.5rem);background:#030303;border-top:.5px solid rgba(255,255,255,0.06)" id="newsletter">
+  <div style="max-width:680px;margin:0 auto;text-align:center">
+    <div style="font-family:'DM Mono',monospace;font-size:.52rem;letter-spacing:.28em;text-transform:uppercase;color:#888;margin-bottom:.75rem">Stay Informed</div>
+    <h2 style="font-family:'Cormorant Garamond',serif;font-size:clamp(1.6rem,3vw,2.4rem);font-weight:300;color:#FFFFFF;line-height:1.15;margin-bottom:.75rem">AEC <em>Investor Updates</em></h2>
+    <p style="font-size:.9rem;color:rgba(255,255,255,.4);font-family:'Jost',sans-serif;font-weight:300;line-height:1.9;margin-bottom:2.5rem;max-width:500px;margin-left:auto;margin-right:auto">Market commentary, performance updates, fund news, and exclusive AEC insights — delivered directly to your inbox. No spam. Unsubscribe anytime.</p>
+    <!-- ConvertKit Form — replace YOUR_FORM_ID with your actual ConvertKit form ID -->
+    <form action="https://app.convertkit.com/forms/YOUR_FORM_ID/subscriptions" method="post" style="display:flex;gap:0;max-width:480px;margin:0 auto 1rem">
+      <input type="email" name="email_address" placeholder="Your email address" required
+        style="flex:1;background:rgba(255,255,255,0.05);border:.5px solid rgba(255,255,255,0.15);border-right:none;color:#fff;padding:.9rem 1.25rem;font-family:'DM Mono',monospace;font-size:.6rem;letter-spacing:.08em;outline:none;min-width:0"/>
+      <button type="submit"
+        style="background:rgba(255,255,255,0.9);color:#06050D;font-family:'DM Mono',monospace;font-size:.52rem;letter-spacing:.15em;text-transform:uppercase;padding:.9rem 1.5rem;border:none;cursor:pointer;white-space:nowrap;font-weight:700;transition:all .2s"
+        onmouseover="this.style.background='#fff'" onmouseout="this.style.background='rgba(255,255,255,0.9)'">Subscribe →</button>
+    </form>
+    <p style="font-family:'DM Mono',monospace;font-size:.44rem;letter-spacing:.08em;color:rgba(255,255,255,.18);text-transform:uppercase">For accredited investors and qualified allocators · Unsubscribe anytime</p>
+  </div>
+</section>
 
 <!-- CONTACT -->
 <section class="sec sec-light2" id="contact">
@@ -3524,8 +3698,8 @@ html,body{max-width:100vw;overflow-x:hidden}
           <a href="ascenda-allocator.html" style="font-family:'Jost',sans-serif;font-size:.82rem;color:rgba(255,255,255,.35);text-decoration:none;transition:color .2s" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,.35)'">Allocator Application</a>
           <a href="ascenda-mentorship.html" style="font-family:'Jost',sans-serif;font-size:.82rem;color:rgba(255,255,255,.35);text-decoration:none;transition:color .2s" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,.35)'">Mentorship</a>
           <a href="aec-daytrader.html" style="font-family:'Jost',sans-serif;font-size:.82rem;color:rgba(255,255,255,.35);text-decoration:none;transition:color .2s" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,.35)'">Day Trader Hub</a>
-          <a href="aec-research.html" style="font-family:'Jost',sans-serif;font-size:.82rem;color:rgba(255,255,255,.35);text-decoration:none;transition:color .2s" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,.35)'">Research Notes</a>
-          <a href="aec-portal.html" style="font-family:'Jost',sans-serif;font-size:.82rem;color:rgba(255,255,255,.35);text-decoration:none;transition:color .2s" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,.35)'">Investor Portal</a>
+          <a href="#research" style="font-family:'Jost',sans-serif;font-size:.82rem;color:rgba(255,255,255,.35);text-decoration:none;transition:color .2s" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,.35)'">Research Notes</a>
+          <a href="#" onclick="document.getElementById('portal-modal').style.display='flex';return false;" style="font-family:'Jost',sans-serif;font-size:.82rem;color:rgba(255,255,255,.35);text-decoration:none;transition:color .2s" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,.35)'">Investor Portal</a>
           <a href="AEC-Executive-Summary.pdf" download style="font-family:'Jost',sans-serif;font-size:.82rem;color:rgba(255,255,255,.35);text-decoration:none;transition:color .2s" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,.35)'">↓ Executive Summary</a>
         </div>
       </div>
@@ -4178,6 +4352,40 @@ function toggleFaq(el) {
 
 
 
+
+
+<!-- INVESTOR PORTAL MODAL -->
+<div id="portal-modal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.92);z-index:9999;align-items:center;justify-content:center;padding:2rem" onclick="if(event.target===this)this.style.display='none'">
+  <div style="background:#06050D;border:.5px solid rgba(255,255,255,0.12);max-width:520px;width:100%;padding:3rem 2.5rem;position:relative">
+    <button onclick="document.getElementById('portal-modal').style.display='none'" style="position:absolute;top:1.25rem;right:1.25rem;background:none;border:none;color:rgba(255,255,255,.4);font-size:1.2rem;cursor:pointer;font-family:'DM Mono',monospace">✕</button>
+    <div style="font-family:'DM Mono',monospace;font-size:.48rem;letter-spacing:.22em;text-transform:uppercase;color:#F5A623;margin-bottom:1rem;display:flex;align-items:center;gap:.6rem">
+      <span style="width:6px;height:6px;border-radius:50%;background:#F5A623;display:inline-block;animation:pulse 2s infinite"></span>
+      Investor Portal — In Development
+    </div>
+    <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.8rem;font-weight:300;color:#FFFFFF;margin-bottom:1rem;line-height:1.2">Private Investor Portal</h3>
+    <p style="font-size:.9rem;color:rgba(255,255,255,.45);font-family:'Jost',sans-serif;font-weight:300;line-height:1.9;margin-bottom:2rem">The AEC Investor Portal is currently in active development. Confirmed investors will receive direct login credentials upon onboarding. Real-time P&L, quarterly reports, and fund communications — all in one secure dashboard.</p>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1px;background:rgba(255,255,255,0.08);margin-bottom:2rem">
+      <div style="background:#06050D;padding:1rem 1.25rem">
+        <div style="font-family:'DM Mono',monospace;font-size:.44rem;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,.25);margin-bottom:.3rem">Feature</div>
+        <div style="font-family:'DM Mono',monospace;font-size:.52rem;color:rgba(255,255,255,.5)">Real-Time P&L</div>
+      </div>
+      <div style="background:#06050D;padding:1rem 1.25rem">
+        <div style="font-family:'DM Mono',monospace;font-size:.44rem;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,.25);margin-bottom:.3rem">Feature</div>
+        <div style="font-family:'DM Mono',monospace;font-size:.52rem;color:rgba(255,255,255,.5)">Quarterly Reports</div>
+      </div>
+      <div style="background:#06050D;padding:1rem 1.25rem">
+        <div style="font-family:'DM Mono',monospace;font-size:.44rem;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,.25);margin-bottom:.3rem">Feature</div>
+        <div style="font-family:'DM Mono',monospace;font-size:.52rem;color:rgba(255,255,255,.5)">Fund Communications</div>
+      </div>
+      <div style="background:#06050D;padding:1rem 1.25rem">
+        <div style="font-family:'DM Mono',monospace;font-size:.44rem;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,.25);margin-bottom:.3rem">Feature</div>
+        <div style="font-family:'DM Mono',monospace;font-size:.52rem;color:rgba(255,255,255,.5)">Document Vault</div>
+      </div>
+    </div>
+    <p style="font-size:.8rem;color:rgba(255,255,255,.3);font-family:'DM Mono',monospace;letter-spacing:.06em;margin-bottom:1.5rem">Already an investor? Contact us directly for access.</p>
+    <a href="mailto:izaiah@ascendaenterprisecapital.com" style="display:block;text-align:center;font-family:'DM Mono',monospace;font-size:.55rem;letter-spacing:.18em;text-transform:uppercase;background:rgba(255,255,255,0.08);color:#fff;border:.5px solid rgba(255,255,255,0.2);padding:1rem;text-decoration:none">Contact for Portal Access →</a>
+  </div>
+</div>
 
 </body>
 </html>
