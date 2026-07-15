@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Quant System — Ascenda Enterprise Capital</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Mono:wght@300;400;500&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --gold:#FFFFFF;--gold2:#FFFFFF;--gold3:#9A9A9A;--gold4:#EDEDED;
+  --ink:#050505;--ink2:#0C0C0C;--ink3:#151515;
+  --white:#FFFFFF;--off:#F5F0E8;--off2:#EAE3D3;
+  --cream2:rgba(255,255,255,.72);--cream3:rgba(255,255,255,.38);
+  --rule:rgba(255,255,255,0.12);--rule2:rgba(255,255,255,0.28);
+  --up:#3DDC7A;--down:#E5584D;
+  --font-display:'Cormorant Garamond',serif;
+  --font-mono:'DM Mono',monospace;
+  --font-body:'Jost',sans-serif;
+}
+html{scroll-behavior:smooth}
+body{background:var(--ink);color:var(--white);font-family:var(--font-body);font-weight:300;min-height:100vh}
+
+nav{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:1.2rem 3.5rem;
+  background:rgba(6,5,13,.96);
+  border-bottom:.5px solid var(--rule);
+  backdrop-filter:blur(20px);
+  position:sticky;top:0;z-index:100;
+}
+.nav-logo{display:flex;align-items:center;gap:.65rem}
+.nav-logo-main{font-family:var(--font-display);font-size:1rem;color:var(--white);font-weight:400;letter-spacing:.06em}
+.nav-logo-sub{font-family:var(--font-mono);font-size:.45rem;letter-spacing:.25em;text-transform:uppercase;color:var(--gold3)}
+.nav-back{font-family:var(--font-mono);font-size:.58rem;letter-spacing:.18em;text-transform:uppercase;color:var(--cream3);text-decoration:none;transition:color .2s}
+.nav-back:hover{color:var(--gold2)}
+.nav-status{display:flex;align-items:center;gap:.5rem;font-family:var(--font-mono);font-size:.52rem;letter-spacing:.12em;text-transform:uppercase;color:var(--cream3)}
+.nav-status .dot{width:6px;height:6px;border-radius:50%;background:var(--gold3)}
+
+/* HERO / COMING SOON */
+.hero{
+  padding:6rem 3.5rem 4rem;
+  background:var(--ink);
+  border-bottom:.5px solid var(--rule);
+  position:relative;overflow:hidden;
+  text-align:center;
+}
+.hero::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse 70% 60% at 50% 0%,rgba(255,255,255,0.05) 0%,transparent 60%);
+}
+.hero-inner{position:relative;z-index:2;max-width:720px;margin:0 auto}
+.badge-soon{
+  display:inline-flex;align-items:center;gap:.5rem;
+  font-family:var(--font-mono);font-size:.58rem;letter-spacing:.3em;text-transform:uppercase;
+  color:var(--ink);background:var(--white);
+  padding:.55rem 1.3rem;margin-bottom:2rem;
+}
+.badge-soon .pulse{width:6px;height:6px;border-radius:50%;background:var(--ink);animation:pulse 1.8s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+
+.eyebrow{font-family:var(--font-mono);font-size:.58rem;letter-spacing:.28em;text-transform:uppercase;color:var(--cream3);margin-bottom:1.1rem;display:flex;align-items:center;justify-content:center;gap:.8rem}
+h1{font-family:var(--font-display);font-size:clamp(2.4rem,5vw,3.8rem);font-weight:300;color:var(--white);line-height:1.08;margin-bottom:1.2rem}
+h1 em{font-style:italic;color:var(--gold2)}
+.hero-sub{font-size:.95rem;color:var(--cream2);line-height:1.85;font-weight:300;max-width:560px;margin:0 auto}
+
+.main{padding:4.5rem 3.5rem 5rem;max-width:1100px;margin:0 auto}
+
+.section-title{font-family:var(--font-mono);font-size:.62rem;letter-spacing:.25em;text-transform:uppercase;color:var(--white);margin:0 0 1.75rem;display:flex;align-items:center;gap:.8rem}
+.section-title::before{content:'';display:block;width:24px;height:.5px;background:var(--white)}
+
+/* THREE-LAYER FRAMEWORK */
+.layer-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--rule);margin-bottom:4rem}
+@media(max-width:800px){.layer-grid{grid-template-columns:1fr}}
+.layer-card{background:var(--ink2);padding:2rem 1.75rem}
+.layer-num{font-family:var(--font-mono);font-size:.6rem;color:var(--cream3);letter-spacing:.15em;margin-bottom:1rem}
+.layer-card h3{font-family:var(--font-display);font-weight:400;font-size:1.3rem;color:var(--white);margin-bottom:.75rem}
+.layer-card p{font-size:.8rem;color:var(--cream2);line-height:1.75}
+
+/* CAPABILITY GRID */
+.cap-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--rule);margin-bottom:1px}
+@media(max-width:700px){.cap-grid{grid-template-columns:1fr}}
+.cap-card{background:var(--ink2);padding:1.75rem}
+.cap-card .cap-label{font-family:var(--font-mono);font-size:.5rem;letter-spacing:.14em;text-transform:uppercase;color:var(--cream3);margin-bottom:.6rem}
+.cap-card h4{font-family:var(--font-display);font-weight:400;font-size:1.1rem;color:var(--white);margin-bottom:.6rem}
+.cap-card p{font-size:.76rem;color:var(--cream2);line-height:1.7}
+.cap-card .status{
+  display:inline-flex;align-items:center;gap:.4rem;margin-top:1rem;
+  font-family:var(--font-mono);font-size:.48rem;letter-spacing:.1em;text-transform:uppercase;color:var(--cream3);
+}
+.cap-card .status .dot{width:5px;height:5px;border-radius:50%;background:var(--cream3)}
+
+footer.legal{
+  margin-top:4rem;padding:1.75rem;
+  border:.5px solid var(--rule);background:rgba(255,255,255,.02);
+}
+footer.legal p{font-family:var(--font-mono);font-size:.52rem;color:rgba(255,255,255,.3);line-height:1.85;letter-spacing:.02em}
+
+@media(max-width:768px){
+  nav{padding:1rem 1.5rem}
+  .hero{padding:4rem 1.5rem 3rem}
+  .main{padding:3rem 1.5rem}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">
+    <div style="display:flex;flex-direction:column;line-height:1.1">
+      <div class="nav-logo-main">Ascenda</div>
+      <div class="nav-logo-sub">Enterprise Capital</div>
+    </div>
+  </div>
+  <div class="nav-status"><span class="dot"></span>Quant System — Coming Soon</div>
+  <a href="aec-performance.html" class="nav-back">← Back to Portal</a>
+</nav>
+
+<section class="hero">
+  <div class="hero-inner">
+    <div class="badge-soon"><span class="pulse"></span>Coming Soon</div>
+    <div class="eyebrow">Private Investor Portal</div>
+    <h1>The Quant <em>System</em></h1>
+    <p class="hero-sub">A three-layer signal framework and full institutional risk infrastructure, built from the ground up. Live investor-facing metrics from this system will appear here once broker and data feed integration is complete.</p>
+  </div>
+</section>
+
+<div class="main">
+
+  <div class="section-title">The Three-Layer Framework</div>
+  <div class="layer-grid">
+    <div class="layer-card">
+      <div class="layer-num">Layer I</div>
+      <h3>Momentum Engine</h3>
+      <p>Multi-timeframe trend alignment and momentum strength scoring. No trade is considered unless higher and lower timeframe direction agree.</p>
+    </div>
+    <div class="layer-card">
+      <div class="layer-num">Layer II</div>
+      <h3>Z-Score Statistical Deviation</h3>
+      <p>Measures how far price has moved from its statistical baseline, filtering out entries that are already too extended to chase.</p>
+    </div>
+    <div class="layer-card">
+      <div class="layer-num">Layer III</div>
+      <h3>DOM &amp; Order Flow</h3>
+      <p>Reads the order book directly — order flow delta, absorption, and institutional footprint scoring confirm real participation before entry.</p>
+    </div>
+  </div>
+
+  <div class="section-title">System Capabilities</div>
+  <div class="cap-grid">
+    <div class="cap-card">
+      <div class="cap-label">Signal &amp; Risk Engine</div>
+      <h4>71-Component Analytics Library</h4>
+      <p>Position sizing, options Greeks, and a full institutional performance suite — Sharpe, Sortino, Calmar, Value at Risk, Monte Carlo risk-of-ruin, and more — run against every strategy.</p>
+      <div class="status"><span class="dot"></span>Built &amp; Tested</div>
+    </div>
+    <div class="cap-card">
+      <div class="cap-label">Portfolio Risk</div>
+      <h4>Cross-Strategy Risk Management</h4>
+      <p>Portfolio-level Value at Risk, correlation-aware position sizing, concentration and leverage limits, and an automatic circuit breaker on daily loss thresholds.</p>
+      <div class="status"><span class="dot"></span>Built &amp; Tested</div>
+    </div>
+    <div class="cap-card">
+      <div class="cap-label">Compliance &amp; Audit</div>
+      <h4>Tamper-Evident Trade Ledger</h4>
+      <p>Every signal and trade decision is recorded in a hash-chained audit log, with automated reconciliation against broker statements.</p>
+      <div class="status"><span class="dot"></span>Built &amp; Tested</div>
+    </div>
+    <div class="cap-card">
+      <div class="cap-label">Backtesting</div>
+      <h4>Walk-Forward Validation</h4>
+      <p>Strategies are validated out-of-sample using rolling walk-forward windows, transaction cost modeling, and regime stress testing — not a single in-sample curve.</p>
+      <div class="status"><span class="dot"></span>Built &amp; Tested</div>
+    </div>
+    <div class="cap-card">
+      <div class="cap-label">Execution</div>
+      <h4>Broker-Agnostic Order Infrastructure</h4>
+      <p>A unified order lifecycle and broker interface designed to connect to any execution venue without changing strategy logic.</p>
+      <div class="status"><span class="dot"></span>Broker Integration Pending</div>
+    </div>
+    <div class="cap-card">
+      <div class="cap-label">Live Data</div>
+      <h4>Real-Time Dashboard Feed</h4>
+      <p>Once connected, live performance from this system will populate the Performance &amp; Fund Metrics page automatically.</p>
+      <div class="status"><span class="dot"></span>Coming Soon</div>
+    </div>
+  </div>
+
+  <footer class="legal">
+    <p>The Quant System described on this page is proprietary technology developed by Ascenda Enterprise Capital LLC. Descriptions here are informational and do not constitute a performance guarantee, investment recommendation, or offer of any kind. Live performance data, once available, will be clearly labeled as such and subject to the same disclosures found on the Performance &amp; Fund Metrics page.</p>
+  </footer>
+
+</div>
+
+</body>
+</html>

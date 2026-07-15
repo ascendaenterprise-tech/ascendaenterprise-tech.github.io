@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Dashboard Data Editor — AEC</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Mono:wght@300;400;500&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --ink:#050505;--ink2:#0C0C0C;
+  --white:#FFFFFF;--cream2:rgba(255,255,255,.72);--cream3:rgba(255,255,255,.38);
+  --rule:rgba(255,255,255,0.12);--rule2:rgba(255,255,255,0.28);
+  --up:#3DDC7A;--down:#E5584D;
+  --font-display:'Cormorant Garamond',serif;--font-mono:'DM Mono',monospace;--font-body:'Jost',sans-serif;
+}
+body{background:var(--ink);color:var(--white);font-family:var(--font-body);font-weight:300;padding:2.5rem 3rem 6rem}
+h1{font-family:var(--font-display);font-weight:300;font-size:2rem;margin-bottom:.3rem}
+.sub{font-family:var(--font-mono);font-size:.62rem;letter-spacing:.1em;color:var(--cream3);margin-bottom:2.5rem}
+.section{border:.5px solid var(--rule);margin-bottom:1.75rem;background:var(--ink2)}
+.section-head{font-family:var(--font-mono);font-size:.58rem;letter-spacing:.2em;text-transform:uppercase;color:var(--white);padding:1rem 1.25rem;border-bottom:.5px solid var(--rule);display:flex;justify-content:space-between;align-items:center}
+.section-head button{font-family:var(--font-mono);font-size:.52rem;letter-spacing:.08em;text-transform:uppercase;background:transparent;border:.5px solid var(--rule2);color:var(--cream2);padding:.35rem .8rem;cursor:pointer}
+.section-body{padding:1.25rem}
+.grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--rule);margin-bottom:1px}
+.grid5{display:grid;grid-template-columns:1.3fr 1.6fr .8fr .8fr .8fr;gap:1px;background:var(--rule);margin-bottom:1px}
+.grid6{display:grid;grid-template-columns:1fr 1.2fr .9fr .7fr .7fr .7fr .7fr auto;gap:1px;background:var(--rule);margin-bottom:1px}
+.cell{background:var(--ink2);padding:.6rem}
+.cell label{display:block;font-family:var(--font-mono);font-size:.45rem;letter-spacing:.08em;text-transform:uppercase;color:var(--cream3);margin-bottom:.35rem}
+.cell input,.cell select{width:100%;background:rgba(255,255,255,.03);border:.5px solid var(--rule2);color:var(--white);font-family:var(--font-mono);font-size:.68rem;padding:.5rem .55rem;outline:none}
+.cell input:focus,.cell select:focus{border-color:var(--white)}
+.cell.pos-toggle label{margin-bottom:.35rem}
+.row-remove{background:var(--ink2);display:flex;align-items:center;justify-content:center}
+.row-remove button{background:transparent;border:.5px solid var(--down);color:var(--down);font-family:var(--font-mono);font-size:.5rem;padding:.4rem .5rem;cursor:pointer}
+.add-btn{font-family:var(--font-mono);font-size:.55rem;letter-spacing:.1em;text-transform:uppercase;background:transparent;border:.5px dashed var(--rule2);color:var(--cream2);padding:.6rem 1rem;cursor:pointer;width:100%;margin-top:.5rem}
+.add-btn:hover{border-color:var(--white);color:var(--white)}
+.field-row{display:flex;gap:1px;background:var(--rule);margin-bottom:1px}
+.field-row .cell{flex:1}
+.actions{position:sticky;bottom:0;background:rgba(5,5,5,.95);backdrop-filter:blur(12px);border-top:.5px solid var(--rule);padding:1.25rem;display:flex;gap:1rem;align-items:center;margin:2.5rem -3rem -6rem;padding-left:3rem;padding-right:3rem}
+.btn-primary{font-family:var(--font-mono);font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;background:var(--white);color:var(--ink);border:none;padding:.9rem 2rem;cursor:pointer;font-weight:500}
+.btn-secondary{font-family:var(--font-mono);font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;background:transparent;border:.5px solid var(--rule2);color:var(--cream2);padding:.85rem 1.5rem;cursor:pointer}
+.status{font-family:var(--font-mono);font-size:.6rem;color:var(--up)}
+.hint{font-family:var(--font-mono);font-size:.55rem;color:var(--cream3);line-height:1.8;margin-top:.5rem}
+.curve-input{grid-column:1/-1}
+.curve-input textarea{width:100%;background:rgba(255,255,255,.03);border:.5px solid var(--rule2);color:var(--white);font-family:var(--font-mono);font-size:.62rem;padding:.6rem;min-height:50px;outline:none;resize:vertical}
+@media(max-width:900px){
+  .grid4,.grid5,.grid6{grid-template-columns:1fr}
+  body{padding:1.5rem}
+  .actions{margin:2.5rem -1.5rem -6rem;padding-left:1.5rem;padding-right:1.5rem}
+}
+</style>
+</head>
+<body>
+
+<h1>Dashboard Data Editor</h1>
+<div class="sub">Fill in real numbers below → download aec-performance-data.json → replace the file next to aec-performance.html on your site.</div>
+
+<!-- AS OF -->
+<div class="section">
+  <div class="section-head">As-Of Timestamp</div>
+  <div class="section-body">
+    <div class="cell" style="max-width:400px"><label>Displayed on dashboard header</label><input id="asOf" type="text" value="Jul 13, 2026, 09:41 ET"/></div>
+  </div>
+</div>
+
+<!-- LIVE -->
+<div class="section">
+  <div class="section-head">Live Results</div>
+  <div class="section-body">
+    <div class="grid4" id="liveKpis"></div>
+    <div class="hint">4 KPI cards shown under "Performance — Live"</div>
+
+    <div style="margin-top:1.25rem" class="field-row">
+      <div class="cell"><label>Avg Win</label><input id="liveAvgWin" value="+$430.73"/></div>
+      <div class="cell"><label>Avg Loss</label><input id="liveAvgLoss" value="−$409.72"/></div>
+      <div class="cell"><label>Winners</label><input id="liveWinners" type="number" value="858"/></div>
+      <div class="cell"><label>Losers</label><input id="liveLosers" type="number" value="542"/></div>
+      <div class="cell"><label>Breakevens</label><input id="liveBE" type="number" value="14"/></div>
+    </div>
+
+    <div style="margin-top:1.25rem" class="cell curve-input">
+      <label>Equity Curve (comma-separated cumulative P&L points, oldest → newest)</label>
+      <textarea id="liveCurve">0,4,3,9,7,14,12,19,17,24,21,28,26,33,30,37,35,41,44,42,48,46,52,55,53,58,62,60,65,68</textarea>
+    </div>
+  </div>
+</div>
+
+<!-- BACKTEST -->
+<div class="section">
+  <div class="section-head">Backtested Results</div>
+  <div class="section-body">
+    <div class="grid4" id="backtestKpis"></div>
+    <div class="hint">4 KPI cards shown under "Performance — Backtested"</div>
+
+    <div style="margin-top:1.25rem" class="field-row">
+      <div class="cell"><label>Avg Win</label><input id="btAvgWin" value="+$430.73"/></div>
+      <div class="cell"><label>Avg Loss</label><input id="btAvgLoss" value="−$409.72"/></div>
+      <div class="cell"><label>Winners</label><input id="btWinners" type="number" value="858"/></div>
+      <div class="cell"><label>Losers</label><input id="btLosers" type="number" value="542"/></div>
+      <div class="cell"><label>Breakevens</label><input id="btBE" type="number" value="14"/></div>
+    </div>
+
+    <div style="margin-top:1.25rem" class="cell curve-input">
+      <label>Equity Curve (comma-separated)</label>
+      <textarea id="btCurve">0,2,5,4,9,8,14,12,18,16,22,25,23,29,33,31,38,42,40,47,52,50,58,63,60,68,74,71,80,88</textarea>
+    </div>
+  </div>
+</div>
+
+<!-- FUND -->
+<div class="section">
+  <div class="section-head">Fund &amp; Capital</div>
+  <div class="section-body">
+    <div class="field-row">
+      <div class="cell"><label>Total Capital Deployed</label><input id="fundCapital" value="$—"/></div>
+      <div class="cell"><label>Active Strategies</label><input id="fundStrategies" type="number" value="3"/></div>
+      <div class="cell"><label>Available Capacity</label><input id="fundCapacity" value="$—"/></div>
+      <div class="cell"><label>Inception Year</label><input id="fundInception" value="2025"/></div>
+    </div>
+
+    <div style="margin-top:1.25rem">
+      <div class="section-head" style="border:.5px solid var(--rule);margin-bottom:1px">
+        Allocation by Strategy
+        <button onclick="addAllocRow()">+ Add Row</button>
+      </div>
+      <div id="allocRows"></div>
+    </div>
+  </div>
+</div>
+
+<!-- CLIENTS -->
+<div class="section">
+  <div class="section-head">
+    Client &amp; Investor Activity
+    <button onclick="addClientRow()">+ Add Client</button>
+  </div>
+  <div class="section-body">
+    <div id="clientRows"></div>
+  </div>
+</div>
+
+<div class="actions">
+  <button class="btn-primary" onclick="downloadJSON()">Download aec-performance-data.json</button>
+  <button class="btn-secondary" onclick="copyJSON()">Copy to Clipboard</button>
+  <span class="status" id="statusMsg"></span>
+</div>
+
+<script>
+function kpiFieldSet(containerId, defaults){
+  const el = document.getElementById(containerId);
+  el.innerHTML = defaults.map((d,i) => `
+    <div class="cell">
+      <label>Label ${i+1}</label>
+      <input class="kpi-label" value="${d.label}"/>
+      <label style="margin-top:.5rem">Value</label>
+      <input class="kpi-value" value="${d.value}"/>
+      <label style="margin-top:.5rem">Delta / Subtext</label>
+      <input class="kpi-delta" value="${d.delta}"/>
+      <label style="margin-top:.5rem">Direction</label>
+      <select class="kpi-pos"><option value="true" ${d.pos?'selected':''}>Positive (green)</option><option value="false" ${!d.pos?'selected':''}>Negative (red)</option></select>
+    </div>`).join('');
+}
+
+kpiFieldSet('liveKpis', [
+  { label:"Net P&L (90D)", value:"$26,849", delta:"+$1,412 today", pos:true },
+  { label:"Win Rate", value:"64%", delta:"Winning trades", pos:true },
+  { label:"Profit Factor", value:"1.72", delta:"Gross profit / gross loss", pos:true },
+  { label:"Avg Profit / Trade", value:"$96.58", delta:"Per executed trade", pos:true },
+]);
+kpiFieldSet('backtestKpis', [
+  { label:"Net P&L (365D)", value:"$147,500", delta:"+147.5% cumulative", pos:true },
+  { label:"Max Drawdown", value:"$27,038", delta:"27.04% peak-to-trough", pos:false },
+  { label:"Profit Factor", value:"1.664", delta:"Gross profit / gross loss", pos:true },
+  { label:"Profitable Trades", value:"60.7%", delta:"858 / 1,414 trades", pos:true },
+]);
+
+function readKpis(containerId){
+  const cells = document.querySelectorAll('#'+containerId+' .cell');
+  return Array.from(cells).map(c => ({
+    label: c.querySelector('.kpi-label').value,
+    value: c.querySelector('.kpi-value').value,
+    delta: c.querySelector('.kpi-delta').value,
+    pos: c.querySelector('.kpi-pos').value === 'true'
+  }));
+}
+
+// ---------- Allocation rows ----------
+function allocRowHTML(a){
+  a = a || { name:"", vertical:"", allocation:"$—", pctOfBook:0, ytdReturn:"—%" };
+  return `<div class="grid6 alloc-row">
+    <div class="cell"><label>Strategy</label><input class="a-name" value="${a.name}"/></div>
+    <div class="cell"><label>Vertical</label><input class="a-vertical" value="${a.vertical}"/></div>
+    <div class="cell"><label>Allocation</label><input class="a-allocation" value="${a.allocation}"/></div>
+    <div class="cell"><label>% of Book</label><input class="a-pct" type="number" value="${a.pctOfBook}"/></div>
+    <div class="cell"><label>YTD Return</label><input class="a-ytd" value="${a.ytdReturn}"/></div>
+    <div class="row-remove"><button onclick="this.closest('.alloc-row').remove()">Remove</button></div>
+  </div>`;
+}
+function addAllocRow(a){ document.getElementById('allocRows').insertAdjacentHTML('beforeend', allocRowHTML(a)); }
+[
+  { name:"Smart Money Engine V7", vertical:"QQQ / SPY · Momentum + Z-Score", allocation:"$—", pctOfBook:0, ytdReturn:"—%" },
+  { name:"Tradovate NQ Engine", vertical:"NQ Futures · DOM / Order Flow", allocation:"$—", pctOfBook:0, ytdReturn:"—%" },
+  { name:"OHOS Real Estate", vertical:"Wholesale / Acquisitions — Atlanta Metro", allocation:"$—", pctOfBook:0, ytdReturn:"—%" },
+].forEach(addAllocRow);
+
+function readAllocs(){
+  return Array.from(document.querySelectorAll('.alloc-row')).map(r => ({
+    name: r.querySelector('.a-name').value,
+    vertical: r.querySelector('.a-vertical').value,
+    allocation: r.querySelector('.a-allocation').value,
+    pctOfBook: Number(r.querySelector('.a-pct').value) || 0,
+    ytdReturn: r.querySelector('.a-ytd').value
+  }));
+}
+
+// ---------- Client rows ----------
+function clientRowHTML(c){
+  c = c || { name:"", email:"", tier:"Foundation", signals:0, orders:0, success:"0%", pnl:"$0.00" };
+  return `<div class="grid6 client-row" style="grid-template-columns:1fr 1.2fr .8fr .6fr .6fr .6fr .8fr auto">
+    <div class="cell"><label>Name</label><input class="c-name" value="${c.name}"/></div>
+    <div class="cell"><label>Email (masked)</label><input class="c-email" value="${c.email}"/></div>
+    <div class="cell"><label>Tier</label>
+      <select class="c-tier">
+        <option ${c.tier==='Foundation'?'selected':''}>Foundation</option>
+        <option ${c.tier==='Accelerator'?'selected':''}>Accelerator</option>
+        <option ${c.tier==='Elite'?'selected':''}>Elite</option>
+      </select>
+    </div>
+    <div class="cell"><label>Signals</label><input class="c-signals" type="number" value="${c.signals}"/></div>
+    <div class="cell"><label>Orders</label><input class="c-orders" type="number" value="${c.orders}"/></div>
+    <div class="cell"><label>Success</label><input class="c-success" value="${c.success}"/></div>
+    <div class="cell"><label>Realized P&L</label><input class="c-pnl" value="${c.pnl}"/></div>
+    <div class="row-remove"><button onclick="this.closest('.client-row').remove()">Remove</button></div>
+  </div>`;
+}
+function addClientRow(c){ document.getElementById('clientRows').insertAdjacentHTML('beforeend', clientRowHTML(c)); }
+[
+  { name:"Issac R.", email:"iss****@gmail.com", tier:"Foundation", signals:412, orders:380, success:"81%", pnl:"$4,162.92" },
+  { name:"Eugene T.", email:"eug****@outlook.com", tier:"Foundation", signals:38, orders:12, success:"58%", pnl:"$318.40" },
+].forEach(addClientRow);
+
+function readClients(){
+  return Array.from(document.querySelectorAll('.client-row')).map(r => ({
+    name: r.querySelector('.c-name').value,
+    email: r.querySelector('.c-email').value,
+    tier: r.querySelector('.c-tier').value,
+    signals: Number(r.querySelector('.c-signals').value) || 0,
+    orders: Number(r.querySelector('.c-orders').value) || 0,
+    success: r.querySelector('.c-success').value,
+    pnl: r.querySelector('.c-pnl').value
+  }));
+}
+
+function parseCurve(str){
+  return str.split(',').map(s => Number(s.trim())).filter(n => !isNaN(n));
+}
+
+function buildJSON(){
+  return {
+    asOf: document.getElementById('asOf').value,
+    live: {
+      kpis: readKpis('liveKpis'),
+      curve: parseCurve(document.getElementById('liveCurve').value),
+      trades: {
+        winners: Number(document.getElementById('liveWinners').value)||0,
+        losers: Number(document.getElementById('liveLosers').value)||0,
+        breakevens: Number(document.getElementById('liveBE').value)||0,
+        total: (Number(document.getElementById('liveWinners').value)||0)+(Number(document.getElementById('liveLosers').value)||0)+(Number(document.getElementById('liveBE').value)||0)
+      },
+      avgWin: document.getElementById('liveAvgWin').value,
+      avgLoss: document.getElementById('liveAvgLoss').value,
+      tag: "Live · 90D window"
+    },
+    backtest: {
+      kpis: readKpis('backtestKpis'),
+      curve: parseCurve(document.getElementById('btCurve').value),
+      trades: {
+        winners: Number(document.getElementById('btWinners').value)||0,
+        losers: Number(document.getElementById('btLosers').value)||0,
+        breakevens: Number(document.getElementById('btBE').value)||0,
+        total: (Number(document.getElementById('btWinners').value)||0)+(Number(document.getElementById('btLosers').value)||0)+(Number(document.getElementById('btBE').value)||0)
+      },
+      avgWin: document.getElementById('btAvgWin').value,
+      avgLoss: document.getElementById('btAvgLoss').value,
+      tag: "Backtested · Last 365 days"
+    },
+    fund: {
+      totalCapitalDeployed: document.getElementById('fundCapital').value,
+      activeStrategies: Number(document.getElementById('fundStrategies').value)||0,
+      availableCapacity: document.getElementById('fundCapacity').value,
+      inceptionYear: document.getElementById('fundInception').value,
+      allocations: readAllocs()
+    },
+    clients: readClients()
+  };
+}
+
+function downloadJSON(){
+  const data = buildJSON();
+  const blob = new Blob([JSON.stringify(data, null, 2)], {type:'application/json'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url; a.download = 'aec-performance-data.json';
+  a.click();
+  URL.revokeObjectURL(url);
+  document.getElementById('statusMsg').textContent = 'Downloaded — replace aec-performance-data.json next to aec-performance.html';
+  setTimeout(()=>document.getElementById('statusMsg').textContent='', 4000);
+}
+
+function copyJSON(){
+  const data = buildJSON();
+  navigator.clipboard.writeText(JSON.stringify(data, null, 2));
+  document.getElementById('statusMsg').textContent = 'Copied to clipboard';
+  setTimeout(()=>document.getElementById('statusMsg').textContent='', 4000);
+}
+</script>
+
+</body>
+</html>
