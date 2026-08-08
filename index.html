@@ -34,16 +34,35 @@
   gtag('js', new Date());
   gtag('config', 'G-0YMYZFJG77');
 </script>
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpolygon points='50,5 70,30 50,55 30,30' fill='%23E4B84A'/%3E%3Cpolygon points='50,5 80,35 70,30' fill='%23F2D680'/%3E%3Cpolygon points='50,55 70,30 80,35' fill='%23C0C0D0'/%3E%3Cpolygon points='50,55 30,30 20,35' fill='%23A0A0B0'/%3E%3Cpolygon points='50,55 80,35 50,80' fill='%23909090'/%3E%3Cpolygon points='50,80 20,35 50,55' fill='%23808080'/%3E%3C/svg%3E"/>
-<link rel="shortcut icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpolygon points='50,5 70,30 50,55 30,30' fill='%23E4B84A'/%3E%3Cpolygon points='50,5 80,35 70,30' fill='%23F2D680'/%3E%3Cpolygon points='50,55 70,30 80,35' fill='%23C0C0D0'/%3E%3Cpolygon points='50,55 30,30 20,35' fill='%23A0A0B0'/%3E%3Cpolygon points='50,55 80,35 50,80' fill='%23909090'/%3E%3Cpolygon points='50,80 20,35 50,55' fill='%23808080'/%3E%3C/svg%3E"/>
+<link rel="icon" type="image/svg+xml" href="aec-icon.svg"/>
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png"/>
+<link rel="shortcut icon" type="image/png" href="favicon-32.png"/>
 <!-- PWA META TAGS -->
 <meta name="mobile-web-app-capable" content="yes"/>
 <meta name="apple-mobile-web-app-capable" content="yes"/>
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
 <meta name="apple-mobile-web-app-title" content="Ascenda Capital"/>
 <meta name="theme-color" content="#06050D"/>
-<link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%2306050D'/%3E%3Cpolygon points='50,10 70,35 50,55 30,35' fill='%23E4B84A'/%3E%3Cpolygon points='50,55 70,35 80,45 50,80' fill='%23909090'/%3E%3Cpolygon points='50,55 30,35 20,45 50,80' fill='%23707070'/%3E%3C/svg%3E"/>
+<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png"/>
+<link rel="apple-touch-icon" sizes="152x152" href="apple-touch-icon-152.png"/>
 <link rel="manifest" href="manifest.json"/>
+
+<!-- Organization schema for Google Knowledge Panel / search results -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "Ascenda Enterprise Capital",
+  "legalName": "Ascenda Enterprise Capital LLC",
+  "url": "https://ascendaenterprisecapital.com/",
+  "logo": "https://ascendaenterprisecapital.com/aec-logo.png",
+  "description": "A multi-strategy investment firm operating across global markets trading, real estate, and private equity. Registered in Georgia.",
+  "sameAs": [
+    "https://x.com/izaiahcottle",
+    "https://instagram.com/zoogie__"
+  ]
+}
+</script>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=DM+Mono:wght@300;400;500&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet"/>
@@ -1506,23 +1525,13 @@ html,body{max-width:100vw;overflow-x:hidden}
   <div class="gate-inner">
     <div class="gate-logo-wrap">
       <svg class="gate-diamond" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <polygon points="40,4 62,28 40,52 18,28" fill="none" stroke="rgba(200,200,200,0.3)" stroke-width="0.5"/>
-        <polygon points="40,4 54,24 40,40 26,24" fill="url(#dg1)"/>
-        <polygon points="40,4 62,28 54,24" fill="url(#dg2)"/>
-        <polygon points="40,40 54,24 62,28" fill="rgba(180,180,200,0.5)"/>
-        <polygon points="40,40 26,24 18,28" fill="rgba(160,160,180,0.4)"/>
-        <polygon points="40,40 62,28 40,58" fill="rgba(140,140,160,0.35)" opacity="0.7"/>
-        <polygon points="40,58 18,28 40,40" fill="rgba(120,120,140,0.3)" opacity="0.6"/>
-        <defs>
-          <linearGradient id="dg1" x1="40" y1="4" x2="40" y2="52" gradientUnits="userSpaceOnUse">
-            <stop offset="0%" stop-color="#FFFFFF"/>
-            <stop offset="100%" stop-color="#888888"/>
-          </linearGradient>
-          <linearGradient id="dg2" x1="40" y1="4" x2="62" y2="28" gradientUnits="userSpaceOnUse">
-            <stop offset="0%" stop-color="#E0E0E0"/>
-            <stop offset="100%" stop-color="#C8C8C8"/>
-          </linearGradient>
-        </defs>
+        <g transform="translate(40,40)" stroke="#FFFFFF">
+          <polygon points="0,-38 38,0 0,38 -38,0" stroke-width="4.1" opacity="1"/>
+          <polygon points="0,-29 29,0 0,29 -29,0" stroke-width="3.5" opacity="0.85"/>
+          <polygon points="0,-21 21,0 0,21 -21,0" stroke-width="3.2" opacity="0.7"/>
+          <polygon points="0,-13 13,0 0,13 -13,0" stroke-width="2.9" opacity="0.55"/>
+          <polygon points="0,-5 5,0 0,5 -5,0" stroke-width="2.6" opacity="0.4"/>
+        </g>
       </svg>
       <div class="gate-brand">ASCENDA</div>
       <div class="gate-brand-sub">Enterprise Capital</div>
@@ -1557,14 +1566,13 @@ html,body{max-width:100vw;overflow-x:hidden}
 <nav>
   <div class="nav-logo">
     <svg class="nav-logo-diamond" viewBox="0 0 40 40" fill="none">
-      <polygon points="20,2 30,14 20,26 10,14" fill="url(#ng1)"/>
-      <polygon points="20,2 30,14 26,12" fill="url(#ng2)"/>
-      <polygon points="20,26 30,14 26,20" fill="rgba(180,180,200,0.4)"/>
-      <polygon points="20,26 10,14 14,20" fill="rgba(160,160,180,0.3)"/>
-      <defs>
-        <linearGradient id="ng1" x1="20" y1="2" x2="20" y2="26"><stop offset="0%" stop-color="#FFFFFF"/><stop offset="100%" stop-color="#888888"/></linearGradient>
-        <linearGradient id="ng2" x1="20" y1="2" x2="30" y2="14"><stop offset="0%" stop-color="#E0E0E0"/><stop offset="100%" stop-color="#C8C8C8"/></linearGradient>
-      </defs>
+      <g transform="translate(20,20)" stroke="#FFFFFF">
+        <polygon points="0,-19 19,0 0,19 -19,0" stroke-width="2.1" opacity="1"/>
+        <polygon points="0,-15 15,0 0,15 -15,0" stroke-width="1.8" opacity="0.85"/>
+        <polygon points="0,-11 11,0 0,11 -11,0" stroke-width="1.6" opacity="0.7"/>
+        <polygon points="0,-7 7,0 0,7 -7,0" stroke-width="1.4" opacity="0.55"/>
+        <polygon points="0,-3 3,0 0,3 -3,0" stroke-width="1.3" opacity="0.4"/>
+      </g>
     </svg>
     <div class="nav-logo-text">
       <div class="nav-logo-main">Ascenda</div>
