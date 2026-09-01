@@ -1454,8 +1454,93 @@ section[style*="padding:8rem"]{padding-top:4.25rem!important;padding-bottom:4.25
 }
 </style>
 
+
+<style id="aec-market-rail-v4">
+/* V4: compact 9-feed matrix + Investing.com information rail */
+.aec-market-layout{
+  width:100%;
+  display:grid;
+  grid-template-columns:minmax(0,1fr) clamp(300px,23vw,350px);
+  gap:.85rem;
+  align-items:start;
+}
+.aec-feed-grid{
+  grid-template-columns:repeat(3,minmax(0,1fr))!important;
+  gap:.55rem!important;
+}
+.aec-feed-card header{
+  height:27px!important;
+  padding:0 .5rem!important;
+  font-size:.41rem!important;
+}
+.aec-market-rail{
+  width:100%;
+  min-width:0;
+  overflow:hidden;
+  border:.5px solid var(--rule);
+  background:rgba(255,255,255,.02);
+}
+.aec-rail-head{
+  padding:.72rem .8rem;
+  border-bottom:.5px solid var(--rule);
+  display:flex;
+  flex-direction:column;
+  gap:.18rem;
+}
+.aec-rail-head span{
+  font-family:var(--font-mono);
+  font-size:.42rem;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:var(--gold3);
+}
+.aec-rail-head strong{
+  font-family:var(--font-display);
+  font-size:1.05rem;
+  font-weight:400;
+  color:var(--white);
+}
+.aec-rail-head small{
+  font-family:var(--font-mono);
+  font-size:.38rem;
+  letter-spacing:.035em;
+  color:var(--cream3);
+}
+.aec-market-rail iframe{
+  display:block;
+  width:100%!important;
+  max-width:100%!important;
+  height:610px!important;
+  border:0;
+  overflow:hidden;
+}
+.aec-rail-note{
+  padding:.55rem .7rem;
+  border-top:.5px solid var(--rule);
+  font-family:var(--font-mono);
+  font-size:.38rem;
+  line-height:1.55;
+  letter-spacing:.04em;
+  color:var(--cream3);
+}
+@media(max-width:1180px){
+  .aec-market-layout{
+    grid-template-columns:minmax(0,1fr) 290px;
+  }
+  .aec-feed-card header{font-size:.38rem!important}
+}
+@media(max-width:980px){
+  .aec-market-layout{grid-template-columns:1fr}
+  .aec-feed-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+  .aec-market-rail iframe{height:520px!important}
+}
+@media(max-width:680px){
+  .aec-feed-grid{grid-template-columns:1fr!important}
+}
+</style>
+
 </head>
-<body data-aec-build="layout-v3-9feeds">
+<body data-aec-build="layout-v4-9feeds-investing-rail">
 
 <!-- ══════════════════════════════════
      LANDING PAGE — 4 PATH SELECTOR
@@ -2104,7 +2189,8 @@ section[style*="padding:8rem"]{padding-top:4.25rem!important;padding-bottom:4.25
     <div class="sec-label">Real-Time Coverage</div>
     <h2 class="on-dark">Live Market <em>Coverage</em></h2>
     <p class="aec-live-intro">Nine market and financial-news feeds. Streams are provided by their respective publishers.</p>
-    <div class="aec-feed-grid">
+    <div class="aec-market-layout">
+      <div class="aec-feed-grid">
       <article class="aec-feed-card">
   <header><span class="aec-live-dot"></span><span>Bloomberg</span></header>
   <div class="aec-video-frame"><iframe src="https://www.youtube.com/embed/QB5BNdBFujE?autoplay=1&mute=1&playsinline=1" loading="lazy" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe></div>
@@ -2362,6 +2448,25 @@ section[style*="padding:8rem"]{padding-top:4.25rem!important;padding-bottom:4.25
       <div class="sg-n">03 — Portfolio & Execution</div>
       <h3>Risk-Controlled <em>Implementation</em></h3>
       <p>Signals are evaluated inside a portfolio framework with defined position sizing, execution assumptions, transaction-cost modeling, risk limits, and ongoing validation rather than being treated as isolated backtests.</p>
+      </div>
+      <aside class="aec-market-rail">
+        <div class="aec-rail-head">
+          <span>Market Intelligence</span>
+          <strong>Economic Calendar</strong>
+          <small>Investing.com · High &amp; medium impact events</small>
+        </div>
+        <iframe
+          src="https://sslecal2.investing.com?columns=exc_flags,exc_currency,exc_importance,exc_actual,exc_forecast,exc_previous&importance=3,2&features=datepicker,timezone&countries=25,32,6,37,72,22,17,39,14,10,35,43,56,36,110,11,26,12,4,5&calType=week&timeZone=8&lang=1"
+          width="100%"
+          height="610"
+          frameborder="0"
+          allowtransparency="true"
+          marginwidth="0"
+          marginheight="0"
+          loading="lazy"
+          title="Investing.com Economic Calendar"></iframe>
+        <div class="aec-rail-note">CPI · PPI · FOMC · NFP · GDP · Rates · Global macro events</div>
+      </aside>
     </div>
   </div>
 </section>
