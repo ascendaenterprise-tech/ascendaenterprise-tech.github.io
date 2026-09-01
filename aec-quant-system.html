@@ -1,196 +1,199 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Quant System — Ascenda Enterprise Capital</title>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Mono:wght@300;400;500&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet"/>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>AECQS | AEC Quantitative System</title>
+<meta name="description" content="AECQS — Ascenda Enterprise Capital's proprietary quantitative research, analysis and execution architecture, under active research and development." />
+<meta property="og:type" content="website" />
+<meta property="og:title" content="AECQS | AEC Quantitative System" />
+<meta property="og:description" content="Proprietary quantitative research, analysis and execution architecture developed by Ascenda Enterprise Capital." />
+<meta property="og:url" content="https://ascendaenterprisecapital.com/AEC-Quant-System/" />
+<meta name="theme-color" content="#06050D" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300&family=DM+Mono:wght@300;400;500&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet" />
 <style>
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
-  --gold:#FFFFFF;--gold2:#FFFFFF;--gold3:#9A9A9A;--gold4:#EDEDED;
-  --ink:#050505;--ink2:#0C0C0C;--ink3:#151515;
-  --white:#FFFFFF;--off:#F5F0E8;--off2:#EAE3D3;
-  --cream2:rgba(255,255,255,.72);--cream3:rgba(255,255,255,.38);
-  --rule:rgba(255,255,255,0.12);--rule2:rgba(255,255,255,0.28);
-  --up:#3DDC7A;--down:#E5584D;
-  --font-display:'Cormorant Garamond',serif;
-  --font-mono:'DM Mono',monospace;
-  --font-body:'Jost',sans-serif;
+  --bg:#04030A;--bg2:#080612;--bg3:#0E0B1A;--panel:#11101A;
+  --text:#fff;--muted:rgba(255,255,255,.58);--muted2:rgba(255,255,255,.32);
+  --line:rgba(255,255,255,.10);--line2:rgba(255,255,255,.22);--accent:#DADADA;
+  --green:#49C77A;--red:#E46A61;
+  --display:'Cormorant Garamond',Georgia,serif;--mono:'DM Mono',monospace;--body:'Jost',sans-serif;
 }
+*{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
-body{background:var(--ink);color:var(--white);font-family:var(--font-body);font-weight:300;min-height:100vh}
-
-nav{
-  display:flex;align-items:center;justify-content:space-between;
-  padding:1.2rem 3.5rem;
-  background:rgba(6,5,13,.96);
-  border-bottom:.5px solid var(--rule);
-  backdrop-filter:blur(20px);
-  position:sticky;top:0;z-index:100;
-}
-.nav-logo{display:flex;align-items:center;gap:.65rem}
-.nav-logo-main{font-family:var(--font-display);font-size:1rem;color:var(--white);font-weight:400;letter-spacing:.06em}
-.nav-logo-sub{font-family:var(--font-mono);font-size:.45rem;letter-spacing:.25em;text-transform:uppercase;color:var(--gold3)}
-.nav-back{font-family:var(--font-mono);font-size:.58rem;letter-spacing:.18em;text-transform:uppercase;color:var(--cream3);text-decoration:none;transition:color .2s}
-.nav-back:hover{color:var(--gold2)}
-.nav-status{display:flex;align-items:center;gap:.5rem;font-family:var(--font-mono);font-size:.52rem;letter-spacing:.12em;text-transform:uppercase;color:var(--cream3)}
-.nav-status .dot{width:6px;height:6px;border-radius:50%;background:var(--gold3)}
-
-/* HERO / COMING SOON */
-.hero{
-  padding:6rem 3.5rem 4rem;
-  background:var(--ink);
-  border-bottom:.5px solid var(--rule);
-  position:relative;overflow:hidden;
-  text-align:center;
-}
-.hero::before{
-  content:'';position:absolute;inset:0;
-  background:radial-gradient(ellipse 70% 60% at 50% 0%,rgba(255,255,255,0.05) 0%,transparent 60%);
-}
-.hero-inner{position:relative;z-index:2;max-width:720px;margin:0 auto}
-.badge-soon{
-  display:inline-flex;align-items:center;gap:.5rem;
-  font-family:var(--font-mono);font-size:.58rem;letter-spacing:.3em;text-transform:uppercase;
-  color:var(--ink);background:var(--white);
-  padding:.55rem 1.3rem;margin-bottom:2rem;
-}
-.badge-soon .pulse{width:6px;height:6px;border-radius:50%;background:var(--ink);animation:pulse 1.8s ease-in-out infinite}
-@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
-
-.eyebrow{font-family:var(--font-mono);font-size:.58rem;letter-spacing:.28em;text-transform:uppercase;color:var(--cream3);margin-bottom:1.1rem;display:flex;align-items:center;justify-content:center;gap:.8rem}
-h1{font-family:var(--font-display);font-size:clamp(2.4rem,5vw,3.8rem);font-weight:300;color:var(--white);line-height:1.08;margin-bottom:1.2rem}
-h1 em{font-style:italic;color:var(--gold2)}
-.hero-sub{font-size:.95rem;color:var(--cream2);line-height:1.85;font-weight:300;max-width:560px;margin:0 auto}
-
-.main{padding:4.5rem 3.5rem 5rem;max-width:1100px;margin:0 auto}
-
-.section-title{font-family:var(--font-mono);font-size:.62rem;letter-spacing:.25em;text-transform:uppercase;color:var(--white);margin:0 0 1.75rem;display:flex;align-items:center;gap:.8rem}
-.section-title::before{content:'';display:block;width:24px;height:.5px;background:var(--white)}
-
-/* THREE-LAYER FRAMEWORK */
-.layer-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--rule);margin-bottom:4rem}
-@media(max-width:800px){.layer-grid{grid-template-columns:1fr}}
-.layer-card{background:var(--ink2);padding:2rem 1.75rem}
-.layer-num{font-family:var(--font-mono);font-size:.6rem;color:var(--cream3);letter-spacing:.15em;margin-bottom:1rem}
-.layer-card h3{font-family:var(--font-display);font-weight:400;font-size:1.3rem;color:var(--white);margin-bottom:.75rem}
-.layer-card p{font-size:.8rem;color:var(--cream2);line-height:1.75}
-
-/* CAPABILITY GRID */
-.cap-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--rule);margin-bottom:1px}
-@media(max-width:700px){.cap-grid{grid-template-columns:1fr}}
-.cap-card{background:var(--ink2);padding:1.75rem}
-.cap-card .cap-label{font-family:var(--font-mono);font-size:.5rem;letter-spacing:.14em;text-transform:uppercase;color:var(--cream3);margin-bottom:.6rem}
-.cap-card h4{font-family:var(--font-display);font-weight:400;font-size:1.1rem;color:var(--white);margin-bottom:.6rem}
-.cap-card p{font-size:.76rem;color:var(--cream2);line-height:1.7}
-.cap-card .status{
-  display:inline-flex;align-items:center;gap:.4rem;margin-top:1rem;
-  font-family:var(--font-mono);font-size:.48rem;letter-spacing:.1em;text-transform:uppercase;color:var(--cream3);
-}
-.cap-card .status .dot{width:5px;height:5px;border-radius:50%;background:var(--cream3)}
-
-footer.legal{
-  margin-top:4rem;padding:1.75rem;
-  border:.5px solid var(--rule);background:rgba(255,255,255,.02);
-}
-footer.legal p{font-family:var(--font-mono);font-size:.52rem;color:rgba(255,255,255,.3);line-height:1.85;letter-spacing:.02em}
-
-@media(max-width:768px){
-  nav{padding:1rem 1.5rem}
-  .hero{padding:4rem 1.5rem 3rem}
-  .main{padding:3rem 1.5rem}
-}
+body{background:var(--bg);color:var(--text);font-family:var(--body);font-weight:300;overflow-x:hidden}
+a{color:inherit}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(4,3,10,.92);backdrop-filter:blur(18px);border-bottom:1px solid var(--line);padding:1.05rem clamp(1rem,4vw,3.5rem);display:flex;align-items:center;justify-content:space-between;gap:2rem}
+.brand{display:flex;align-items:center;gap:.75rem;text-decoration:none}.diamond{width:28px;height:28px;border:1px solid rgba(255,255,255,.55);transform:rotate(45deg);position:relative}.diamond:after{content:'';position:absolute;inset:6px;border:1px solid rgba(255,255,255,.25)}
+.brand-main{font-family:var(--display);font-size:1.05rem;letter-spacing:.06em}.brand-sub{font-family:var(--mono);font-size:.48rem;letter-spacing:.22em;color:var(--muted2);text-transform:uppercase}
+.navlinks{display:flex;gap:1.6rem;align-items:center}.navlinks a{text-decoration:none;font-family:var(--mono);font-size:.56rem;letter-spacing:.15em;text-transform:uppercase;color:var(--muted)}.navlinks a:hover{color:#fff}
+.hero{min-height:100vh;padding:8rem clamp(1rem,5vw,4rem) 5rem;display:flex;align-items:flex-end;position:relative;overflow:hidden;background:radial-gradient(ellipse 70% 55% at 80% 20%,rgba(255,255,255,.055),transparent 58%),linear-gradient(180deg,#0A0812 0%,#04030A 70%)}
+.hero:before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);background-size:70px 70px;mask-image:linear-gradient(to bottom,black,transparent 78%)}
+.hero-inner{position:relative;z-index:2;max-width:1120px;width:100%}.eyebrow{font-family:var(--mono);font-size:.58rem;letter-spacing:.25em;text-transform:uppercase;color:var(--muted2);margin-bottom:1.3rem}.hero h1{font-family:var(--display);font-weight:300;font-size:clamp(3.2rem,8vw,7rem);line-height:.9;letter-spacing:.015em}.hero h1 em{display:block;font-weight:300;font-style:italic;color:var(--accent);font-size:.62em;margin-top:.25rem}.hero p{max-width:730px;font-size:1rem;line-height:1.95;color:var(--muted);margin:2rem 0 2.2rem;border-left:1px solid var(--line2);padding-left:1.25rem}.ctas{display:flex;flex-wrap:wrap;gap:.8rem}.btn{display:inline-block;text-decoration:none;font-family:var(--mono);font-size:.58rem;letter-spacing:.16em;text-transform:uppercase;padding:.95rem 1.35rem;border:1px solid var(--line2)}.btn.primary{background:#fff;color:#05040A;border-color:#fff}.btn:hover{transform:translateY(-1px)}
+.status-band{border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:var(--bg2);padding:1.1rem clamp(1rem,5vw,4rem);display:flex;justify-content:space-between;gap:1.5rem;flex-wrap:wrap}.status-item{font-family:var(--mono);font-size:.56rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted2)}.status-item b{color:#fff;font-weight:400}
+section{padding:7rem clamp(1rem,5vw,4rem)}.alt{background:var(--bg2);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}.wrap{max-width:1180px;margin:0 auto}.label{font-family:var(--mono);font-size:.56rem;letter-spacing:.22em;text-transform:uppercase;color:var(--muted2);margin-bottom:1rem}.title{font-family:var(--display);font-weight:300;font-size:clamp(2.2rem,4vw,3.6rem);line-height:1.06;max-width:850px}.lead{max-width:840px;color:var(--muted);font-size:.98rem;line-height:2;margin-top:1.35rem}
+.metrics{display:grid;grid-template-columns:repeat(5,1fr);gap:1px;background:var(--line);margin-top:3rem;border:1px solid var(--line)}.metric{background:var(--bg2);padding:1.7rem 1.35rem}.metric .v{font-family:var(--display);font-size:2.1rem;font-style:italic}.metric .k{font-family:var(--mono);font-size:.5rem;letter-spacing:.13em;text-transform:uppercase;color:var(--muted2);margin-top:.35rem;line-height:1.5}.metric.good .v{color:var(--green)}.metric.bad .v{color:var(--red)}
+.notice{margin-top:1rem;border:1px solid var(--line);padding:1rem 1.25rem;background:rgba(255,255,255,.025);font-family:var(--mono);font-size:.57rem;line-height:1.75;color:var(--muted2)}.notice strong{color:var(--muted);font-weight:400}
+.arch{display:grid;grid-template-columns:repeat(7,1fr);gap:1px;background:var(--line);margin-top:3rem}.arch-card{background:var(--bg3);padding:1.5rem 1rem;min-height:150px}.arch-n{font-family:var(--mono);font-size:.48rem;letter-spacing:.16em;color:var(--muted2);margin-bottom:.9rem}.arch-card h3{font-family:var(--display);font-size:1.25rem;font-weight:400;margin-bottom:.6rem}.arch-card p{font-size:.76rem;line-height:1.75;color:var(--muted)}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);margin-top:3rem}.card{background:var(--bg2);padding:2.4rem 2rem}.card h3{font-family:var(--display);font-size:1.55rem;font-weight:400;margin-bottom:.8rem}.card p{font-size:.86rem;line-height:1.9;color:var(--muted)}.card .mono{font-family:var(--mono);font-size:.5rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted2);margin-bottom:1rem}
+.pipeline{margin-top:3rem;border-top:1px solid var(--line)}.pipe-row{display:grid;grid-template-columns:80px 1.2fr 2fr;gap:1.5rem;padding:1.25rem 0;border-bottom:1px solid var(--line);align-items:start}.pipe-num{font-family:var(--mono);color:var(--muted2);font-size:.58rem}.pipe-row h4{font-family:var(--display);font-size:1.2rem;font-weight:400}.pipe-row p{font-size:.84rem;line-height:1.8;color:var(--muted)}
+.split{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:start}.quote{font-family:var(--display);font-size:clamp(1.8rem,3vw,2.7rem);font-style:italic;line-height:1.3;border-left:1px solid var(--line2);padding-left:1.4rem}.mini-list{display:grid;gap:1px;background:var(--line);margin-top:1.5rem}.mini{background:var(--bg2);padding:1.2rem}.mini b{display:block;font-family:var(--mono);font-size:.54rem;letter-spacing:.14em;text-transform:uppercase;margin-bottom:.35rem}.mini span{font-size:.8rem;line-height:1.7;color:var(--muted)}
+.footer{padding:3rem clamp(1rem,5vw,4rem);border-top:1px solid var(--line);background:#030208}.footer-grid{max-width:1180px;margin:0 auto;display:flex;justify-content:space-between;gap:2rem;flex-wrap:wrap}.footer p{font-family:var(--mono);font-size:.5rem;line-height:1.8;color:var(--muted2);max-width:760px}.footer a{text-decoration:none;color:var(--muted)}
+@media(max-width:1000px){.metrics{grid-template-columns:repeat(2,1fr)}.arch{grid-template-columns:repeat(2,1fr)}.grid3{grid-template-columns:1fr 1fr}.split{grid-template-columns:1fr}.navlinks a:nth-child(2){display:none}}
+@media(max-width:640px){nav{padding:.9rem 1rem}.navlinks{gap:.8rem}.navlinks a{font-size:.48rem}.hero{padding:7rem 1.2rem 3.5rem;min-height:88vh}.hero h1{font-size:clamp(3rem,18vw,4.7rem)}section{padding:4.5rem 1.2rem}.metrics,.arch,.grid3{grid-template-columns:1fr}.pipe-row{grid-template-columns:40px 1fr}.pipe-row p{grid-column:2}.status-band{padding:1rem 1.2rem}.brand-sub{display:none}}
 </style>
 </head>
 <body>
-
 <nav>
-  <div class="nav-logo">
-    <div style="display:flex;flex-direction:column;line-height:1.1">
-      <div class="nav-logo-main">Ascenda</div>
-      <div class="nav-logo-sub">Enterprise Capital</div>
-    </div>
+  <a class="brand" href="/">
+    <span class="diamond"></span>
+    <span><span class="brand-main">Ascenda Enterprise Capital</span><br><span class="brand-sub">Quantitative Research & Technology</span></span>
+  </a>
+  <div class="navlinks">
+    <a href="#architecture">Architecture</a>
+    <a href="#research">Research</a>
+    <a href="/AEC-Wire/">AEC Wire</a>
+    <a href="/">Main Site</a>
   </div>
-  <div class="nav-status"><span class="dot"></span>Quant System — Coming Soon</div>
-  <a href="aec-performance.html" class="nav-back">← Back to Portal</a>
 </nav>
 
-<section class="hero">
+<header class="hero">
   <div class="hero-inner">
-    <div class="badge-soon"><span class="pulse"></span>Coming Soon</div>
-    <div class="eyebrow">Private Investor Portal</div>
-    <h1>The Quant <em>System</em></h1>
-    <p class="hero-sub">A three-layer signal framework and full institutional risk infrastructure, built from the ground up. Live investor-facing metrics from this system will appear here once broker and data feed integration is complete.</p>
+    <div class="eyebrow">Ascenda Enterprise Capital · Proprietary Research Platform</div>
+    <h1>AECQS<em>AEC Quantitative System</em></h1>
+    <p>AECQS is Ascenda Enterprise Capital's independently developed quantitative research, analysis and execution architecture. It is being engineered to research, test, evaluate and systematically organize multiple strategy families through a unified framework spanning market structure, statistical analysis, liquidity, order flow, volatility, momentum, mean reversion, portfolio construction and defined risk controls.</p>
+    <div class="ctas">
+      <a class="btn primary" href="#checkpoint">View Current Checkpoint</a>
+      <a class="btn" href="#architecture">Explore Architecture</a>
+      <a class="btn" href="/AEC-Wire/">Open AEC Wire</a>
+    </div>
+  </div>
+</header>
+
+<div class="status-band">
+  <div class="status-item">Development Status · <b>Active Research & Development</b></div>
+  <div class="status-item">Current Program · <b>AECQS-30</b></div>
+  <div class="status-item">Primary Research Focus · <b>NQ Futures</b></div>
+  <div class="status-item">Strategy Program · <b>1,000+ Candidates / Variants Under Research</b></div>
+</div>
+
+<section id="checkpoint">
+  <div class="wrap">
+    <div class="label">Current Development Checkpoint</div>
+    <h2 class="title">AECQS-30 — current cumulative research checkpoint</h2>
+    <p class="lead">This checkpoint represents the current state of AECQS historical backtest and simulated research. It is a development measurement, not a claim of live fund performance, investor returns or audited performance. The system remains under active development and the figures can change materially as research, execution logic, portfolio construction and validation evolve.</p>
+    <div class="metrics">
+      <div class="metric good"><div class="v">+$6.039M</div><div class="k">Current cumulative net backtest P&amp;L</div></div>
+      <div class="metric"><div class="v">25,507</div><div class="k">Accepted historical backtest trades</div></div>
+      <div class="metric"><div class="v">45.42%</div><div class="k">Win rate</div></div>
+      <div class="metric"><div class="v">1.131</div><div class="k">Profit factor</div></div>
+      <div class="metric bad"><div class="v">-$367K</div><div class="k">Maximum drawdown</div></div>
+    </div>
+    <div class="notice"><strong>Research disclosure:</strong> Historical backtest/simulated research results only. Figures represent the current AECQS development checkpoint and are not live or audited investment performance. AECQS remains under active research and development. Past or simulated results do not guarantee future results.</div>
   </div>
 </section>
 
-<div class="main">
-
-  <div class="section-title">The Three-Layer Framework</div>
-  <div class="layer-grid">
-    <div class="layer-card">
-      <div class="layer-num">Layer I</div>
-      <h3>Momentum Engine</h3>
-      <p>Multi-timeframe trend alignment and momentum strength scoring. No trade is considered unless higher and lower timeframe direction agree.</p>
-    </div>
-    <div class="layer-card">
-      <div class="layer-num">Layer II</div>
-      <h3>Z-Score Statistical Deviation</h3>
-      <p>Measures how far price has moved from its statistical baseline, filtering out entries that are already too extended to chase.</p>
-    </div>
-    <div class="layer-card">
-      <div class="layer-num">Layer III</div>
-      <h3>DOM &amp; Order Flow</h3>
-      <p>Reads the order book directly — order flow delta, absorption, and institutional footprint scoring confirm real participation before entry.</p>
+<section class="alt" id="architecture">
+  <div class="wrap">
+    <div class="label">System Architecture</div>
+    <h2 class="title">A multi-stage quantitative research and execution architecture.</h2>
+    <p class="lead">AECQS is designed as an integrated architecture rather than a single trading strategy. Each layer has a distinct job: generating hypotheses, measuring regimes, combining signals, controlling portfolio risk, executing rules and validating whether research survives realistic constraints.</p>
+    <div class="arch">
+      <div class="arch-card"><div class="arch-n">01</div><h3>Research Engine</h3><p>Generates, transforms and evaluates quantitative hypotheses across historical market data.</p></div>
+      <div class="arch-card"><div class="arch-n">02</div><h3>Strategy Engine</h3><p>Encodes strategy families, parameter sets, entries, exits, filters and position logic.</p></div>
+      <div class="arch-card"><div class="arch-n">03</div><h3>Regime Analysis</h3><p>Classifies market context using volatility, trend, structure, time and participation conditions.</p></div>
+      <div class="arch-card"><div class="arch-n">04</div><h3>Signal &amp; Confluence</h3><p>Combines independent evidence including structure, liquidity, order flow, momentum and statistical conditions.</p></div>
+      <div class="arch-card"><div class="arch-n">05</div><h3>Portfolio &amp; Risk</h3><p>Controls exposure, sizing, strategy interaction, drawdown behavior and portfolio-level constraints.</p></div>
+      <div class="arch-card"><div class="arch-n">06</div><h3>Execution Engine</h3><p>Translates approved signals into deterministic execution logic with defined operational controls.</p></div>
+      <div class="arch-card"><div class="arch-n">07</div><h3>Validation &amp; Monitoring</h3><p>Tracks robustness, failure modes, out-of-sample behavior and ongoing system diagnostics.</p></div>
     </div>
   </div>
+</section>
 
-  <div class="section-title">System Capabilities</div>
-  <div class="cap-grid">
-    <div class="cap-card">
-      <div class="cap-label">Signal &amp; Risk Engine</div>
-      <h4>71-Component Analytics Library</h4>
-      <p>Position sizing, options Greeks, and a full institutional performance suite — Sharpe, Sortino, Calmar, Value at Risk, Monte Carlo risk-of-ruin, and more — run against every strategy.</p>
-      <div class="status"><span class="dot"></span>Built &amp; Tested</div>
-    </div>
-    <div class="cap-card">
-      <div class="cap-label">Portfolio Risk</div>
-      <h4>Cross-Strategy Risk Management</h4>
-      <p>Portfolio-level Value at Risk, correlation-aware position sizing, concentration and leverage limits, and an automatic circuit breaker on daily loss thresholds.</p>
-      <div class="status"><span class="dot"></span>Built &amp; Tested</div>
-    </div>
-    <div class="cap-card">
-      <div class="cap-label">Compliance &amp; Audit</div>
-      <h4>Tamper-Evident Trade Ledger</h4>
-      <p>Every signal and trade decision is recorded in a hash-chained audit log, with automated reconciliation against broker statements.</p>
-      <div class="status"><span class="dot"></span>Built &amp; Tested</div>
-    </div>
-    <div class="cap-card">
-      <div class="cap-label">Backtesting</div>
-      <h4>Walk-Forward Validation</h4>
-      <p>Strategies are validated out-of-sample using rolling walk-forward windows, transaction cost modeling, and regime stress testing — not a single in-sample curve.</p>
-      <div class="status"><span class="dot"></span>Built &amp; Tested</div>
-    </div>
-    <div class="cap-card">
-      <div class="cap-label">Execution</div>
-      <h4>Broker-Agnostic Order Infrastructure</h4>
-      <p>A unified order lifecycle and broker interface designed to connect to any execution venue without changing strategy logic.</p>
-      <div class="status"><span class="dot"></span>Broker Integration Pending</div>
-    </div>
-    <div class="cap-card">
-      <div class="cap-label">Live Data</div>
-      <h4>Real-Time Dashboard Feed</h4>
-      <p>Once connected, live performance from this system will populate the Performance &amp; Fund Metrics page automatically.</p>
-      <div class="status"><span class="dot"></span>Coming Soon</div>
+<section id="research">
+  <div class="wrap">
+    <div class="label">Research Program</div>
+    <h2 class="title">Broader than one model, one indicator or one market condition.</h2>
+    <div class="grid3">
+      <div class="card"><div class="mono">Market Structure</div><h3>Structure &amp; Liquidity</h3><p>Research includes higher-timeframe location, prior highs and lows, liquidity interaction, displacement, breaks of structure, retests and response behavior around key market locations.</p></div>
+      <div class="card"><div class="mono">Statistical Research</div><h3>Mean Reversion &amp; Distribution</h3><p>Statistical components evaluate standardized deviation, reversion behavior, volatility regimes, distribution shifts and the conditions under which statistical relationships remain useful.</p></div>
+      <div class="card"><div class="mono">Participation</div><h3>Order Flow &amp; Volume</h3><p>AECQS research incorporates participation data and concepts such as aggressive buying/selling, absorption, exhaustion, volume concentration and liquidity response where suitable data is available.</p></div>
+      <div class="card"><div class="mono">Trend</div><h3>Momentum &amp; Continuation</h3><p>Momentum and continuation families evaluate directional persistence, breakout quality, volatility expansion, multi-timeframe alignment and trend-state filters.</p></div>
+      <div class="card"><div class="mono">Value</div><h3>VWAP &amp; Market Location</h3><p>Value-oriented research uses VWAP, deviation bands, profile concepts and contextual price location to distinguish extension, acceptance, rejection and reversion environments.</p></div>
+      <div class="card"><div class="mono">Portfolio Engineering</div><h3>Strategy Interaction</h3><p>Individual models are evaluated not only in isolation but also by how they interact, compete for entries, concentrate risk and change overall portfolio behavior.</p></div>
     </div>
   </div>
+</section>
 
-  <footer class="legal">
-    <p>The Quant System described on this page is proprietary technology developed by Ascenda Enterprise Capital LLC. Descriptions here are informational and do not constitute a performance guarantee, investment recommendation, or offer of any kind. Live performance data, once available, will be clearly labeled as such and subject to the same disclosures found on the Performance &amp; Fund Metrics page.</p>
-  </footer>
+<section class="alt">
+  <div class="wrap">
+    <div class="label">Research Workflow</div>
+    <h2 class="title">From idea to accepted system behavior.</h2>
+    <div class="pipeline">
+      <div class="pipe-row"><div class="pipe-num">01</div><h4>Hypothesis</h4><p>Define a market behavior or structural relationship that can be stated clearly enough to test.</p></div>
+      <div class="pipe-row"><div class="pipe-num">02</div><h4>Implementation</h4><p>Translate the hypothesis into deterministic rules, data requirements and measurable outcomes.</p></div>
+      <div class="pipe-row"><div class="pipe-num">03</div><h4>Historical Testing</h4><p>Measure trade behavior, profitability, drawdown, distribution, regime dependence and failure modes across historical data.</p></div>
+      <div class="pipe-row"><div class="pipe-num">04</div><h4>Stress &amp; Robustness</h4><p>Challenge parameters, assumptions and execution logic to reduce dependence on fragile or overly specific conditions.</p></div>
+      <div class="pipe-row"><div class="pipe-num">05</div><h4>Portfolio Integration</h4><p>Evaluate whether a strategy improves the broader portfolio after exposure, overlap and shared-entry constraints are considered.</p></div>
+      <div class="pipe-row"><div class="pipe-num">06</div><h4>Monitoring</h4><p>Track the behavior of accepted research as the system evolves, with the expectation that models can be revised, suspended or replaced as evidence changes.</p></div>
+    </div>
+  </div>
+</section>
 
-</div>
+<section>
+  <div class="wrap split">
+    <div>
+      <div class="label">Development Philosophy</div>
+      <div class="quote">“The objective is not to make a backtest look perfect. The objective is to build a research process strong enough to reveal what survives.”</div>
+    </div>
+    <div>
+      <h2 class="title" style="font-size:2.25rem">Evidence before promotion.</h2>
+      <p class="lead" style="margin-top:1rem">AECQS development emphasizes empirical iteration, one-change-at-a-time testing where practical, explicit risk accounting, separation of research from live performance, and continuous examination of why strategies work or fail. Weak strategies are not automatically discarded solely because they lose; the research process first attempts to identify whether the underlying behavior can be improved without curve fitting.</p>
+      <div class="mini-list">
+        <div class="mini"><b>Research vs. Live</b><span>Backtest and simulation data are labeled separately from any documented live trading activity.</span></div>
+        <div class="mini"><b>System Evolution</b><span>AECQS is not locked to a fixed number of systems. Strategy families, variants and portfolio construction can change as development progresses.</span></div>
+        <div class="mini"><b>Proprietary Boundary</b><span>Public materials describe architecture and research principles without publishing proprietary strategy mechanics, source code or protected execution logic.</span></div>
+      </div>
+    </div>
+  </div>
+</section>
 
+<section class="alt">
+  <div class="wrap split">
+    <div>
+      <div class="label">Technology &amp; Development</div>
+      <h2 class="title">Built as internal quantitative infrastructure.</h2>
+      <p class="lead">AECQS is being developed as proprietary internal research technology for Ascenda Enterprise Capital. Its purpose is to organize strategy research, validation, portfolio construction and execution logic in a repeatable framework while preserving clear boundaries between exploratory research, accepted research and live implementation.</p>
+    </div>
+    <div class="mini-list" style="margin-top:0">
+      <div class="mini"><b>Research Stack</b><span>Historical data processing, strategy backtesting, statistical analysis, validation and research reporting.</span></div>
+      <div class="mini"><b>Execution Stack</b><span>Rule-based signal handling, position logic, risk controls and broker/exchange integration where deployed.</span></div>
+      <div class="mini"><b>Monitoring Stack</b><span>Trade records, portfolio diagnostics, status reporting, performance segmentation and system-level monitoring.</span></div>
+      <div class="mini"><b>Primary Development Market</b><span>Nasdaq-100 E-mini futures (NQ), with architecture designed to support broader research as data and validation permit.</span></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="label">Access &amp; Inquiries</div>
+    <h2 class="title">AECQS is proprietary to Ascenda Enterprise Capital.</h2>
+    <p class="lead">Public information is limited to high-level architecture, research methodology and selected development checkpoints. Proprietary strategy mechanics, code, parameters, private research files and execution logic are not published on this site.</p>
+    <div class="ctas" style="margin-top:2rem">
+      <a class="btn primary" href="/AEC-Wire/">Open AEC Wire</a>
+      <a class="btn" href="/#contact">Institutional Inquiry</a>
+      <a class="btn" href="/">Return to AEC</a>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="footer-grid">
+    <p>© 2026 Ascenda Enterprise Capital LLC. AECQS is a proprietary research and development platform. Historical backtest and simulated research results are not live or audited investment performance and are not guarantees of future results. Nothing on this page constitutes an offer to sell or a solicitation to buy any security or investment product.</p>
+    <p><a href="/">Ascenda Enterprise Capital</a> · <a href="/AEC-Wire/">AEC Wire</a></p>
+  </div>
+</footer>
 </body>
 </html>
