@@ -1539,8 +1539,60 @@ section[style*="padding:8rem"]{padding-top:4.25rem!important;padding-bottom:4.25
 }
 </style>
 
+
+<style id="aec-performance-v5">
+.aec-deferred-embed{
+  position:relative;
+  width:100%;
+  background:
+    radial-gradient(circle at 50% 45%,rgba(201,168,76,.09),transparent 34%),
+    #050505;
+}
+.aec-video-frame.aec-deferred-embed{aspect-ratio:16/9}
+.aec-calendar-deferred{height:610px}
+.aec-load-embed{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  border:0;
+  cursor:pointer;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:.55rem;
+  background:transparent;
+  color:var(--cream3);
+  font-family:var(--font-mono);
+  font-size:.48rem;
+  letter-spacing:.1em;
+  text-transform:uppercase;
+}
+.aec-load-embed:hover{color:var(--white);background:rgba(255,255,255,.025)}
+.aec-play{
+  width:36px;
+  height:36px;
+  display:grid;
+  place-items:center;
+  border:1px solid rgba(201,168,76,.45);
+  border-radius:50%;
+  color:var(--gold3);
+  font-size:.72rem;
+}
+.aec-deferred-embed iframe{
+  position:absolute;
+  inset:0;
+  width:100%!important;
+  height:100%!important;
+  max-width:100%!important;
+  border:0;
+}
+@media(max-width:980px){.aec-calendar-deferred{height:520px}}
+</style>
+
 </head>
-<body data-aec-build="layout-v4-9feeds-investing-rail">
+<body data-aec-build="performance-v5-click-to-load">
 
 <!-- ══════════════════════════════════
      LANDING PAGE — 4 PATH SELECTOR
@@ -2193,39 +2245,84 @@ section[style*="padding:8rem"]{padding-top:4.25rem!important;padding-bottom:4.25
       <div class="aec-feed-grid">
       <article class="aec-feed-card">
   <header><span class="aec-live-dot"></span><span>Bloomberg</span></header>
-  <div class="aec-video-frame"><iframe src="https://www.youtube.com/embed/QB5BNdBFujE?autoplay=1&mute=1&playsinline=1" loading="lazy" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe></div>
+  <div class="aec-video-frame aec-deferred-embed" data-embed="https://www.youtube.com/embed/QB5BNdBFujE?autoplay=1&mute=1&playsinline=1">
+    <button class="aec-load-embed" type="button" aria-label="Load live video">
+      <span class="aec-play">▶</span>
+      <span>Load live feed</span>
+    </button>
+  </div>
 </article>
 <article class="aec-feed-card">
   <header><span class="aec-live-dot"></span><span>Yahoo Finance</span></header>
-  <div class="aec-video-frame"><iframe src="https://www.youtube.com/embed/KQp-e_XQnDE?autoplay=1&mute=1&playsinline=1" loading="lazy" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe></div>
+  <div class="aec-video-frame aec-deferred-embed" data-embed="https://www.youtube.com/embed/KQp-e_XQnDE?autoplay=1&mute=1&playsinline=1">
+    <button class="aec-load-embed" type="button" aria-label="Load live video">
+      <span class="aec-play">▶</span>
+      <span>Load live feed</span>
+    </button>
+  </div>
 </article>
 <article class="aec-feed-card">
   <header><span class="aec-live-dot"></span><span>LiveNOW</span></header>
-  <div class="aec-video-frame"><iframe src="https://www.youtube.com/embed/C96oohpWBGw?autoplay=1&mute=1&playsinline=1" loading="lazy" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe></div>
+  <div class="aec-video-frame aec-deferred-embed" data-embed="https://www.youtube.com/embed/C96oohpWBGw?autoplay=1&mute=1&playsinline=1">
+    <button class="aec-load-embed" type="button" aria-label="Load live video">
+      <span class="aec-play">▶</span>
+      <span>Load live feed</span>
+    </button>
+  </div>
 </article>
 <article class="aec-feed-card">
   <header><span class="aec-live-dot"></span><span>Reuters</span></header>
-  <div class="aec-video-frame"><iframe src="https://www.youtube.com/embed/live_stream?channel=UCjTMxYSAvQ9DNPYjtxNgkCw&autoplay=1&mute=1&playsinline=1" loading="lazy" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe></div>
+  <div class="aec-video-frame aec-deferred-embed" data-embed="https://www.youtube.com/embed/live_stream?channel=UCjTMxYSAvQ9DNPYjtxNgkCw&autoplay=1&mute=1&playsinline=1">
+    <button class="aec-load-embed" type="button" aria-label="Load live video">
+      <span class="aec-play">▶</span>
+      <span>Load live feed</span>
+    </button>
+  </div>
 </article>
 <article class="aec-feed-card">
   <header><span class="aec-live-dot"></span><span>NBC News NOW</span></header>
-  <div class="aec-video-frame"><iframe src="https://www.youtube.com/embed/live_stream?channel=UCdUCBzZCacPI61FdL7x9yvQ&autoplay=1&mute=1&playsinline=1" loading="lazy" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe></div>
+  <div class="aec-video-frame aec-deferred-embed" data-embed="https://www.youtube.com/embed/live_stream?channel=UCdUCBzZCacPI61FdL7x9yvQ&autoplay=1&mute=1&playsinline=1">
+    <button class="aec-load-embed" type="button" aria-label="Load live video">
+      <span class="aec-play">▶</span>
+      <span>Load live feed</span>
+    </button>
+  </div>
 </article>
 <article class="aec-feed-card">
   <header><span class="aec-live-dot"></span><span>Fox Business</span></header>
-  <div class="aec-video-frame"><iframe src="https://www.youtube.com/embed/live_stream?channel=UC7UQyQ1NRIAIDMKn75WYwlw&autoplay=1&mute=1&playsinline=1" loading="lazy" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe></div>
+  <div class="aec-video-frame aec-deferred-embed" data-embed="https://www.youtube.com/embed/live_stream?channel=UC7UQyQ1NRIAIDMKn75WYwlw&autoplay=1&mute=1&playsinline=1">
+    <button class="aec-load-embed" type="button" aria-label="Load live video">
+      <span class="aec-play">▶</span>
+      <span>Load live feed</span>
+    </button>
+  </div>
 </article>
 <article class="aec-feed-card">
   <header><span class="aec-live-dot"></span><span>ABC News Live</span></header>
-  <div class="aec-video-frame"><iframe src="https://www.youtube.com/embed/-mvUkiILTqI?autoplay=1&mute=1&playsinline=1" loading="lazy" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe></div>
+  <div class="aec-video-frame aec-deferred-embed" data-embed="https://www.youtube.com/embed/-mvUkiILTqI?autoplay=1&mute=1&playsinline=1">
+    <button class="aec-load-embed" type="button" aria-label="Load live video">
+      <span class="aec-play">▶</span>
+      <span>Load live feed</span>
+    </button>
+  </div>
 </article>
 <article class="aec-feed-card">
   <header><span class="aec-live-dot"></span><span>CBS News 24/7</span></header>
-  <div class="aec-video-frame"><iframe src="https://www.youtube.com/embed/WFvOChuI2cg?autoplay=1&mute=1&playsinline=1" loading="lazy" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe></div>
+  <div class="aec-video-frame aec-deferred-embed" data-embed="https://www.youtube.com/embed/WFvOChuI2cg?autoplay=1&mute=1&playsinline=1">
+    <button class="aec-load-embed" type="button" aria-label="Load live video">
+      <span class="aec-play">▶</span>
+      <span>Load live feed</span>
+    </button>
+  </div>
 </article>
 <article class="aec-feed-card">
   <header><span class="aec-live-dot"></span><span>CNBC</span></header>
-  <div class="aec-video-frame"><iframe src="https://www.youtube.com/embed/live_stream?channel=UCrp_UI8XtuYfpiqluWLD7Lw&autoplay=1&mute=1&playsinline=1" loading="lazy" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe></div>
+  <div class="aec-video-frame aec-deferred-embed" data-embed="https://www.youtube.com/embed/live_stream?channel=UCrp_UI8XtuYfpiqluWLD7Lw&autoplay=1&mute=1&playsinline=1">
+    <button class="aec-load-embed" type="button" aria-label="Load live video">
+      <span class="aec-play">▶</span>
+      <span>Load live feed</span>
+    </button>
+  </div>
 </article>
     </div>
   </div>
@@ -2455,16 +2552,12 @@ section[style*="padding:8rem"]{padding-top:4.25rem!important;padding-bottom:4.25
           <strong>Economic Calendar</strong>
           <small>Investing.com · High &amp; medium impact events</small>
         </div>
-        <iframe
-          src="https://sslecal2.investing.com?columns=exc_flags,exc_currency,exc_importance,exc_actual,exc_forecast,exc_previous&importance=3,2&features=datepicker,timezone&countries=25,32,6,37,72,22,17,39,14,10,35,43,56,36,110,11,26,12,4,5&calType=week&timeZone=8&lang=1"
-          width="100%"
-          height="610"
-          frameborder="0"
-          allowtransparency="true"
-          marginwidth="0"
-          marginheight="0"
-          loading="lazy"
-          title="Investing.com Economic Calendar"></iframe>
+        <div class="aec-calendar-deferred aec-deferred-embed" data-embed="https://sslecal2.investing.com?columns=exc_flags,exc_currency,exc_importance,exc_actual,exc_forecast,exc_previous&importance=3,2&features=datepicker,timezone&countries=25,32,6,37,72,22,17,39,14,10,35,43,56,36,110,11,26,12,4,5&calType=week&timeZone=8&lang=1" data-title="Investing.com Economic Calendar">
+      <button class="aec-load-embed" type="button" aria-label="Load economic calendar">
+        <span class="aec-play">↗</span>
+        <span>Load economic calendar</span>
+      </button>
+    </div>
         <div class="aec-rail-note">CPI · PPI · FOMC · NFP · GDP · Rates · Global macro events</div>
       </aside>
     </div>
@@ -4466,11 +4559,45 @@ function toggleFaq(el) {
     <h3 style="font-family:var(--font-display);font-size:1.5rem;font-weight:300;color:var(--white);margin-bottom:1rem">Economic Calendar</h3>
     <div style="font-family:var(--font-mono);font-size:.5rem;letter-spacing:.06em;text-transform:uppercase;color:var(--cream3);margin-bottom:1rem">CPI · PPI · FOMC · NFP · GDP -- High &amp; Medium Impact Events -- Eastern Time</div>
     <div style="width:100%;overflow:hidden;border:.5px solid var(--rule)">
-      <iframe src="https://sslecal2.investing.com?columns=exc_flags,exc_currency,exc_importance,exc_actual,exc_forecast,exc_previous&importance=3,2&features=datepicker,timezone&countries=25,32,6,37,72,22,17,39,14,10,35,43,56,36,110,11,26,12,4,5&calType=week&timeZone=8&lang=1"
+      <iframe loading="lazy" src="https://sslecal2.investing.com?columns=exc_flags,exc_currency,exc_importance,exc_actual,exc_forecast,exc_previous&importance=3,2&features=datepicker,timezone&countries=25,32,6,37,72,22,17,39,14,10,35,43,56,36,110,11,26,12,4,5&calType=week&timeZone=8&lang=1"
         width="100%" height="500" frameborder="0" allowtransparency="true" marginwidth="0" marginheight="0"
         style="border:none;background:transparent;filter:invert(1) hue-rotate(180deg)"></iframe>
     </div>
   </div>
 </div>
+
+<script id="aec-performance-loader-v5">
+(function(){
+  function loadEmbed(box){
+    if(!box || box.dataset.loaded === "1") return;
+    var src = box.dataset.embed;
+    if(!src) return;
+    var iframe = document.createElement("iframe");
+    iframe.src = src;
+    iframe.loading = "lazy";
+    iframe.allow = "autoplay; encrypted-media; picture-in-picture";
+    iframe.allowFullscreen = true;
+    iframe.referrerPolicy = "strict-origin-when-cross-origin";
+    iframe.title = box.dataset.title || "AEC embedded content";
+    box.dataset.loaded = "1";
+    box.innerHTML = "";
+    box.appendChild(iframe);
+  }
+
+  document.addEventListener("click", function(e){
+    var btn = e.target.closest(".aec-load-embed");
+    if(btn) loadEmbed(btn.closest(".aec-deferred-embed"));
+  });
+
+  /* After the core page is interactive, preload only lightweight same-page work.
+     Heavy external video/calendar embeds remain user-initiated. */
+  if("requestIdleCallback" in window){
+    requestIdleCallback(function(){ document.documentElement.dataset.aecIdleReady = "1"; }, {timeout:2000});
+  }else{
+    setTimeout(function(){ document.documentElement.dataset.aecIdleReady = "1"; }, 1200);
+  }
+})();
+</script>
+
 </body>
 </html>
