@@ -1119,6 +1119,119 @@ html,body{max-width:100vw;overflow-x:hidden}
 @media(max-width:520px){
   .aecqs-metric-grid{grid-template-columns:1fr !important}
 }
+
+/* ═══════════════════════════════════════════════════════
+   AEC COMPACT DESKTOP LAYOUT — 2026-09
+   Prevent horizontal overflow, reduce dead space, and keep
+   dense market/research information inside the viewport.
+═══════════════════════════════════════════════════════ */
+html,body{max-width:100%;overflow-x:hidden!important}
+*{box-sizing:border-box}
+nav{padding:.72rem clamp(1rem,2.4vw,2.25rem)!important;gap:1rem}
+.nav-logo{flex:0 0 auto}
+.nav-logo-main{font-size:.88rem!important}
+.nav-logo-sub{font-size:.39rem!important;letter-spacing:.18em!important}
+.nav-links{
+  flex:1 1 auto!important;
+  min-width:0!important;
+  justify-content:flex-end!important;
+  gap:clamp(.55rem,1.15vw,1.25rem)!important;
+  flex-wrap:nowrap!important;
+}
+.nav-links a{
+  font-size:clamp(.43rem,.52vw,.54rem)!important;
+  letter-spacing:clamp(.08em,.12vw,.15em)!important;
+  white-space:nowrap!important;
+}
+.nav-cta{padding:.42rem .72rem!important}
+#market-status{font-size:.43rem!important;white-space:nowrap}
+#theme-toggle{width:29px!important;height:29px!important;font-size:.72rem!important}
+nav button[onclick*="econ-calendar"]{font-size:.44rem!important;padding:.42rem .62rem!important;letter-spacing:.1em!important}
+
+/* Compress the top information stack. */
+#visitor-bar{padding:.25rem clamp(1rem,2.4vw,2.25rem)!important}
+.tradingview-widget-container{max-width:100%!important;overflow:hidden!important}
+.market-clock-section{padding:.55rem clamp(1rem,2.4vw,2.25rem)!important}
+
+/* The old 100vh hero created the large empty black field in the screenshot. */
+.hero{
+  min-height:clamp(560px,68vh,720px)!important;
+  padding:5.4rem clamp(1.25rem,4vw,3.5rem) 2.4rem!important;
+  justify-content:center!important;
+}
+.hero-content{
+  max-width:760px!important;
+  gap:1.6rem!important;
+  margin-top:1.5rem!important;
+}
+.hero-left h1{
+  font-size:clamp(2.25rem,4vw,3.7rem)!important;
+  margin-bottom:1rem!important;
+}
+.hero-left p{
+  max-width:620px!important;
+  font-size:.88rem!important;
+  line-height:1.7!important;
+  margin-bottom:1.15rem!important;
+}
+.hero-ctas{gap:.65rem!important}
+.hero-ctas a,.hero-ctas button{padding:.72rem 1.2rem!important}
+.hero-diamond-deco{width:min(18vw,220px)!important;height:min(18vw,220px)!important;right:5%!important}
+
+/* Compact the information bars immediately below the hero. */
+.hero + div,
+.hero + div + div{
+  max-width:100%!important;
+}
+#live-tv{
+  padding:2.75rem clamp(1rem,3vw,2.5rem) 1.75rem!important;
+}
+#live-tv h2{margin-bottom:.45rem!important}
+#live-tv .sec-label{margin-bottom:.45rem!important}
+
+/* 9 feeds: three clean rows of three. */
+.aec-live-layout{
+  display:grid!important;
+  grid-template-columns:minmax(0,1fr) 300px!important;
+  gap:1rem!important;
+  align-items:start!important;
+}
+.aec-live-grid{
+  display:grid!important;
+  grid-template-columns:repeat(3,minmax(0,1fr))!important;
+  gap:.7rem!important;
+}
+.aec-live-card{min-width:0!important}
+.aec-live-card .feed-head{padding:.48rem .62rem!important}
+.aec-live-card iframe{display:block!important;width:100%!important}
+.aec-econ-calendar{position:sticky!important;top:62px!important}
+.aec-econ-calendar iframe{height:560px!important}
+
+/* General density pass for the largest desktop sections. */
+@media(min-width:901px){
+  .statement{padding:3.5rem clamp(1.5rem,4vw,3.5rem)!important}
+  .aum-band{padding:2rem clamp(1.5rem,4vw,3.5rem)!important}
+  #performance,#strategy,#markets,#network,#research,#faq,#about,#contact{
+    scroll-margin-top:76px;
+  }
+}
+@media(max-width:1180px){
+  .nav-links{gap:.65rem!important}
+  nav button[onclick*="econ-calendar"]{display:none!important}
+  #market-status{display:none!important}
+  .aec-live-layout{grid-template-columns:1fr!important}
+  .aec-econ-calendar{position:relative!important;top:auto!important}
+  .aec-econ-calendar iframe{height:460px!important}
+}
+@media(max-width:900px){
+  .hero{min-height:auto!important;padding:5.5rem 1.15rem 2.2rem!important}
+  .hero-diamond-deco{opacity:.25!important;width:180px!important;height:180px!important}
+  .aec-live-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+}
+@media(max-width:620px){
+  .aec-live-grid{grid-template-columns:1fr!important}
+}
+
 </style>
 
 <style>
@@ -1554,10 +1667,8 @@ html,body{max-width:100vw;overflow-x:hidden}
     <a href="#strategy" onclick="closeNav()">Strategy</a>
     <a href="#markets" onclick="closeNav()">Markets</a>
     <a href="#equity-curve" onclick="closeNav()">Equity Curve</a>
-    <a href="#live-markets" onclick="closeNav()">Markets</a>
     <a href="#network" onclick="closeNav()">Network</a>
     <a href="#join" onclick="closeNav()">Join</a>
-    <a href="#video" onclick="closeNav()">About</a>
     <a href="#" onclick="document.getElementById('portal-modal').style.display='flex';return false;" onclick="closeNav()">Portal</a>
     <a href="https://ascendaenterprise-tech.github.io/AEC-Wire/" target="_blank" rel="noopener" onclick="closeNav()" style="color:#C8893A">Wire ↗</a>
     <a href="#research" onclick="closeNav()">Research</a>
@@ -1947,433 +2058,108 @@ html,body{max-width:100vw;overflow-x:hidden}
 <!-- MARKET SENTIMENT BAR -->
 
 <!-- LIVE MARKET COVERAGE -->
-<section style="padding:4rem clamp(1rem,5vw,3.5rem) 2rem;background:var(--ink);border-bottom:.5px solid var(--rule)" id="live-tv">
-  <div style="max-width:1400px;margin:0 auto">
+<section id="live-tv" style="padding:3rem clamp(1rem,4vw,3.5rem) 2rem;background:var(--ink);border-bottom:.5px solid var(--rule)">
+  <div style="max-width:1500px;margin:0 auto">
     <div class="sec-label">Real-Time Coverage</div>
     <h2 class="on-dark">Live Market <em>Coverage</em></h2>
-    <p style="font-family:var(--font-mono);font-size:.62rem;color:var(--cream3);margin-top:-.2rem;margin-bottom:2rem;letter-spacing:.06em">Nine real-time financial news feeds and the live economic calendar, side by side</p>
+    <p style="font-family:var(--font-mono);font-size:.58rem;color:var(--cream3);margin:.15rem 0 1.25rem;letter-spacing:.05em">Nine live financial/news feeds plus the economic calendar · streams are provided by their respective publishers</p>
 
-    <div style="display:grid;grid-template-columns:1fr 340px;gap:1.5rem;align-items:start">
-      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1rem">
-      <div style="border:.5px solid var(--rule);background:rgba(255,255,255,0.02);overflow:hidden">
-        <div style="display:flex;justify-content:space-between;align-items:center;padding:.65rem .85rem;border-bottom:.5px solid var(--rule)">
-          <span style="font-family:var(--font-mono);font-size:.52rem;letter-spacing:.08em;text-transform:uppercase;color:var(--white);display:flex;align-items:center;gap:5px"><span style="width:5px;height:5px;border-radius:50%;background:#E74C3C;display:inline-block;box-shadow:0 0 6px #E74C3C;animation:pulse 1.6s ease-in-out infinite"></span>Bloomberg</span>
-          <a href="https://www.youtube.com/watch?v=QB5BNdBFujE" target="_blank" rel="noopener" style="font-family:var(--font-mono);font-size:.42rem;letter-spacing:.05em;text-transform:uppercase;color:var(--cream3);text-decoration:none;border:.5px solid var(--rule);padding:.2rem .5rem">Open &#8599;</a>
+    <div class="aec-live-layout">
+      <div class="aec-live-grid">
+        
+        <div class="aec-live-card" style="border:.5px solid var(--rule);background:rgba(255,255,255,0.02);overflow:hidden">
+          <div class="feed-head" style="display:flex;justify-content:space-between;align-items:center;gap:.5rem;padding:.55rem .7rem;border-bottom:.5px solid var(--rule)">
+            <span style="min-width:0;font-family:var(--font-mono);font-size:.48rem;letter-spacing:.06em;text-transform:uppercase;color:var(--white);display:flex;align-items:center;gap:5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis"><span style="width:5px;height:5px;border-radius:50%;background:#E74C3C;display:inline-block;box-shadow:0 0 6px #E74C3C;animation:pulse 1.6s ease-in-out infinite;flex:0 0 auto"></span>Bloomberg</span>
+            <a href="https://www.youtube.com/watch?v=QB5BNdBFujE" target="_blank" rel="noopener" style="font-family:var(--font-mono);font-size:.4rem;letter-spacing:.04em;text-transform:uppercase;color:var(--cream3);text-decoration:none;border:.5px solid var(--rule);padding:.18rem .38rem;white-space:nowrap">Open ↗</a>
+          </div>
+          <div style="position:relative;aspect-ratio:16/9">
+            <iframe src="https://www.youtube.com/embed/QB5BNdBFujE?autoplay=1&mute=1&playsinline=1" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;border:none" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>
+          </div>
         </div>
-        <div style="position:relative;padding-bottom:56.25%;height:0">
-          <iframe src="https://www.youtube.com/embed/QB5BNdBFujE?autoplay=1&mute=1&playsinline=1" style="position:absolute;top:0;left:0;width:100%;height:100%;border:none" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>
+        <div class="aec-live-card" style="border:.5px solid var(--rule);background:rgba(255,255,255,0.02);overflow:hidden">
+          <div class="feed-head" style="display:flex;justify-content:space-between;align-items:center;gap:.5rem;padding:.55rem .7rem;border-bottom:.5px solid var(--rule)">
+            <span style="min-width:0;font-family:var(--font-mono);font-size:.48rem;letter-spacing:.06em;text-transform:uppercase;color:var(--white);display:flex;align-items:center;gap:5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis"><span style="width:5px;height:5px;border-radius:50%;background:#E74C3C;display:inline-block;box-shadow:0 0 6px #E74C3C;animation:pulse 1.6s ease-in-out infinite;flex:0 0 auto"></span>Yahoo Finance</span>
+            <a href="https://www.youtube.com/watch?v=KQp-e_XQnDE" target="_blank" rel="noopener" style="font-family:var(--font-mono);font-size:.4rem;letter-spacing:.04em;text-transform:uppercase;color:var(--cream3);text-decoration:none;border:.5px solid var(--rule);padding:.18rem .38rem;white-space:nowrap">Open ↗</a>
+          </div>
+          <div style="position:relative;aspect-ratio:16/9">
+            <iframe src="https://www.youtube.com/embed/KQp-e_XQnDE?autoplay=1&mute=1&playsinline=1" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;border:none" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>
+          </div>
+        </div>
+        <div class="aec-live-card" style="border:.5px solid var(--rule);background:rgba(255,255,255,0.02);overflow:hidden">
+          <div class="feed-head" style="display:flex;justify-content:space-between;align-items:center;gap:.5rem;padding:.55rem .7rem;border-bottom:.5px solid var(--rule)">
+            <span style="min-width:0;font-family:var(--font-mono);font-size:.48rem;letter-spacing:.06em;text-transform:uppercase;color:var(--white);display:flex;align-items:center;gap:5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis"><span style="width:5px;height:5px;border-radius:50%;background:#E74C3C;display:inline-block;box-shadow:0 0 6px #E74C3C;animation:pulse 1.6s ease-in-out infinite;flex:0 0 auto"></span>LiveNOW from FOX</span>
+            <a href="https://www.youtube.com/watch?v=C96oohpWBGw" target="_blank" rel="noopener" style="font-family:var(--font-mono);font-size:.4rem;letter-spacing:.04em;text-transform:uppercase;color:var(--cream3);text-decoration:none;border:.5px solid var(--rule);padding:.18rem .38rem;white-space:nowrap">Open ↗</a>
+          </div>
+          <div style="position:relative;aspect-ratio:16/9">
+            <iframe src="https://www.youtube.com/embed/C96oohpWBGw?autoplay=1&mute=1&playsinline=1" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;border:none" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>
+          </div>
+        </div>
+        <div class="aec-live-card" style="border:.5px solid var(--rule);background:rgba(255,255,255,0.02);overflow:hidden">
+          <div class="feed-head" style="display:flex;justify-content:space-between;align-items:center;gap:.5rem;padding:.55rem .7rem;border-bottom:.5px solid var(--rule)">
+            <span style="min-width:0;font-family:var(--font-mono);font-size:.48rem;letter-spacing:.06em;text-transform:uppercase;color:var(--white);display:flex;align-items:center;gap:5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis"><span style="width:5px;height:5px;border-radius:50%;background:#E74C3C;display:inline-block;box-shadow:0 0 6px #E74C3C;animation:pulse 1.6s ease-in-out infinite;flex:0 0 auto"></span>Reuters</span>
+            <a href="https://www.youtube.com/channel/UCjTMxYSAvQ9DNPYjtxNgkCw/live" target="_blank" rel="noopener" style="font-family:var(--font-mono);font-size:.4rem;letter-spacing:.04em;text-transform:uppercase;color:var(--cream3);text-decoration:none;border:.5px solid var(--rule);padding:.18rem .38rem;white-space:nowrap">Open ↗</a>
+          </div>
+          <div style="position:relative;aspect-ratio:16/9">
+            <iframe src="https://www.youtube.com/embed/live_stream?channel=UCjTMxYSAvQ9DNPYjtxNgkCw&autoplay=1&mute=1&playsinline=1" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;border:none" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>
+          </div>
+        </div>
+        <div class="aec-live-card" style="border:.5px solid var(--rule);background:rgba(255,255,255,0.02);overflow:hidden">
+          <div class="feed-head" style="display:flex;justify-content:space-between;align-items:center;gap:.5rem;padding:.55rem .7rem;border-bottom:.5px solid var(--rule)">
+            <span style="min-width:0;font-family:var(--font-mono);font-size:.48rem;letter-spacing:.06em;text-transform:uppercase;color:var(--white);display:flex;align-items:center;gap:5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis"><span style="width:5px;height:5px;border-radius:50%;background:#E74C3C;display:inline-block;box-shadow:0 0 6px #E74C3C;animation:pulse 1.6s ease-in-out infinite;flex:0 0 auto"></span>NBC News NOW</span>
+            <a href="https://www.youtube.com/channel/UCdUCBzZCacPI61FdL7x9yvQ/live" target="_blank" rel="noopener" style="font-family:var(--font-mono);font-size:.4rem;letter-spacing:.04em;text-transform:uppercase;color:var(--cream3);text-decoration:none;border:.5px solid var(--rule);padding:.18rem .38rem;white-space:nowrap">Open ↗</a>
+          </div>
+          <div style="position:relative;aspect-ratio:16/9">
+            <iframe src="https://www.youtube.com/embed/live_stream?channel=UCdUCBzZCacPI61FdL7x9yvQ&autoplay=1&mute=1&playsinline=1" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;border:none" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>
+          </div>
+        </div>
+        <div class="aec-live-card" style="border:.5px solid var(--rule);background:rgba(255,255,255,0.02);overflow:hidden">
+          <div class="feed-head" style="display:flex;justify-content:space-between;align-items:center;gap:.5rem;padding:.55rem .7rem;border-bottom:.5px solid var(--rule)">
+            <span style="min-width:0;font-family:var(--font-mono);font-size:.48rem;letter-spacing:.06em;text-transform:uppercase;color:var(--white);display:flex;align-items:center;gap:5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis"><span style="width:5px;height:5px;border-radius:50%;background:#E74C3C;display:inline-block;box-shadow:0 0 6px #E74C3C;animation:pulse 1.6s ease-in-out infinite;flex:0 0 auto"></span>Fox Business</span>
+            <a href="https://www.youtube.com/channel/UC7UQyQ1NRIAIDMKn75WYwlw/live" target="_blank" rel="noopener" style="font-family:var(--font-mono);font-size:.4rem;letter-spacing:.04em;text-transform:uppercase;color:var(--cream3);text-decoration:none;border:.5px solid var(--rule);padding:.18rem .38rem;white-space:nowrap">Open ↗</a>
+          </div>
+          <div style="position:relative;aspect-ratio:16/9">
+            <iframe src="https://www.youtube.com/embed/live_stream?channel=UC7UQyQ1NRIAIDMKn75WYwlw&autoplay=1&mute=1&playsinline=1" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;border:none" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>
+          </div>
+        </div>
+        <div class="aec-live-card" style="border:.5px solid var(--rule);background:rgba(255,255,255,0.02);overflow:hidden">
+          <div class="feed-head" style="display:flex;justify-content:space-between;align-items:center;gap:.5rem;padding:.55rem .7rem;border-bottom:.5px solid var(--rule)">
+            <span style="min-width:0;font-family:var(--font-mono);font-size:.48rem;letter-spacing:.06em;text-transform:uppercase;color:var(--white);display:flex;align-items:center;gap:5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis"><span style="width:5px;height:5px;border-radius:50%;background:#E74C3C;display:inline-block;box-shadow:0 0 6px #E74C3C;animation:pulse 1.6s ease-in-out infinite;flex:0 0 auto"></span>ABC News Live</span>
+            <a href="https://www.youtube.com/live/-mvUkiILTqI" target="_blank" rel="noopener" style="font-family:var(--font-mono);font-size:.4rem;letter-spacing:.04em;text-transform:uppercase;color:var(--cream3);text-decoration:none;border:.5px solid var(--rule);padding:.18rem .38rem;white-space:nowrap">Open ↗</a>
+          </div>
+          <div style="position:relative;aspect-ratio:16/9">
+            <iframe src="https://www.youtube.com/embed/-mvUkiILTqI?autoplay=1&mute=1&playsinline=1" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;border:none" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>
+          </div>
+        </div>
+        <div class="aec-live-card" style="border:.5px solid var(--rule);background:rgba(255,255,255,0.02);overflow:hidden">
+          <div class="feed-head" style="display:flex;justify-content:space-between;align-items:center;gap:.5rem;padding:.55rem .7rem;border-bottom:.5px solid var(--rule)">
+            <span style="min-width:0;font-family:var(--font-mono);font-size:.48rem;letter-spacing:.06em;text-transform:uppercase;color:var(--white);display:flex;align-items:center;gap:5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis"><span style="width:5px;height:5px;border-radius:50%;background:#E74C3C;display:inline-block;box-shadow:0 0 6px #E74C3C;animation:pulse 1.6s ease-in-out infinite;flex:0 0 auto"></span>CBS News 24/7</span>
+            <a href="https://www.youtube.com/live/WFvOChuI2cg" target="_blank" rel="noopener" style="font-family:var(--font-mono);font-size:.4rem;letter-spacing:.04em;text-transform:uppercase;color:var(--cream3);text-decoration:none;border:.5px solid var(--rule);padding:.18rem .38rem;white-space:nowrap">Open ↗</a>
+          </div>
+          <div style="position:relative;aspect-ratio:16/9">
+            <iframe src="https://www.youtube.com/embed/WFvOChuI2cg?autoplay=1&mute=1&playsinline=1" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;border:none" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>
+          </div>
+        </div>
+        <div class="aec-live-card" style="border:.5px solid var(--rule);background:rgba(255,255,255,0.02);overflow:hidden">
+          <div class="feed-head" style="display:flex;justify-content:space-between;align-items:center;gap:.5rem;padding:.55rem .7rem;border-bottom:.5px solid var(--rule)">
+            <span style="min-width:0;font-family:var(--font-mono);font-size:.48rem;letter-spacing:.06em;text-transform:uppercase;color:var(--white);display:flex;align-items:center;gap:5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis"><span style="width:5px;height:5px;border-radius:50%;background:#E74C3C;display:inline-block;box-shadow:0 0 6px #E74C3C;animation:pulse 1.6s ease-in-out infinite;flex:0 0 auto"></span>CNBC Television</span>
+            <a href="https://www.youtube.com/@CNBCtelevision/live" target="_blank" rel="noopener" style="font-family:var(--font-mono);font-size:.4rem;letter-spacing:.04em;text-transform:uppercase;color:var(--cream3);text-decoration:none;border:.5px solid var(--rule);padding:.18rem .38rem;white-space:nowrap">Open ↗</a>
+          </div>
+          <div style="position:relative;aspect-ratio:16/9">
+            <iframe src="https://www.youtube.com/embed/live_stream?channel=UCrp_UI8XtuYfpiqluWLD7Lw&autoplay=1&mute=1&playsinline=1" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;border:none" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>
+          </div>
         </div>
       </div>
-      <div style="border:.5px solid var(--rule);background:rgba(255,255,255,0.02);overflow:hidden">
-        <div style="display:flex;justify-content:space-between;align-items:center;padding:.65rem .85rem;border-bottom:.5px solid var(--rule)">
-          <span style="font-family:var(--font-mono);font-size:.52rem;letter-spacing:.08em;text-transform:uppercase;color:var(--white);display:flex;align-items:center;gap:5px"><span style="width:5px;height:5px;border-radius:50%;background:#E74C3C;display:inline-block;box-shadow:0 0 6px #E74C3C;animation:pulse 1.6s ease-in-out infinite"></span>Yahoo Finance</span>
-          <a href="https://www.youtube.com/watch?v=KQp-e_XQnDE" target="_blank" rel="noopener" style="font-family:var(--font-mono);font-size:.42rem;letter-spacing:.05em;text-transform:uppercase;color:var(--cream3);text-decoration:none;border:.5px solid var(--rule);padding:.2rem .5rem">Open &#8599;</a>
-        </div>
-        <div style="position:relative;padding-bottom:56.25%;height:0">
-          <iframe src="https://www.youtube.com/embed/KQp-e_XQnDE?autoplay=1&mute=1&playsinline=1" style="position:absolute;top:0;left:0;width:100%;height:100%;border:none" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>
-        </div>
-      </div>
-      <div style="border:.5px solid var(--rule);background:rgba(255,255,255,0.02);overflow:hidden">
-        <div style="display:flex;justify-content:space-between;align-items:center;padding:.65rem .85rem;border-bottom:.5px solid var(--rule)">
-          <span style="font-family:var(--font-mono);font-size:.52rem;letter-spacing:.08em;text-transform:uppercase;color:var(--white);display:flex;align-items:center;gap:5px"><span style="width:5px;height:5px;border-radius:50%;background:#E74C3C;display:inline-block;box-shadow:0 0 6px #E74C3C;animation:pulse 1.6s ease-in-out infinite"></span>LiveNOW (Fox)</span>
-          <a href="https://www.youtube.com/watch?v=C96oohpWBGw" target="_blank" rel="noopener" style="font-family:var(--font-mono);font-size:.42rem;letter-spacing:.05em;text-transform:uppercase;color:var(--cream3);text-decoration:none;border:.5px solid var(--rule);padding:.2rem .5rem">Open &#8599;</a>
-        </div>
-        <div style="position:relative;padding-bottom:56.25%;height:0">
-          <iframe src="https://www.youtube.com/embed/C96oohpWBGw?autoplay=1&mute=1&playsinline=1" style="position:absolute;top:0;left:0;width:100%;height:100%;border:none" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>
-        </div>
-      </div>
-      <div style="border:.5px solid var(--rule);background:rgba(255,255,255,0.02);overflow:hidden">
-        <div style="display:flex;justify-content:space-between;align-items:center;padding:.65rem .85rem;border-bottom:.5px solid var(--rule)">
-          <span style="font-family:var(--font-mono);font-size:.52rem;letter-spacing:.08em;text-transform:uppercase;color:var(--white);display:flex;align-items:center;gap:5px"><span style="width:5px;height:5px;border-radius:50%;background:#E74C3C;display:inline-block;box-shadow:0 0 6px #E74C3C;animation:pulse 1.6s ease-in-out infinite"></span>Reuters</span>
-          <a href="https://www.youtube.com/channel/UCjTMxYSAvQ9DNPYjtxNgkCw/live" target="_blank" rel="noopener" style="font-family:var(--font-mono);font-size:.42rem;letter-spacing:.05em;text-transform:uppercase;color:var(--cream3);text-decoration:none;border:.5px solid var(--rule);padding:.2rem .5rem">Open &#8599;</a>
-        </div>
-        <div style="position:relative;padding-bottom:56.25%;height:0">
-          <iframe src="https://www.youtube.com/embed/live_stream?channel=UCjTMxYSAvQ9DNPYjtxNgkCw&autoplay=1&mute=1&playsinline=1" style="position:absolute;top:0;left:0;width:100%;height:100%;border:none" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>
-        </div>
-      </div>
-      <div style="border:.5px solid var(--rule);background:rgba(255,255,255,0.02);overflow:hidden">
-        <div style="display:flex;justify-content:space-between;align-items:center;padding:.65rem .85rem;border-bottom:.5px solid var(--rule)">
-          <span style="font-family:var(--font-mono);font-size:.52rem;letter-spacing:.08em;text-transform:uppercase;color:var(--white);display:flex;align-items:center;gap:5px"><span style="width:5px;height:5px;border-radius:50%;background:#E74C3C;display:inline-block;box-shadow:0 0 6px #E74C3C;animation:pulse 1.6s ease-in-out infinite"></span>NBC News NOW</span>
-          <a href="https://www.youtube.com/channel/UCdUCBzZCacPI61FdL7x9yvQ/live" target="_blank" rel="noopener" style="font-family:var(--font-mono);font-size:.42rem;letter-spacing:.05em;text-transform:uppercase;color:var(--cream3);text-decoration:none;border:.5px solid var(--rule);padding:.2rem .5rem">Open &#8599;</a>
-        </div>
-        <div style="position:relative;padding-bottom:56.25%;height:0">
-          <iframe src="https://www.youtube.com/embed/live_stream?channel=UCdUCBzZCacPI61FdL7x9yvQ&autoplay=1&mute=1&playsinline=1" style="position:absolute;top:0;left:0;width:100%;height:100%;border:none" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>
-        </div>
-      </div>
-      <div style="border:.5px solid var(--rule);background:rgba(255,255,255,0.02);overflow:hidden">
-        <div style="display:flex;justify-content:space-between;align-items:center;padding:.65rem .85rem;border-bottom:.5px solid var(--rule)">
-          <span style="font-family:var(--font-mono);font-size:.52rem;letter-spacing:.08em;text-transform:uppercase;color:var(--white);display:flex;align-items:center;gap:5px"><span style="width:5px;height:5px;border-radius:50%;background:#E74C3C;display:inline-block;box-shadow:0 0 6px #E74C3C;animation:pulse 1.6s ease-in-out infinite"></span>Fox Business</span>
-          <a href="https://www.youtube.com/channel/UC7UQyQ1NRIAIDMKn75WYwlw/live" target="_blank" rel="noopener" style="font-family:var(--font-mono);font-size:.42rem;letter-spacing:.05em;text-transform:uppercase;color:var(--cream3);text-decoration:none;border:.5px solid var(--rule);padding:.2rem .5rem">Open &#8599;</a>
-        </div>
-        <div style="position:relative;padding-bottom:56.25%;height:0">
-          <iframe src="https://www.youtube.com/embed/live_stream?channel=UC7UQyQ1NRIAIDMKn75WYwlw&autoplay=1&mute=1&playsinline=1" style="position:absolute;top:0;left:0;width:100%;height:100%;border:none" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>
-        </div>
-      </div>
-      </div>
-      <div style="border:.5px solid var(--rule);background:rgba(255,255,255,0.02);overflow:hidden;position:sticky;top:80px">
-        <div style="padding:.85rem 1rem;border-bottom:.5px solid var(--rule)">
-          <div style="font-family:var(--font-mono);font-size:.5rem;letter-spacing:.15em;text-transform:uppercase;color:var(--gold3);margin-bottom:.3rem">Real-Time · Auto-Updating</div>
-          <div style="font-family:var(--font-display);font-size:1.1rem;color:var(--white);font-weight:400">Economic Calendar</div>
-          <div style="font-family:var(--font-mono);font-size:.42rem;letter-spacing:.04em;text-transform:uppercase;color:var(--cream3);margin-top:.3rem">CPI · PPI · FOMC · NFP · GDP</div>
+
+      <div class="aec-econ-calendar" style="border:.5px solid var(--rule);background:rgba(255,255,255,0.02);overflow:hidden">
+        <div style="padding:.65rem .8rem;border-bottom:.5px solid var(--rule)">
+          <div style="font-family:var(--font-mono);font-size:.46rem;letter-spacing:.13em;text-transform:uppercase;color:var(--gold3);margin-bottom:.2rem">Auto-Updating</div>
+          <div style="font-family:var(--font-display);font-size:1rem;color:var(--white);font-weight:400">Economic Calendar</div>
+          <div style="font-family:var(--font-mono);font-size:.4rem;letter-spacing:.04em;text-transform:uppercase;color:var(--cream3);margin-top:.2rem">CPI · PPI · FOMC · NFP · GDP</div>
         </div>
         <iframe src="https://sslecal2.investing.com?columns=exc_flags,exc_currency,exc_importance,exc_actual,exc_forecast,exc_previous&importance=3,2&features=datepicker,timezone&countries=25,32,6,37,72,22,17,39,14,10,35,43,56,36,110,11,26,12,4,5&calType=week&timeZone=8&lang=1"
-          width="100%" height="620" frameborder="0" allowtransparency="true" marginwidth="0" marginheight="0"
-          style="border:none;background:transparent;filter:invert(1) hue-rotate(180deg);display:block"></iframe>
+          width="100%" height="560" frameborder="0" allowtransparency="true" marginwidth="0" marginheight="0"
+          style="border:none;background:transparent;display:block"></iframe>
       </div>
-    </div>
-  </div>
-</section>
-
-<div id="aec-sentiment" style="background:#080a0d;border-bottom:.5px solid #1c2433;padding:.6rem 2rem;display:flex;align-items:center;gap:1.5rem;flex-wrap:wrap;overflow-x:auto">
-  <div style="font-family:monospace;font-size:.55rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:#c8922a;flex-shrink:0">Market Pulse</div>
-  
-  <!-- Fear & Greed -->
-  <div style="display:flex;align-items:center;gap:.5rem;flex-shrink:0">
-    <span style="font-family:monospace;font-size:.52rem;color:#404858;letter-spacing:.08em;text-transform:uppercase">Fear & Greed</span>
-    <div id="fg-bar" style="width:80px;height:5px;background:#1c2433;border-radius:2px;position:relative">
-      <div id="fg-fill" style="height:100%;border-radius:2px;width:0%;transition:width 1s ease"></div>
-    </div>
-    <span id="fg-val" style="font-family:monospace;font-size:.65rem;font-weight:700;color:#fff">--</span>
-    <span id="fg-label" style="font-family:monospace;font-size:.52rem;color:#404858">--</span>
-  </div>
-
-  <div style="width:.5px;height:16px;background:#1c2433;flex-shrink:0"></div>
-
-  <!-- VIX -->
-  <div style="display:flex;align-items:center;gap:.5rem;flex-shrink:0">
-    <span style="font-family:monospace;font-size:.52rem;color:#404858;letter-spacing:.08em;text-transform:uppercase">VIX</span>
-    <span id="vix-val" style="font-family:monospace;font-size:.65rem;font-weight:700;color:#fff">--</span>
-    <span id="vix-change" style="font-family:monospace;font-size:.55rem;color:#404858">--</span>
-  </div>
-
-  <div style="width:.5px;height:16px;background:#1c2433;flex-shrink:0"></div>
-
-  <!-- Put/Call Ratio -->
-  <div style="display:flex;align-items:center;gap:.5rem;flex-shrink:0">
-    <span style="font-family:monospace;font-size:.52rem;color:#404858;letter-spacing:.08em;text-transform:uppercase">P/C Ratio</span>
-    <span id="pc-val" style="font-family:monospace;font-size:.65rem;font-weight:700;color:#fff">--</span>
-    <span id="pc-signal" style="font-family:monospace;font-size:.52rem;color:#404858">--</span>
-  </div>
-
-  <div style="width:.5px;height:16px;background:#1c2433;flex-shrink:0"></div>
-
-  <!-- SPY -->
-  <div style="display:flex;align-items:center;gap:.5rem;flex-shrink:0">
-    <span style="font-family:monospace;font-size:.52rem;color:#404858;letter-spacing:.08em;text-transform:uppercase">SPY</span>
-    <span id="spy-val" style="font-family:monospace;font-size:.65rem;font-weight:700;color:#fff">--</span>
-    <span id="spy-change" style="font-family:monospace;font-size:.55rem;color:#404858">--</span>
-  </div>
-
-  <div style="width:.5px;height:16px;background:#1c2433;flex-shrink:0"></div>
-
-  <!-- 10Y Yield -->
-  <div style="display:flex;align-items:center;gap:.5rem;flex-shrink:0">
-    <span style="font-family:monospace;font-size:.52rem;color:#404858;letter-spacing:.08em;text-transform:uppercase">10Y Yield</span>
-    <span id="yield-val" style="font-family:monospace;font-size:.65rem;font-weight:700;color:#fff">--</span>
-    <span id="yield-change" style="font-family:monospace;font-size:.55rem;color:#404858">--</span>
-  </div>
-
-  <div style="margin-left:auto;font-family:monospace;font-size:.5rem;color:#222;flex-shrink:0" id="sentiment-updated"></div>
-</div>
-
-<!-- HERO -->
-<section class="hero">
-  <div class="hero-bg"></div>
-  <div class="hero-grid-overlay"></div>
-
-  <div class="hero-diamond-deco" aria-hidden="true" style="position:absolute;right:2%;top:50%;transform:translateY(-50%);width:min(22vw,300px);height:min(22vw,300px);pointer-events:none;z-index:1">
-    <svg viewBox="0 0 200 200" fill="none" width="100%" height="100%">
-      <g transform="translate(100,100)" stroke="#FFFFFF">
-        <polygon points="0,-92 92,0 0,92 -92,0" stroke-width="1.6" opacity="0.5"/>
-        <polygon points="0,-72 72,0 0,72 -72,0" stroke-width="1.5" opacity="0.42"/>
-        <polygon points="0,-52 52,0 0,52 -52,0" stroke-width="1.4" opacity="0.34"/>
-        <polygon points="0,-32 32,0 0,32 -32,0" stroke-width="1.3" opacity="0.26"/>
-        <polygon points="0,-12 12,0 0,12 -12,0" stroke-width="1.2" opacity="0.18"/>
-      </g>
-    </svg>
-  </div>
-
-
-  <div class="hero-content">
-    <div class="hero-left">
-      <h1>
-        Capital deployed<br/>
-        with <em>uncommon</em><br/>
-        precision.
-      </h1>
-      <p>A multi-strategy investment and research firm building proprietary quantitative infrastructure across global markets while pursuing opportunities in real estate, private equity, and pharmaceutical research & development.</p>
-      <div style="display:inline-flex;align-items:center;gap:.6rem;margin-bottom:1.5rem;background:rgba(255,255,255,0.04);border:.5px solid rgba(255,255,255,0.12);padding:.5rem 1rem">
-        <span style="width:7px;height:7px;border-radius:50%;background:#2ECC71;display:inline-block;animation:pulse 2s infinite"></span>
-        <span style="font-family:'DM Mono',monospace;font-size:.5rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.5)">Independent research · disciplined execution · long-horizon ownership</span>
-      </div>
-      <!-- LIVE NQ MINI CHART -->
-<div style="background:rgba(255,255,255,.04);border:.5px solid rgba(200,200,200,.2);padding:.5rem;margin-bottom:1.5rem;max-width:420px">
-  <div style="font-family:'DM Mono',monospace;font-size:.48rem;letter-spacing:.15em;text-transform:uppercase;color:var(--cream3);margin-bottom:.25rem;padding:.2rem .25rem">NQ Futures — Live</div>
-  <div class="tradingview-widget-container">
-    <div class="tradingview-widget-container__widget"></div>
-    <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-mini-symbol-overview.js" async>
-    {"symbol":"CME_MINI:NQ1!","width":"100%","height":"120","locale":"en","dateRange":"1D","colorTheme":"dark","isTransparent":true,"autosize":true,"chartOnly":false}
-    </script>
-  </div>
-</div>
-<div class="hero-ctas">
-        <a href="#contact" class="btn-gold">Request a meeting</a>
-        <a href="#performance" class="btn-ghost">View performance</a>
-        <button onclick="document.getElementById('mentorship-payment-modal').style.display='flex'" style="background:transparent;border:.5px solid var(--gold);color:var(--gold);font-family:var(--font-mono);font-size:.58rem;letter-spacing:.18em;text-transform:uppercase;padding:.75rem 1.75rem;cursor:pointer;transition:all .2s;font-weight:600" onmouseover="this.style.background='rgba(200,200,200,0.1)'" onmouseout="this.style.background='transparent'">Enroll in Mentorship →</button>
-      </div>
-    </div><!-- end hero-left -->
-
-  </div>
-</section>
-
-
-<!-- CORPORATE INFORMATION STRIP -->
-<div style="background:#0A0A0A;border-top:.5px solid rgba(255,255,255,0.08);border-bottom:.5px solid rgba(255,255,255,0.08);padding:1.1rem 3.5rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem">
-  <div style="display:flex;align-items:center;gap:3rem;flex-wrap:wrap">
-    <div><span style="font-family:'DM Mono',monospace;font-size:.5rem;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.3)">Firm</span> <span style="font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-style:italic;color:#FFFFFF">Ascenda Enterprise Capital LLC</span></div>
-    <div><span style="font-family:'DM Mono',monospace;font-size:.5rem;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.3)">Research Platform</span> <span style="font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-style:italic;color:#FFFFFF">AECQS · Active R&amp;D</span></div>
-  </div>
-  <a href="#contact" style="font-family:'DM Mono',monospace;font-size:.55rem;letter-spacing:.18em;text-transform:uppercase;color:#C8C8C8;text-decoration:none;border:.5px solid rgba(255,255,255,.2);padding:.65rem 1.25rem">Corporate Inquiry →</a>
-</div>
-
-<!-- STATEMENT -->
-<!-- AS SEEN IN / TRUST -->
-<div style="background:var(--ink2);border-top:.5px solid var(--rule);border-bottom:.5px solid var(--rule);padding:1.5rem 3.5rem;display:flex;align-items:center;gap:2rem;flex-wrap:wrap">
-  <div style="font-family:var(--font-mono);font-size:.55rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.2);flex-shrink:0">Public & Research Resources</div>
-  <div style="display:flex;gap:2rem;align-items:center;flex-wrap:wrap">
-    <div style="font-family:var(--font-mono);font-size:.7rem;font-weight:700;letter-spacing:.1em;color:rgba(255,255,255,.3);text-transform:uppercase">TraderSync</div>
-    <div style="width:1px;height:16px;background:var(--rule)"></div>
-    <div style="font-family:var(--font-mono);font-size:.7rem;font-weight:700;letter-spacing:.1em;color:rgba(255,255,255,.3);text-transform:uppercase">Market Data</div>
-    <div style="width:1px;height:16px;background:var(--rule)"></div>
-    <div style="font-family:var(--font-mono);font-size:.7rem;font-weight:700;letter-spacing:.1em;color:rgba(255,255,255,.3);text-transform:uppercase">TradingView</div>
-    <div style="width:1px;height:16px;background:var(--rule)"></div>
-    <div style="font-family:var(--font-mono);font-size:.7rem;font-weight:700;letter-spacing:.1em;color:rgba(255,255,255,.3);text-transform:uppercase">Georgia SOS</div>
-    <div style="width:1px;height:16px;background:var(--rule)"></div>
-    <div style="font-family:var(--font-mono);font-size:.7rem;font-weight:700;letter-spacing:.1em;color:rgba(255,255,255,.3);text-transform:uppercase">Public Filings & Regulatory Resources</div>
-  </div>
-</div>
-
-<div class="statement">
-  <div>
-    <div class="statement-q">"Ascenda is being built around research, disciplined execution, and long-horizon ownership — not short-term promotion."</div>
-    <div class="statement-attr">— Izaiah Cottle, Founder & CEO · Ascenda Enterprise Capital LLC</div>
-  </div>
-</div>
-
-<!-- AUM BAND -->
-<!-- LIVE TRADE RESULTS TICKER -->
-<div style="background:rgba(0,0,0,.4);border-top:.5px solid var(--rule);padding:.6rem 0;overflow:hidden;white-space:nowrap;position:relative">
-  <div style="position:absolute;left:0;top:0;bottom:0;width:80px;background:linear-gradient(90deg,var(--ink),transparent);z-index:2"></div>
-  <div style="position:absolute;right:0;top:0;bottom:0;width:80px;background:linear-gradient(270deg,var(--ink),transparent);z-index:2"></div>
-  <div id="trade-ticker" style="display:inline-flex;gap:3rem;animation:tradeTick 40s linear infinite"></div>
-</div>
-
-<div class="aum-band">
-  <div class="aum-l">
-    <div class="aum-tag">Capital Capacity</div>
-    <div class="aum-num">Strategic Capacity</div>
-    <div class="aum-cap">Built to scale with disciplined risk management.</div>
-  </div>
-  <div class="aum-sep"></div>
-  <div class="aum-r">
-    Capital deployment is evaluated across investment strategy, market liquidity, execution capacity, risk management, operational infrastructure, and applicable agreements. Capacity is reviewed and governed as these factors evolve.
-  </div>
-</div>
-
-<!-- PERFORMANCE & RESEARCH -->
-<section class="tearsheet" id="performance">
-  <div class="ts-header">
-    <div>
-      <div class="sec-label">Performance &amp; Research</div>
-      <h2 class="on-dark">Evidence before <em>interpretation</em></h2>
-    </div>
-    <div style="text-align:right">
-      <div style="font-family:var(--font-mono);font-size:.55rem;letter-spacing:.15em;text-transform:uppercase;color:var(--cream3)">Research Classification</div>
-      <div style="font-family:var(--font-display);font-size:1.45rem;font-style:italic;color:var(--gold2);margin-top:.25rem">Simulation · Development · Executed Records</div>
-    </div>
-  </div>
-
-  <div class="ts-disclaimer">
-    <p><strong>Reporting standard:</strong> Ascenda separates AECQS historical backtest/simulated research, active-development checkpoints, and actual executed trading records. Simulated P&amp;L is not represented as investor returns or audited fund performance, and backtest trade counts are not described as live executed trades. Any live or documented trading figures should be evaluated from their underlying account/platform records and reported separately from AECQS research.</p>
-  </div>
-
-  <div class="kpi-grid">
-    <div class="kpi"><div class="kpi-val" style="font-size:1.5rem;color:#2ECC71">+$6.039M</div><div class="kpi-label">AECQS-30 Net Backtest P&amp;L</div><div class="kpi-sub">Historical simulation · current R&amp;D checkpoint</div></div>
-    <div class="kpi"><div class="kpi-val" style="font-size:1.5rem">25,507</div><div class="kpi-label">Accepted Historical Trades</div><div class="kpi-sub">AECQS-30 backtest observations</div></div>
-    <div class="kpi"><div class="kpi-val" style="font-size:1.5rem">45.42%</div><div class="kpi-label">Win Rate</div><div class="kpi-sub">Current AECQS-30 research checkpoint</div></div>
-    <div class="kpi"><div class="kpi-val" style="font-size:1.5rem">1.131</div><div class="kpi-label">Profit Factor</div><div class="kpi-sub">Current AECQS-30 research checkpoint</div></div>
-  </div>
-
-  <div class="perf-grid">
-    <div class="perf-block">
-      <div class="perf-block-title">Result classification</div>
-      <div class="metric-list">
-        <div class="ml-row"><span class="ml-label">AECQS backtest / simulation</span><span class="ml-val gold">Historical quantitative research</span></div>
-        <div class="ml-row"><span class="ml-label">Development checkpoints</span><span class="ml-val">Snapshots of evolving R&amp;D</span></div>
-        <div class="ml-row"><span class="ml-label">Executed trading records</span><span class="ml-val">Reported separately when supported</span></div>
-        <div class="ml-row"><span class="ml-label">Maximum drawdown</span><span class="ml-val" style="color:#E74C3C">-$367,003.23 · simulated</span></div>
-      </div>
-    </div>
-    <div class="perf-block">
-      <div class="perf-block-title">Research interpretation</div>
-      <div class="metric-list">
-        <div class="ml-row"><span class="ml-label">Primary development market</span><span class="ml-val gold">Nasdaq-100 Futures (NQ)</span></div>
-        <div class="ml-row"><span class="ml-label">Program status</span><span class="ml-val">Active Research &amp; Development</span></div>
-        <div class="ml-row"><span class="ml-label">Architecture</span><span class="ml-val">Systematic · Multi-Strategy</span></div>
-        <div class="ml-row"><span class="ml-label">Performance status</span><span class="ml-val">Not audited live fund performance</span></div>
-      </div>
-    </div>
-  </div>
-
-  <div style="font-family:var(--font-mono);font-size:.5rem;color:rgba(255,255,255,.28);letter-spacing:.04em;line-height:1.75;padding:1rem 1.1rem;background:rgba(0,0,0,.3);border:.5px solid rgba(200,200,200,.1);margin-top:1px">
-    Historical backtest/simulated research only where identified as AECQS research. The current AECQS-30 checkpoint is +$6,039,476.17 cumulative net backtest P&amp;L, 25,507 accepted trades, 45.42% win rate, 1.131 profit factor, and -$367,003.23 maximum drawdown. Modeled slippage, fees, applicable trading costs, contract sizing, execution assumptions, and risk parameters are incorporated into this checkpoint. AECQS remains under active R&amp;D; results may change materially as research continues. Past or simulated performance does not guarantee future results.
-  </div>
-</section>
-
-<!-- STRATEGY -->
-<section class="sec sec-alt" id="strategy">
-  <div class="sec-label">Quantitative Research & Investment Strategy</div>
-  <h2 class="on-dark">Research first. <em>Execution second.</em></h2>
-  <p style="font-size:.98rem;color:var(--cream2);line-height:1.95;max-width:720px;font-weight:300;margin-top:.5rem">
-    AEC develops and evaluates systematic strategy families across market structure, statistical behavior, liquidity, order flow,
-    volatility, momentum, mean reversion, and multi-timeframe information. Research concepts move through testing, portfolio
-    evaluation, risk controls, execution modeling, and validation before they are considered for deployment.
-  </p>
-  <div class="strategy-grid">
-    <div class="sg">
-      <div class="sg-bar"></div>
-      <div class="sg-n">01 — Research Engine</div>
-      <h3>Systematic <em>Discovery</em></h3>
-      <p>Large strategy universes are evaluated across historical market data with an emphasis on repeatability, market logic, regime behavior, and resistance to overfitting.</p>
-    </div>
-    <div class="sg">
-      <div class="sg-bar"></div>
-      <div class="sg-n">02 — Market Intelligence</div>
-      <h3>Structure, Liquidity & <em>Order Flow</em></h3>
-      <p>Research incorporates higher-timeframe structure, liquidity interaction, VWAP and volume-profile context, order-flow behavior, volatility, momentum, and statistical relationships where the data supports them.</p>
-    </div>
-    <div class="sg">
-      <div class="sg-bar"></div>
-      <div class="sg-n">03 — Portfolio & Execution</div>
-      <h3>Risk-Controlled <em>Implementation</em></h3>
-      <p>Signals are evaluated inside a portfolio framework with defined position sizing, execution assumptions, transaction-cost modeling, risk limits, and ongoing validation rather than being treated as isolated backtests.</p>
-    </div>
-  </div>
-</section>
-
-<!-- AECQS DEVELOPMENT -->
-<section style="padding:6rem clamp(1rem,5vw,3.5rem);background:#04030A;border-top:.5px solid rgba(255,255,255,0.06)" id="aecqs">
-  <div style="max-width:1100px;margin:0 auto">
-    <div style="display:flex;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;gap:2rem;margin-bottom:3rem">
-      <div style="max-width:720px">
-        <div style="font-family:'DM Mono',monospace;font-size:.55rem;letter-spacing:.28em;text-transform:uppercase;color:#888;margin-bottom:.75rem;display:flex;align-items:center;gap:.8rem">
-          <span style="display:block;width:28px;height:.5px;background:#888"></span>Proprietary Quantitative Technology
-        </div>
-        <h2 style="font-family:'Cormorant Garamond',serif;font-size:clamp(1.9rem,3.8vw,3rem);font-weight:300;color:#FFFFFF;line-height:1.08">
-          AECQS <em style="font-style:italic;color:#C8C8C8">— AEC Quantitative System</em>
-        </h2>
-        <p style="font-size:.94rem;color:rgba(255,255,255,.5);margin-top:1rem;font-family:'Jost',sans-serif;font-weight:300;max-width:720px;line-height:1.95">
-          AECQS is Ascenda Enterprise Capital's independently developed quantitative research, analysis, portfolio-risk, and execution architecture.
-          It is designed to research and evaluate multiple strategy families through a unified framework rather than rely on a single indicator,
-          signal, or market regime.
-        </p>
-      </div>
-      <div style="display:inline-flex;align-items:center;gap:.6rem;background:rgba(255,255,255,0.04);border:.5px solid rgba(255,255,255,0.15);padding:.65rem 1.25rem;align-self:flex-start">
-        <span style="width:7px;height:7px;border-radius:50%;background:#F5A623;display:inline-block;animation:pulse 2s infinite"></span>
-        <span style="font-family:'DM Mono',monospace;font-size:.5rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.55)">Active Research & Development</span>
-      </div>
-    </div>
-
-    <div class="aecqs-spec-grid" style="display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(255,255,255,0.08);margin-bottom:2rem">
-      <div style="background:#06050D;padding:2rem 1.75rem">
-        <div style="font-family:'DM Mono',monospace;font-size:.48rem;letter-spacing:.2em;text-transform:uppercase;color:#888;margin-bottom:.75rem">Architecture</div>
-        <div style="font-family:'Cormorant Garamond',serif;font-size:1.2rem;color:#FFFFFF;margin-bottom:.75rem;font-weight:300">Multi-Strategy Research Stack</div>
-        <p style="font-size:.82rem;color:rgba(255,255,255,.42);font-family:'Jost',sans-serif;font-weight:300;line-height:1.8">Research Engine → Strategy Engine → Market & Regime Analysis → Signal & Confluence → Portfolio & Risk → Execution → Validation & Monitoring.</p>
-      </div>
-      <div style="background:#06050D;padding:2rem 1.75rem">
-        <div style="font-family:'DM Mono',monospace;font-size:.48rem;letter-spacing:.2em;text-transform:uppercase;color:#888;margin-bottom:.75rem">Research Program</div>
-        <div style="font-family:'Cormorant Garamond',serif;font-size:1.2rem;color:#FFFFFF;margin-bottom:.75rem;font-weight:300">1,000+ Strategy Evaluation Program</div>
-        <p style="font-size:.82rem;color:rgba(255,255,255,.42);font-family:'Jost',sans-serif;font-weight:300;line-height:1.8">The current R&D program is evaluating more than one thousand strategy concepts against more than five years of historical market data, with surviving ideas subjected to additional validation.</p>
-      </div>
-      <div style="background:#06050D;padding:2rem 1.75rem">
-        <div style="font-family:'DM Mono',monospace;font-size:.48rem;letter-spacing:.2em;text-transform:uppercase;color:#888;margin-bottom:.75rem">Primary Development Market</div>
-        <div style="font-family:'Cormorant Garamond',serif;font-size:1.2rem;color:#FFFFFF;margin-bottom:.75rem;font-weight:300">Nasdaq Futures (NQ)</div>
-        <p style="font-size:.82rem;color:rgba(255,255,255,.42);font-family:'Jost',sans-serif;font-weight:300;line-height:1.8">Current intensive development centers on NQ while the broader architecture is designed to support additional instruments and asset classes as research is validated.</p>
-      </div>
-    </div>
-
-    <div style="font-family:'DM Mono',monospace;font-size:.5rem;letter-spacing:.2em;text-transform:uppercase;color:#888;margin-bottom:1rem">AECQS-30 — Current Development Checkpoint</div>
-    <div class="aecqs-metric-grid" style="display:grid;grid-template-columns:repeat(5,1fr);gap:1px;background:rgba(255,255,255,0.08);margin-bottom:1rem">
-      <div style="background:#06050D;padding:1.65rem 1rem;text-align:center">
-        <div style="font-family:'Cormorant Garamond',serif;font-size:1.8rem;font-style:italic;color:#2ECC71;line-height:1">+$6.039M</div>
-        <div style="font-family:'DM Mono',monospace;font-size:.45rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.35);margin-top:.5rem">Net Backtest P&amp;L</div>
-      </div>
-      <div style="background:#06050D;padding:1.65rem 1rem;text-align:center">
-        <div style="font-family:'Cormorant Garamond',serif;font-size:1.8rem;font-style:italic;color:#FFFFFF;line-height:1">25,507</div>
-        <div style="font-family:'DM Mono',monospace;font-size:.45rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.35);margin-top:.5rem">Accepted Trades</div>
-      </div>
-      <div style="background:#06050D;padding:1.65rem 1rem;text-align:center">
-        <div style="font-family:'Cormorant Garamond',serif;font-size:1.8rem;font-style:italic;color:#FFFFFF;line-height:1">45.42%</div>
-        <div style="font-family:'DM Mono',monospace;font-size:.45rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.35);margin-top:.5rem">Win Rate</div>
-      </div>
-      <div style="background:#06050D;padding:1.65rem 1rem;text-align:center">
-        <div style="font-family:'Cormorant Garamond',serif;font-size:1.8rem;font-style:italic;color:#FFFFFF;line-height:1">1.131</div>
-        <div style="font-family:'DM Mono',monospace;font-size:.45rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.35);margin-top:.5rem">Profit Factor</div>
-      </div>
-      <div style="background:#06050D;padding:1.65rem 1rem;text-align:center">
-        <div style="font-family:'Cormorant Garamond',serif;font-size:1.8rem;font-style:italic;color:#E74C3C;line-height:1">-$367K</div>
-        <div style="font-family:'DM Mono',monospace;font-size:.45rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.35);margin-top:.5rem">Maximum Drawdown</div>
-      </div>
-    </div>
-
-    <div style="background:rgba(255,255,255,.025);border:.5px solid rgba(255,255,255,.08);padding:1.35rem 1.5rem;margin-bottom:1.5rem">
-      <p style="font-family:'DM Mono',monospace;font-size:.49rem;letter-spacing:.045em;color:rgba(255,255,255,.35);line-height:1.8;margin:0">
-        CURRENT DEVELOPMENT CHECKPOINT — Historical backtest/simulated research only. The +$6,039,476.17 figure is the current cumulative net backtest P&amp;L for the supplied AECQS-30 research run, with 25,507 accepted trades, 45.42% win rate, 1.131 profit factor, and -$367,003.23 maximum drawdown. Modeled slippage, fees, applicable trading costs, contract sizing, execution assumptions, and risk parameters are incorporated into this checkpoint. AECQS remains under active R&amp;D; these figures are not audited or live investment performance and may change materially as research continues.
-      </p>
-    </div>
-
-    <div style="display:flex;align-items:center;justify-content:space-between;gap:1.5rem;flex-wrap:wrap">
-      <div style="display:flex;gap:2rem;flex-wrap:wrap">
-        <div><div style="font-family:'DM Mono',monospace;font-size:.43rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.24);margin-bottom:.3rem">Status</div><div style="font-family:'DM Mono',monospace;font-size:.56rem;letter-spacing:.08em;text-transform:uppercase;color:#F5A623">Active R&amp;D</div></div>
-        <div><div style="font-family:'DM Mono',monospace;font-size:.43rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.24);margin-bottom:.3rem">Ownership</div><div style="font-family:'DM Mono',monospace;font-size:.56rem;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.52)">Developed In-House</div></div>
-        <div><div style="font-family:'DM Mono',monospace;font-size:.43rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.24);margin-bottom:.3rem">Developer</div><div style="font-family:'DM Mono',monospace;font-size:.56rem;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.52)">Izaiah Cottle</div></div>
-        <div><div style="font-family:'DM Mono',monospace;font-size:.43rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.24);margin-bottom:.3rem">Research Scope</div><div style="font-family:'DM Mono',monospace;font-size:.56rem;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.52)">Systematic · Multi-Strategy</div></div>
-      </div>
-      <a href="aec-quant-system.html" style="font-family:'DM Mono',monospace;font-size:.52rem;letter-spacing:.15em;text-transform:uppercase;color:#fff;border:.5px solid rgba(255,255,255,.25);padding:.7rem 1.4rem;text-decoration:none;white-space:nowrap">Explore AECQS →</a>
-    </div>
-  </div>
-</section>
-
-<!-- MARKETS — TradingView -->
-<section class="sec" id="markets" style="background:var(--ink3);border-top:.5px solid var(--rule)">
-  <div class="sec-label">Live Market Data</div>
-  <h2 class="on-dark">Markets, <em>real-time</em></h2>
-  <p style="font-size:.78rem;color:var(--cream3);margin-top:-.2rem;letter-spacing:.05em;margin-bottom:2.5rem;font-family:var(--font-mono)">Powered by TradingView — market data subject to provider and exchange delays</p>
-
-  <div style="border:.5px solid var(--rule);overflow:hidden;margin-bottom:2rem">
-    <div class="tradingview-widget-container">
-      <div class="tradingview-widget-container__widget"></div>
-      <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-market-overview.js" async>
-      {"colorTheme":"dark","dateRange":"1D","showChart":true,"locale":"en","isTransparent":true,"showSymbolLogo":false,"showFloatingTooltip":true,"width":"100%","height":"550","tabs":[{"title":"Indices","symbols":[{"s":"FOREXCOM:SPXUSD","d":"S&P 500"},{"s":"FOREXCOM:NSXUSD","d":"NASDAQ 100"},{"s":"INDEX:DJI","d":"Dow Jones"},{"s":"INDEX:VIX","d":"VIX"}],"originalTitle":"Indices"},{"title":"Forex","symbols":[{"s":"FOREXCOM:EURUSD","d":"EUR/USD"},{"s":"FOREXCOM:GBPUSD","d":"GBP/USD"},{"s":"FOREXCOM:USDJPY","d":"USD/JPY"},{"s":"FOREXCOM:AUDUSD","d":"AUD/USD"}],"originalTitle":"Forex"},{"title":"Top Equities","symbols":[{"s":"NASDAQ:NVDA","d":"NVIDIA"},{"s":"NASDAQ:AAPL","d":"Apple"},{"s":"NASDAQ:MSFT","d":"Microsoft"},{"s":"NASDAQ:AMZN","d":"Amazon"},{"s":"NASDAQ:META","d":"Meta"}],"originalTitle":"Top Equities"},{"title":"Commodities","symbols":[{"s":"TVC:GOLD","d":"Gold"},{"s":"TVC:USOIL","d":"WTI Crude"},{"s":"TVC:SILVER","d":"Silver"}],"originalTitle":"Commodities"}]}
-      </script>
-    </div>
-  </div>
-
-  <div class="tv-charts-grid">
-    <div class="tv-card">
-      <div class="tv-card-label">NASDAQ 100</div>
-      <div class="tradingview-widget-container"><div class="tradingview-widget-container__widget"></div>
-      <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-mini-symbol-overview.js" async>{"symbol":"FOREXCOM:NSXUSD","width":"100%","height":"200","locale":"en","dateRange":"3M","colorTheme":"dark","isTransparent":true,"autosize":true}</script></div>
-    </div>
-    <div class="tv-card">
-      <div class="tv-card-label">ES Futures (S&amp;P 500)</div>
-      <div class="tradingview-widget-container"><div class="tradingview-widget-container__widget"></div>
-      <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-mini-symbol-overview.js" async>{"symbol":"CME_MINI:ES1!","width":"100%","height":"200","locale":"en","dateRange":"3M","colorTheme":"dark","isTransparent":true,"autosize":true}</script></div>
-    </div>
-    <div class="tv-card">
-      <div class="tv-card-label">Gold</div>
-      <div class="tradingview-widget-container"><div class="tradingview-widget-container__widget"></div>
-      <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-mini-symbol-overview.js" async>{"symbol":"TVC:GOLD","width":"100%","height":"200","locale":"en","dateRange":"3M","colorTheme":"dark","isTransparent":true,"autosize":true}</script></div>
     </div>
   </div>
 </section>
