@@ -1653,8 +1653,95 @@ section[style*="padding:8rem"]{padding-top:4.25rem!important;padding-bottom:4.25
 }
 </style>
 
+
+<style id="aec-investing-position-fix-v7">
+/* Deterministic desktop layout: feeds left, Investing.com right */
+#aec-live-tv, #live-tv, .aec-live-section{
+  width:100%!important;
+  max-width:none!important;
+  overflow:visible!important;
+}
+.aec-live-section .aec-shell{
+  width:100%!important;
+  max-width:none!important;
+  padding:0!important;
+}
+.aec-market-layout{
+  width:100%!important;
+  max-width:none!important;
+  display:grid!important;
+  grid-template-columns:minmax(0,3fr) minmax(285px,1fr)!important;
+  gap:.75rem!important;
+  align-items:start!important;
+}
+.aec-market-layout > .aec-feed-grid{
+  grid-column:1!important;
+  width:100%!important;
+  max-width:none!important;
+  display:grid!important;
+  grid-template-columns:repeat(3,minmax(0,1fr))!important;
+  gap:.55rem!important;
+}
+.aec-market-layout > .aec-market-rail{
+  grid-column:2!important;
+  grid-row:1!important;
+  display:block!important;
+  position:relative!important;
+  width:100%!important;
+  max-width:none!important;
+  min-width:0!important;
+  min-height:100%!important;
+  visibility:visible!important;
+  opacity:1!important;
+  z-index:3!important;
+  overflow:hidden!important;
+  border:.5px solid var(--rule)!important;
+  background:#07070A!important;
+}
+.aec-market-rail .aec-rail-head,
+.aec-market-rail .aec-calendar-summary,
+.aec-market-rail .aec-calendar-deferred,
+.aec-market-rail .aec-rail-note{
+  display:block!important;
+  visibility:visible!important;
+  opacity:1!important;
+}
+.aec-market-rail .aec-cal-row{
+  display:flex!important;
+}
+.aec-market-rail .aec-calendar-deferred{
+  position:relative!important;
+  width:100%!important;
+  height:330px!important;
+  min-height:330px!important;
+}
+@media(max-width:1100px){
+  .aec-market-layout{
+    grid-template-columns:minmax(0,1fr) 280px!important;
+  }
+}
+@media(max-width:900px){
+  .aec-market-layout{
+    grid-template-columns:1fr!important;
+  }
+  .aec-market-layout > .aec-feed-grid{
+    grid-column:1!important;
+    grid-template-columns:repeat(2,minmax(0,1fr))!important;
+  }
+  .aec-market-layout > .aec-market-rail{
+    grid-column:1!important;
+    grid-row:auto!important;
+  }
+}
+@media(max-width:620px){
+  .aec-market-layout > .aec-feed-grid{
+    grid-template-columns:1fr!important;
+  }
+}
+</style>
+
 </head>
-<body data-aec-build="performance-v6-visible-investing">
+<body data-aec-build="performance-v7b-investing-static-fix">
 
 <!-- ══════════════════════════════════
      LANDING PAGE — 4 PATH SELECTOR
@@ -2387,6 +2474,33 @@ section[style*="padding:8rem"]{padding-top:4.25rem!important;padding-bottom:4.25
   </div>
 </article>
     </div>
+<aside class="aec-market-rail">
+  <div class="aec-rail-head">
+    <span>Market Intelligence</span>
+    <strong>Investing.com Economic Calendar</strong>
+    <small>Macro events · releases · actual · forecast · previous</small>
+  </div>
+
+  <div class="aec-calendar-summary">
+    <div class="aec-cal-row"><span>Rates</span><strong>FOMC · Central Banks</strong></div>
+    <div class="aec-cal-row"><span>Inflation</span><strong>CPI · PPI</strong></div>
+    <div class="aec-cal-row"><span>Labor</span><strong>NFP · Jobless Claims</strong></div>
+    <div class="aec-cal-row"><span>Growth</span><strong>GDP · PMI</strong></div>
+    <div class="aec-cal-row"><span>Coverage</span><strong>High &amp; Medium Impact</strong></div>
+  </div>
+
+  <div class="aec-calendar-deferred aec-deferred-embed"
+       data-embed="https://sslecal2.investing.com?columns=exc_flags,exc_currency,exc_importance,exc_actual,exc_forecast,exc_previous&amp;importance=3,2&amp;features=datepicker,timezone&amp;countries=25,32,6,37,72,22,17,39,14,10,35,43,56,36,110,11,26,12,4,5&amp;calType=week&amp;timeZone=8&amp;lang=1"
+       data-title="Investing.com Economic Calendar">
+    <button class="aec-load-embed aec-calendar-button" type="button" aria-label="Load Investing.com economic calendar">
+      <span class="aec-play">↗</span>
+      <span>Load Investing.com Calendar</span>
+      <small>Loads only when clicked</small>
+    </button>
+  </div>
+
+  <div class="aec-rail-note">CPI · PPI · FOMC · NFP · GDP · Rates · Global macro events</div>
+</aside>
   </div>
 </section>
 <!-- VIX -->
@@ -2608,33 +2722,7 @@ section[style*="padding:8rem"]{padding-top:4.25rem!important;padding-bottom:4.25
       <h3>Risk-Controlled <em>Implementation</em></h3>
       <p>Signals are evaluated inside a portfolio framework with defined position sizing, execution assumptions, transaction-cost modeling, risk limits, and ongoing validation rather than being treated as isolated backtests.</p>
       </div>
-      <aside class="aec-market-rail">
-  <div class="aec-rail-head">
-    <span>Market Intelligence</span>
-    <strong>Investing.com Economic Calendar</strong>
-    <small>Macro events · releases · actual · forecast · previous</small>
-  </div>
-
-  <div class="aec-calendar-summary">
-    <div class="aec-cal-row"><span>Rates</span><strong>FOMC · Central Banks</strong></div>
-    <div class="aec-cal-row"><span>Inflation</span><strong>CPI · PPI</strong></div>
-    <div class="aec-cal-row"><span>Labor</span><strong>NFP · Jobless Claims</strong></div>
-    <div class="aec-cal-row"><span>Growth</span><strong>GDP · PMI</strong></div>
-    <div class="aec-cal-row"><span>Coverage</span><strong>High &amp; Medium Impact</strong></div>
-  </div>
-
-  <div class="aec-calendar-deferred aec-deferred-embed"
-       data-embed="https://sslecal2.investing.com?columns=exc_flags,exc_currency,exc_importance,exc_actual,exc_forecast,exc_previous&amp;importance=3,2&amp;features=datepicker,timezone&amp;countries=25,32,6,37,72,22,17,39,14,10,35,43,56,36,110,11,26,12,4,5&amp;calType=week&amp;timeZone=8&amp;lang=1"
-       data-title="Investing.com Economic Calendar">
-    <button class="aec-load-embed aec-calendar-button" type="button" aria-label="Load Investing.com economic calendar">
-      <span class="aec-play">↗</span>
-      <span>Load Investing.com Calendar</span>
-      <small>Loads only when clicked</small>
-    </button>
-  </div>
-
-  <div class="aec-rail-note">CPI · PPI · FOMC · NFP · GDP · Rates · Global macro events</div>
-</aside>
+      
     </div>
   </div>
 </section>
@@ -4672,6 +4760,21 @@ function toggleFaq(el) {
     setTimeout(function(){ document.documentElement.dataset.aecIdleReady = "1"; }, 1200);
   }
 })();
+</script>
+
+
+<script id="aec-investing-position-guard-v7">
+document.addEventListener("DOMContentLoaded", function(){
+  var layout = document.querySelector(".aec-market-layout");
+  var rail = document.querySelector(".aec-market-rail");
+  var feeds = document.querySelector(".aec-feed-grid");
+  if(layout && rail && rail.parentElement !== layout){
+    layout.appendChild(rail);
+  }
+  if(layout && feeds && feeds.parentElement !== layout){
+    layout.insertBefore(feeds, layout.firstChild);
+  }
+});
 </script>
 
 </body>
