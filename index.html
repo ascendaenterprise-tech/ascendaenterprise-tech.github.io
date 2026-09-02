@@ -934,7 +934,7 @@ html,body{max-width:100vw;overflow-x:hidden}
 
 
 /* ── LANDING 4-PATH ── */
-#aec-landing{display:none;position:fixed;inset:0;z-index:9998;background:#04030A;align-items:center;justify-content:center;padding:2rem;overflow-y:auto}
+#aec-landing{display:flex;position:fixed;inset:0;z-index:9998;background:#04030A;align-items:center;justify-content:center;padding:2rem;overflow-y:auto}
 .path-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:rgba(255,255,255,0.12);margin-bottom:2.5rem}
 .path-card{background:#080612;padding:2.75rem 2rem;display:flex;flex-direction:column;align-items:center;text-align:center;text-decoration:none;transition:background .3s;position:relative;overflow:hidden;cursor:pointer;border:none;color:inherit;font-family:inherit}
 .path-card:hover{background:rgba(255,255,255,0.04)}
@@ -4772,6 +4772,40 @@ document.addEventListener("DOMContentLoaded", function(){
     layout.insertBefore(feeds, layout.firstChild);
   }
 });
+</script>
+
+
+<script id="aec-market-autoload-v8">
+(function () {
+  function loadAECEmbeds() {
+    document.querySelectorAll('.aec-deferred-embed').forEach(function(box) {
+      if (box.dataset.loaded === '1') return;
+
+      var src = box.dataset.embed;
+      if (!src) return;
+
+      var iframe = document.createElement('iframe');
+      iframe.src = src;
+      iframe.loading = 'eager';
+      iframe.allow = 'autoplay; encrypted-media; picture-in-picture';
+      iframe.allowFullscreen = true;
+      iframe.referrerPolicy = 'strict-origin-when-cross-origin';
+      iframe.title = box.dataset.title || 'AEC market intelligence';
+
+      var button = box.querySelector('.aec-load-embed');
+      if (button) button.remove();
+
+      box.appendChild(iframe);
+      box.dataset.loaded = '1';
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', loadAECEmbeds);
+  } else {
+    loadAECEmbeds();
+  }
+})();
 </script>
 
 </body>
