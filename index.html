@@ -1746,7 +1746,37 @@ section[style*="padding:8rem"]{padding-top:4.25rem!important;padding-bottom:4.25
 <!-- ══════════════════════════════════
      LANDING PAGE — 4 PATH SELECTOR
 ══════════════════════════════════ -->
-<div id="aec-landing">
+<!-- ACCREDITED INVESTOR GATE -->
+<div id="gate">
+  <div class="gate-inner">
+    <div class="gate-logo-wrap">
+      <div class="gate-brand">ASCENDA</div>
+      <div class="gate-brand-sub">Enterprise Capital</div>
+      <div class="gate-rule"></div>
+    </div>
+
+    <h1 class="gate-title">Accredited Investor<br>Verification Required</h1>
+    <p class="gate-text">This website contains information intended for sophisticated or accredited investors and other qualified market participants. This website does not independently verify or certify a visitor's legal investor status.</p>
+
+    <div class="gate-check">
+      <input type="checkbox" id="accredited-check" onchange="document.getElementById('gate-enter').classList.toggle('active',this.checked)">
+      <label for="accredited-check">I confirm that I consider myself an accredited or otherwise qualified investor for purposes of accessing this information, and I understand that this acknowledgment does not constitute independent verification of my legal status or eligibility.</label>
+    </div>
+
+    <button class="gate-btn" id="gate-enter" onclick="document.getElementById('gate').style.display='none';document.getElementById('aec-landing').style.display='flex';">Enter Ascenda Enterprise Capital</button>
+
+    <div style="margin-top:2rem;padding:1.5rem;text-align:left;background:rgba(200,200,200,.035);border:.5px solid var(--rule);">
+      <div style="font-family:var(--font-mono);font-size:.55rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold3);margin-bottom:.7rem;">Don't meet the accredited investor requirements?</div>
+      <p style="font-size:.75rem;color:var(--cream3);line-height:1.75;margin:0 0 1rem;">You may still explore Ascenda's educational materials, mentorship programs, and other publicly available resources.</p>
+      <a href="ascenda-mentorship.html" style="display:inline-block;font-family:var(--font-mono);font-size:.55rem;letter-spacing:.15em;text-transform:uppercase;color:var(--cream2);text-decoration:none;border:.5px solid var(--rule2);padding:.7rem 1rem;">Explore Mentorship &amp; Paid Materials &rarr;</a>
+    </div>
+
+    <a class="gate-decline" href="about:blank">I do not qualify and I'm not interested - Exit Site</a>
+    <p class="gate-disclaimer">Nothing on this website constitutes an offer to sell, a solicitation of an offer to buy, or a recommendation regarding any security, investment product, advisory service, or transaction.</p>
+  </div>
+</div>
+
+<div id="aec-landing" style="display:none">
   <div style="position:absolute;top:0;left:0;right:0;height:1.5px;background:linear-gradient(90deg,transparent,#C8C8C8,transparent)"></div>
   <div style="max-width:1020px;width:100%;margin:auto;text-align:center">
 
