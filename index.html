@@ -1743,6 +1743,41 @@ section[style*="padding:8rem"]{padding-top:4.25rem!important;padding-bottom:4.25
 </head>
 <body data-aec-build="sitewide-final-qa-v1">
 
+<div id="gate">
+  <div class="gate-inner">
+    <div class="gate-logo-wrap">
+      <div class="gate-brand">ASCENDA</div>
+      <div class="gate-brand-sub">Enterprise Capital</div>
+    </div>
+    <div class="gate-rule"></div>
+    <h1 class="gate-title">Investor Access Confirmation</h1>
+    <p class="gate-text">Before continuing, please confirm your investor status.</p>
+    <div class="gate-check">
+      <input type="checkbox" id="accreditedCheck" onchange="toggleInvestorGate()">
+      <label for="accreditedCheck">I confirm that I am an accredited investor as defined under applicable U.S. securities laws and understand that this website is provided for informational purposes only.</label>
+    </div>
+    <button id="gateEnter" class="gate-btn" type="button" onclick="enterAECWebsite()">Continue to Ascenda</button>
+    <a class="gate-decline" href="javascript:void(0)" onclick="declineInvestorGate()">I do not meet this qualification</a>
+    <p class="gate-disclaimer">This confirmation does not constitute an offer, solicitation, recommendation, or acceptance of capital.</p>
+  </div>
+</div>
+
+<script>
+function toggleInvestorGate(){
+  var checked=document.getElementById('accreditedCheck').checked;
+  document.getElementById('gateEnter').classList.toggle('active',checked);
+}
+function enterAECWebsite(){
+  if(!document.getElementById('accreditedCheck').checked)return;
+  document.getElementById('gate').style.display='none';
+  document.getElementById('aec-landing').style.display='flex';
+  document.body.style.overflow='hidden';
+}
+function declineInvestorGate(){
+  document.getElementById('gate').innerHTML='<div class="gate-inner"><div class="gate-brand">ASCENDA</div><div class="gate-brand-sub">Enterprise Capital</div><div class="gate-rule"></div><h1 class="gate-title">Access Restricted</h1><p class="gate-text">This area of the website is currently limited to visitors who confirm the required investor status.</p></div>';
+}
+</script>
+
 <!-- ══════════════════════════════════
      LANDING PAGE — 4 PATH SELECTOR
 ══════════════════════════════════ -->
