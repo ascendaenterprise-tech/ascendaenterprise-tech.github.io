@@ -1743,6 +1743,41 @@ section[style*="padding:8rem"]{padding-top:4.25rem!important;padding-bottom:4.25
 </head>
 <body data-aec-build="sitewide-final-qa-v1">
 
+<div id="gate">
+  <div class="gate-inner">
+    <div class="gate-logo-wrap">
+      <div class="gate-brand">ASCENDA</div>
+      <div class="gate-brand-sub">Enterprise Capital</div>
+    </div>
+    <div class="gate-rule"></div>
+    <h1 class="gate-title">Investor Access Confirmation</h1>
+    <p class="gate-text">Before continuing, please confirm your investor status.</p>
+    <div class="gate-check">
+      <input type="checkbox" id="accreditedCheck" onchange="toggleInvestorGate()">
+      <label for="accreditedCheck">I confirm that I am an accredited investor as defined under applicable U.S. securities laws and understand that this website is provided for informational purposes only.</label>
+    </div>
+    <button id="gateEnter" class="gate-btn" type="button" onclick="enterAECWebsite()">Continue to Ascenda</button>
+    <a class="gate-decline" href="javascript:void(0)" onclick="declineInvestorGate()">I do not meet this qualification</a>
+    <p class="gate-disclaimer">This confirmation does not constitute an offer, solicitation, recommendation, or acceptance of capital.</p>
+  </div>
+</div>
+
+<script>
+function toggleInvestorGate(){
+  var checked=document.getElementById('accreditedCheck').checked;
+  document.getElementById('gateEnter').classList.toggle('active',checked);
+}
+function enterAECWebsite(){
+  if(!document.getElementById('accreditedCheck').checked)return;
+  document.getElementById('gate').style.display='none';
+  document.getElementById('aec-landing').style.display='flex';
+  document.body.style.overflow='hidden';
+}
+function declineInvestorGate(){
+  document.getElementById('gate').innerHTML='<div class="gate-inner"><div class="gate-brand">ASCENDA</div><div class="gate-brand-sub">Enterprise Capital</div><div class="gate-rule"></div><h1 class="gate-title">Access Restricted</h1><p class="gate-text">This area of the website is currently limited to visitors who confirm the required investor status.</p></div>';
+}
+</script>
+
 <!-- ══════════════════════════════════
      LANDING PAGE — 4 PATH SELECTOR
 ══════════════════════════════════ -->
@@ -3524,7 +3559,7 @@ section[style*="padding:8rem"]{padding-top:4.25rem!important;padding-bottom:4.25
   <div class="founder-grid">
     <div class="founder-left">
       <div class="sec-label-dark">Founder, Owner, CEO &amp; Philanthropist</div>
-      <div class="founder-name">Izaiah<br/>Cottle</div>
+      <div class="founder-name">Izaiah<br/>Cottle</div><a href="izaiah-cottle.html" style="display:inline-block;margin:0 0 1.25rem;font-family:var(--font-mono);font-size:.52rem;letter-spacing:.16em;text-transform:uppercase;color:var(--gold3);text-decoration:none;border-bottom:1px solid currentColor;padding-bottom:.2rem">View Founder Profile &rarr;</a>
       <div class="founder-title">Founder, Owner, Chief Executive Officer &amp; Philanthropist<br/>Ascenda Enterprise Capital LLC</div>
       <div class="founder-bio">
         <p>Izaiah Cottle is a quantitative finance professional, trading mentor, philanthropist, and the Founder, Owner, and Chief Executive Officer of Ascenda Enterprise Capital. His work centers on the development of proprietary systematic finance and quantitative trading frameworks, with broader ventures spanning real estate, private equity, and pharmaceutical research and development.</p>
