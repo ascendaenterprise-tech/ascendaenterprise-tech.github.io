@@ -2692,10 +2692,10 @@ section[style*="padding:8rem"]{padding-top:4.25rem!important;padding-bottom:4.25
   </div>
 
   <div class="kpi-grid">
-    <div class="kpi"><div class="kpi-val" style="font-size:1.5rem;color:#2ECC71">+$22.641M</div><div class="kpi-label">AECQS Aggregate Net Backtest P&amp;L</div><div class="kpi-sub">Historical simulation - current development point</div></div>
-    <div class="kpi"><div class="kpi-val" style="font-size:1.5rem">27,214</div><div class="kpi-label">Accepted Historical Trades</div><div class="kpi-sub">Aggregate research-system observations</div></div>
-    <div class="kpi"><div class="kpi-val" style="font-size:1.5rem">~53.7%</div><div class="kpi-label">Win Rate</div><div class="kpi-sub">AECQS current development point</div></div>
-    <div class="kpi"><div class="kpi-val" style="font-size:1.5rem">~1.61</div><div class="kpi-label">Profit Factor</div><div class="kpi-sub">AECQS current development point</div></div>
+    <div class="kpi"><div class="kpi-val" style="font-size:1.5rem;color:#2ECC71">+$31.649M</div><div class="kpi-label">AECQS Raw Combined Net Backtest P&amp;L</div><div class="kpi-sub">Historical backtest / simulated research</div></div>
+    <div class="kpi"><div class="kpi-val" style="font-size:1.5rem">53,317</div><div class="kpi-label">Historical Trades</div><div class="kpi-sub">Combined NQ · ES · YM research observations</div></div>
+    <div class="kpi"><div class="kpi-val" style="font-size:1.5rem">3</div><div class="kpi-label">Research Markets</div><div class="kpi-sub">NQ · ES · YM</div></div>
+    <div class="kpi"><div class="kpi-val" style="font-size:1.5rem">10</div><div class="kpi-label">Max Entries / Market</div><div class="kpi-sub">Final research configuration</div></div>
   </div>
 
   <div class="perf-grid">
@@ -2705,13 +2705,13 @@ section[style*="padding:8rem"]{padding-top:4.25rem!important;padding-bottom:4.25
         <div class="ml-row"><span class="ml-label">AECQS backtest / simulation</span><span class="ml-val gold">Historical quantitative research</span></div>
         <div class="ml-row"><span class="ml-label">Development checkpoints</span><span class="ml-val">Snapshots of evolving R&amp;D</span></div>
         <div class="ml-row"><span class="ml-label">Executed trading records</span><span class="ml-val">Reported separately when supported</span></div>
-        <div class="ml-row"><span class="ml-label">Maximum drawdown</span><span class="ml-val" style="color:#E74C3C">-$367,003.23 · simulated</span></div>
+        <div class="ml-row"><span class="ml-label">Cross-portfolio max drawdown</span><span class="ml-val">Not yet calculated</span></div>
       </div>
     </div>
     <div class="perf-block">
       <div class="perf-block-title">Research interpretation</div>
       <div class="metric-list">
-        <div class="ml-row"><span class="ml-label">Primary development market</span><span class="ml-val gold">Nasdaq-100 Futures (NQ)</span></div>
+        <div class="ml-row"><span class="ml-label">Research markets</span><span class="ml-val gold">NQ · ES · YM</span></div>
         <div class="ml-row"><span class="ml-label">Program status</span><span class="ml-val">Active Research &amp; Development</span></div>
         <div class="ml-row"><span class="ml-label">Architecture</span><span class="ml-val">Systematic · Multi-Strategy</span></div>
         <div class="ml-row"><span class="ml-label">Performance status</span><span class="ml-val">Not audited live fund performance</span></div>
@@ -2720,7 +2720,7 @@ section[style*="padding:8rem"]{padding-top:4.25rem!important;padding-bottom:4.25
   </div>
 
   <div style="font-family:var(--font-mono);font-size:.5rem;color:rgba(255,255,255,.28);letter-spacing:.04em;line-height:1.75;padding:1rem 1.1rem;background:rgba(0,0,0,.3);border:.5px solid rgba(200,200,200,.1);margin-top:1px">
-    Historical backtest/simulated research only where identified as AECQS research. The current AECQS development point reflects +$22,640,546.74 aggregate net backtest P&amp;L across 27,214 accepted historical trades, with an approximate 53.7% win rate and approximate 1.61 profit factor. Cross-portfolio maximum drawdown has not yet been calculated. Modeled slippage, fees, applicable trading costs, contract sizing, execution assumptions, and risk parameters are incorporated into this checkpoint. AECQS remains under active R&amp;D; results may change materially as research continues. Past or simulated performance does not guarantee future results.
+    Historical backtest/simulated research only where identified as AECQS research. The current AECQS development point reflects +$31,648,982.32 aggregate net backtest P&amp;L across 53,317 accepted historical trades, spanning NQ, ES, and YM. Cross-portfolio maximum drawdown has not yet been calculated. Modeled slippage, fees, applicable trading costs, contract sizing, execution assumptions, and risk parameters are incorporated into this checkpoint. AECQS remains under active R&amp;D; results may change materially as research continues. Past or simulated performance does not guarantee future results.
   </div>
 </section>
 
@@ -2792,24 +2792,24 @@ section[style*="padding:8rem"]{padding-top:4.25rem!important;padding-bottom:4.25
         <p style="font-size:.82rem;color:rgba(255,255,255,.42);font-family:'Jost',sans-serif;font-weight:300;line-height:1.8">The current R&D program is evaluating more than one thousand strategy concepts against more than five years of historical market data, with surviving ideas subjected to additional validation.</p>
       </div>
       <div style="background:#06050D;padding:2rem 1.75rem">
-        <div style="font-family:'DM Mono',monospace;font-size:.48rem;letter-spacing:.2em;text-transform:uppercase;color:#888;margin-bottom:.75rem">Primary Development Market</div>
+        <div style="font-family:'DM Mono',monospace;font-size:.48rem;letter-spacing:.2em;text-transform:uppercase;color:#888;margin-bottom:.75rem">Research Markets</div>
         <div style="font-family:'Cormorant Garamond',serif;font-size:1.2rem;color:#FFFFFF;margin-bottom:.75rem;font-weight:300">Nasdaq Futures (NQ)</div>
         <p style="font-size:.82rem;color:rgba(255,255,255,.42);font-family:'Jost',sans-serif;font-weight:300;line-height:1.8">Current intensive development centers on NQ while the broader architecture is designed to support additional instruments and asset classes as research is validated.</p>
       </div>
     </div>
 
-    <div style="font-family:'DM Mono',monospace;font-size:.5rem;letter-spacing:.2em;text-transform:uppercase;color:#888;margin-bottom:1rem">AECQS-30 — Current Development Checkpoint</div>
+    <div style="font-family:'DM Mono',monospace;font-size:.5rem;letter-spacing:.2em;text-transform:uppercase;color:#888;margin-bottom:1rem">AECQS - Final 10-Entry Research Configuration</div>
     <div class="aecqs-metric-grid" style="display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:rgba(255,255,255,0.08);margin-bottom:1rem">
       <div style="background:#06050D;padding:1.65rem 1rem;text-align:center">
-        <div style="font-family:'Cormorant Garamond',serif;font-size:1.8rem;font-style:italic;color:#2ECC71;line-height:1">+$22.641M</div>
+        <div style="font-family:'Cormorant Garamond',serif;font-size:1.8rem;font-style:italic;color:#2ECC71;line-height:1">+$31.649M</div>
         <div style="font-family:'DM Mono',monospace;font-size:.45rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.35);margin-top:.5rem">Net Backtest P&amp;L</div>
       </div>
       <div style="background:#06050D;padding:1.65rem 1rem;text-align:center">
-        <div style="font-family:'Cormorant Garamond',serif;font-size:1.8rem;font-style:italic;color:#FFFFFF;line-height:1">27,214</div>
+        <div style="font-family:'Cormorant Garamond',serif;font-size:1.8rem;font-style:italic;color:#FFFFFF;line-height:1">53,317</div>
         <div style="font-family:'DM Mono',monospace;font-size:.45rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.35);margin-top:.5rem">Accepted Trades</div>
       </div>
       <div style="background:#06050D;padding:1.65rem 1rem;text-align:center">
-        <div style="font-family:'Cormorant Garamond',serif;font-size:1.8rem;font-style:italic;color:#FFFFFF;line-height:1">~53.7%</div>
+        <div style="font-family:'Cormorant Garamond',serif;font-size:1.8rem;font-style:italic;color:#FFFFFF;line-height:1">3</div>
         <div style="font-family:'DM Mono',monospace;font-size:.45rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.35);margin-top:.5rem">Win Rate</div>
       </div>
       <div style="background:#06050D;padding:1.65rem 1rem;text-align:center">
@@ -2820,7 +2820,7 @@ section[style*="padding:8rem"]{padding-top:4.25rem!important;padding-bottom:4.25
 
     <div style="background:rgba(255,255,255,.025);border:.5px solid rgba(255,255,255,.08);padding:1.35rem 1.5rem;margin-bottom:1.5rem">
       <p style="font-family:'DM Mono',monospace;font-size:.49rem;letter-spacing:.045em;color:rgba(255,255,255,.35);line-height:1.8;margin:0">
-        CURRENT DEVELOPMENT POINT — Historical backtest/simulated research only. The +$22,640,546.74 figure represents aggregate historical backtest/simulated research net P&amp;L at the current AECQS development point, across 27,214 accepted historical trades, with an approximate 53.7% win rate and approximate 1.61 profit factor. Cross-portfolio maximum drawdown has not yet been calculated. Modeled slippage, fees, applicable trading costs, contract sizing, execution assumptions, and risk parameters are incorporated into this checkpoint. AECQS remains under active R&amp;D; these figures are not audited or live investment performance and may change materially as research continues.
+        CURRENT DEVELOPMENT POINT — Historical backtest/simulated research only. The +$31,648,982.32 figure represents aggregate historical backtest/simulated research net P&amp;L across 53,317 historical trades spanning NQ, ES, and YM. Cross-portfolio maximum drawdown has not yet been calculated. Modeled slippage, fees, applicable trading costs, contract sizing, execution assumptions, and risk parameters are incorporated into this checkpoint. AECQS remains under active R&amp;D; these figures are not audited or live investment performance and may change materially as research continues.
       </p>
     </div>
 
@@ -4090,7 +4090,7 @@ var chatSystemPrompts = {
   private_equity: 'You are the AEC virtual assistant for Ascenda Enterprise Capital LLC. The user is asking about private equity, strategic relationships, or institutional inquiries. Explain that the public website is informational and does not constitute an offering or acceptance of capital. AEC works across quantitative research, real estate, private equity, and pharmaceutical R&D. Direct transaction-specific questions to izaiah@ascendaenterprisecapital.com. Do not state regulatory exemptions, investor eligibility, minimum allocations, verified returns, or guaranteed outcomes. Keep responses under 100 words.',
   real_estate: 'You are the AEC virtual assistant for Ascenda Enterprise Capital LLC. The user is asking about real estate investing. Key facts: AEC pursues value-add and opportunistic acquisitions in commercial and residential sectors, focus on supply-constrained markets, Sun Belt industrial and multifamily, active management approach. AEC also co-founded One House One Story (OHOS), a cash home buying company in Atlanta. For real estate inquiries contact: izaiah@ascendaenterprisecapital.com. Keep responses under 100 words. Do not guarantee returns. Be professional.',
   mentorship: 'You are the AEC virtual assistant for Ascenda Enterprise Capital LLC. The user is asking about the mentorship program. Tiers: Foundation $750 (3 months), Accelerator $4,500 (6 months), Elite $35,000 (12 months). All tiers include direct 1-on-1 with Izaiah Cottle, real trade reviews, AEC frameworks and playbooks. Not a course — real proximity to the actual operation. Apply at: ascendaenterprisecapital.com/ascenda-mentorship.html. Extremely limited spots. Keep responses under 100 words. Be professional and confident.',
-  trading: 'You are the AEC virtual assistant for Ascenda Enterprise Capital LLC. The user is asking about quantitative trading research. AECQS is a proprietary multi-strategy quantitative research, analysis, portfolio-risk, and execution architecture under active R&D, with NQ as the primary development market. Published AECQS checkpoints are historical backtest/simulated research, not audited live fund performance. Do not provide investment advice or guarantee outcomes. Keep responses under 100 words.'
+  trading: 'You are the AEC virtual assistant for Ascenda Enterprise Capital LLC. The user is asking about quantitative trading research. AECQS is a proprietary multi-strategy quantitative research, analysis, portfolio-risk, and execution architecture under active R&D, spanning NQ, ES, and YM in the final 10-entry research configuration. Published AECQS checkpoints are historical backtest/simulated research, not audited live fund performance. Do not provide investment advice or guarantee outcomes. Keep responses under 100 words.'
 };
 
 function toggleChat(){
@@ -4107,7 +4107,7 @@ function selectTopic(topic){
     private_equity: 'You are the AEC virtual assistant for Ascenda Enterprise Capital LLC. The user is asking about private equity, strategic relationships, or institutional inquiries. Explain that the public website is informational and does not constitute an offering or acceptance of capital. AEC works across quantitative research, real estate, private equity, and pharmaceutical R&D. Direct transaction-specific questions to izaiah@ascendaenterprisecapital.com. Do not state regulatory exemptions, investor eligibility, minimum allocations, verified returns, or guaranteed outcomes. Keep responses under 100 words.',
     real_estate: 'Real Estate Investing',
     mentorship: 'Mentorship Program',
-    trading: 'You are the AEC virtual assistant for Ascenda Enterprise Capital LLC. The user is asking about quantitative trading research. AECQS is a proprietary multi-strategy quantitative research, analysis, portfolio-risk, and execution architecture under active R&D, with NQ as the primary development market. Published AECQS checkpoints are historical backtest/simulated research, not audited live fund performance. Do not provide investment advice or guarantee outcomes. Keep responses under 100 words.'
+    trading: 'You are the AEC virtual assistant for Ascenda Enterprise Capital LLC. The user is asking about quantitative trading research. AECQS is a proprietary multi-strategy quantitative research, analysis, portfolio-risk, and execution architecture under active R&D, spanning NQ, ES, and YM in the final 10-entry research configuration. Published AECQS checkpoints are historical backtest/simulated research, not audited live fund performance. Do not provide investment advice or guarantee outcomes. Keep responses under 100 words.'
   };
   document.getElementById('chat-topics').style.display = 'none';
   var main = document.getElementById('chat-main');

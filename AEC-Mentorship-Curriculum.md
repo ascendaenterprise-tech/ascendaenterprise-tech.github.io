@@ -10,7 +10,7 @@
 ### Month 1 — The Foundation
 **Week 1: Mindset & Framework**
 - Why 95% of traders fail — and the exact mindset shift that separates the 5%
-- How Izaiah built from $0 to $82M — the real story, no filters
+- How Izaiah built from $0 to AECQS research — the real story, no filters
 - The AEC trading philosophy: conviction, patience, precision
 - Setting up your trading environment (platform, tools, watchlists)
 - Daily routine of a professional trader
