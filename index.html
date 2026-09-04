@@ -1574,7 +1574,7 @@ section[style*="padding:8rem"]{padding-top:4.25rem!important;padding-bottom:4.25
   position:relative;
   width:100%;
   background:
-    radial-gradient(circle at 50% 45%,rgba(201,168,76,.09),transparent 34%),
+    radial-gradient(circle at 50% 45%,rgba(255,255,255,.09),transparent 34%),
     #050505;
 }
 .aec-video-frame.aec-deferred-embed{aspect-ratio:16/9}
@@ -1604,7 +1604,7 @@ section[style*="padding:8rem"]{padding-top:4.25rem!important;padding-bottom:4.25
   height:36px;
   display:grid;
   place-items:center;
-  border:1px solid rgba(201,168,76,.45);
+  border:1px solid rgba(255,255,255,.45);
   border-radius:50%;
   color:var(--gold3);
   font-size:.72rem;
@@ -1663,8 +1663,8 @@ section[style*="padding:8rem"]{padding-top:4.25rem!important;padding-bottom:4.25
   height:330px!important;
   min-height:330px!important;
   background:
-    linear-gradient(rgba(201,168,76,.025) 1px,transparent 1px),
-    linear-gradient(90deg,rgba(201,168,76,.025) 1px,transparent 1px),
+    linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px),
     #050505!important;
   background-size:22px 22px!important;
 }
@@ -2266,12 +2266,12 @@ section[style*="padding:8rem"]{padding-top:4.25rem!important;padding-bottom:4.25
 
 <!-- LIVE NEWS BAR -->
 <div id="aec-nb" style="background:#0d1018;border-bottom:.5px solid #1c2433;position:relative">
-  <div style="position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,#c8922a,transparent,#c8922a)"></div>
+  <div style="position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,#FFFFFF,transparent,#FFFFFF)"></div>
   <div style="display:flex;align-items:center;justify-content:space-between;padding:.55rem 2rem;border-bottom:.5px solid #1c2433;flex-wrap:wrap;gap:.5rem">
     <div style="display:flex;align-items:center;gap:.75rem;flex-wrap:wrap">
       <div style="display:flex;align-items:center;gap:.4rem">
         <div style="width:6px;height:6px;border-radius:50%;background:#00c896;flex-shrink:0"></div>
-        <span style="font-family:monospace;font-size:.58rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:#c8922a">Live Market News</span>
+        <span style="font-family:monospace;font-size:.58rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:#FFFFFF">Live Market News</span>
       </div>
       <div id="aec-nb-tabs" style="display:flex"></div>
     </div>
@@ -2292,7 +2292,7 @@ section[style*="padding:8rem"]{padding-top:4.25rem!important;padding-bottom:4.25
     'reuters.com':'#f97316','bloomberg.com':'#3b82f6','wsj.com':'#e2e8f0',
     'cnbc.com':'#ef4444','ft.com':'#f59e0b','marketwatch.com':'#10b981',
     'forbes.com':'#8b5cf6','businessinsider.com':'#06b6d4','yahoo.com':'#6366f1',
-    'default':'#c8922a'
+    'default':'#FFFFFF'
   };
 
   function getColor(url){
@@ -2331,12 +2331,12 @@ section[style*="padding:8rem"]{padding-top:4.25rem!important;padding-bottom:4.25
         {s:'MarketWatch',c:'#10b981',k:'equity',t:'live',h:'Tech stocks lead gains as AI spending cycle accelerates into second half',u:'https://marketwatch.com'},
         {s:'Yahoo Finance',c:'#6366f1',k:'macro',t:'live',h:'Fed watchers eye upcoming inflation data ahead of next FOMC meeting',u:'https://finance.yahoo.com'},
         {s:'Bloomberg',c:'#3b82f6',k:'markets',t:'live',h:'NQ futures holding above key support level amid broad market strength',u:'https://bloomberg.com/markets'},
-        {s:'Investing.com',c:'#c8922a',k:'equity',t:'live',h:'NVIDIA leads semiconductor sector higher on continued data center demand',u:'https://investing.com'},
+        {s:'Investing.com',c:'#FFFFFF',k:'equity',t:'live',h:'NVIDIA leads semiconductor sector higher on continued data center demand',u:'https://investing.com'},
         {s:'CNBC',c:'#ef4444',k:'macro',t:'live',h:'Treasury yields steady as traders await next catalyst for rate outlook',u:'https://cnbc.com'},
         {s:'MarketWatch',c:'#10b981',k:'markets',t:'live',h:'Gold holds near record highs as dollar weakens on global uncertainty',u:'https://marketwatch.com'},
         {s:'Yahoo Finance',c:'#6366f1',k:'equity',t:'live',h:'S&P 500 earnings season showing broad beats across major sectors',u:'https://finance.yahoo.com'},
         {s:'Bloomberg',c:'#3b82f6',k:'macro',t:'live',h:'Consumer spending data beats expectations, supporting soft landing thesis',u:'https://bloomberg.com'},
-        {s:'Investing.com',c:'#c8922a',k:'markets',t:'live',h:'Crude oil rises on supply concerns as OPEC+ maintains production cuts',u:'https://investing.com'},
+        {s:'Investing.com',c:'#FFFFFF',k:'markets',t:'live',h:'Crude oil rises on supply concerns as OPEC+ maintains production cuts',u:'https://investing.com'},
         {s:'CNBC',c:'#ef4444',k:'equity',t:'live',h:'Meta and Microsoft report strong cloud and AI revenue in latest quarter',u:'https://cnbc.com'},
         {s:'MarketWatch',c:'#10b981',k:'macro',t:'live',h:'Jobs market remains resilient with unemployment holding near historic lows',u:'https://marketwatch.com'}
       ];
@@ -2349,7 +2349,7 @@ section[style*="padding:8rem"]{padding-top:4.25rem!important;padding-bottom:4.25
         {url:'https://feeds.finance.yahoo.com/rss/2.0/headline?s=^GSPC&region=US&lang=en-US', source:'Yahoo Finance', color:'#6366f1'},
         {url:'https://www.marketwatch.com/rss/topstories', source:'MarketWatch', color:'#10b981'},
         {url:'https://feeds.bloomberg.com/markets/news.rss', source:'Bloomberg', color:'#3b82f6'},
-        {url:'https://www.investing.com/rss/news.rss', source:'Investing.com', color:'#c8922a'}
+        {url:'https://www.investing.com/rss/news.rss', source:'Investing.com', color:'#FFFFFF'}
       ];
       var allItems = [];
       for(var i=0;i<feeds.length;i++){
@@ -2411,7 +2411,7 @@ section[style*="padding:8rem"]{padding-top:4.25rem!important;padding-bottom:4.25
     cats.forEach(function(cat,i){
       var btn=document.createElement('button');
       btn.textContent=cat.l;
-      btn.style.cssText='font-family:monospace;font-size:.52rem;letter-spacing:.08em;text-transform:uppercase;padding:.25rem .6rem;cursor:pointer;border:.5px solid '+(cat.k===f?'#c8922a':'#1c2433')+(i>0?';border-left:none':'')+';background:'+(cat.k===f?'rgba(200,200,200,0.12)':'transparent')+';color:'+(cat.k===f?'#c8922a':'#8090a8');
+      btn.style.cssText='font-family:monospace;font-size:.52rem;letter-spacing:.08em;text-transform:uppercase;padding:.25rem .6rem;cursor:pointer;border:.5px solid '+(cat.k===f?'#FFFFFF':'#1c2433')+(i>0?';border-left:none':'')+';background:'+(cat.k===f?'rgba(200,200,200,0.12)':'transparent')+';color:'+(cat.k===f?'#FFFFFF':'#8090a8');
       btn.addEventListener('click',function(){f=cat.k;buildTabs();render();});
       tabs.appendChild(btn);
     });
