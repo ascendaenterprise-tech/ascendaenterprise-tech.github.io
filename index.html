@@ -41,6 +41,21 @@
     gtag('js', new Date());
     gtag('config', 'G-0YMYZFJG77', {anonymize_ip:true});
   }
+  function loadConsentContent(){
+    document.querySelectorAll('script[data-consent-src]:not([data-consent-loaded])').forEach(function(holder){
+      var script = document.createElement('script');
+      script.src = holder.getAttribute('data-consent-src');
+      script.async = true;
+      if(holder.dataset.uid) script.dataset.uid = holder.dataset.uid;
+      script.textContent = holder.textContent;
+      holder.dataset.consentLoaded = 'true';
+      holder.parentNode.insertBefore(script, holder.nextSibling);
+    });
+    document.querySelectorAll('iframe[data-consent-src]:not([data-consent-loaded])').forEach(function(frame){
+      frame.src = frame.getAttribute('data-consent-src');
+      frame.dataset.consentLoaded = 'true';
+    });
+  }
 </script>
 <link rel="icon" type="image/svg+xml" href="aec-icon.svg"/>
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png"/>
@@ -117,6 +132,9 @@
 }
 html{scroll-behavior:smooth}
 body{background:var(--ink);color:var(--white);font-family:var(--font-body);font-weight:300;overflow-x:hidden;cursor:default}
+*:focus-visible{outline:2px solid #FFFFFF;outline-offset:3px}
+.skip-link{position:fixed;left:1rem;top:-5rem;z-index:100000;background:#FFFFFF;color:#04030A;padding:.8rem 1rem;font-family:var(--font-mono);font-size:.7rem;text-decoration:none}
+.skip-link:focus{top:1rem}
 
 /* ═══════════════════════════════
    ACCREDITED INVESTOR GATE
@@ -1784,6 +1802,7 @@ section[style*="padding:8rem"]{padding-top:4.25rem!important;padding-bottom:4.25
 
 </head>
 <body data-aec-build="sitewide-final-qa-v1">
+<a class="skip-link" href="#main-content">Skip to main content</a>
 
 <!-- ══════════════════════════════════
      LANDING PAGE — 4 PATH SELECTOR
@@ -1868,7 +1887,7 @@ section[style*="padding:8rem"]{padding-top:4.25rem!important;padding-bottom:4.25
         <div class="path-num">01</div>
         <span class="path-icon">🎓</span>
         <div class="path-title">Explore<br/><em>Mentorship</em></div>
-        <p class="path-desc">Direct 1-on-1 training under Izaiah Cottle. Real frameworks, real trade reviews, real access. Foundation, Accelerator, or Elite tiers available.</p>
+        <p class="path-desc">Educational mentorship covering research methods, market concepts, and historical case-study review. Mentorship does not include personalized investment advice, trade signals, brokerage services, or investment access.</p>
         <div class="path-cta">Explore Mentorship →</div>
       </a>
 
@@ -1877,9 +1896,9 @@ section[style*="padding:8rem"]{padding-top:4.25rem!important;padding-bottom:4.25
         <div class="path-top-bar"></div>
         <div class="path-num">02</div>
         <span class="path-icon">🏗️</span>
-        <div class="path-title">Apply as an<br/><em>RE Investor</em></div>
+        <div class="path-title">Submit a<br/><em>Real Estate Inquiry</em></div>
         <p class="path-desc">Real estate buyers, sellers, builders, operators, and strategic counterparties may submit an inquiry regarding properties, land, development, or transaction opportunities.</p>
-        <div class="path-cta">Apply as RE Investor →</div>
+        <div class="path-cta">Real Estate Inquiry →</div>
       </div>
 
       <!-- 03: Main Site -->
@@ -1888,7 +1907,7 @@ section[style*="padding:8rem"]{padding-top:4.25rem!important;padding-bottom:4.25
         <div class="path-num">03</div>
         <span class="path-icon">📊</span>
         <div class="path-title">Explore the<br/><em>Main Site</em></div>
-        <p class="path-desc">Performance Record, strategy, live markets, investor portal, the AEC story, and everything else. The full picture of Ascenda Enterprise Capital.</p>
+        <p class="path-desc">Historical research results, methodology, market resources, company information, and the development story of Ascenda Enterprise Capital.</p>
         <div class="path-cta path-cta-featured">Enter Main Site →</div>
       </div>
 
@@ -1915,19 +1934,19 @@ section[style*="padding:8rem"]{padding-top:4.25rem!important;padding-bottom:4.25
     <div style="position:absolute;top:0;left:0;right:0;height:1.5px;background:linear-gradient(90deg,transparent,#C8C8C8,transparent)"></div>
     <button onclick="document.getElementById('aec-re-modal').style.display='none';document.getElementById('aec-landing').style.display='flex'" style="position:absolute;top:1rem;right:1rem;background:none;border:none;color:rgba(255,255,255,0.4);font-size:1.2rem;cursor:pointer">✕</button>
     <div style="font-size:2.5rem;margin-bottom:1.25rem">🏗️</div>
-    <div style="font-family:'DM Mono',monospace;font-size:.55rem;letter-spacing:.22em;text-transform:uppercase;color:#888888;margin-bottom:.75rem">Real Estate Investment</div>
-    <h2 style="font-family:'Cormorant Garamond',Georgia,serif;font-size:1.8rem;font-weight:300;color:#FFF;margin-bottom:.75rem">Apply as a <em style="font-style:italic;color:#FFFFFF">Real Estate Investor</em></h2>
+    <div style="font-family:'DM Mono',monospace;font-size:.55rem;letter-spacing:.22em;text-transform:uppercase;color:#888888;margin-bottom:.75rem">Real Estate Business Inquiry</div>
+    <h2 style="font-family:'Cormorant Garamond',Georgia,serif;font-size:1.8rem;font-weight:300;color:#FFF;margin-bottom:.75rem">Submit a <em style="font-style:italic;color:#FFFFFF">Real Estate Inquiry</em></h2>
     <p style="font-size:.85rem;color:rgba(255,255,255,0.55);font-weight:300;line-height:1.85;margin-bottom:2rem">Use the inquiry form to provide the relevant property, transaction, timing, and counterparty information. Additional diligence may be requested when appropriate.</p>
     <div style="display:flex;flex-direction:column;gap:.6rem;margin-bottom:2rem;text-align:left;padding:1.25rem 1.5rem;background:rgba(200,200,200,0.05);border:.5px solid rgba(200,200,200,0.15)">
       <div style="font-family:'DM Mono',monospace;font-size:.52rem;letter-spacing:.15em;text-transform:uppercase;color:#888888;margin-bottom:.35rem">What We Ask</div>
       <div style="font-size:.8rem;color:rgba(255,255,255,0.5);font-weight:300;line-height:1.7">Name · Email · Phone · Area of interest · Property location · Budget range · Prior experience · Timeline · Relevant diligence information</div>
     </div>
-    <a href="https://docs.google.com/forms/d/e/1FAIpQLSfSxLW9mVhS5bls9SPSvztuADngTxmGgz9QeOzQKiDV9MV2Lw/viewform?usp=header" target="_blank" style="display:block;font-family:'DM Mono',monospace;font-size:.65rem;letter-spacing:.18em;text-transform:uppercase;background:#C8C8C8;color:#04030A;padding:1.1rem 2rem;text-decoration:none;font-weight:700;transition:background .2s;margin-bottom:1rem" onmouseover="this.style.background='#FFFFFF'" onmouseout="this.style.background='#C8C8C8'">Begin Application →</a>
+    <a href="https://docs.google.com/forms/d/e/1FAIpQLSfSxLW9mVhS5bls9SPSvztuADngTxmGgz9QeOzQKiDV9MV2Lw/viewform?usp=header" target="_blank" rel="noopener" style="display:block;font-family:'DM Mono',monospace;font-size:.65rem;letter-spacing:.18em;text-transform:uppercase;background:#C8C8C8;color:#04030A;padding:1.1rem 2rem;text-decoration:none;font-weight:700;transition:background .2s;margin-bottom:1rem" onmouseover="this.style.background='#FFFFFF'" onmouseout="this.style.background='#C8C8C8'">Open Inquiry Form →</a>
     <p style="font-family:'DM Mono',monospace;font-size:.5rem;color:rgba(255,255,255,0.2);line-height:1.7">Opens Google Form · Use only for genuine real-estate and strategic inquiries</p>
   </div>
 </div>
 
-<!-- AI INVESTOR CHAT ASSISTANT -->
+<!-- GENERAL INFORMATION ASSISTANT -->
 <div id="chat-bubble" onclick="toggleChat()" style="
   position:fixed;bottom:2rem;left:2rem;z-index:9996;
   width:52px;height:52px;border-radius:50%;
@@ -1959,10 +1978,10 @@ section[style*="padding:8rem"]{padding-top:4.25rem!important;padding-bottom:4.25
       Select a topic to get started:
     </div>
     <button onclick="selectTopic('private_equity')" style="background:rgba(200,200,200,.07);border:.5px solid rgba(200,200,200,.25);color:var(--cream2);padding:.75rem 1rem;text-align:left;cursor:pointer;font-size:.8rem;font-family:'Jost',sans-serif;transition:all .2s" onmouseover="this.style.borderColor='var(--gold)';this.style.color='var(--white)'" onmouseout="this.style.borderColor='rgba(200,200,200,.25)';this.style.color='var(--cream2)'">
-      <span style="color:var(--gold);margin-right:.5rem">01</span> Private Equity & Fund Investment
+      <span style="color:var(--gold);margin-right:.5rem">01</span> Private Equity Research &amp; Business Inquiries
     </button>
     <button onclick="selectTopic('real_estate')" style="background:rgba(200,200,200,.07);border:.5px solid rgba(200,200,200,.25);color:var(--cream2);padding:.75rem 1rem;text-align:left;cursor:pointer;font-size:.8rem;font-family:'Jost',sans-serif;transition:all .2s" onmouseover="this.style.borderColor='var(--gold)';this.style.color='var(--white)'" onmouseout="this.style.borderColor='rgba(200,200,200,.25)';this.style.color='var(--cream2)'">
-      <span style="color:var(--gold);margin-right:.5rem">02</span> Real Estate Investing
+      <span style="color:var(--gold);margin-right:.5rem">02</span> Real Estate Business Inquiries
     </button>
     <button onclick="selectTopic('mentorship')" style="background:rgba(200,200,200,.07);border:.5px solid rgba(200,200,200,.25);color:var(--cream2);padding:.75rem 1rem;text-align:left;cursor:pointer;font-size:.8rem;font-family:'Jost',sans-serif;transition:all .2s" onmouseover="this.style.borderColor='var(--gold)';this.style.color='var(--white)'" onmouseout="this.style.borderColor='rgba(200,200,200,.25)';this.style.color='var(--cream2)'">
       <span style="color:var(--gold);margin-right:.5rem">03</span> Mentorship Program
@@ -2015,12 +2034,12 @@ section[style*="padding:8rem"]{padding-top:4.25rem!important;padding-bottom:4.25
     <button onclick="document.getElementById('wire-modal').style.display='none'" style="position:absolute;top:1rem;right:1rem;background:none;border:none;color:var(--cream3);font-size:1.2rem;cursor:pointer">✕</button>
     <div style="font-family:var(--font-mono);font-size:.55rem;letter-spacing:.22em;text-transform:uppercase;color:var(--gold3);margin-bottom:1rem">Transaction Security</div>
     <h3 style="font-family:var(--font-display);font-size:1.5rem;font-weight:300;color:var(--white);margin-bottom:.5rem">Payment & Transfer Security</h3>
-    <p style="font-size:.85rem;color:var(--cream2);line-height:1.8;font-weight:300;margin-bottom:1.5rem">AEC does not publish securities-investment wire instructions on this website. Any legitimate payment or transfer connected to a documented transaction must be independently verified using the contact information and definitive documents applicable to that transaction.</p>
+    <p style="font-size:.85rem;color:var(--cream2);line-height:1.8;font-weight:300;margin-bottom:1.5rem">AEC does not accept investment funds or publish investment wire instructions through this website. Never treat a website, social-media message, or unsolicited email as authority to transfer money.</p>
     <div style="background:rgba(255,255,255,0.04);border:.5px solid var(--rule);padding:1.25rem;margin-bottom:1.5rem">
       <div style="font-family:var(--font-mono);font-size:.55rem;letter-spacing:.15em;text-transform:uppercase;color:var(--gold3);margin-bottom:.5rem">Important</div>
-      <p style="font-size:.78rem;color:var(--cream2);line-height:1.7;font-weight:300">Never transfer funds until you have received and verified official wire instructions directly from Izaiah Cottle at <strong style="color:var(--gold)">izaiah@ascendaenterprisecapital.com</strong>. AEC will never request payment through PayPal, Venmo, or crypto.</p>
+      <p style="font-size:.78rem;color:var(--cream2);line-height:1.7;font-weight:300">Do not send money, brokerage credentials, banking information, government identifiers, or cryptocurrency in response to this website. Report suspected impersonation or fraud to <strong style="color:var(--gold)">izaiah@ascendaenterprisecapital.com</strong>.</p>
     </div>
-    <a href="mailto:izaiah@ascendaenterprisecapital.com?subject=Transaction Security Request — AEC&body=I would like to request transaction-security information for a documented AEC relationship." style="display:block;text-align:center;font-family:var(--font-mono);font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;background:var(--gold);color:var(--ink);padding:1rem;text-decoration:none;font-weight:500;transition:background .2s" onmouseover="this.style.background='var(--gold2)'" onmouseout="this.style.background='var(--gold)'">Contact AEC About Transaction Security →</a>
+    <a href="mailto:izaiah@ascendaenterprisecapital.com?subject=Suspected%20impersonation%20or%20fraud" style="display:block;text-align:center;font-family:var(--font-mono);font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;background:var(--gold);color:var(--ink);padding:1rem;text-decoration:none;font-weight:500;transition:background .2s" onmouseover="this.style.background='var(--gold2)'" onmouseout="this.style.background='var(--gold)'">Report Suspected Fraud →</a>
   </div>
 </div>
 
@@ -2113,33 +2132,13 @@ section[style*="padding:8rem"]{padding-top:4.25rem!important;padding-bottom:4.25
   </div>
 </nav>
 
-<!-- VISITOR COUNTER -->
-<div id="visitor-bar" style="
-  background:rgba(6,5,13,.95);
-  border-bottom:.5px solid rgba(200,200,200,.15);
-  padding:.4rem 3.5rem;
-  display:flex;align-items:center;justify-content:flex-end;
-  gap:1.5rem;
-">
-  <div style="display:flex;align-items:center;gap:.5rem">
-    <div style="width:6px;height:6px;border-radius:50%;background:#2ECC71;box-shadow:0 0 6px #2ECC71;animation:visitorPulse 2s ease infinite"></div>
-    <span style="font-family:'DM Mono',monospace;font-size:.52rem;letter-spacing:.1em;color:rgba(255,255,255,.4)">
-      <span id="visitor-count">--</span> viewing now
-    </span>
-  </div>
-  <div style="width:.5px;height:12px;background:rgba(255,255,255,.1)"></div>
-  <div style="font-family:'DM Mono',monospace;font-size:.52rem;letter-spacing:.1em;color:rgba(255,255,255,.25)">
-    <span id="visitor-today">--</span> visitors today
-  </div>
-</div>
-
 <!-- TICKER -->
 <div style="margin-top:56px;border-top:.5px solid rgba(200,200,200,0.15);background:rgba(200,200,200,0.05)">
   <!-- ROW 1: Indices, Forex, Crypto, Commodities -->
   <div style="border-bottom:.5px solid rgba(200,200,200,0.1)">
     <div class="tradingview-widget-container">
       <div class="tradingview-widget-container__widget"></div>
-      <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js" async>
+<script type="application/json" data-consent-src="https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js">
       {
         "symbols": [
           {"proName":"FOREXCOM:NSXUSD","title":"NQ / NASDAQ 100"},
@@ -2170,7 +2169,7 @@ section[style*="padding:8rem"]{padding-top:4.25rem!important;padding-bottom:4.25
   <div style="border-bottom:.5px solid rgba(200,200,200,0.15)">
     <div class="tradingview-widget-container">
       <div class="tradingview-widget-container__widget"></div>
-      <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js" async>
+<script type="application/json" data-consent-src="https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js">
       {
         "symbols": [
           {"proName":"NASDAQ:TSLA","title":"Tesla"},
@@ -2202,7 +2201,7 @@ section[style*="padding:8rem"]{padding-top:4.25rem!important;padding-bottom:4.25
   <div style="border-bottom:.5px solid rgba(200,200,200,0.15)">
     <div class="tradingview-widget-container">
       <div class="tradingview-widget-container__widget"></div>
-      <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js" async>
+<script type="application/json" data-consent-src="https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js">
       {
         "symbols": [
           {"proName":"NYSE:SPG","title":"Simon Property"},
@@ -2294,14 +2293,14 @@ section[style*="padding:8rem"]{padding-top:4.25rem!important;padding-bottom:4.25
   <div id="cd-label" style="font-family:'DM Mono',monospace;font-size:.52rem;letter-spacing:.1em;color:rgba(255,255,255,.3)">until open</div>
 </div>
 
-<!-- LIVE NEWS BAR -->
+<!-- PUBLISHER LINKS — no scraped or fabricated headlines -->
 <div id="aec-nb" style="background:#0d1018;border-bottom:.5px solid #1c2433;position:relative">
   <div style="position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,#FFFFFF,transparent,#FFFFFF)"></div>
   <div style="display:flex;align-items:center;justify-content:space-between;padding:.55rem 2rem;border-bottom:.5px solid #1c2433;flex-wrap:wrap;gap:.5rem">
     <div style="display:flex;align-items:center;gap:.75rem;flex-wrap:wrap">
       <div style="display:flex;align-items:center;gap:.4rem">
         <div style="width:6px;height:6px;border-radius:50%;background:#00c896;flex-shrink:0"></div>
-        <span style="font-family:monospace;font-size:.58rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:#FFFFFF">Live Market News</span>
+        <span style="font-family:monospace;font-size:.58rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:#FFFFFF">Independent Market-News Sources</span>
       </div>
       <div id="aec-nb-tabs" style="display:flex"></div>
     </div>
@@ -2354,25 +2353,21 @@ section[style*="padding:8rem"]{padding-top:4.25rem!important;padding-bottom:4.25
   }
 
   async function fetchNews(){
-    // Load fallback headlines immediately
+    // Publisher home-page links only. Do not present invented, scraped, or stale text as live news.
     if(hl.length === 0){
       hl = [
-        {s:'CNBC',c:'#ef4444',k:'markets',t:'live',h:'Markets open — S&P 500 and NASDAQ tracking overnight futures gains',u:'https://cnbc.com/markets'},
-        {s:'MarketWatch',c:'#10b981',k:'equity',t:'live',h:'Tech stocks lead gains as AI spending cycle accelerates into second half',u:'https://marketwatch.com'},
-        {s:'Yahoo Finance',c:'#6366f1',k:'macro',t:'live',h:'Fed watchers eye upcoming inflation data ahead of next FOMC meeting',u:'https://finance.yahoo.com'},
-        {s:'Bloomberg',c:'#3b82f6',k:'markets',t:'live',h:'NQ futures holding above key support level amid broad market strength',u:'https://bloomberg.com/markets'},
-        {s:'Investing.com',c:'#FFFFFF',k:'equity',t:'live',h:'NVIDIA leads semiconductor sector higher on continued data center demand',u:'https://investing.com'},
-        {s:'CNBC',c:'#ef4444',k:'macro',t:'live',h:'Treasury yields steady as traders await next catalyst for rate outlook',u:'https://cnbc.com'},
-        {s:'MarketWatch',c:'#10b981',k:'markets',t:'live',h:'Gold holds near record highs as dollar weakens on global uncertainty',u:'https://marketwatch.com'},
-        {s:'Yahoo Finance',c:'#6366f1',k:'equity',t:'live',h:'S&P 500 earnings season showing broad beats across major sectors',u:'https://finance.yahoo.com'},
-        {s:'Bloomberg',c:'#3b82f6',k:'macro',t:'live',h:'Consumer spending data beats expectations, supporting soft landing thesis',u:'https://bloomberg.com'},
-        {s:'Investing.com',c:'#FFFFFF',k:'markets',t:'live',h:'Crude oil rises on supply concerns as OPEC+ maintains production cuts',u:'https://investing.com'},
-        {s:'CNBC',c:'#ef4444',k:'equity',t:'live',h:'Meta and Microsoft report strong cloud and AI revenue in latest quarter',u:'https://cnbc.com'},
-        {s:'MarketWatch',c:'#10b981',k:'macro',t:'live',h:'Jobs market remains resilient with unemployment holding near historic lows',u:'https://marketwatch.com'}
+        {s:'CNBC',c:'#ef4444',k:'markets',t:'external',h:'Visit CNBC Markets',u:'https://www.cnbc.com/markets/'},
+        {s:'MarketWatch',c:'#10b981',k:'markets',t:'external',h:'Visit MarketWatch',u:'https://www.marketwatch.com/'},
+        {s:'Yahoo Finance',c:'#6366f1',k:'markets',t:'external',h:'Visit Yahoo Finance',u:'https://finance.yahoo.com/'},
+        {s:'Bloomberg',c:'#3b82f6',k:'markets',t:'external',h:'Visit Bloomberg Markets',u:'https://www.bloomberg.com/markets/'},
+        {s:'Investing.com',c:'#FFFFFF',k:'markets',t:'external',h:'Visit Investing.com',u:'https://www.investing.com/'}
       ];
       render();
     }
-    // Then try to fetch live headlines
+    var el=document.getElementById('aec-nb-time');
+    if(el) el.textContent='Third-party links · verify independently';
+    return;
+    // Disabled pending written permission and a compliant licensed data integration.
     try {
       var feeds = [
         {url:'https://www.cnbc.com/id/100003114/device/rss/rss.html', source:'CNBC', color:'#ef4444'},
@@ -2479,7 +2474,7 @@ section[style*="padding:8rem"]{padding-top:4.25rem!important;padding-bottom:4.25
   <div class="aec-shell">
     <div class="sec-label">Real-Time Coverage</div>
     <h2 class="on-dark">Live Market <em>Coverage</em></h2>
-    <p class="aec-live-intro">Nine market and financial-news feeds. Streams are provided by their respective publishers.</p>
+    <p class="aec-live-intro">Optional third-party market and financial-news streams. A stream is not loaded until you select its button. Selecting a button connects your browser to the named publisher or YouTube, which may process technical data under its own privacy terms. Ascenda does not control, verify, or endorse third-party content.</p>
     <div class="aec-market-layout">
       <div class="aec-feed-grid">
       <article class="aec-feed-card">
@@ -2487,7 +2482,7 @@ section[style*="padding:8rem"]{padding-top:4.25rem!important;padding-bottom:4.25
   <div class="aec-video-frame aec-deferred-embed" data-embed="https://www.youtube.com/embed/QB5BNdBFujE?autoplay=1&mute=1&playsinline=1">
     <button class="aec-load-embed" type="button" aria-label="Load live video">
       <span class="aec-play">▶</span>
-      <span>Load live feed</span>
+      <span>Load third-party feed</span>
     </button>
   </div>
 </article>
@@ -2496,7 +2491,7 @@ section[style*="padding:8rem"]{padding-top:4.25rem!important;padding-bottom:4.25
   <div class="aec-video-frame aec-deferred-embed" data-embed="https://www.youtube.com/embed/KQp-e_XQnDE?autoplay=1&mute=1&playsinline=1">
     <button class="aec-load-embed" type="button" aria-label="Load live video">
       <span class="aec-play">▶</span>
-      <span>Load live feed</span>
+      <span>Load third-party feed</span>
     </button>
   </div>
 </article>
@@ -2505,7 +2500,7 @@ section[style*="padding:8rem"]{padding-top:4.25rem!important;padding-bottom:4.25
   <div class="aec-video-frame aec-deferred-embed" data-embed="https://www.youtube.com/embed/C96oohpWBGw?autoplay=1&mute=1&playsinline=1">
     <button class="aec-load-embed" type="button" aria-label="Load live video">
       <span class="aec-play">▶</span>
-      <span>Load live feed</span>
+      <span>Load third-party feed</span>
     </button>
   </div>
 </article>
@@ -2514,7 +2509,7 @@ section[style*="padding:8rem"]{padding-top:4.25rem!important;padding-bottom:4.25
   <div class="aec-video-frame aec-deferred-embed" data-embed="https://www.youtube.com/embed/live_stream?channel=UCjTMxYSAvQ9DNPYjtxNgkCw&autoplay=1&mute=1&playsinline=1">
     <button class="aec-load-embed" type="button" aria-label="Load live video">
       <span class="aec-play">▶</span>
-      <span>Load live feed</span>
+      <span>Load third-party feed</span>
     </button>
   </div>
 </article>
@@ -2523,7 +2518,7 @@ section[style*="padding:8rem"]{padding-top:4.25rem!important;padding-bottom:4.25
   <div class="aec-video-frame aec-deferred-embed" data-embed="https://www.youtube.com/embed/live_stream?channel=UCdUCBzZCacPI61FdL7x9yvQ&autoplay=1&mute=1&playsinline=1">
     <button class="aec-load-embed" type="button" aria-label="Load live video">
       <span class="aec-play">▶</span>
-      <span>Load live feed</span>
+      <span>Load third-party feed</span>
     </button>
   </div>
 </article>
@@ -2532,7 +2527,7 @@ section[style*="padding:8rem"]{padding-top:4.25rem!important;padding-bottom:4.25
   <div class="aec-video-frame aec-deferred-embed" data-embed="https://www.youtube.com/embed/live_stream?channel=UC7UQyQ1NRIAIDMKn75WYwlw&autoplay=1&mute=1&playsinline=1">
     <button class="aec-load-embed" type="button" aria-label="Load live video">
       <span class="aec-play">▶</span>
-      <span>Load live feed</span>
+      <span>Load third-party feed</span>
     </button>
   </div>
 </article>
@@ -2541,7 +2536,7 @@ section[style*="padding:8rem"]{padding-top:4.25rem!important;padding-bottom:4.25
   <div class="aec-video-frame aec-deferred-embed" data-embed="https://www.youtube.com/embed/-mvUkiILTqI?autoplay=1&mute=1&playsinline=1">
     <button class="aec-load-embed" type="button" aria-label="Load live video">
       <span class="aec-play">▶</span>
-      <span>Load live feed</span>
+      <span>Load third-party feed</span>
     </button>
   </div>
 </article>
@@ -2550,7 +2545,7 @@ section[style*="padding:8rem"]{padding-top:4.25rem!important;padding-bottom:4.25
   <div class="aec-video-frame aec-deferred-embed" data-embed="https://www.youtube.com/embed/WFvOChuI2cg?autoplay=1&mute=1&playsinline=1">
     <button class="aec-load-embed" type="button" aria-label="Load live video">
       <span class="aec-play">▶</span>
-      <span>Load live feed</span>
+      <span>Load third-party feed</span>
     </button>
   </div>
 </article>
@@ -2559,7 +2554,7 @@ section[style*="padding:8rem"]{padding-top:4.25rem!important;padding-bottom:4.25
   <div class="aec-video-frame aec-deferred-embed" data-embed="https://www.youtube.com/embed/live_stream?channel=UCrp_UI8XtuYfpiqluWLD7Lw&autoplay=1&mute=1&playsinline=1">
     <button class="aec-load-embed" type="button" aria-label="Load live video">
       <span class="aec-play">▶</span>
-      <span>Load live feed</span>
+      <span>Load third-party feed</span>
     </button>
   </div>
 </article>
@@ -2631,7 +2626,7 @@ section[style*="padding:8rem"]{padding-top:4.25rem!important;padding-bottom:4.25
 </div>
 
 <!-- HERO -->
-<section class="hero">
+<section class="hero" id="main-content" tabindex="-1">
   <div class="hero-bg"></div>
   <div class="hero-grid-overlay"></div>
 
@@ -2651,21 +2646,21 @@ section[style*="padding:8rem"]{padding-top:4.25rem!important;padding-bottom:4.25
   <div class="hero-content">
     <div class="hero-left">
       <h1>
-        Capital deployed<br/>
+        Research built<br/>
         with <em>uncommon</em><br/>
         precision.
       </h1>
-      <p>A multi-strategy investment and research firm building proprietary quantitative infrastructure across global markets while pursuing opportunities in real estate, private equity, and pharmaceutical research & development.</p>
+      <p>A private, multi-strategy investment firm building proprietary quantitative research infrastructure while developing business interests across real estate, private equity, and pharmaceutical research and development. No investment opportunity is offered through this website.</p>
       <div style="display:inline-flex;align-items:center;gap:.6rem;margin-bottom:1.5rem;background:rgba(255,255,255,0.04);border:.5px solid rgba(255,255,255,0.12);padding:.5rem 1rem">
         <span style="width:7px;height:7px;border-radius:50%;background:#2ECC71;display:inline-block;animation:pulse 2s infinite"></span>
         <span style="font-family:'DM Mono',monospace;font-size:.5rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.5)">Independent research · disciplined execution · long-horizon ownership</span>
       </div>
       <!-- LIVE NQ MINI CHART -->
 <div style="background:rgba(255,255,255,.04);border:.5px solid rgba(200,200,200,.2);padding:.5rem;margin-bottom:1.5rem;max-width:420px">
-  <div style="font-family:'DM Mono',monospace;font-size:.48rem;letter-spacing:.15em;text-transform:uppercase;color:var(--cream3);margin-bottom:.25rem;padding:.2rem .25rem">NQ Futures — Live</div>
+  <div style="font-family:'DM Mono',monospace;font-size:.48rem;letter-spacing:.15em;text-transform:uppercase;color:var(--cream3);margin-bottom:.25rem;padding:.2rem .25rem">NQ Futures — Optional Third-Party Market Widget</div>
   <div class="tradingview-widget-container">
     <div class="tradingview-widget-container__widget"></div>
-    <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-mini-symbol-overview.js" async>
+<script type="application/json" data-consent-src="https://s3.tradingview.com/external-embedding/embed-widget-mini-symbol-overview.js">
     {"symbol":"CME_MINI:NQ1!","width":"100%","height":"120","locale":"en","dateRange":"1D","colorTheme":"dark","isTransparent":true,"autosize":true,"chartOnly":false}
     </script>
   </div>
@@ -2673,7 +2668,7 @@ section[style*="padding:8rem"]{padding-top:4.25rem!important;padding-bottom:4.25
 <div class="hero-ctas">
         <a href="#contact" class="btn-gold">Request a meeting</a>
         <a href="#performance" class="btn-ghost">View performance</a>
-        <button onclick="document.getElementById('mentorship-payment-modal').style.display='flex'" style="background:transparent;border:.5px solid var(--gold);color:var(--gold);font-family:var(--font-mono);font-size:.58rem;letter-spacing:.18em;text-transform:uppercase;padding:.75rem 1.75rem;cursor:pointer;transition:all .2s;font-weight:600" onmouseover="this.style.background='rgba(200,200,200,0.1)'" onmouseout="this.style.background='transparent'">Enroll in Mentorship →</button>
+        <a href="ascenda-mentorship.html" style="background:transparent;border:.5px solid var(--gold);color:var(--gold);font-family:var(--font-mono);font-size:.58rem;letter-spacing:.18em;text-transform:uppercase;padding:.75rem 1.75rem;cursor:pointer;transition:all .2s;font-weight:600;text-decoration:none" onmouseover="this.style.background='rgba(200,200,200,0.1)'" onmouseout="this.style.background='transparent'">View Educational Mentorship →</a>
       </div>
     </div><!-- end hero-left -->
 
@@ -2715,18 +2710,11 @@ section[style*="padding:8rem"]{padding-top:4.25rem!important;padding-bottom:4.25
 </div>
 
 <!-- AUM BAND -->
-<!-- LIVE TRADE RESULTS TICKER -->
-<div style="background:rgba(0,0,0,.4);border-top:.5px solid var(--rule);padding:.6rem 0;overflow:hidden;white-space:nowrap;position:relative">
-  <div style="position:absolute;left:0;top:0;bottom:0;width:80px;background:linear-gradient(90deg,var(--ink),transparent);z-index:2"></div>
-  <div style="position:absolute;right:0;top:0;bottom:0;width:80px;background:linear-gradient(270deg,var(--ink),transparent);z-index:2"></div>
-  <div id="trade-ticker" style="display:inline-flex;gap:3rem;animation:tradeTick 40s linear infinite"></div>
-</div>
-
 <div class="aum-band">
   <div class="aum-l">
-    <div class="aum-tag">Capital Capacity</div>
-    <div class="aum-num">Strategic Capacity</div>
-    <div class="aum-cap">Built to scale with disciplined risk management.</div>
+    <div class="aum-tag">Research Scope</div>
+    <div class="aum-num">Capacity Is Not Established</div>
+    <div class="aum-cap">Simulation scale does not establish executable live-market capacity.</div>
   </div>
   <div class="aum-sep"></div>
   <div class="aum-r">
@@ -2849,7 +2837,7 @@ section[style*="padding:8rem"]{padding-top:4.25rem!important;padding-bottom:4.25
 
     <div style="background:rgba(255,255,255,.025);border:.5px solid rgba(255,255,255,.08);padding:1.35rem 1.5rem;margin-bottom:1.5rem">
       <p style="font-family:'DM Mono',monospace;font-size:.49rem;letter-spacing:.045em;color:rgba(255,255,255,.35);line-height:1.8;margin:0">
-        CURRENT RESEARCH REVIEW — Historical simulation/backtest only. One shared $1,000,000 account combines NQ, ES, YM and equities. The uncapped branch ends at $1,637,097,075.58 with $1,636,097,075.58 net profit across 107,167 closed entries, a 53.61% pooled win rate and 2.898 account profit factor. The specified partial 10% ADV-cap scenario ends at $1,500,989,975.35. Account-level risk and trade statistics refer to the uncapped branch unless specifically stated. These figures are research-owner-verified/reconstructed, not externally audited or realized investor returns.</p>
+        CURRENT RESEARCH REVIEW — Historical simulation/backtest only. One modeled $1,000,000 account combines NQ, ES, YM and equities. The uncapped branch ends at $1,637,097,075.58 with $1,636,097,075.58 modeled net profit across 107,167 closed entries, a 53.61% pooled modeled win rate and 2.898 modeled profit factor. The specified partial 10% ADV-cap scenario ends at $1,500,989,975.35. Account-level risk and trade statistics refer to the uncapped branch unless specifically stated. These figures are internally reconstructed, not independently audited, not actual trading, and not realized investor returns.</p>
     </div>
 
     <div style="display:flex;align-items:center;justify-content:space-between;gap:1.5rem;flex-wrap:wrap">
@@ -2873,7 +2861,7 @@ section[style*="padding:8rem"]{padding-top:4.25rem!important;padding-bottom:4.25
   <div style="border:.5px solid var(--rule);overflow:hidden;margin-bottom:2rem">
     <div class="tradingview-widget-container">
       <div class="tradingview-widget-container__widget"></div>
-      <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-market-overview.js" async>
+<script type="application/json" data-consent-src="https://s3.tradingview.com/external-embedding/embed-widget-market-overview.js">
       {"colorTheme":"dark","dateRange":"1D","showChart":true,"locale":"en","isTransparent":true,"showSymbolLogo":false,"showFloatingTooltip":true,"width":"100%","height":"550","tabs":[{"title":"Indices","symbols":[{"s":"FOREXCOM:SPXUSD","d":"S&P 500"},{"s":"FOREXCOM:NSXUSD","d":"NASDAQ 100"},{"s":"INDEX:DJI","d":"Dow Jones"},{"s":"INDEX:VIX","d":"VIX"}],"originalTitle":"Indices"},{"title":"Forex","symbols":[{"s":"FOREXCOM:EURUSD","d":"EUR/USD"},{"s":"FOREXCOM:GBPUSD","d":"GBP/USD"},{"s":"FOREXCOM:USDJPY","d":"USD/JPY"},{"s":"FOREXCOM:AUDUSD","d":"AUD/USD"}],"originalTitle":"Forex"},{"title":"Top Equities","symbols":[{"s":"NASDAQ:NVDA","d":"NVIDIA"},{"s":"NASDAQ:AAPL","d":"Apple"},{"s":"NASDAQ:MSFT","d":"Microsoft"},{"s":"NASDAQ:AMZN","d":"Amazon"},{"s":"NASDAQ:META","d":"Meta"}],"originalTitle":"Top Equities"},{"title":"Commodities","symbols":[{"s":"TVC:GOLD","d":"Gold"},{"s":"TVC:USOIL","d":"WTI Crude"},{"s":"TVC:SILVER","d":"Silver"}],"originalTitle":"Commodities"}]}
       </script>
     </div>
@@ -2883,17 +2871,17 @@ section[style*="padding:8rem"]{padding-top:4.25rem!important;padding-bottom:4.25
     <div class="tv-card">
       <div class="tv-card-label">NASDAQ 100</div>
       <div class="tradingview-widget-container"><div class="tradingview-widget-container__widget"></div>
-      <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-mini-symbol-overview.js" async>{"symbol":"FOREXCOM:NSXUSD","width":"100%","height":"200","locale":"en","dateRange":"3M","colorTheme":"dark","isTransparent":true,"autosize":true}</script></div>
+      <script type="application/json" data-consent-src="https://s3.tradingview.com/external-embedding/embed-widget-mini-symbol-overview.js">{"symbol":"FOREXCOM:NSXUSD","width":"100%","height":"200","locale":"en","dateRange":"3M","colorTheme":"dark","isTransparent":true,"autosize":true}</script></div>
     </div>
     <div class="tv-card">
       <div class="tv-card-label">ES Futures (S&amp;P 500)</div>
       <div class="tradingview-widget-container"><div class="tradingview-widget-container__widget"></div>
-      <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-mini-symbol-overview.js" async>{"symbol":"CME_MINI:ES1!","width":"100%","height":"200","locale":"en","dateRange":"3M","colorTheme":"dark","isTransparent":true,"autosize":true}</script></div>
+      <script type="application/json" data-consent-src="https://s3.tradingview.com/external-embedding/embed-widget-mini-symbol-overview.js">{"symbol":"CME_MINI:ES1!","width":"100%","height":"200","locale":"en","dateRange":"3M","colorTheme":"dark","isTransparent":true,"autosize":true}</script></div>
     </div>
     <div class="tv-card">
       <div class="tv-card-label">Gold</div>
       <div class="tradingview-widget-container"><div class="tradingview-widget-container__widget"></div>
-      <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-mini-symbol-overview.js" async>{"symbol":"TVC:GOLD","width":"100%","height":"200","locale":"en","dateRange":"3M","colorTheme":"dark","isTransparent":true,"autosize":true}</script></div>
+      <script type="application/json" data-consent-src="https://s3.tradingview.com/external-embedding/embed-widget-mini-symbol-overview.js">{"symbol":"TVC:GOLD","width":"100%","height":"200","locale":"en","dateRange":"3M","colorTheme":"dark","isTransparent":true,"autosize":true}</script></div>
     </div>
   </div>
 </section>
@@ -2913,7 +2901,7 @@ section[style*="padding:8rem"]{padding-top:4.25rem!important;padding-bottom:4.25
     <div style="border:.5px solid var(--rule);overflow:hidden;margin-bottom:3rem">
       <div class="tradingview-widget-container">
         <div class="tradingview-widget-container__widget"></div>
-        <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-market-overview.js" async>
+<script type="application/json" data-consent-src="https://s3.tradingview.com/external-embedding/embed-widget-market-overview.js">
         {
           "colorTheme":"dark","dateRange":"1D","showChart":true,"locale":"en",
           "isTransparent":true,"showSymbolLogo":false,"showFloatingTooltip":true,
@@ -2955,28 +2943,28 @@ section[style*="padding:8rem"]{padding-top:4.25rem!important;padding-bottom:4.25
       <div style="border:.5px solid var(--rule);overflow:hidden">
         <div style="font-family:var(--font-mono);font-size:.5rem;letter-spacing:.15em;text-transform:uppercase;color:var(--cream3);padding:.65rem 1rem .2rem">NVIDIA</div>
         <div class="tradingview-widget-container"><div class="tradingview-widget-container__widget"></div>
-        <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-mini-symbol-overview.js" async>
+<script type="application/json" data-consent-src="https://s3.tradingview.com/external-embedding/embed-widget-mini-symbol-overview.js">
         {"symbol":"NASDAQ:NVDA","width":"100%","height":"160","locale":"en","dateRange":"1M","colorTheme":"dark","isTransparent":true,"autosize":true}
         </script></div>
       </div>
       <div style="border:.5px solid var(--rule);overflow:hidden">
         <div style="font-family:var(--font-mono);font-size:.5rem;letter-spacing:.15em;text-transform:uppercase;color:var(--cream3);padding:.65rem 1rem .2rem">Tesla</div>
         <div class="tradingview-widget-container"><div class="tradingview-widget-container__widget"></div>
-        <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-mini-symbol-overview.js" async>
+<script type="application/json" data-consent-src="https://s3.tradingview.com/external-embedding/embed-widget-mini-symbol-overview.js">
         {"symbol":"NASDAQ:TSLA","width":"100%","height":"160","locale":"en","dateRange":"1M","colorTheme":"dark","isTransparent":true,"autosize":true}
         </script></div>
       </div>
       <div style="border:.5px solid var(--rule);overflow:hidden">
         <div style="font-family:var(--font-mono);font-size:.5rem;letter-spacing:.15em;text-transform:uppercase;color:var(--cream3);padding:.65rem 1rem .2rem">S&P 500</div>
         <div class="tradingview-widget-container"><div class="tradingview-widget-container__widget"></div>
-        <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-mini-symbol-overview.js" async>
+<script type="application/json" data-consent-src="https://s3.tradingview.com/external-embedding/embed-widget-mini-symbol-overview.js">
         {"symbol":"FOREXCOM:SPXUSD","width":"100%","height":"160","locale":"en","dateRange":"1M","colorTheme":"dark","isTransparent":true,"autosize":true}
         </script></div>
       </div>
       <div style="border:.5px solid var(--rule);overflow:hidden">
         <div style="font-family:var(--font-mono);font-size:.5rem;letter-spacing:.15em;text-transform:uppercase;color:var(--cream3);padding:.65rem 1rem .2rem">Palantir</div>
         <div class="tradingview-widget-container"><div class="tradingview-widget-container__widget"></div>
-        <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-mini-symbol-overview.js" async>
+<script type="application/json" data-consent-src="https://s3.tradingview.com/external-embedding/embed-widget-mini-symbol-overview.js">
         {"symbol":"NASDAQ:PLTR","width":"100%","height":"160","locale":"en","dateRange":"1M","colorTheme":"dark","isTransparent":true,"autosize":true}
         </script></div>
       </div>
@@ -2990,7 +2978,7 @@ section[style*="padding:8rem"]{padding-top:4.25rem!important;padding-bottom:4.25
     <div style="border:.5px solid var(--rule);overflow:hidden;margin-bottom:2rem">
       <div class="tradingview-widget-container">
         <div class="tradingview-widget-container__widget"></div>
-        <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-market-overview.js" async>
+<script type="application/json" data-consent-src="https://s3.tradingview.com/external-embedding/embed-widget-market-overview.js">
         {
           "colorTheme":"dark","dateRange":"1D","showChart":true,"locale":"en",
           "isTransparent":true,"showSymbolLogo":false,"showFloatingTooltip":true,
@@ -3023,21 +3011,21 @@ section[style*="padding:8rem"]{padding-top:4.25rem!important;padding-bottom:4.25
       <div style="border:.5px solid var(--rule);overflow:hidden">
         <div style="font-family:var(--font-mono);font-size:.5rem;letter-spacing:.15em;text-transform:uppercase;color:var(--cream3);padding:.65rem 1rem .2rem">NQ Futures</div>
         <div class="tradingview-widget-container"><div class="tradingview-widget-container__widget"></div>
-        <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-mini-symbol-overview.js" async>
+<script type="application/json" data-consent-src="https://s3.tradingview.com/external-embedding/embed-widget-mini-symbol-overview.js">
         {"symbol":"CME_MINI:NQ1!","width":"100%","height":"160","locale":"en","dateRange":"1M","colorTheme":"dark","isTransparent":true,"autosize":true}
         </script></div>
       </div>
       <div style="border:.5px solid var(--rule);overflow:hidden">
         <div style="font-family:var(--font-mono);font-size:.5rem;letter-spacing:.15em;text-transform:uppercase;color:var(--cream3);padding:.65rem 1rem .2rem">ES Futures</div>
         <div class="tradingview-widget-container"><div class="tradingview-widget-container__widget"></div>
-        <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-mini-symbol-overview.js" async>
+<script type="application/json" data-consent-src="https://s3.tradingview.com/external-embedding/embed-widget-mini-symbol-overview.js">
         {"symbol":"CME_MINI:ES1!","width":"100%","height":"160","locale":"en","dateRange":"1M","colorTheme":"dark","isTransparent":true,"autosize":true}
         </script></div>
       </div>
       <div style="border:.5px solid var(--rule);overflow:hidden">
         <div style="font-family:var(--font-mono);font-size:.5rem;letter-spacing:.15em;text-transform:uppercase;color:var(--cream3);padding:.65rem 1rem .2rem">Gold</div>
         <div class="tradingview-widget-container"><div class="tradingview-widget-container__widget"></div>
-        <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-mini-symbol-overview.js" async>
+<script type="application/json" data-consent-src="https://s3.tradingview.com/external-embedding/embed-widget-mini-symbol-overview.js">
         {"symbol":"TVC:GOLD","width":"100%","height":"160","locale":"en","dateRange":"1M","colorTheme":"dark","isTransparent":true,"autosize":true}
         </script></div>
       </div>
@@ -3051,7 +3039,7 @@ section[style*="padding:8rem"]{padding-top:4.25rem!important;padding-bottom:4.25
     <div style="border:.5px solid var(--rule);overflow:hidden;margin-bottom:2rem">
       <div class="tradingview-widget-container">
         <div class="tradingview-widget-container__widget"></div>
-        <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-market-overview.js" async>
+<script type="application/json" data-consent-src="https://s3.tradingview.com/external-embedding/embed-widget-market-overview.js">
         {
           "colorTheme":"dark","dateRange":"1D","showChart":true,"locale":"en",
           "isTransparent":true,"showSymbolLogo":false,"showFloatingTooltip":true,
@@ -3088,21 +3076,21 @@ section[style*="padding:8rem"]{padding-top:4.25rem!important;padding-bottom:4.25
       <div style="border:.5px solid var(--rule);overflow:hidden">
         <div style="font-family:var(--font-mono);font-size:.5rem;letter-spacing:.15em;text-transform:uppercase;color:var(--cream3);padding:.65rem 1rem .2rem">Prologis — Industrial REIT</div>
         <div class="tradingview-widget-container"><div class="tradingview-widget-container__widget"></div>
-        <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-mini-symbol-overview.js" async>
+<script type="application/json" data-consent-src="https://s3.tradingview.com/external-embedding/embed-widget-mini-symbol-overview.js">
         {"symbol":"NYSE:PLD","width":"100%","height":"160","locale":"en","dateRange":"3M","colorTheme":"dark","isTransparent":true,"autosize":true}
         </script></div>
       </div>
       <div style="border:.5px solid var(--rule);overflow:hidden">
         <div style="font-family:var(--font-mono);font-size:.5rem;letter-spacing:.15em;text-transform:uppercase;color:var(--cream3);padding:.65rem 1rem .2rem">Blackstone — PE / RE</div>
         <div class="tradingview-widget-container"><div class="tradingview-widget-container__widget"></div>
-        <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-mini-symbol-overview.js" async>
+<script type="application/json" data-consent-src="https://s3.tradingview.com/external-embedding/embed-widget-mini-symbol-overview.js">
         {"symbol":"NYSE:BX","width":"100%","height":"160","locale":"en","dateRange":"3M","colorTheme":"dark","isTransparent":true,"autosize":true}
         </script></div>
       </div>
       <div style="border:.5px solid var(--rule);overflow:hidden">
         <div style="font-family:var(--font-mono);font-size:.5rem;letter-spacing:.15em;text-transform:uppercase;color:var(--cream3);padding:.65rem 1rem .2rem">Realty Income — REIT</div>
         <div class="tradingview-widget-container"><div class="tradingview-widget-container__widget"></div>
-        <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-mini-symbol-overview.js" async>
+<script type="application/json" data-consent-src="https://s3.tradingview.com/external-embedding/embed-widget-mini-symbol-overview.js">
         {"symbol":"NYSE:O","width":"100%","height":"160","locale":"en","dateRange":"3M","colorTheme":"dark","isTransparent":true,"autosize":true}
         </script></div>
       </div>
@@ -3273,7 +3261,7 @@ section[style*="padding:8rem"]{padding-top:4.25rem!important;padding-bottom:4.25
       <div style="width:38px;height:38px;background:rgba(255,255,255,0.06);border:.5px solid rgba(255,255,255,0.12);display:flex;align-items:center;justify-content:center;font-size:1.1rem">📱</div>
       <div>
         <div style="font-family:'DM Mono',monospace;font-size:.5rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.5);margin-bottom:.2rem">Coming Soon</div>
-        <div style="font-family:'Cormorant Garamond',serif;font-size:1rem;color:#fff;font-weight:300">AEC Mobile — Investor updates on the go</div>
+        <div style="font-family:'Cormorant Garamond',serif;font-size:1rem;color:#fff;font-weight:300">AEC Mobile — Company and research updates</div>
       </div>
     </div>
     <div style="display:flex;align-items:center;gap:.75rem;flex-wrap:wrap">
@@ -3430,7 +3418,7 @@ section[style*="padding:8rem"]{padding-top:4.25rem!important;padding-bottom:4.25
     <div class="jc">
       <div class="jc-n">01 — Strategic Inquiry</div>
       <div class="jc-title">Explore a<br/><em>relationship.</em></div>
-      <p class="jc-body">Prospective counterparties, investors, operators, and strategic relationships may contact AEC for an introductory conversation. A public inquiry is not an offer, acceptance of capital, or commitment to transact.</p>
+      <p class="jc-body">Businesses, operators, vendors, researchers, media representatives, and strategic counterparties may contact AEC for a general introductory conversation. A public inquiry is not an offer, acceptance of capital, or commitment to transact.</p>
       <div class="jc-points">
         <div class="jcp"><span class="jcp-dot">✦</span><span>Relationship evaluated case by case</span></div>
         <div class="jcp"><span class="jcp-dot">✦</span><span>No promise or guarantee of investment returns</span></div>
@@ -3454,15 +3442,15 @@ section[style*="padding:8rem"]{padding-top:4.25rem!important;padding-bottom:4.25
     <div class="jc">
       <div class="jc-n">03 — Mentee</div>
       <div class="jc-title">Learn From<br/><em>the Inside.</em></div>
-      <p class="jc-body">Direct mentorship under Izaiah Cottle. Real frameworks, real trade reviews, real access. Not a course — proximity to the actual thing. Reserved for those who prove they're built for it.</p>
+      <p class="jc-body">Educational mentorship under Izaiah Cottle covering research methods, market concepts, and historical case studies. It does not provide personalized investment advice, trade signals, brokerage services, or access to an investment opportunity.</p>
       <div class="jc-points">
         <div class="jcp"><span class="jcp-dot">✦</span><span>Direct 1-on-1 with Izaiah Cottle</span></div>
         <div class="jcp"><span class="jcp-dot">✦</span><span>Real-world trading & investment training</span></div>
         <div class="jcp"><span class="jcp-dot">✦</span><span>Access to AEC's frameworks & playbooks</span></div>
-        <div class="jcp"><span class="jcp-dot">✦</span><span>Extremely limited — serious applicants only</span></div>
+        <div class="jcp"><span class="jcp-dot">✦</span><span>Educational program; participation does not provide investment access</span></div>
       </div>
       <a href="ascenda-mentorship.html" class="jc-btn" style="margin-bottom:.5rem">Explore Mentorship →</a>
-      <button onclick="document.getElementById('mentorship-payment-modal').style.display='flex'" style="background:var(--gold);color:var(--ink);border:none;font-family:var(--font-mono);font-size:.58rem;letter-spacing:.18em;text-transform:uppercase;padding:.9rem 1.5rem;cursor:pointer;width:100%;font-weight:600;margin-top:.25rem">Enroll Now →</button>
+      <a href="ascenda-mentorship.html" style="display:block;text-align:center;background:var(--gold);color:var(--ink);border:none;font-family:var(--font-mono);font-size:.58rem;letter-spacing:.18em;text-transform:uppercase;padding:.9rem 1.5rem;cursor:pointer;width:100%;font-weight:600;margin-top:.25rem;text-decoration:none">View Program Terms →</a>
     </div>
   </div>
 </section>
@@ -3625,7 +3613,7 @@ section[style*="padding:8rem"]{padding-top:4.25rem!important;padding-bottom:4.25
         <p style="font-size:.9rem;color:rgba(255,255,255,.55);line-height:1.95;font-family:'Jost',sans-serif;font-weight:300;margin-bottom:1.5rem">His work spans quantitative markets, real estate, private equity, and pharmaceutical research &amp; development, with an emphasis on rigorous research, disciplined risk management, and long-horizon capital allocation.</p>
         <div style="display:flex;gap:1rem;flex-wrap:wrap">
           <div style="font-family:'DM Mono',monospace;font-size:.48rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.3);border:.5px solid rgba(255,255,255,0.1);padding:.35rem .75rem">AECQS Developer</div>
-          <div style="font-family:'DM Mono',monospace;font-size:.48rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.3);border:.5px solid rgba(255,255,255,0.1);padding:.35rem .75rem">Verified Track Record</div>
+          <div style="font-family:'DM Mono',monospace;font-size:.48rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.3);border:.5px solid rgba(255,255,255,0.1);padding:.35rem .75rem">Documented Research Record</div>
           <div style="font-family:'DM Mono',monospace;font-size:.48rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.3);border:.5px solid rgba(255,255,255,0.1);padding:.35rem .75rem">AECQS · Active R&amp;D</div>
           <div style="font-family:'DM Mono',monospace;font-size:.48rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.3);border:.5px solid rgba(255,255,255,0.1);padding:.35rem .75rem">Georgia LLC</div>
         </div>
@@ -3722,10 +3710,10 @@ section[style*="padding:8rem"]{padding-top:4.25rem!important;padding-bottom:4.25
 
       <div class="faq-item" style="border-bottom:.5px solid var(--rule)">
         <div class="faq-q" onclick="toggleFaq(this)" style="padding:1.25rem clamp(.75rem,3vw,2rem);display:flex;justify-content:space-between;align-items:center;cursor:pointer;transition:background .2s;gap:.75rem" onmouseover="this.style.background='rgba(200,200,200,0.05)'" onmouseout="this.style.background='transparent'">
-          <span style="font-size:.95rem;font-weight:400;color:var(--white);font-family:var(--font-body)">What is the minimum investment?</span>
+          <span style="font-size:.95rem;font-weight:400;color:var(--white);font-family:var(--font-body)">Can I invest through this website?</span>
           <div class="faq-icon" style="width:22px;height:22px;background:var(--gold3);color:var(--white);display:flex;align-items:center;justify-content:center;font-size:.75rem;flex-shrink:0;transition:transform .3s">+</div>
         </div>
-        <div class="faq-a" style="max-height:0;overflow:hidden;transition:max-height .35s ease;font-size:.88rem;color:var(--cream2);line-height:1.9;font-weight:300;padding:0 clamp(.75rem,3vw,2rem);word-break:normal;overflow-wrap:break-word;width:100%;box-sizing:border-box">AEC does not publish a general investment minimum on this corporate website. Any transaction-specific amount, if applicable, would be addressed only in the relevant diligence and definitive documentation.</div>
+        <div class="faq-a" style="max-height:0;overflow:hidden;transition:max-height .35s ease;font-size:.88rem;color:var(--cream2);line-height:1.9;font-weight:300;padding:0 clamp(.75rem,3vw,2rem);word-break:normal;overflow-wrap:break-word;width:100%;box-sizing:border-box">No. This website does not offer securities, fund interests, managed accounts, advisory services, or investor onboarding, and it does not accept investment funds.</div>
       </div>
 
       <div class="faq-item" style="border-bottom:.5px solid var(--rule)">
@@ -3852,11 +3840,11 @@ section[style*="padding:8rem"]{padding-top:4.25rem!important;padding-bottom:4.25
 <section style="padding:5rem clamp(1rem,5vw,3.5rem);background:#030303;border-top:.5px solid rgba(255,255,255,0.06)" id="newsletter">
   <div style="max-width:680px;margin:0 auto;text-align:center">
     <div style="font-family:'DM Mono',monospace;font-size:.52rem;letter-spacing:.28em;text-transform:uppercase;color:#888;margin-bottom:.75rem">Stay Informed</div>
-    <h2 style="font-family:'Cormorant Garamond',serif;font-size:clamp(1.6rem,3vw,2.4rem);font-weight:300;color:#FFFFFF;line-height:1.15;margin-bottom:.75rem">AEC <em>Investor Updates</em></h2>
-    <p style="font-size:.9rem;color:rgba(255,255,255,.4);font-family:'Jost',sans-serif;font-weight:300;line-height:1.9;margin-bottom:2.5rem;max-width:500px;margin-left:auto;margin-right:auto">Market commentary, performance updates, fund news, and exclusive AEC insights — delivered directly to your inbox. No spam. Unsubscribe anytime.</p>
+    <h2 style="font-family:'Cormorant Garamond',serif;font-size:clamp(1.6rem,3vw,2.4rem);font-weight:300;color:#FFFFFF;line-height:1.15;margin-bottom:.75rem">AEC <em>Company &amp; Research Updates</em></h2>
+    <p style="font-size:.9rem;color:rgba(255,255,255,.4);font-family:'Jost',sans-serif;font-weight:300;line-height:1.9;margin-bottom:2.5rem;max-width:500px;margin-left:auto;margin-right:auto">General company news, educational research, and development updates delivered to your inbox. Subscription does not provide investment advice, trade signals, investor access, or an offering. Unsubscribe anytime.</p>
     <!-- ConvertKit Form — replace YOUR_FORM_ID with your actual ConvertKit form ID -->
     <div style="max-width:480px;margin:0 auto">
-      <script async data-uid="bb4d404832" src="https://ascenda-enterprise-capital.kit.com/bb4d404832/index.js"></script>
+      <script type="application/json" data-uid="bb4d404832" data-consent-src="https://ascenda-enterprise-capital.kit.com/bb4d404832/index.js"></script>
     </div>
     <p style="font-family:'DM Mono',monospace;font-size:.44rem;letter-spacing:.08em;color:rgba(255,255,255,.18);text-transform:uppercase">Research, company and strategic updates · Unsubscribe anytime</p>
   </div>
@@ -3868,13 +3856,13 @@ section[style*="padding:8rem"]{padding-top:4.25rem!important;padding-bottom:4.25
     <div>
       <div class="sec-label-dark">Get in Touch</div>
       <h2 class="on-light">Let's discuss<br/><em>your objectives</em></h2>
-      <p style="font-size:1rem;line-height:2;color:#3A3348;font-weight:300;margin-bottom:2rem">Whether you're an institutional allocator, a family office, or an operating partner — we welcome the conversation. Capacity is finite and fills permanently.</p>
+      <p style="font-size:1rem;line-height:2;color:#3A3348;font-weight:300;margin-bottom:2rem">AEC welcomes general corporate, research, vendor, media, real-estate, and strategic-business inquiries. This contact form is not an investment application and does not accept capital or create a client or investor relationship.</p>
       <div class="cd"><span style="color:var(--gold3)">Email</span><a href="mailto:izaiah@ascendaenterprisecapital.com" style="color:#0D1A10">izaiah@ascendaenterprisecapital.com</a></div>
       <div class="cd"><span style="color:var(--gold3)">Availability</span><p style="color:#0D1A10">By Appointment Only</p></div>
       <div class="cd"><span style="color:var(--gold3)">Registration</span><p style="color:#0D1A10">Ascenda Enterprise Capital LLC · Georgia</p></div>
-      <div class="cd"><span style="color:var(--gold3)">AUM status</span><p style="color:var(--up);font-weight:400">Currently Accepting Allocators</p></div>
+      <div class="cd"><span style="color:var(--gold3)">Website status</span><p style="color:#0D1A10;font-weight:400">No public offering or investor onboarding</p></div>
       <div class="cd">
-        <button onclick="document.getElementById('wire-modal').style.display='flex'" style="font-family:var(--font-mono);font-size:.58rem;letter-spacing:.15em;text-transform:uppercase;background:transparent;color:var(--gold);border:.5px solid var(--rule2);padding:.75rem 1.5rem;cursor:pointer;transition:all .2s;width:100%;margin-top:.5rem" onmouseover="this.style.borderColor='var(--gold)';this.style.background='rgba(200,200,200,0.08)'" onmouseout="this.style.borderColor='var(--rule2)';this.style.background='transparent'">🏦 Request Transaction Security →</button>
+        <button onclick="document.getElementById('wire-modal').style.display='flex'" style="font-family:var(--font-mono);font-size:.58rem;letter-spacing:.15em;text-transform:uppercase;background:transparent;color:var(--gold);border:.5px solid var(--rule2);padding:.75rem 1.5rem;cursor:pointer;transition:all .2s;width:100%;margin-top:.5rem" onmouseover="this.style.borderColor='var(--gold)';this.style.background='rgba(200,200,200,0.08)'" onmouseout="this.style.borderColor='var(--rule2)';this.style.background='transparent'">Report Suspected Impersonation or Fraud →</button>
       </div>
 
       <div style="margin-top:1.5rem;background:rgba(255,255,255,0.04);border:.5px solid var(--rule);padding:1.5rem">
@@ -3892,8 +3880,8 @@ section[style*="padding:8rem"]{padding-top:4.25rem!important;padding-bottom:4.25
         <div class="cff"><label style="color:#6B6080">Area of interest</label>
           <select name="interest" style="background:var(--white);border-color:rgba(26,22,36,.15);color:#0D1A10">
             <option value="">Select an option</option>
-            <option>Private Investor</option>
-            <option>Allocator</option>
+            <option>Corporate / Strategic Inquiry</option>
+            <option>Research Inquiry</option>
             <option>Mentee</option>
             <option>Trading / Public Markets</option>
             <option>Real Estate</option>
@@ -3901,11 +3889,12 @@ section[style*="padding:8rem"]{padding-top:4.25rem!important;padding-bottom:4.25
             <option>General inquiry</option>
           </select>
         </div>
-        <div class="cff"><label style="color:#6B6080">Message</label><textarea name="message" placeholder="Tell us about your investment objectives..." style="background:var(--white);border-color:rgba(26,22,36,.15);color:#0D1A10"></textarea></div>
+        <div class="cff"><label style="color:#6B6080">Message</label><textarea name="message" placeholder="Describe your general corporate or research inquiry. Do not include sensitive financial information." style="background:var(--white);border-color:rgba(26,22,36,.15);color:#0D1A10"></textarea></div>
+        <label style="display:flex;align-items:flex-start;gap:.65rem;color:#3A3348;font-size:.78rem;line-height:1.6"><input type="checkbox" name="privacy_acknowledgment" required style="margin-top:.2rem"> <span>I have read the <a href="privacy-policy.html">Privacy Policy</a> and understand that this form sends my submitted information to Ascenda through Formspree for the purpose of responding to my inquiry. I will not submit account credentials, banking information, government identifiers, or other unnecessary sensitive information.</span></label>
         <button type="submit" id="contact-submit-btn" style="background:var(--ink);color:var(--gold2);font-family:var(--font-mono);font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;border:none;padding:1.1rem 2rem;cursor:pointer;font-weight:500;transition:background .2s;align-self:flex-start"
           onmouseover="this.style.background='var(--gold)';this.style.color='var(--ink)'"
           onmouseout="this.style.background='var(--ink)';this.style.color='var(--gold2)'">Submit inquiry →</button>
-        <div style="display:flex;align-items:center;gap:.5rem;margin-top:.75rem"><span style="font-family:'DM Mono',monospace;font-size:.44rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.2)">🔒 256-bit SSL · Encrypted · Secured by GitHub Pages</span></div>
+        <div style="display:flex;align-items:center;gap:.5rem;margin-top:.75rem"><span style="font-family:'DM Mono',monospace;font-size:.44rem;letter-spacing:.1em;text-transform:uppercase;color:#6B6080">Submitted to Formspree over HTTPS · See Privacy Policy</span></div>
       </form>
       <div id="contact-success" style="display:none;margin-top:1.5rem;background:rgba(46,204,113,0.08);border:.5px solid rgba(46,204,113,0.3);padding:1.5rem;text-align:center">
         <div style="font-size:1.5rem;margin-bottom:.5rem">✓</div>
@@ -3948,6 +3937,7 @@ section[style*="padding:8rem"]{padding-top:4.25rem!important;padding-bottom:4.25
     <a href="privacy-policy.html" class="ft-link">Privacy Policy</a>
     <a href="terms-of-service.html" class="ft-link">Terms of Service</a>
     <a href="regulatory-disclosures.html" class="ft-link">Regulatory Disclosures</a>
+    <a href="mailto:izaiah@ascendaenterprisecapital.com?subject=Accessibility%20request" class="ft-link">Accessibility Assistance</a>
     <p class="ft-text" style="margin-top:1rem">This website is for informational and research purposes only. Nothing here constitutes an offer to sell or a solicitation of an offer to buy any security or investment product, or legal, tax, investment, or securities advice.</p>
     <p class="ft-text" style="margin-top:.75rem">Ascenda Enterprise Capital LLC · Registered in Georgia · All Rights Reserved.</p>
   </div>
@@ -4017,6 +4007,7 @@ section[style*="padding:8rem"]{padding-top:4.25rem!important;padding-bottom:4.25
           <a href="regulatory-disclosures.html" style="font-family:'Jost',sans-serif;font-size:.82rem;color:rgba(255,255,255,.35);text-decoration:none;transition:color .2s" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,.35)'">Regulatory Disclosures</a>
           <a href="privacy-policy.html" style="font-family:'Jost',sans-serif;font-size:.82rem;color:rgba(255,255,255,.35);text-decoration:none;transition:color .2s" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,.35)'">Privacy Policy</a>
           <a href="terms-of-service.html" style="font-family:'Jost',sans-serif;font-size:.82rem;color:rgba(255,255,255,.35);text-decoration:none;transition:color .2s" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,.35)'">Terms of Service</a>
+          <a href="mailto:izaiah@ascendaenterprisecapital.com?subject=Accessibility%20request" style="font-family:'Jost',sans-serif;font-size:.82rem;color:rgba(255,255,255,.35);text-decoration:none;transition:color .2s" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,.35)'">Accessibility Assistance</a>
           <a href="#faq-investors" style="font-family:'Jost',sans-serif;font-size:.82rem;color:rgba(255,255,255,.35);text-decoration:none;transition:color .2s" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,.35)'">Corporate FAQ</a>
           <a href="mailto:izaiah@ascendaenterprisecapital.com" style="font-family:'Jost',sans-serif;font-size:.82rem;color:rgba(255,255,255,.35);text-decoration:none;transition:color .2s" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,.35)'">Contact</a>
         </div>
@@ -4032,7 +4023,7 @@ section[style*="padding:8rem"]{padding-top:4.25rem!important;padding-bottom:4.25
       <div>
         <div style="font-family:'DM Mono',monospace;font-size:.44rem;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.18);line-height:1.9;max-width:680px">
           © 2026 Ascenda Enterprise Capital LLC · Registered in the State of Georgia · Atlanta Metropolitan Area · All Rights Reserved<br/>
-          Not registered as an Investment Adviser with the SEC · Not a member of FINRA or SIPC · Capital not SIPC-protected<br/>
+          This website does not represent SEC/state investment-adviser registration, FINRA membership, SIPC membership, or regulatory approval · Verify status independently<br/>
           All investments involve risk including total and permanent loss of principal · Past performance not indicative of future results<br/>
           Nothing on this website is an offer to sell or a solicitation of an offer to buy securities or commodity interests · Verify regulatory and transaction-specific information independently
         </div>
@@ -4120,7 +4111,7 @@ var chatTopic = null;
 var chatSystemPrompts = {
   private_equity: 'You are the AEC virtual assistant for Ascenda Enterprise Capital LLC. The user is asking about private equity, strategic relationships, or institutional inquiries. Explain that the public website is informational and does not constitute an offering or acceptance of capital. AEC works across quantitative research, real estate, private equity, and pharmaceutical R&D. Direct transaction-specific questions to izaiah@ascendaenterprisecapital.com. Do not state regulatory exemptions, investor eligibility, minimum allocations, verified returns, or guaranteed outcomes. Keep responses under 100 words.',
   real_estate: 'You are the AEC virtual assistant for Ascenda Enterprise Capital LLC. The user is asking about real estate investing. Key facts: AEC pursues value-add and opportunistic acquisitions in commercial and residential sectors, focus on supply-constrained markets, Sun Belt industrial and multifamily, active management approach. AEC also co-founded One House One Story (OHOS), a cash home buying company in Atlanta. For real estate inquiries contact: izaiah@ascendaenterprisecapital.com. Keep responses under 100 words. Do not guarantee returns. Be professional.',
-  mentorship: 'You are the AEC virtual assistant for Ascenda Enterprise Capital LLC. The user is asking about the mentorship program. Tiers: Foundation $750 (3 months), Accelerator $4,500 (6 months), Elite $35,000 (12 months). All tiers include direct 1-on-1 with Izaiah Cottle, real trade reviews, AEC frameworks and playbooks. Not a course — real proximity to the actual operation. Apply at: ascendaenterprisecapital.com/ascenda-mentorship.html. Extremely limited spots. Keep responses under 100 words. Be professional and confident.',
+  mentorship: 'You are the AEC virtual assistant for Ascenda Enterprise Capital LLC. The user is asking about an educational mentorship program covering research methods, market concepts, and historical case studies. Explain that mentorship does not provide personalized investment advice, trade signals, brokerage services, investor eligibility, or access to an investment opportunity. Direct users to ascenda-mentorship.html for current curriculum, pricing, refund, and program terms. Do not promise outcomes. Keep responses under 100 words.',
   trading: 'You are the AEC virtual assistant for Ascenda Enterprise Capital LLC. The user is asking about quantitative trading research. AECQS is a proprietary multi-strategy quantitative research, analysis, portfolio-risk, and execution architecture under active R&D, spanning NQ, ES, and YM in the final 10-entry research configuration. Published AECQS checkpoints are historical backtest/simulated research, not audited live fund performance. Do not provide investment advice or guarantee outcomes. Keep responses under 100 words.'
 };
 
@@ -4136,7 +4127,7 @@ function selectTopic(topic){
   chatTopic = topic;
   var topicLabels = {
     private_equity: 'You are the AEC virtual assistant for Ascenda Enterprise Capital LLC. The user is asking about private equity, strategic relationships, or institutional inquiries. Explain that the public website is informational and does not constitute an offering or acceptance of capital. AEC works across quantitative research, real estate, private equity, and pharmaceutical R&D. Direct transaction-specific questions to izaiah@ascendaenterprisecapital.com. Do not state regulatory exemptions, investor eligibility, minimum allocations, verified returns, or guaranteed outcomes. Keep responses under 100 words.',
-    real_estate: 'Real Estate Investing',
+    real_estate: 'Real Estate Business Inquiry',
     mentorship: 'Mentorship Program',
     trading: 'You are the AEC virtual assistant for Ascenda Enterprise Capital LLC. The user is asking about quantitative trading research. AECQS is a proprietary multi-strategy quantitative research, analysis, portfolio-risk, and execution architecture under active R&D, spanning NQ, ES, and YM in the final 10-entry research configuration. Published AECQS checkpoints are historical backtest/simulated research, not audited live fund performance. Do not provide investment advice or guarantee outcomes. Keep responses under 100 words.'
   };
@@ -4409,6 +4400,7 @@ if(wireModal){
 function acceptCookies(){
   localStorage.setItem('aec_cookie_consent','accepted');
   loadOptionalAnalytics();
+  loadConsentContent();
   document.getElementById('cookie-banner').style.display='none';
 }
 function declineCookies(){
@@ -4420,7 +4412,10 @@ function declineCookies(){
   if(localStorage.getItem('aec_cookie_consent')){
     document.getElementById('cookie-banner').style.display='none';
   }
-  if(localStorage.getItem('aec_cookie_consent') === 'accepted') loadOptionalAnalytics();
+  if(localStorage.getItem('aec_cookie_consent') === 'accepted'){
+    loadOptionalAnalytics();
+    loadConsentContent();
+  }
 })();
 
 // NAV
@@ -4459,6 +4454,7 @@ document.addEventListener('DOMContentLoaded', function(){
       if(analyticsCheck && analyticsCheck.checked){
         localStorage.setItem('aec_cookie_consent','accepted');
         loadOptionalAnalytics();
+        loadConsentContent();
       }else{
         localStorage.setItem('aec_cookie_consent','declined');
       }
@@ -4597,28 +4593,6 @@ window.addEventListener('resize', applyMobileFixes);
 })();
 </script>
 
-<!-- MENTORSHIP PAYMENT MODAL -->
-<div id="mentorship-payment-modal" style="display:none;position:fixed;inset:0;z-index:9999;background:rgba(4,3,10,.95);align-items:center;justify-content:center;padding:2rem">
-  <div style="background:var(--ink2);border:.5px solid var(--rule2);padding:3rem;max-width:580px;width:100%;position:relative;max-height:90vh;overflow-y:auto">
-    <div style="position:absolute;top:0;left:0;right:0;height:1.5px;background:linear-gradient(90deg,transparent,var(--gold),transparent)"></div>
-    <button onclick="document.getElementById('mentorship-payment-modal').style.display='none'" style="position:absolute;top:1rem;right:1rem;background:none;border:none;color:var(--cream3);font-size:1.2rem;cursor:pointer">✕</button>
-    <div style="font-family:var(--font-mono);font-size:.55rem;letter-spacing:.22em;text-transform:uppercase;color:var(--gold3);margin-bottom:.75rem">Mentorship Enrollment</div>
-    <h3 style="font-family:var(--font-display);font-size:1.5rem;font-weight:300;color:var(--white);margin-bottom:.5rem">Select Your Tier</h3>
-    <p style="font-size:.82rem;color:var(--cream3);line-height:1.7;font-weight:300;margin-bottom:2rem">Direct mentorship under Izaiah Cottle. Real frameworks, real trade reviews, real access. Limited spots available.</p>
-
-    <div style="display:flex;flex-direction:column;gap:1px;background:var(--rule);margin-bottom:2rem">
-      <!-- FOUNDATION -->
-      <div style="background:var(--ink2);padding:1.5rem 1.75rem;display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap">
-        <div>
-          <div style="font-family:var(--font-mono);font-size:.6rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--gold2);margin-bottom:.35rem">Foundation</div>
-          <div style="font-size:.82rem;color:var(--cream2);margin-bottom:.2rem">3-month program · Core frameworks</div>
-          <div style="font-family:var(--font-display);font-size:1.5rem;color:var(--white);font-weight:300">$750</div>
-        </div>
-        <div style="display:flex;flex-direction:column;gap:.5rem">
-          <a href="https://app.mercury.com/pay/m72tnzyqgp5d05p3" target="_blank" style="font-family:var(--font-mono);font-size:.58rem;letter-spacing:.15em;text-transform:uppercase;background:transparent;color:var(--gold);border:.5px solid var(--gold);padding:.65rem 1.25rem;text-decoration:none;white-space:nowrap;transition:all .2s;text-align:center" onmouseover="this.style.background='rgba(200,200,200,0.1)'" onmouseout="this.style.background='transparent'">Pay via Mercury →</a>
-
-
-
 <!-- STICKY CTA -->
 <div id="sticky-cta" style="position:fixed;bottom:0;left:0;right:0;z-index:9990;background:rgba(4,3,10,.97);border-top:.5px solid rgba(255,255,255,0.12);padding:.85rem 3.5rem;display:none;align-items:center;justify-content:space-between;gap:1rem;backdrop-filter:blur(20px)">
   <div style="display:flex;align-items:center;gap:2rem;flex-wrap:wrap">
@@ -4751,7 +4725,7 @@ function toggleFaq(el) {
       <p style="font-size:.95rem;color:rgba(255,255,255,.55);line-height:1.9;margin-bottom:1rem">The NASDAQ 100 futures opened directly into a weekly Fair Value Gap on June 14. With CPI printing hotter than expected, the market is pricing in higher-for-longer — and the institutional reaction was immediate.</p>
       <p style="font-size:.95rem;color:rgba(255,255,255,.55);line-height:1.9;margin-bottom:1rem">What caught AEC's attention was not the CPI print itself — it was the order flow response. In the first 15 minutes of the New York open, NQ absorbed significant sell-side liquidity at the 18,840 level without breaking. That absorption pattern, confirmed by our DOM layer, signaled institutional accumulation rather than distribution.</p>
       <p style="font-size:.95rem;color:rgba(255,255,255,.55);line-height:1.9;margin-bottom:1rem">Our Z-Score framework showed price at 2.1 standard deviations below the 20-period mean on the 15-minute chart — historically a high-probability mean reversion zone. Combined with the FVG confluence and order flow confirmation, the setup aligned across all three layers of AEC's system.</p>
-      <p style="font-size:.95rem;color:rgba(255,255,255,.55);line-height:1.9;margin-bottom:1rem"><strong style="color:rgba(255,255,255,.7)">Key levels to watch:</strong> 18,840 remains critical support. A sustained close above 19,200 opens the door to the next liquidity pool at 19,580. Failure to hold 18,840 targets the daily FVG at 18,420.</p>
+      <p style="font-size:.95rem;color:rgba(255,255,255,.55);line-height:1.9;margin-bottom:1rem"><strong style="color:rgba(255,255,255,.7)">Historical study levels:</strong> The cited prices were recorded as inputs to a retrospective market-structure study. They are stale historical observations, not current support, targets, entry or exit levels, or trade instructions.</p>
       <p style="font-size:.95rem;color:rgba(255,255,255,.55);line-height:1.9"><strong style="color:rgba(255,255,255,.7)">Historical research observation:</strong> These indicators were evaluated as part of a retrospective market-structure study. This is not a current position disclosure, entry or exit instruction, sizing prescription, or recommendation.</p>
       <div style="margin-top:1.5rem;padding:1rem 1.25rem;background:rgba(255,255,255,0.04);border-left:2px solid rgba(255,255,255,0.2)">
         <p style="font-family:'DM Mono',monospace;font-size:.5rem;letter-spacing:.08em;color:rgba(255,255,255,.25);margin:0">This note is for informational purposes only and does not constitute investment advice. Past performance is not indicative of future results.</p>
@@ -4780,7 +4754,7 @@ function toggleFaq(el) {
       <p style="font-size:.95rem;color:rgba(255,255,255,.55);line-height:1.9;margin-bottom:1rem">Atlanta is not a typical market. The city's population has grown faster than any major U.S. metro over the past five years. Job creation in the technology, film, logistics, and financial services sectors continues to outpace housing supply by a significant margin. The fundamentals that drive real estate appreciation — population growth, job creation, housing undersupply — remain firmly intact regardless of the rate environment.</p>
       <p style="font-size:.95rem;color:rgba(255,255,255,.55);line-height:1.9;margin-bottom:1rem">AEC's real estate strategy is not rate-dependent. We focus on value-add acquisitions where the forced appreciation through renovation and repositioning creates equity that rate environment alone cannot erode. A property acquired at the right basis with the right execution thesis generates returns independent of the financing rate.</p>
       <p style="font-size:.95rem;color:rgba(255,255,255,.55);line-height:1.9;margin-bottom:1rem"><strong style="color:rgba(255,255,255,.7)">Target submarkets:</strong> Southwest Atlanta, College Park, East Point, and select DeKalb County corridors showing above-average rent growth and below-average days on market. These pockets remain underpriced relative to their trajectory.</p>
-      <p style="font-size:.95rem;color:rgba(255,255,255,.55);line-height:1.9"><strong style="color:rgba(255,255,255,.7)">AEC thesis:</strong> Rate normalization — whenever it comes — will be a significant catalyst for appreciation in already supply-constrained markets like Atlanta. We are positioning now to benefit from that inflection point. Those who wait for rates to drop will be competing for the same assets at higher prices.</p>
+      <p style="font-size:.95rem;color:rgba(255,255,255,.55);line-height:1.9"><strong style="color:rgba(255,255,255,.7)">Archived research thesis:</strong> This historical discussion examined how financing conditions and housing supply might affect selected Atlanta properties. It is not a prediction, promise of appreciation, current acquisition announcement, or invitation to invest.</p>
       <div style="margin-top:1.5rem;padding:1rem 1.25rem;background:rgba(255,255,255,0.04);border-left:2px solid rgba(255,255,255,0.2)">
         <p style="font-family:'DM Mono',monospace;font-size:.5rem;letter-spacing:.08em;color:rgba(255,255,255,.25);margin:0">This note is for informational purposes only and does not constitute investment advice. Past performance is not indicative of future results.</p>
       </div>
@@ -4792,10 +4766,10 @@ function toggleFaq(el) {
       <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.8rem;font-weight:300;color:#fff;line-height:1.2;margin-bottom:1.25rem">Trading Through the Fog — Why Patience Beats Aggression Right Now</h3>
       <p style="font-size:.95rem;color:rgba(255,255,255,.55);line-height:1.9;margin-bottom:1rem">The current environment is not a friendly one for newer traders, and we want to be direct about that rather than sell false confidence. Between an active 2026 Iran conflict, a Strait of Hormuz disruption the IEA called the largest oil supply shock in the market's history, a new Fed chair still finding his footing on rate policy, and now renewed flare-ups in Lebanon, this is a market defined by headline risk rather than clean technical structure. For a trader still building consistency, that's a genuinely difficult tape to learn on.</p>
       <p style="font-size:.95rem;color:rgba(255,255,255,.55);line-height:1.9;margin-bottom:1rem"><strong style="color:rgba(255,255,255,.7)">What actually happened in Lebanon:</strong> On June 29-30, Israeli forces detonated a Hezbollah tunnel network near the village of Majdal Zoun as part of enforcement activity under the existing Israel-Lebanon ceasefire framework — not a new bombing campaign, and not connected to the broader Iran conflict directly. Markets treated it accordingly: it barely moved gold or oil on its own. The more consequential story remains the Iran conflict that began in late February, which sent oil into a historic supply shock and pushed gold to fresh highs before easing in recent weeks as US-Iran talks in Qatar showed signs of progress.</p>
-      <p style="font-size:.95rem;color:rgba(255,255,255,.55);line-height:1.9;margin-bottom:1rem"><strong style="color:rgba(255,255,255,.7)">Gold:</strong> Trading near $4,065–$4,090/oz, up over 22% year-over-year, but down roughly 8% over the past month as talk of progress in US-Iran negotiations cooled the safe-haven bid. Fed Chair Kevin Warsh's recent comments that inflation expectations have eased added further pressure. Our read: gold's medium-term structure is still constructive given central bank accumulation and unresolved geopolitical risk, but it's vulnerable to sharp pullbacks on any real de-escalation headline. Not a market to chase at the highs right now.</p>
-      <p style="font-size:.95rem;color:rgba(255,255,255,.55);line-height:1.9;margin-bottom:1rem"><strong style="color:rgba(255,255,255,.7)">Crude Oil (WTI):</strong> Has pulled back to the high-$60s after spiking earlier this year on Strait of Hormuz fears. The pullback tracks directly with easing shipping disruption and the Qatar talks. If those talks continue to progress, we'd expect oil to keep drifting lower into the $60–$65 range; if they break down, the prior supply-shock premium could snap right back.</p>
-      <p style="font-size:.95rem;color:rgba(255,255,255,.55);line-height:1.9;margin-bottom:1rem"><strong style="color:rgba(255,255,255,.7)">Volatility (VIX):</strong> Sits in the high-16s to high-18s — elevated relative to a calm market, but nowhere near panic levels. That's actually the trap for new traders: the tape feels calm on the surface while headline risk sits underneath it, which is exactly the setup that produces violent, low-warning moves.</p>
-      <p style="font-size:.95rem;color:rgba(255,255,255,.55);line-height:1.9;margin-bottom:1rem"><strong style="color:rgba(255,255,255,.7)">Our take:</strong> For traders without a large sample size of screen time yet, this is a stretch of market better watched than traded aggressively. Position sizing should be smaller than usual — we'd rather see someone sit on their hands through a geopolitically-driven whipsaw than force trades into a tape this headline-sensitive. That's not pessimism, it's risk management. The setups will still be there once the macro picture clarifies.</p>
+      <p style="font-size:.95rem;color:rgba(255,255,255,.55);line-height:1.9;margin-bottom:1rem"><strong style="color:rgba(255,255,255,.7)">Archived research scope:</strong> The study considered how gold, crude oil, and implied volatility responded to changes in geopolitical headlines and macroeconomic expectations during the stated historical period.</p>
+      <p style="font-size:.95rem;color:rgba(255,255,255,.55);line-height:1.9;margin-bottom:1rem"><strong style="color:rgba(255,255,255,.7)">Important limitation:</strong> Any prices, officeholders, events, or market conditions referenced in an archived note may be stale, incomplete, or incorrect. Visitors must verify current facts using primary sources.</p>
+      <p style="font-size:.95rem;color:rgba(255,255,255,.55);line-height:1.9;margin-bottom:1rem"><strong style="color:rgba(255,255,255,.7)">No trading instruction:</strong> This archived discussion does not state Ascenda's current holdings and does not instruct a visitor to buy, sell, hold, size, or avoid any position.</p>
+      <p style="font-size:.95rem;color:rgba(255,255,255,.55);line-height:1.9;margin-bottom:1rem"><strong style="color:rgba(255,255,255,.7)">Research observation:</strong> Headline-driven periods were examined as a market-structure research topic. No conclusion is presented as a prediction or recommendation.</p>
       <p style="font-size:.95rem;color:rgba(255,255,255,.55);line-height:1.9">Separately — AECQS, the AEC Quantitative System, remains in active research and development. The platform has expanded beyond the original three-layer concept into a multi-strategy research, risk, and execution architecture spanning market structure, statistics, liquidity, order flow, volatility, momentum, mean reversion, and multi-timeframe information. AEC will continue publishing development checkpoints as research and validation progress.</p>
       <div style="margin-top:1.5rem;padding:1rem 1.25rem;background:rgba(255,255,255,0.04);border-left:2px solid rgba(255,255,255,0.2)">
         <p style="font-family:'DM Mono',monospace;font-size:.5rem;letter-spacing:.08em;color:rgba(255,255,255,.25);margin:0">This note reflects AEC's internal market view as of early July 2026 and is not investment advice. Geopolitical and macroeconomic conditions can change rapidly. Past performance is not indicative of future results.</p>
@@ -4817,7 +4791,7 @@ function toggleFaq(el) {
     <h3 style="font-family:var(--font-display);font-size:1.5rem;font-weight:300;color:var(--white);margin-bottom:1rem">Economic Calendar</h3>
     <div style="font-family:var(--font-mono);font-size:.5rem;letter-spacing:.06em;text-transform:uppercase;color:var(--cream3);margin-bottom:1rem">CPI · PPI · FOMC · NFP · GDP -- High &amp; Medium Impact Events -- Eastern Time</div>
     <div style="width:100%;overflow:hidden;border:.5px solid var(--rule)">
-      <iframe loading="lazy" src="https://sslecal2.investing.com?columns=exc_flags,exc_currency,exc_importance,exc_actual,exc_forecast,exc_previous&importance=3,2&features=datepicker,timezone&countries=25,32,6,37,72,22,17,39,14,10,35,43,56,36,110,11,26,12,4,5&calType=week&timeZone=8&lang=1"
+      <iframe loading="lazy" title="Investing.com economic calendar" data-consent-src="https://sslecal2.investing.com?columns=exc_flags,exc_currency,exc_importance,exc_actual,exc_forecast,exc_previous&importance=3,2&features=datepicker,timezone&countries=25,32,6,37,72,22,17,39,14,10,35,43,56,36,110,11,26,12,4,5&calType=week&timeZone=8&lang=1"
         width="100%" height="500" frameborder="0" allowtransparency="true" marginwidth="0" marginheight="0"
         style="border:none;background:transparent;filter:invert(1) hue-rotate(180deg)"></iframe>
     </div>
@@ -4866,45 +4840,12 @@ document.addEventListener("DOMContentLoaded", function(){
   if(layout && rail && rail.parentElement !== layout){
     layout.appendChild(rail);
   }
-  if(layout && feeds && feeds.parentElement !== layout){
+  if(layout && feeds && a.parentElement !== layout){
     layout.insertBefore(feeds, layout.firstChild);
   }
 });
 </script>
 
-
-<script id="aec-market-autoload-v8">
-(function () {
-  function loadAECEmbeds() {
-    document.querySelectorAll('.aec-deferred-embed').forEach(function(box) {
-      if (box.dataset.loaded === '1') return;
-
-      var src = box.dataset.embed;
-      if (!src) return;
-
-      var iframe = document.createElement('iframe');
-      iframe.src = src;
-      iframe.loading = 'eager';
-      iframe.allow = 'autoplay; encrypted-media; picture-in-picture';
-      iframe.allowFullscreen = true;
-      iframe.referrerPolicy = 'strict-origin-when-cross-origin';
-      iframe.title = box.dataset.title || 'AEC market intelligence';
-
-      var button = box.querySelector('.aec-load-embed');
-      if (button) button.remove();
-
-      box.appendChild(iframe);
-      box.dataset.loaded = '1';
-    });
-  }
-
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', loadAECEmbeds);
-  } else {
-    loadAECEmbeds();
-  }
-})();
-</script>
 
 </body>
 </html>
