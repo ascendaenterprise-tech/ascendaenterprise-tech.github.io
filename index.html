@@ -1610,6 +1610,14 @@ section[style*="padding:8rem"]{padding-top:4.25rem!important;padding-bottom:4.25
   text-transform:uppercase;
 }
 .aec-load-embed:hover{color:var(--white);background:rgba(255,255,255,.025)}
+.aec-sound-toggle{
+  position:absolute;right:.55rem;bottom:.55rem;z-index:3;
+  border:1px solid rgba(255,255,255,.5);border-radius:999px;
+  background:rgba(4,3,10,.88);color:#fff;padding:.42rem .7rem;
+  font-family:var(--font-mono);font-size:.45rem;letter-spacing:.08em;
+  text-transform:uppercase;cursor:pointer;backdrop-filter:blur(8px)
+}
+.aec-sound-toggle:hover,.aec-sound-toggle:focus-visible{background:#fff;color:#04030A}
 .aec-play{
   width:36px;
   height:36px;
@@ -1803,7 +1811,7 @@ section[style*="padding:8rem"]{padding-top:4.25rem!important;padding-bottom:4.25
 
     <div class="gate-check">
       <input type="checkbox" id="legal-check" onchange="var b=document.getElementById('gate-enter');b.disabled=!this.checked;b.classList.toggle('active',this.checked)" aria-controls="gate-enter">
-      <label for="legal-check">I acknowledge that I have read and understand this notice. I understand that checking this box is not investor-status verification and does not create an investment, advisory, brokerage, fiduciary, client, or contractual relationship.</label>
+      <label for="legal-check">I acknowledge that I have read and understand this notice. I understand that entering the site automatically connects my browser to YouTube and loads nine embedded live-news players with sound muted; YouTube may receive technical data such as my IP address and browser information under its own privacy terms. Checking this box is not investor-status verification and does not create an investment, advisory, brokerage, fiduciary, client, or contractual relationship.</label>
     </div>
 
     <div class="gate-check" style="margin-top:-1rem;margin-bottom:1.5rem">
@@ -2382,7 +2390,7 @@ section[style*="padding:8rem"]{padding-top:4.25rem!important;padding-bottom:4.25
   <div class="aec-shell">
     <div class="sec-label">Real-Time Coverage</div>
     <h2 class="on-dark">Live Market <em>Coverage</em></h2>
-    <p class="aec-live-intro">Optional third-party market and financial-news streams. A stream is not loaded until you select its button. Selecting a button connects your browser to the named publisher or YouTube, which may process technical data under its own privacy terms. Ascenda does not control, verify, or endorse third-party content.</p>
+    <p class="aec-live-intro">Nine third-party YouTube live-news players load together after the entrance acknowledgment and begin muted where browser and publisher policies permit. Use a stream's Sound On button to hear that stream; selecting another automatically mutes the previous stream. YouTube and the named publishers may process technical data under their own terms. Ascenda does not control, verify, or endorse third-party content, and stream availability can change without notice.</p>
     <div class="aec-market-layout">
       <div class="aec-feed-grid">
       <article class="aec-feed-card">
@@ -2413,8 +2421,8 @@ section[style*="padding:8rem"]{padding-top:4.25rem!important;padding-bottom:4.25
   </div>
 </article>
 <article class="aec-feed-card">
-  <header><span class="aec-live-dot"></span><span>Reuters</span></header>
-  <div class="aec-video-frame aec-deferred-embed" data-embed="https://www.youtube.com/embed/live_stream?channel=UCjTMxYSAvQ9DNPYjtxNgkCw&autoplay=1&mute=1&playsinline=1">
+  <header><span class="aec-live-dot"></span><span>Al Jazeera English</span></header>
+  <div class="aec-video-frame aec-deferred-embed" data-embed="https://www.youtube.com/embed/gCNeDWCI0vo?autoplay=1&mute=1&playsinline=1">
     <button class="aec-load-embed" type="button" aria-label="Load live video">
       <span class="aec-play">▶</span>
       <span>Load third-party feed</span>
@@ -2423,7 +2431,7 @@ section[style*="padding:8rem"]{padding-top:4.25rem!important;padding-bottom:4.25
 </article>
 <article class="aec-feed-card">
   <header><span class="aec-live-dot"></span><span>NBC News NOW</span></header>
-  <div class="aec-video-frame aec-deferred-embed" data-embed="https://www.youtube.com/embed/live_stream?channel=UCdUCBzZCacPI61FdL7x9yvQ&autoplay=1&mute=1&playsinline=1">
+  <div class="aec-video-frame aec-deferred-embed" data-embed="https://www.youtube.com/embed/ZNyTrCfdTCo?autoplay=1&mute=1&playsinline=1">
     <button class="aec-load-embed" type="button" aria-label="Load live video">
       <span class="aec-play">▶</span>
       <span>Load third-party feed</span>
@@ -2431,8 +2439,8 @@ section[style*="padding:8rem"]{padding-top:4.25rem!important;padding-bottom:4.25
   </div>
 </article>
 <article class="aec-feed-card">
-  <header><span class="aec-live-dot"></span><span>Fox Business</span></header>
-  <div class="aec-video-frame aec-deferred-embed" data-embed="https://www.youtube.com/embed/live_stream?channel=UC7UQyQ1NRIAIDMKn75WYwlw&autoplay=1&mute=1&playsinline=1">
+  <header><span class="aec-live-dot"></span><span>DW News</span></header>
+  <div class="aec-video-frame aec-deferred-embed" data-embed="https://www.youtube.com/embed/LuKwFajn37U?autoplay=1&mute=1&playsinline=1">
     <button class="aec-load-embed" type="button" aria-label="Load live video">
       <span class="aec-play">▶</span>
       <span>Load third-party feed</span>
@@ -2458,8 +2466,8 @@ section[style*="padding:8rem"]{padding-top:4.25rem!important;padding-bottom:4.25
   </div>
 </article>
 <article class="aec-feed-card">
-  <header><span class="aec-live-dot"></span><span>CNBC</span></header>
-  <div class="aec-video-frame aec-deferred-embed" data-embed="https://www.youtube.com/embed/live_stream?channel=UCrp_UI8XtuYfpiqluWLD7Lw&autoplay=1&mute=1&playsinline=1">
+  <header><span class="aec-live-dot"></span><span>France 24 English</span></header>
+  <div class="aec-video-frame aec-deferred-embed" data-embed="https://www.youtube.com/embed/Ap-UM1O9RBU?autoplay=1&mute=1&playsinline=1">
     <button class="aec-load-embed" type="button" aria-label="Load live video">
       <span class="aec-play">▶</span>
       <span>Load third-party feed</span>
@@ -4369,6 +4377,7 @@ document.addEventListener('DOMContentLoaded', function(){
       if(cookieBanner) cookieBanner.style.display = 'none';
       gate.style.display = 'none';
       document.body.style.overflow = '';
+      if(typeof window.loadAllLiveVideos === 'function') window.loadAllLiveVideos();
       var mainContent = document.getElementById('main-content');
       if(mainContent) mainContent.focus();
     });
@@ -4706,29 +4715,71 @@ function toggleFaq(el) {
 
 <script id="aec-performance-loader-v5">
 (function(){
+  function youtubeCommand(frame, command){
+    if(!frame || !frame.contentWindow) return;
+    frame.contentWindow.postMessage(JSON.stringify({event:"command",func:command,args:[]}), "https://www.youtube.com");
+  }
+
+  function muteEveryVideo(exceptFrame){
+    document.querySelectorAll('.aec-video-frame iframe').forEach(function(frame){
+      if(frame !== exceptFrame) youtubeCommand(frame, 'mute');
+    });
+    document.querySelectorAll('.aec-sound-toggle').forEach(function(button){
+      if(button.dataset.frameId !== (exceptFrame && exceptFrame.id)){
+        button.textContent = '🔇 Sound On';
+        button.setAttribute('aria-pressed','false');
+      }
+    });
+  }
+
   function loadEmbed(box){
     if(!box || box.dataset.loaded === "1") return;
     var src = box.dataset.embed;
     if(!src) return;
+    var isYouTube = /youtube\.com\/embed\//.test(src);
     var iframe = document.createElement("iframe");
+    if(isYouTube && src.indexOf('enablejsapi=1') === -1){
+      src += (src.indexOf('?') === -1 ? '?' : '&') + 'enablejsapi=1&controls=1&rel=0';
+    }
     iframe.src = src;
-    iframe.loading = "lazy";
+    iframe.loading = isYouTube ? "eager" : "lazy";
     iframe.allow = "autoplay; encrypted-media; picture-in-picture";
     iframe.allowFullscreen = true;
     iframe.referrerPolicy = "strict-origin-when-cross-origin";
-    iframe.title = box.dataset.title || "AEC embedded content";
+    iframe.title = box.dataset.title || (isYouTube ? "Muted live-news stream" : "AEC embedded content");
     box.dataset.loaded = "1";
     box.innerHTML = "";
     box.appendChild(iframe);
+    if(isYouTube){
+      iframe.id = 'aec-live-frame-' + Array.prototype.indexOf.call(document.querySelectorAll('.aec-video-frame'), box);
+      var sound = document.createElement('button');
+      sound.type = 'button';
+      sound.className = 'aec-sound-toggle';
+      sound.dataset.frameId = iframe.id;
+      sound.setAttribute('aria-pressed','false');
+      sound.textContent = '🔇 Sound On';
+      sound.addEventListener('click', function(){
+        var turningOn = sound.getAttribute('aria-pressed') !== 'true';
+        muteEveryVideo(turningOn ? iframe : null);
+        youtubeCommand(iframe, turningOn ? 'unMute' : 'mute');
+        sound.setAttribute('aria-pressed', turningOn ? 'true' : 'false');
+        sound.textContent = turningOn ? '🔊 Sound Off' : '🔇 Sound On';
+      });
+      box.appendChild(sound);
+    }
   }
+
+  window.loadAllLiveVideos = function(){
+    document.querySelectorAll('.aec-video-frame.aec-deferred-embed').forEach(loadEmbed);
+  };
 
   document.addEventListener("click", function(e){
     var btn = e.target.closest(".aec-load-embed");
     if(btn) loadEmbed(btn.closest(".aec-deferred-embed"));
   });
 
-  /* After the core page is interactive, preload only lightweight same-page work.
-     Heavy external video/calendar embeds remain user-initiated. */
+  /* The nine YouTube players load only after the required entrance acknowledgment.
+     The Investing.com calendar remains user-initiated. */
   if("requestIdleCallback" in window){
     requestIdleCallback(function(){ document.documentElement.dataset.aecIdleReady = "1"; }, {timeout:2000});
   }else{
