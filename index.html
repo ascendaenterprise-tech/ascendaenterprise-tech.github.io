@@ -57,7 +57,6 @@
     });
   }
 </script>
-<link rel="icon" type="image/svg+xml" href="aec-icon.svg"/>
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png"/>
 <link rel="shortcut icon" type="image/png" href="favicon-32.png"/>
 <!-- PWA META TAGS -->
@@ -68,7 +67,6 @@
 <meta name="theme-color" content="#06050D"/>
 <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png"/>
 <link rel="apple-touch-icon" sizes="152x152" href="apple-touch-icon-152.png"/>
-<link rel="manifest" href="manifest.json"/>
 
 <!-- Organization and founder structured data -->
 <script type="application/ld+json">
@@ -993,24 +991,6 @@ html,body{max-width:100vw;overflow-x:hidden}
 }
 
 
-/* ── LANDING 4-PATH ── */
-#aec-landing{display:flex;position:fixed;inset:0;z-index:9998;background:#04030A;align-items:center;justify-content:center;padding:2rem;overflow-y:auto}
-.path-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:rgba(255,255,255,0.12);margin-bottom:2.5rem}
-.path-card{background:#080612;padding:2.75rem 2rem;display:flex;flex-direction:column;align-items:center;text-align:center;text-decoration:none;transition:background .3s;position:relative;overflow:hidden;cursor:pointer;border:none;color:inherit;font-family:inherit}
-.path-card:hover{background:rgba(255,255,255,0.04)}
-.path-top-bar{position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,#C8C8C8,transparent)}
-.path-num{font-family:'DM Mono',monospace;font-size:.52rem;letter-spacing:.22em;text-transform:uppercase;color:#888888;margin-bottom:.75rem}
-.path-icon{font-size:2.2rem;margin-bottom:1.25rem;display:block}
-.path-title{font-family:'Cormorant Garamond',Georgia,serif;font-size:1.5rem;font-weight:300;color:#FFF;margin-bottom:.75rem;line-height:1.2}
-.path-title em{font-style:italic;color:#FFFFFF}
-.path-desc{font-family:'Jost',sans-serif;font-size:.82rem;color:rgba(255,255,255,0.6);font-weight:300;line-height:1.8;margin-bottom:1.5rem}
-.path-cta{font-family:'DM Mono',monospace;font-size:.58rem;letter-spacing:.15em;text-transform:uppercase;color:#C8C8C8;border:.5px solid rgba(255,255,255,0.3);padding:.6rem 1.5rem;display:inline-block}
-.path-badge{display:inline-block;font-family:'DM Mono',monospace;font-size:.46rem;letter-spacing:.16em;text-transform:uppercase;color:#FFFFFF;border:.5px solid rgba(255,255,255,0.4);padding:.2rem .55rem;margin-bottom:.6rem;background:rgba(255,255,255,0.08)}
-.path-card-featured{background:rgba(255,255,255,0.04)!important;border:.5px solid rgba(255,255,255,0.2)}
-.path-card-featured:hover{background:rgba(255,255,255,0.08)!important}
-.path-cta-featured{color:#FFFFFF;background:rgba(255,255,255,0.08);border:.5px solid rgba(255,255,255,0.35)}
-@media(max-width:700px){.path-grid{grid-template-columns:1fr!important}}
-
 /* ═══════════════════════════════
    MOBILE — COMPREHENSIVE FIX
    max-width: 768px
@@ -1167,7 +1147,7 @@ html,body{max-width:100vw;overflow-x:hidden}
 
 
 /* ── 3D GLOBE ── */
-#aec-globe{width:500px;height:500px}
+.aec-globe{width:500px;height:500px}
 @media(max-width:900px){.hero-right{display:none!important}}
 
 
@@ -1804,9 +1784,6 @@ section[style*="padding:8rem"]{padding-top:4.25rem!important;padding-bottom:4.25
 <body data-aec-build="sitewide-final-qa-v1">
 <a class="skip-link" href="#main-content">Skip to main content</a>
 
-<!-- ══════════════════════════════════
-     LANDING PAGE — 4 PATH SELECTOR
-══════════════════════════════════ -->
 <!-- IMPORTANT LEGAL NOTICE AND ACCESS ACKNOWLEDGMENT -->
 <div id="gate" role="dialog" aria-modal="true" aria-labelledby="gate-title" aria-describedby="gate-summary">
   <div class="gate-inner" tabindex="-1">
@@ -1854,85 +1831,11 @@ section[style*="padding:8rem"]{padding-top:4.25rem!important;padding-bottom:4.25
   </div>
 </div>
 
-<div id="aec-landing" style="display:none">
-  <div style="position:absolute;top:0;left:0;right:0;height:1.5px;background:linear-gradient(90deg,transparent,#C8C8C8,transparent)"></div>
-  <div style="max-width:1020px;width:100%;margin:auto;text-align:center">
-
-    <!-- Logo -->
-    <div style="margin-bottom:2.5rem">
-      <svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:54px;height:54px;margin:0 auto 1rem;display:block">
-        <polygon points="40,4 62,28 40,52 18,28" fill="none" stroke="rgba(200,200,200,0.3)" stroke-width="0.5"/>
-        <polygon points="40,4 54,24 40,40 26,24" fill="url(#ld1)"/>
-        <polygon points="40,4 62,28 54,24" fill="url(#ld2)"/>
-        <polygon points="40,40 54,24 62,28" fill="rgba(180,180,200,0.5)"/>
-        <polygon points="40,40 26,24 18,28" fill="rgba(160,160,180,0.4)"/>
-        <defs>
-          <linearGradient id="ld1" x1="40" y1="4" x2="40" y2="52" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#FFFFFF"/><stop offset="100%" stop-color="#888888"/></linearGradient>
-          <linearGradient id="ld2" x1="40" y1="4" x2="62" y2="28" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#E0E0E0"/><stop offset="100%" stop-color="#C8C8C8"/></linearGradient>
-        </defs>
-      </svg>
-      <div style="font-family:'Cormorant Garamond',Georgia,serif;font-size:1.3rem;font-weight:300;color:#FFF;letter-spacing:.08em">ASCENDA</div>
-      <div style="font-family:'DM Mono',monospace;font-size:.55rem;letter-spacing:.3em;text-transform:uppercase;color:#888888;margin-top:.2rem">Enterprise Capital</div>
-    </div>
-
-    <h1 style="font-family:'Cormorant Garamond',Georgia,serif;font-size:clamp(1.8rem,4vw,2.8rem);font-weight:300;color:#FFF;margin-bottom:.75rem;line-height:1.15">What brings you to <em style="font-style:italic;color:#FFFFFF">Ascenda?</em></h1>
-    <p style="font-family:'Jost',sans-serif;font-size:.92rem;color:rgba(255,255,255,0.55);font-weight:300;margin-bottom:3.5rem;max-width:520px;margin-left:auto;margin-right:auto;line-height:1.8">Choose the path that fits you. We'll take you exactly where you need to go.</p>
-
-    <!-- 4 CARDS -->
-    <div class="path-grid">
-
-      <!-- 01: Mentorship -->
-      <a href="ascenda-mentorship.html" class="path-card">
-        <div class="path-top-bar"></div>
-        <div class="path-num">01</div>
-        <span class="path-icon">🎓</span>
-        <div class="path-title">Explore<br/><em>Mentorship</em></div>
-        <p class="path-desc">Educational mentorship covering research methods, market concepts, and historical case-study review. Mentorship does not include personalized investment advice, trade signals, brokerage services, or investment access.</p>
-        <div class="path-cta">Explore Mentorship →</div>
-      </a>
-
-      <!-- 02: Real Estate -->
-      <div class="path-card" onclick="document.getElementById('aec-landing').style.display='none';document.getElementById('aec-re-modal').style.display='flex';document.body.style.overflow=''">
-        <div class="path-top-bar"></div>
-        <div class="path-num">02</div>
-        <span class="path-icon">🏗️</span>
-        <div class="path-title">Submit a<br/><em>Real Estate Inquiry</em></div>
-        <p class="path-desc">Real estate buyers, sellers, builders, operators, and strategic counterparties may submit an inquiry regarding properties, land, development, or transaction opportunities.</p>
-        <div class="path-cta">Real Estate Inquiry →</div>
-      </div>
-
-      <!-- 03: Main Site -->
-      <div class="path-card path-card-featured" onclick="document.getElementById('aec-landing').style.display='none';document.body.style.overflow=''">
-        <div class="path-top-bar" style="background:linear-gradient(90deg,transparent,#FFFFFF,transparent)"></div>
-        <div class="path-num">03</div>
-        <span class="path-icon">📊</span>
-        <div class="path-title">Explore the<br/><em>Main Site</em></div>
-        <p class="path-desc">Historical research results, methodology, market resources, company information, and the development story of Ascenda Enterprise Capital.</p>
-        <div class="path-cta path-cta-featured">Enter Main Site →</div>
-      </div>
-
-      <!-- 04: Day Trader — NEW -->
-      <a href="aec-daytrader.html" class="path-card" style="background:rgba(200,200,200,0.04)">
-        <div class="path-top-bar"></div>
-        <div class="path-num">04</div>
-        <div class="path-badge">New</div>
-        <span class="path-icon">📈</span>
-        <div class="path-title">I'm a<br/><em>Day Trader</em></div>
-        <p class="path-desc">AECQS research — systematic strategy development, liquidity and order flow, market structure, statistical analysis, risk, execution, live charts, and research notes.</p>
-        <div class="path-cta">Enter Trading Hub →</div>
-      </a>
-
-    </div>
-
-    <p style="font-family:'DM Mono',monospace;font-size:.5rem;letter-spacing:.1em;color:rgba(255,255,255,0.18);text-transform:uppercase">Ascenda Enterprise Capital LLC · Georgia · All investments involve risk</p>
-  </div>
-</div>
-
 <!-- RE MODAL -->
 <div id="aec-re-modal" style="display:none;position:fixed;inset:0;z-index:9999;background:rgba(4,3,10,.97);align-items:center;justify-content:center;padding:2rem;overflow-y:auto">
   <div style="max-width:580px;width:100%;background:#080612;border:.5px solid rgba(200,200,200,0.35);padding:3.5rem;position:relative;text-align:center">
     <div style="position:absolute;top:0;left:0;right:0;height:1.5px;background:linear-gradient(90deg,transparent,#C8C8C8,transparent)"></div>
-    <button onclick="document.getElementById('aec-re-modal').style.display='none';document.getElementById('aec-landing').style.display='flex'" style="position:absolute;top:1rem;right:1rem;background:none;border:none;color:rgba(255,255,255,0.4);font-size:1.2rem;cursor:pointer">✕</button>
+    <button aria-label="Close real estate inquiry" onclick="document.getElementById('aec-re-modal').style.display='none'" style="position:absolute;top:1rem;right:1rem;background:none;border:none;color:rgba(255,255,255,0.4);font-size:1.2rem;cursor:pointer">✕</button>
     <div style="font-size:2.5rem;margin-bottom:1.25rem">🏗️</div>
     <div style="font-family:'DM Mono',monospace;font-size:.55rem;letter-spacing:.22em;text-transform:uppercase;color:#888888;margin-bottom:.75rem">Real Estate Business Inquiry</div>
     <h2 style="font-family:'Cormorant Garamond',Georgia,serif;font-size:1.8rem;font-weight:300;color:#FFF;margin-bottom:.75rem">Submit a <em style="font-style:italic;color:#FFFFFF">Real Estate Inquiry</em></h2>
@@ -2100,11 +2003,15 @@ section[style*="padding:8rem"]{padding-top:4.25rem!important;padding-bottom:4.25
     <a href="#performance" onclick="closeNav()">Performance</a>
     <a href="#strategy" onclick="closeNav()">Strategy</a>
     <a href="#markets" onclick="closeNav()">Markets</a>
-    <a href="#equity-curve" onclick="closeNav()">Equity Curve</a>
+    <a href="#performance" onclick="closeNav()">Equity Curve</a>
     <a href="#network" onclick="closeNav()">Network</a>
     <a href="#join" onclick="closeNav()">Join</a>
     <a href="#video" onclick="closeNav()">About</a>
     <a href="Izaiah-Cottle/" onclick="closeNav()">About Izaiah Cottle</a>
+    <a href="ascenda-mentorship.html" onclick="closeNav()">Mentorship</a>
+    <a href="#" onclick="closeNav();document.getElementById('aec-re-modal').style.display='flex';return false">Real Estate</a>
+    <a href="#main-content" onclick="closeNav()">Main Site</a>
+    <a href="aec-daytrader.html" onclick="closeNav()">Day Trader</a>
     <a href="aec-portal.html" onclick="closeNav()">Portal</a>
     <a href="https://ascendaenterprise-tech.github.io/AEC-Wire/" target="_blank" rel="noopener" onclick="closeNav()" style="color:#C8893A">AEC Wire ↗</a>
     <a href="#research" onclick="closeNav()">Research</a>
@@ -3173,7 +3080,7 @@ section[style*="padding:8rem"]{padding-top:4.25rem!important;padding-bottom:4.25
     </div>
 
     <div class="hero-right" style="display:flex;align-items:center;justify-content:center;position:relative;min-height:460px;background:transparent">
-      <canvas id="aec-globe" style="border-radius:50%;display:block;border:.5px solid rgba(255,255,255,0.08);box-shadow:0 0 60px rgba(255,255,255,0.04)"></canvas>
+      <canvas class="aec-globe" aria-hidden="true" style="border-radius:50%;display:block;border:.5px solid rgba(255,255,255,0.08);box-shadow:0 0 60px rgba(255,255,255,0.04)"></canvas>
     </div>
 
   </div>
@@ -3249,7 +3156,7 @@ section[style*="padding:8rem"]{padding-top:4.25rem!important;padding-bottom:4.25
     </div>
 
     <div class="hero-right" style="display:flex;align-items:center;justify-content:center;position:relative;min-height:460px;background:transparent">
-      <canvas id="aec-globe" style="border-radius:50%;display:block;border:.5px solid rgba(255,255,255,0.08);box-shadow:0 0 60px rgba(255,255,255,0.04)"></canvas>
+      <canvas class="aec-globe" aria-hidden="true" style="border-radius:50%;display:block;border:.5px solid rgba(255,255,255,0.08);box-shadow:0 0 60px rgba(255,255,255,0.04)"></canvas>
     </div>
 
   </div>
@@ -3828,7 +3735,7 @@ section[style*="padding:8rem"]{padding-top:4.25rem!important;padding-bottom:4.25
     </div>
 
     <div class="hero-right" style="display:flex;align-items:center;justify-content:center;position:relative;min-height:460px;background:transparent">
-      <canvas id="aec-globe" style="border-radius:50%;display:block;border:.5px solid rgba(255,255,255,0.08);box-shadow:0 0 60px rgba(255,255,255,0.04)"></canvas>
+      <canvas class="aec-globe" aria-hidden="true" style="border-radius:50%;display:block;border:.5px solid rgba(255,255,255,0.08);box-shadow:0 0 60px rgba(255,255,255,0.04)"></canvas>
     </div>
 
   </div>
@@ -3925,7 +3832,7 @@ section[style*="padding:8rem"]{padding-top:4.25rem!important;padding-bottom:4.25
     <a href="#join" class="ft-link">Join</a>
     <a href="#about" class="ft-link">About</a>
     <a href="#video" class="ft-link">Video</a>
-  <a href="#testimonials" class="ft-link">Testimonials</a>
+  <a href="#about" class="ft-link">About</a>
   <a href="#press" class="ft-link">Press</a>
   <a href="#live-markets" class="ft-link">Live Markets</a>
   <a href="#faq" class="ft-link">FAQ</a>
@@ -3979,7 +3886,7 @@ section[style*="padding:8rem"]{padding-top:4.25rem!important;padding-bottom:4.25
           <a href="#process" style="font-family:'Jost',sans-serif;font-size:.82rem;color:rgba(255,255,255,.35);text-decoration:none;transition:color .2s" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,.35)'">Process</a>
           <a href="#faq-investors" style="font-family:'Jost',sans-serif;font-size:.82rem;color:rgba(255,255,255,.35);text-decoration:none;transition:color .2s" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,.35)'">Corporate FAQ</a>
           <a href="#advisory" style="font-family:'Jost',sans-serif;font-size:.82rem;color:rgba(255,255,255,.35);text-decoration:none;transition:color .2s" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,.35)'">Advisory</a>
-          <a href="#documents" style="font-family:'Jost',sans-serif;font-size:.82rem;color:rgba(255,255,255,.35);text-decoration:none;transition:color .2s" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,.35)'">Documents</a>
+          <a href="#governance" style="font-family:'Jost',sans-serif;font-size:.82rem;color:rgba(255,255,255,.35);text-decoration:none;transition:color .2s" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,.35)'">Governance</a>
           <a href="#schedule" style="font-family:'Jost',sans-serif;font-size:.82rem;color:rgba(255,255,255,.35);text-decoration:none;transition:color .2s" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,.35)'">Schedule a Call</a>
         </div>
       </div>
@@ -3994,8 +3901,8 @@ section[style*="padding:8rem"]{padding-top:4.25rem!important;padding-bottom:4.25
           <a href="aec-daytrader.html" style="font-family:'Jost',sans-serif;font-size:.82rem;color:rgba(255,255,255,.35);text-decoration:none;transition:color .2s" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,.35)'">Day Trader Hub</a>
           <a href="#research" style="font-family:'Jost',sans-serif;font-size:.82rem;color:rgba(255,255,255,.35);text-decoration:none;transition:color .2s" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,.35)'">Research Notes</a>
           <a href="Izaiah-Cottle/" style="font-family:'Jost',sans-serif;font-size:.82rem;color:rgba(255,255,255,.35);text-decoration:none;transition:color .2s">About Izaiah Cottle</a>
-          <a href="Izaiah-Cottle-Research/" style="font-family:'Jost',sans-serif;font-size:.82rem;color:rgba(255,255,255,.35);text-decoration:none;transition:color .2s">Izaiah Cottle Research</a>
-          <a href="Ascenda-Enterprise-Capital-Leadership/" style="font-family:'Jost',sans-serif;font-size:.82rem;color:rgba(255,255,255,.35);text-decoration:none;transition:color .2s">Leadership</a>
+          <a href="#research" style="font-family:'Jost',sans-serif;font-size:.82rem;color:rgba(255,255,255,.35);text-decoration:none;transition:color .2s">Izaiah Cottle Research</a>
+          <a href="Izaiah-Cottle/" style="font-family:'Jost',sans-serif;font-size:.82rem;color:rgba(255,255,255,.35);text-decoration:none;transition:color .2s">Leadership</a>
           <a href="aec-portal.html" style="font-family:'Jost',sans-serif;font-size:.82rem;color:rgba(255,255,255,.35);text-decoration:none;transition:color .2s" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,.35)'">Information Portal</a>
         </div>
       </div>
@@ -4445,7 +4352,6 @@ document.addEventListener('DOMContentLoaded', function(){
   var legalCheck = document.getElementById('legal-check');
   var analyticsCheck = document.getElementById('analytics-consent');
   var enterButton = document.getElementById('gate-enter');
-  var landing = document.getElementById('aec-landing');
 
   if(gatePanel) gatePanel.focus();
   if(enterButton){
@@ -4461,10 +4367,9 @@ document.addEventListener('DOMContentLoaded', function(){
       var cookieBanner = document.getElementById('cookie-banner');
       if(cookieBanner) cookieBanner.style.display = 'none';
       gate.style.display = 'none';
-      if(landing) landing.style.display = 'flex';
       document.body.style.overflow = '';
-      var firstLandingControl = landing && landing.querySelector('a,button,[tabindex]:not([tabindex="-1"])');
-      if(firstLandingControl) firstLandingControl.focus();
+      var mainContent = document.getElementById('main-content');
+      if(mainContent) mainContent.focus();
     });
   }
 
@@ -4840,7 +4745,7 @@ document.addEventListener("DOMContentLoaded", function(){
   if(layout && rail && rail.parentElement !== layout){
     layout.appendChild(rail);
   }
-  if(layout && feeds && a.parentElement !== layout){
+  if(layout && feeds && feeds.parentElement !== layout){
     layout.insertBefore(feeds, layout.firstChild);
   }
 });
