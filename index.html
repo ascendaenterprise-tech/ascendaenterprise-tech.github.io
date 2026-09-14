@@ -27,13 +27,20 @@
 <!-- SEO -->
 <meta name="description" content="Ascenda Enterprise Capital LLC — a multi-strategy investment and research firm spanning global markets, quantitative systems, real estate, private equity, and pharmaceutical research & development."/>
 <meta name="robots" content="index, follow"/>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-0YMYZFJG77"></script>
+<!-- Analytics loads only after the visitor makes an optional consent choice. -->
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-0YMYZFJG77');
+  function loadOptionalAnalytics(){
+    if(window.aecAnalyticsLoaded) return;
+    window.aecAnalyticsLoaded = true;
+    var analyticsScript = document.createElement('script');
+    analyticsScript.async = true;
+    analyticsScript.src = 'https://www.googletagmanager.com/gtag/js?id=G-0YMYZFJG77';
+    document.head.appendChild(analyticsScript);
+    gtag('js', new Date());
+    gtag('config', 'G-0YMYZFJG77', {anonymize_ip:true});
+  }
 </script>
 <link rel="icon" type="image/svg+xml" href="aec-icon.svg"/>
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png"/>
@@ -117,8 +124,9 @@ body{background:var(--ink);color:var(--white);font-family:var(--font-body);font-
 #gate{
   position:fixed;inset:0;z-index:9999;
   background:var(--ink2);
-  display:flex;align-items:center;justify-content:center;
+  display:flex;align-items:flex-start;justify-content:center;
   padding:2rem;
+  overflow-y:auto;
 }
 .gate-inner{
   max-width:620px;width:100%;
@@ -127,6 +135,7 @@ body{background:var(--ink);color:var(--white);font-family:var(--font-body);font-
   background:rgba(8,6,18,0.98);
   text-align:center;
   position:relative;
+  margin:auto;
 }
 .gate-inner::before{
   content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);
@@ -154,6 +163,10 @@ body{background:var(--ink);color:var(--white);font-family:var(--font-body);font-
 .gate-decline{display:block;margin-top:1rem;font-family:var(--font-mono);font-size:.58rem;letter-spacing:.15em;text-transform:uppercase;color:var(--cream3);text-decoration:none;cursor:pointer;transition:color .2s}
 .gate-decline:hover{color:var(--cream2)}
 .gate-disclaimer{margin-top:2rem;font-size:.62rem;color:rgba(255,255,255,.2);line-height:1.7}
+.gate-legal-links{display:flex;justify-content:center;gap:.8rem;flex-wrap:wrap;margin-top:1.25rem}
+.gate-legal-links a{font-family:var(--font-mono);font-size:.52rem;letter-spacing:.08em;text-transform:uppercase;color:var(--cream3);text-decoration:underline;text-underline-offset:3px}
+.gate-legal-links a:hover,.gate-legal-links a:focus{color:var(--white)}
+.gate-warning{font-size:.76rem;color:var(--cream2);line-height:1.75;text-align:left;margin:0 0 1.2rem;padding:1rem;border-left:2px solid var(--gold);background:rgba(255,255,255,.035)}
 
 /* ═══════════════════════════════
    NAV
@@ -1775,33 +1788,50 @@ section[style*="padding:8rem"]{padding-top:4.25rem!important;padding-bottom:4.25
 <!-- ══════════════════════════════════
      LANDING PAGE — 4 PATH SELECTOR
 ══════════════════════════════════ -->
-<!-- ACCREDITED INVESTOR GATE -->
-<div id="gate">
-  <div class="gate-inner">
+<!-- IMPORTANT LEGAL NOTICE AND ACCESS ACKNOWLEDGMENT -->
+<div id="gate" role="dialog" aria-modal="true" aria-labelledby="gate-title" aria-describedby="gate-summary">
+  <div class="gate-inner" tabindex="-1">
     <div class="gate-logo-wrap">
       <div class="gate-brand">ASCENDA</div>
       <div class="gate-brand-sub">Enterprise Capital</div>
       <div class="gate-rule"></div>
     </div>
 
-    <h1 class="gate-title">Accredited Investor<br>Verification Required</h1>
-    <p class="gate-text">This website contains information intended for sophisticated or accredited investors and other qualified market participants. This website does not independently verify or certify a visitor's legal investor status.</p>
+    <h1 class="gate-title" id="gate-title">Important Legal Notice</h1>
+    <p class="gate-text" id="gate-summary"><strong style="color:var(--white)">Ascenda Enterprise Capital LLC is a private, multi-strategy investment firm.</strong> This website provides general company information, educational material, market commentary, and quantitative research. The description of Ascenda as a private investment firm does not mean that any investment opportunity is currently being offered or available through this website.</p>
+
+    <p class="gate-warning"><strong>NO OFFER OR SOLICITATION.</strong> Nothing on this website constitutes an offer to sell, a solicitation of an offer to buy, or a recommendation concerning any security, commodity interest, fund interest, advisory service, managed account, or other financial product.</p>
+    <p class="gate-text" style="text-align:left;margin-bottom:1rem">Ascenda does not accept investor funds, open investment accounts, execute trades for visitors, or establish an investment-advisory, brokerage, fiduciary, client, partnership, or investor relationship through this website.</p>
+    <p class="gate-text" style="text-align:left;margin-bottom:1rem">Website material is general research and education, not personalized investment, legal, accounting, or tax advice. Trading and investing involve substantial risk, including possible total loss. Hypothetical, simulated, backtested, or reconstructed results do not represent actual trading, audited fund performance, investor returns, or assets under management and do not guarantee future results.</p>
+    <p class="gate-text" style="text-align:left;margin-bottom:1.25rem">Some materials may be intended for sophisticated, accredited, or otherwise qualified market participants. Accessing this site does not verify, certify, or establish legal investor status. Any future transaction would require separate legal documentation, eligibility review, regulatory analysis, and written acceptance by the appropriate entity.</p>
 
     <div class="gate-check">
-      <input type="checkbox" id="accredited-check" onchange="document.getElementById('gate-enter').classList.toggle('active',this.checked)">
-      <label for="accredited-check">I confirm that I consider myself an accredited or otherwise qualified investor for purposes of accessing this information, and I understand that this acknowledgment does not constitute independent verification of my legal status or eligibility.</label>
+      <input type="checkbox" id="legal-check" onchange="var b=document.getElementById('gate-enter');b.disabled=!this.checked;b.classList.toggle('active',this.checked)" aria-controls="gate-enter">
+      <label for="legal-check">I acknowledge that I have read and understand this notice. I understand that checking this box is not investor-status verification and does not create an investment, advisory, brokerage, fiduciary, client, or contractual relationship.</label>
     </div>
 
-    <button class="gate-btn" id="gate-enter" onclick="document.getElementById('gate').style.display='none';document.getElementById('aec-landing').style.display='flex';">Enter Ascenda Enterprise Capital</button>
+    <div class="gate-check" style="margin-top:-1rem;margin-bottom:1.5rem">
+      <input type="checkbox" id="analytics-consent">
+      <label for="analytics-consent">Optional: I consent to analytics cookies or similar technologies as described in the Privacy Policy. Leaving this unchecked will not prevent access to the website.</label>
+    </div>
+
+    <button class="gate-btn" id="gate-enter" type="button" disabled>Enter Ascenda Enterprise Capital</button>
 
     <div style="margin-top:2rem;padding:1.5rem;text-align:left;background:rgba(200,200,200,.035);border:.5px solid var(--rule);">
-      <div style="font-family:var(--font-mono);font-size:.55rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold3);margin-bottom:.7rem;">Don't meet the accredited investor requirements?</div>
-      <p style="font-size:.75rem;color:var(--cream3);line-height:1.75;margin:0 0 1rem;">You may still explore Ascenda's educational materials, mentorship programs, and other publicly available resources.</p>
-      <a href="ascenda-mentorship.html" style="display:inline-block;font-family:var(--font-mono);font-size:.55rem;letter-spacing:.15em;text-transform:uppercase;color:var(--cream2);text-decoration:none;border:.5px solid var(--rule2);padding:.7rem 1rem;">Explore Mentorship &amp; Paid Materials &rarr;</a>
+      <div style="font-family:var(--font-mono);font-size:.55rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold3);margin-bottom:.7rem;">Looking for educational resources?</div>
+      <p style="font-size:.75rem;color:var(--cream3);line-height:1.75;margin:0 0 1rem;">You may explore Ascenda's educational materials and mentorship information. Payment for education does not purchase investment advice, trade signals, investment access, or eligibility to participate in any transaction.</p>
+      <a href="ascenda-mentorship.html" style="display:inline-block;font-family:var(--font-mono);font-size:.55rem;letter-spacing:.15em;text-transform:uppercase;color:var(--cream2);text-decoration:none;border:.5px solid var(--rule2);padding:.7rem 1rem;">Explore Mentorship &amp; Educational Materials &rarr;</a>
     </div>
 
-    <a class="gate-decline" href="about:blank">I do not qualify and I'm not interested - Exit Site</a>
-    <p class="gate-disclaimer">Nothing on this website constitutes an offer to sell, a solicitation of an offer to buy, or a recommendation regarding any security, investment product, advisory service, or transaction.</p>
+    <a class="gate-decline" href="https://www.google.com/">Exit Website</a>
+    <div class="gate-legal-links" aria-label="Legal policies">
+      <a href="terms-of-service.html">Terms of Use</a>
+      <a href="privacy-policy.html">Privacy Policy</a>
+      <a href="regulatory-disclosures.html">Regulatory Disclosures</a>
+      <a href="mailto:izaiah@ascendaenterprisecapital.com?subject=Accessibility%20request">Accessibility</a>
+      <a href="mailto:izaiah@ascendaenterprisecapital.com">Contact</a>
+    </div>
+    <p class="gate-disclaimer">This acknowledgment is a notice and access control only. It is not independent accreditation verification, a subscription agreement, an offering document, or consent to receive marketing communications.</p>
   </div>
 </div>
 
@@ -2008,7 +2038,7 @@ section[style*="padding:8rem"]{padding-top:4.25rem!important;padding-bottom:4.25
   <div style="flex:1;min-width:250px">
     <div style="font-family:'DM Mono',monospace;font-size:.55rem;letter-spacing:.2em;text-transform:uppercase;color:#C8C8C8;margin-bottom:.35rem">Cookie Notice</div>
     <p style="font-size:.75rem;color:rgba(255,255,255,.55);line-height:1.7;margin:0;font-family:'Jost',sans-serif;font-weight:300">
-      We use cookies to analyze site traffic and improve your experience. By continuing to use this site, you consent to our use of cookies.
+      Optional analytics help us understand site traffic. Analytics will load only after you select Accept. Declining will not prevent access. Some requested third-party media or market widgets may operate under their own privacy terms.
       <a href="privacy-policy.html" style="color:#FFFFFF;text-decoration:none;margin-left:.35rem">Privacy Policy</a>
     </p>
   </div>
@@ -2707,7 +2737,7 @@ section[style*="padding:8rem"]{padding-top:4.25rem!important;padding-bottom:4.25
 <!-- PERFORMANCE & RESEARCH -->
 <section class="tearsheet" id="performance">
   <div class="ts-header"><div><div class="sec-label">Performance &amp; Research</div><h2 class="on-dark">Unified multi-asset <em>research review</em></h2></div><div style="text-align:right"><div style="font-family:var(--font-mono);font-size:.55rem;letter-spacing:.15em;text-transform:uppercase;color:var(--cream3)">Research Review · 08 Sep 2026</div><div style="font-family:var(--font-display);font-size:1.45rem;font-style:italic;color:var(--gold2);margin-top:.25rem">NQ · ES · YM · Equities</div></div></div>
-  <div class="ts-disclaimer"><p><strong>Reporting standard:</strong> Historical simulation / backtest research. One shared $1,000,000 starting account connects NQ, ES, YM and equities. Figures are research-owner-verified and reconstructed records, not an external audit or realized investor returns. Unless specifically stated, account-level trade economics and risk statistics below describe the uncapped shared-account branch.</p></div>
+  <div class="ts-disclaimer"><p><strong>HYPOTHETICAL RESEARCH RESULTS — NOT ACTUAL TRADING.</strong> The figures below are simulated or reconstructed and are not audited fund performance, investor returns, or assets under management. They may benefit from hindsight and may not reflect liquidity, market impact, rejected or partial orders, changing spreads, latency, financing, taxes, operational failures, or the effect of actual losses. Displayed configurations may have been selected after testing alternatives. No account is expected or guaranteed to achieve similar results. One modeled $1,000,000 starting account connects NQ, ES, YM and equities; unless stated otherwise, statistics describe the uncapped research branch. Review the methodology, assumptions, costs, testing period, and liquidity limitations before interpreting any figure.</p></div>
   <div class="kpi-grid">
     <div class="kpi"><div class="kpi-val" style="font-size:1.5rem;color:#2ECC71">$1.501B</div><div class="kpi-label">10% ADV-Cap Scenario</div><div class="kpi-sub">$1,500,989,975.35 ending account value</div></div>
     <div class="kpi"><div class="kpi-val" style="font-size:1.5rem">$1.637B</div><div class="kpi-label">Uncapped Ending Value</div><div class="kpi-sub">$1,637,097,075.58 exact</div></div>
@@ -3711,7 +3741,7 @@ section[style*="padding:8rem"]{padding-top:4.25rem!important;padding-bottom:4.25
           <span style="font-size:.95rem;font-weight:400;color:var(--white);font-family:var(--font-body)">What markets does AEC trade?</span>
           <div class="faq-icon" style="width:22px;height:22px;background:var(--gold3);color:var(--white);display:flex;align-items:center;justify-content:center;font-size:.75rem;flex-shrink:0;transition:transform .3s">+</div>
         </div>
-        <div class="faq-a" style="max-height:0;overflow:hidden;transition:max-height .35s ease;font-size:.88rem;color:var(--cream2);line-height:1.9;font-weight:300;padding:0 clamp(.75rem,3vw,2rem);word-break:normal;overflow-wrap:break-word;width:100%;box-sizing:border-box">AEC's primary trading instruments include NAS100, ES Futures, Gold, Crude Oil, and the top-performing equities of the decade including NVDA, TSLA, AMZN, AAPL, MSFT, and META. We operate across both long and short positions using systematic momentum and order flow strategies.</div>
+        <div class="faq-a" style="max-height:0;overflow:hidden;transition:max-height .35s ease;font-size:.88rem;color:var(--cream2);line-height:1.9;font-weight:300;padding:0 clamp(.75rem,3vw,2rem);word-break:normal;overflow-wrap:break-word;width:100%;box-sizing:border-box">AECQS research has evaluated futures and equities, including NQ, ES, YM, and selected U.S. stocks. References to instruments or modeled long and short positions describe historical research inputs, not current holdings, trade instructions, recommendations, or evidence of live execution.</div>
       </div>
 
       <div class="faq-item" style="border-bottom:.5px solid var(--rule)">
@@ -3735,7 +3765,7 @@ section[style*="padding:8rem"]{padding-top:4.25rem!important;padding-bottom:4.25
           <span style="font-size:.95rem;font-weight:400;color:var(--white);font-family:var(--font-body)">Is AEC registered with the SEC?</span>
           <div class="faq-icon" style="width:22px;height:22px;background:var(--gold3);color:var(--white);display:flex;align-items:center;justify-content:center;font-size:.75rem;flex-shrink:0;transition:transform .3s">+</div>
         </div>
-        <div class="faq-a" style="max-height:0;overflow:hidden;transition:max-height .35s ease;font-size:.88rem;color:var(--cream2);line-height:1.9;font-weight:300;padding:0 clamp(.75rem,3vw,2rem);word-break:normal;overflow-wrap:break-word;width:100%;box-sizing:border-box">Ascenda Enterprise Capital LLC is a registered Limited Liability Company in the State of Georgia. AEC is not currently registered as an Investment Adviser with the SEC or any state authority. All investment activities are conducted in compliance with applicable federal and state securities laws. Prospective investors are encouraged to consult with independent legal and financial advisors before making any investment decisions.</div>
+        <div class="faq-a" style="max-height:0;overflow:hidden;transition:max-height .35s ease;font-size:.88rem;color:var(--cream2);line-height:1.9;font-weight:300;padding:0 clamp(.75rem,3vw,2rem);word-break:normal;overflow-wrap:break-word;width:100%;box-sizing:border-box">Ascenda Enterprise Capital LLC is a limited liability company formed in Georgia. The company does not represent through this website that it is registered with the SEC or a state securities regulator as an investment adviser, or that any exemption applies. Regulatory status depends on actual activities and should be independently verified before entering any relationship.</div>
       </div>
 
     </div>
@@ -3751,7 +3781,7 @@ section[style*="padding:8rem"]{padding-top:4.25rem!important;padding-bottom:4.25
         <span style="display:block;width:28px;height:.5px;background:#888"></span>Book a Call
       </div>
       <h2 style="font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,4vw,3rem);font-weight:300;color:#06050D;line-height:1.05;margin-bottom:1.25rem">15 Minutes.<br/><em style="font-style:italic;color:#888888">No Pitch Decks Required.</em></h2>
-      <p style="font-size:.92rem;color:rgba(0,0,0,.55);line-height:1.95;font-family:'Jost',sans-serif;font-weight:300;margin-bottom:2rem">If you are a serious investor, allocator, or operator who wants to understand what AEC is building — book a direct call with Izaiah. Every call is personal. No assistants, no gatekeepers.</p>
+      <p style="font-size:.92rem;color:rgba(0,0,0,.55);line-height:1.95;font-family:'Jost',sans-serif;font-weight:300;margin-bottom:2rem">For general corporate, research, vendor, media, or strategic inquiries, you may request an introductory call with Izaiah. A call is not an offer, solicitation, investment-advisory engagement, investor onboarding process, or acceptance of funds.</p>
 
       <div style="display:flex;flex-direction:column;gap:.75rem;margin-bottom:2.5rem">
         <div style="display:flex;align-items:center;gap:1rem">
@@ -3784,21 +3814,21 @@ section[style*="padding:8rem"]{padding-top:4.25rem!important;padding-bottom:4.25
           <div style="font-family:'DM Mono',monospace;font-size:.52rem;color:#888;width:28px;flex-shrink:0;margin-top:.15rem">01</div>
           <div>
             <div style="font-family:'Cormorant Garamond',serif;font-size:1rem;color:#06050D;margin-bottom:.3rem">You Introduce Yourself</div>
-            <p style="font-size:.8rem;color:rgba(0,0,0,.5);font-family:'Jost',sans-serif;font-weight:300;line-height:1.75">Background, capital, and what you are looking to accomplish. No slides needed.</p>
+            <p style="font-size:.8rem;color:rgba(0,0,0,.5);font-family:'Jost',sans-serif;font-weight:300;line-height:1.75">Background and the general purpose of your inquiry. Do not send account credentials, banking instructions, or sensitive financial information.</p>
           </div>
         </div>
         <div style="display:flex;gap:1.25rem;align-items:flex-start">
           <div style="font-family:'DM Mono',monospace;font-size:.52rem;color:#888;width:28px;flex-shrink:0;margin-top:.15rem">02</div>
           <div>
             <div style="font-family:'Cormorant Garamond',serif;font-size:1rem;color:#06050D;margin-bottom:.3rem">Izaiah Walks You Through AEC</div>
-            <p style="font-size:.8rem;color:rgba(0,0,0,.5);font-family:'Jost',sans-serif;font-weight:300;line-height:1.75">Strategy, current capacity, terms, and what working with AEC actually looks like.</p>
+            <p style="font-size:.8rem;color:rgba(0,0,0,.5);font-family:'Jost',sans-serif;font-weight:300;line-height:1.75">Publicly available information about AEC's research and business-development work. Transaction terms and personalized recommendations are not provided through this introductory call.</p>
           </div>
         </div>
         <div style="display:flex;gap:1.25rem;align-items:flex-start">
           <div style="font-family:'DM Mono',monospace;font-size:.52rem;color:#888;width:28px;flex-shrink:0;margin-top:.15rem">03</div>
           <div>
             <div style="font-family:'Cormorant Garamond',serif;font-size:1rem;color:#06050D;margin-bottom:.3rem">Clear Next Step</div>
-            <p style="font-size:.8rem;color:rgba(0,0,0,.5);font-family:'Jost',sans-serif;font-weight:300;line-height:1.75">Every call ends with a defined outcome — either it's a fit and we move forward, or it isn't and we part ways cleanly.</p>
+            <p style="font-size:.8rem;color:rgba(0,0,0,.5);font-family:'Jost',sans-serif;font-weight:300;line-height:1.75">AEC may respond with public information, request additional non-sensitive context, refer the inquiry to professional advisers, or decline it. No relationship is formed unless separately documented in writing.</p>
           </div>
         </div>
       </div>
@@ -4004,7 +4034,7 @@ section[style*="padding:8rem"]{padding-top:4.25rem!important;padding-bottom:4.25
           © 2026 Ascenda Enterprise Capital LLC · Registered in the State of Georgia · Atlanta Metropolitan Area · All Rights Reserved<br/>
           Not registered as an Investment Adviser with the SEC · Not a member of FINRA or SIPC · Capital not SIPC-protected<br/>
           All investments involve risk including total and permanent loss of principal · Past performance not indicative of future results<br/>
-          No public securities offering is made through this website · Verify regulatory and transaction-specific information independently
+          Nothing on this website is an offer to sell or a solicitation of an offer to buy securities or commodity interests · Verify regulatory and transaction-specific information independently
         </div>
       </div>
       <div style="text-align:right">
@@ -4378,6 +4408,7 @@ if(wireModal){
 // COOKIE CONSENT
 function acceptCookies(){
   localStorage.setItem('aec_cookie_consent','accepted');
+  loadOptionalAnalytics();
   document.getElementById('cookie-banner').style.display='none';
 }
 function declineCookies(){
@@ -4389,6 +4420,7 @@ function declineCookies(){
   if(localStorage.getItem('aec_cookie_consent')){
     document.getElementById('cookie-banner').style.display='none';
   }
+  if(localStorage.getItem('aec_cookie_consent') === 'accepted') loadOptionalAnalytics();
 })();
 
 // NAV
@@ -4412,6 +4444,45 @@ window.addEventListener('resize',checkMobile);
 checkMobile();
 
 // GATE
+document.addEventListener('DOMContentLoaded', function(){
+  var gate = document.getElementById('gate');
+  var gatePanel = gate && gate.querySelector('.gate-inner');
+  var legalCheck = document.getElementById('legal-check');
+  var analyticsCheck = document.getElementById('analytics-consent');
+  var enterButton = document.getElementById('gate-enter');
+  var landing = document.getElementById('aec-landing');
+
+  if(gatePanel) gatePanel.focus();
+  if(enterButton){
+    enterButton.addEventListener('click', function(){
+      if(!legalCheck || !legalCheck.checked) return;
+      if(analyticsCheck && analyticsCheck.checked){
+        localStorage.setItem('aec_cookie_consent','accepted');
+        loadOptionalAnalytics();
+      }else{
+        localStorage.setItem('aec_cookie_consent','declined');
+      }
+      var cookieBanner = document.getElementById('cookie-banner');
+      if(cookieBanner) cookieBanner.style.display = 'none';
+      gate.style.display = 'none';
+      if(landing) landing.style.display = 'flex';
+      document.body.style.overflow = '';
+      var firstLandingControl = landing && landing.querySelector('a,button,[tabindex]:not([tabindex="-1"])');
+      if(firstLandingControl) firstLandingControl.focus();
+    });
+  }
+
+  if(gate){
+    gate.addEventListener('keydown', function(event){
+      if(event.key !== 'Tab') return;
+      var controls = gate.querySelectorAll('a[href],button:not([disabled]),input:not([disabled]),[tabindex]:not([tabindex="-1"])');
+      if(!controls.length) return;
+      var first = controls[0], last = controls[controls.length - 1];
+      if(event.shiftKey && document.activeElement === first){ event.preventDefault(); last.focus(); }
+      else if(!event.shiftKey && document.activeElement === last){ event.preventDefault(); first.focus(); }
+    });
+  }
+});
 
 // MOBILE FIXES
 function applyMobileFixes(){
@@ -4681,7 +4752,7 @@ function toggleFaq(el) {
       <p style="font-size:.95rem;color:rgba(255,255,255,.55);line-height:1.9;margin-bottom:1rem">What caught AEC's attention was not the CPI print itself — it was the order flow response. In the first 15 minutes of the New York open, NQ absorbed significant sell-side liquidity at the 18,840 level without breaking. That absorption pattern, confirmed by our DOM layer, signaled institutional accumulation rather than distribution.</p>
       <p style="font-size:.95rem;color:rgba(255,255,255,.55);line-height:1.9;margin-bottom:1rem">Our Z-Score framework showed price at 2.1 standard deviations below the 20-period mean on the 15-minute chart — historically a high-probability mean reversion zone. Combined with the FVG confluence and order flow confirmation, the setup aligned across all three layers of AEC's system.</p>
       <p style="font-size:.95rem;color:rgba(255,255,255,.55);line-height:1.9;margin-bottom:1rem"><strong style="color:rgba(255,255,255,.7)">Key levels to watch:</strong> 18,840 remains critical support. A sustained close above 19,200 opens the door to the next liquidity pool at 19,580. Failure to hold 18,840 targets the daily FVG at 18,420.</p>
-      <p style="font-size:.95rem;color:rgba(255,255,255,.55);line-height:1.9"><strong style="color:rgba(255,255,255,.7)">AEC positioning:</strong> We remain tactically long on confirmed momentum above 18,900, with defined risk below 18,780. Position sizing per Kelly Criterion — no overexposure regardless of conviction level.</p>
+      <p style="font-size:.95rem;color:rgba(255,255,255,.55);line-height:1.9"><strong style="color:rgba(255,255,255,.7)">Historical research observation:</strong> These indicators were evaluated as part of a retrospective market-structure study. This is not a current position disclosure, entry or exit instruction, sizing prescription, or recommendation.</p>
       <div style="margin-top:1.5rem;padding:1rem 1.25rem;background:rgba(255,255,255,0.04);border-left:2px solid rgba(255,255,255,0.2)">
         <p style="font-family:'DM Mono',monospace;font-size:.5rem;letter-spacing:.08em;color:rgba(255,255,255,.25);margin:0">This note is for informational purposes only and does not constitute investment advice. Past performance is not indicative of future results.</p>
       </div>
@@ -4695,7 +4766,7 @@ function toggleFaq(el) {
       <p style="font-size:.95rem;color:rgba(255,255,255,.55);line-height:1.9;margin-bottom:1rem">The inverse relationship between the dollar and gold is well understood. What is less understood is the timing of these rotations at the institutional level. When large capital moves from dollar-denominated assets into hard assets like gold, it does so gradually — over weeks, not days. The weekly chart tells this story clearly.</p>
       <p style="font-size:.95rem;color:rgba(255,255,255,.55);line-height:1.9;margin-bottom:1rem">AEC's order flow analysis on Gold futures shows consistent absorption at the $2,280-$2,300 range over the past three weeks. Every dip into that zone has been met with institutional buying — the kind of patient, systematic accumulation that precedes significant directional moves.</p>
       <p style="font-size:.95rem;color:rgba(255,255,255,.55);line-height:1.9;margin-bottom:1rem"><strong style="color:rgba(255,255,255,.7)">The macro thesis:</strong> If the Fed delays rate cuts further into 2026, dollar strength becomes a ceiling rather than a floor. Simultaneously, geopolitical uncertainty and sovereign debt concerns globally continue to support the gold bid. AEC sees this as a multi-month structural tailwind for precious metals.</p>
-      <p style="font-size:.95rem;color:rgba(255,255,255,.55);line-height:1.9"><strong style="color:rgba(255,255,255,.7)">AEC positioning:</strong> Long Gold on pullbacks to the $2,280 zone with targets at $2,420 and $2,500. Stop below $2,240 on a weekly close basis.</p>
+      <p style="font-size:.95rem;color:rgba(255,255,255,.55);line-height:1.9"><strong style="color:rgba(255,255,255,.7)">Historical research observation:</strong> The cited price regions were examined retrospectively to study market structure. They are not current targets, stops, trade instructions, position disclosures, or recommendations.</p>
       <div style="margin-top:1.5rem;padding:1rem 1.25rem;background:rgba(255,255,255,0.04);border-left:2px solid rgba(255,255,255,0.2)">
         <p style="font-family:'DM Mono',monospace;font-size:.5rem;letter-spacing:.08em;color:rgba(255,255,255,.25);margin:0">This note is for informational purposes only and does not constitute investment advice. Past performance is not indicative of future results.</p>
       </div>
