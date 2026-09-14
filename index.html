@@ -2216,12 +2216,24 @@ section[style*="padding:8rem"]{padding-top:4.25rem!important;padding-bottom:4.25
       <button id="aec-nb-toggle" style="font-family:monospace;font-size:.5rem;letter-spacing:.08em;text-transform:uppercase;padding:.22rem .55rem;background:transparent;border:.5px solid #1c2433;color:#8090a8;cursor:pointer">▼ Collapse</button>
     </div>
   </div>
-  <div id="aec-nb-grid" style="display:grid;grid-template-columns:repeat(3,1fr);max-height:270px;overflow-y:auto"></div>
+  <div id="aec-nb-grid" style="display:grid;grid-template-columns:repeat(3,1fr);max-height:270px;overflow-y:auto">
+    <a href="https://www.cnbc.com/markets/" target="_blank" rel="noopener noreferrer" style="display:block;padding:.85rem 1.25rem;border-right:.5px solid #1c2433;border-bottom:.5px solid #1c2433;text-decoration:none"><div style="display:flex;justify-content:space-between;margin-bottom:.35rem"><span style="font-family:monospace;font-size:.52rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#ef4444">CNBC</span><span style="font-family:monospace;font-size:.48rem;color:#606a7a">Publisher link</span></div><div style="font-size:.78rem;color:#b0bac8;line-height:1.55;font-weight:300">Visit CNBC Markets</div></a>
+    <a href="https://www.marketwatch.com/" target="_blank" rel="noopener noreferrer" style="display:block;padding:.85rem 1.25rem;border-right:.5px solid #1c2433;border-bottom:.5px solid #1c2433;text-decoration:none"><div style="display:flex;justify-content:space-between;margin-bottom:.35rem"><span style="font-family:monospace;font-size:.52rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#10b981">MarketWatch</span><span style="font-family:monospace;font-size:.48rem;color:#606a7a">Publisher link</span></div><div style="font-size:.78rem;color:#b0bac8;line-height:1.55;font-weight:300">Visit MarketWatch</div></a>
+    <a href="https://finance.yahoo.com/" target="_blank" rel="noopener noreferrer" style="display:block;padding:.85rem 1.25rem;border-right:.5px solid #1c2433;border-bottom:.5px solid #1c2433;text-decoration:none"><div style="display:flex;justify-content:space-between;margin-bottom:.35rem"><span style="font-family:monospace;font-size:.52rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#6366f1">Yahoo Finance</span><span style="font-family:monospace;font-size:.48rem;color:#606a7a">Publisher link</span></div><div style="font-size:.78rem;color:#b0bac8;line-height:1.55;font-weight:300">Visit Yahoo Finance</div></a>
+    <a href="https://www.bloomberg.com/markets/" target="_blank" rel="noopener noreferrer" style="display:block;padding:.85rem 1.25rem;border-right:.5px solid #1c2433;border-bottom:.5px solid #1c2433;text-decoration:none"><div style="display:flex;justify-content:space-between;margin-bottom:.35rem"><span style="font-family:monospace;font-size:.52rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#3b82f6">Bloomberg</span><span style="font-family:monospace;font-size:.48rem;color:#606a7a">Publisher link</span></div><div style="font-size:.78rem;color:#b0bac8;line-height:1.55;font-weight:300">Visit Bloomberg Markets</div></a>
+    <a href="https://www.investing.com/" target="_blank" rel="noopener noreferrer" style="display:block;padding:.85rem 1.25rem;border-right:.5px solid #1c2433;border-bottom:.5px solid #1c2433;text-decoration:none"><div style="display:flex;justify-content:space-between;margin-bottom:.35rem"><span style="font-family:monospace;font-size:.52rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#FFFFFF">Investing.com</span><span style="font-family:monospace;font-size:.48rem;color:#606a7a">Publisher link</span></div><div style="font-size:.78rem;color:#b0bac8;line-height:1.55;font-weight:300">Visit Investing.com</div></a>
+  </div>
 </div>
 <script>
 !function(){
   var f='all',o=true;
-  var hl=[];
+  var hl=[
+    {s:'CNBC',c:'#ef4444',k:'markets',t:'Publisher link',h:'Visit CNBC Markets',u:'https://www.cnbc.com/markets/'},
+    {s:'MarketWatch',c:'#10b981',k:'markets',t:'Publisher link',h:'Visit MarketWatch',u:'https://www.marketwatch.com/'},
+    {s:'Yahoo Finance',c:'#6366f1',k:'markets',t:'Publisher link',h:'Visit Yahoo Finance',u:'https://finance.yahoo.com/'},
+    {s:'Bloomberg',c:'#3b82f6',k:'markets',t:'Publisher link',h:'Visit Bloomberg Markets',u:'https://www.bloomberg.com/markets/'},
+    {s:'Investing.com',c:'#FFFFFF',k:'markets',t:'Publisher link',h:'Visit Investing.com',u:'https://www.investing.com/'}
+  ];
   var NEWS_KEY='59d74aa2328448c8916d7914b3ab0097';
 
   var sourceColors={
@@ -2261,16 +2273,7 @@ section[style*="padding:8rem"]{padding-top:4.25rem!important;padding-bottom:4.25
 
   async function fetchNews(){
     // Publisher home-page links only. Do not present invented, scraped, or stale text as live news.
-    if(hl.length === 0){
-      hl = [
-        {s:'CNBC',c:'#ef4444',k:'markets',t:'external',h:'Visit CNBC Markets',u:'https://www.cnbc.com/markets/'},
-        {s:'MarketWatch',c:'#10b981',k:'markets',t:'external',h:'Visit MarketWatch',u:'https://www.marketwatch.com/'},
-        {s:'Yahoo Finance',c:'#6366f1',k:'markets',t:'external',h:'Visit Yahoo Finance',u:'https://finance.yahoo.com/'},
-        {s:'Bloomberg',c:'#3b82f6',k:'markets',t:'external',h:'Visit Bloomberg Markets',u:'https://www.bloomberg.com/markets/'},
-        {s:'Investing.com',c:'#FFFFFF',k:'markets',t:'external',h:'Visit Investing.com',u:'https://www.investing.com/'}
-      ];
-      render();
-    }
+    render();
     var el=document.getElementById('aec-nb-time');
     if(el) el.textContent='Third-party links · verify independently';
     return;
@@ -2364,9 +2367,7 @@ section[style*="padding:8rem"]{padding-top:4.25rem!important;padding-bottom:4.25
 
   buildTabs();
   setGrid();
-  // Show loading state
-  var g=document.getElementById('aec-nb-grid');
-  if(g) g.innerHTML='<div style="padding:1.5rem;color:#404858;font-family:monospace;font-size:.72rem;grid-column:1/-1">Loading headlines...</div>';
+  render();
   fetchNews();
   window.addEventListener('resize',setGrid);
   setInterval(fetchNews, 300000);
