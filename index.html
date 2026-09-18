@@ -1788,6 +1788,18 @@ section[style*="padding:8rem"]{padding-top:4.25rem!important;padding-bottom:4.25
 }
 </style>
 
+<style>
+/* Institutional information layer — additive to the original AEC design */
+.aec-inst{padding:7rem clamp(1rem,5vw,3.5rem);background:#080808;border-top:.5px solid var(--rule);border-bottom:.5px solid var(--rule)}
+.aec-inst-shell{max-width:1220px;margin:0 auto}.aec-inst-head{display:grid;grid-template-columns:.8fr 1.2fr;gap:4rem;align-items:start;margin-bottom:3rem}
+.aec-inst-head h2{font-family:var(--font-display);font-size:clamp(2.6rem,5vw,5rem);font-weight:300;line-height:.96;color:#fff;margin:.8rem 0}.aec-inst-copy{font-size:.98rem;color:var(--cream2);line-height:1.95;font-weight:300}
+.aec-glance{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:1px;background:var(--rule);border:.5px solid var(--rule)}.aec-glance>div{background:#0d0d0d;padding:1.4rem}.aec-glance b{display:block;font-family:var(--font-display);font-size:1.15rem;font-weight:400;color:#fff}.aec-glance span{display:block;margin-top:.45rem;font-family:var(--font-mono);font-size:.48rem;letter-spacing:.13em;text-transform:uppercase;color:var(--cream3);line-height:1.6}
+.aec-system-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--rule);border:.5px solid var(--rule);margin-top:3rem}.aec-system{background:#0d0d0d;padding:2rem}.aec-system-top{display:flex;justify-content:space-between;gap:1rem;align-items:start}.aec-system h3{font-family:var(--font-display);font-size:2rem;font-weight:300;color:#fff;margin:.25rem 0}.aec-badge{font-family:var(--font-mono);font-size:.45rem;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);border:.5px solid rgba(200,200,200,.35);padding:.45rem .65rem;white-space:nowrap}.aec-system-metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--rule);margin:1.5rem 0}.aec-system-metrics div{background:#090909;padding:1rem}.aec-system-metrics strong{display:block;font-family:var(--font-display);font-size:1.4rem;font-weight:400;color:#fff}.aec-system-metrics span{font-family:var(--font-mono);font-size:.44rem;letter-spacing:.1em;text-transform:uppercase;color:var(--cream3)}.aec-system p{font-size:.74rem;color:var(--cream3);line-height:1.75;margin:0}
+.aec-framework{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--rule);border:.5px solid var(--rule);margin-top:3rem}.aec-framework a,.aec-framework article{background:#0d0d0d;padding:1.6rem;text-decoration:none;min-height:175px}.aec-framework .n{font-family:var(--font-mono);font-size:.46rem;color:var(--gold);letter-spacing:.14em}.aec-framework h3{font-family:var(--font-display);font-size:1.35rem;font-weight:300;color:#fff;margin:2rem 0 .5rem}.aec-framework p{font-size:.72rem;color:var(--cream3);line-height:1.7;margin:0}
+.aec-inst-note{margin-top:2rem;border:.5px solid var(--rule);padding:1.2rem 1.4rem;font-size:.7rem;color:var(--cream3);line-height:1.8}.aec-inst-actions{display:flex;gap:.75rem;flex-wrap:wrap;margin-top:2rem}.aec-inst-actions a{font-family:var(--font-mono);font-size:.52rem;letter-spacing:.14em;text-transform:uppercase;padding:.8rem 1.2rem;text-decoration:none;border:.5px solid rgba(255,255,255,.25)}.aec-inst-actions a:first-child{background:var(--gold);color:var(--ink);border-color:var(--gold)}
+@media(max-width:900px){.aec-inst-head{grid-template-columns:1fr;gap:1.5rem}.aec-glance{grid-template-columns:repeat(2,1fr)}.aec-system-grid{grid-template-columns:1fr}.aec-framework{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:560px){.aec-inst{padding:5rem 1rem}.aec-glance,.aec-framework{grid-template-columns:1fr}.aec-system-metrics{grid-template-columns:1fr}.aec-system-top{display:block}.aec-badge{display:inline-block;margin-top:.5rem}}
+</style>
 </head>
 <body data-aec-build="sitewide-final-qa-v1">
 <a class="skip-link" href="#main-content">Skip to main content</a>
@@ -2562,11 +2574,11 @@ section[style*="padding:8rem"]{padding-top:4.25rem!important;padding-bottom:4.25
   <div class="hero-content">
     <div class="hero-left">
       <h1>
-        Research built<br/>
-        with <em>uncommon</em><br/>
-        precision.
+        Institutional research.<br/>
+        Governed with<br/>
+        <em>precision.</em>
       </h1>
-      <p>A private, multi-strategy investment firm building proprietary quantitative research infrastructure while developing business interests across real estate, private equity, and pharmaceutical research and development. No investment opportunity is offered through this website.</p>
+      <p>Ascenda Enterprise Capital LLC develops proprietary quantitative research, model-governance, and financial-technology infrastructure. AECQS Growth V1 remains company-only research; Controlled V3 is available for confidential institutional diligence. No investment opportunity is offered through this website.</p>
       <div style="display:inline-flex;align-items:center;gap:.6rem;margin-bottom:1.5rem;background:rgba(255,255,255,0.04);border:.5px solid rgba(255,255,255,0.12);padding:.5rem 1rem">
         <span style="width:7px;height:7px;border-radius:50%;background:#2ECC71;display:inline-block;animation:pulse 2s infinite"></span>
         <span style="font-family:'DM Mono',monospace;font-size:.5rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.5)">Independent research · disciplined execution · long-horizon ownership</span>
@@ -2600,6 +2612,35 @@ section[style*="padding:8rem"]{padding-top:4.25rem!important;padding-bottom:4.25
   </div>
   <a href="#contact" style="font-family:'DM Mono',monospace;font-size:.55rem;letter-spacing:.18em;text-transform:uppercase;color:#C8C8C8;text-decoration:none;border:.5px solid rgba(255,255,255,.2);padding:.65rem 1.25rem">Corporate Inquiry →</a>
 </div>
+
+<!-- INSTITUTIONAL OVERVIEW — additive to original site -->
+<section class="aec-inst" id="institutional-overview">
+  <div class="aec-inst-shell">
+    <div class="aec-inst-head">
+      <div><div class="sec-label">Institutional Overview</div><h2>Firm at a <em>glance.</em></h2></div>
+      <div class="aec-inst-copy">Ascenda Enterprise Capital LLC is a privately held quantitative research and financial-technology company developing AECQS, a governed multi-asset systematic research platform. Public results are historical simulations, not audited fund performance. Institutional engagement begins with evidence classification, documented limitations, and controlled diligence.</div>
+    </div>
+    <div class="aec-glance">
+      <div><b>Georgia LLC</b><span>Privately held legal entity</span></div>
+      <div><b>Founder-led</b><span>Izaiah Cottle · Owner &amp; CEO</span></div>
+      <div><b>15-year study</b><span>02 Sep 2011–01 Sep 2026</span></div>
+      <div><b>Multi-asset</b><span>NQ · ES · YM · Equities</span></div>
+      <div><b>Historical research</b><span>Simulation · not audited returns</span></div>
+    </div>
+    <div class="aec-system-grid">
+      <article class="aec-system"><div class="aec-system-top"><div><div class="sec-label">Company-only research</div><h3>AECQS Growth V1</h3></div><span class="aec-badge">AEC reserved</span></div><div class="aec-system-metrics"><div><strong>$2.427B</strong><span>Ending value</span></div><div><strong>68.15%</strong><span>Modeled CAGR</span></div><div><strong>-45.70%</strong><span>Max closed-day DD</span></div></div><p>Exclusively reserved for Ascenda Enterprise Capital LLC. Not offered for sale, license, client use, or third-party deployment.</p></article>
+      <article class="aec-system"><div class="aec-system-top"><div><div class="sec-label">Institutional diligence candidate</div><h3>AECQS Controlled V3</h3></div><span class="aec-badge">Controlled access</span></div><div class="aec-system-metrics"><div><strong>$287.04M</strong><span>Ending value</span></div><div><strong>45.84%</strong><span>Modeled CAGR</span></div><div><strong>-11.64%</strong><span>Max closed-day DD</span></div></div><p>Available for confidential institutional evaluation subject to technical diligence, legal review, and separately executed written agreements. Not a public offering.</p></article>
+    </div>
+    <div class="aec-framework">
+      <a href="aec-performance.html"><div class="n">01 / EVIDENCE</div><h3>Research evidence &amp; limitations</h3><p>Current results, assumptions, cost sensitivity, survivorship-bias risk, and capacity limitations.</p></a>
+      <a href="aec-research.html"><div class="n">02 / VALIDATION</div><h3>Methodology &amp; validation</h3><p>Research pipeline, robustness standards, portfolio integration, and evidence classification.</p></a>
+      <article><div class="n">03 / GOVERNANCE</div><h3>Validation &amp; governance</h3><p>Named configurations, version checkpoints, change control, model-risk review, and controlled distribution.</p></article>
+      <a href="institutional-diligence.html"><div class="n">04 / DILIGENCE</div><h3>Diligence room index</h3><p>Firm, technical, operational, legal, ownership, cybersecurity, and business-continuity materials.</p></a>
+    </div>
+    <div class="aec-inst-note"><strong style="color:#fff">Research classification:</strong> Both configurations begin with a modeled $1,000,000 shared account. Results are internally reconstructed and reproducible historical backtests but have not been independently audited or verified. The equity universe carries survivorship-bias risk; point-in-time membership, historical margin, capacity, market impact, and intraday liquidation feasibility remain unverified. Actual results would differ and could involve total loss.</div>
+    <div class="aec-inst-actions"><a href="institutional-diligence.html">Open institutional diligence index →</a><a href="mailto:izaiah@ascendaenterprisecapital.com?subject=AEC%20Legal%20or%20Technical%20Diligence">Legal &amp; technical contact</a><a href="regulatory-disclosures.html">Legal &amp; regulatory disclosures</a></div>
+  </div>
+</section>
 
 <!-- STATEMENT -->
 <!-- AS SEEN IN / TRUST -->
@@ -2722,7 +2763,7 @@ section[style*="padding:8rem"]{padding-top:4.25rem!important;padding-bottom:4.25
       <div style="background:#06050D;padding:2rem 1.75rem">
         <div style="font-family:'DM Mono',monospace;font-size:.48rem;letter-spacing:.2em;text-transform:uppercase;color:#888;margin-bottom:.75rem">Research Program</div>
         <div style="font-family:'Cormorant Garamond',serif;font-size:1.2rem;color:#FFFFFF;margin-bottom:.75rem;font-weight:300">1,000+ Strategy Evaluation Program</div>
-        <p style="font-size:.82rem;color:rgba(255,255,255,.42);font-family:'Jost',sans-serif;font-weight:300;line-height:1.8">The current R&D program is evaluating more than one thousand strategy concepts against more than five years of historical market data, with surviving ideas subjected to additional validation.</p>
+        <p style="font-size:.82rem;color:rgba(255,255,255,.42);font-family:'Jost',sans-serif;font-weight:300;line-height:1.8">The current R&amp;D program evaluates more than one thousand strategy concepts, with the current unified research review spanning a fifteen-year historical study and surviving ideas subjected to additional validation.</p>
       </div>
       <div style="background:#06050D;padding:2rem 1.75rem">
         <div style="font-family:'DM Mono',monospace;font-size:.48rem;letter-spacing:.2em;text-transform:uppercase;color:#888;margin-bottom:.75rem">Research Markets</div>
@@ -3201,7 +3242,7 @@ section[style*="padding:8rem"]{padding-top:4.25rem!important;padding-bottom:4.25
   <div style="display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:3rem;flex-wrap:wrap;gap:1rem">
     <div>
       <div class="sec-label">National Reach</div>
-      <h2 class="on-dark">48 states. One <em>command center.</em></h2>
+      <h2 class="on-dark">National reach. <em>Georgia headquarters.</em></h2>
     </div>
     <div style="font-family:var(--font-mono);font-size:.55rem;letter-spacing:.12em;color:var(--cream3)">Headquartered in Georgia · Connected nationwide</div>
   </div>
@@ -3216,7 +3257,7 @@ section[style*="padding:8rem"]{padding-top:4.25rem!important;padding-bottom:4.25
   <div style="max-width:900px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center">
     <div>
       <div class="sec-label">Restricted Access</div>
-      <h2 class="on-dark">Investor <em>Portal</em></h2>
+      <h2 class="on-dark">Institutional <em>Diligence Room</em></h2>
       <p style="font-size:.98rem;color:var(--cream2);line-height:1.95;font-weight:300;margin-bottom:2rem">AEC maintains restricted information areas for authorized counterparties and diligence conversations. Availability, contents, permissions, and reporting scope depend on the relationship and the records actually available.</p>
       <div style="display:flex;flex-direction:column;gap:.75rem;margin-bottom:2rem">
         <div style="display:flex;align-items:center;gap:.85rem;font-size:.88rem;color:var(--cream2);font-weight:300">
@@ -3328,7 +3369,7 @@ section[style*="padding:8rem"]{padding-top:4.25rem!important;padding-bottom:4.25
       <span style="display:block;width:28px;height:.5px;background:var(--gold)"></span>
     </div>
     <h2 class="on-dark">Three Ways to Be Part of <em>Ascenda</em></h2>
-    <p style="font-size:.95rem;color:var(--cream2);line-height:1.95;font-weight:300;margin-top:.75rem">We don't open our doors to everyone. But for the right people — there is a seat at this table.</p>
+    <p style="font-size:.95rem;color:var(--cream2);line-height:1.95;font-weight:300;margin-top:.75rem">AEC evaluates each institutional, strategic, educational, and operating relationship according to mandate, fit, legal requirements, and the information appropriate to share.</p>
   </div>
   <div class="join-grid">
     <div class="jc">
@@ -3429,7 +3470,7 @@ section[style*="padding:8rem"]{padding-top:4.25rem!important;padding-bottom:4.25
       <span style="display:block;width:28px;height:.5px;background:var(--gold);margin-left:.8rem;margin-top:.5rem"></span>
     </div>
     <h2 class="on-dark" style="margin-bottom:1rem">Hear it from <em>Izaiah</em></h2>
-    <p style="font-size:.98rem;color:var(--cream2);line-height:1.9;font-weight:300;max-width:580px;margin:0 auto 2.5rem">A 60-second message from the founder of Ascenda Enterprise Capital — why he built it, how it works, and why the right investors are choosing AEC.</p>
+    <p style="font-size:.98rem;color:var(--cream2);line-height:1.9;font-weight:300;max-width:580px;margin:0 auto 2.5rem">A concise introduction from the founder covering AEC's purpose, research standards, operating model, and long-term institutional objectives.</p>
     <div style="background:var(--ink2);border:.5px solid var(--rule);aspect-ratio:16/9;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;max-width:800px;margin:0 auto" id="video-placeholder">
       <div style="position:absolute;inset:0;background:radial-gradient(ellipse at center,rgba(200,200,200,0.08) 0%,transparent 70%)"></div>
       <div style="text-align:center;position:relative;z-index:2">
@@ -3566,7 +3607,7 @@ section[style*="padding:8rem"]{padding-top:4.25rem!important;padding-bottom:4.25
     <div class="ap"><div class="ap-n">I</div><h4 style="font-family:var(--font-display);font-size:1.2rem;font-weight:300;color:var(--white);margin-bottom:.65rem">Conviction-driven</h4><p>We concentrate capital in our highest-conviction ideas. Diversification for its own sake is a performance tax we refuse to pay.</p></div>
     <div class="ap"><div class="ap-n">II</div><h4 style="font-family:var(--font-display);font-size:1.2rem;font-weight:300;color:var(--white);margin-bottom:.65rem">Risk-first always</h4><p>Downside protection is never an afterthought. Every position is sized with explicit risk parameters from the first dollar deployed.</p></div>
     <div class="ap"><div class="ap-n">III</div><h4 style="font-family:var(--font-display);font-size:1.2rem;font-weight:300;color:var(--white);margin-bottom:.65rem">Operator mindset</h4><p>We don't just allocate — we engage. Operational depth flows through every vertical we touch. We build, not just buy.</p></div>
-    <div class="ap"><div class="ap-n">IV</div><h4 style="font-family:var(--font-display);font-size:1.2rem;font-weight:300;color:var(--white);margin-bottom:.65rem">Built without limits</h4><p>No ceiling. No cap. No boundaries. We scale our edge with our capital — the bigger we get, the sharper we become. That is the AEC advantage.</p></div>
+    <div class="ap"><div class="ap-n">IV</div><h4 style="font-family:var(--font-display);font-size:1.2rem;font-weight:300;color:var(--white);margin-bottom:.65rem">Evidence-led scale</h4><p>Capacity is governed by liquidity, execution quality, market impact, operational readiness, and documented risk limits. Scale is pursued only when the evidence supports it.</p></div>
   </div>
 </div>
 
@@ -3642,7 +3683,7 @@ section[style*="padding:8rem"]{padding-top:4.25rem!important;padding-bottom:4.25
 
       <div class="faq-item" style="border-bottom:.5px solid var(--rule)">
         <div class="faq-q" onclick="toggleFaq(this)" style="padding:1.25rem clamp(.75rem,3vw,2rem);display:flex;justify-content:space-between;align-items:center;cursor:pointer;transition:background .2s;gap:.75rem" onmouseover="this.style.background='rgba(200,200,200,0.05)'" onmouseout="this.style.background='transparent'">
-          <span style="font-size:.95rem;font-weight:400;color:var(--white);font-family:var(--font-body)">What markets does AEC trade?</span>
+          <span style="font-size:.95rem;font-weight:400;color:var(--white);font-family:var(--font-body)">What markets does AECQS research?</span>
           <div class="faq-icon" style="width:22px;height:22px;background:var(--gold3);color:var(--white);display:flex;align-items:center;justify-content:center;font-size:.75rem;flex-shrink:0;transition:transform .3s">+</div>
         </div>
         <div class="faq-a" style="max-height:0;overflow:hidden;transition:max-height .35s ease;font-size:.88rem;color:var(--cream2);line-height:1.9;font-weight:300;padding:0 clamp(.75rem,3vw,2rem);word-break:normal;overflow-wrap:break-word;width:100%;box-sizing:border-box">AECQS research has evaluated futures and equities, including NQ, ES, YM, and selected U.S. stocks. References to instruments or modeled long and short positions describe historical research inputs, not current holdings, trade instructions, recommendations, or evidence of live execution.</div>
