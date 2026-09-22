@@ -64,6 +64,28 @@
   style.textContent='.aec-media-tools{display:flex;flex-wrap:wrap;align-items:center;gap:10px;padding:10px 12px;border:1px solid rgba(150,160,175,.3);border-radius:6px;font:12px/1.5 system-ui,sans-serif;background:#131b24;color:#edf1f5;margin:8px 0 16px}.aec-media-tools span{flex:1 1 180px}.aec-media-tools button,.aec-media-tools a{font:inherit;color:#edf1f5;background:#243243;border:1px solid #61718a;border-radius:4px;padding:6px 10px;text-decoration:none;cursor:pointer}.aec-media-tools :focus-visible{outline:2px solid #f2cf87;outline-offset:3px}.aec-feed-note{font:12px/1.5 system-ui,sans-serif;color:inherit;opacity:.8;padding:8px 0;margin:4px 0 12px;overflow-wrap:anywhere}';
   style.textContent += ':where(a,button,input,select,textarea):focus-visible{outline:2px solid #c9a96e;outline-offset:4px}.aec-media-tools{box-sizing:border-box;max-width:100%}.aec-media-tools button,.aec-media-tools a{min-height:40px;display:inline-flex;align-items:center}.aec-media-tools a:hover,.aec-media-tools button:hover{border-color:#c9a96e;background:#2c3b4d}@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto!important}*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}';
   document.head.appendChild(style);
+  const market=document.createElement('section');
+  market.className='aec-media-tools';market.style.margin='24px';
+  const intro=document.createElement('div');intro.style.flex='1 1 100%';
+  const heading=document.createElement('h2');heading.textContent='Crypto market snapshot';heading.style.font='600 18px/1.4 system-ui';
+  const disclosure=document.createElement('p');disclosure.textContent='Bitcoin / USD · CoinMarketCap-hosted data. Provider controls pricing and refresh frequency; this is not a CME futures or equities feed. Loading connects to CoinMarketCap and shares normal browser/network information under its privacy terms.';
+  const privacy=document.createElement('a');privacy.href='https://coinmarketcap.com/privacy/';privacy.textContent='Provider privacy policy';privacy.target='_blank';privacy.rel='noopener noreferrer';
+  const load=document.createElement('button');load.type='button';load.textContent='Load Bitcoin market card';
+  const fallback=document.createElement('a');fallback.href='https://coinmarketcap.com/currencies/bitcoin/';fallback.textContent='View Bitcoin on CoinMarketCap ↗';fallback.target='_blank';fallback.rel='noopener noreferrer';
+  const state=document.createElement('span');state.setAttribute('role','status');state.textContent='Not connected';
+  const slot=document.createElement('div');slot.style.cssText='flex:1 1 100%;min-width:0';
+  intro.append(heading,disclosure);market.append(intro,load,fallback,privacy,state,slot);
+  const footer=document.querySelector('footer');if(footer)footer.before(market);else document.body.append(market);
+  load.onclick=()=>{
+    load.disabled=true;state.textContent='Requesting provider widget…';
+    const card=document.createElement('div');card.className='coinmarketcap-currency-widget';
+    Object.entries({currencyid:'1',base:'USD',secondary:'',ticker:'true',rank:'true',marketcap:'true',volume:'true',statsticker:'true',stats:'USD'}).forEach(([k,v])=>card.setAttribute('data-'+k,v));
+    slot.append(card);
+    const script=document.createElement('script');script.src='https://files.coinmarketcap.com/static/widget/currency.js';
+    script.onload=()=>{state.textContent='Provider script loaded; if no quote appears, use the provider link. Refresh timing is provider-controlled.';};
+    script.onerror=()=>{state.textContent='Provider unavailable — use the CoinMarketCap link.';};
+    document.head.append(script);
+  };
   scan();
   let pending=false;
   new MutationObserver(()=>{if(!pending){pending=true;requestAnimationFrame(()=>{pending=false;scan();});}}).observe(document.body,{subtree:true,childList:true,attributes:true,attributeFilter:['src']});
