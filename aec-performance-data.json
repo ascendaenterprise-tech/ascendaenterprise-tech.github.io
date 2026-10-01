@@ -1,0 +1,48 @@
+{
+  "asOf": "Jul 13, 2026, 09:41 ET",
+
+  "live": {
+    "kpis": [
+      { "label": "Net P&L (90D)", "value": "$26,849", "delta": "+$1,412 today", "pos": true },
+      { "label": "Win Rate", "value": "64%", "delta": "Winning trades", "pos": true },
+      { "label": "Profit Factor", "value": "1.72", "delta": "Gross profit / gross loss", "pos": true },
+      { "label": "Avg Profit / Trade", "value": "$96.58", "delta": "Per executed trade", "pos": true }
+    ],
+    "curve": [0,4,3,9,7,14,12,19,17,24,21,28,26,33,30,37,35,41,44,42,48,46,52,55,53,58,62,60,65,68],
+    "trades": { "winners": 858, "losers": 542, "breakevens": 14, "total": 1414 },
+    "avgWin": "+$430.73",
+    "avgLoss": "\u2212$409.72",
+    "tag": "Live \u00b7 90D window"
+  },
+
+  "backtest": {
+    "kpis": [
+      { "label": "Net P&L (365D)", "value": "$147,500", "delta": "+147.5% cumulative", "pos": true },
+      { "label": "Max Drawdown", "value": "$27,038", "delta": "27.04% peak-to-trough", "pos": false },
+      { "label": "Profit Factor", "value": "1.664", "delta": "Gross profit / gross loss", "pos": true },
+      { "label": "Profitable Trades", "value": "60.7%", "delta": "858 / 1,414 trades", "pos": true }
+    ],
+    "curve": [0,2,5,4,9,8,14,12,18,16,22,25,23,29,33,31,38,42,40,47,52,50,58,63,60,68,74,71,80,88],
+    "trades": { "winners": 858, "losers": 542, "breakevens": 14, "total": 1414 },
+    "avgWin": "+$430.73",
+    "avgLoss": "\u2212$409.72",
+    "tag": "Backtested \u00b7 Last 365 days"
+  },
+
+  "fund": {
+    "totalCapitalDeployed": "$\u2014",
+    "activeStrategies": 3,
+    "availableCapacity": "$\u2014",
+    "inceptionYear": "2025",
+    "allocations": [
+      { "name": "Smart Money Engine V7", "vertical": "QQQ / SPY \u00b7 Momentum + Z-Score", "allocation": "$\u2014", "pctOfBook": 0, "ytdReturn": "\u2014%" },
+      { "name": "Tradovate NQ Engine", "vertical": "NQ Futures \u00b7 DOM / Order Flow", "allocation": "$\u2014", "pctOfBook": 0, "ytdReturn": "\u2014%" },
+      { "name": "OHOS Real Estate", "vertical": "Wholesale / Acquisitions \u2014 Atlanta Metro", "allocation": "$\u2014", "pctOfBook": 0, "ytdReturn": "\u2014%" }
+    ]
+  },
+
+  "clients": [
+    { "name": "Issac R.", "email": "iss****@gmail.com", "tier": "Foundation", "signals": 412, "orders": 380, "success": "81%", "pnl": "$4,162.92" },
+    { "name": "Eugene T.", "email": "eug****@outlook.com", "tier": "Foundation", "signals": 38, "orders": 12, "success": "58%", "pnl": "$318.40" }
+  ]
+}

@@ -1,0 +1,1054 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>AEC — Command Center</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@300;400;500;600;700&family=EB+Garamond:wght@300;400;500&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet"/>
+<style>
+:root {
+  --bg: #000000;
+  --panel: #0a0a0a;
+  --panel2: #111111;
+  --border: #222222;
+  --gold: #ffffff;
+  --gold2: #e0e0e0;
+  --gold3: #cccccc;
+  --green: #ffffff;
+  --red: #999999;
+  --blue: #bbbbbb;
+  --text: #ffffff;
+  --text2: #888888;
+  --text3: #444444;
+  --mono: 'JetBrains Mono', 'Fira Code', monospace;
+  --ui: 'EB Garamond', Georgia, serif;
+  --display: 'Playfair Display', Georgia, serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{height:100%;background:var(--bg);color:var(--text);font-family:var(--ui);font-size:13px;overflow-x:hidden}
+
+/* LOGIN */
+#login-screen {
+  position:fixed;inset:0;background:var(--bg);z-index:9999;
+  display:flex;align-items:center;justify-content:center;
+}
+.login-box {
+  background:var(--panel);border:.5px solid var(--border);
+  padding:3rem;width:400px;max-width:90vw;position:relative;
+}
+.login-box::before {
+  content:'';position:absolute;top:0;left:0;right:0;height:1.5px;
+  background:linear-gradient(90deg,transparent,#fff,transparent);
+}
+.login-logo {
+  font-family:var(--mono);font-size:.65rem;font-weight:700;
+  letter-spacing:.2em;text-transform:uppercase;color:#fff;
+  margin-bottom:2rem;text-align:center;
+}
+.login-title {
+  font-size:1.8rem;font-weight:400;color:var(--text);
+  margin-bottom:.5rem;text-align:center;font-family:var(--display);letter-spacing:-.01em;
+}
+.login-sub {
+  font-size:.75rem;color:var(--text2);text-align:center;margin-bottom:2rem;
+}
+.login-input {
+  width:100%;background:rgba(255,255,255,.04);border:.5px solid var(--border);
+  color:var(--text);font-family:var(--mono);font-size:.85rem;
+  padding:.85rem 1rem;outline:none;margin-bottom:.75rem;
+  transition:border-color .2s;letter-spacing:.1em;
+}
+.login-input:focus {border-color:#fff}
+.login-btn {
+  width:100%;background:#fff;color:#000;border:none;
+  font-family:var(--mono);font-size:.62rem;font-weight:700;
+  letter-spacing:.18em;text-transform:uppercase;padding:.9rem;
+  cursor:pointer;transition:background .2s;margin-top:.25rem;
+}
+.login-btn:hover{background:#e0e0e0}
+.login-error {
+  display:none;background:rgba(232,51,74,.1);border:.5px solid rgba(232,51,74,.3);
+  color:#E8334A;font-family:var(--mono);font-size:.62rem;padding:.6rem .85rem;
+  margin-top:.75rem;text-align:center;
+}
+
+/* DASHBOARD */
+#dashboard {display:none;flex-direction:column;min-height:100vh}
+
+/* TOP BAR */
+.topbar {
+  height:52px;background:var(--panel);border-bottom:.5px solid var(--border);
+  display:flex;align-items:center;padding:0 1.5rem;gap:1rem;
+  position:sticky;top:0;z-index:100;flex-shrink:0;
+}
+.topbar::after {
+  content:'';position:absolute;bottom:0;left:0;right:0;height:1px;
+  background:linear-gradient(90deg,#fff,transparent);
+}
+.tb-logo {font-family:var(--display);font-size:.75rem;font-weight:700;letter-spacing:.12em;color:var(--text)}
+.tb-logo span{color:#fff}
+.tb-badge {
+  font-family:var(--mono);font-size:.52rem;letter-spacing:.1em;text-transform:uppercase;
+  background:rgba(255,255,255,.08);border:.5px solid #fff;
+  color:#e0e0e0;padding:.2rem .6rem;
+}
+.tb-right {margin-left:auto;display:flex;align-items:center;gap:1rem}
+.tb-time {font-family:var(--mono);font-size:.65rem;color:var(--text2)}
+.tb-logout {
+  background:transparent;border:.5px solid var(--border);color:var(--text3);
+  font-family:var(--mono);font-size:.52rem;letter-spacing:.1em;text-transform:uppercase;
+  padding:.3rem .75rem;cursor:pointer;transition:all .2s;
+}
+.tb-logout:hover{border-color:#999;color:#999}
+
+/* MAIN */
+.main {flex:1;padding:2rem;max-width:1400px;margin:0 auto;width:100%}
+
+/* KPI GRID */
+.kpi-grid {
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+  gap:1px;background:var(--border);margin-bottom:2rem;
+}
+.kpi-card {
+  background:var(--panel);padding:1.5rem;position:relative;overflow:hidden;
+}
+.kpi-card::after {
+  content:'';position:absolute;bottom:0;left:0;right:0;height:2px;
+  background:var(--accent, var(--gold));opacity:.3;
+}
+.kpi-label {
+  font-family:var(--mono);font-size:.55rem;font-weight:700;
+  letter-spacing:.15em;text-transform:uppercase;color:var(--text3);
+  margin-bottom:.75rem;
+}
+.kpi-val {
+  font-family:var(--display);font-size:2rem;font-weight:500;
+  color:var(--text);line-height:1;margin-bottom:.35rem;
+}
+.kpi-sub {font-size:.72rem;color:var(--text2)}
+.kpi-badge {
+  display:inline-flex;align-items:center;gap:.25rem;
+  font-family:var(--mono);font-size:.6rem;margin-top:.5rem;
+  padding:.15rem .45rem;border-radius:2px;
+}
+.kpi-badge.up{background:rgba(0,200,150,.1);color:#fff}
+.kpi-badge.dn{background:rgba(232,51,74,.1);color:#999}
+.kpi-badge.neu{background:rgba(255,255,255,.06);color:#e0e0e0}
+
+/* GRID 2-COL */
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-bottom:1.5rem}
+.grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1.5rem;margin-bottom:1.5rem}
+
+/* PANEL */
+.panel {background:var(--panel);border:.5px solid var(--border);padding:1.5rem}
+.panel-title {
+  font-family:var(--mono);font-size:.6rem;font-weight:700;
+  letter-spacing:.15em;text-transform:uppercase;color:var(--text3);
+  margin-bottom:1.25rem;padding-bottom:.75rem;border-bottom:.5px solid var(--border);
+  display:flex;justify-content:space-between;align-items:center;
+}
+.panel-badge {
+  font-family:var(--mono);font-size:.55rem;background:rgba(255,255,255,.06);
+  border:.5px solid #fff;color:#e0e0e0;padding:.15rem .5rem;
+}
+
+/* TABLE */
+table{width:100%;border-collapse:collapse}
+thead th {
+  font-family:var(--mono);font-size:.55rem;font-weight:700;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--text3);padding:.5rem .75rem;
+  text-align:left;border-bottom:.5px solid var(--border);
+}
+tbody td {
+  font-family:var(--mono);font-size:.75rem;padding:.5rem .75rem;
+  border-bottom:.5px solid rgba(30,26,48,.5);color:var(--text2);
+}
+tbody tr:hover td{background:var(--panel2)}
+.td-name{color:var(--text);font-weight:600}
+.td-green{color:#fff}
+.td-gold{color:#e0e0e0}
+.td-red{color:#999}
+.td-blue{color:#bbb}
+
+/* CHART */
+.chart-wrap{position:relative;height:180px;margin-top:.75rem}
+canvas{width:100%;height:100%}
+
+/* ACTIVITY FEED */
+.activity-item {
+  display:flex;align-items:flex-start;gap:.75rem;
+  padding:.75rem 0;border-bottom:.5px solid rgba(30,26,48,.5);
+}
+.activity-item:last-child{border:none}
+.activity-dot {
+  width:8px;height:8px;border-radius:50%;flex-shrink:0;margin-top:.2rem;
+}
+.activity-time{font-family:var(--mono);font-size:.6rem;color:var(--text3);flex-shrink:0;min-width:60px}
+.activity-text{font-size:.78rem;color:var(--text2);line-height:1.5}
+.activity-text strong{color:var(--text)}
+
+/* STAT ROW */
+.stat-row {
+  display:flex;justify-content:space-between;align-items:center;
+  padding:.6rem 0;border-bottom:.5px solid rgba(30,26,48,.5);
+}
+.stat-row:last-child{border:none}
+.stat-key{font-size:.75rem;color:var(--text2)}
+.stat-val{font-family:var(--mono);font-size:.8rem;color:var(--text);font-weight:600}
+
+/* PROGRESS */
+.progress-wrap{margin-bottom:.85rem}
+.progress-label{display:flex;justify-content:space-between;margin-bottom:.3rem;font-size:.7rem;color:var(--text2)}
+.progress-bar{height:3px;background:var(--border);border-radius:2px}
+.progress-fill{height:100%;border-radius:2px;transition:width .8s ease}
+
+/* TAGS */
+.tag {
+  display:inline-block;font-family:var(--mono);font-size:.55rem;
+  letter-spacing:.08em;text-transform:uppercase;
+  padding:.15rem .45rem;border:.5px solid;margin:.15rem;
+}
+
+/* EDITABLE */
+.editable {
+  background:transparent;border:none;border-bottom:.5px dashed var(--border);
+  color:var(--text);font-family:var(--mono);font-size:inherit;
+  font-weight:inherit;outline:none;width:100%;cursor:text;
+  transition:border-color .2s;
+}
+.editable:focus{border-bottom-color:#fff}
+
+.add-btn {
+  background:transparent;border:.5px solid var(--border);color:#fff;
+  font-family:var(--mono);font-size:.55rem;letter-spacing:.1em;text-transform:uppercase;
+  padding:.3rem .75rem;cursor:pointer;transition:all .2s;
+}
+.add-btn:hover{border-color:#fff;background:rgba(255,255,255,.04)}
+
+/* RESPONSIVE */
+@media(max-width:900px){
+  .grid-2,.grid-3{grid-template-columns:1fr}
+  .kpi-grid{grid-template-columns:1fr 1fr}
+  .main{padding:1rem}
+}
+@media(max-width:500px){
+  .kpi-grid{grid-template-columns:1fr}
+}
+
+/* SCROLLBAR */
+::-webkit-scrollbar{width:3px}
+::-webkit-scrollbar-thumb{background:var(--border)}
+</style>
+</head>
+<body>
+
+<!-- LOGIN -->
+<div id="login-screen">
+  <div class="login-box">
+    <div class="login-logo">Ascenda Enterprise Capital</div>
+    <div class="login-title">Command Center</div>
+    <div class="login-sub">Private access only — authorized personnel</div>
+    <div id="biometric-section" style="display:none;margin-bottom:1rem">
+      <button class="biometric-btn" id="biometric-btn" onclick="biometricLogin()">
+        <span style="font-size:1.2rem">&#x1F511;</span>
+        <span id="biometric-btn-text">Sign in with Face ID</span>
+      </button>
+      <div class="biometric-status" id="biometric-status"></div>
+      <div style="display:flex;align-items:center;gap:.75rem;margin:.85rem 0">
+        <div style="flex:1;height:.5px;background:#1a1a1a"></div>
+        <span style="font-family:'JetBrains Mono',monospace;font-size:.52rem;color:#333;letter-spacing:.1em">OR</span>
+        <div style="flex:1;height:.5px;background:#1a1a1a"></div>
+      </div>
+    </div>
+    <input class="login-input" type="password" id="pw-input" placeholder="Enter access code" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" onkeypress="if(event.key==='Enter')checkPass()"/>
+    <button class="login-btn" onclick="checkPass()">Access Dashboard →</button>
+    <div id="register-biometric-wrap" style="display:none;margin-top:.5rem">
+      <button class="biometric-btn" onclick="registerBiometric()" style="font-size:.55rem">
+        <span>+ Register Face ID for this device</span>
+      </button>
+    </div>
+    <div class="login-error" id="login-error">Invalid access code. Try again.</div>
+  </div>
+</div>
+
+<!-- DASHBOARD -->
+<div id="dashboard">
+
+  <!-- TOP BAR -->
+  <div class="topbar">
+    <div class="tb-logo">AEC<span>.</span>COMMAND</div>
+    <div class="tb-badge">Private</div>
+    <div class="tb-right">
+      <div class="tb-time" id="tb-clock"></div>
+      <button class="tb-logout" onclick="logout()">Lock</button>
+    </div>
+  </div>
+
+  <div class="main">
+
+    <!-- KPI ROW -->
+    <div class="kpi-grid" id="kpi-grid">
+      <div class="kpi-card" style="--accent:var(--gold)">
+        <div class="kpi-label">Total Revenue</div>
+        <div class="kpi-val" id="kpi-revenue">$0</div>
+        <div class="kpi-sub">All-time collected</div>
+        <div class="kpi-badge neu" id="kpi-revenue-badge">Update below</div>
+      </div>
+      <div class="kpi-card" style="--accent:var(--green)">
+        <div class="kpi-label">Active Investors</div>
+        <div class="kpi-val" id="kpi-investors">0</div>
+        <div class="kpi-sub">Funded allocations</div>
+        <div class="kpi-badge neu">Track below</div>
+      </div>
+      <div class="kpi-card" style="--accent:var(--blue)">
+        <div class="kpi-label">Mentorship Clients</div>
+        <div class="kpi-val" id="kpi-mentees">0</div>
+        <div class="kpi-sub">Active enrollments</div>
+        <div class="kpi-badge neu">Track below</div>
+      </div>
+      <div class="kpi-card" style="--accent:var(--gold)">
+        <div class="kpi-label">Site Traffic (30d)</div>
+        <div class="kpi-val">351</div>
+        <div class="kpi-sub">Views · 178 active users</div>
+        <div class="kpi-badge up">↑ From Google Analytics</div>
+      </div>
+      <div class="kpi-card" style="--accent:var(--green)">
+        <div class="kpi-label">Open P&L</div>
+        <div class="kpi-val" id="kpi-pnl">—</div>
+        <div class="kpi-sub">Live TradeLocker</div>
+        <div class="kpi-badge neu" id="kpi-pnl-badge">Connecting...</div>
+      </div>
+      <div class="kpi-card" style="--accent:var(--red)">
+        <div class="kpi-label">Emails Sent</div>
+        <div class="kpi-val">23</div>
+        <div class="kpi-sub">Apollo outreach</div>
+        <div class="kpi-badge neu">0 replies tracked</div>
+      </div>
+    </div>
+
+    <!-- ROW 1 -->
+    <div class="grid-2">
+      <!-- INVESTORS TABLE -->
+      <div class="panel">
+        <div class="panel-title">
+          Active Investors
+          <button class="add-btn" onclick="addInvestor()">+ Add</button>
+        </div>
+        <table>
+          <thead><tr><th>Name</th><th>Amount</th><th>Date</th><th>Status</th></tr></thead>
+          <tbody id="investor-tbody">
+            <tr><td colspan="4" style="color:var(--text3);font-size:.72rem;padding:1rem .75rem">No investors logged yet. Click + Add to record one.</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- MENTORSHIP TABLE -->
+      <div class="panel">
+        <div class="panel-title">
+          Mentorship Clients
+          <button class="add-btn" onclick="addMentee()">+ Add</button>
+        </div>
+        <table>
+          <thead><tr><th>Name</th><th>Tier</th><th>Amount</th><th>Start</th><th></th></tr></thead>
+          <tbody id="mentee-tbody">
+            <tr><td colspan="4" style="color:var(--text3);font-size:.72rem;padding:1rem .75rem">No clients logged yet. Click + Add to record one.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ROW 2 -->
+    <div class="grid-3">
+      <!-- REVENUE BREAKDOWN -->
+      <div class="panel">
+        <div class="panel-title">Revenue Breakdown</div>
+        <div id="revenue-breakdown">
+          <div class="progress-wrap">
+            <div class="progress-label"><span>Fund Investments</span><span id="rb-inv">$0</span></div>
+            <div class="progress-bar"><div class="progress-fill" id="rb-inv-bar" style="width:0%;background:#fff"></div></div>
+          </div>
+          <div class="progress-wrap">
+            <div class="progress-label"><span>Mentorship</span><span id="rb-ment">$0</span></div>
+            <div class="progress-bar"><div class="progress-fill" id="rb-ment-bar" style="width:0%;background:#888"></div></div>
+          </div>
+          <div class="progress-wrap">
+            <div class="progress-label"><span>Other</span><span id="rb-other">$0</span></div>
+            <div class="progress-bar"><div class="progress-fill" id="rb-other-bar" style="width:0%;background:#ccc"></div></div>
+          </div>
+        </div>
+        <div style="margin-top:1.5rem">
+          <div class="panel-title" style="margin-bottom:.75rem;padding-bottom:.5rem">Log Revenue</div>
+          <input class="editable" id="rev-source" placeholder="Source (e.g. John Smith - Foundation)" style="font-size:.78rem;margin-bottom:.5rem;display:block"/>
+          <input class="editable" id="rev-amount" placeholder="Amount (e.g. 750)" type="number" style="font-size:.78rem;margin-bottom:.5rem;display:block"/>
+          <select id="rev-type" style="background:var(--panel2);border:.5px solid var(--border);color:var(--text2);padding:.4rem .6rem;font-family:var(--mono);font-size:.72rem;width:100%;margin-bottom:.75rem;outline:none">
+            <option value="investment">Fund Investment</option>
+            <option value="mentorship">Mentorship</option>
+            <option value="other">Other</option>
+          </select>
+          <button class="add-btn" style="width:100%" onclick="logRevenue()">Log Revenue →</button>
+        </div>
+      </div>
+
+      <!-- TRAFFIC -->
+      <div class="panel">
+        <div class="panel-title">Site Traffic</div>
+        <div class="stat-row"><div class="stat-key">Total Views</div><div class="stat-val">351</div></div>
+        <div class="stat-row"><div class="stat-key">Sessions</div><div class="stat-val">260</div></div>
+        <div class="stat-row"><div class="stat-key">Active Users</div><div class="stat-val">178</div></div>
+        <div class="stat-row"><div class="stat-key">Active Right Now</div><div class="stat-val td-green">3</div></div>
+        <div class="stat-row"><div class="stat-key">Top Country</div><div class="stat-val">🇺🇸 United States</div></div>
+        <div class="stat-row"><div class="stat-key">Returning Users</div><div class="stat-val">12</div></div>
+        <div class="stat-row"><div class="stat-key">New Users</div><div class="stat-val">123</div></div>
+        <div style="margin-top:1rem;font-family:var(--mono);font-size:.55rem;color:var(--text3)">Source: Google Analytics · Last updated today</div>
+      </div>
+
+      <!-- ACTIVITY FEED -->
+      <div class="panel">
+        <div class="panel-title">
+          Activity Log
+          <button class="add-btn" onclick="addActivity()">+ Log</button>
+        </div>
+        <div id="activity-feed">
+          <div class="activity-item">
+            <div class="activity-dot" style="background:#fff"></div>
+            <div class="activity-time">Today</div>
+            <div class="activity-text">Site launched on <strong>ascendaenterprisecapital.com</strong></div>
+          </div>
+          <div class="activity-item">
+            <div class="activity-dot" style="background:#888"></div>
+            <div class="activity-time">Jun 12</div>
+            <div class="activity-text">Sent cold outreach to <strong>23 institutional contacts</strong></div>
+          </div>
+          <div class="activity-item">
+            <div class="activity-dot" style="background:#ccc"></div>
+            <div class="activity-time">Jun 11</div>
+            <div class="activity-text">Professional email <strong>izaiah@ascendaenterprisecapital.com</strong> live</div>
+          </div>
+          <div class="activity-item">
+            <div class="activity-dot" style="background:#888"></div>
+            <div class="activity-time">Jun 11</div>
+            <div class="activity-text">Domain <strong>ascendaenterprisecapital.com</strong> connected</div>
+          </div>
+          <div class="activity-item">
+            <div class="activity-dot" style="background:#fff"></div>
+            <div class="activity-time">Jun 10</div>
+            <div class="activity-text">Mercury account funded · Wire instructions live</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ROW 3 -->
+    <div class="grid-2">
+      <!-- TRADELOCKER P&L -->
+      <div class="panel">
+        <div class="panel-title">
+          TradeLocker — Live Account
+          <div class="panel-badge" id="tl-status">Connecting...</div>
+        </div>
+        <div id="tl-data">
+          <div class="stat-row"><div class="stat-key">Balance</div><div class="stat-val" id="tl-balance">—</div></div>
+          <div class="stat-row"><div class="stat-key">Equity</div><div class="stat-val" id="tl-equity">—</div></div>
+          <div class="stat-row"><div class="stat-key">Open P&L</div><div class="stat-val" id="tl-pnl">—</div></div>
+          <div class="stat-row"><div class="stat-key">Margin Used</div><div class="stat-val" id="tl-margin">—</div></div>
+          <div class="stat-row"><div class="stat-key">Free Margin</div><div class="stat-val" id="tl-free">—</div></div>
+          <div class="stat-row"><div class="stat-key">Open Positions</div><div class="stat-val" id="tl-positions">—</div></div>
+          <div class="stat-row"><div class="stat-key">Account</div><div class="stat-val" id="tl-account">—</div></div>
+          <div class="stat-row"><div class="stat-key">Server</div><div class="stat-val">Herofx · Live</div></div>
+        </div>
+      </div>
+
+      <!-- NOTES / GOALS -->
+      <div class="panel">
+        <div class="panel-title">Notes & Goals</div>
+        <textarea id="notes-area" placeholder="Private notes, goals, reminders..." style="width:100%;min-height:180px;background:var(--panel2);border:.5px solid var(--border);color:var(--text);font-family:var(--mono);font-size:.75rem;padding:.85rem;outline:none;resize:vertical;line-height:1.7;transition:border-color .2s" onfocus="this.style.borderColor='#fff'" onblur="this.style.borderColor='var(--border)';saveNotes()"></textarea>
+        <div style="margin-top:1rem">
+          <div class="panel-title" style="margin-bottom:.75rem;padding-bottom:.5rem">Quick Goals</div>
+          <div id="goals-list"></div>
+          <div style="display:flex;gap:.5rem;margin-top:.75rem">
+            <input class="editable" id="goal-input" placeholder="Add a goal..." style="font-size:.75rem;flex:1" onkeypress="if(event.key==='Enter')addGoal()"/>
+            <button class="add-btn" onclick="addGoal()">Add</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+// ── PASSWORDS ──
+var PASSWORDS = ['AEC2026!', 'Zoogie881!', 'Ascenda$Capital'];
+
+function checkPass() {
+  var pw = document.getElementById('pw-input').value;
+  if(PASSWORDS.includes(pw)) {
+    document.getElementById('login-screen').style.display = 'none';
+    document.getElementById('dashboard').style.display = 'flex';
+    document.getElementById('dashboard').style.flexDirection = 'column';
+    initDashboard();
+  } else {
+    document.getElementById('login-error').style.display = 'block';
+    document.getElementById('pw-input').value = '';
+    document.getElementById('pw-input').focus();
+  }
+}
+
+function logout() {
+  document.getElementById('login-screen').style.display = 'flex';
+  document.getElementById('dashboard').style.display = 'none';
+  document.getElementById('pw-input').value = '';
+}
+
+// ── CLOCK ──
+function updateClock() {
+  var now = new Date();
+  document.getElementById('tb-clock').textContent =
+    now.toLocaleDateString('en-US', {weekday:'short', month:'short', day:'numeric'}) +
+    ' · ' + now.toLocaleTimeString('en-US', {hour:'2-digit', minute:'2-digit'});
+}
+setInterval(updateClock, 1000);
+
+// ── STATE ──
+var state = {
+  investors: [],
+  mentees: [],
+  revenue: { investment: 0, mentorship: 0, other: 0 },
+  activities: [],
+  goals: [],
+  notes: ''
+};
+
+function saveState() {
+  try { localStorage.setItem('aec_dash', JSON.stringify(state)); } catch(e){}
+}
+
+function loadState() {
+  try {
+    var s = localStorage.getItem('aec_dash');
+    if(s) state = Object.assign(state, JSON.parse(s));
+  } catch(e){}
+}
+
+// ── INVESTORS ──
+function addInvestor() {
+  var name = prompt('Investor name:');
+  if(!name) return;
+  var amount = prompt('Allocation amount ($):');
+  if(!amount) return;
+  var date = new Date().toLocaleDateString('en-US', {month:'short', day:'numeric', year:'numeric'});
+  state.investors.push({name, amount: parseFloat(amount), date, status:'Active'});
+  state.revenue.investment += parseFloat(amount);
+  saveState();
+  renderAll();
+}
+
+function renderInvestors() {
+  var tbody = document.getElementById('investor-tbody');
+  if(!state.investors.length) {
+    tbody.innerHTML = '<tr><td colspan="4" style="color:var(--text3);font-size:.72rem;padding:1rem .75rem">No investors logged yet. Click + Add to record one.</td></tr>';
+    return;
+  }
+  tbody.innerHTML = state.investors.map(function(inv) {
+    return '<tr><td class="td-name">'+inv.name+'</td><td class="td-gold">$'+inv.amount.toLocaleString()+'</td><td>'+inv.date+'</td><td class="td-green">'+inv.status+'</td></tr>';
+  }).join('');
+}
+
+// ── MENTEES ──
+function addMentee() {
+  var name = prompt('Client name:');
+  if(!name) return;
+  var tierInput = prompt('Tier:\n1 = Foundation ($750)\n2 = Accelerator ($4,500)\n3 = Elite ($35,000)') || '1';
+  var tierMap = {'1':'Foundation','2':'Accelerator','3':'Elite','Foundation':'Foundation','Accelerator':'Accelerator','Elite':'Elite'};
+  var amtMap = {'Foundation':750,'Accelerator':4500,'Elite':35000};
+  var tier = tierMap[tierInput.trim()] || 'Foundation';
+  var amount = amtMap[tier];
+  var date = new Date().toLocaleDateString('en-US', {month:'short', day:'numeric', year:'numeric'});
+  state.mentees.push({name:name, tier:tier, amount:amount, date:date});
+  state.revenue.mentorship += amount;
+  saveState();
+  renderAll();
+  renderRevenue();
+  renderKPIs();
+}
+
+function deleteMentee(i) {
+  if(!confirm('Remove ' + state.mentees[i].name + ' and deduct $' + state.mentees[i].amount.toLocaleString() + ' from revenue?')) return;
+  state.revenue.mentorship -= state.mentees[i].amount;
+  if(state.revenue.mentorship < 0) state.revenue.mentorship = 0;
+  state.mentees.splice(i, 1);
+  saveState();
+  renderAll();
+  renderRevenue();
+  renderKPIs();
+}
+
+function renderMentees() {
+  var tbody = document.getElementById('mentee-tbody');
+  if(!state.mentees.length) {
+    tbody.innerHTML = '<tr><td colspan="5" style="color:var(--text3);font-size:.72rem;padding:1rem .75rem">No clients logged yet. Click + Add to record one.</td></tr>';
+    return;
+  }
+  tbody.innerHTML = state.mentees.map(function(m, i) {
+    var color = m.tier === 'Elite' ? '#e0e0e0' : m.tier === 'Accelerator' ? '#bbb' : '#fff';
+    return '<tr>' +
+      '<td class="td-name">' + m.name + '</td>' +
+      '<td style="color:' + color + ';font-family:var(--mono);font-size:.75rem">' + m.tier + '</td>' +
+      '<td style="color:#e0e0e0;font-family:var(--mono);font-size:.75rem">$' + m.amount.toLocaleString() + '</td>' +
+      '<td style="font-family:var(--mono);font-size:.72rem;color:var(--text2)">' + m.date + '</td>' +
+      '<td><button onclick="deleteMentee(' + i + ')" style="background:none;border:.5px solid #333;color:#666;font-family:var(--mono);font-size:.55rem;padding:.2rem .45rem;cursor:pointer">x Remove</button></td>' +
+    '</tr>';
+  }).join('');
+}
+
+// ── REVENUE ──
+function logRevenue() {
+  var source = document.getElementById('rev-source').value.trim();
+  var amount = parseFloat(document.getElementById('rev-amount').value);
+  var type = document.getElementById('rev-type').value;
+  if(!source || !amount) return;
+  state.revenue[type] = (state.revenue[type] || 0) + amount;
+  document.getElementById('rev-source').value = '';
+  document.getElementById('rev-amount').value = '';
+  saveState();
+  renderRevenue();
+  renderKPIs();
+}
+
+function renderRevenue() {
+  var total = state.revenue.investment + state.revenue.mentorship + state.revenue.other;
+  var max = Math.max(total, 1);
+  document.getElementById('rb-inv').textContent = '$' + state.revenue.investment.toLocaleString();
+  document.getElementById('rb-ment').textContent = '$' + state.revenue.mentorship.toLocaleString();
+  document.getElementById('rb-other').textContent = '$' + state.revenue.other.toLocaleString();
+  document.getElementById('rb-inv-bar').style.width = (state.revenue.investment/max*100)+'%';
+  document.getElementById('rb-ment-bar').style.width = (state.revenue.mentorship/max*100)+'%';
+  document.getElementById('rb-other-bar').style.width = (state.revenue.other/max*100)+'%';
+}
+
+// ── KPIs ──
+function renderKPIs() {
+  var total = state.revenue.investment + state.revenue.mentorship + state.revenue.other;
+  document.getElementById('kpi-revenue').textContent = '$' + total.toLocaleString();
+  document.getElementById('kpi-revenue-badge').textContent = total > 0 ? '↑ Updated' : 'Log revenue below';
+  document.getElementById('kpi-revenue-badge').className = 'kpi-badge ' + (total > 0 ? 'up' : 'neu');
+  document.getElementById('kpi-investors').textContent = state.investors.length;
+  document.getElementById('kpi-mentees').textContent = state.mentees.length;
+}
+
+// ── ACTIVITY ──
+function addActivity() {
+  var text = prompt('Log activity:');
+  if(!text) return;
+  var date = new Date().toLocaleDateString('en-US', {month:'short', day:'numeric'});
+  state.activities.unshift({text, date, color:'#fff'});
+  saveState();
+  renderActivities();
+}
+
+function renderActivities() {
+  if(!state.activities.length) return;
+  var feed = document.getElementById('activity-feed');
+  var extra = state.activities.map(function(a) {
+    return '<div class="activity-item"><div class="activity-dot" style="background:'+a.color+'"></div><div class="activity-time">'+a.date+'</div><div class="activity-text">'+a.text+'</div></div>';
+  }).join('');
+  // Prepend to existing
+  feed.innerHTML = extra + feed.innerHTML;
+}
+
+// ── GOALS ──
+function addGoal() {
+  var text = document.getElementById('goal-input').value.trim();
+  if(!text) return;
+  state.goals.push({text, done:false});
+  document.getElementById('goal-input').value = '';
+  saveState();
+  renderGoals();
+}
+
+function toggleGoal(i) {
+  state.goals[i].done = !state.goals[i].done;
+  saveState();
+  renderGoals();
+}
+
+function renderGoals() {
+  var el = document.getElementById('goals-list');
+  el.innerHTML = state.goals.map(function(g, i) {
+    return '<div style="display:flex;align-items:center;gap:.6rem;padding:.4rem 0;cursor:pointer" onclick="toggleGoal('+i+')">'+
+      '<div style="width:12px;height:12px;border:.5px solid '+(g.done?'#fff':'var(--border)')+';background:'+(g.done?'#fff':'transparent')+';flex-shrink:0"></div>'+
+      '<span style="font-size:.75rem;color:'+(g.done?'var(--text3)':'var(--text2)')+';text-decoration:'+(g.done?'line-through':'none')+'">'+g.text+'</span>'+
+    '</div>';
+  }).join('');
+}
+
+// ── NOTES ──
+function saveNotes() {
+  state.notes = document.getElementById('notes-area').value;
+  saveState();
+}
+
+// ── TRADELOCKER ──
+var TL = {
+  baseUrl: 'https://tradelocker-proxy.ascendaenterprise.workers.dev',
+  email: 'izaiahcottle0@gmail.com',
+  password: '[REDACTED]$',
+  server: 'Herofx',
+  accessToken: null,
+  accountId: null,
+  accNum: null
+};
+
+async function tlConnect() {
+  try {
+    var r = await fetch(TL.baseUrl + '/auth/jwt/token', {
+      method:'POST', headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({email:TL.email, password:TL.password, server:TL.server})
+    });
+    var j = await r.json();
+    if(!j.accessToken) throw new Error('Auth failed');
+    TL.accessToken = j.accessToken;
+    var r2 = await fetch(TL.baseUrl + '/auth/jwt/all-accounts', {
+      headers:{'Authorization':'Bearer '+TL.accessToken}
+    });
+    var j2 = await r2.json();
+    if(j2.accounts && j2.accounts.length) {
+      TL.accountId = j2.accounts[0].id;
+      TL.accNum = j2.accounts[0].accNum;
+    }
+    tlFetch();
+    setInterval(tlFetch, 10000);
+  } catch(e) {
+    document.getElementById('tl-status').textContent = 'Offline';
+    document.getElementById('tl-status').style.color = '#999';
+  }
+}
+
+async function tlFetch() {
+  try {
+    var r = await fetch(TL.baseUrl + '/trade/accounts/'+TL.accountId, {
+      headers:{'Authorization':'Bearer '+TL.accessToken,'accNum':TL.accNum}
+    });
+    var j = await r.json();
+    var d = j.d || {};
+    var bal = parseFloat(d.balance)||0;
+    var eq = parseFloat(d.equity)||0;
+    var pnl = parseFloat(d.unrealizedPnL||d.floatingPnL)||0;
+    var margin = parseFloat(d.margin||d.usedMargin)||0;
+    var free = parseFloat(d.freeMargin)||0;
+
+    document.getElementById('tl-balance').textContent = '$'+bal.toLocaleString(undefined,{minimumFractionDigits:2});
+    document.getElementById('tl-equity').textContent = '$'+eq.toLocaleString(undefined,{minimumFractionDigits:2});
+    document.getElementById('tl-pnl').textContent = (pnl>=0?'+':'')+pnl.toFixed(2);
+    document.getElementById('tl-pnl').style.color = pnl >= 0 ? '#fff' : '#999';
+    document.getElementById('tl-margin').textContent = '$'+margin.toFixed(2);
+    document.getElementById('tl-free').textContent = '$'+free.toFixed(2);
+    document.getElementById('tl-account').textContent = TL.accNum;
+    document.getElementById('tl-status').textContent = 'Live';
+    document.getElementById('tl-status').style.color = '#fff';
+
+    // Update P&L KPI
+    document.getElementById('kpi-pnl').textContent = (pnl>=0?'+$':'−$')+Math.abs(pnl).toFixed(2);
+    document.getElementById('kpi-pnl-badge').textContent = '↑ TradeLocker Live';
+    document.getElementById('kpi-pnl-badge').className = 'kpi-badge '+(pnl>=0?'up':'dn');
+
+    // Get positions
+    var rp = await fetch(TL.baseUrl + '/trade/accounts/'+TL.accountId+'/positions', {
+      headers:{'Authorization':'Bearer '+TL.accessToken,'accNum':TL.accNum}
+    });
+    var jp = await rp.json();
+    var pos = (jp.d && jp.d.positions) ? jp.d.positions.length : 0;
+    document.getElementById('tl-positions').textContent = pos;
+  } catch(e) {
+    console.error('TL fetch error', e);
+  }
+}
+
+// ── INIT ──
+function renderAll() {
+  renderKPIs();
+  renderInvestors();
+  renderMentees();
+  renderRevenue();
+  renderGoals();
+}
+
+// Clear password on load so browser doesn't remember it
+window.addEventListener('load', function() {
+  var pw = document.getElementById('pw-input');
+  if(pw) { pw.value = ''; pw.focus(); }
+});
+
+function getGreeting() {
+  var h = new Date().getHours();
+  var morning = [
+    "Good morning, Mr. Cottle. The markets open in less than an hour.",
+    "Good morning, sir. Another day. Another opportunity to dominate.",
+    "Good morning, Mr. Cottle. Most of the world is still asleep. You are already ahead.",
+    "Good morning, sir. The empire doesn't build itself — but with you at the helm, it might as well.",
+    "Good morning, Mr. Cottle. Your competitors woke up this morning too. The difference is you.",
+    "Good morning, sir. The markets await your attention. They always do.",
+    "Good morning, Mr. Cottle. Atlanta is quiet. The rest of the world is about to feel your presence.",
+    "Good morning, sir. Ascenda Enterprise Capital is live. The world is watching.",
+    "Good morning, Mr. Cottle. Today is another chance to make history. Don't waste it.",
+    "Good morning, sir. The kind of discipline you carry — it doesn't go unnoticed.",
+  ];
+  var afternoon = [
+    "Good afternoon, Mr. Cottle. The markets are moving. So are you.",
+    "Good afternoon, sir. Ascenda is watching the markets closely.",
+    "Good afternoon, Mr. Cottle. A number of items require your attention.",
+    "Good afternoon, sir. The day is far from over. There is still work to be done.",
+    "Good afternoon, Mr. Cottle. Everything you've built — it's already more than most will ever attempt.",
+    "Good afternoon, sir. The NQ is moving. I trust you've already seen it.",
+    "Good afternoon, Mr. Cottle. Capital deployed. Precision maintained. Carry on.",
+    "Good afternoon, sir. The foundation you're laying right now — this is what legacy looks like.",
+    "Good afternoon, Mr. Cottle. You are not just building a fund. You are building a name.",
+    "Good afternoon, sir. It has not gone unnoticed how hard you've been working.",
+  ];
+  var evening = [
+    "Good evening, Mr. Cottle. The markets have closed for the day.",
+    "Good evening, sir. A productive day for Ascenda Enterprise Capital.",
+    "Good evening, Mr. Cottle. The world continues to move in our favor.",
+    "Good evening, sir. What you accomplished today — most wouldn't attempt in a year.",
+    "Good evening, Mr. Cottle. The day is done. The work is not. But you already know that.",
+    "Good evening, sir. Every decision you made today moved Ascenda forward. That matters.",
+    "Good evening, Mr. Cottle. Atlanta to the world. That is where this is headed.",
+    "Good evening, sir. The kind of vision you carry is rare. Protect it.",
+    "Good evening, Mr. Cottle. You see what others can't see yet. That's the edge.",
+    "Good evening, sir. Ascenda Enterprise Capital is becoming something real. You made that happen.",
+  ];
+  var night = [
+    "Still working, Mr. Cottle? The best deals are made after midnight.",
+    "Good evening, sir. Most men are asleep. You are not most men.",
+    "Late night, Mr. Cottle. Ascenda never sleeps — and neither do you.",
+    "Still here, sir. I wouldn't expect anything less.",
+    "The night belongs to those who refuse to stop, Mr. Cottle. You've always known that.",
+    "Late night again, sir. The discipline required to do what you do — it does not go unnoticed.",
+    "Mr. Cottle. It's late. And you're still building. That is the difference between you and them.",
+    "Most have logged off for the night, sir. You never really do.",
+    "The hours you put in when no one is watching — that's what separates Ascenda from everything else.",
+    "Late night, sir. I've prepared everything you need. The rest is yours.",
+  ];
+
+  var lastKey = sessionStorage.getItem('aec_last_greeting');
+  var set = h >= 5 && h < 12 ? morning :
+            h >= 12 && h < 17 ? afternoon :
+            h >= 17 && h < 21 ? evening : night;
+
+  // Avoid repeating last greeting
+  var available = set.filter(function(g) { return g !== lastKey; });
+  var chosen = available[Math.floor(Math.random() * available.length)];
+  sessionStorage.setItem('aec_last_greeting', chosen);
+  return chosen;
+}
+
+function showGreeting() {
+  var overlay = document.createElement('div');
+  overlay.id = 'greeting-overlay';
+  overlay.style.cssText = 'position:fixed;inset:0;background:#000;z-index:9998;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:1.5rem;opacity:1;transition:opacity 1.2s ease';
+  
+  var line1 = document.createElement('div');
+  line1.style.cssText = 'font-family:"Playfair Display",Georgia,serif;font-size:clamp(1rem,3vw,1.4rem);font-weight:300;color:rgba(255,255,255,0);letter-spacing:.05em;transition:color 1.5s ease;text-align:center;padding:0 2rem;max-width:600px;line-height:1.6';
+  line1.textContent = getGreeting();
+
+  var line2 = document.createElement('div');
+  line2.style.cssText = 'font-family:"JetBrains Mono",monospace;font-size:.58rem;letter-spacing:.25em;text-transform:uppercase;color:rgba(255,255,255,0);transition:color 1.8s ease 0.3s';
+  line2.textContent = 'Ascenda Enterprise Capital — Command Center';
+
+  overlay.appendChild(line1);
+  overlay.appendChild(line2);
+  document.body.appendChild(overlay);
+
+  // Fade in text
+  setTimeout(function() {
+    line1.style.color = 'rgba(255,255,255,0.9)';
+    line2.style.color = 'rgba(255,255,255,0.3)';
+  }, 100);
+
+  // Fade out and remove
+  setTimeout(function() {
+    overlay.style.opacity = '0';
+    setTimeout(function() {
+      overlay.remove();
+    }, 1200);
+  }, 6000);
+}
+
+function initDashboard() {
+  loadState();
+  updateClock();
+  renderAll();
+  renderActivities();
+  document.getElementById('notes-area').value = state.notes || '';
+  showGreeting();
+  setTimeout(tlConnect, 3500);
+}
+
+// ── WEBAUTHN / FACE ID ──
+var WEBAUTHN_RP_ID = window.location.hostname || 'ascendaenterprisecapital.com';
+var WEBAUTHN_KEY = 'aec_webauthn_credential';
+
+function bufferToBase64(buffer) {
+  return btoa(String.fromCharCode(...new Uint8Array(buffer)));
+}
+
+function base64ToBuffer(base64) {
+  var binary = atob(base64);
+  var bytes = new Uint8Array(binary.length);
+  for (var i = 0; i < binary.length; i++) bytes[i] = binary.charCodeAt(i);
+  return bytes.buffer;
+}
+
+function isWebAuthnAvailable() {
+  return window.PublicKeyCredential !== undefined && 
+         typeof window.PublicKeyCredential === 'function';
+}
+
+async function checkBiometricAvailable() {
+  if (!isWebAuthnAvailable()) return false;
+  try {
+    var available = await PublicKeyCredential.isUserVerifyingPlatformAuthenticatorAvailable();
+    return available;
+  } catch(e) { return false; }
+}
+
+async function initBiometric() {
+  var available = await checkBiometricAvailable();
+  if (!available) return;
+  
+  var stored = localStorage.getItem(WEBAUTHN_KEY);
+  var section = document.getElementById('biometric-section');
+  var regWrap = document.getElementById('register-biometric-wrap');
+  
+  if (stored) {
+    // Credential registered — show Face ID button
+    section.style.display = 'block';
+    document.getElementById('biometric-btn-text').textContent = 'Sign in with Face ID';
+    document.getElementById('biometric-status').textContent = 'Biometric credential registered on this device';
+  } else {
+    // Not registered yet — show register option after password login
+    regWrap.style.display = 'block';
+  }
+}
+
+async function registerBiometric() {
+  if (!isWebAuthnAvailable()) {
+    alert('WebAuthn not supported on this browser.');
+    return;
+  }
+  
+  var status = document.getElementById('biometric-status');
+  
+  try {
+    var challenge = new Uint8Array(32);
+    crypto.getRandomValues(challenge);
+    
+    var userId = new Uint8Array(16);
+    crypto.getRandomValues(userId);
+    
+    var credential = await navigator.credentials.create({
+      publicKey: {
+        challenge: challenge,
+        rp: { name: 'AEC Command Center', id: WEBAUTHN_RP_ID },
+        user: { id: userId, name: 'izaiah@ascendaenterprisecapital.com', displayName: 'Izaiah Cottle' },
+        pubKeyCredParams: [{ alg: -7, type: 'public-key' }, { alg: -257, type: 'public-key' }],
+        authenticatorSelection: {
+          authenticatorAttachment: 'platform',
+          userVerification: 'required',
+          requireResidentKey: false
+        },
+        timeout: 60000,
+        attestation: 'none'
+      }
+    });
+    
+    // Store credential ID
+    var credData = {
+      id: bufferToBase64(credential.rawId),
+      type: credential.type
+    };
+    localStorage.setItem(WEBAUTHN_KEY, JSON.stringify(credData));
+    
+    // Show biometric section
+    document.getElementById('biometric-section').style.display = 'block';
+    document.getElementById('register-biometric-wrap').style.display = 'none';
+    document.getElementById('biometric-btn-text').textContent = 'Sign in with Face ID';
+    document.getElementById('biometric-status').textContent = 'Face ID registered successfully';
+    
+  } catch(e) {
+    console.error('Registration error:', e);
+    if (e.name === 'NotAllowedError') {
+      document.getElementById('biometric-status').textContent = 'Registration cancelled.';
+    } else {
+      document.getElementById('biometric-status').textContent = 'Registration failed: ' + e.message;
+    }
+  }
+}
+
+async function biometricLogin() {
+  var stored = localStorage.getItem(WEBAUTHN_KEY);
+  if (!stored) { registerBiometric(); return; }
+  
+  var credData = JSON.parse(stored);
+  var status = document.getElementById('biometric-status');
+  status.textContent = 'Waiting for biometric...';
+  
+  try {
+    var challenge = new Uint8Array(32);
+    crypto.getRandomValues(challenge);
+    
+    var assertion = await navigator.credentials.get({
+      publicKey: {
+        challenge: challenge,
+        rpId: WEBAUTHN_RP_ID,
+        allowCredentials: [{ id: base64ToBuffer(credData.id), type: 'public-key' }],
+        userVerification: 'required',
+        timeout: 60000
+      }
+    });
+    
+    // Auth successful — unlock dashboard
+    status.textContent = 'Authenticated.';
+    document.getElementById('login-screen').style.display = 'none';
+    document.getElementById('dashboard').style.display = 'flex';
+    document.getElementById('dashboard').style.flexDirection = 'column';
+    document.getElementById('dashboard').style.minHeight = '100vh';
+    initDashboard();
+    setTimeout(showRegisterBiometricAfterLogin, 2000);
+    
+  } catch(e) {
+    if (e.name === 'NotAllowedError') {
+      status.textContent = 'Authentication cancelled or failed.';
+    } else {
+      status.textContent = 'Error: ' + e.message;
+    }
+  }
+}
+
+// Show register option after successful password login
+function showRegisterBiometricAfterLogin() {
+  checkBiometricAvailable().then(function(available) {
+    if (!available) return;
+    if (localStorage.getItem(WEBAUTHN_KEY)) return;
+    // Show a toast
+    var toast = document.createElement('div');
+    toast.style.cssText = 'position:fixed;bottom:5rem;right:1.5rem;background:#111;border:.5px solid #333;padding:1rem 1.25rem;z-index:9000;max-width:280px;';
+    toast.innerHTML = '<div style="font-family:\'JetBrains Mono\',monospace;font-size:.6rem;color:#fff;font-weight:700;margin-bottom:.4rem">Register Face ID?</div>' +
+      '<div style="font-family:\'JetBrains Mono\',monospace;font-size:.58rem;color:#666;margin-bottom:.75rem">Login faster next time with biometrics</div>' +
+      '<button onclick="registerBiometric();this.parentElement.remove()" style="background:#fff;color:#000;border:none;font-family:\'JetBrains Mono\',monospace;font-size:.55rem;font-weight:700;letter-spacing:.1em;padding:.5rem 1rem;cursor:pointer;margin-right:.5rem">Register</button>' +
+      '<button onclick="this.parentElement.remove()" style="background:transparent;border:.5px solid #333;color:#666;font-family:\'JetBrains Mono\',monospace;font-size:.55rem;padding:.5rem .75rem;cursor:pointer">Not now</button>';
+    document.body.appendChild(toast);
+    setTimeout(function() { if(toast.parentElement) toast.remove(); }, 8000);
+  });
+}
+
+// Init biometric on page load
+window.addEventListener('load', function() {
+  var pw = document.getElementById('pw-input');
+  if(pw) { pw.value = ''; pw.focus(); }
+  initBiometric();
+});
+
+</script>
+</body>
+</html>
