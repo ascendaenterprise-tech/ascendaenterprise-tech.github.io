@@ -432,28 +432,28 @@ footer{
           NQ Futures — NASDAQ 100
           <span class="chart-live-dot"></span>
         </div>
-        <div class="tradingview-widget-container" id="tv-nq"></div>
+        <div class="tradingview-widget-container" id="tv-nq" data-aec-yahoo-chart="NQ=F" data-title="NQ futures" data-height="400"></div>
       </div>
       <div class="chart-panel">
         <div class="chart-label">
           ES Futures — S&amp;P 500
           <span class="chart-live-dot"></span>
         </div>
-        <div class="tradingview-widget-container" id="tv-es"></div>
+        <div class="tradingview-widget-container" id="tv-es" data-aec-yahoo-chart="ES=F" data-title="ES futures" data-height="400"></div>
       </div>
       <div class="chart-panel">
         <div class="chart-label">
           Gold — XAUUSD
           <span class="chart-live-dot"></span>
         </div>
-        <div class="tradingview-widget-container" id="tv-gold"></div>
+        <div class="tradingview-widget-container" id="tv-gold" data-aec-yahoo-chart="GC=F" data-title="Gold" data-height="400"></div>
       </div>
       <div class="chart-panel">
         <div class="chart-label">
           Crude Oil — USOIL
           <span class="chart-live-dot"></span>
         </div>
-        <div class="tradingview-widget-container" id="tv-oil"></div>
+        <div class="tradingview-widget-container" id="tv-oil" data-aec-yahoo-chart="CL=F" data-title="WTI crude" data-height="400"></div>
       </div>
     </div>
   </div>
@@ -683,31 +683,11 @@ footer{
 </footer>
 
 <!-- TRADINGVIEW WIDGETS -->
-<script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
-<script>
-const tvConfig = {
-  autosize: true,
-  interval: "240",
-  timezone: "America/New_York",
-  theme: "dark",
-  style: "1",
-  locale: "en",
-  toolbar_bg: "#060606",
-  enable_publishing: false,
-  hide_top_toolbar: false,
-  hide_legend: false,
-  save_image: false,
-  backgroundColor: "#060606",
-  gridColor: "rgba(255,255,255,0.06)",
-  hide_volume: false,
-  allow_symbol_change: false,
-};
 
-new TradingView.widget({...tvConfig, symbol:"CME_MINI:NQ1!", container_id:"tv-nq", height:400});
-new TradingView.widget({...tvConfig, symbol:"CME_MINI:ES1!", container_id:"tv-es", height:400});
-new TradingView.widget({...tvConfig, symbol:"OANDA:XAUUSD", container_id:"tv-gold", height:400});
-new TradingView.widget({...tvConfig, symbol:"OANDA:USOIL", container_id:"tv-oil", height:400});
+<script>
+
 </script>
 
+<script src="aec-yahoo.js"></script>
 </body>
 </html>

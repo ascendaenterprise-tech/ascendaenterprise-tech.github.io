@@ -56,7 +56,7 @@
     document.querySelectorAll('.tradingview-widget-container').forEach(box=>{
       if(box.dataset.aecFeedNotice)return;box.dataset.aecFeedNotice='1';
       const p=document.createElement('p');p.className='aec-feed-note';
-      p.textContent='Third-party market data · may be delayed. Public real-time futures/equity feed not configured. Confirm instrument, venue and timestamp before use.';
+      p.textContent='Market data: Yahoo Finance free feed. It can be delayed and is not a trading feed. Confirm instrument, venue and timestamp before use.';
       box.insertAdjacentElement('afterend',p);
     });
   }
