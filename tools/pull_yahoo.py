@@ -6,8 +6,8 @@ from concurrent.futures import ThreadPoolExecutor
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 UA = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/124 Safari/537.36'}
 
-def fetch(sym):
-    url = 'https://query1.finance.yahoo.com/v8/finance/chart/' + urllib.parse.quote(sym) + '?range=1d&interval=5m&includePrePost=true'
+def fetch(sym, rng='range=1d&interval=5m&includePrePost=true'):
+    url = 'https://query1.finance.yahoo.com/v8/finance/chart/' + urllib.parse.quote(sym) + '?' + rng
     last = None
     for attempt in range(3):
         try:
@@ -15,7 +15,11 @@ def fetch(sym):
                 d = json.loads(r.read().decode())
             res = (d.get('chart') or {}).get('result')
             if not res: raise RuntimeError(str((d.get('chart') or {}).get('error'))[:120])
-            return build(res[0])
+            rec = build(res[0])
+            if len(rec['spark']) < 5 and rng.startswith('range=1d'):   # market not open yet today: use the last two sessions
+                try: rec['spark'] = fetch(sym, 'range=2d&interval=15m')['spark']
+                except Exception: pass
+            return rec
         except Exception as e:
             last = e; time.sleep(1 + attempt)
     raise last

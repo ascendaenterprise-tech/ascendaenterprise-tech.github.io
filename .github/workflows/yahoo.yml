@@ -19,4 +19,5 @@ jobs:
           git config user.name "aec-yahoo-bot"
           git config user.email "actions@users.noreply.github.com"
           git add yahoo_quotes.json
+          [ -f quotes.json ] && git add quotes.json || true
           git diff --cached --quiet || (git commit -m "Update Yahoo quotes" && git push)
