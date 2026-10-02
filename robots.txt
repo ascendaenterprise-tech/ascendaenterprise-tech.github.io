@@ -1,3 +1,7 @@
 User-agent: *
 Allow: /
+Disallow: /*.pdf$
+Disallow: /*.zip$
+Disallow: /aec-performance-editor.html
+Disallow: /aec-dashboard.html
 Sitemap: https://ascendaenterprisecapital.com/sitemap.xml
