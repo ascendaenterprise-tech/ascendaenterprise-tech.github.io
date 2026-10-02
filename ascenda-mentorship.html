@@ -11,13 +11,13 @@
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
   --gold:#FFFFFF;--gold2:#FFFFFF;--gold3:#A3A3A3;--gold4:#E5E5E5;
-  --ink:#06050D;--ink2:#0D0B18;--ink3:#151220;
+  --ink:#080808;--ink2:#101010;--ink3:#181818;
   --light:#F7F3EB;--light2:#EDE6D5;--light3:#DDD4BE;
   --white:#FFFFFF;
   --cream:rgba(255,255,255,0.95);--cream2:rgba(255,255,255,0.75);--cream3:rgba(255,255,255,0.45);
-  --dark-text:#1A1624;--dark-text2:#3A3348;--dark-text3:#6B6080;
+  --dark-text:#1c1c1c;--dark-text2:#3c3c3c;--dark-text3:#6e6e6e;
   --rule:rgba(255,255,255,0.15);--rule2:rgba(255,255,255,0.38);
-  --rule-dark:rgba(26,22,36,0.12);
+  --rule-dark:rgba(28,28,28,0.12);
   --up:#3DC47A;
 }
 html{scroll-behavior:smooth}
@@ -27,7 +27,7 @@ body{background:var(--ink);color:var(--white);font-family:'Jost',sans-serif;font
 nav{
   display:flex;align-items:center;justify-content:space-between;
   padding:1.3rem 4rem;
-  background:rgba(6,5,13,0.96);
+  background:rgba(8,8,8,0.96);
   border-bottom:.5px solid var(--rule);
   backdrop-filter:blur(20px);
   position:sticky;top:0;z-index:100;
@@ -97,26 +97,26 @@ h2 em{font-style:italic;color:var(--gold2)}
 .pc.featured:hover{background:var(--gold2)}
 .pc-tag{font-size:.55rem;letter-spacing:.22em;text-transform:uppercase;font-weight:500;margin-bottom:1.75rem}
 .pc:not(.featured) .pc-tag{color:var(--gold3)}
-.pc.featured .pc-tag{color:rgba(6,5,13,.55)}
+.pc.featured .pc-tag{color:rgba(8,8,8,.55)}
 .pc-name{font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:400;margin-bottom:.5rem}
 .pc:not(.featured) .pc-name{color:var(--white)}
 .pc.featured .pc-name{color:var(--ink)}
 .pc-duration{font-size:.68rem;letter-spacing:.15em;text-transform:uppercase;font-weight:300;margin-bottom:2rem}
 .pc:not(.featured) .pc-duration{color:var(--cream3)}
-.pc.featured .pc-duration{color:rgba(6,5,13,.5)}
+.pc.featured .pc-duration{color:rgba(8,8,8,.5)}
 .pc-price{font-family:'Playfair Display',serif;font-size:3rem;font-style:italic;line-height:1;margin-bottom:.35rem}
 .pc:not(.featured) .pc-price{color:var(--gold2)}
 .pc.featured .pc-price{color:var(--ink)}
 .pc-period{font-size:.65rem;letter-spacing:.12em;text-transform:uppercase;font-weight:300;margin-bottom:2rem}
 .pc:not(.featured) .pc-period{color:var(--cream3)}
-.pc.featured .pc-period{color:rgba(6,5,13,.5)}
+.pc.featured .pc-period{color:rgba(8,8,8,.5)}
 .pc-divider{height:.5px;margin-bottom:2rem}
 .pc:not(.featured) .pc-divider{background:var(--rule)}
-.pc.featured .pc-divider{background:rgba(6,5,13,.15)}
+.pc.featured .pc-divider{background:rgba(8,8,8,.15)}
 .pc-features{display:flex;flex-direction:column;gap:.75rem;flex:1;margin-bottom:2rem}
 .pf{display:flex;align-items:flex-start;gap:.75rem;font-size:.82rem;font-weight:300;line-height:1.6}
 .pc:not(.featured) .pf{color:var(--cream2)}
-.pc.featured .pf{color:rgba(6,5,13,.75)}
+.pc.featured .pf{color:rgba(8,8,8,.75)}
 .pf-icon{flex-shrink:0;margin-top:.1rem;font-size:.7rem}
 .pc:not(.featured) .pf-icon{color:var(--gold)}
 .pc.featured .pf-icon{color:var(--ink)}
@@ -134,7 +134,7 @@ h2 em{font-style:italic;color:var(--gold2)}
   background:var(--gold);padding:6rem 4rem;text-align:center;
 }
 .statement-quote{font-family:'Playfair Display',serif;font-size:clamp(1.8rem,3.5vw,3rem);font-style:italic;font-weight:400;color:var(--ink);line-height:1.2;margin-bottom:1rem;max-width:800px;margin-left:auto;margin-right:auto}
-.statement-attr{font-size:.65rem;letter-spacing:.25em;text-transform:uppercase;color:rgba(6,5,13,.5);font-weight:500}
+.statement-attr{font-size:.65rem;letter-spacing:.25em;text-transform:uppercase;color:rgba(8,8,8,.5);font-weight:500}
 
 /* WHO IS THIS FOR */
 .who-sec{padding:8rem 4rem;background:var(--light2)}
@@ -173,7 +173,7 @@ h2 em{font-style:italic;color:var(--gold2)}
 .cff input,.cff textarea,.cff select{background:rgba(255,255,255,.03);border:.5px solid rgba(255,255,255,.22);color:var(--white);font-family:'Jost',sans-serif;font-size:.9rem;font-weight:300;padding:.85rem 1rem;outline:none;transition:border-color .2s;width:100%}
 .cff input:focus,.cff textarea:focus,.cff select:focus{border-color:var(--gold)}
 .cff textarea{resize:vertical;min-height:90px}
-.cff select option{background:#151220}
+.cff select option{background:#181818}
 .btn-gold{font-size:.65rem;letter-spacing:.22em;text-transform:uppercase;background:var(--gold);color:var(--ink);border:none;padding:1.1rem 2rem;cursor:pointer;font-family:'Jost',sans-serif;font-weight:500;transition:background .2s;width:100%;margin-top:.5rem}
 .btn-gold:hover{background:var(--gold2)}
 
