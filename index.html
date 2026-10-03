@@ -1802,6 +1802,12 @@ section[style*="padding:8rem"]{padding-top:4.25rem!important;padding-bottom:4.25
 </style>
 <script src="aec-media-health.js" defer></script>
 <style id="aec-mobile-tuning">
+@media(max-width:1280px){
+  .nav-links.open{display:flex!important;position:absolute!important;top:100%;left:0;right:0;bottom:auto;height:calc(100vh - 56px);height:calc(100dvh - 56px);flex-direction:column!important;align-items:center!important;justify-content:flex-start!important;gap:1.1rem!important;padding:1.6rem 1rem 3rem;background:rgba(6,6,6,.99);z-index:999;overflow-y:auto!important}
+  .nav-links.open a{font-size:.8rem!important;letter-spacing:.15em!important;color:var(--cream2);text-align:center;white-space:normal!important;padding:.35rem 0!important}
+  .nav-links.open #market-status{display:flex!important}
+  .nav-links.open button[onclick*="econ-calendar"]{display:inline-flex!important}
+}
 /* tapes: faster, alternating direction */
 .aecy-tape .trk{animation-duration:40s!important}
 .tape-row:nth-child(even) .aecy-tape .trk{animation-direction:reverse}
