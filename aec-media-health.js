@@ -54,7 +54,7 @@
   function scan(){
     document.querySelectorAll('iframe[src]').forEach(enhance);
     document.querySelectorAll('.tradingview-widget-container').forEach(box=>{
-      if(box.dataset.aecFeedNotice)return;box.dataset.aecFeedNotice='1';
+      if(box.dataset.aecFeedNotice)return;box.dataset.aecFeedNotice='1';return;
       const p=document.createElement('p');p.className='aec-feed-note';
       p.textContent='Market data: Yahoo Finance free feed. It can be delayed and is not a trading feed. Confirm instrument, venue and timestamp before use.';
       box.insertAdjacentElement('afterend',p);
