@@ -1801,6 +1801,21 @@ section[style*="padding:8rem"]{padding-top:4.25rem!important;padding-bottom:4.25
 @media(max-width:560px){.aec-inst{padding:5rem 1rem}.aec-glance,.aec-framework{grid-template-columns:1fr}.aec-system-metrics{grid-template-columns:1fr}.aec-system-top{display:block}.aec-badge{display:inline-block;margin-top:.5rem}}
 </style>
 <script src="aec-media-health.js" defer></script>
+<style id="aec-mobile-tuning">
+/* tapes: faster, alternating direction */
+.aecy-tape .trk{animation-duration:40s!important}
+.tape-row:nth-child(even) .aecy-tape .trk{animation-direction:reverse}
+@media(max-width:900px){
+  .aec-market-layout > .aec-feed-grid,.aec-feed-grid{grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:.3rem!important}
+  .aec-feed-card header{height:20px!important;padding:0 .3rem!important;font-size:.3rem!important;gap:.2rem!important}
+  .aec-live-dot{width:4px;height:4px;flex-basis:4px}
+  .aec-load-embed{gap:.2rem!important;font-size:0!important}
+  .aec-load-embed span:last-child{display:none}
+  .aec-play{width:22px!important;height:22px!important;font-size:.5rem!important}
+  .aec-sound-toggle{right:.2rem!important;bottom:.2rem!important;padding:.15rem .3rem!important;font-size:.28rem!important}
+  .aec-market-layout{gap:.6rem!important}
+}
+</style>
 </head>
 <body data-aec-build="sitewide-final-qa-v1">
 <a class="skip-link" href="#main-content">Skip to main content</a>
@@ -2063,24 +2078,54 @@ section[style*="padding:8rem"]{padding-top:4.25rem!important;padding-bottom:4.25
 <!-- TICKER -->
 <div style="margin-top:56px;border-top:.5px solid rgba(200,200,200,0.15);background:rgba(200,200,200,0.05)">
   <!-- ROW 1: Indices, Forex, Crypto, Commodities -->
-  <div style="border-bottom:.5px solid rgba(200,200,200,0.1)">
+  <div class="tape-row" style="border-bottom:.5px solid rgba(200,200,200,0.1)">
     <div class="tradingview-widget-container">
       <div class="tradingview-widget-container__widget"></div>
 <script type="application/json" data-aec-yahoo="tape">{"symbols":[{"y":"^NDX","title":"NQ / NASDAQ 100"},{"y":"^GSPC","title":"ES / S&P 500"},{"y":"^DJI","title":"Dow Jones"},{"y":"GC=F","title":"Gold"},{"y":"CL=F","title":"WTI Crude"},{"y":"SI=F","title":"Silver"},{"y":"EURUSD=X","title":"EUR/USD"},{"y":"GBPUSD=X","title":"GBP/USD"},{"y":"JPY=X","title":"USD/JPY"},{"y":"AUDUSD=X","title":"AUD/USD"},{"y":"BTC-USD","title":"Bitcoin"},{"y":"ETH-USD","title":"Ethereum"},{"y":"^TNX","title":"US 10Y Yield"},{"y":"ES=F","title":"ES Futures"}]}</script>
     </div>
   </div>
   <!-- ROW 2: Top Stocks -->
-  <div style="border-bottom:.5px solid rgba(200,200,200,0.15)">
+  <div class="tape-row" style="border-bottom:.5px solid rgba(200,200,200,0.15)">
     <div class="tradingview-widget-container">
       <div class="tradingview-widget-container__widget"></div>
 <script type="application/json" data-aec-yahoo="tape">{"symbols":[{"y":"TSLA","title":"Tesla"},{"y":"NVDA","title":"NVIDIA"},{"y":"PLTR","title":"Palantir"},{"y":"AMZN","title":"Amazon"},{"y":"AAPL","title":"Apple"},{"y":"MSFT","title":"Microsoft"},{"y":"META","title":"Meta"},{"y":"GOOGL","title":"Google"},{"y":"JPM","title":"JPMorgan"},{"y":"GS","title":"Goldman Sachs"},{"y":"BRK-B","title":"Berkshire"},{"y":"BAC","title":"Bank of America"},{"y":"V","title":"Visa"},{"y":"UNH","title":"UnitedHealth"},{"y":"NFLX","title":"Netflix"}]}</script>
     </div>
   </div>
   <!-- ROW 3: Real Estate, Energy, Commodities, International -->
-  <div style="border-bottom:.5px solid rgba(200,200,200,0.15)">
+  <div class="tape-row" style="border-bottom:.5px solid rgba(200,200,200,0.15)">
     <div class="tradingview-widget-container">
       <div class="tradingview-widget-container__widget"></div>
 <script type="application/json" data-aec-yahoo="tape">{"symbols":[{"y":"SPG","title":"Simon Property"},{"y":"PLD","title":"Prologis REIT"},{"y":"AMT","title":"American Tower"},{"y":"EQIX","title":"Equinix REIT"},{"y":"O","title":"Realty Income"},{"y":"BX","title":"Blackstone"},{"y":"KKR","title":"KKR"},{"y":"APO","title":"Apollo Global"},{"y":"MSCI","title":"MSCI"},{"y":"BZ=F","title":"Brent Crude"},{"y":"NG=F","title":"Natural Gas"},{"y":"HG=F","title":"Copper"},{"y":"CAD=X","title":"USD/CAD"},{"y":"CHF=X","title":"USD/CHF"},{"y":"^HSI","title":"Hang Seng"}]}</script>
+    </div>
+  </div>
+  <div class="tape-row" style="border-bottom:.5px solid rgba(200,200,200,0.15)">
+    <div class="tradingview-widget-container">
+      <div class="tradingview-widget-container__widget"></div>
+<script type="application/json" data-aec-yahoo="tape">{"symbols":[{"y":"^FTSE","title":"FTSE 100"},{"y":"^GDAXI","title":"DAX"},{"y":"^FCHI","title":"CAC 40"},{"y":"^N225","title":"Nikkei 225"},{"y":"000001.SS","title":"Shanghai"},{"y":"^AXJO","title":"ASX 200"},{"y":"^BVSP","title":"Bovespa"},{"y":"^RUT","title":"Russell 2000"},{"y":"^VIX","title":"VIX"},{"y":"^STOXX50E","title":"Euro Stoxx 50"}]}</script>
+    </div>
+  </div>
+  <div class="tape-row" style="border-bottom:.5px solid rgba(200,200,200,0.15)">
+    <div class="tradingview-widget-container">
+      <div class="tradingview-widget-container__widget"></div>
+<script type="application/json" data-aec-yahoo="tape">{"symbols":[{"y":"NQ=F","title":"NQ Futures"},{"y":"YM=F","title":"YM Futures"},{"y":"RTY=F","title":"RTY Futures"},{"y":"ZN=F","title":"10Y Note"},{"y":"ZB=F","title":"30Y Bond"},{"y":"ZT=F","title":"2Y Note"},{"y":"ZF=F","title":"5Y Note"},{"y":"6E=F","title":"Euro FX Fut"},{"y":"6J=F","title":"Yen Fut"},{"y":"DX-Y.NYB","title":"US Dollar Index"}]}</script>
+    </div>
+  </div>
+  <div class="tape-row" style="border-bottom:.5px solid rgba(200,200,200,0.15)">
+    <div class="tradingview-widget-container">
+      <div class="tradingview-widget-container__widget"></div>
+<script type="application/json" data-aec-yahoo="tape">{"symbols":[{"y":"AMD","title":"AMD"},{"y":"AVGO","title":"Broadcom"},{"y":"TSM","title":"TSMC"},{"y":"INTC","title":"Intel"},{"y":"MU","title":"Micron"},{"y":"ORCL","title":"Oracle"},{"y":"CRM","title":"Salesforce"},{"y":"ADBE","title":"Adobe"},{"y":"QCOM","title":"Qualcomm"},{"y":"ASML","title":"ASML"}]}</script>
+    </div>
+  </div>
+  <div class="tape-row" style="border-bottom:.5px solid rgba(200,200,200,0.15)">
+    <div class="tradingview-widget-container">
+      <div class="tradingview-widget-container__widget"></div>
+<script type="application/json" data-aec-yahoo="tape">{"symbols":[{"y":"SOL-USD","title":"Solana"},{"y":"XRP-USD","title":"XRP"},{"y":"DOGE-USD","title":"Dogecoin"},{"y":"ADA-USD","title":"Cardano"},{"y":"BNB-USD","title":"BNB"},{"y":"COIN","title":"Coinbase"},{"y":"MSTR","title":"MicroStrategy"},{"y":"HOOD","title":"Robinhood"},{"y":"SQ","title":"Block"},{"y":"PYPL","title":"PayPal"}]}</script>
+    </div>
+  </div>
+  <div class="tape-row" style="border-bottom:.5px solid rgba(200,200,200,0.15)">
+    <div class="tradingview-widget-container">
+      <div class="tradingview-widget-container__widget"></div>
+<script type="application/json" data-aec-yahoo="tape">{"symbols":[{"y":"SPY","title":"SPY"},{"y":"QQQ","title":"QQQ"},{"y":"IWM","title":"IWM"},{"y":"DIA","title":"DIA"},{"y":"XLF","title":"Financials"},{"y":"XLE","title":"Energy"},{"y":"XLK","title":"Tech"},{"y":"XLV","title":"Health Care"},{"y":"XLU","title":"Utilities"},{"y":"TLT","title":"20Y+ Treasury"},{"y":"GLD","title":"Gold ETF"}]}</script>
     </div>
   </div>
 </div>

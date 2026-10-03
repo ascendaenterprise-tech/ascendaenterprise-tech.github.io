@@ -12,7 +12,7 @@ var CSS='.aecy{font:12px/1.4 ui-monospace,SFMono-Regular,Menlo,Consolas,monospac
 +'.aecy *{box-sizing:border-box}.aecy .up{color:#3ddc97}.aecy .dn{color:#ff5f56}.aecy .dim{color:#8a8a8a}'
 +'.aecy .pill{display:inline-block;padding:1px 7px;border-radius:3px;font-size:11px;font-weight:600}.aecy .pill.up{background:rgba(61,220,151,.13)}.aecy .pill.dn{background:rgba(255,95,86,.13)}.aecy .pill.fl{background:#1c1c1c;color:#8a8a8a}'
 +'.aecy-tape{display:flex;overflow:hidden;white-space:nowrap;background:#0b0b0b;border-top:1px solid #2c2c2c;border-bottom:1px solid #2c2c2c}'
-+'.aecy-tape .trk{display:flex;flex:none;width:max-content;animation:aecyscroll 110s linear infinite;will-change:transform}.aecy-tape:hover .trk{animation-play-state:paused}'
++'.aecy-tape .trk{display:flex;flex:none;width:max-content;animation:aecyscroll 40s linear infinite;will-change:transform}.aecy-tape:hover .trk{animation-play-state:paused}'
 +'.aecy-tape .it{display:flex;flex:none;align-items:baseline;gap:9px;padding:10px 22px;border-right:1px solid #1f1f1f}'
 +'.aecy-tape .it b{font-weight:600;color:#bdbdbd;font-size:11px;letter-spacing:.06em;text-transform:uppercase}.aecy-tape .it .v{font-size:14px;font-weight:600;color:#fff}'
 +'@keyframes aecyscroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}'
