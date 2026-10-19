@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Real Estate Portal | Ascenda Enterprise Capital</title>
+<meta name="robots" content="noindex, nofollow"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600&family=DM+Mono:wght@300;400;500&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --gold:#FFFFFF;--gold2:#FFFFFF;--gold3:#9A9A9A;
+  --ink:#050505;--ink2:#0C0C0C;--ink3:#111111;--ink4:#181818;
+  --white:#FFFFFF;--cream2:rgba(255,255,255,.72);--cream3:rgba(255,255,255,.42);
+  --rule:rgba(255,255,255,.12);--rule2:rgba(255,255,255,.28);
+  --up:#3DDC7A;--dn:#E74C3C;--amber:#E8B84A;--blue:#6FA8FF;
+  --font-display:'Cormorant Garamond',Georgia,serif;--font-mono:'DM Mono',monospace;--font-body:'Jost',sans-serif;
+}
+[data-theme="light"]{
+  --gold:#222;--gold2:#000;--gold3:#555;
+  --ink:#FAFAFA;--ink2:#FFFFFF;--ink3:#F0F0F0;--ink4:#E5E5E5;
+  --white:#0A0A0A;--cream2:rgba(10,10,10,.7);--cream3:rgba(10,10,10,.45);
+  --rule:rgba(0,0,0,.14);--rule2:rgba(0,0,0,.32);
+  --up:#1E9E56;--dn:#C0392B;--amber:#B07A00;--blue:#2F6FD6;
+}
+html{scroll-behavior:smooth}
+body{background:var(--ink);color:var(--white);font-family:var(--font-body);font-weight:300;min-height:100vh;overflow-x:hidden;transition:background-color .3s,color .3s}
+button,input,select,textarea{font:inherit;color:inherit}
+
+/* NAV */
+nav{position:fixed;inset:0 0 auto 0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:1.1rem 3rem;background:rgba(5,5,5,.94);border-bottom:.5px solid var(--rule);backdrop-filter:blur(8px)}
+[data-theme="light"] nav{background:rgba(250,250,250,.94)}
+.logo{display:flex;flex-direction:column;line-height:1.1;text-decoration:none}
+.logo b{font-family:var(--font-display);font-weight:400;font-size:1.05rem;letter-spacing:.06em;color:var(--white)}
+.logo span{font-family:var(--font-mono);font-size:.48rem;letter-spacing:.25em;text-transform:uppercase;color:var(--gold3)}
+.nav-r{display:flex;align-items:center;gap:1.1rem}
+.nl{font-family:var(--font-mono);font-size:.58rem;letter-spacing:.18em;text-transform:uppercase;color:var(--cream3);text-decoration:none;background:none;border:0;cursor:pointer}
+.nl:hover{color:var(--white)}
+.iconbtn{width:34px;height:34px;border-radius:50%;border:.5px solid var(--rule);background:transparent;cursor:pointer;display:grid;place-items:center;color:var(--cream2)}
+.iconbtn:hover{border-color:var(--white)}
+@media(max-width:700px){nav{padding:1rem 1.1rem}.nl.hide-m{display:none}}
+
+/* LOGIN */
+#login{position:fixed;inset:0;z-index:9999;background:var(--ink2);display:flex;align-items:center;justify-content:center;padding:2rem}
+.login-inner{max-width:440px;width:100%;border:.5px solid var(--rule2);padding:3.2rem 2.6rem;background:var(--ink3);text-align:center;position:relative}
+.login-inner::before{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);width:120px;height:1.5px;background:linear-gradient(90deg,transparent,var(--white),transparent)}
+.login-brand{font-family:var(--font-display);font-size:1.35rem;letter-spacing:.06em;font-weight:300}
+.login-sub{font-family:var(--font-mono);font-size:.56rem;letter-spacing:.28em;text-transform:uppercase;color:var(--gold3);margin:.35rem 0 1.8rem}
+.login-title{font-family:var(--font-display);font-size:1.5rem;font-weight:300;margin-bottom:1.3rem}
+.field{width:100%;background:rgba(127,127,127,.08);border:.5px solid var(--rule);padding:.85rem 1rem;outline:none;margin-bottom:.8rem;font-size:.88rem}
+.field:focus{border-color:var(--white)}
+.btn{font-family:var(--font-mono);font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;background:var(--white);color:var(--ink);border:0;padding:.95rem 1.4rem;cursor:pointer;font-weight:500}
+.btn:hover{opacity:.88}.btn:disabled{opacity:.5;cursor:wait}
+.btn.ghost{background:transparent;color:var(--white);border:.5px solid var(--rule2)}
+.btn.ghost:hover{border-color:var(--white);opacity:1}
+.btn.sm{padding:.6rem .95rem;font-size:.55rem}
+.btn.block{width:100%}
+.login-note{margin-top:1.3rem;font-size:.72rem;color:var(--cream3);line-height:1.7}
+.login-note a{color:var(--white)}
+.err{color:var(--dn);font-size:.74rem;margin-top:.55rem;display:none}
+
+/* DASH */
+#dash{display:none;padding:6.4rem 3rem 4rem;max-width:1320px;margin:0 auto}
+@media(max-width:700px){#dash{padding:5.6rem 1.1rem 3rem}}
+.eyebrow{font-family:var(--font-mono);font-size:.56rem;letter-spacing:.22em;text-transform:uppercase;color:var(--gold3);margin-bottom:.45rem}
+.h1{font-family:var(--font-display);font-size:2.4rem;font-weight:300;line-height:1.1}
+.sub{color:var(--cream3);font-size:.86rem;margin-top:.4rem}
+.head{display:flex;justify-content:space-between;align-items:flex-end;gap:1rem;flex-wrap:wrap;margin-bottom:2rem}
+.banner{display:none;border:.5px solid var(--amber);color:var(--amber);padding:.7rem 1rem;font-family:var(--font-mono);font-size:.62rem;letter-spacing:.1em;margin-bottom:1.4rem}
+
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--rule);border:.5px solid var(--rule);margin-bottom:1px}
+.kpis.second{margin-bottom:2.6rem;margin-top:1px}
+@media(max-width:1000px){.kpis{grid-template-columns:repeat(2,1fr)}}
+.kpi{background:var(--ink2);padding:1.5rem 1.4rem;position:relative}
+.kpi.hero{background:var(--ink3)}
+.kl{font-family:var(--font-mono);font-size:.52rem;letter-spacing:.16em;text-transform:uppercase;color:var(--cream3);margin-bottom:.55rem}
+.kv{font-family:var(--font-display);font-size:2rem;font-weight:300;line-height:1}
+.kv.up{color:var(--up)}.kv.dn{color:var(--dn)}
+.ks{font-size:.68rem;color:var(--cream3);margin-top:.45rem}
+
+.grid2{display:grid;grid-template-columns:1.6fr 1fr;gap:1.4rem;margin-bottom:2.6rem}
+@media(max-width:1000px){.grid2{grid-template-columns:1fr}}
+.card{border:.5px solid var(--rule);background:var(--ink2);padding:1.4rem 1.4rem 1.2rem}
+.ct{font-family:var(--font-display);font-size:1.25rem;font-weight:300;margin-bottom:.2rem}
+.cs{font-size:.7rem;color:var(--cream3);margin-bottom:1rem}
+svg text{font-family:var(--font-mono);font-size:9px;fill:var(--cream3)}
+.legend{display:flex;gap:1.1rem;font-family:var(--font-mono);font-size:.54rem;letter-spacing:.1em;text-transform:uppercase;color:var(--cream3);margin-top:.5rem}
+.legend i{display:inline-block;width:9px;height:9px;margin-right:.4rem;vertical-align:-1px}
+.stack{display:flex;height:9px;background:var(--ink4);margin:.6rem 0 .5rem;overflow:hidden}
+.stack div{height:100%}
+.prow{display:flex;justify-content:space-between;font-size:.8rem;padding:.55rem 0;border-bottom:.5px solid var(--rule)}
+.prow:last-child{border:0}
+.prow span:first-child{color:var(--cream2)}
+
+/* TABLE */
+.tools{display:flex;gap:.7rem;flex-wrap:wrap;align-items:center;margin-bottom:1rem}
+.tabs{display:flex;border:.5px solid var(--rule)}
+.tab{font-family:var(--font-mono);font-size:.55rem;letter-spacing:.14em;text-transform:uppercase;padding:.7rem 1rem;background:none;border:0;cursor:pointer;color:var(--cream3);border-right:.5px solid var(--rule)}
+.tab:last-child{border:0}
+.tab.on{background:var(--white);color:var(--ink)}
+.tab small{opacity:.6;margin-left:.35rem}
+.search{flex:1;min-width:160px;max-width:300px;margin:0}
+.spacer{flex:1}
+.twrap{overflow-x:auto;border:.5px solid var(--rule);background:var(--ink2)}
+table{width:100%;border-collapse:collapse;min-width:980px}
+th{font-family:var(--font-mono);font-size:.5rem;letter-spacing:.14em;text-transform:uppercase;color:var(--cream3);text-align:left;padding:.9rem 1rem;border-bottom:.5px solid var(--rule2);cursor:pointer;white-space:nowrap;user-select:none}
+th.r,td.r{text-align:right}
+td{padding:.95rem 1rem;border-bottom:.5px solid var(--rule);font-size:.84rem;vertical-align:middle}
+tr:last-child td{border:0}
+tbody tr{cursor:pointer;transition:background .15s}
+tbody tr:hover{background:rgba(127,127,127,.07)}
+.addr b{display:block;font-weight:400;font-size:.9rem}
+.addr span{font-size:.7rem;color:var(--cream3)}
+.mono{font-family:var(--font-mono);font-size:.78rem}
+.pill{font-family:var(--font-mono);font-size:.5rem;letter-spacing:.14em;text-transform:uppercase;padding:.28rem .6rem;border:.5px solid;white-space:nowrap}
+.pill.pending{color:var(--amber);border-color:var(--amber)}
+.pill.active{color:var(--blue);border-color:var(--blue)}
+.pill.closed{color:var(--up);border-color:var(--up)}
+.up{color:var(--up)}.dn{color:var(--dn)}.mut{color:var(--cream3)}
+.pbar{height:3px;background:var(--ink4);margin-top:.35rem;width:92px;margin-left:auto}
+.pbar i{display:block;height:100%}
+.empty{padding:3.2rem 1rem;text-align:center;color:var(--cream3);font-size:.9rem;line-height:1.8}
+.empty b{display:block;font-family:var(--font-display);font-weight:300;font-size:1.4rem;color:var(--white);margin-bottom:.3rem}
+tfoot td{font-family:var(--font-mono);font-size:.72rem;border-top:.5px solid var(--rule2);background:var(--ink3)}
+
+/* MODAL */
+#modal{position:fixed;inset:0;z-index:500;background:rgba(0,0,0,.7);display:none;align-items:flex-start;justify-content:center;padding:4vh 1rem;overflow:auto}
+.mbox{background:var(--ink3);border:.5px solid var(--rule2);max-width:760px;width:100%;padding:2rem}
+.mhead{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:1.3rem}
+.mgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:.2rem .9rem}
+@media(max-width:600px){.mgrid{grid-template-columns:1fr}}
+.mgrid label{font-family:var(--font-mono);font-size:.5rem;letter-spacing:.14em;text-transform:uppercase;color:var(--cream3);display:block;margin:.55rem 0 .3rem}
+.mgrid .field{margin:0}
+.full{grid-column:1/-1}
+.live{border:.5px dashed var(--rule2);padding:1rem;margin-top:1.1rem;display:flex;justify-content:space-between;flex-wrap:wrap;gap:.8rem}
+.live div{min-width:120px}
+.live .kv{font-size:1.45rem}
+.mfoot{display:flex;gap:.7rem;margin-top:1.3rem;flex-wrap:wrap}
+.toast{position:fixed;bottom:1.4rem;left:50%;transform:translateX(-50%);background:var(--white);color:var(--ink);font-family:var(--font-mono);font-size:.62rem;letter-spacing:.1em;padding:.8rem 1.2rem;z-index:900;display:none}
+.foot{margin-top:2.6rem;color:var(--cream3);font-size:.7rem;line-height:1.8;border-top:.5px solid var(--rule);padding-top:1.2rem}
+</style>
+</head>
+<body>
+
+<div id="login">
+  <div class="login-inner">
+    <div class="login-brand">Ascenda Enterprise Capital</div>
+    <div class="login-sub">Real Estate Portal</div>
+    <div class="login-title">Team sign-in</div>
+    <input class="field" id="em" type="email" placeholder="Work email" autocomplete="username" aria-label="Work email"/>
+    <input class="field" id="pw" type="password" placeholder="Access code" autocomplete="current-password" aria-label="Access code"/>
+    <button class="btn block" id="go" onclick="login()">Enter Portal &rarr;</button>
+    <div class="err" id="lerr"></div>
+    <div class="login-note">Access is issued individually to AEC team members. Need access? <a href="mailto:izaiah@ascendaenterprisecapital.com?subject=Real%20Estate%20Portal%20Access">Email Izaiah</a>.</div>
+  </div>
+</div>
+
+<nav>
+  <a class="logo" href="https://ascendaenterprisecapital.com/"><b>Ascenda Enterprise Capital</b><span>Real Estate Portal</span></a>
+  <div class="nav-r">
+    <a class="nl hide-m" href="aec-real-estate.html">Real Estate</a>
+    <a class="nl hide-m" href="https://ascendaenterprisecapital.com/">Main Site</a>
+    <button class="nl" id="out" onclick="logout()" style="display:none">Sign out</button>
+    <button class="iconbtn" onclick="toggleTheme()" aria-label="Toggle theme" title="Theme">&#9680;</button>
+  </div>
+</nav>
+
+<main id="dash">
+  <div class="banner" id="banner"></div>
+  <div class="head">
+    <div>
+      <div class="eyebrow">Real Estate &middot; Team Pipeline</div>
+      <div class="h1">Deals &amp; Profit</div>
+      <div class="sub" id="asof"></div>
+    </div>
+    <div style="display:flex;gap:.6rem;flex-wrap:wrap">
+      <button class="btn ghost sm" onclick="exportCsv()">Export CSV</button>
+      <button class="btn sm" onclick="openDeal()">+ Add deal</button>
+    </div>
+  </div>
+
+  <div class="kpis">
+    <div class="kpi hero"><div class="kl">Total P&amp;L &middot; closed deals</div><div class="kv" id="k-real">&mdash;</div><div class="ks" id="k-real-s"></div></div>
+    <div class="kpi"><div class="kl">Projected P&amp;L &middot; open deals</div><div class="kv" id="k-proj">&mdash;</div><div class="ks" id="k-proj-s"></div></div>
+    <div class="kpi"><div class="kl">Total P&amp;L &middot; all houses</div><div class="kv" id="k-all">&mdash;</div><div class="ks">Realized + projected</div></div>
+    <div class="kpi"><div class="kl">Capital in active deals</div><div class="kv" id="k-cap">&mdash;</div><div class="ks" id="k-cap-s"></div></div>
+  </div>
+  <div class="kpis second">
+    <div class="kpi"><div class="kl">Deals</div><div class="kv" id="k-n">&mdash;</div><div class="ks" id="k-n-s"></div></div>
+    <div class="kpi"><div class="kl">Average profit / closed house</div><div class="kv" id="k-avg">&mdash;</div><div class="ks" id="k-avg-s"></div></div>
+    <div class="kpi"><div class="kl">Return on cost &middot; closed</div><div class="kv" id="k-roi">&mdash;</div><div class="ks" id="k-roi-s"></div></div>
+    <div class="kpi"><div class="kl">Avg days contract &rarr; close</div><div class="kv" id="k-days">&mdash;</div><div class="ks" id="k-days-s"></div></div>
+  </div>
+
+  <div class="grid2">
+    <div class="card">
+      <div class="ct">Closed profit by month</div>
+      <div class="cs">Bars are each month&rsquo;s realized P&amp;L. The line is the running total.</div>
+      <div id="chart"></div>
+      <div class="legend"><span><i style="background:var(--up)"></i>Gain</span><span><i style="background:var(--dn)"></i>Loss</span><span><i style="background:var(--white)"></i>Running total</span></div>
+    </div>
+    <div class="card">
+      <div class="ct">Where the money went</div>
+      <div class="cs">All closed deals combined.</div>
+      <div class="stack" id="stack"></div>
+      <div id="costs"></div>
+    </div>
+  </div>
+
+  <div class="tools">
+    <div class="tabs" id="tabs"></div>
+    <input class="field search" id="q" placeholder="Search address, city, owner" oninput="render()" aria-label="Search deals"/>
+    <span class="spacer"></span>
+    <select class="field search" id="ownerf" onchange="render()" style="max-width:190px" aria-label="Filter by owner"><option value="">All team members</option></select>
+  </div>
+  <div class="twrap">
+    <table>
+      <thead><tr id="thead"></tr></thead>
+      <tbody id="tbody"></tbody>
+      <tfoot id="tfoot"></tfoot>
+    </table>
+    <div class="empty" id="empty" style="display:none"></div>
+  </div>
+
+  <div class="foot">Closed P&amp;L = sale price &minus; purchase &minus; rehab &minus; holding &minus; closing &minus; other costs. Open-deal P&amp;L is projected from the expected sale value (ARV) and is not realized. Figures are internal management numbers, not audited.</div>
+</main>
+
+<div id="modal" onclick="if(event.target===this)closeDeal()">
+  <div class="mbox">
+    <div class="mhead"><div><div class="eyebrow" id="m-eye">New deal</div><div class="h1" style="font-size:1.8rem" id="m-title">Add a deal</div></div><button class="iconbtn" onclick="closeDeal()" aria-label="Close">&times;</button></div>
+    <div class="mgrid">
+      <div class="full"><label>Property address</label><input class="field" id="f-address"/></div>
+      <div><label>City / state</label><input class="field" id="f-city"/></div>
+      <div><label>Deal type</label><select class="field" id="f-type"><option>Flip</option><option>Wholesale</option><option>Rental / hold</option><option>New build</option><option>Commercial</option><option>Other</option></select></div>
+      <div><label>Status</label><select class="field" id="f-status"><option value="pending">Pending (under contract)</option><option value="active">Active (owned / in progress)</option><option value="closed">Closed (sold)</option></select></div>
+      <div><label>Team member</label><input class="field" id="f-owner"/></div>
+      <div><label>Contract date</label><input class="field" type="date" id="f-cdate"/></div>
+      <div><label>Close / sale date</label><input class="field" type="date" id="f-sdate"/></div>
+      <div><label>Purchase price ($)</label><input class="field" type="number" inputmode="decimal" id="f-purchase" oninput="live()"/></div>
+      <div><label>Rehab cost ($)</label><input class="field" type="number" inputmode="decimal" id="f-rehab" oninput="live()"/></div>
+      <div><label>Holding cost ($)</label><input class="field" type="number" inputmode="decimal" id="f-holding" oninput="live()"/></div>
+      <div><label>Closing costs ($)</label><input class="field" type="number" inputmode="decimal" id="f-closing" oninput="live()"/></div>
+      <div><label>Other costs ($)</label><input class="field" type="number" inputmode="decimal" id="f-other" oninput="live()"/></div>
+      <div><label>Expected sale value / ARV ($)</label><input class="field" type="number" inputmode="decimal" id="f-arv" oninput="live()"/></div>
+      <div><label>Actual sale price ($)</label><input class="field" type="number" inputmode="decimal" id="f-sale" oninput="live()"/></div>
+      <div class="full"><label>Notes</label><textarea class="field" rows="3" id="f-notes"></textarea></div>
+    </div>
+    <div class="live">
+      <div><div class="kl">Total cost</div><div class="kv" id="l-cost">$0</div></div>
+      <div><div class="kl" id="l-pl-l">Projected P&amp;L</div><div class="kv" id="l-pl">$0</div></div>
+      <div><div class="kl">Return on cost</div><div class="kv" id="l-roi">&mdash;</div></div>
+    </div>
+    <div class="err" id="merr"></div>
+    <div class="mfoot">
+      <button class="btn" id="save" onclick="saveDeal()">Save deal</button>
+      <button class="btn ghost" onclick="closeDeal()">Cancel</button>
+      <span class="spacer"></span>
+      <button class="btn ghost" id="del" onclick="delDeal()" style="display:none;color:var(--dn);border-color:var(--dn)">Delete</button>
+    </div>
+  </div>
+</div>
+<div class="toast" id="toast"></div>
+
+<script>
+/* ================= CONFIG =================
+   Deals are read from and written to the AEC portal API after sign-in.
+   No deal data is stored in this public file. See re-portal-api/README.md.
+   Append ?preview=1 to the URL to see the layout with clearly-labelled SAMPLE data
+   (nothing is saved or sent anywhere in preview mode). */
+var API_BASE='https://aec-portal-api.ascendaenterprise.workers.dev';
+var PREVIEW=/[?&]preview=1/.test(location.search);
+
+var deals=[], tab='all', sortKey='date', sortDir=-1, editing=null;
+
+/* ---------- helpers ---------- */
+function $(id){return document.getElementById(id)}
+function n(v){v=parseFloat(v);return isFinite(v)?v:0}
+function money(v,sign){var a=Math.abs(Math.round(v));var s='$'+a.toLocaleString('en-US');if(v<0)return '−'+s;return (sign&&v>0?'+':'')+s}
+function compact(v){var a=Math.abs(v),s=v<0?'−':'';if(a>=1e6)return s+'$'+(a/1e6).toFixed(2)+'M';if(a>=1e4)return s+'$'+(a/1e3).toFixed(0)+'K';return money(v)}
+function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]})}
+function dstr(d){if(!d)return '—';var x=new Date(d+'T00:00:00');return isNaN(x)?'—':x.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'})}
+function toast(m){var t=$('toast');t.textContent=m;t.style.display='block';clearTimeout(toast.h);toast.h=setTimeout(function(){t.style.display='none'},2600)}
+
+/* ---------- deal math ---------- */
+function cost(d){return n(d.purchase_price)+n(d.rehab_cost)+n(d.holding_cost)+n(d.closing_cost)+n(d.other_cost)}
+function value(d){return d.status==='closed'?n(d.sale_price):n(d.arv)}
+function pl(d){var v=value(d);return v>0?v-cost(d):null}   // null = not enough info yet
+function roi(d){var p=pl(d),c=cost(d);return p===null||c<=0?null:p/c}
+function days(d){if(!d.contract_date||!d.close_date)return null;var a=new Date(d.contract_date+'T00:00:00'),b=new Date(d.close_date+'T00:00:00');var x=Math.round((b-a)/864e5);return x>=0?x:null}
+function sortDate(d){return d.close_date||d.contract_date||''}
+
+/* ---------- auth ---------- */
+function token(){try{return sessionStorage.getItem('aec_token')}catch(e){return null}}
+async function api(path,opt){
+  opt=opt||{};opt.headers=Object.assign({'Authorization':'Bearer '+token()},opt.headers||{});
+  var r=await fetch(API_BASE+path,opt);
+  if(r.status===401){logout();throw new Error('auth')}
+  return r;
+}
+async function login(){
+  var e=$('em').value.trim(),p=$('pw').value.trim(),err=$('lerr'),b=$('go');
+  if(!e||!p){err.textContent='Enter your email and access code.';err.style.display='block';return}
+  err.style.display='none';b.disabled=true;b.textContent='Signing in…';
+  try{
+    var r=await fetch(API_BASE+'/login',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email:e,password:p})});
+    var d=await r.json();
+    if(!r.ok){err.textContent=d.error||'Those details were not recognised.';err.style.display='block';b.disabled=false;b.textContent='Enter Portal →';return}
+    try{sessionStorage.setItem('aec_token',d.token)}catch(x){}
+    start();
+  }catch(x){err.textContent='Could not reach the portal. Try again, or contact Izaiah.';err.style.display='block';b.disabled=false;b.textContent='Enter Portal →'}
+}
+async function logout(){
+  var t=token();if(t&&!PREVIEW){try{await fetch(API_BASE+'/logout',{method:'POST',headers:{'Authorization':'Bearer '+t}})}catch(e){}}
+  try{sessionStorage.removeItem('aec_token')}catch(e){}
+  $('login').style.display='flex';$('dash').style.display='none';$('out').style.display='none';
+  $('go').disabled=false;$('go').textContent='Enter Portal →';
+}
+$('pw').addEventListener('keydown',function(e){if(e.key==='Enter')login()});
+$('em').addEventListener('keydown',function(e){if(e.key==='Enter')login()});
+
+async function start(){
+  $('login').style.display='none';$('dash').style.display='block';$('out').style.display='inline';
+  $('asof').textContent='As of '+new Date().toLocaleDateString('en-US',{weekday:'long',year:'numeric',month:'long',day:'numeric'});
+  if(PREVIEW){deals=sample();banner('SAMPLE DATA — these are made-up deals to show the layout. Nothing here is real, saved, or sent.');}
+  else{
+    try{var r=await api('/re/deals');var d=await r.json();deals=d.deals||[];}
+    catch(e){if(e.message!=='auth'){deals=[];banner('Could not load deals from the portal API. If this is the first time, the Real Estate endpoints may not be deployed yet (see re-portal-api/README.md).');}}
+  }
+  buildTabs();render();
+}
+function banner(t){var b=$('banner');b.textContent=t;b.style.display='block'}
+
+/* ---------- tabs / table ---------- */
+var COLS=[['address','Property',0],['status','Status',0],['owner','Team',0],['purchase_price','Purchase',1],['rehab_cost','Rehab',1],['cost','All-in cost',1],['value','Sale / ARV',1],['pl','P&L',1],['roi','Return',1],['date','Date',0]];
+function buildTabs(){
+  var h='';COLS.forEach(function(c){h+='<th class="'+(c[2]?'r':'')+'" onclick="sortBy(\''+c[0]+'\')">'+esc(c[1])+(sortKey===c[0]?(sortDir>0?' ▲':' ▼'):'')+'</th>'});
+  $('thead').innerHTML=h;
+}
+function sortBy(k){if(sortKey===k)sortDir*=-1;else{sortKey=k;sortDir=(k==='address'||k==='owner'||k==='status')?1:-1}buildTabs();render()}
+function setTab(t){tab=t;render()}
+function keyOf(d,k){
+  switch(k){case 'cost':return cost(d);case 'value':return value(d);case 'pl':return pl(d)===null?-1e15:pl(d);case 'roi':return roi(d)===null?-1e15:roi(d);
+    case 'date':return sortDate(d);case 'address':return (d.address||'').toLowerCase();case 'owner':return (d.owner||'').toLowerCase();case 'status':return d.status;default:return n(d[k])}
+}
+function render(){
+  var q=$('q').value.trim().toLowerCase(),of=$('ownerf').value;
+  var counts={all:deals.length,pending:0,active:0,closed:0};deals.forEach(function(d){counts[d.status]=(counts[d.status]||0)+1});
+  var tabs=[['all','All'],['pending','Pending'],['active','Active'],['closed','Closed']];
+  $('tabs').innerHTML=tabs.map(function(t){return '<button class="tab '+(tab===t[0]?'on':'')+'" onclick="setTab(\''+t[0]+'\')">'+t[1]+'<small>'+(counts[t[0]]||0)+'</small></button>'}).join('');
+  // owner filter
+  var owners=Array.from(new Set(deals.map(function(d){return d.owner}).filter(Boolean))).sort();
+  var cur=$('ownerf').value;$('ownerf').innerHTML='<option value="">All team members</option>'+owners.map(function(o){return '<option '+(o===cur?'selected':'')+'>'+esc(o)+'</option>'}).join('');
+  var list=deals.filter(function(d){
+    if(tab!=='all'&&d.status!==tab)return false;
+    if(of&&d.owner!==of)return false;
+    if(q&&((d.address||'')+' '+(d.city||'')+' '+(d.owner||'')).toLowerCase().indexOf(q)<0)return false;
+    return true;
+  });
+  list.sort(function(a,b){var x=keyOf(a,sortKey),y=keyOf(b,sortKey);return (x<y?-1:x>y?1:0)*sortDir});
+  var maxAbs=Math.max.apply(null,[1].concat(list.map(function(d){return Math.abs(pl(d)||0)})));
+  $('tbody').innerHTML=list.map(function(d){
+    var p=pl(d),r=roi(d);
+    return '<tr onclick="openDeal(\''+esc(d.id)+'\')"><td class="addr"><b>'+esc(d.address)+'</b><span>'+esc(d.city||'')+(d.type?' · '+esc(d.type):'')+'</span></td>'
+     +'<td><span class="pill '+esc(d.status)+'">'+esc(d.status)+'</span></td><td>'+esc(d.owner||'—')+'</td>'
+     +'<td class="r mono">'+(n(d.purchase_price)?money(n(d.purchase_price)):'—')+'</td>'
+     +'<td class="r mono">'+(n(d.rehab_cost)?money(n(d.rehab_cost)):'—')+'</td>'
+     +'<td class="r mono">'+(cost(d)?money(cost(d)):'—')+'</td>'
+     +'<td class="r mono">'+(value(d)?money(value(d)):'—')+(d.status!=='closed'&&value(d)?'<div class="mut" style="font-size:.6rem">projected</div>':'')+'</td>'
+     +'<td class="r mono '+(p===null?'mut':p>=0?'up':'dn')+'">'+(p===null?'—':money(p,1))+(p!==null?'<div class="pbar"><i style="width:'+Math.max(4,Math.abs(p)/maxAbs*100)+'%;background:var(--'+(p>=0?'up':'dn')+');'+(p<0?'margin-left:auto':'')+'"></i></div>':'')+'</td>'
+     +'<td class="r mono '+(r===null?'mut':r>=0?'up':'dn')+'">'+(r===null?'—':(r*100).toFixed(1)+'%')+'</td>'
+     +'<td class="mono mut">'+dstr(sortDate(d))+'</td></tr>';
+  }).join('');
+  var em=$('empty');
+  if(!list.length){em.style.display='block';em.innerHTML=deals.length?'<b>No deals match</b>Try another tab or clear the search.':'<b>No deals yet</b>Add the first one with &ldquo;+ Add deal&rdquo; and it will show up here for the whole team.'}
+  else em.style.display='none';
+  var tp=0,tc=0,tv=0;list.forEach(function(d){var p=pl(d);if(p!==null){tp+=p}tc+=cost(d);tv+=value(d)});
+  $('tfoot').innerHTML=list.length?'<tr><td colspan="5">'+list.length+' deal'+(list.length>1?'s':'')+' shown</td><td class="r">'+money(tc)+'</td><td class="r">'+money(tv)+'</td><td class="r '+(tp>=0?'up':'dn')+'">'+money(tp,1)+'</td><td colspan="2"></td></tr>':'';
+  kpis();
+}
+
+/* ---------- KPIs + charts ---------- */
+function kpis(){
+  var cl=deals.filter(function(d){return d.status==='closed'}),op=deals.filter(function(d){return d.status!=='closed'});
+  var real=0,realCost=0,proj=0,projN=0,capital=0,capN=0,wins=0,dsum=0,dn=0;
+  cl.forEach(function(d){var p=pl(d);if(p!==null){real+=p;realCost+=cost(d);if(p>0)wins++}var x=days(d);if(x!==null){dsum+=x;dn++}});
+  op.forEach(function(d){var p=pl(d);if(p!==null){proj+=p;projN++}if(d.status==='active'){capital+=cost(d);capN++}});
+  function set(id,v,cls){var e=$(id);e.textContent=v;e.className='kv'+(cls?' '+cls:'')}
+  var priced=cl.filter(function(d){return pl(d)!==null}).length;
+  set('k-real',cl.length?money(real,1):'$0',real>0?'up':real<0?'dn':'');
+  $('k-real-s').textContent=cl.length?cl.length+' closed · '+wins+' profitable':'No closed deals yet';
+  set('k-proj',projN?money(proj,1):'$0',proj>0?'up':proj<0?'dn':'');
+  $('k-proj-s').textContent=projN+' open deal'+(projN===1?'':'s')+' priced';
+  var all=real+proj;set('k-all',deals.length?money(all,1):'$0',all>0?'up':all<0?'dn':'');
+  set('k-cap',capN?compact(capital):'$0');$('k-cap-s').textContent=capN+' active deal'+(capN===1?'':'s');
+  set('k-n',String(deals.length));
+  var pc=deals.filter(function(d){return d.status==='pending'}).length,ac=deals.filter(function(d){return d.status==='active'}).length;
+  $('k-n-s').textContent=pc+' pending · '+ac+' active · '+cl.length+' closed';
+  set('k-avg',priced?money(real/priced,1):'—',priced&&real>0?'up':priced&&real<0?'dn':'');
+  $('k-avg-s').textContent=priced?'Across '+priced+' closed house'+(priced===1?'':'s'):'Needs a closed, priced deal';
+  var rr=realCost>0?real/realCost:null;set('k-roi',rr===null?'—':(rr*100).toFixed(1)+'%',rr>0?'up':rr<0?'dn':'');
+  $('k-roi-s').textContent=rr===null?'Needs a closed, priced deal':'Profit ÷ all-in cost';
+  set('k-days',dn?Math.round(dsum/dn)+' d':'—');$('k-days-s').textContent=dn?'Across '+dn+' deal'+(dn===1?'':'s'):'Add contract and close dates';
+  chart(cl);costs(cl);
+}
+function chart(cl){
+  var by={};cl.forEach(function(d){var p=pl(d);if(p===null||!d.close_date)return;var m=d.close_date.slice(0,7);by[m]=(by[m]||0)+p});
+  var ms=Object.keys(by).sort();var el=$('chart');
+  if(!ms.length){el.innerHTML='<div class="empty" style="padding:2.4rem 0">Closed deals with a sale price and close date will chart here.</div>';return}
+  // fill gaps so months are contiguous
+  var first=ms[0],last=ms[ms.length-1],fy=+first.slice(0,4),fm=+first.slice(5),ly=+last.slice(0,4),lm=+last.slice(5),all=[];
+  while(fy<ly||(fy===ly&&fm<=lm)){all.push(fy+'-'+('0'+fm).slice(-2));fm++;if(fm>12){fm=1;fy++}}
+  if(all.length>18)all=all.slice(-18);
+  var vals=all.map(function(m){return by[m]||0}),run=[],s=0;all.forEach(function(m,i){s+=vals[i];run.push(s)});
+  var W=640,H=250,pl_=48,pr=12,pt=14,pb=28,iw=W-pl_-pr,ih=H-pt-pb;
+  var mx=Math.max.apply(null,vals.concat(run,[1])),mn=Math.min.apply(null,vals.concat(run,[0]));
+  var rng=mx-mn||1,y=function(v){return pt+(mx-v)/rng*ih},bw=iw/all.length;
+  var g='';for(var i=0;i<=4;i++){var v=mn+rng*i/4,yy=y(v);g+='<line x1="'+pl_+'" x2="'+(W-pr)+'" y1="'+yy+'" y2="'+yy+'" stroke="var(--rule)" stroke-width="1"/><text x="'+(pl_-6)+'" y="'+(yy+3)+'" text-anchor="end">'+compact(v)+'</text>'}
+  var z=y(0),b='',line='';
+  all.forEach(function(m,i){var v=vals[i],x=pl_+i*bw+bw*.2,w=bw*.6,yy=y(Math.max(v,0)),h=Math.abs(y(v)-z);
+    b+='<rect x="'+x+'" y="'+(v>=0?yy:z)+'" width="'+w+'" height="'+Math.max(h,1)+'" fill="var(--'+(v>=0?'up':'dn')+')" opacity=".85"><title>'+m+': '+money(v,1)+'</title></rect>';
+    line+=(i?'L':'M')+(pl_+i*bw+bw/2)+' '+y(run[i]);
+    if(all.length<=12||i%2===0)b+='<text x="'+(pl_+i*bw+bw/2)+'" y="'+(H-9)+'" text-anchor="middle">'+['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'][+m.slice(5)-1]+" '"+m.slice(2,4)+'</text>'});
+  el.innerHTML='<svg viewBox="0 0 '+W+' '+H+'" width="100%" role="img" aria-label="Closed profit by month">'+g+'<line x1="'+pl_+'" x2="'+(W-pr)+'" y1="'+z+'" y2="'+z+'" stroke="var(--rule2)"/>'+b+'<path d="'+line+'" fill="none" stroke="var(--white)" stroke-width="1.6"/></svg>';
+}
+function costs(cl){
+  var pr=0,rh=0,ho=0,cc=0,ot=0,sale=0,k=0;
+  cl.forEach(function(d){if(pl(d)===null)return;k++;pr+=n(d.purchase_price);rh+=n(d.rehab_cost);ho+=n(d.holding_cost);cc+=n(d.closing_cost);ot+=n(d.other_cost);sale+=n(d.sale_price)});
+  if(!k){$('stack').innerHTML='';$('costs').innerHTML='<div class="empty" style="padding:1.6rem 0">Appears once a deal is closed and priced.</div>';return}
+  var tot=pr+rh+ho+cc+ot||1,col=['#6FA8FF','#E8B84A','#B28CFF','#5CD1C9','#999'];
+  var parts=[['Purchase',pr],['Rehab',rh],['Holding',ho],['Closing',cc],['Other',ot]];
+  $('stack').innerHTML=parts.map(function(p,i){return '<div style="width:'+(p[1]/tot*100)+'%;background:'+col[i]+'" title="'+p[0]+'"></div>'}).join('');
+  $('costs').innerHTML=parts.map(function(p,i){return '<div class="prow"><span><i style="display:inline-block;width:8px;height:8px;background:'+col[i]+';margin-right:.55rem"></i>'+p[0]+'</span><span class="mono">'+money(p[1])+' <span class="mut">'+(p[1]/tot*100).toFixed(0)+'%</span></span></div>'}).join('')
+   +'<div class="prow"><span>Total sales</span><span class="mono">'+money(sale)+'</span></div><div class="prow"><span><b style="font-weight:400">Profit</b></span><span class="mono '+(sale-tot>=0?'up':'dn')+'">'+money(sale-tot,1)+'</span></div>';
+}
+
+/* ---------- modal ---------- */
+var F=['address','city','type','status','owner','contract_date','close_date','purchase_price','rehab_cost','holding_cost','closing_cost','other_cost','arv','sale_price','notes'];
+var FID={contract_date:'cdate',close_date:'sdate',purchase_price:'purchase',rehab_cost:'rehab',holding_cost:'holding',closing_cost:'closing',other_cost:'other',sale_price:'sale'};
+function fid(k){return 'f-'+(FID[k]||k)}
+function openDeal(id){
+  editing=id?deals.filter(function(d){return d.id===id})[0]:null;
+  $('m-eye').textContent=editing?'Edit deal':'New deal';$('m-title').textContent=editing?editing.address:'Add a deal';
+  F.forEach(function(k){$(fid(k)).value=editing&&editing[k]!=null?editing[k]:(k==='status'?'pending':k==='type'?'Flip':'')});
+  $('del').style.display=editing&&!PREVIEW?'inline-block':'none';$('merr').style.display='none';
+  $('modal').style.display='flex';live();
+}
+function closeDeal(){$('modal').style.display='none'}
+function read(){var d={};F.forEach(function(k){d[k]=$(fid(k)).value.trim()});return d}
+function live(){
+  var d=read(),c=cost(d),v=value(d);
+  $('l-cost').textContent=money(c);$('l-pl-l').textContent=d.status==='closed'?'Realized P&L':'Projected P&L';
+  var p=v>0?v-c:null;var e=$('l-pl');e.textContent=p===null?'—':money(p,1);e.className='kv'+(p>0?' up':p<0?' dn':'');
+  $('l-roi').textContent=p===null||c<=0?'—':(p/c*100).toFixed(1)+'%';
+}
+$('f-status').addEventListener('change',live);
+async function saveDeal(){
+  var d=read(),er=$('merr');
+  if(!d.address){er.textContent='Enter the property address.';er.style.display='block';return}
+  if(d.status==='closed'&&!n(d.sale_price)){er.textContent='A closed deal needs the actual sale price.';er.style.display='block';return}
+  ['purchase_price','rehab_cost','holding_cost','closing_cost','other_cost','arv','sale_price'].forEach(function(k){d[k]=d[k]===''?null:n(d[k])});
+  if(PREVIEW){toast('Preview mode — not saved');closeDeal();return}
+  var b=$('save');b.disabled=true;
+  try{
+    var r=await api(editing?'/re/deals/'+encodeURIComponent(editing.id):'/re/deals',{method:editing?'PUT':'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(d)});
+    var j=await r.json();if(!r.ok)throw new Error(j.error||'Save failed');
+    if(editing){Object.assign(editing,j.deal||d)}else deals.push(j.deal||Object.assign({id:String(Date.now())},d));
+    closeDeal();render();toast('Deal saved');
+  }catch(e){if(e.message!=='auth'){er.textContent=e.message||'Could not save.';er.style.display='block'}}
+  b.disabled=false;
+}
+async function delDeal(){
+  if(!editing||!confirm('Delete this deal permanently?'))return;
+  try{var r=await api('/re/deals/'+encodeURIComponent(editing.id),{method:'DELETE'});if(!r.ok){var j=await r.json().catch(function(){return{}});throw new Error(j.error||'Not allowed')}
+    deals=deals.filter(function(d){return d!==editing});closeDeal();render();toast('Deal deleted');
+  }catch(e){if(e.message!=='auth'){$('merr').textContent=e.message;$('merr').style.display='block'}}
+}
+function exportCsv(){
+  if(!deals.length){toast('Nothing to export yet');return}
+  var cols=['address','city','type','status','owner','contract_date','close_date','purchase_price','rehab_cost','holding_cost','closing_cost','other_cost','arv','sale_price','notes'];
+  var rows=[cols.concat(['total_cost','pl','roi'])].concat(deals.map(function(d){var p=pl(d),r=roi(d);return cols.map(function(c){return d[c]==null?'':d[c]}).concat([cost(d),p===null?'':p,r===null?'':r.toFixed(4)])}));
+  var csv=rows.map(function(r){return r.map(function(v){v=String(v);return /[",\n]/.test(v)?'"'+v.replace(/"/g,'""')+'"':v}).join(',')}).join('\n');
+  var a=document.createElement('a');a.href=URL.createObjectURL(new Blob([csv],{type:'text/csv'}));a.download='aec-real-estate-deals.csv';a.click();
+}
+document.addEventListener('keydown',function(e){if(e.key==='Escape')closeDeal()});
+
+/* ---------- theme ---------- */
+function toggleTheme(){var l=document.documentElement.getAttribute('data-theme')==='light';if(l)document.documentElement.removeAttribute('data-theme');else document.documentElement.setAttribute('data-theme','light');try{localStorage.setItem('aec_theme',l?'dark':'light')}catch(e){}}
+try{if(localStorage.getItem('aec_theme')==='light')document.documentElement.setAttribute('data-theme','light')}catch(e){}
+
+/* ---------- preview-only sample data (fictional) ---------- */
+function sample(){
+  function D(a,c,t,s,o,cd,sd,p,r,h,cl,ot,arv,sp){return{id:'s'+a,address:a,city:c,type:t,status:s,owner:o,contract_date:cd,close_date:sd,purchase_price:p,rehab_cost:r,holding_cost:h,closing_cost:cl,other_cost:ot,arv:arv,sale_price:sp,notes:''}}
+  return[
+   D('101 Sample Oak Ln','Anytown, ST','Flip','closed','Team A','2026-01-05','2026-03-20',142000,38000,6200,9800,1500,258000,251000),
+   D('22 Example Birch Ct','Anytown, ST','Flip','closed','Team B','2026-02-10','2026-05-02',98000,52000,8400,11200,2200,214000,205000),
+   D('7 Demo Maple Dr','Sampleville, ST','Wholesale','closed','Team A','2026-04-02','2026-04-30',0,0,0,2500,0,0,14500),
+   D('310 Placeholder Ave','Anytown, ST','Rental / hold','closed','Team C','2026-05-12','2026-07-15',176000,21000,5100,8800,900,205000,189000),
+   D('58 Fiction Pine Rd','Sampleville, ST','Flip','closed','Team B','2026-06-08','2026-08-29',121000,44000,7300,10400,1300,238000,242500),
+   D('9 Mockup Cedar Way','Anytown, ST','Flip','active','Team A','2026-08-14','',133000,41000,4800,0,800,262000,null),
+   D('415 Test Elm St','Sampleville, ST','New build','active','Team C','2026-07-01','',89000,160000,9700,0,5400,395000,null),
+   D('64 Imaginary Ash Pl','Anytown, ST','Flip','pending','Team B','2026-09-22','',108000,0,0,0,0,226000,null),
+   D('12 Pretend Willow Ln','Sampleville, ST','Wholesale','pending','Team A','2026-09-28','',0,0,0,0,0,0,null)
+  ];
+}
+
+/* ---------- boot ---------- */
+if(PREVIEW){start()}else if(token()){start()}
+</script>
+</body>
+</html>
