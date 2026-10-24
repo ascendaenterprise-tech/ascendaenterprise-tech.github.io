@@ -1,0 +1,187 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Deal Analyzer | AEC Real Estate | Ascenda Enterprise Capital</title>
+<meta name="description" content="A free real estate deal calculator from Ascenda Enterprise Capital: maximum offer, assignment fee and end-buyer profit for wholesale deals, plus a flip mode.">
+<link rel="canonical" href="https://ascendaenterprisecapital.com/aec-deal-analyzer.html">
+<style>
+body{margin:0}[hidden]{display:none!important}
+nav{padding:20px 24px;border-bottom:1px solid #262626;background:#0b0b0c} nav a{margin-right:20px;color:#d5b56a;text-decoration:none;font-family:Arial,sans-serif}
+.eyebrow{letter-spacing:.16em;text-transform:uppercase;color:#d5b56a;font-size:12px;margin-bottom:6px}
+footer{max-width:1040px;margin:30px auto 0;padding:20px 16px;color:#888;border-top:1px solid #262626;font:12px/1.6 Arial,sans-serif}
+:root{--bg:#0b0b0c;--panel:#141415;--ink:#eeeeee;--muted:#a8a8a8;--line:#2a2a2c;--accent:#d5b56a;--accent-ink:#1a1405;--field:#0f0f10;
+--good:#6fd3a0;--good-bg:#12332a;--warn:#e8c26e;--warn-bg:#352a0e;--bad:#f0a29b;--bad-bg:#3a1b18;
+--seg-buy:#d5b56a;--seg-rep:#7d7a70;--seg-cost:#3a3a3d;--seg-profit:#6fd3a0;
+--sans:Arial,Helvetica,sans-serif;--mono:ui-monospace,Menlo,Consolas,monospace;color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:15px;line-height:1.45;
+  padding-block:20px 40px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.wrap{max-width:1040px;margin:0 auto;display:flex;flex-direction:column;gap:16px}
+header{display:flex;flex-wrap:wrap;gap:12px;align-items:flex-end;justify-content:space-between}
+h1{font-size:22px;margin:0;font-weight:600;text-wrap:balance}
+.sub{color:var(--muted);font-size:13px;margin:2px 0 0}
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:6px;overflow:hidden;background:var(--panel)}
+.seg button{font:inherit;font-size:13px;padding:7px 14px;border:0;background:transparent;color:var(--muted);cursor:pointer}
+.seg button[aria-pressed="true"]{background:var(--accent);color:var(--accent-ink);font-weight:600}
+.seg button:focus-visible,input:focus-visible,.reset:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:16px;align-items:start}
+@media (max-width:760px){.grid{grid-template-columns:minmax(0,1fr)}}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:16px}
+.panel h2{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin:0 0 12px;font-weight:600}
+.note{font-size:12px;color:var(--muted);margin:10px 0 0}
+.fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.fields .full{grid-column:1/-1}
+label{display:flex;flex-direction:column;gap:4px;font-size:12.5px;color:var(--muted)}
+.inp{display:flex;align-items:center;background:var(--field);border:1px solid var(--line);border-radius:6px;padding:0 10px}
+.inp:focus-within{border-color:var(--accent)}
+.inp span{color:var(--muted);font-family:var(--mono);font-size:13px}
+.inp input{flex:1;min-width:0;border:0;background:transparent;color:var(--ink);font-family:var(--mono);font-size:15px;padding:9px 4px;outline:none;font-variant-numeric:tabular-nums}
+.verdict{display:flex;flex-direction:column;gap:2px;border-radius:8px;padding:14px 16px}
+.verdict b{font-size:20px}
+.verdict small{font-size:13px}
+.v-good{background:var(--good-bg);color:var(--good)} .v-warn{background:var(--warn-bg);color:var(--warn)} .v-bad{background:var(--bad-bg);color:var(--bad)}
+.kpis{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:14px}
+.kpi{border-top:1px solid var(--line);padding-top:8px}
+.kpi dt{font-size:12px;color:var(--muted)} .kpi dd{margin:2px 0 0;font-family:var(--mono);font-size:20px;font-variant-numeric:tabular-nums}
+.kpi.big dd{font-size:24px;color:var(--accent);font-weight:500}
+.bar{display:flex;gap:2px;height:22px;margin-top:6px}
+.bar i{display:block;min-width:2px;border-radius:2px}
+.legend{display:flex;flex-wrap:wrap;gap:6px 14px;margin-top:8px;font-size:12px;color:var(--muted)}
+.legend span::before{content:"";display:inline-block;width:9px;height:9px;border-radius:2px;margin-right:5px;background:var(--c)}
+table{width:100%;border-collapse:collapse;font-size:13.5px}
+td{padding:6px 0;border-bottom:1px solid var(--line)} td:last-child{text-align:right;font-family:var(--mono);font-variant-numeric:tabular-nums}
+tr.t td{font-weight:600;border-bottom:0}
+.tscroll{overflow-x:auto}
+.reset{font:inherit;font-size:12px;background:none;border:1px solid var(--line);color:var(--muted);border-radius:6px;padding:5px 10px;cursor:pointer}
+.tag{display:inline-block;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);border:1px solid var(--line);border-radius:4px;padding:1px 6px;margin-left:8px;vertical-align:middle}
+@media (prefers-reduced-motion:no-preference){.bar i{transition:flex-grow .25s}}
+
+</style></head><body>
+<nav><a href="/">AEC</a><a href="aec-quant.html">Quant</a><a href="aec-real-estate.html">Real Estate</a><a href="aec-private-equity.html">Private Equity</a><a href="aec-research.html">Research</a><a href="Izaiah-Cottle/">Founder</a></nav>
+<div class="wrap">
+  <header>
+    <div>
+      <div class="eyebrow">AEC Real Estate</div><h1>Deal Analyzer<span class="tag">Example numbers loaded</span></h1>
+      <p class="sub">Enter a property's numbers to see a maximum offer and the end buyer's profit. For illustration only.</p>
+    </div>
+    <div class="seg" role="group" aria-label="Mode">
+      <button id="m-wh" aria-pressed="true">Wholesale</button>
+      <button id="m-fl" aria-pressed="false">Flip it myself</button>
+    </div>
+  </header>
+
+  <div class="grid">
+    <section class="panel" aria-labelledby="in-h">
+      <h2 id="in-h">Property</h2>
+      <div class="fields">
+        <label class="full">Market (sets default cost estimates)
+          <div class="seg" role="group" aria-label="Market" style="align-self:flex-start">
+            <button id="k-ga" aria-pressed="true">Georgia</button>
+            <button id="k-ny" aria-pressed="false">New York</button>
+          </div>
+        </label>
+        <label>After-repair value (ARV)<div class="inp"><span>$</span><input id="arv" inputmode="decimal" autocomplete="off"></div></label>
+        <label>Repair estimate<div class="inp"><span>$</span><input id="rep" inputmode="decimal" autocomplete="off"></div></label>
+        <label>Seller's asking price<div class="inp"><span>$</span><input id="ask" inputmode="decimal" autocomplete="off"></div></label>
+        <label id="fee-l">Your assignment fee<div class="inp"><span>$</span><input id="fee" inputmode="decimal" autocomplete="off"></div></label>
+        <label id="own-l" hidden>Your purchase price<div class="inp"><span>$</span><input id="buy" inputmode="decimal" autocomplete="off"></div></label>
+      </div>
+      <h2 style="margin-top:18px">Assumptions (edit freely)</h2>
+      <div class="fields">
+        <label>Buyer's ARV rule<div class="inp"><input id="rule" inputmode="decimal" autocomplete="off"><span>%</span></div></label>
+        <label>Buying costs<div class="inp"><input id="bc" inputmode="decimal" autocomplete="off"><span>% of price</span></div></label>
+        <label>Selling costs<div class="inp"><input id="sc" inputmode="decimal" autocomplete="off"><span>% of ARV</span></div></label>
+        <label>Months held<div class="inp"><input id="mo" inputmode="decimal" autocomplete="off"><span>mo</span></div></label>
+        <label>Holding cost per month<div class="inp"><span>$</span><input id="hold" inputmode="decimal" autocomplete="off"></div></label>
+        <label>Profit buyers want<div class="inp"><input id="tp" inputmode="decimal" autocomplete="off"><span>% of ARV</span></div></label>
+      </div>
+      <p class="note">Cost defaults are rough estimates for each market, not quotes. Closing, transfer taxes and attorney fees vary by county and deal, so confirm them with a title company or attorney before you make an offer.</p>
+      <p style="margin:12px 0 0"><button class="reset" id="reset">Reset to example numbers</button></p>
+    </section>
+
+    <section class="panel" aria-live="polite" aria-labelledby="out-h">
+      <h2 id="out-h">Result</h2>
+      <div id="verdict" class="verdict"></div>
+      <dl class="kpis" id="kpis"></dl>
+      <div style="margin-top:16px">
+        <div style="font-size:12px;color:var(--muted)" id="barcap"></div>
+        <div class="bar" id="bar"></div>
+        <div class="legend" id="legend"></div>
+      </div>
+      <div class="tscroll" style="margin-top:14px"><table id="tbl"></table></div>
+    </section>
+  </div>
+</div>
+
+<script>
+(function(){
+  var EX={arv:350000,rep:60000,ask:190000,fee:12000,buy:190000,rule:70,tp:15,mo:5};
+  var MK={ga:{bc:1.5,sc:7,hold:1400,label:"Georgia"},ny:{bc:2.5,sc:9,hold:2000,label:"New York"}};
+  var ids=["arv","rep","ask","fee","buy","rule","bc","sc","mo","hold","tp"];
+  var S={mode:"wh",mkt:"ga"};
+  function $(i){return document.getElementById(i)}
+  function num(i){var v=parseFloat(String($(i).value).replace(/[^0-9.\-]/g,""));return isFinite(v)?v:0}
+  function usd(n){var s=Math.abs(Math.round(n)).toLocaleString("en-US");return (n<0?"-$":"$")+s}
+  function pct(n){return (Math.round(n*10)/10).toFixed(1)+"%"}
+  function setDefaults(){
+    for(var k in EX){$(k).value=EX[k]}
+    var m=MK[S.mkt];$("bc").value=m.bc;$("sc").value=m.sc;$("hold").value=m.hold;
+  }
+  function save(){try{var o={mode:S.mode,mkt:S.mkt};ids.forEach(function(i){o[i]=$(i).value});localStorage.setItem("aec-deal",JSON.stringify(o))}catch(e){}}
+  function load(){try{var o=JSON.parse(localStorage.getItem("aec-deal")||"null");if(!o)return false;S.mode=o.mode||"wh";S.mkt=o.mkt||"ga";ids.forEach(function(i){if(o[i]!=null)$(i).value=o[i]});return true}catch(e){return false}}
+  function sync(){
+    $("m-wh").setAttribute("aria-pressed",S.mode==="wh");$("m-fl").setAttribute("aria-pressed",S.mode==="fl");
+    $("k-ga").setAttribute("aria-pressed",S.mkt==="ga");$("k-ny").setAttribute("aria-pressed",S.mkt==="ny");
+    $("fee-l").hidden=S.mode!=="wh";$("own-l").hidden=S.mode!=="fl";
+  }
+  function row(a,b,t){return "<tr"+(t?' class="t"':"")+"><td>"+a+"</td><td>"+b+"</td></tr>"}
+  function kpi(l,v,big){return '<div class="kpi'+(big?" big":"")+'"><dt>'+l+"</dt><dd>"+v+"</dd></div>"}
+  function seg(parts){
+    var tot=parts.reduce(function(s,p){return s+Math.max(p.v,0)},0)||1;
+    $("bar").innerHTML=parts.map(function(p){return '<i style="flex-grow:'+(Math.max(p.v,0)/tot*1000)+';flex-basis:0;background:'+p.c+'" title="'+p.n+": "+usd(p.v)+'"></i>'}).join("");
+    $("legend").innerHTML=parts.map(function(p){return '<span style="--c:'+p.c+'">'+p.n+" "+usd(p.v)+"</span>"}).join("");
+  }
+  function verdict(cls,head,sub){$("verdict").className="verdict "+cls;$("verdict").innerHTML="<b>"+head+"</b><small>"+sub+"</small>"}
+  function calc(){
+    var arv=num("arv"),rep=num("rep"),ask=num("ask"),rule=num("rule")/100,bc=num("bc")/100,sc=num("sc")/100,mo=num("mo"),hold=num("hold"),tp=num("tp")/100;
+    var sell=arv*sc,holdT=mo*hold;
+    if(S.mode==="wh"){
+      var fee=num("fee");
+      var buyerMAO=arv*rule-rep;                      /* most the end buyer should pay you */
+      var maxContract=buyerMAO-fee;                   /* most you should put under contract with the seller */
+      var price=Math.max(maxContract,0)+fee;          /* what the end buyer pays */
+      var buyerCost=price*(1+bc)+rep+holdT+sell;
+      var profit=arv-buyerCost, pm=arv?profit/arv:0;
+      var gap=ask-maxContract;
+      if(pm>=tp&&gap<=0) verdict("v-good","Works at your asking price","The seller's price fits under your maximum offer with room for your fee.");
+      else if(pm>=tp&&gap>0) verdict("v-warn","Works only below "+usd(maxContract),"The seller wants "+usd(gap)+" more than you can pay and still collect your fee.");
+      else if(pm>=0.05) verdict("v-warn","Thin for the end buyer","Buyer profit is "+pct(pm*100)+" of ARV, under the "+pct(tp*100)+" they want. Lower the fee or the price.");
+      else verdict("v-bad","Pass or renegotiate","At these numbers the end buyer keeps "+pct(pm*100)+" of ARV.");
+      $("kpis").innerHTML=kpi("Max contract price with seller",usd(maxContract),true)+kpi("Price to end buyer",usd(price),true)+kpi("Your fee",usd(fee))+kpi("End buyer's profit",usd(profit)+" ("+pct(pm*100)+")")+kpi("Seller's ask vs your max",(gap>0?"+":"")+usd(gap)+(gap>0?" over":" under"))+kpi("Fee as % of price",pct(price?fee/price*100:0));
+      $("barcap").textContent="Where the ARV goes for the end buyer";
+      seg([{n:"Price",v:price,c:"var(--seg-buy)"},{n:"Repairs",v:rep,c:"var(--seg-rep)"},{n:"Costs",v:price*bc+holdT+sell,c:"var(--seg-cost)"},{n:"Profit",v:profit,c:"var(--seg-profit)"}]);
+      $("tbl").innerHTML=row("ARV",usd(arv))+row("ARV x "+pct(rule*100)+" rule",usd(arv*rule))+row("Minus repairs",usd(-rep))+row("Buyer's max price",usd(buyerMAO))+row("Minus your fee",usd(-fee))+row("Your max offer to seller",usd(maxContract),true);
+    } else {
+      var p=num("buy");
+      var cost=p*(1+bc)+rep+holdT+sell, prof=arv-cost, pm2=arv?prof/arv:0, roi=(p+rep)?prof/(p+rep)*100:0;
+      var annual=mo>0?roi*12/mo:0;
+      var mao=arv*rule-rep;
+      if(pm2>=tp) verdict("v-good","Meets your profit target","Profit is "+pct(pm2*100)+" of ARV against a "+pct(tp*100)+" target.");
+      else if(pm2>=0.05) verdict("v-warn","Below target","Profit is "+pct(pm2*100)+" of ARV. To reach "+pct(tp*100)+" you would need to buy near "+usd(mao)+".");
+      else verdict("v-bad","Pass or renegotiate","Profit is only "+pct(pm2*100)+" of ARV.");
+      $("kpis").innerHTML=kpi("Projected profit",usd(prof),true)+kpi("Profit % of ARV",pct(pm2*100),true)+kpi("Return on cash in",pct(roi))+kpi("Annualized return",pct(annual))+kpi("70%-rule style max price",usd(mao))+kpi("Price vs that max",(p-mao>0?"+":"")+usd(p-mao));
+      $("barcap").textContent="Where the ARV goes";
+      seg([{n:"Purchase",v:p,c:"var(--seg-buy)"},{n:"Repairs",v:rep,c:"var(--seg-rep)"},{n:"Costs",v:p*bc+holdT+sell,c:"var(--seg-cost)"},{n:"Profit",v:prof,c:"var(--seg-profit)"}]);
+      $("tbl").innerHTML=row("Purchase price",usd(p))+row("Buying costs",usd(p*bc))+row("Repairs",usd(rep))+row("Holding ("+mo+" mo)",usd(holdT))+row("Selling costs",usd(sell))+row("Total cost",usd(cost),true)+row("ARV",usd(arv))+row("Profit",usd(prof),true);
+    }
+  }
+  function all(){sync();calc();save()}
+  ids.forEach(function(i){$(i).addEventListener("input",all)});
+  $("m-wh").onclick=function(){S.mode="wh";all()};$("m-fl").onclick=function(){S.mode="fl";all()};
+  $("k-ga").onclick=function(){S.mkt="ga";var m=MK.ga;$("bc").value=m.bc;$("sc").value=m.sc;$("hold").value=m.hold;all()};
+  $("k-ny").onclick=function(){S.mkt="ny";var m=MK.ny;$("bc").value=m.bc;$("sc").value=m.sc;$("hold").value=m.hold;all()};
+  $("reset").onclick=function(){setDefaults();all()};
+  setDefaults();load();all();
+})();
+</script>
+<footer>Ascenda Enterprise Capital LLC. This calculator is for illustration only. It is not an offer, appraisal, legal, tax or investment advice, and cost defaults are rough estimates. Confirm every number with a licensed professional before acting.</footer>
+</body></html>
