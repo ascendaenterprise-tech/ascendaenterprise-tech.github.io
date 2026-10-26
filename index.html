@@ -4758,5 +4758,53 @@ document.addEventListener("DOMContentLoaded", function(){
 
 
 <script src="aec-yahoo.js"></script>
+
+<style id="aecOpenCss">
+#aecOpen{position:fixed;inset:0;z-index:2147483000;overflow:hidden;perspective:1200px;background:#F5F2EC;color:#0b0b0b;cursor:pointer;
+  transition:transform .95s cubic-bezier(.77,0,.18,1);will-change:transform}
+#aecOpen.go{transform:translateX(108%) skewX(-14deg)}
+#aecOpen .grain{position:absolute;inset:0;background:radial-gradient(ellipse at 50% 42%,rgba(255,255,255,.7),rgba(245,242,236,0) 62%);}
+#aecOpen .rule{position:absolute;left:50%;top:0;width:1px;height:0;background:linear-gradient(#0b0b0b,rgba(11,11,11,0));animation:aoRule 1s .05s cubic-bezier(.3,.7,.2,1) forwards}
+@keyframes aoRule{to{height:calc(50% - 90px)}}
+#aecOpen .stage{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1.15rem;transform-style:preserve-3d}
+#aecOpen svg{width:min(32vw,160px);min-width:104px;height:auto;overflow:visible;filter:drop-shadow(0 18px 22px rgba(0,0,0,.14))}
+#aecOpen polygon{fill:none;stroke:#0b0b0b;stroke-linejoin:miter;transform-box:fill-box;transform-origin:center;opacity:0;animation:aoDrop .85s cubic-bezier(.22,.9,.24,1.1) forwards}
+#aecOpen polygon:nth-child(1){animation-delay:.2s}#aecOpen polygon:nth-child(2){animation-delay:.34s}#aecOpen polygon:nth-child(3){animation-delay:.48s}#aecOpen polygon:nth-child(4){animation-delay:.62s}#aecOpen polygon:nth-child(5){animation-delay:.76s}
+@keyframes aoDrop{0%{opacity:0;transform:translateY(-80vh) rotateZ(-25deg) scale(1.2)}60%{opacity:1}80%{transform:translateY(6px) rotateZ(0) scale(1)}100%{opacity:1;transform:none}}
+#aecOpen .word{font:500 clamp(.78rem,2.1vw,1.1rem)/1 'Helvetica Neue',Arial,sans-serif;letter-spacing:.44em;text-transform:uppercase;padding-left:.44em;opacity:0;transform:translateY(12px);animation:aoUp .7s 1.5s forwards;text-align:center}
+#aecOpen .sub{font:400 clamp(.6rem,1.5vw,.76rem)/1.6 ui-monospace,Menlo,monospace;letter-spacing:.2em;text-transform:uppercase;color:#5b5b57;opacity:0;animation:aoUp .7s 1.85s forwards;text-align:center;padding:0 16px}
+@keyframes aoUp{to{opacity:1;transform:none}}
+#aecOpen .streak{position:absolute;top:-10%;bottom:-10%;width:34%;left:-45%;transform:skewX(-14deg);opacity:0;
+  background:linear-gradient(90deg,rgba(255,255,255,0),rgba(255,255,255,.95),rgba(255,255,255,0))}
+#aecOpen.sweep .streak{animation:aoStreak .75s cubic-bezier(.5,0,.2,1) forwards}
+@keyframes aoStreak{0%{left:-45%;opacity:0}15%{opacity:1}100%{left:120%;opacity:0}}
+#aecOpen .skip{position:absolute;right:max(16px,env(safe-area-inset-right,0px));bottom:max(16px,env(safe-area-inset-bottom,0px));background:none;border:1px solid rgba(11,11,11,.3);color:#3b3b38;font:11px ui-monospace,Menlo,monospace;letter-spacing:.16em;text-transform:uppercase;padding:8px 12px;cursor:pointer;opacity:0;animation:aoUp .4s .6s forwards}
+@media (prefers-reduced-motion:reduce){#aecOpen{display:none!important}}
+</style>
+<div id="aecOpen" role="presentation" aria-hidden="true">
+  <div class="grain"></div><div class="rule"></div>
+  <div class="stage">
+    <svg viewBox="-72 -72 144 144"><polygon points="0,-66 66,0 0,66 -66,0" stroke-width="3.2"/><polygon points="0,-51 51,0 0,51 -51,0" stroke-width="2.8"/><polygon points="0,-37 37,0 0,37 -37,0" stroke-width="2.6"/><polygon points="0,-23 23,0 0,23 -23,0" stroke-width="2.4"/><polygon points="0,-9 9,0 0,9 -9,0" stroke-width="2.2"/></svg>
+    <div class="word">Ascenda Enterprise Capital</div>
+    <div class="sub">Quantitative research · Real estate · Private markets</div>
+  </div>
+  <div class="streak"></div>
+  <button class="skip" type="button">Skip</button>
+</div>
+<script>
+(function(){
+  var el=document.getElementById('aecOpen'); if(!el) return;
+  var seen=false; try{seen=sessionStorage.getItem('aecOpenSeen')==='1'}catch(e){}
+  var reduce=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if(seen||reduce||/[?&]nointro/.test(location.search)||location.hash){el.remove();return;}
+  try{sessionStorage.setItem('aecOpenSeen','1')}catch(e){}
+  var de=document.documentElement, prev=de.style.overflow; de.style.overflow='hidden';
+  var done=false;
+  function open(){ if(done) return; done=true; el.classList.add('sweep'); setTimeout(function(){el.classList.add('go')},260);
+    setTimeout(function(){de.style.overflow=prev; el.remove();},1500); }
+  setTimeout(open,3200); setTimeout(open,6000);
+  el.addEventListener('click',open); document.addEventListener('keydown',open,{once:true});
+})();
+</script>
 </body>
 </html>
