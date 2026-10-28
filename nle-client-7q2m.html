@@ -327,7 +327,7 @@ section[hidden]{display:none}
     $('thread').innerHTML='<div class="msg"><div>Welcome. Send a message here and it goes straight to Izaiah.</div><small>Ascenda</small></div>';
   }
   function enter(a){$('gate').hidden=true; $('app').hidden=false; render(a); show('overview'); draw()}
-  function signOut(){var t=token; token=''; try{sessionStorage.removeItem('nle_token')}catch(e){} if(t) fetch(API+'/logout',{method:'POST',headers:{Authorization:'Bearer '+t}}).catch(function(){}); $('app').hidden=true; $('gate').hidden=false; $('codeField').hidden=true; $('pass').value=''; $('gateBtn').textContent='Email me a code'; $('gateNote').textContent='Signed out.'}
+  function signOut(){var t=token; token=''; try{sessionStorage.removeItem('nle_token');sessionStorage.removeItem('nle_role')}catch(e){} if(t) fetch(API+'/logout',{method:'POST',headers:{Authorization:'Bearer '+t}}).catch(function(){}); $('app').hidden=true; $('gate').hidden=false; $('codeField').hidden=true; $('pass').value=''; $('gateBtn').textContent='Email me a code'; $('gateNote').textContent='Signed out.'}
   $('outBtn').addEventListener('click',signOut);
   var step=1;
   $('gateForm').addEventListener('submit',function(e){e.preventDefault(); var email=$('email').value.trim().toLowerCase(), note=$('gateNote'), btn=$('gateBtn'); if(!email){note.textContent='Enter your email.';return} btn.disabled=true;
@@ -335,7 +335,8 @@ section[hidden]{display:none}
         if(r.s===200){step=2; $('codeField').hidden=false; $('pass').focus(); btn.textContent='Sign in'; note.textContent='If that email is approved, a code is on its way. It expires in 10 minutes.'} else note.textContent=r.j.error||'Something went wrong. Try again.'}).catch(function(){btn.disabled=false; note.textContent='Could not reach the server. Try again.'}) }
     else { api('/otp/verify',{method:'POST',body:{email:email,code:$('pass').value.trim()}}).then(function(r){
         if(r.s!==200||!r.j.token){btn.disabled=false; note.textContent=r.j.error||'Invalid or expired code.'; return}
-        token=r.j.token; try{sessionStorage.setItem('nle_token',token)}catch(e){}
+        if(r.j.role!=='client'){ var t0=r.j.token; fetch(API+'/logout',{method:'POST',headers:{Authorization:'Bearer '+t0}}).catch(function(){}); btn.disabled=false; step=1; $('codeField').hidden=true; $('pass').value=''; btn.textContent='Email me a code'; note.textContent='This portal is for Nique Living Estate. Please use the client portal for your account.'; return }
+        token=r.j.token; try{sessionStorage.setItem('nle_token',token); sessionStorage.setItem('nle_role','client')}catch(e){}
         return api('/account').then(function(a){btn.disabled=false; step=1; if(a.s===200) enter(a.j); else note.textContent='Could not load your account.'}) }).catch(function(){btn.disabled=false; note.textContent='Could not reach the server. Try again.'}) }
   });
   $('composeForm').addEventListener('submit',function(e){e.preventDefault(); var t=$('msgText').value.trim(), n=$('msgNote'); if(!t){n.textContent='Write a message first.';return}
@@ -345,6 +346,8 @@ section[hidden]{display:none}
   if(window.matchMedia) window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change',draw);
   /* resume session */
   $('app').hidden=true; $('gate').hidden=false;
+  var role=''; try{role=sessionStorage.getItem('nle_role')||''}catch(e){}
+  if(token&&role!=='client'){ token=''; try{sessionStorage.removeItem('nle_token')}catch(e){} }
   if(token) api('/account').then(function(a){ if(a.s===200) enter(a.j); else { token=''; try{sessionStorage.removeItem('nle_token')}catch(e){} } }).catch(function(){});
 })();
 </script>
