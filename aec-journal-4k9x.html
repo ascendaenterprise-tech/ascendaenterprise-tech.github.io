@@ -212,7 +212,7 @@ section[hidden]{display:none}
       <div class="hello">
         <div class="eyebrow" id="today"></div>
         <h1 id="welcome">Welcome, Izaiah.</h1>
-        <p>Interactive Brokers paper trading account. <b>Simulated trading, not real money.</b> Figures come from the broker's activity statement, May 4 to Oct 28, 2026.</p>
+        <p>Interactive Brokers paper trading account. <b>Simulated trading, not real money.</b> Account value and history match the Interactive Brokers app. The trade log covers May 4 to Oct 28, 2026.</p>
       </div>
       <div class="kpis" id="kpis"></div>
       <div class="grid">
@@ -358,9 +358,9 @@ section[hidden]{display:none}
     $('welcome').textContent='Welcome, '+String(a.name||'').split(' ')[0]+'.';
     $('today').textContent=new Date().toLocaleDateString('en-US',{weekday:'long',month:'long',day:'numeric',year:'numeric'});
     var bal=Number(a.currentBalance)||0,con=Number(a.totalContributed)||0,net=bal-con,pct=con?net/con*100:0;
-    $('kpis').innerHTML=[['Account value',fmt(bal),'Recorded balance',''],['Starting value',fmt(con),'May 4, 2026',''],['Net gain',sgn(net),pct.toFixed(1)+'% since May 4',net>0?'up':(net<0?'dn':'')],['Account','Paper','Simulated','']].map(function(k){return '<div class="kpi"><div class="eyebrow">'+k[0]+'</div><div class="v num '+k[3]+'">'+k[1]+'</div><div class="s">'+k[2]+'</div></div>'}).join('');
+    $('kpis').innerHTML=[['Account value',fmt(bal),'Recorded balance',''],['Starting capital',fmt(con),'Paper account start',''],['Net gain',sgn(net),pct.toFixed(1)+'% since inception',net>0?'up':(net<0?'dn':'')],['Account','Paper','Simulated','']].map(function(k){return '<div class="kpi"><div class="eyebrow">'+k[0]+'</div><div class="v num '+k[3]+'">'+k[1]+'</div><div class="s">'+k[2]+'</div></div>'}).join('');
     var st=(a.statements||[]).slice().reverse(); // oldest first
-    series=[['May 4',con]].concat(st.map(function(x){return [x.period,Number(x.closing_balance)||0]}));
+    series=[['Start',con]].concat(st.map(function(x){return [x.period,Number(x.closing_balance)||0]}));
     if(con<=0) series=series.slice(1);
     $('chartFoot').innerHTML=st.length?'':'<div><span class="eyebrow">History</span><b>Builds as statements are issued</b></div>';
     var peak=Math.max.apply(null,series.map(function(p){return p[1]}).concat([0])), cur=series.length?series[series.length-1][1]:0, dd=peak?cur/peak-1:0;
