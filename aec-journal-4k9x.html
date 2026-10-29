@@ -158,7 +158,7 @@ section[hidden]{display:none}
   <div class="stage">
     <svg viewBox="-72 -72 144 144"><polygon points="0,-66 66,0 0,66 -66,0" stroke-width="3.2"/><polygon points="0,-51 51,0 0,51 -51,0" stroke-width="2.8"/><polygon points="0,-37 37,0 0,37 -37,0" stroke-width="2.6"/><polygon points="0,-23 23,0 0,23 -23,0" stroke-width="2.4"/><polygon points="0,-9 9,0 0,9 -9,0" stroke-width="2.2"/></svg>
     <div class="word">Trading Journal</div>
-    <div class="sub">Welcome · Paper trading account · Ascenda Enterprise Capital</div>
+    <div class="sub">Welcome · AEC owned testing account · Ascenda Enterprise Capital</div>
   </div>
   <div class="streak"></div>
   <button class="skip" type="button">Skip</button>
@@ -212,7 +212,7 @@ section[hidden]{display:none}
       <div class="hello">
         <div class="eyebrow" id="today"></div>
         <h1 id="welcome">Welcome, Izaiah.</h1>
-        <p>Interactive Brokers paper trading account. <b>Simulated trading, not real money.</b> Account value and history match the Interactive Brokers app. The trade log covers May 4 to Oct 28, 2026.</p>
+        <p>Interactive Brokers account, <b>AEC owned testing account</b>. Account value and history match the Interactive Brokers app. The trade log covers May 4 to Oct 28, 2026.</p>
       </div>
       <div class="kpis" id="kpis"></div>
       <div class="grid">
@@ -232,8 +232,8 @@ section[hidden]{display:none}
         <aside>
           <div class="panel">
             <div class="eyebrow">Account</div>
-            <div class="who">IBKR paper account</div>
-            <p style="color:var(--fg2)">Simulated trading. Positions and results do not involve real money and do not reflect real execution or liquidity.</p>
+            <div class="who">IBKR account</div>
+            <p style="color:var(--fg2)">AEC owned testing account. Positions and results are for internal testing and do not reflect client funds.</p>
             <span id="ddNow" hidden></span><div id="ddBar" hidden></div>
           </div>
         </aside>
@@ -253,13 +253,13 @@ section[hidden]{display:none}
     <!-- TRADES -->
     <section id="t-trades" hidden>
       <div class="hello"><div class="eyebrow">Trades</div><h1>Your trade log</h1>
-        <p>Every closed trade in your paper account, from the Interactive Brokers activity statement. Net P&amp;L matches the broker's realized P&amp;L (after fees). Entry prices are not in the broker's summary, so they show a dash.</p></div>
+        <p>Every closed trade in the testing account, from the Interactive Brokers activity statement. Net P&amp;L matches the broker's realized P&amp;L (after fees). Entry prices are not in the broker's summary, so they show a dash.</p></div>
       <div class="kpis" id="tkpis"></div>
       <div class="panel">
         <div class="panel-head"><h2>All trades</h2><span class="pill" id="tCount">0 trades</span></div>
         <div class="tablewrap"><table><thead><tr><th>Closed</th><th>Market</th><th>Closed side</th><th class="r">Qty</th><th class="r">Entry</th><th class="r">Exit</th><th class="r">P&amp;L</th><th class="r">Fees</th><th class="r">Net</th></tr></thead><tbody id="trades"></tbody></table></div>
       </div>
-      <p style="color:var(--fg3);font-size:12px;margin-top:10px">Simulated trading. Times are Eastern. Realized P&amp;L only: open positions are not included, so the total differs from the account value change.</p>
+      <p style="color:var(--fg3);font-size:12px;margin-top:10px">AEC owned testing account. Times are Eastern. Realized P&amp;L only: open positions are not included, so the total differs from the account value change.</p>
     </section>
 
     <!-- DEALS -->
@@ -328,7 +328,7 @@ section[hidden]{display:none}
       </div>
     </section>
 
-    <p class="legal">Ascenda Enterprise Capital LLC. Trading figures on this page come from a simulated (paper) Interactive Brokers account. Real estate figures are deal records entered by Ascenda. Simulated results have inherent limitations, do not reflect actual trading, and are not a guarantee of future results. Nothing here is an offer to sell or a solicitation to buy any security or a recommendation for any person.</p>
+    <p class="legal">Ascenda Enterprise Capital LLC. Trading figures on this page come from an AEC owned testing account at Interactive Brokers and do not involve client funds. Real estate figures are deal records entered by Ascenda. Results from a testing account have inherent limitations and are not a guarantee of future results. Nothing here is an offer to sell or a solicitation to buy any security or a recommendation for any person.</p>
   </main>
 </div>
 </div>
@@ -370,7 +370,7 @@ section[hidden]{display:none}
     $('welcome').textContent='Welcome, '+String(a.name||'').split(' ')[0]+'.';
     $('today').textContent=new Date().toLocaleDateString('en-US',{weekday:'long',month:'long',day:'numeric',year:'numeric'});
     var bal=Number(a.currentBalance)||0,con=Number(a.totalContributed)||0,net=bal-con,pct=con?net/con*100:0;
-    $('kpis').innerHTML=[['Account value',fmt(bal),'Recorded balance',''],['Starting capital',fmt(con),'Paper account start',''],['Net gain',sgn(net),pct.toFixed(1)+'% since inception',net>0?'up':(net<0?'dn':'')],['Account','Paper','Simulated','']].map(function(k){return '<div class="kpi"><div class="eyebrow">'+k[0]+'</div><div class="v num '+k[3]+'">'+k[1]+'</div><div class="s">'+k[2]+'</div></div>'}).join('');
+    $('kpis').innerHTML=[['Account value',fmt(bal),'Recorded balance',''],['Starting capital',fmt(con),'Testing account start',''],['Net gain',sgn(net),pct.toFixed(1)+'% since inception',net>0?'up':(net<0?'dn':'')],['Account','Testing','AEC owned','']].map(function(k){return '<div class="kpi"><div class="eyebrow">'+k[0]+'</div><div class="v num '+k[3]+'">'+k[1]+'</div><div class="s">'+k[2]+'</div></div>'}).join('');
     var st=(a.statements||[]).slice().reverse(); // oldest first
     series=[['Start',con]].concat(st.map(function(x){return [x.period,Number(x.closing_balance)||0]}));
     if(con<=0) series=series.slice(1);
