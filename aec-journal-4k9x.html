@@ -195,7 +195,7 @@ section[hidden]{display:none}
 <div class="wrap">
   <header class="mast">
     <div class="mast-row">
-      <div class="brand">TRADING JOURNAL<small>Paper trading · Ascenda Enterprise Capital</small></div>
+      <div class="brand">TRADING JOURNAL<small>Private · Ascenda Enterprise Capital</small></div>
       <div class="mast-actions">
         <button class="icon-btn" id="outBtn" aria-label="Sign out" title="Sign out" style="width:auto;padding:0 .8rem;font-size:.7rem;letter-spacing:.1em">SIGN OUT</button>
         <button class="icon-btn" id="themeBtn" aria-label="Switch light and dark theme" title="Theme">◐</button>
@@ -262,6 +262,18 @@ section[hidden]{display:none}
       <p style="color:var(--fg3);font-size:12px;margin-top:10px">Simulated trading. Times are Eastern. Realized P&amp;L only: open positions are not included, so the total differs from the account value change.</p>
     </section>
 
+    <!-- DEALS -->
+    <section id="t-deals" hidden>
+      <div class="hello"><div class="eyebrow">Real estate</div><h1>Your deals</h1>
+        <p>Every wholesale and flip deal on file. Profit is sale price minus purchase, rehab, holding, closing and other costs. Open deals show projected profit from the after-repair value (ARV).</p></div>
+      <div class="kpis" id="dkpis"></div>
+      <div class="panel">
+        <div class="panel-head"><h2>All deals</h2><span class="pill" id="dCount">0 deals</span></div>
+        <div class="tablewrap"><table><thead><tr><th>Address</th><th>Type</th><th>Status</th><th>Closed</th><th class="r">Purchase</th><th class="r">Costs</th><th class="r">Sale / ARV</th><th class="r">Profit</th></tr></thead><tbody id="deals"></tbody></table></div>
+      </div>
+      <p style="color:var(--fg3);font-size:12px;margin-top:10px" id="dNote">Deals come from the Real Estate portal. Add or edit them there and they appear here.</p>
+    </section>
+
     <!-- STATEMENTS -->
     <section id="t-statements" hidden>
       <div class="hello"><div class="eyebrow">Statements</div><h1>Monthly statements</h1></div>
@@ -316,7 +328,7 @@ section[hidden]{display:none}
       </div>
     </section>
 
-    <p class="legal">Ascenda Enterprise Capital LLC. This page shows a simulated (paper) trading account at Interactive Brokers. Simulated results have inherent limitations, do not reflect actual trading, and are not a guarantee of future results. Nothing here is an offer to sell or a solicitation to buy any security or a recommendation for any person.</p>
+    <p class="legal">Ascenda Enterprise Capital LLC. Trading figures on this page come from a simulated (paper) Interactive Brokers account. Real estate figures are deal records entered by Ascenda. Simulated results have inherent limitations, do not reflect actual trading, and are not a guarantee of future results. Nothing here is an offer to sell or a solicitation to buy any security or a recommendation for any person.</p>
   </main>
 </div>
 </div>
@@ -324,7 +336,7 @@ section[hidden]{display:none}
 <script>
 (function(){
   var API='https://aec-portal-api.ascendaenterprise.workers.dev';
-  var TABS=[['overview','Overview'],['trades','Trades'],['statements','Statements']];
+  var TABS=[['overview','Overview'],['trades','Trades'],['deals','Real estate'],['statements','Statements']];
   var $=function(id){return document.getElementById(id)};
   var fmt=function(n,d){return '$'+Number(n).toLocaleString('en-US',{minimumFractionDigits:d||0,maximumFractionDigits:d||0})};
   var s2=function(n){return (n>=0?'+':'-')+fmt(Math.abs(n),2)};
@@ -380,7 +392,24 @@ section[hidden]{display:none}
     $('obCount').textContent=steps.filter(function(s){return s[2]}).length+' of '+steps.length+' complete';
     $('thread').innerHTML='<div class="msg"><div>Welcome. Send a message here and it goes straight to Izaiah.</div><small>Ascenda</small></div>';
   }
-  function enter(a){$('gate').hidden=true; $('app').hidden=false; render(a); show('overview'); draw()}
+  function loadDeals(){
+    api('/re/deals').then(function(r){
+      var d=(r.s===200&&r.j.deals)?r.j.deals:[]; if(r.s!==200){ $('dNote').textContent='Could not load deals ('+(r.j.error||r.s)+').'; }
+      var money=function(v){return v===null||v===undefined||v===''?0:Number(v)||0}, rows='', real=0, closedN=0, pipe=0, openN=0;
+      d.forEach(function(x){
+        var cost=money(x.purchase_price)+money(x.rehab_cost)+money(x.holding_cost)+money(x.closing_cost)+money(x.other_cost);
+        var isClosed=x.status==='closed'&&money(x.sale_price)>0, basis=isClosed?money(x.sale_price):money(x.arv), p=basis?basis-cost:0;
+        if(isClosed){real+=p; closedN++} else {openN++; pipe+=p}
+        x._p=p; x._c=cost; x._b=basis; x._closed=isClosed;
+      });
+      d.sort(function(a,b){return String(b.close_date||b.contract_date||'').localeCompare(String(a.close_date||a.contract_date||''))});
+      rows=d.map(function(x){return '<tr><td>'+esc(x.address)+(x.city?'<br><small style="color:var(--fg3)">'+esc(x.city)+'</small>':'')+'</td><td>'+esc(x.type||'-')+'</td><td><span class="pill">'+esc(x.status)+'</span></td><td class="num">'+esc(x.close_date||x.contract_date||'-')+'</td><td class="r num">'+fmt(money(x.purchase_price))+'</td><td class="r num">'+fmt(x._c-money(x.purchase_price))+'</td><td class="r num">'+(x._b?fmt(x._b):'-')+(x._closed?'':'<br><small style="color:var(--fg3)">ARV</small>')+'</td><td class="r num '+(x._p>0?'up':x._p<0?'dn':'')+'">'+(x._b?sgn(x._p):'-')+'</td></tr>'}).join('');
+      $('deals').innerHTML=rows||'<tr><td colspan="8" style="color:var(--fg3)">No deals on file yet.</td></tr>';
+      $('dCount').textContent=d.length+(d.length===1?' deal':' deals');
+      $('dkpis').innerHTML=[['Deals',String(d.length),closedN+' closed, '+openN+' open',''],['Realized profit',closedN?sgn(real):'-','On closed deals',real>0?'up':(real<0?'dn':'')],['Avg per closed deal',closedN?sgn(real/closedN):'-','',real>0?'up':(real<0?'dn':'')],['Pipeline (projected)',openN?sgn(pipe):'-','From ARV on open deals',pipe>0?'up':(pipe<0?'dn':'')]].map(function(k){return '<div class="kpi"><div class="eyebrow">'+k[0]+'</div><div class="v num '+k[3]+'">'+k[1]+'</div><div class="s">'+k[2]+'</div></div>'}).join('');
+    }).catch(function(){});
+  }
+  function enter(a){$('gate').hidden=true; $('app').hidden=false; render(a); loadDeals(); show('overview'); draw()}
   function signOut(){var t=token; token=''; try{sessionStorage.removeItem('nle_token');sessionStorage.removeItem('nle_role')}catch(e){} if(t) fetch(API+'/logout',{method:'POST',headers:{Authorization:'Bearer '+t}}).catch(function(){}); $('app').hidden=true; $('gate').hidden=false; $('codeField').hidden=true; $('pass').value=''; $('gateBtn').textContent='Email me a code'; $('gateNote').textContent='Signed out.'}
   $('outBtn').addEventListener('click',signOut);
   var step=1;
@@ -389,8 +418,8 @@ section[hidden]{display:none}
         if(r.s===200){step=2; $('codeField').hidden=false; $('pass').focus(); btn.textContent='Sign in'; note.textContent='If that email is approved, a code is on its way. It expires in 10 minutes.'} else note.textContent=r.j.error||'Something went wrong. Try again.'}).catch(function(){btn.disabled=false; note.textContent='Could not reach the server. Try again.'}) }
     else { api('/otp/verify',{method:'POST',body:{email:email,code:$('pass').value.trim()}}).then(function(r){
         if(r.s!==200||!r.j.token){btn.disabled=false; note.textContent=r.j.error||'Invalid or expired code.'; return}
-        if(r.j.role!=='client'){ var t0=r.j.token; fetch(API+'/logout',{method:'POST',headers:{Authorization:'Bearer '+t0}}).catch(function(){}); btn.disabled=false; step=1; $('codeField').hidden=true; $('pass').value=''; btn.textContent='Email me a code'; note.textContent='This journal is a separate private page. Use the portal for your account.'; return }
-        token=r.j.token; try{sessionStorage.setItem('nle_token',token); sessionStorage.setItem('nle_role','client')}catch(e){}
+        if(r.j.role!=='admin'){ var t0=r.j.token; fetch(API+'/logout',{method:'POST',headers:{Authorization:'Bearer '+t0}}).catch(function(){}); btn.disabled=false; step=1; $('codeField').hidden=true; $('pass').value=''; btn.textContent='Email me a code'; note.textContent='This journal is private. Use the client portal for your account.'; return }
+        token=r.j.token; try{sessionStorage.setItem('nle_token',token); sessionStorage.setItem('nle_role','admin')}catch(e){}
         return api('/account').then(function(a){btn.disabled=false; step=1; if(a.s===200) enter(a.j); else note.textContent='Could not load your account.'}) }).catch(function(){btn.disabled=false; note.textContent='Could not reach the server. Try again.'}) }
   });
   $('composeForm').addEventListener('submit',function(e){e.preventDefault(); var t=$('msgText').value.trim(), n=$('msgNote'); if(!t){n.textContent='Write a message first.';return}
@@ -401,7 +430,7 @@ section[hidden]{display:none}
   /* resume session */
   $('app').hidden=true; $('gate').hidden=false;
   var role=''; try{role=sessionStorage.getItem('nle_role')||''}catch(e){}
-  if(token&&role!=='client'){ token=''; try{sessionStorage.removeItem('nle_token')}catch(e){} }
+  if(token&&role!=='admin'){ token=''; try{sessionStorage.removeItem('nle_token')}catch(e){} }
   if(token) api('/account').then(function(a){ if(a.s===200) enter(a.j); else { token=''; try{sessionStorage.removeItem('nle_token')}catch(e){} } }).catch(function(){});
 })();
 </script>
