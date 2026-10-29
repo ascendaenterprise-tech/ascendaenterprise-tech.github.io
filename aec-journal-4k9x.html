@@ -265,11 +265,11 @@ section[hidden]{display:none}
     <!-- DEALS -->
     <section id="t-deals" hidden>
       <div class="hello"><div class="eyebrow">Real estate</div><h1>Your deals</h1>
-        <p>Every wholesale and flip deal on file. Profit is sale price minus purchase, rehab, holding, closing and other costs. Open deals show projected profit from the after-repair value (ARV).</p></div>
+        <p>Every wholesale and flip deal on file. Open wholesale deals show the asking price, the after-repair value (ARV) and the equity a buyer would have. Closed deals show profit after all costs.</p></div>
       <div class="kpis" id="dkpis"></div>
       <div class="panel">
         <div class="panel-head"><h2>All deals</h2><span class="pill" id="dCount">0 deals</span></div>
-        <div class="tablewrap"><table><thead><tr><th>Address</th><th>Type</th><th>Status</th><th>Closed</th><th class="r">Purchase</th><th class="r">Costs</th><th class="r">Sale / ARV</th><th class="r">Profit</th></tr></thead><tbody id="deals"></tbody></table></div>
+        <div class="tablewrap"><table><thead><tr><th>Address</th><th>Type</th><th>Status</th><th class="r">Price</th><th class="r">ARV</th><th class="r">Profit / equity</th></tr></thead><tbody id="deals"></tbody></table></div>
       </div>
       <p style="color:var(--fg3);font-size:12px;margin-top:10px" id="dNote">Deals come from the Real Estate portal. Add or edit them there and they appear here.</p>
     </section>
@@ -395,18 +395,22 @@ section[hidden]{display:none}
   function loadDeals(){
     api('/re/deals').then(function(r){
       var d=(r.s===200&&r.j.deals)?r.j.deals:[]; if(r.s!==200){ $('dNote').textContent='Could not load deals ('+(r.j.error||r.s)+').'; }
-      var money=function(v){return v===null||v===undefined||v===''?0:Number(v)||0}, rows='', real=0, closedN=0, pipe=0, openN=0;
+      var m=function(v){return v===null||v===undefined||v===''?0:Number(v)||0}, real=0, closedN=0, openN=0, ask=0, eq=0, eqN=0;
       d.forEach(function(x){
-        var cost=money(x.purchase_price)+money(x.rehab_cost)+money(x.holding_cost)+money(x.closing_cost)+money(x.other_cost);
-        var isClosed=x.status==='closed'&&money(x.sale_price)>0, basis=isClosed?money(x.sale_price):money(x.arv), p=basis?basis-cost:0;
-        if(isClosed){real+=p; closedN++} else {openN++; pipe+=p}
-        x._p=p; x._c=cost; x._b=basis; x._closed=isClosed;
+        var cost=m(x.purchase_price)+m(x.rehab_cost)+m(x.holding_cost)+m(x.closing_cost)+m(x.other_cost);
+        x._closed=x.status==='closed'&&m(x.sale_price)>0; x._cost=cost;
+        if(x._closed){ x._p=m(x.sale_price)-cost; x._pl='Profit'; real+=x._p; closedN++ }
+        else { openN++; ask+=m(x.sale_price);
+          if(m(x.purchase_price)>0&&m(x.arv)>0){ x._p=m(x.arv)-cost; x._pl='Projected' }
+          else if(m(x.sale_price)>0&&m(x.arv)>0){ x._p=m(x.arv)-m(x.sale_price); x._pl='Buyer equity'; eq+=x._p; eqN++ }
+          else { x._p=null; x._pl='' } }
       });
-      d.sort(function(a,b){return String(b.close_date||b.contract_date||'').localeCompare(String(a.close_date||a.contract_date||''))});
-      rows=d.map(function(x){return '<tr><td>'+esc(x.address)+(x.city?'<br><small style="color:var(--fg3)">'+esc(x.city)+'</small>':'')+'</td><td>'+esc(x.type||'-')+'</td><td><span class="pill">'+esc(x.status)+'</span></td><td class="num">'+esc(x.close_date||x.contract_date||'-')+'</td><td class="r num">'+fmt(money(x.purchase_price))+'</td><td class="r num">'+fmt(x._c-money(x.purchase_price))+'</td><td class="r num">'+(x._b?fmt(x._b):'-')+(x._closed?'':'<br><small style="color:var(--fg3)">ARV</small>')+'</td><td class="r num '+(x._p>0?'up':x._p<0?'dn':'')+'">'+(x._b?sgn(x._p):'-')+'</td></tr>'}).join('');
-      $('deals').innerHTML=rows||'<tr><td colspan="8" style="color:var(--fg3)">No deals on file yet.</td></tr>';
+      d.sort(function(a,b){return String(b.close_date||b.contract_date||b.created_at||'').localeCompare(String(a.close_date||a.contract_date||a.created_at||''))});
+      var rows=d.map(function(x){var show=x._closed?m(x.sale_price):m(x.sale_price);
+        return '<tr><td>'+esc(x.address)+(x.city?'<br><small style="color:var(--fg3)">'+esc(x.city)+'</small>':'')+'</td><td>'+esc(x.type||'-')+'</td><td><span class="pill">'+esc(x.status)+'</span></td><td class="r num">'+(show?fmt(show):'-')+'<br><small style="color:var(--fg3)">'+(x._closed?'sold':'asking')+'</small></td><td class="r num">'+(m(x.arv)?fmt(m(x.arv)):'-')+'</td><td class="r num '+(x._p>0?'up':x._p<0?'dn':'')+'">'+(x._p===null?'-':sgn(x._p))+(x._pl?'<br><small style="color:var(--fg3)">'+x._pl+'</small>':'')+'</td></tr>'}).join('');
+      $('deals').innerHTML=rows||'<tr><td colspan="6" style="color:var(--fg3)">No deals on file yet.</td></tr>';
       $('dCount').textContent=d.length+(d.length===1?' deal':' deals');
-      $('dkpis').innerHTML=[['Deals',String(d.length),closedN+' closed, '+openN+' open',''],['Realized profit',closedN?sgn(real):'-','On closed deals',real>0?'up':(real<0?'dn':'')],['Avg per closed deal',closedN?sgn(real/closedN):'-','',real>0?'up':(real<0?'dn':'')],['Pipeline (projected)',openN?sgn(pipe):'-','From ARV on open deals',pipe>0?'up':(pipe<0?'dn':'')]].map(function(k){return '<div class="kpi"><div class="eyebrow">'+k[0]+'</div><div class="v num '+k[3]+'">'+k[1]+'</div><div class="s">'+k[2]+'</div></div>'}).join('');
+      $('dkpis').innerHTML=[['Deals',String(d.length),closedN+' closed, '+openN+' open',''],['On the market',String(openN),'Asking total '+fmt(ask),''],['Avg buyer equity',eqN?fmt(eq/eqN):'-','ARV minus asking price',eq>0?'up':''],['Realized profit',closedN?sgn(real):'-','On closed deals',real>0?'up':(real<0?'dn':'')]].map(function(k){return '<div class="kpi"><div class="eyebrow">'+k[0]+'</div><div class="v num '+k[3]+'">'+k[1]+'</div><div class="s">'+k[2]+'</div></div>'}).join('');
     }).catch(function(){});
   }
   function enter(a){$('gate').hidden=true; $('app').hidden=false; render(a); loadDeals(); show('overview'); draw()}
