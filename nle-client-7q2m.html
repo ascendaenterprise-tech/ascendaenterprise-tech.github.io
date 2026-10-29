@@ -261,6 +261,18 @@ section[hidden]{display:none}
       </div>
     </section>
 
+    <!-- TRADES -->
+    <section id="t-trades" hidden>
+      <div class="hello"><div class="eyebrow">Trades</div><h1>Your trade log</h1>
+        <p>Every trade on your account, from the broker's trade report. Profit and loss are shown before and after fees.</p></div>
+      <div class="kpis" id="tkpis"></div>
+      <div class="panel">
+        <div class="panel-head"><h2>All trades</h2><span class="pill" id="tCount">0 trades</span></div>
+        <div class="tablewrap"><table><thead><tr><th>Closed</th><th>Market</th><th>Side</th><th class="r">Qty</th><th class="r">Entry</th><th class="r">Exit</th><th class="r">P&amp;L</th><th class="r">Fees</th><th class="r">Net</th></tr></thead><tbody id="trades"></tbody></table></div>
+      </div>
+      <p style="color:var(--fg3);font-size:12px;margin-top:10px">Times are Eastern. Trades are added after each trading day or statement. Figures come from the broker's report and may differ slightly from your final statement.</p>
+    </section>
+
     <!-- STATEMENTS -->
     <section id="t-statements" hidden>
       <div class="hello"><div class="eyebrow">Statements</div><h1>Monthly statements</h1></div>
@@ -323,9 +335,10 @@ section[hidden]{display:none}
 <script>
 (function(){
   var API='https://aec-portal-api.ascendaenterprise.workers.dev';
-  var TABS=[['overview','Overview'],['signals','Signals'],['statements','Statements'],['realestate','Real Estate'],['documents','Documents'],['messages','Messages'],['account','Account']];
+  var TABS=[['overview','Overview'],['signals','Signals'],['trades','Trades'],['statements','Statements'],['realestate','Real Estate'],['documents','Documents'],['messages','Messages'],['account','Account']];
   var $=function(id){return document.getElementById(id)};
   var fmt=function(n,d){return '$'+Number(n).toLocaleString('en-US',{minimumFractionDigits:d||0,maximumFractionDigits:d||0})};
+  var s2=function(n){return (n>=0?'+':'-')+fmt(Math.abs(n),2)};
   var sgn=function(n){return (n>=0?'+':'-')+fmt(Math.abs(n))};
   var esc=function(t){return String(t).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})};
   var token=''; try{token=sessionStorage.getItem('nle_token')||''}catch(e){}
@@ -365,6 +378,10 @@ section[hidden]{display:none}
     $('ddNow').textContent=series.length>1?(dd*100).toFixed(1)+'%':'0.0%'; $('ddBar').style.width=Math.min(100,Math.abs(dd)/0.16*100)+'%';
     $('activity').innerHTML=(a.statements||[]).slice(0,5).map(function(x){var c=(Number(x.closing_balance)||0)-(Number(x.opening_balance)||0);return '<tr><td class="num">'+esc(x.period)+'</td><td>Monthly statement</td><td class="r num '+(c>0?'up':c<0?'dn':'')+'">'+(c?sgn(c):'-')+'</td></tr>'}).join('')||'<tr><td colspan="3" style="color:var(--fg3)">No activity yet. Your first statement will appear here.</td></tr>';
     $('statements').innerHTML=(a.statements||[]).map(function(x){var o=Number(x.opening_balance)||0,c=Number(x.closing_balance)||0,d=c-o;return '<tr><td>'+esc(x.period)+'</td><td class="r num">'+fmt(o)+'</td><td class="r num">'+fmt(c)+'</td><td class="r num '+(d>0?'up':d<0?'dn':'')+'">'+(d?sgn(d):'-')+'</td><td><span class="pill">'+esc(x.status||'')+'</span></td></tr>'}).join('')||'<tr><td colspan="5" style="color:var(--fg3)">No statements yet.</td></tr>';
+    var tr=a.trades||[], tg=0,tf=0,tw=0; tr.forEach(function(x){tg+=Number(x.pnl)||0; tf+=Number(x.fees)||0; if((Number(x.pnl)||0)-(Number(x.fees)||0)>0) tw++});
+    $('tkpis').innerHTML=[['Trades',String(tr.length),'All time',''],['Win rate',tr.length?Math.round(tw/tr.length*100)+'%':'-',tw+' of '+tr.length+' after fees',''],['Gross P&L',tr.length?s2(tg):'-','Before fees',tg>0?'up':(tg<0?'dn':'')],['Net P&L',tr.length?s2(tg-tf):'-','After '+fmt(tf,2)+' fees',(tg-tf)>0?'up':((tg-tf)<0?'dn':'')]].map(function(k){return '<div class="kpi"><div class="eyebrow">'+k[0]+'</div><div class="v num '+k[3]+'">'+k[1]+'</div><div class="s">'+k[2]+'</div></div>'}).join('');
+    $('tCount').textContent=tr.length+(tr.length===1?' trade':' trades');
+    $('trades').innerHTML=tr.map(function(x){var g=Number(x.pnl)||0,f=Number(x.fees)||0,n=g-f,px=function(v){return Number(v).toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2})}; return '<tr><td class="num">'+esc(String(x.closed_at||'').slice(0,16))+'</td><td>'+esc(x.symbol)+'</td><td>'+esc(x.side)+'</td><td class="r num">'+esc(x.qty)+'</td><td class="r num">'+px(x.entry_price)+'</td><td class="r num">'+px(x.exit_price)+'</td><td class="r num '+(g>0?'up':g<0?'dn':'')+'">'+s2(g)+'</td><td class="r num">'+fmt(f,2)+'</td><td class="r num '+(n>0?'up':n<0?'dn':'')+'">'+s2(n)+'</td></tr>'}).join('')||'<tr><td colspan="9" style="color:var(--fg3)">No trades yet. Your trades will appear here after your first trading day.</td></tr>';
     $('signals').innerHTML='<tr><td colspan="6" style="color:var(--fg3)">No signals yet. The signal log starts when signals are issued to your account.</td></tr>';
     $('rePart').innerHTML='<tr><td colspan="5" style="color:var(--fg3)">No participations yet. Deals appear here once a signed participation agreement is on file.</td></tr>';
     $('reDeals').innerHTML='<div class="doc"><b>No open deals right now</b><span>Ascenda will list deals here when they are available to you.</span></div>';
