@@ -1,0 +1,408 @@
+<title>Ascenda Trading Journal</title>
+<meta name="robots" content="noindex, nofollow">
+<style>[hidden]{display:none!important}html{-webkit-text-size-adjust:100%}</style>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=DM+Mono:wght@400;500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+/* Layout: sticky masthead, horizontal tab rail, single-column content with a main chart panel beside an advisor card.
+   Look follows the existing AEC investor portal: black and white, Cormorant display, Jost body, DM Mono data. */
+:root{
+  --bg:#070707; --surface:#0e0e0e; --surface2:#151515; --line:rgba(255,255,255,.12); --line2:rgba(255,255,255,.26);
+  --fg:#f4f4f2; --fg2:rgba(244,244,242,.68); --fg3:rgba(244,244,242,.42);
+  --accent:#ffffff; --on-accent:#070707; --up:#52d490; --dn:#ef6f60; --warn:#e3b341;
+  --display:'Cormorant Garamond',Georgia,serif; --body:'Jost',system-ui,sans-serif; --mono:'DM Mono',ui-monospace,monospace;
+  color-scheme:dark;
+}
+@media (prefers-color-scheme: light){ :root:not([data-theme="dark"]){
+  --bg:#f5f5f2; --surface:#ffffff; --surface2:#ececE8; --line:rgba(10,10,10,.14); --line2:rgba(10,10,10,.34);
+  --fg:#0b0b0b; --fg2:rgba(11,11,11,.7); --fg3:rgba(11,11,11,.46);
+  --accent:#0b0b0b; --on-accent:#ffffff; --up:#13804a; --dn:#b83a2d; --warn:#8a6508; color-scheme:light; } }
+:root[data-theme="light"]{
+  --bg:#f5f5f2; --surface:#ffffff; --surface2:#ececE8; --line:rgba(10,10,10,.14); --line2:rgba(10,10,10,.34);
+  --fg:#0b0b0b; --fg2:rgba(11,11,11,.7); --fg3:rgba(11,11,11,.46);
+  --accent:#0b0b0b; --on-accent:#ffffff; --up:#13804a; --dn:#b83a2d; --warn:#8a6508; color-scheme:light; }
+:root[data-theme="dark"]{
+  --bg:#070707; --surface:#0e0e0e; --surface2:#151515; --line:rgba(255,255,255,.12); --line2:rgba(255,255,255,.26);
+  --fg:#f4f4f2; --fg2:rgba(244,244,242,.68); --fg3:rgba(244,244,242,.42);
+  --accent:#ffffff; --on-accent:#070707; --up:#52d490; --dn:#ef6f60; --warn:#e3b341; color-scheme:dark; }
+
+*,*::before,*::after{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font-family:var(--body);font-weight:300;font-size:15px;line-height:1.55;margin:0;padding-inline:16px;padding-block:0 3rem}
+h1,h2,h3,p{margin:0}
+button{font:inherit;color:inherit;cursor:pointer}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.wrap{max-width:1120px;margin-inline:auto}
+.num{font-family:var(--mono);font-variant-numeric:tabular-nums}
+.eyebrow{font-family:var(--mono);font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;color:var(--fg3)}
+
+/* gate */
+#gate{min-height:100vh;display:grid;place-items:center;padding-block:2rem}
+.gate-card{width:100%;max-width:420px;background:var(--surface);border:1px solid var(--line);padding:2.5rem 2rem;display:grid;gap:.9rem}
+.brand{font-family:var(--display);font-size:1.9rem;letter-spacing:.14em;font-weight:400}
+.gate-card h1{font-family:var(--display);font-size:1.7rem;font-weight:300}
+.field{display:grid;gap:.3rem}
+.field label{font-family:var(--mono);font-size:.64rem;letter-spacing:.16em;text-transform:uppercase;color:var(--fg3)}
+.field input{background:var(--surface2);border:1px solid var(--line);color:var(--fg);padding:.8rem .9rem;font:inherit;border-radius:0}
+.field input:focus{border-color:var(--accent);outline:none}
+.btn{background:var(--accent);color:var(--on-accent);border:0;padding:.9rem 1.2rem;font-family:var(--mono);font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;font-weight:500}
+.btn:hover{opacity:.88}
+.btn.ghost{background:transparent;color:var(--fg);border:1px solid var(--line2)}
+.btn.small{padding:.55rem .9rem;font-size:.66rem}
+.demo-note{font-size:.8rem;color:var(--fg3)}
+
+/* masthead */
+header.mast{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--bg);border-bottom:1px solid var(--line);margin-inline:-16px;padding:.8rem 16px 0}
+.mast-row{display:flex;align-items:center;justify-content:space-between;gap:1rem}
+.mast .brand{font-size:1.25rem}
+.mast .brand small{display:block;font-family:var(--mono);font-size:.56rem;letter-spacing:.24em;color:var(--fg3);text-transform:uppercase;margin-top:-.15rem}
+.mast-actions{display:flex;gap:.6rem;align-items:center}
+.icon-btn{width:36px;height:36px;border:1px solid var(--line);background:transparent;border-radius:50%;display:grid;place-items:center;font-size:.9rem}
+.icon-btn:hover{border-color:var(--accent)}
+nav.tabs{display:flex;gap:.25rem;overflow-x:auto;scrollbar-width:none;margin-top:.7rem}
+nav.tabs::-webkit-scrollbar{display:none}
+nav.tabs button{background:none;border:0;border-bottom:2px solid transparent;padding:.7rem .9rem;font-family:var(--mono);font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;color:var(--fg3);white-space:nowrap}
+nav.tabs button[aria-selected="true"]{color:var(--fg);border-bottom-color:var(--accent)}
+nav.tabs button:hover{color:var(--fg)}
+
+main{padding-top:2rem}
+.banner{font-family:var(--mono);font-size:.68rem;letter-spacing:.06em;color:var(--warn);border:1px solid var(--line);padding:.55rem .8rem;margin-bottom:1.6rem}
+.hello{display:grid;gap:.35rem;margin-bottom:1.8rem}
+.hello h1{font-family:var(--display);font-weight:300;font-size:clamp(2rem,5vw,3rem);line-height:1.1;text-wrap:balance}
+.hello p{color:var(--fg2)}
+
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);margin-bottom:1.5rem}
+.kpi{background:var(--surface);padding:1.3rem 1.3rem 1.1rem;min-width:0}
+.kpi .v{font-family:var(--display);font-size:2.1rem;font-weight:400;line-height:1.1;margin-top:.45rem;overflow-wrap:anywhere}
+.kpi .s{font-size:.78rem;color:var(--fg3);margin-top:.2rem}
+.up{color:var(--up)} .dn{color:var(--dn)}
+
+.grid{display:grid;grid-template-columns:minmax(0,2fr) minmax(0,1fr);gap:1.5rem;align-items:start}
+@media (max-width:860px){.grid{grid-template-columns:minmax(0,1fr)}}
+.panel{background:var(--surface);border:1px solid var(--line);padding:1.4rem;min-width:0}
+.panel + .panel{margin-top:1.5rem}
+.panel h2{font-family:var(--display);font-weight:400;font-size:1.4rem}
+.panel-head{display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap;margin-bottom:1rem}
+.seg{display:flex;border:1px solid var(--line)}
+.seg button{background:none;border:0;padding:.4rem .75rem;font-family:var(--mono);font-size:.66rem;letter-spacing:.1em;color:var(--fg3)}
+.seg button[aria-pressed="true"]{background:var(--accent);color:var(--on-accent)}
+#chart{width:100%;height:auto;display:block}
+.chart-foot{display:flex;flex-wrap:wrap;gap:1.5rem;margin-top:1rem;padding-top:1rem;border-top:1px solid var(--line)}
+.chart-foot div{display:grid;gap:.1rem}
+.chart-foot b{font-family:var(--mono);font-weight:500;font-size:.95rem}
+
+.advisor{display:grid;gap:.8rem}
+.advisor .who{font-family:var(--display);font-size:1.5rem}
+.copyrow{display:flex;align-items:center;justify-content:space-between;gap:.6rem;border:1px solid var(--line);padding:.55rem .7rem;font-family:var(--mono);font-size:.78rem;overflow-wrap:anywhere}
+.copyrow button{background:none;border:0;font-family:var(--mono);font-size:.64rem;letter-spacing:.12em;text-transform:uppercase;color:var(--fg2);flex:none}
+.copyrow button:hover{color:var(--fg)}
+
+.tablewrap{overflow-x:auto}
+table{width:100%;border-collapse:collapse;min-width:520px}
+th{font-family:var(--mono);font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;color:var(--fg3);text-align:left;padding:.7rem .8rem;border-bottom:1px solid var(--line2);font-weight:400}
+td{padding:.8rem;border-bottom:1px solid var(--line);font-size:.9rem}
+td.r,th.r{text-align:right}
+tr:hover td{background:var(--surface2)}
+.pill{display:inline-block;font-family:var(--mono);font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;border:1px solid var(--line2);padding:.15rem .5rem}
+.pill.up{border-color:var(--up)} .pill.dn{border-color:var(--dn)} .pill.warn{color:var(--warn);border-color:var(--warn)}
+
+.docs{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:1px;background:var(--line);border:1px solid var(--line)}
+.doc{background:var(--surface);padding:1.2rem;display:grid;gap:.25rem;min-width:0}
+.doc b{font-weight:400}
+.doc span{font-family:var(--mono);font-size:.68rem;color:var(--fg3)}
+
+.steps{list-style:none;margin:0;padding:0;display:grid;gap:0}
+.steps li{display:grid;grid-template-columns:auto 1fr auto;gap:.9rem;align-items:center;padding:.95rem 0;border-bottom:1px solid var(--line)}
+.dot{width:20px;height:20px;border-radius:50%;border:1px solid var(--line2);display:grid;place-items:center;font-size:.7rem}
+.dot.done{background:var(--up);border-color:var(--up);color:#06140c}
+.steps small{display:block;color:var(--fg3);font-size:.8rem}
+
+.thread{display:grid;gap:.8rem;margin-bottom:1rem}
+.msg{max-width:78%;padding:.8rem 1rem;border:1px solid var(--line);background:var(--surface2)}
+.msg.me{margin-left:auto;background:var(--surface);border-color:var(--line2)}
+.msg small{display:block;font-family:var(--mono);font-size:.62rem;color:var(--fg3);margin-top:.35rem}
+textarea{width:100%;min-height:90px;background:var(--surface2);border:1px solid var(--line);color:var(--fg);padding:.8rem;font:inherit;resize:vertical;border-radius:0}
+textarea:focus{border-color:var(--accent);outline:none}
+.compose{display:grid;gap:.6rem}
+
+.legal{margin-top:2.5rem;padding-top:1.2rem;border-top:1px solid var(--line);font-size:.74rem;color:var(--fg3);line-height:1.7;max-width:80ch}
+section[hidden]{display:none}
+@media (prefers-reduced-motion:no-preference){ .panel,.kpis{animation:rise .35s ease both} @keyframes rise{from{opacity:.001;transform:translateY(6px)}to{opacity:1;transform:none}} }
+</style>
+
+<style id="aecOpenCss">
+#aecOpen{position:fixed;inset:0;z-index:2147483000;overflow:hidden;perspective:1200px;background:#070707;color:#f2f0ea;cursor:pointer;
+  transition:transform .95s cubic-bezier(.77,0,.18,1);will-change:transform}
+#aecOpen.go{transform:translateX(108%) skewX(-14deg)}
+#aecOpen .grain{position:absolute;inset:0;background:radial-gradient(ellipse at 50% 42%,rgba(255,255,255,.07),rgba(7,7,7,0) 62%);}
+#aecOpen .rule{position:absolute;left:50%;top:0;width:1px;height:0;background:linear-gradient(#f2f0ea,rgba(242,240,234,0));animation:aoRule 1s .05s cubic-bezier(.3,.7,.2,1) forwards}
+@keyframes aoRule{to{height:calc(50% - 90px)}}
+#aecOpen .stage{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1.15rem;transform-style:preserve-3d}
+#aecOpen svg{width:min(32vw,160px);min-width:104px;height:auto;overflow:visible;filter:drop-shadow(0 18px 22px rgba(0,0,0,.6))}
+#aecOpen polygon{fill:none;stroke:#f2f0ea;stroke-linejoin:miter;transform-box:fill-box;transform-origin:center;opacity:0;animation:aoDrop .85s cubic-bezier(.22,.9,.24,1.1) forwards}
+#aecOpen polygon:nth-child(1){animation-delay:.2s}#aecOpen polygon:nth-child(2){animation-delay:.34s}#aecOpen polygon:nth-child(3){animation-delay:.48s}#aecOpen polygon:nth-child(4){animation-delay:.62s}#aecOpen polygon:nth-child(5){animation-delay:.76s}
+@keyframes aoDrop{0%{opacity:0;transform:translateY(-80vh) rotateZ(-25deg) scale(1.2)}60%{opacity:1}80%{transform:translateY(6px) rotateZ(0) scale(1)}100%{opacity:1;transform:none}}
+#aecOpen .word{font:500 clamp(.78rem,2.1vw,1.1rem)/1 'Helvetica Neue',Arial,sans-serif;letter-spacing:.44em;text-transform:uppercase;padding-left:.44em;opacity:0;transform:translateY(12px);animation:aoUp .7s 1.5s forwards;text-align:center}
+#aecOpen .sub{font:400 clamp(.6rem,1.5vw,.76rem)/1.6 ui-monospace,Menlo,monospace;letter-spacing:.2em;text-transform:uppercase;color:#9a978f;opacity:0;animation:aoUp .7s 1.85s forwards;text-align:center;padding:0 16px}
+@keyframes aoUp{to{opacity:1;transform:none}}
+#aecOpen .streak{position:absolute;top:-10%;bottom:-10%;width:34%;left:-45%;transform:skewX(-14deg);opacity:0;
+  background:linear-gradient(90deg,rgba(255,255,255,0),rgba(255,255,255,.22),rgba(255,255,255,0))}
+#aecOpen.sweep .streak{animation:aoStreak .75s cubic-bezier(.5,0,.2,1) forwards}
+@keyframes aoStreak{0%{left:-45%;opacity:0}15%{opacity:1}100%{left:120%;opacity:0}}
+#aecOpen .skip{position:absolute;right:max(16px,env(safe-area-inset-right,0px));bottom:max(16px,env(safe-area-inset-bottom,0px));background:none;border:1px solid rgba(242,240,234,.3);color:#c9c6bd;font:11px ui-monospace,Menlo,monospace;letter-spacing:.16em;text-transform:uppercase;padding:8px 12px;cursor:pointer;opacity:0;animation:aoUp .4s .6s forwards}
+@media (prefers-reduced-motion:reduce){#aecOpen{display:none!important}}
+</style>
+<div id="aecOpen" role="presentation" aria-hidden="true">
+  <div class="grain"></div><div class="rule"></div>
+  <div class="stage">
+    <svg viewBox="-72 -72 144 144"><polygon points="0,-66 66,0 0,66 -66,0" stroke-width="3.2"/><polygon points="0,-51 51,0 0,51 -51,0" stroke-width="2.8"/><polygon points="0,-37 37,0 0,37 -37,0" stroke-width="2.6"/><polygon points="0,-23 23,0 0,23 -23,0" stroke-width="2.4"/><polygon points="0,-9 9,0 0,9 -9,0" stroke-width="2.2"/></svg>
+    <div class="word">Trading Journal</div>
+    <div class="sub">Welcome · Paper trading account · Ascenda Enterprise Capital</div>
+  </div>
+  <div class="streak"></div>
+  <button class="skip" type="button">Skip</button>
+</div>
+<script>
+(function(){
+  var el=document.getElementById('aecOpen'); if(!el) return;
+  var seen=false; try{seen=sessionStorage.getItem('nleOpenSeen')==='1'}catch(e){}
+  var reduce=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if(seen||reduce||/[?&]nointro/.test(location.search)||location.hash){el.remove();return;}
+  try{sessionStorage.setItem('nleOpenSeen','1')}catch(e){}
+  var de=document.documentElement, prev=de.style.overflow; de.style.overflow='hidden';
+  var done=false;
+  function open(){ if(done) return; done=true; el.classList.add('sweep'); setTimeout(function(){el.classList.add('go')},260);
+    setTimeout(function(){de.style.overflow=prev; el.remove();},1500); }
+  setTimeout(open,3200); setTimeout(open,6000);
+  el.addEventListener('click',open); document.addEventListener('keydown',open,{once:true});
+})();
+</script>
+
+<div id="gate">
+  <form class="gate-card" id="gateForm" novalidate>
+    <div class="brand">TRADING JOURNAL</div>
+    <div class="eyebrow">Client Portal · Ascenda Enterprise Capital</div>
+    <h1>Sign in</h1>
+    <div class="field"><label for="email">Email</label><input id="email" type="email" autocomplete="username" required></div>
+    <div class="field" id="codeField" hidden><label for="pass">6-digit code (sent to your email)</label><input id="pass" type="text" inputmode="numeric" maxlength="6" autocomplete="one-time-code"></div>
+    <button class="btn" type="submit" id="gateBtn">Email me a code</button>
+    <p class="demo-note" id="gateNote">No password. Enter your email and we will send a one-time code. Only approved emails receive one.</p>
+  </form>
+</div>
+
+<div id="app" hidden>
+<div class="wrap">
+  <header class="mast">
+    <div class="mast-row">
+      <div class="brand">TRADING JOURNAL<small>Paper trading · Ascenda Enterprise Capital</small></div>
+      <div class="mast-actions">
+        <button class="icon-btn" id="outBtn" aria-label="Sign out" title="Sign out" style="width:auto;padding:0 .8rem;font-size:.7rem;letter-spacing:.1em">SIGN OUT</button>
+        <button class="icon-btn" id="themeBtn" aria-label="Switch light and dark theme" title="Theme">◐</button>
+        
+      </div>
+    </div>
+    <nav class="tabs" role="tablist" aria-label="Portal sections" id="tabs"></nav>
+  </header>
+
+  <main>
+
+    <!-- OVERVIEW -->
+    <section id="t-overview">
+      <div class="hello">
+        <div class="eyebrow" id="today"></div>
+        <h1 id="welcome">Welcome, Izaiah.</h1>
+        <p>Interactive Brokers paper trading account. <b>Simulated trading, not real money.</b> Figures come from the broker's activity statement, May 4 to Oct 28, 2026.</p>
+      </div>
+      <div class="kpis" id="kpis"></div>
+      <div class="grid">
+        <div>
+          <div class="panel">
+            <div class="panel-head">
+              <h2>Account value by statement</h2>
+            </div>
+            <svg id="chart" viewBox="0 0 720 300" role="img" aria-label="Account value over the selected range"></svg>
+            <div class="chart-foot" id="chartFoot"></div>
+          </div>
+          <div class="panel">
+            <div class="panel-head"><h2>Recent activity</h2></div>
+            <div class="tablewrap"><table><thead><tr><th>Date</th><th>Item</th><th class="r">Amount</th></tr></thead><tbody id="activity"></tbody></table></div>
+          </div>
+        </div>
+        <aside>
+          <div class="panel">
+            <div class="eyebrow">Account</div>
+            <div class="who">IBKR paper account</div>
+            <p style="color:var(--fg2)">Simulated trading. Positions and results do not involve real money and do not reflect real execution or liquidity.</p>
+            <span id="ddNow" hidden></span><div id="ddBar" hidden></div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- SIGNALS -->
+    <section id="t-signals" hidden>
+      <div class="hello"><div class="eyebrow">Signals</div><h1>Today and recent signals</h1>
+        <p>Signals are information only. You place your own orders at your own broker. Signals are not personalized advice.</p></div>
+      <div class="panel">
+        <div class="panel-head"><h2>Signal log</h2><span class="pill warn">Minimum $50,000 account</span></div>
+        <div class="tablewrap"><table><thead><tr><th>Date</th><th>Market</th><th>Direction</th><th class="r">Entry</th><th class="r">Exit</th><th class="r">Result</th></tr></thead><tbody id="signals"></tbody></table></div>
+      </div>
+    </section>
+
+    <!-- TRADES -->
+    <section id="t-trades" hidden>
+      <div class="hello"><div class="eyebrow">Trades</div><h1>Your trade log</h1>
+        <p>Every closed trade in your paper account, from the Interactive Brokers activity statement. Net P&amp;L matches the broker's realized P&amp;L (after fees). Entry prices are not in the broker's summary, so they show a dash.</p></div>
+      <div class="kpis" id="tkpis"></div>
+      <div class="panel">
+        <div class="panel-head"><h2>All trades</h2><span class="pill" id="tCount">0 trades</span></div>
+        <div class="tablewrap"><table><thead><tr><th>Closed</th><th>Market</th><th>Closed side</th><th class="r">Qty</th><th class="r">Entry</th><th class="r">Exit</th><th class="r">P&amp;L</th><th class="r">Fees</th><th class="r">Net</th></tr></thead><tbody id="trades"></tbody></table></div>
+      </div>
+      <p style="color:var(--fg3);font-size:12px;margin-top:10px">Simulated trading. Times are Eastern. Realized P&amp;L only: open positions are not included, so the total differs from the account value change.</p>
+    </section>
+
+    <!-- STATEMENTS -->
+    <section id="t-statements" hidden>
+      <div class="hello"><div class="eyebrow">Statements</div><h1>Monthly statements</h1></div>
+      <div class="panel"><div class="tablewrap"><table><thead><tr><th>Period</th><th class="r">Opening</th><th class="r">Closing</th><th class="r">Change</th><th>Status</th></tr></thead><tbody id="statements"></tbody></table></div></div>
+    </section>
+
+    <!-- REAL ESTATE -->
+    <section id="t-realestate" hidden>
+      <div class="hello"><div class="eyebrow">Real estate</div><h1>Your deals</h1><p>Deals you take part in appear here once a signed participation agreement is on file. Projected figures are hypothetical; closed deals show actual results.</p></div>
+      <div class="panel"><div class="panel-head"><h2>Your participations</h2><span class="pill" id="reCount">0 deals</span></div>
+      <div class="tablewrap"><table><thead><tr><th>Property</th><th>Your role</th><th class="r">Your amount</th><th>Status</th><th class="r">Result</th></tr></thead><tbody id="rePart"></tbody></table></div></div>
+      <div class="panel"><div class="panel-head"><h2>Available deals</h2><span class="pill" id="reOpen">0 open</span></div>
+      <div class="docs" id="reDeals"></div></div>
+    </section>
+
+    <!-- DOCUMENTS -->
+    <section id="t-documents" hidden>
+      <div class="hello"><div class="eyebrow">Documents</div><h1>Agreements and disclosures</h1></div>
+      <div class="docs" id="docs"></div>
+    </section>
+
+    <!-- MESSAGES -->
+    <section id="t-messages" hidden>
+      <div class="hello"><div class="eyebrow">Messages</div><h1>Talk to Ascenda</h1></div>
+      <div class="panel">
+        <div class="thread" id="thread"></div>
+        <form class="compose" id="composeForm">
+          <label class="eyebrow" for="msgText">New message</label>
+          <textarea id="msgText" placeholder="Write your question here"></textarea>
+          <div style="display:flex;gap:1rem;align-items:center;flex-wrap:wrap"><button class="btn small" type="submit">Send</button><span class="demo-note" id="msgNote">Your message is emailed to Izaiah. Replies come to your email.</span></div>
+        </form>
+      </div>
+    </section>
+
+    <!-- ACCOUNT -->
+    <section id="t-account" hidden>
+      <div class="hello"><div class="eyebrow">Account</div><h1>Setup and requirements</h1></div>
+      <div class="grid">
+        <div class="panel">
+          <div class="panel-head"><h2>Onboarding</h2><span class="pill up" id="obCount"></span></div>
+          <ul class="steps" id="steps"></ul>
+        </div>
+        <div class="panel">
+          <div class="eyebrow">Plan</div>
+          <div class="who" style="font-family:var(--display);font-size:1.5rem;margin:.4rem 0">Private Client · Custom</div>
+          <div style="display:grid;gap:.6rem;font-size:.9rem">
+            <div style="display:flex;justify-content:space-between"><span style="color:var(--fg2)">Minimum account</span><b class="num">$50,000</b></div>
+            <div style="display:flex;justify-content:space-between"><span style="color:var(--fg2)">Account type</span><b>Trust</b></div>
+            <div style="display:flex;justify-content:space-between"><span style="color:var(--fg2)">Trading authority</span><b>You only</b></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <p class="legal">Ascenda Enterprise Capital LLC. This page shows a simulated (paper) trading account at Interactive Brokers. Simulated results have inherent limitations, do not reflect actual trading, and are not a guarantee of future results. Nothing here is an offer to sell or a solicitation to buy any security or a recommendation for any person.</p>
+  </main>
+</div>
+</div>
+
+<script>
+(function(){
+  var API='https://aec-portal-api.ascendaenterprise.workers.dev';
+  var TABS=[['overview','Overview'],['trades','Trades'],['statements','Statements']];
+  var $=function(id){return document.getElementById(id)};
+  var fmt=function(n,d){return '$'+Number(n).toLocaleString('en-US',{minimumFractionDigits:d||0,maximumFractionDigits:d||0})};
+  var s2=function(n){return (n>=0?'+':'-')+fmt(Math.abs(n),2)};
+  var sgn=function(n){return (n>=0?'+':'-')+fmt(Math.abs(n))};
+  var esc=function(t){return String(t).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})};
+  var token=''; try{token=sessionStorage.getItem('nle_token')||''}catch(e){}
+  var tabBox=$('tabs');
+  TABS.forEach(function(t,i){var b=document.createElement('button'); b.type='button'; b.setAttribute('role','tab'); b.dataset.t=t[0]; b.textContent=t[1]; b.setAttribute('aria-selected',i===0?'true':'false'); tabBox.appendChild(b)});
+  function show(t){TABS.forEach(function(x){var s=$('t-'+x[0]); if(s) s.hidden=x[0]!==t}); Array.prototype.forEach.call(tabBox.children,function(b){b.setAttribute('aria-selected',b.dataset.t===t?'true':'false')}); window.scrollTo(0,0)}
+  tabBox.addEventListener('click',function(e){var b=e.target.closest('button'); if(b) show(b.dataset.t)});
+  document.addEventListener('click',function(e){var g=e.target.closest('[data-go]'); if(g) show(g.dataset.go)});
+  function api(path,opt){opt=opt||{}; var h={'Content-Type':'application/json'}; if(token) h.Authorization='Bearer '+token;
+    return fetch(API+path,{method:opt.method||'GET',headers:h,body:opt.body?JSON.stringify(opt.body):undefined}).then(function(r){return r.json().catch(function(){return {}}).then(function(j){return {s:r.status,j:j}})})}
+  function css(n){return getComputedStyle(document.documentElement).getPropertyValue(n).trim()}
+  var series=[];
+  function niceStep(r){var p=Math.pow(10,Math.floor(Math.log10(r))),m=r/p;return (m<1.5?1:m<3.5?2:m<7.5?5:10)*p}
+  function draw(){
+    var el=$('chart'); if(!series.length){el.innerHTML=''; return}
+    var W=720,H=300,L=92,R=16,T=16,B=30,ys=series.map(function(p){return p[1]}),n=ys.length;
+    var lo=Math.min.apply(null,ys),hi=Math.max.apply(null,ys); if(hi===lo){hi+=1000;lo-=1000} var pad=(hi-lo)*0.12; lo-=pad; hi+=pad;
+    var step=niceStep((hi-lo)/4),t0=Math.ceil(lo/step)*step,ticks=[]; for(var t=t0;t<=hi;t+=step) ticks.push(t);
+    var X=function(i){return n===1?(L+(W-L-R)/2):L+(W-L-R)*i/(n-1)},Y=function(y){return T+(H-T-B)*(1-(y-lo)/(hi-lo))};
+    var fg3=css('--fg3'),line=css('--line'),acc=css('--accent'),s='';
+    ticks.forEach(function(t){s+='<line x1="'+L+'" x2="'+(W-R)+'" y1="'+Y(t)+'" y2="'+Y(t)+'" stroke="'+line+'"/><text x="'+(L-8)+'" y="'+(Y(t)+4)+'" text-anchor="end" font-family="DM Mono, monospace" font-size="11" fill="'+fg3+'">'+fmt(t)+'</text>'});
+    if(n>1){s+='<path d="'+ys.map(function(y,i){return (i?'L':'M')+X(i).toFixed(1)+' '+Y(y).toFixed(1)}).join(' ')+'" fill="none" stroke="'+acc+'" stroke-width="2"/>'}
+    ys.forEach(function(y,i){s+='<circle cx="'+X(i)+'" cy="'+Y(y)+'" r="4" fill="'+acc+'"/>'});
+    [0,n-1].forEach(function(i,j){if(n===1&&j)return; s+='<text x="'+X(i)+'" y="'+(H-8)+'" text-anchor="'+(n===1?'middle':(j?'end':'start'))+'" font-family="DM Mono, monospace" font-size="11" fill="'+fg3+'">'+esc(series[i][0])+'</text>'});
+    el.innerHTML=s;
+  }
+  function render(a){
+    $('welcome').textContent='Welcome, '+String(a.name||'').split(' ')[0]+'.';
+    $('today').textContent=new Date().toLocaleDateString('en-US',{weekday:'long',month:'long',day:'numeric',year:'numeric'});
+    var bal=Number(a.currentBalance)||0,con=Number(a.totalContributed)||0,net=bal-con,pct=con?net/con*100:0;
+    $('kpis').innerHTML=[['Account value',fmt(bal),'Recorded balance',''],['Starting value',fmt(con),'May 4, 2026',''],['Net gain',sgn(net),pct.toFixed(1)+'% since May 4',net>0?'up':(net<0?'dn':'')],['Account','Paper','Simulated','']].map(function(k){return '<div class="kpi"><div class="eyebrow">'+k[0]+'</div><div class="v num '+k[3]+'">'+k[1]+'</div><div class="s">'+k[2]+'</div></div>'}).join('');
+    var st=(a.statements||[]).slice().reverse(); // oldest first
+    series=[['May 4',con]].concat(st.map(function(x){return [x.period,Number(x.closing_balance)||0]}));
+    if(con<=0) series=series.slice(1);
+    $('chartFoot').innerHTML=st.length?'':'<div><span class="eyebrow">History</span><b>Builds as statements are issued</b></div>';
+    var peak=Math.max.apply(null,series.map(function(p){return p[1]}).concat([0])), cur=series.length?series[series.length-1][1]:0, dd=peak?cur/peak-1:0;
+    $('ddNow').textContent=series.length>1?(dd*100).toFixed(1)+'%':'0.0%'; $('ddBar').style.width=Math.min(100,Math.abs(dd)/0.16*100)+'%';
+    $('activity').innerHTML=(a.statements||[]).slice(0,5).map(function(x){var c=(Number(x.closing_balance)||0)-(Number(x.opening_balance)||0);return '<tr><td class="num">'+esc(x.period)+'</td><td>Monthly statement</td><td class="r num '+(c>0?'up':c<0?'dn':'')+'">'+(c?sgn(c):'-')+'</td></tr>'}).join('')||'<tr><td colspan="3" style="color:var(--fg3)">No activity yet. Your first statement will appear here.</td></tr>';
+    $('statements').innerHTML=(a.statements||[]).map(function(x){var o=Number(x.opening_balance)||0,c=Number(x.closing_balance)||0,d=c-o;return '<tr><td>'+esc(x.period)+'</td><td class="r num">'+fmt(o)+'</td><td class="r num">'+fmt(c)+'</td><td class="r num '+(d>0?'up':d<0?'dn':'')+'">'+(d?sgn(d):'-')+'</td><td><span class="pill">'+esc(x.status||'')+'</span></td></tr>'}).join('')||'<tr><td colspan="5" style="color:var(--fg3)">No statements yet.</td></tr>';
+    var tr=a.trades||[], tg=0,tf=0,tw=0; tr.forEach(function(x){tg+=Number(x.pnl)||0; tf+=Number(x.fees)||0; if((Number(x.pnl)||0)-(Number(x.fees)||0)>0) tw++});
+    $('tkpis').innerHTML=[['Trades',String(tr.length),'All time',''],['Win rate',tr.length?Math.round(tw/tr.length*100)+'%':'-',tw+' of '+tr.length+' after fees',''],['Gross P&L',tr.length?s2(tg):'-','Before fees',tg>0?'up':(tg<0?'dn':'')],['Net P&L',tr.length?s2(tg-tf):'-','After '+fmt(tf,2)+' fees',(tg-tf)>0?'up':((tg-tf)<0?'dn':'')]].map(function(k){return '<div class="kpi"><div class="eyebrow">'+k[0]+'</div><div class="v num '+k[3]+'">'+k[1]+'</div><div class="s">'+k[2]+'</div></div>'}).join('');
+    $('tCount').textContent=tr.length+(tr.length===1?' trade':' trades');
+    $('trades').innerHTML=tr.map(function(x){var g=Number(x.pnl)||0,f=Number(x.fees)||0,n=g-f,px=function(v){return Number(v).toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2})}; return '<tr><td class="num">'+esc(String(x.closed_at||'').slice(0,16))+'</td><td>'+esc(x.symbol)+'</td><td>'+esc(x.side)+'</td><td class="r num">'+esc(x.qty)+'</td><td class="r num">'+(Number(x.entry_price)?px(x.entry_price):'-')+'</td><td class="r num">'+px(x.exit_price)+'</td><td class="r num '+(g>0?'up':g<0?'dn':'')+'">'+s2(g)+'</td><td class="r num">'+fmt(f,2)+'</td><td class="r num '+(n>0?'up':n<0?'dn':'')+'">'+s2(n)+'</td></tr>'}).join('')||'<tr><td colspan="9" style="color:var(--fg3)">No trades yet. Your trades will appear here after your first trading day.</td></tr>';
+    $('signals').innerHTML='<tr><td colspan="6" style="color:var(--fg3)">No signals yet. The signal log starts when signals are issued to your account.</td></tr>';
+    $('rePart').innerHTML='<tr><td colspan="5" style="color:var(--fg3)">No participations yet. Deals appear here once a signed participation agreement is on file.</td></tr>';
+    $('reDeals').innerHTML='<div class="doc"><b>No open deals right now</b><span>Ascenda will list deals here when they are available to you.</span></div>';
+    $('docs').innerHTML=(a.documents||[]).map(function(d){var ok=/^https:\/\//.test(d.url||'');return '<div class="doc"><b>'+esc(d.name)+'</b><span>'+(ok?'<a href="'+esc(d.url)+'" target="_blank" rel="noopener" style="color:var(--accent)">Open</a>':esc(d.doc_type||''))+'</span></div>'}).join('')||'<div class="doc"><b>No documents yet</b><span>Your agreements and disclosures will be added here.</span></div>';
+    var steps=[['Trust certification and trustee identity','Confirmed by Ascenda',true],['Client agreement','Confirmed by Ascenda',true],['Risk disclosure acknowledged','Confirmed by Ascenda',true],['Funding received','Full payment received',true],['Tradovate account','Account added and linked to your portal',true],['Balance reporting','Recorded balance, updated with each statement',true]];
+    $('steps').innerHTML=steps.map(function(s){return '<li><span class="dot '+(s[2]?'done':'')+'">'+(s[2]?'✓':'')+'</span><div>'+s[0]+'<small>'+s[1]+'</small></div><span class="pill '+(s[2]?'up':'warn')+'">'+(s[2]?'Done':'Pending')+'</span></li>'}).join('');
+    $('obCount').textContent=steps.filter(function(s){return s[2]}).length+' of '+steps.length+' complete';
+    $('thread').innerHTML='<div class="msg"><div>Welcome. Send a message here and it goes straight to Izaiah.</div><small>Ascenda</small></div>';
+  }
+  function enter(a){$('gate').hidden=true; $('app').hidden=false; render(a); show('overview'); draw()}
+  function signOut(){var t=token; token=''; try{sessionStorage.removeItem('nle_token');sessionStorage.removeItem('nle_role')}catch(e){} if(t) fetch(API+'/logout',{method:'POST',headers:{Authorization:'Bearer '+t}}).catch(function(){}); $('app').hidden=true; $('gate').hidden=false; $('codeField').hidden=true; $('pass').value=''; $('gateBtn').textContent='Email me a code'; $('gateNote').textContent='Signed out.'}
+  $('outBtn').addEventListener('click',signOut);
+  var step=1;
+  $('gateForm').addEventListener('submit',function(e){e.preventDefault(); var email=$('email').value.trim().toLowerCase(), note=$('gateNote'), btn=$('gateBtn'); if(!email){note.textContent='Enter your email.';return} btn.disabled=true;
+    if(step===1){ api('/otp/request',{method:'POST',body:{email:email}}).then(function(r){btn.disabled=false;
+        if(r.s===200){step=2; $('codeField').hidden=false; $('pass').focus(); btn.textContent='Sign in'; note.textContent='If that email is approved, a code is on its way. It expires in 10 minutes.'} else note.textContent=r.j.error||'Something went wrong. Try again.'}).catch(function(){btn.disabled=false; note.textContent='Could not reach the server. Try again.'}) }
+    else { api('/otp/verify',{method:'POST',body:{email:email,code:$('pass').value.trim()}}).then(function(r){
+        if(r.s!==200||!r.j.token){btn.disabled=false; note.textContent=r.j.error||'Invalid or expired code.'; return}
+        if(r.j.role!=='client'){ var t0=r.j.token; fetch(API+'/logout',{method:'POST',headers:{Authorization:'Bearer '+t0}}).catch(function(){}); btn.disabled=false; step=1; $('codeField').hidden=true; $('pass').value=''; btn.textContent='Email me a code'; note.textContent='This journal is a separate private page. Use the portal for your account.'; return }
+        token=r.j.token; try{sessionStorage.setItem('nle_token',token); sessionStorage.setItem('nle_role','client')}catch(e){}
+        return api('/account').then(function(a){btn.disabled=false; step=1; if(a.s===200) enter(a.j); else note.textContent='Could not load your account.'}) }).catch(function(){btn.disabled=false; note.textContent='Could not reach the server. Try again.'}) }
+  });
+  $('composeForm').addEventListener('submit',function(e){e.preventDefault(); var t=$('msgText').value.trim(), n=$('msgNote'); if(!t){n.textContent='Write a message first.';return}
+    api('/message',{method:'POST',body:{message:t}}).then(function(r){ if(r.s===200){var d=document.createElement('div'); d.className='msg me'; d.innerHTML='<div>'+esc(t)+'</div><small>You · Sent</small>'; $('thread').appendChild(d); $('msgText').value=''; n.textContent='Sent to Izaiah. Replies come to your email.'} else n.textContent=r.j.error||'Could not send. Email or call instead.'}).catch(function(){n.textContent='Could not send. Email or call instead.'})});
+  document.addEventListener('click',function(e){var b=e.target.closest('[data-copy]'); if(!b) return; var txt=b.dataset.copy,old=b.textContent; try{navigator.clipboard.writeText(txt).then(function(){b.textContent='Copied';setTimeout(function(){b.textContent=old},1400)},function(){b.textContent='Select text';setTimeout(function(){b.textContent=old},1400)})}catch(err){b.textContent='Select text';setTimeout(function(){b.textContent=old},1400)}});
+  $('themeBtn').addEventListener('click',function(){var r=document.documentElement,cur=r.getAttribute('data-theme'),isDark=cur?cur==='dark':window.matchMedia('(prefers-color-scheme: dark)').matches; r.setAttribute('data-theme',isDark?'light':'dark'); draw()});
+  if(window.matchMedia) window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change',draw);
+  /* resume session */
+  $('app').hidden=true; $('gate').hidden=false;
+  var role=''; try{role=sessionStorage.getItem('nle_role')||''}catch(e){}
+  if(token&&role!=='client'){ token=''; try{sessionStorage.removeItem('nle_token')}catch(e){} }
+  if(token) api('/account').then(function(a){ if(a.s===200) enter(a.j); else { token=''; try{sessionStorage.removeItem('nle_token')}catch(e){} } }).catch(function(){});
+})();
+</script>
+
