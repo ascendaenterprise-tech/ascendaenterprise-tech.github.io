@@ -112,6 +112,7 @@
 }
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=DM+Mono:wght@300;400;500&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet"/>
 <style>
@@ -3906,8 +3907,8 @@ section[style*="padding:8rem"]{padding-top:4.25rem!important;padding-bottom:4.25
 </footer>
 
 <!-- SCRIPTS -->
-<script src="https://cdn.jsdelivr.net/npm/d3@7/dist/d3.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/topojson-client@3/dist/topojson-client.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/d3@7.9.0/dist/d3.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/topojson-client@3.1.0/dist/topojson-client.min.js"></script>
 <script>
 // Live ticker powered by TradingView
 
@@ -4779,6 +4780,8 @@ document.addEventListener("DOMContentLoaded", function(){
 @keyframes aoStreak{0%{left:-45%;opacity:0}15%{opacity:1}100%{left:120%;opacity:0}}
 #aecOpen .skip{position:absolute;right:max(16px,env(safe-area-inset-right,0px));bottom:max(16px,env(safe-area-inset-bottom,0px));background:none;border:1px solid rgba(11,11,11,.3);color:#3b3b38;font:11px ui-monospace,Menlo,monospace;letter-spacing:.16em;text-transform:uppercase;padding:8px 12px;cursor:pointer;opacity:0;animation:aoUp .4s .6s forwards}
 @media (prefers-reduced-motion:reduce){#aecOpen{display:none!important}}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}}
+
 </style>
 <div id="aecOpen" role="presentation" aria-hidden="true">
   <div class="grain"></div><div class="rule"></div>
