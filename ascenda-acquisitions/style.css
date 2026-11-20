@@ -44,3 +44,8 @@ footer{border-top:1px solid var(--line);padding-block:32px;color:var(--mut);font
 .empty{text-align:center;padding:44px 24px}
 .empty .btn.p{box-shadow:none}
 .btn.s{clip-path:none}
+form label{display:grid;gap:6px;font:600 13px/1.2 'Chakra Petch',Arial,sans-serif;letter-spacing:.08em;text-transform:uppercase;color:var(--cardfg)}
+form input,form textarea,form select{font:16px/1.4 'Inter',Arial,sans-serif;padding:12px;border:2px solid #cfc6ad;background:#fffaf0;color:var(--cardfg);border-radius:0;width:100%}
+form input:focus,form textarea:focus,form select:focus{outline:none;border-color:#6a3fd6}
+form .btn.p{border:0;background:#14092e;color:var(--accent)}
+form p{color:var(--cardmut)}
