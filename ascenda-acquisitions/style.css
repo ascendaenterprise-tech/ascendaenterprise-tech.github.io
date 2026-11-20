@@ -49,3 +49,10 @@ form input,form textarea,form select{font:16px/1.4 'Inter',Arial,sans-serif;padd
 form input:focus,form textarea:focus,form select:focus{outline:none;border-color:#6a3fd6}
 form .btn.p{border:0;background:#14092e;color:var(--accent)}
 form p{color:var(--cardmut)}
+body::before{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;background:url(logo-watermark.png) center 55%/min(860px,92vw) auto no-repeat;opacity:.11;filter:drop-shadow(0 0 24px rgba(255,255,255,.6))}
+header,main,footer{position:relative;z-index:1}
+header{box-shadow:0 8px 30px rgba(0,0,0,.45)}
+.card{filter:drop-shadow(0 14px 22px rgba(0,0,0,.5))}
+.btn.p{filter:drop-shadow(0 6px 14px rgba(0,0,0,.45))}
+.cta{filter:drop-shadow(0 16px 30px rgba(0,0,0,.55))}
+h1{text-shadow:0 4px 24px rgba(0,0,0,.55)}
