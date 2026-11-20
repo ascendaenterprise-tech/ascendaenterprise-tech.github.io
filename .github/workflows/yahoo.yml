@@ -22,8 +22,8 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          git config user.name "aec-yahoo-bot"
-          git config user.email "actions@users.noreply.github.com"
+          git config --global user.name "aec-yahoo-bot"
+          git config --global user.email "actions@users.noreply.github.com"
           end=$((SECONDS+20400)); n=0
           while [ $SECONDS -lt $end ]; do
             python3 tools/pull_yahoo.py || true
