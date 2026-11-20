@@ -66,10 +66,13 @@ function mk(type,host,cfg){
  return function(){}}
 function load(){
  var urls=[];if(API){var all=window.AEC_YAHOO_SYMBOLS||[];urls.push(API+(API.indexOf('?')<0?'?':'&')+'symbols='+encodeURIComponent(all.join(',')))}
+ urls.push('https://raw.githubusercontent.com/ascendaenterprise-tech/ascendaenterprise-tech.github.io/data/yahoo_quotes.json?t='+Math.floor(Date.now()/60000));
  urls.push(FILE+(FILE.indexOf('?')<0?'?':'&')+'t='+Math.floor(Date.now()/15000));
- var i=0;(function next(){if(i>=urls.length){STATE.ok=false;redraw();return}
-  fetch(urls[i++],{cache:'no-store'}).then(function(r){if(!r.ok)throw 0;return r.json()}).then(function(d){
-   if(!d||!d.quotes)throw 0;STATE.q=d.quotes;STATE.asof=d.asof?Date.parse(d.asof):Date.now();STATE.ok=true;redraw()}).catch(next)})()}
+ var best=null,left=urls.length;
+ function done(){if(--left>0)return;if(!best){STATE.ok=false;redraw();return}STATE.q=best.quotes;STATE.asof=best.asof;STATE.ok=true;redraw()}
+ urls.forEach(function(u,i){fetch(u,{cache:'no-store'}).then(function(r){if(!r.ok)throw 0;return r.json()}).then(function(d){
+   if(!d||!d.quotes)throw 0;var a=d.asof?Date.parse(d.asof):Date.now();
+   if(!best||a>best.asof||(i===0&&API))best={quotes:d.quotes,asof:a}}).catch(function(){}).then(done)})}
 function redraw(){SUBS.forEach(function(f){try{f()}catch(e){}})}
 function boot(){inject();
  document.querySelectorAll('script[data-aec-yahoo]').forEach(function(s){
@@ -78,7 +81,7 @@ function boot(){inject();
   if(!host)host=s.parentNode;
   var f=mk(s.getAttribute('data-aec-yahoo'),host,cfg);SUBS.push(f);f()});
  document.querySelectorAll('[data-aec-yahoo-chart]').forEach(function(h){var cfg={y:h.getAttribute('data-aec-yahoo-chart'),title:h.getAttribute('data-title'),height:h.getAttribute('data-height')||400};var f=mk('snapshot',h,cfg);SUBS.push(f);f()});
- load();clearInterval(timer);timer=setInterval(load,API?15000:30000);
+ load();clearInterval(timer);timer=setInterval(load,API?15000:20000);
  document.addEventListener('visibilitychange',function(){if(!document.hidden)load()})}
 window.AECY={reload:load,state:STATE};
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',boot);else boot();

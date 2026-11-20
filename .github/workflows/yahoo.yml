@@ -1,23 +1,45 @@
 name: Refresh Yahoo Finance quotes
+# Runs as a self-restarting loop: pulls Yahoo Finance every minute for about 5h40m, publishes the file to the
+# `data` branch (the sites read it from there, so no Pages rebuild is needed), then starts the next loop.
+# The cron line is only a backup restarter in case the chain is ever broken.
 on:
   schedule:
-    - cron: '*/5 * * * *'
+    - cron: '7,37 * * * *'
   workflow_dispatch: {}
 permissions:
   contents: write
+  actions: write
 concurrency:
-  group: yahoo-quotes
-  cancel-in-progress: true
+  group: yahoo-loop
+  cancel-in-progress: false
 jobs:
-  pull:
+  loop:
     runs-on: ubuntu-latest
+    timeout-minutes: 355
     steps:
       - uses: actions/checkout@v4
-      - run: python3 tools/pull_yahoo.py
-      - name: Commit if changed
+      - name: Pull quotes every minute
+        env:
+          GH_TOKEN: ${{ github.token }}
         run: |
           git config user.name "aec-yahoo-bot"
           git config user.email "actions@users.noreply.github.com"
-          git add yahoo_quotes.json
-          [ -f quotes.json ] && git add quotes.json || true
-          git diff --cached --quiet || (git commit -m "Update Yahoo quotes" && git push)
+          end=$((SECONDS+20400)); n=0
+          while [ $SECONDS -lt $end ]; do
+            python3 tools/pull_yahoo.py || true
+            rm -rf /tmp/pub && mkdir /tmp/pub
+            cp yahoo_quotes.json /tmp/pub/ 2>/dev/null || true
+            [ -f quotes.json ] && cp quotes.json /tmp/pub/ || true
+            (cd /tmp/pub && git init -q && git checkout -q -b data && git add -A && git commit -qm "quotes" && git push -q -f "https://x-access-token:$GH_TOKEN@github.com/$GITHUB_REPOSITORY.git" data) || true
+            n=$((n+1))
+            if [ $((n % 30)) -eq 0 ]; then
+              git add yahoo_quotes.json; [ -f quotes.json ] && git add quotes.json || true
+              git diff --cached --quiet || (git commit -q -m "Update Yahoo quotes" && git pull -q --rebase origin main && git push -q origin HEAD:main) || true
+            fi
+            sleep 60
+          done
+      - name: Start the next loop
+        if: always()
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh workflow run yahoo.yml --repo "$GITHUB_REPOSITORY" || true
