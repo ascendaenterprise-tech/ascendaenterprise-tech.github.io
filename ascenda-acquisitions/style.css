@@ -94,3 +94,6 @@ footer a{color:var(--mut);text-decoration:none}footer a:hover{color:var(--accent
 footer p{max-width:60em;font-size:12px;opacity:.85}
 .card .fine,.card ul.chk{color:var(--cardmut)}
 @media(max-width:560px){.step{grid-template-columns:44px 1fr}}
+.calc label{display:grid;gap:6px;font:600 13px/1.2 'Chakra Petch',Arial,sans-serif;letter-spacing:.08em;text-transform:uppercase;color:var(--cardfg)}
+.calc input{font:16px/1.4 'Inter',Arial,sans-serif;padding:12px;border:2px solid #cfc6ad;background:#fffaf0;color:var(--cardfg);border-radius:0;width:100%}
+.calc input:focus{outline:none;border-color:#6a3fd6}
