@@ -35,7 +35,7 @@
     const link = document.createElement('a'); link.textContent='Open on YouTube ↗'; link.target='_blank'; link.rel='noopener noreferrer';
     const channel=url.searchParams.get('channel'), id=url.pathname.split('/').pop();
     link.href=channel ? 'https://www.youtube.com/channel/'+encodeURIComponent(channel)+'/live' : 'https://www.youtube.com/watch?v='+encodeURIComponent(id);
-    bar.append(status,play,retry,link);
+    bar.append(status,play,retry,link);frame._aecBar=bar;if(!frame.dataset.aecCh){const c0=chanOf(frame);if(c0)frame.dataset.aecCh=c0}if(!frame.dataset.aecOrig)frame.dataset.aecOrig=nameOf(frame);
     const box=frame.closest('.aec-video-frame') || frame.parentElement;
     box.insertAdjacentElement('afterend',bar);
     play.onclick=()=>{const p=players.get(frame);if(p){p.mute();p.playVideo();}else status.textContent='Use the player or open the publisher link.';};
@@ -44,12 +44,63 @@
       if (!frame.isConnected) return;
       const p=new YT.Player(frame.id,{events:{
         onReady:e=>{status.textContent='Ready — press Play if autoplay is blocked.';e.target.mute();},
-        onStateChange:e=>{status.textContent=({1:'Playing — publisher content',2:'Paused',3:'Buffering…',0:'Video ended',5:'Ready'})[e.data] || 'Waiting for playback';},
+        onStateChange:e=>{stamp(frame,e.data);status.textContent=({1:'Playing — publisher content',2:'Paused',3:'Buffering…',0:'Video ended',5:'Ready'})[e.data] || 'Waiting for playback';},
         onAutoplayBlocked:()=>{status.textContent='Autoplay blocked — press Play muted.';},
-        onError:e=>{status.textContent='Publisher playback unavailable (code '+e.data+'). Try the publisher link.';}
+        onError:e=>{status.textContent='Feed unavailable (code '+e.data+'), loading another live feed…';rotate(frame,'error '+e.data);}
       }}); players.set(frame,p);
     }).catch(()=>{status.textContent='Playback status unavailable — use the player or publisher link.';});
   }
+
+  /* ---- video guard: when a feed is blocked, ended, or stuck, load a replacement live feed automatically ---- */
+  const POOL=[['Bloomberg TV','UCIALMKvObZNtJ6AmdCLP7Lg'],['CNBC','UCrp_UI8XtuYfpiqluWLD1Lw'],['Yahoo Finance','UCEAZeUIeJs0IjQiqTCdVSIg'],['Sky News','UCoMdktPbSTixAyNGwb-UYkQ'],['Al Jazeera English','UCNye-wNBqNL5ZzHSJj3l8Bg'],['DW News','UCknLrEdhRCp1aegoMqRaCZg'],['France 24 English','UCQfwfsi5VrQ8yKZ-UWmAEFg'],['Euronews English','UCSrZ3UV4jOidv8ppoVuvW9Q'],['ABC News Live','UCBi2mrWuNuyYy4gbM6fU18Q'],['NBC News','UCeY0bbntWzzVIaj2z3QigXg'],['CBS News','UC8p1vwvWtl6T73JiExfWs1g'],['WION','UC_gUM8rL-Lrg6O3adPW9K1g'],['TRT World','UC7fWeaHhqgM4Ry-RMpM2YYw'],['LiveNOW from FOX','UCJg9wBPyKMNA5sRDnvzmkdg'],['CGTN','UCgrNz-aDmcr2uuto8_DL2jg'],['ABC News Australia','UCVgO39Bk5sMo66-6o6Spn6Q'],['Al Arabiya English','UCaEKnVtSxcTh-bZhuqwAuUw'],['NBC News NOW','UCdUCBzZCacPI61FdL7x9yvQ'],['Fox Business','UC7UQyQ1NRIAIDMKn75WYwlw'],['Reuters','UCjTMxYSAvQ9DNPYjtxNgkCw'],['CNA (Channel NewsAsia)','UC83jt4dlz1Gjl58fzQrrKZg']];
+  const ALIAS={'bloomberg':'bloomberg tv','livenow':'livenow from fox','livenow (fox)':'livenow from fox','cna':'cna (channel newsasia)'};
+  const BYNAME=new Map(POOL.map(x=>[x[0].toLowerCase(),x]));
+  const BAD=new Map();
+  const norm=n=>{n=(n||'').toLowerCase().trim();return ALIAS[n]||n};
+  function cardOf(f){return f.closest('.aec-feed-card,.panel')}
+  function labelEl(f){const c=cardOf(f);return c?c.querySelector('header span:not(.aec-live-dot):last-of-type,.tag'):null}
+  function nameOf(f){if(f.dataset.aecName)return f.dataset.aecName;const e=labelEl(f);return e?e.textContent.replace(/\s+/g,' ').trim():''}
+  function chanOf(f){try{const u=new URL(f.getAttribute('src'),location.href);const c=u.searchParams.get('channel');if(c)return c}catch(_){}const e=BYNAME.get(norm(nameOf(f)));return e?e[1]:''}
+  function shown(){const set=new Set();document.querySelectorAll('iframe[data-aec-ch]').forEach(f=>set.add(f.dataset.aecCh));return set}
+  function pick(f){
+    const tried=new Set((f.dataset.aecTried||'').split(',').filter(Boolean)), now=Date.now(), on=shown();
+    const own=BYNAME.get(norm(f.dataset.aecOrig||nameOf(f)));
+    const cands=[]; if(own)cands.push(own);
+    const rest=POOL.filter(x=>!(own&&x[1]===own[1])).sort(()=>Math.random()-.5);
+    rest.forEach(x=>cands.push(x));
+    for(const c of cands){ if(tried.has(c[1]))continue; if(BAD.has(c[1])&&now-BAD.get(c[1])<15*60000)continue; if(on.has(c[1])&&!(own&&c[1]===own[1]))continue; return c; }
+    tried.clear(); f.dataset.aecTried=''; return rest[0];
+  }
+  function rotate(f,why){
+    if(!f.isConnected||f._rot)return; const now=Date.now();
+    f._hist=(f._hist||[]).filter(t=>now-t<10*60000); if(f._hist.length>=4&&why.indexOf('error')<0)return; f._hist.push(now);
+    f._rot=1; const cur=chanOf(f); let viaCh=false; try{viaCh=!!new URL(f.getAttribute('src'),location.href).searchParams.get('channel')}catch(_){} if(cur&&viaCh)BAD.set(cur,now);
+    const c=pick(f); if(!c){f._rot=0;return}
+    const n=document.createElement('iframe');
+    n.src='https://www.youtube.com/embed/live_stream?channel='+encodeURIComponent(c[1])+'&autoplay=1&mute=1&playsinline=1';
+    n.className=f.className; n.style.cssText=f.style.cssText; if(f.width)n.width=f.width; if(f.height)n.height=f.height;
+    n.title='Live feed: '+c[0]; n.allowFullscreen=true;
+    n.dataset.aecName=c[0]; n.dataset.aecOrig=f.dataset.aecOrig||nameOf(f); n.dataset.aecCh=c[1];
+    n.dataset.aecTried=((f.dataset.aecTried||'')+','+(cur||'')+','+c[1]).replace(/^,+/,'');
+    try{const p=players.get(f);if(p&&p.destroy)p.destroy()}catch(_){}
+    players.delete(f); if(f._aecBar)f._aecBar.remove();
+    const el=labelEl(f); if(el)el.textContent=c[0];
+    const card=cardOf(f); if(card){const a=card.querySelector('a[href*="youtube.com"]');if(a)a.href='https://www.youtube.com/channel/'+c[1]+'/live'}
+    f.replaceWith(n);
+  }
+  function stamp(f,state){f._st=state;f._since=Date.now();if(state===1){f._played=Date.now();f._kick=0;if(f._hist&&Date.now()-f._played>0)f.dataset.aecTried=''}if(state===0)rotate(f,'ended')}
+  setInterval(()=>{
+    players.forEach((p,f)=>{
+      if(!f.isConnected){players.delete(f);return}
+      let st;try{st=p.getPlayerState()}catch(_){return}
+      const age=Date.now()-(f._since||Date.now());
+      if(st===0){rotate(f,'ended');return}
+      if(st===3&&age>90000){rotate(f,'stuck buffering');return}
+      if((st===-1||st===5)&&age>20000&&!f._kick){f._kick=1;try{p.mute();p.playVideo()}catch(_){}}
+      if((st===-1||st===5)&&age>60000){rotate(f,'never started')}
+    });
+  },10000);
+  document.addEventListener('visibilitychange',()=>{if(document.hidden)return;players.forEach((p,f)=>{try{if(p.getPlayerState()!==1){p.mute();p.playVideo()}}catch(_){}})});
   enhance.count=0;
   function scan(){
     document.querySelectorAll('iframe[src]').forEach(enhance);
