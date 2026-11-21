@@ -97,3 +97,4 @@ footer p{max-width:60em;font-size:12px;opacity:.85}
 .calc label{display:grid;gap:6px;font:600 13px/1.2 'Chakra Petch',Arial,sans-serif;letter-spacing:.08em;text-transform:uppercase;color:var(--cardfg)}
 .calc input{font:16px/1.4 'Inter',Arial,sans-serif;padding:12px;border:2px solid #cfc6ad;background:#fffaf0;color:var(--cardfg);border-radius:0;width:100%}
 .calc input:focus{outline:none;border-color:#6a3fd6}
+@media(max-width:640px){header .w{padding-block:10px}nav{gap:6px 14px;font-size:11px;letter-spacing:.08em}.brand{font-size:15px}}
