@@ -29,7 +29,7 @@
 <button class="btn p" type="submit">Send message</button><p class="msg" role="status"></p>
 <p class="fine">We use your details only to reply to you. Please do not send bank, card or ID numbers.</p></form></div></div></div></section></main>
 <footer><div class="w"><div class="fgrid"><div><b>ASCENDA ACQUISITIONS</b><br>A division of Ascenda Enterprise Capital LLC<br>izaiah@ascendaenterprisecapital.com<br>845-327-6587</div>
-<div><a href="sell-property.html">Sell a property</a><br><a href="sell-business.html">Sell a business</a><br><a href="deals.html">Current deals</a><br><a href="markets.html">Markets</a></div>
+<div><a href="sell-property.html">Sell a property</a><br><a href="sell-business.html">Sell a business</a><br><a href="deals.html">Current deals</a><br><a href="tax-deeds.html">Tax sale properties</a><br><a href="markets.html">Markets</a></div>
 <div><a href="about.html">About</a><br><a href="resources.html">Resources</a><br><a href="contact.html">Contact</a><br><a href="https://ascendaenterprisecapital.com/">Ascenda Enterprise Capital</a></div></div>
 <p>&copy; 2026 Ascenda Acquisitions, a division of Ascenda Enterprise Capital LLC. Ascenda Acquisitions buys properties and businesses for its own account. Nothing on this site is an offer to sell securities or a solicitation of investment. We are not a licensed real estate brokerage; offers are made as a principal buyer and are subject to inspection, title review and a written agreement. Content is general education and not legal, tax or financial advice.</p></div></footer>
 <script>
@@ -39,4 +39,5 @@ function fmt(n){return '$'+Math.round(n).toLocaleString('en-US')}
 var a=document.getElementById('arv');if(a){['arv','rep','mar'].forEach(function(i){document.getElementById(i).addEventListener('input',function(){var v=+document.getElementById('arv').value,r=+document.getElementById('rep').value||0,m=+document.getElementById('mar').value;var o=document.getElementById('pout');if(!v){o.textContent='Enter values';return}var p=v*(1-m/100)-r;o.textContent=p>0?fmt(p):'Repairs exceed the formula value'})})}
 var s=document.getElementById('sde');if(s){s.addEventListener('input',function(){var v=+s.value,o=document.getElementById('vout');if(!v){o.textContent='Enter earnings';return}var lo,hi;if(v<5e5){lo=1.5;hi=3}else if(v<1e6){lo=2.5;hi=4}else if(v<3e6){lo=4;hi=6.5}else{lo=5.5;hi=10}o.textContent=fmt(v*lo)+' to '+fmt(v*hi)+' ('+lo+'x to '+hi+'x)'})}
 </script>
+<script src="intro.js?v=1" data-key="acq" data-word="Ascenda Acquisitions" data-sub="Real estate &middot; Private equity &middot; Direct buyers" defer></script>
 </body></html>
